@@ -1,0 +1,110 @@
+---
+interface Props {
+  class?: string;
+  content: string | Promise<string>;
+  duration?: number;
+  delay?: number;
+  stagger?: number;
+}
+
+let {
+  content,
+  duration = 0.6,
+  delay = 0,
+  stagger = 0.1,
+  ...rest
+} = Astro.props;
+
+let processedContent = "";
+if (content) {
+  // @ts-expect-error
+  const words = content.split(" "); // Split text into words
+  processedContent = words
+    .map(
+      (word: string, index: number) =>
+        `<span class="word" style="--word-index:${index}">${word}</span>`,
+    )
+    .join(" ");
+}
+---
+
+<div
+  class:list={["animated-text", Astro.props.class]}
+  set:html={processedContent}
+  data-duration={duration}
+  data-delay={delay}
+  data-stagger={stagger}
+  style={`--animated-text-duration:${duration}s;--animated-text-delay:${delay}s;--animated-text-stagger:${stagger}s;`}
+  {...rest}
+/>
+
+<style is:global>
+  .animated-text .word {
+    display: inline-block;
+  }
+
+  @media (min-width: 768px) {
+    .animated-text.is-ready .word {
+      opacity: 0;
+      filter: blur(10px);
+      transform: translateY(10px);
+      will-change: transform;
+    }
+
+    .animated-text.is-animated .word {
+      animation: animated-text-reveal var(--animated-text-duration, 0.6s)
+        ease-out forwards;
+      animation-delay: calc(
+        var(--animated-text-delay, 0s) +
+          (var(--word-index, 0) * var(--animated-text-stagger, 0.1s))
+      );
+    }
+  }
+
+  @media (max-width: 767px) {
+    .animated-text .word {
+      opacity: 1 !important;
+      filter: none !important;
+      transform: none !important;
+    }
+  }
+
+  @keyframes animated-text-reveal {
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  const animatedTexts = document.querySelectorAll(".animated-text");
+
+  if (window.matchMedia("(max-width: 767px)").matches) {
+    animatedTexts.forEach((animatedText) => {
+      animatedText.querySelectorAll<HTMLElement>(".word").forEach((word) => {
+        word.style.opacity = "1";
+        word.style.filter = "none";
+        word.style.transform = "none";
+      });
+    });
+  } else {
+    const observer = new IntersectionObserver(
+      (entries, currentObserver) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          entry.target.classList.add("is-animated");
+          currentObserver.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.1 },
+    );
+
+    animatedTexts.forEach((animatedText) => {
+      animatedText.classList.add("is-ready");
+      observer.observe(animatedText);
+    });
+  }
+</script>
