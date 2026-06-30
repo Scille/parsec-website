@@ -1,0 +1,13 @@
+{
+  "french": "Français",
+  "english": "English",
+  "welcome1": "Pour commencer, ouvrez le dossier",
+  "welcome2": "dans votre projet.",
+  "goToDoc": "Voir la documentation",
+  "goToExample": "Aller à la page d'exemple",
+  "site": {
+    "title": "Mon super site web !",
+    "description": "Voici la description de mon super site web !"
+  },
+  "404": "Page non trouvée"
+}

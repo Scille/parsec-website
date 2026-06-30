@@ -1,0 +1,60 @@
+---
+import i18n from 'i18next';
+---
+
+<!doctype html>
+<html lang={i18n.language}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/parsec.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro Basics</title>
+	</head>
+	<button
+		change-language-fr-button
+		class="change-language-button"
+	>
+		{i18n.t('french')}
+	</button>
+	<button
+		change-language-en-button
+		class="change-language-button"
+	>
+		{i18n.t('english')}
+	</button>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<script>
+import { changeLocaleTo } from '../services/translation';
+
+const buttonFr = document.querySelector('[change-language-fr-button]');
+if (buttonFr) {
+	buttonFr.addEventListener('click', () => {
+		changeLocaleTo('fr');
+	})
+}
+const buttonEn = document.querySelector('[change-language-en-button]');
+if (buttonEn) {
+	buttonEn.addEventListener('click', () => {
+		changeLocaleTo('en');
+	})
+}
+</script>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.change-language-button {
+		cursor: pointer;
+	}
+</style>

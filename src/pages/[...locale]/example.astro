@@ -1,0 +1,16 @@
+---
+import i18n from 'i18next';
+import Layout from '@/layouts/Layout.astro';
+import { buildStaticPaths } from 'astro-react-i18next/utils';
+
+export function getStaticPaths() {
+  return buildStaticPaths();
+}
+---
+
+<Layout>
+    <html lang={i18n.language}>
+    <p>{i18n.t('site.title')}</p>
+    <p>{i18n.t('site.description')}</p>
+    </html>
+</Layout>
