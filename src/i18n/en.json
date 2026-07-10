@@ -9,23 +9,19 @@
     "paginationPrevious": "Previous",
     "backToHome": "Back to Home",
     "careerJobOverview": "Job Overview",
-    "contactDropdownSearch404": "No results wewe found",
+    "contactDropdownSearch404": "No results were found",
     "careerApplyNow": "Apply Now"
   },
   "navigation": {
-    "buttonLabel": "Sign Up"
+    "buttonLabel": "Download Parsec"
   },
   "contactInfo": {
-    "locationLabel": "Location",
-    "location": "2627 Park Street, San Francisco, CA",
-    "phoneLabel": "Phone Number",
-    "phone": "925-465-3762",
+    "locationLabel": "Address",
+    "location": "226 Bd Voltaire, 75011 Paris, France",
+    "phoneLabel": "Phone",
+    "phone": "+33 1 00 00 00 00",
     "emailLabel": "Email",
-    "email": "stella@example.com"
-  },
-  "subscription": {
-    "label": "Subscribe to our newsletter",
-    "term": "I agree with [privacy policy](/privacy-policy/)"
+    "email": "contact@parsec.cloud"
   },
   "integration": {
     "relatedIntegrationSectionTitle": "You might be **interested in**",
@@ -35,7 +31,7 @@
     "colTitleOne": "Company",
     "colTitleTwo": "Resources",
     "colTitleThree": "Contact",
-    "description": "We provide seamless solutions to Small and Medium Businesses. Whatever work you do, we can help.",
-    "copyright": "Copyright © 2024 Stella. All Rights Reserved."
+    "description": "Parsec Cloud is the ANSSI-certified secure storage and collaboration platform for sensitive data. End-to-end encryption, zero-knowledge, full data sovereignty.",
+    "copyright": "Copyright © 2024 Parsec Cloud. All Rights Reserved."
   }
 }
