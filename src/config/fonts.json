@@ -1,6 +1,6 @@
 [
   {
-    "name": "Figtree",
+    "name": "Albert Sans",
     "variants": [
       {
         "style": "normal",
@@ -9,6 +9,14 @@
       {
         "style": "normal",
         "weight": "500"
+      },
+      {
+        "style": "normal",
+        "weight": "600"
+      },
+      {
+        "style": "normal",
+        "weight": "700"
       }
     ],
     "preload": false,
@@ -19,7 +27,7 @@
     "fallback": "sans-serif"
   },
   {
-    "name": "Instrument Serif",
+    "name": "Orbit",
     "variants": [
       {
         "style": "normal",
