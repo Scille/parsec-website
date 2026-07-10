@@ -17,7 +17,7 @@
   # Add your site logo in image path below and open your terminal and run "npm run generate-favicons" to generate favicons for different devices and platform (https://realfavicongenerator.net/checker)
   [site.favicon]
     path  = "/images/favicons" # favicon images path (No need to change it)
-    image = "/images/logo.svg" # Add your site logo path here and follow upper instruction
+    image = "/images/favicons/favicon-96x96.png" # Source image used by npm run generate-favicons
 
 
 # SEO Metadata
@@ -77,9 +77,11 @@
     enable = true
     text   = "" # Check src/i18n/en.json and src/i18n/fr.json for changing the copyright text in different languages or directly add value here if you are not using internationalization feature
 
-  # Subscription Form located in footer
+  # Mailchimp Subscription Form located in footer
   [settings.subscription]
-    enable = false
+    enable     = true # Enables or disable the subscription form
+    title      = "" # Check src/i18n/en.json and src/i18n/fr.json for changing the title in different languages or directly add value here if you are not using internationalization feature
+    formAction = "https://gmail.us11.list-manage.com/subscribe/post?u=d870b06d86c16269e4b1f9b39&amp;id=12cf0c6ac2&amp;f_id=007e61e1f0"
 
   # Multilingual settings (check src/config/language.json for changing the languages)
   # NOTE: Manually restart your server when you change the following multilingual table values

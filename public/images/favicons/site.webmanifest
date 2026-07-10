@@ -1,6 +1,6 @@
 {
-  "name": "pqk",
-  "short_name": "pqk",
+  "name": "Parsec Cloud",
+  "short_name": "Parsec",
   "icons": [
     {
       "src": "/images/favicons/web-app-manifest-192x192.png",
@@ -15,7 +15,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
+  "theme_color": "#006EFF",
   "background_color": "#ffffff",
   "display": "standalone"
 }
