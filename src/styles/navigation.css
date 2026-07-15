@@ -18,6 +18,10 @@
       @apply lg:max-w-5xl!;
     }
 
+    nav {
+      @apply shadow-nav;
+    }
+
     .nav-item {
       > .nav-link {
         @apply lg:px-4 lg:py-2 xl:px-4;
@@ -35,36 +39,15 @@
   }
 }
 
-/* Hide alternate logo */
 header {
   .logo {
     @apply inline-block;
-  }
-
-  .logo-alternate {
-    @apply hidden;
-  }
-  .logo-text {
-    @apply text-dark;
-  }
-}
-
-/* Show main logo in footer */
-footer {
-  .logo-wrapper {
-    .logo-text {
-      @apply text-h5 text-dark font-medium;
-    }
-
-    &.logo-alternate {
-      @apply hidden;
-    }
   }
 }
 
 /* Language Switcher */
 .header .language-switcher {
-  @apply text-primary relative rounded-full border;
+  @apply text-text-brand-default hover:text-text-brand-default-hover bg-surface-base-default relative rounded-full border font-medium hover:shadow-xs;
 
   .language-switcher-button {
     @apply flex items-center gap-1.5 px-3.5 py-1.5 text-inherit uppercase;
@@ -78,10 +61,10 @@ footer {
     @apply hs-dropdown-open:opacity-100 absolute top-full right-0 min-w-32 space-y-px rounded-lg p-px opacity-0 transition-[opacity,margin] lg:transform-none!;
 
     li a {
-      @apply border-border-light hover:bg-light text-text-default block rounded-full border bg-white px-4 py-1.5 text-center transition;
+      @apply border-border-base-default bg-surface-base-default hover:bg-surface-base-page text-text-default block rounded-full border bg-white px-4 py-1.5 text-center shadow-xs transition;
 
       &.active {
-        @apply bg-primary/5 text-primary;
+        @apply bg-dark text-primary;
       }
     }
   }
@@ -104,7 +87,7 @@ footer {
   .nav-link {
     @apply text-text-default hs-dropdown-open:text-primary hover:text-primary hs-dropdown-open:bg-slate-50 hover:bg-slate-50 [&.nav-dropdown-link]:hover:bg-slate-50;
     &.nav-link-active {
-      @apply text-primary bg-slate-50;
+      @apply text-primary bg-surface-base-page;
     }
   }
 

@@ -232,8 +232,7 @@
   @apply flex items-center gap-2;
 
   .logo {
-    @apply !w-10;
-    @apply flex w-10 items-center gap-x-4;
+    @apply !h-6 !w-auto;
   }
 
   &.has-hover-animation {
@@ -280,6 +279,8 @@
   background-repeat: no-repeat;
   background-size: 0% 100%;
   transition: background-size 0.2s ease-in;
+
+  @apply font-medium;
 
   &:hover {
     background-size: 100% 100%;
