@@ -55,8 +55,8 @@
   # - "src/content" folder
   # - "src/[...lang]/pages" folder
   # - "src/content.config.ts" collections object
-  blogFolder        = "blog" # Folder where blog posts are stored
-  careerFolder      = "career" # Folder where job posts are stored
+  blogFolder   = "blog" # Folder where blog posts are stored
+  careerFolder = "career" # Folder where job posts are stored
 
   pagination   = 6 # Number of posts displayed on each page blog list page
   stickyHeader = true # Enables or disable sticky feature of header
