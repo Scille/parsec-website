@@ -286,7 +286,7 @@
   }
 }
 .has-italic-text strong {
-  @apply font-secondary font-normal text-inherit italic;
+  @apply font-secondary text-text-brand-default font-normal text-inherit italic;
 }
 
 /* Icon Color Override */
