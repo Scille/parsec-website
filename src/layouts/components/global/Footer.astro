@@ -4,12 +4,11 @@ import Logo from "@/components/global/Logo.astro";
 import config from ".astro/config.generated.json";
 import { markdownify } from "@/lib/utils/textConverter";
 import SocialComponent from "@/components/social/Social.astro";
-import SubscriptionForm from "@/components/widgets/SubscriptionForm.astro";
 import { useTranslations, getLocaleUrlCTM } from "@/lib/utils/i18nUtils";
 
 const t = await useTranslations(Astro.currentLocale as string);
 
-let { copyright, footerDescription, subscription, brandName } = config.settings;
+let { copyright, footerDescription, brandName } = config.settings;
 
 footerDescription = footerDescription || t("footer.description");
 const copyrightText = copyright.text || t("footer.copyright");
@@ -21,12 +20,6 @@ const copyrightText = copyright.text || t("footer.copyright");
       <div class="space-y-8 xl:pe-20">
         <Logo />
         {footerDescription && <p set:html={markdownify(footerDescription)} />}
-
-        {
-          subscription && subscription.enable && (
-            <SubscriptionForm {...subscription} />
-          )
-        }
       </div>
 
       <div class="col-span-2 grid gap-y-10 md:grid-cols-3 xl:pl-56">
