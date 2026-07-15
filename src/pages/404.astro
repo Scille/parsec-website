@@ -6,7 +6,7 @@ import SquareElem from "@/components/widgets/SquareElem.astro";
 import Base from "@/layouts/Base.astro";
 import { useTranslations } from "@/lib/utils/i18nUtils";
 
-const t = await useTranslations(Astro.currentLocale as string);
+const translate = await useTranslations(Astro.currentLocale as string);
 ---
 
 <Base status={404} title="Page Not Found" disableTagline={true}>
@@ -41,7 +41,7 @@ const t = await useTranslations(Astro.currentLocale as string);
           class="mt-10"
           url="/"
           hoverEffect="magnetic-text-flip"
-          label={t("common.backToHome")}
+          label={translate("common.backToHome")}
         />
       </div>
     </div>

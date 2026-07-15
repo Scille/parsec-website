@@ -56,17 +56,17 @@ export async function getStaticPaths() {
 }
 
 const { career } = Astro.props;
-const t = await useTranslations(Astro.currentLocale as string);
+const translate = await useTranslations(Astro.currentLocale as string);
 ---
 
 <Base {...career.data}>
   <SinglePageLayout content={career}>
     <div slot="content" class="bg-theme-light rounded-xl p-5 md:p-8">
       {
-        t("common.careerJobOverview") && (
+        translate("common.careerJobOverview") && (
           <h2
             class="text-h6-sm md:text-h6"
-            set:html={markdownify(t("common.careerJobOverview"))}
+            set:html={markdownify(translate("common.careerJobOverview"))}
           />
         )
       }
@@ -90,7 +90,7 @@ const t = await useTranslations(Astro.currentLocale as string);
               class="btn-black"
               hoverEffect="text-flip"
               rel="noopener noreferrer"
-              label={t("common.careerApplyNow")}
+              label={translate("common.careerApplyNow")}
               {...career.data.button}
             />
           </div>

@@ -17,7 +17,7 @@ const {
   settings: { contactFormAction, contactFormProvider },
 } = config;
 
-const t = await useTranslations(Astro.currentLocale as string);
+const translate = await useTranslations(Astro.currentLocale as string);
 
 // Generate ID from label (Required for Input Radio and Checkbox)
 const genIdFromLabel = (label: string) => toLowerCase(label).replace(" ", "-");
@@ -143,7 +143,7 @@ const noteStyles = {
                   placeholder: input.placeholder || "Please set placeholder",
                   searchPlaceholder: input.dropdown?.search?.placeholder,
                   hasSearch: input.dropdown?.type === "search",
-                  notFoundText: t("common.contactDropdownSearch404"),
+                  notFoundText: translate("common.contactDropdownSearch404"),
                 }),
               )}
               class="hidden">

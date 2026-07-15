@@ -21,7 +21,7 @@ interface Props {
   layout?: "horizontal" | "vertical";
 }
 
-const t = await useTranslations(Astro.currentLocale as string);
+const translate = await useTranslations(Astro.currentLocale as string);
 
 let { content, layout = "vertical", class: className, ...rest } = Astro.props;
 let { title, image, excerpt, date, categories } = content || {};
@@ -112,7 +112,7 @@ const isHorizontal = layout === "horizontal";
       hoverEffect="text-flip"
       class="btn-sm btn-outline-white mt-3 capitalize"
       title={"Read more about " + title?.toLowerCase()}
-      label={t("common.readMore")}
+      label={translate("common.readMore")}
       url={slug}
     />
   </div>
