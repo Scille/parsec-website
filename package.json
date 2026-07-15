@@ -46,7 +46,7 @@
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.1",
     "@types/jest": "^30.0.0",
-    "astro": "^6.0.5",
+    "astro": "^6.4.8",
     "astro-auto-import": "^0.5.1",
     "cross-env": "^10.1.0",
     "gray-matter": "^4.0.3",
