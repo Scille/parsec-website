@@ -23,10 +23,6 @@
     "emailLabel": "Email",
     "email": "contact@parsec.cloud"
   },
-  "integration": {
-    "relatedIntegrationSectionTitle": "You might be **interested in**",
-    "backToIntegration": "Browse"
-  },
   "footer": {
     "colTitleOne": "Company",
     "colTitleTwo": "Resources",
