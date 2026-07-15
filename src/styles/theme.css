@@ -1,19 +1,617 @@
 /* prettier-ignore */
+
+:root {
+  /* ---- Colors ---- */
+
+  /* Base */
+  --parsec-color-base-white: #ffffff;
+  --parsec-color-base-black: #000000;
+
+  /* Brand */
+  --parsec-color-brand-30: #F0F6FF;
+  --parsec-color-brand-50: #E0EFFF;
+  --parsec-color-brand-100: #D1E5FF;
+  --parsec-color-brand-200: #ADD1FF;
+  --parsec-color-brand-300: #66A8FF;
+  --parsec-color-brand-400: #338BFF;
+  --parsec-color-brand-500: #006EFF;
+  --parsec-color-brand-600: #0058CC;
+  --parsec-color-brand-700: #004299;
+  --parsec-color-brand-800: #002C66;
+  --parsec-color-brand-900: #001633;
+
+  /* Grey */
+  --parsec-color-grey-10: #FCFCFD;
+  --parsec-color-grey-30: #F6F6F9;
+  --parsec-color-grey-50: #EDEDF3;
+  --parsec-color-grey-100: #EAEAF1;
+  --parsec-color-grey-200: #E0E0EB;
+  --parsec-color-grey-300: #CECEDE;
+  --parsec-color-grey-400: #B2B2CC;
+  --parsec-color-grey-500: #8585AD;
+  --parsec-color-grey-600: #5E5E8D;
+  --parsec-color-grey-700: #454569;
+  --parsec-color-grey-800: #373753;
+  --parsec-color-grey-900: #232334;
+  --parsec-color-grey-950: #171724;
+  --parsec-color-grey-970: #0F0F18;
+  --parsec-color-grey-990: #08080D;
+
+  /* Blue */
+  --parsec-color-blue-30: #F1F7FE;
+  --parsec-color-blue-50: #E2EFFD;
+  --parsec-color-blue-100: #D3E7FD;
+  --parsec-color-blue-200: #B2D4FB;
+  --parsec-color-blue-300: #6EAEF7;
+  --parsec-color-blue-400: #3E93F4;
+  --parsec-color-blue-500: #0C6CD9;
+  --parsec-color-blue-600: #0B60C1;
+  --parsec-color-blue-700: #084891;
+  --parsec-color-blue-800: #053061;
+  --parsec-color-blue-900: #031830;
+
+  /* Green */
+  --parsec-color-green-30: #F3FCF6;
+  --parsec-color-green-50: #E6F9EE;
+  --parsec-color-green-100: #DAF6E5;
+  --parsec-color-green-200: #BEEFD1;
+  --parsec-color-green-300: #83E2A9;
+  --parsec-color-green-400: #5AD88C;
+  --parsec-color-green-500: #2EB865;
+  --parsec-color-green-600: #29A35A;
+  --parsec-color-green-700: #1D7C43;
+  --parsec-color-green-800: #14522D;
+  --parsec-color-green-900: #0A2916;
+
+  /* Yellow */
+  --parsec-color-yellow-30: #FEFBF0;
+  --parsec-color-yellow-50: #FEF7E2;
+  --parsec-color-yellow-100: #FDF3D3;
+  --parsec-color-yellow-200: #EFE2BE;
+  --parsec-color-yellow-300: #E0C985;
+  --parsec-color-yellow-400: #D6B85C;
+  --parsec-color-yellow-500: #B8952E;
+  --parsec-color-yellow-600: #A38529;
+  --parsec-color-yellow-700: #917008;
+  --parsec-color-yellow-800: #614B05;
+  --parsec-color-yellow-900: #312603;
+
+  /* Red */
+  --parsec-color-red-30: #FCF3F4;
+  --parsec-color-red-50: #F9E7E9;
+  --parsec-color-red-100: #F6DADE;
+  --parsec-color-red-200: #EFBDC4;
+  --parsec-color-red-300: #E18490;
+  --parsec-color-red-400: #D75B6B;
+  --parsec-color-red-500: #B82E40;
+  --parsec-color-red-600: #C20A22;
+  --parsec-color-red-700: #910819;
+  --parsec-color-red-800: #610511;
+  --parsec-color-red-900: #310309;
+
+  /* Orange */
+  --parsec-color-orange-30: #FFF9F0;
+  --parsec-color-orange-50: #FFF2E0;
+  --parsec-color-orange-100: #FFECD1;
+  --parsec-color-orange-200: #FFDDAD;
+  --parsec-color-orange-300: #FFBF66;
+  --parsec-color-orange-400: #FFAA33;
+  --parsec-color-orange-500: #E58600;
+  --parsec-color-orange-600: #CC7700;
+  --parsec-color-orange-700: #995900;
+  --parsec-color-orange-800: #663C00;
+  --parsec-color-orange-900: #331E00;
+
+  /* Purple */
+  --parsec-color-purple-30: #F7F0FF;
+  --parsec-color-purple-50: #F0E0FF;
+  --parsec-color-purple-100: #E8D1FF;
+  --parsec-color-purple-200: #D6ADFF;
+  --parsec-color-purple-300: #B266FF;
+  --parsec-color-purple-400: #9933FF;
+  --parsec-color-purple-500: #7300E5;
+  --parsec-color-purple-600: #6600CC;
+  --parsec-color-purple-700: #4D0099;
+  --parsec-color-purple-800: #330066;
+  --parsec-color-purple-900: #1A0033;
+
+  /* Emerald */
+  --parsec-color-emerald-30: #F0FFFC;
+  --parsec-color-emerald-50: #E0FFF8;
+  --parsec-color-emerald-100: #D1FFF5;
+  --parsec-color-emerald-200: #ADFFED;
+  --parsec-color-emerald-300: #66FFDE;
+  --parsec-color-emerald-400: #33FFD3;
+  --parsec-color-emerald-500: #00E5B4;
+  --parsec-color-emerald-600: #00CCA0;
+  --parsec-color-emerald-700: #009978;
+  --parsec-color-emerald-800: #006650;
+  --parsec-color-emerald-900: #003328;
+
+  /* Opacity - Neutral */
+  --parsec-color-opacity-neutral-50: #15151E05;
+  --parsec-color-opacity-neutral-100: #15151E0A;
+  --parsec-color-opacity-neutral-200: #15151E0F;
+  --parsec-color-opacity-neutral-300: #15151E14;
+  --parsec-color-opacity-neutral-400: #15151E1A;
+  --parsec-color-opacity-neutral-500: #15151E24;
+  --parsec-color-opacity-neutral-600: #15151E2E;
+  --parsec-color-opacity-neutral-700: #15151E3D;
+  --parsec-color-opacity-neutral-800: #15151E52;
+  --parsec-color-opacity-neutral-900: #15151E66;
+
+  /* Opacity - Inverse */
+  --parsec-color-opacity-inverse-50: #F9F9FB05;
+  --parsec-color-opacity-inverse-100: #F9F9FB0A;
+  --parsec-color-opacity-inverse-200: #F9F9FB0F;
+  --parsec-color-opacity-inverse-300: #F9F9FB14;
+  --parsec-color-opacity-inverse-400: #F9F9FB1A;
+  --parsec-color-opacity-inverse-500: #F9F9FB24;
+  --parsec-color-opacity-inverse-600: #F6F7F92E;
+  --parsec-color-opacity-inverse-700: #F9F9FB3D;
+  --parsec-color-opacity-inverse-800: #F9F9FB52;
+  --parsec-color-opacity-inverse-900: #F9F9FB66;
+
+  /* ---- Shadow colors (primitive) ---- */
+
+  /* Brand */
+  --parsec-color-shadow-brand-100: #006EFF0D;
+  --parsec-color-shadow-brand-200: #006EFF1A;
+  --parsec-color-shadow-brand-300: #006EFF26;
+  --parsec-color-shadow-brand-400: #006EFF38;
+  --parsec-color-shadow-brand-500: #006EFF40;
+  --parsec-color-shadow-brand-600: #006EFF4D;
+  --parsec-color-shadow-brand-700: #006EFF59;
+  --parsec-color-shadow-brand-800: #006EFF66;
+  --parsec-color-shadow-brand-900: #006EFF73;
+
+  /* Grey */
+  --parsec-color-shadow-grey-100: #B2B2CC0F;
+  --parsec-color-shadow-grey-200: #B2B2CC1A;
+  --parsec-color-shadow-grey-300: #B2B2CC26;
+  --parsec-color-shadow-grey-400: #B2B2CC33;
+  --parsec-color-shadow-grey-500: #B2B2CC40;
+  --parsec-color-shadow-grey-600: #B2B2CC4D;
+  --parsec-color-shadow-grey-700: #B2B2CC59;
+  --parsec-color-shadow-grey-800: #B2B2CC66;
+  --parsec-color-shadow-grey-900: #B2B2CC73;
+
+  /* Blue */
+  --parsec-color-shadow-blue-100: #0B60C10D;
+  --parsec-color-shadow-blue-200: #0B60C11A;
+  --parsec-color-shadow-blue-300: #0B60C126;
+  --parsec-color-shadow-blue-400: #0B60C133;
+  --parsec-color-shadow-blue-500: #0B60C140;
+  --parsec-color-shadow-blue-600: #0B60C14D;
+  --parsec-color-shadow-blue-700: #0B60C159;
+  --parsec-color-shadow-blue-800: #0B60C166;
+  --parsec-color-shadow-blue-900: #0B60C173;
+
+  /* Red */
+  --parsec-color-shadow-red-100: #C20A220D;
+  --parsec-color-shadow-red-200: #C20A221A;
+  --parsec-color-shadow-red-300: #C20A2226;
+  --parsec-color-shadow-red-400: #C20A2233;
+  --parsec-color-shadow-red-500: #C20A2240;
+  --parsec-color-shadow-red-600: #C20A224D;
+  --parsec-color-shadow-red-700: #C20A2259;
+  --parsec-color-shadow-red-800: #C20A2266;
+  --parsec-color-shadow-red-900: #C20A2273;
+
+  /* Green */
+  --parsec-color-shadow-green-100: #29A35A0D;
+  --parsec-color-shadow-green-200: #29A35A1A;
+  --parsec-color-shadow-green-300: #29A35A26;
+  --parsec-color-shadow-green-400: #29A35A33;
+  --parsec-color-shadow-green-500: #29A35A40;
+  --parsec-color-shadow-green-600: #29A35A4D;
+  --parsec-color-shadow-green-700: #29A35A59;
+  --parsec-color-shadow-green-800: #29A35A66;
+  --parsec-color-shadow-green-900: #29A35A73;
+
+  /* Yellow */
+  --parsec-color-shadow-yellow-100: #A385290D;
+  --parsec-color-shadow-yellow-200: #A385291A;
+  --parsec-color-shadow-yellow-300: #A3852926;
+  --parsec-color-shadow-yellow-400: #A3852933;
+  --parsec-color-shadow-yellow-500: #A3852940;
+  --parsec-color-shadow-yellow-600: #A385294D;
+  --parsec-color-shadow-yellow-700: #A3852959;
+  --parsec-color-shadow-yellow-800: #A3852966;
+  --parsec-color-shadow-yellow-900: #A3852973;
+}
+
+/* ---- Theme (Semantic) Variables — Light ---- */
+:root {
+  /* Surface */
+  --parsec-color-surface-base-default: var(--parsec-color-base-white);
+  --parsec-color-surface-base-page: var(--parsec-color-base-gray-10);
+  --parsec-color-surface-base-default-secondary: var(
+    --parsec-color-base-gray-30
+  );
+  --parsec-color-surface-base-page-secondary: var(--parsec-color-base-gray-50);
+
+  --parsec-color-surface-elevated-default: var(--parsec-color-base-gray-900);
+  --parsec-color-surface-elevated-default-hover: var(
+    --parsec-color-base-gray-800
+  );
+  --parsec-color-surface-elevated-default-pressed: var(
+    --parsec-color-base-gray-700
+  );
+  --parsec-color-surface-elevated-secondary: var(--parsec-color-base-gray-950);
+  --parsec-color-surface-elevated-subtle: var(--parsec-color-base-gray-800);
+  --parsec-color-surface-elevated-subtle-hover: var(
+    --parsec-color-base-gray-700
+  );
+
+  --parsec-color-surface-brand-default: var(--parsec-color-brand-500);
+  --parsec-color-surface-brand-default-hover: var(--parsec-color-brand-600);
+  --parsec-color-surface-brand-default-pressed: var(--parsec-color-brand-700);
+  --parsec-color-surface-brand-default-subtle: var(--parsec-color-brand-30);
+  --parsec-color-surface-brand-default-subtle-hover: var(
+    --parsec-color-brand-50
+  );
+  --parsec-color-surface-brand-default-subtle-pressed: var(
+    --parsec-color-brand-100
+  );
+
+  --parsec-color-surface-neutral-default: var(--parsec-color-base-gray-800);
+  --parsec-color-surface-neutral-default-hover: var(
+    --parsec-color-base-gray-900
+  );
+  --parsec-color-surface-neutral-default-pressed: var(
+    --parsec-color-base-gray-950
+  );
+  --parsec-color-surface-neutral-default-subtle: var(
+    --parsec-color-base-gray-10
+  );
+  --parsec-color-surface-neutral-default-subtle-hover: var(
+    --parsec-color-base-gray-30
+  );
+  --parsec-color-surface-neutral-default-subtle-pressed: var(
+    --parsec-color-base-gray-50
+  );
+
+  --parsec-color-surface-error-default: var(--parsec-color-red-600);
+  --parsec-color-surface-error-default-hover: var(--parsec-color-red-700);
+  --parsec-color-surface-error-default-pressed: var(--parsec-color-red-800);
+  --parsec-color-surface-error-default-subtle: var(--parsec-color-red-30);
+  --parsec-color-surface-error-default-subtle-hover: var(--parsec-color-red-50);
+  --parsec-color-surface-error-default-subtle-pressed: var(
+    --parsec-color-red-100
+  );
+
+  --parsec-color-surface-success-default: var(--parsec-color-green-600);
+  --parsec-color-surface-success-default-hover: var(--parsec-color-green-700);
+  --parsec-color-surface-success-default-pressed: var(--parsec-color-green-800);
+  --parsec-color-surface-success-default-subtle: var(--parsec-color-green-30);
+  --parsec-color-surface-success-default-subtle-hover: var(
+    --parsec-color-green-50
+  );
+  --parsec-color-surface-success-default-subtle-pressed: var(
+    --parsec-color-green-100
+  );
+
+  --parsec-color-surface-warning-default: var(--parsec-color-yellow-600);
+  --parsec-color-surface-warning-default-hover: var(--parsec-color-yellow-700);
+  --parsec-color-surface-warning-default-pressed: var(
+    --parsec-color-yellow-800
+  );
+  --parsec-color-surface-warning-default-subtle: var(--parsec-color-yellow-30);
+  --parsec-color-surface-warning-default-subtle-hover: var(
+    --parsec-color-yellow-50
+  );
+  --parsec-color-surface-warning-default-subtle-pressed: var(
+    --parsec-color-yellow-100
+  );
+
+  --parsec-color-surface-information-default: var(--parsec-color-blue-600);
+  --parsec-color-surface-information-default-hover: var(
+    --parsec-color-blue-700
+  );
+  --parsec-color-surface-information-default-pressed: var(
+    --parsec-color-blue-800
+  );
+  --parsec-color-surface-information-default-subtle: var(
+    --parsec-color-blue-30
+  );
+  --parsec-color-surface-information-default-subtle-hover: var(
+    --parsec-color-blue-50
+  );
+  --parsec-color-surface-information-default-subtle-pressed: var(
+    --parsec-color-blue-100
+  );
+
+  --parsec-color-surface-disabled-default: var(--parsec-color-base-gray-200);
+  --parsec-color-surface-disabled-on-color: var(--parsec-color-base-gray-300);
+
+  --parsec-color-surface-extra-orange-default: var(--parsec-color-orange-600);
+  --parsec-color-surface-extra-orange-default-hover: var(
+    --parsec-color-orange-700
+  );
+  --parsec-color-surface-extra-orange-default-pressed: var(
+    --parsec-color-orange-800
+  );
+  --parsec-color-surface-extra-orange-default-subtle: var(
+    --parsec-color-orange-30
+  );
+  --parsec-color-surface-extra-orange-default-subtle-hover: var(
+    --parsec-color-orange-50
+  );
+  --parsec-color-surface-extra-orange-default-subtle-pressed: var(
+    --parsec-color-orange-100
+  );
+
+  --parsec-color-surface-extra-purple-default: var(--parsec-color-purple-600);
+  --parsec-color-surface-extra-purple-default-hover: var(
+    --parsec-color-purple-700
+  );
+  --parsec-color-surface-extra-purple-default-pressed: var(
+    --parsec-color-purple-800
+  );
+  --parsec-color-surface-extra-purple-default-subtle: var(
+    --parsec-color-purple-30
+  );
+  --parsec-color-surface-extra-purple-default-subtle-hover: var(
+    --parsec-color-purple-50
+  );
+  --parsec-color-surface-extra-purple-default-subtle-pressed: var(
+    --parsec-color-purple-100
+  );
+
+  --parsec-color-surface-extra-emerald-default: var(--parsec-color-emerald-600);
+  --parsec-color-surface-extra-emerald-default-hover: var(
+    --parsec-color-emerald-700
+  );
+  --parsec-color-surface-extra-emerald-default-pressed: var(
+    --parsec-color-emerald-800
+  );
+  --parsec-color-surface-extra-emerald-default-subtle: var(
+    --parsec-color-emerald-30
+  );
+  --parsec-color-surface-extra-emerald-default-subtle-hover: var(
+    --parsec-color-emerald-50
+  );
+  --parsec-color-surface-extra-emerald-default-subtle-pressed: var(
+    --parsec-color-emerald-100
+  );
+
+  /* Text */
+  --parsec-color-text-base-hero: var(--parsec-color-grey-900);
+  --parsec-color-text-base-heading: var(--parsec-color-grey-900);
+  --parsec-color-text-base-body: var(--parsec-color-grey-800);
+  --parsec-color-text-base-description: var(--parsec-color-grey-600);
+  --parsec-color-text-base-label: var(--parsec-color-grey-700);
+  --parsec-color-text-base-placeholder: var(--parsec-color-grey-400);
+
+  --parsec-color-text-on-color-hero: var(--parsec-color-grey-100);
+  --parsec-color-text-on-color-heading: var(--parsec-color-grey-100);
+  --parsec-color-text-on-color-body: var(--parsec-color-grey-200);
+  --parsec-color-text-on-color-caption: var(--parsec-color-grey-200);
+  --parsec-color-text-on-color-label: var(--parsec-color-grey-50);
+  --parsec-color-text-on-color-placeholder: var(--parsec-color-grey-400);
+
+  --parsec-color-text-brand-default: var(--parsec-color-brand-500);
+  --parsec-color-text-brand-default-hover: var(--parsec-color-brand-600);
+  --parsec-color-text-brand-on-color: var(--parsec-color-brand-30);
+  --parsec-color-text-brand-on-color-hover: var(--parsec-color-brand-50);
+
+  --parsec-color-text-neutral-default: var(--parsec-color-grey-700);
+  --parsec-color-text-neutral-default-hover: var(--parsec-color-grey-800);
+  --parsec-color-text-neutral-on-color: var(--parsec-color-grey-50);
+  --parsec-color-text-neutral-on-color-hover: var(--parsec-color-grey-100);
+
+  --parsec-color-text-error-default: var(--parsec-color-red-600);
+  --parsec-color-text-error-default-hover: var(--parsec-color-red-700);
+  --parsec-color-text-error-on-color: var(--parsec-color-grey-10);
+  --parsec-color-text-error-on-color-hover: var(--parsec-color-grey-50);
+
+  --parsec-color-text-success-default: var(--parsec-color-green-600);
+  --parsec-color-text-success-default-hover: var(--parsec-color-green-700);
+  --parsec-color-text-success-on-color: var(--parsec-color-grey-10);
+  --parsec-color-text-success-on-color-hover: var(--parsec-color-grey-50);
+
+  --parsec-color-text-warning-default: var(--parsec-color-orange-600);
+  --parsec-color-text-warning-default-hover: var(--parsec-color-orange-700);
+  --parsec-color-text-warning-on-color: var(--parsec-color-grey-10);
+  --parsec-color-text-warning-on-color-hover: var(--parsec-color-grey-50);
+
+  --parsec-color-text-information-default: var(--parsec-color-blue-600);
+  --parsec-color-text-information-default-hover: var(--parsec-color-blue-700);
+  --parsec-color-text-information-on-color: var(--parsec-color-grey-10);
+  --parsec-color-text-information-on-color-hover: var(--parsec-color-grey-50);
+
+  --parsec-color-text-disabled-default: var(--parsec-color-grey-400);
+  --parsec-color-text-disabled-on-color: var(--parsec-color-grey-500);
+
+  --parsec-color-text-extra-orange-default: var(--parsec-color-orange-600);
+  --parsec-color-text-extra-orange-default-hover: var(
+    --parsec-color-orange-700
+  );
+  --parsec-color-text-extra-purple-default: var(--parsec-color-purple-600);
+  --parsec-color-text-extra-purple-default-hover: var(
+    --parsec-color-purple-700
+  );
+  --parsec-color-text-extra-emerald-default: var(--parsec-color-emerald-600);
+  --parsec-color-text-extra-emerald-default-hover: var(
+    --parsec-color-emerald-700
+  );
+
+  /* Icon */
+  --parsec-color-icon-brand-default: var(--parsec-color-brand-500);
+  --parsec-color-icon-brand-default-hover: var(--parsec-color-brand-600);
+  --parsec-color-icon-brand-on-color: var(--parsec-color-brand-30);
+  --parsec-color-icon-brand-on-color-hover: var(--parsec-color-brand-50);
+
+  --parsec-color-icon-neutral-default: var(--parsec-color-grey-700);
+  --parsec-color-icon-neutral-default-hover: var(--parsec-color-grey-800);
+  --parsec-color-icon-neutral-on-color: var(--parsec-color-grey-50);
+  --parsec-color-icon-neutral-on-color-hover: var(--parsec-color-grey-100);
+
+  --parsec-color-icon-error-default: var(--parsec-color-red-600);
+  --parsec-color-icon-error-default-hover: var(--parsec-color-red-700);
+  --parsec-color-icon-error-on-color: var(--parsec-color-grey-10);
+  --parsec-color-icon-error-on-color-hover: var(--parsec-color-grey-50);
+
+  --parsec-color-icon-success-default: var(--parsec-color-green-600);
+  --parsec-color-icon-success-default-hover: var(--parsec-color-green-700);
+  --parsec-color-icon-success-on-color: var(--parsec-color-grey-10);
+  --parsec-color-icon-success-on-color-hover: var(--parsec-color-grey-50);
+
+  --parsec-color-icon-warning-default: var(--parsec-color-orange-600);
+  --parsec-color-icon-warning-default-hover: var(--parsec-color-orange-700);
+  --parsec-color-icon-warning-on-color: var(--parsec-color-grey-10);
+  --parsec-color-icon-warning-on-color-hover: var(--parsec-color-grey-50);
+
+  --parsec-color-icon-information-default: var(--parsec-color-blue-600);
+  --parsec-color-icon-information-default-hover: var(--parsec-color-blue-700);
+  --parsec-color-icon-information-on-color: var(--parsec-color-grey-10);
+  --parsec-color-icon-information-on-color-hover: var(--parsec-color-grey-50);
+
+  --parsec-color-icon-disabled-default: var(--parsec-color-grey-400);
+  --parsec-color-icon-disabled-on-color: var(--parsec-color-grey-500);
+
+  --parsec-color-icon-extra-orange-default: var(--parsec-color-orange-600);
+  --parsec-color-icon-extra-orange-default-hover: var(
+    --parsec-color-orange-700
+  );
+  --parsec-color-icon-extra-purple-default: var(--parsec-color-purple-600);
+  --parsec-color-icon-extra-purple-default-hover: var(
+    --parsec-color-purple-700
+  );
+  --parsec-color-icon-extra-emerald-default: var(--parsec-color-emerald-600);
+  --parsec-color-icon-extra-emerald-default-hover: var(
+    --parsec-color-emerald-700
+  );
+
+  /* Border */
+  --parsec-color-border-base-default: var(--parsec-color-grey-200);
+  --parsec-color-border-base-on-color: var(--parsec-color-grey-300);
+
+  --parsec-color-border-elevated-default: var(--parsec-color-purple-700);
+  --parsec-color-border-elevated-subtle: var(--parsec-color-purple-800);
+
+  --parsec-color-border-brand-default: var(--parsec-color-blue-500);
+  --parsec-color-border-brand-default-hover: var(--parsec-color-blue-600);
+  --parsec-color-border-brand-default-subtle: var(--parsec-color-blue-30);
+  --parsec-color-border-brand-default-subtle-hover: var(--parsec-color-blue-50);
+
+  --parsec-color-border-neutral-default: var(--parsec-color-grey-700);
+  --parsec-color-border-neutral-default-hover: var(--parsec-color-grey-800);
+  --parsec-color-border-neutral-default-subtle: var(--parsec-color-grey-50);
+  --parsec-color-border-neutral-default-subtle-hover: var(
+    --parsec-color-grey-100
+  );
+
+  --parsec-color-border-error-default: var(--parsec-color-red-600);
+  --parsec-color-border-error-default-hover: var(--parsec-color-red-700);
+  --parsec-color-border-error-default-subtle: var(--parsec-color-red-50);
+  --parsec-color-border-error-default-subtle-hover: var(--parsec-color-red-100);
+
+  --parsec-color-border-success-default: var(--parsec-color-green-600);
+  --parsec-color-border-success-default-hover: var(--parsec-color-green-700);
+  --parsec-color-border-success-default-subtle: var(--parsec-color-green-50);
+  --parsec-color-border-success-default-subtle-hover: var(
+    --parsec-color-green-100
+  );
+
+  --parsec-color-border-warning-default: var(--parsec-color-yellow-600);
+  --parsec-color-border-warning-default-hover: var(--parsec-color-yellow-700);
+  --parsec-color-border-warning-default-subtle: var(--parsec-color-yellow-50);
+  --parsec-color-border-warning-default-subtle-hover: var(
+    --parsec-color-yellow-100
+  );
+
+  --parsec-color-border-information-default: var(--parsec-color-blue-600);
+  --parsec-color-border-information-default-hover: var(--parsec-color-blue-700);
+  --parsec-color-border-information-default-subtle: var(--parsec-color-blue-50);
+  --parsec-color-border-information-default-subtle-hover: var(
+    --parsec-color-blue-100
+  );
+
+  --parsec-color-border-disabled-default: var(--parsec-color-grey-200);
+  --parsec-color-border-disabled-on-color: var(--parsec-color-grey-900);
+
+  --parsec-color-border-extra-orange-default: var(--parsec-color-orange-600);
+  --parsec-color-border-extra-orange-default-hover: var(
+    --parsec-color-orange-700
+  );
+  --parsec-color-border-extra-orange-default-subtle: var(
+    --parsec-color-orange-50
+  );
+  --parsec-color-border-extra-orange-default-subtle-hover: var(
+    --parsec-color-orange-100
+  );
+
+  --parsec-color-border-extra-purple-default: var(--parsec-color-purple-600);
+  --parsec-color-border-extra-purple-default-hover: var(
+    --parsec-color-purple-700
+  );
+  --parsec-color-border-extra-purple-default-subtle: var(
+    --parsec-color-purple-50
+  );
+  --parsec-color-border-extra-purple-default-subtle-hover: var(
+    --parsec-color-purple-100
+  );
+
+  --parsec-color-border-extra-emerald-default: var(--parsec-color-emerald-600);
+  --parsec-color-border-extra-emerald-default-hover: var(
+    --parsec-color-emerald-700
+  );
+  --parsec-color-border-extra-emerald-default-subtle: var(
+    --parsec-color-emerald-50
+  );
+  --parsec-color-border-extra-emerald-default-subtle-hover: var(
+    --parsec-color-emerald-100
+  );
+
+  /* Shadow */
+  --parsec-color-shadow-brand-lighter: var(--parsec-color-shadow-brand-300);
+  --parsec-color-shadow-brand-moderate: var(--parsec-color-shadow-brand-500);
+  --parsec-color-shadow-brand-strong: var(--parsec-color-shadow-brand-700);
+
+  --parsec-color-shadow-neutral-lighter: var(--parsec-color-shadow-neutral-300);
+  --parsec-color-shadow-neutral-moderate: var(
+    --parsec-color-shadow-neutral-500
+  );
+  --parsec-color-shadow-neutral-strong: var(--parsec-color-shadow-neutral-700);
+
+  --parsec-color-shadow-error-lighter: var(--parsec-color-shadow-red-300);
+  --parsec-color-shadow-error-moderate: var(--parsec-color-shadow-red-500);
+  --parsec-color-shadow-error-strong: var(--parsec-color-shadow-red-700);
+
+  --parsec-color-shadow-success-lighter: var(--parsec-color-shadow-green-300);
+  --parsec-color-shadow-success-moderate: var(--parsec-color-shadow-green-500);
+  --parsec-color-shadow-success-strong: var(--parsec-color-shadow-green-700);
+
+  --parsec-color-shadow-warning-lighter: var(--parsec-color-shadow-yellow-300);
+  --parsec-color-shadow-warning-moderate: var(--parsec-color-shadow-yellow-500);
+  --parsec-color-shadow-warning-strong: var(--parsec-color-shadow-yellow-700);
+
+  --parsec-color-shadow-information-lighter: var(
+    --parsec-color-shadow-blue-300
+  );
+  --parsec-color-shadow-information-moderate: var(
+    --parsec-color-shadow-blue-500
+  );
+  --parsec-color-shadow-information-strong: var(--parsec-color-shadow-blue-700);
+}
+
 @theme inline {
   /* Configure font families in `src/config/fonts.json` */
   --leading-body: 1.8;
   --leading-inherit: inherit;
 
   /* Colors */
-  --color-primary: #6B1AFF;
-  --color-accent: #630FFD;
+  --color-primary: #006eff;
+  --color-accent: #630ffd;
   --color-body: #fff;
-  --color-border-light: #ECEEF1;
-  --color-theme-light: #F8F8F8;
-  --color-theme-dark: #372D3F;
+  --color-border-light: #eceef1;
+  --color-theme-light: #f8f8f8;
+  --color-theme-dark: #372d3f;
 
-  --color-text-default: #3B3B3B;
-  --color-dark: #322B2B; /* Heading colors */
+  --color-text-default: #3b3b3b;
+  --color-dark: #322b2b; /* Heading colors */
   --color-light: #fff6f6;
 
   /* Screen */
@@ -46,7 +644,6 @@
   --text-h5-sm: calc(var(--text-h5) * 0.9);
   --text-h6-sm: calc(var(--text-h6) * 0.9);
 
-
   /* Custom Shadow */
-  --shadow-button: inset 0px 0px 8px 4px rgba(255,255,255,0.48);
+  --shadow-button: inset 0px 0px 8px 4px rgba(255, 255, 255, 0.48);
 }
