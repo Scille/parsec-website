@@ -18,7 +18,7 @@ const {
 const indexPageLink = currentPage === 2;
 const hasPrevPage = currentPage > 1;
 const hasNextPage = totalPages > currentPage!;
-const t = await useTranslations(Astro.currentLocale as string);
+const translate = await useTranslations(Astro.currentLocale as string);
 
 let pageList: number[] = [];
 for (let i = 1; i <= totalPages; i++) {
@@ -57,7 +57,7 @@ for (let i = 1; i <= totalPages; i++) {
               stroke-width="0.897436"
             />
           </svg>
-          {t("common.paginationPrevious")}
+          {translate("common.paginationPrevious")}
         </a>
       ) : (
         <span class="pointer-events-none flex cursor-not-allowed items-center gap-3 rounded-full border px-8 py-2.5 text-lg opacity-70 transition duration-300 select-none">
@@ -73,7 +73,7 @@ for (let i = 1; i <= totalPages; i++) {
               stroke-width="0.897436"
             />
           </svg>
-          {t("common.paginationPrevious")}
+          {translate("common.paginationPrevious")}
         </span>
       )}
 
@@ -108,7 +108,7 @@ for (let i = 1; i <= totalPages; i++) {
             Astro.currentLocale,
           )}
           class="hover:bg-primary text-text-default hover:text-light flex items-center gap-3 rounded-full border px-8 py-2.5 text-lg transition duration-300">
-          {t("common.paginationNext")}
+          {translate("common.paginationNext")}
           <svg
             width="22"
             height="16"
@@ -124,7 +124,7 @@ for (let i = 1; i <= totalPages; i++) {
         </a>
       ) : (
         <span class="pointer-events-none flex cursor-not-allowed items-center gap-3 rounded-full border px-8 py-2.5 text-lg opacity-70 transition duration-300 select-none">
-          {t("common.paginationNext")}
+          {translate("common.paginationNext")}
           <svg
             width="22"
             height="16"

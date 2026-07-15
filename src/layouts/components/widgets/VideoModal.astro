@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { video } = Astro.props;
-const t = await useTranslations(Astro.currentLocale as string);
+const translate = await useTranslations(Astro.currentLocale as string);
 let { src, provider = "youtube", poster, autoplay = true, type, id } = video;
 
 const isLocalHostedVideo = src?.includes("/videos/") && provider === "html5";
@@ -27,14 +27,14 @@ const embedSrc =
       id={id}
       class="video-modal m-auto w-[min(100%-2rem,72rem)] max-w-4xl rounded-2xl border-0 bg-transparent p-3 text-left shadow-2xl backdrop:bg-black/80"
       data-video-modal
-      aria-label={t("aria.playVideo")}>
+      aria-label={translate("aria.playVideo")}>
       <div class="pointer-events-auto flex flex-col">
         <button
           type="button"
-          aria-label={t("aria.closeModal")}
+          aria-label={translate("aria.closeModal")}
           data-video-modal-close
           class="mb-2 ml-auto flex h-10 w-10 items-center justify-center rounded-full bg-white ring-0 ring-white/50 duration-300 hover:rotate-90 hover:ring-4">
-          <span class="sr-only">{t("aria.closeModal")}</span>
+          <span class="sr-only">{translate("aria.closeModal")}</span>
           <Icons icon="X" class="text-text-default/80 h-6 w-6" />
         </button>
 
@@ -53,7 +53,7 @@ const embedSrc =
           <div class="aspect-video w-full overflow-hidden rounded-2xl bg-black">
             <iframe
               class="hidden size-full"
-              title={t("aria.playVideo")}
+              title={translate("aria.playVideo")}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen
               data-video-embed

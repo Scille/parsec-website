@@ -6,12 +6,12 @@ import { markdownify } from "@/lib/utils/textConverter";
 import SocialComponent from "@/components/social/Social.astro";
 import { useTranslations, getLocaleUrlCTM } from "@/lib/utils/i18nUtils";
 
-const t = await useTranslations(Astro.currentLocale as string);
+const translate = await useTranslations(Astro.currentLocale as string);
 
 let { copyright, footerDescription, brandName } = config.settings;
 
-footerDescription = footerDescription || t("footer.description");
-const copyrightText = copyright.text || t("footer.copyright");
+footerDescription = footerDescription || translate("footer.description");
+const copyrightText = copyright.text || translate("footer.copyright");
 ---
 
 <footer class="relative">
@@ -25,57 +25,61 @@ const copyrightText = copyright.text || t("footer.copyright");
       <div class="col-span-2 grid gap-y-10 md:grid-cols-3 xl:pl-56">
         <div>
           {
-            t("footer.colTitleOne") && (
+            translate("footer.colTitleOne") && (
               <h3
                 class="text-dark mb-4 text-xl md:mb-6"
-                set:html={t("footer.colTitleOne")}
+                set:html={translate("footer.colTitleOne")}
               />
             )
           }
           <ul class="flex flex-col gap-y-1.5">
             {
-              t("footerMenuOne")?.map((menu: { name: string; url: string }) => (
-                <li>
-                  <a
-                    class="has-underline-anim inline-block py-px text-inherit"
-                    href={getLocaleUrlCTM(menu.url, Astro.currentLocale)}>
-                    {menu.name}
-                  </a>
-                </li>
-              ))
+              translate("footerMenuOne")?.map(
+                (menu: { name: string; url: string }) => (
+                  <li>
+                    <a
+                      class="has-underline-anim inline-block py-px text-inherit"
+                      href={getLocaleUrlCTM(menu.url, Astro.currentLocale)}>
+                      {menu.name}
+                    </a>
+                  </li>
+                ),
+              )
             }
           </ul>
         </div>
 
         <div>
           {
-            t("footer.colTitleTwo") && (
+            translate("footer.colTitleTwo") && (
               <h3
                 class="text-dark mb-4 text-xl md:mb-6"
-                set:html={t("footer.colTitleTwo")}
+                set:html={translate("footer.colTitleTwo")}
               />
             )
           }
           <ul class="flex flex-col gap-2">
             {
-              t("footerMenuTwo").map((menu: { name: string; url: string }) => (
-                <li class="inline-block">
-                  <a
-                    class="has-underline-anim inline-block py-px text-inherit"
-                    href={getLocaleUrlCTM(menu.url, Astro.currentLocale)}
-                    set:html={menu.name}
-                  />
-                </li>
-              ))
+              translate("footerMenuTwo").map(
+                (menu: { name: string; url: string }) => (
+                  <li class="inline-block">
+                    <a
+                      class="has-underline-anim inline-block py-px text-inherit"
+                      href={getLocaleUrlCTM(menu.url, Astro.currentLocale)}
+                      set:html={menu.name}
+                    />
+                  </li>
+                ),
+              )
             }
           </ul>
         </div>
         <div>
           {
-            t("footer.colTitleThree") && (
+            translate("footer.colTitleThree") && (
               <h3
                 class="text-dark mb-4 text-xl md:mb-6"
-                set:html={t("footer.colTitleThree")}
+                set:html={translate("footer.colTitleThree")}
               />
             )
           }
@@ -84,11 +88,11 @@ const copyrightText = copyright.text || t("footer.copyright");
             <li>
               <span
                 class="text-dark/65 mb-1.5 inline-block text-sm/none font-medium -tracking-tighter">
-                {t("contactInfo.locationLabel") || "Location"}:
+                {translate("contactInfo.locationLabel") || "Location"}:
               </span>
               <span class="text-base-sm block md:text-base">
                 {
-                  t("contactInfo.location") ||
+                  translate("contactInfo.location") ||
                     "2627 Park Street, San Francisco, CA"
                 }
               </span>
@@ -96,19 +100,19 @@ const copyrightText = copyright.text || t("footer.copyright");
             <li>
               <span
                 class="text-dark/65 mb-1.5 inline-block text-sm/none font-medium -tracking-tighter">
-                {t("contactInfo.phoneLabel") || "Phone Number"}:
+                {translate("contactInfo.phoneLabel") || "Phone Number"}:
               </span>
               <span class="text-base-sm block md:text-base">
-                {t("contactInfo.phone") || "925-465-3762"}
+                {translate("contactInfo.phone") || "925-465-3762"}
               </span>
             </li>
             <li>
               <span
                 class="text-dark/65 mb-1.5 inline-block text-sm/none font-medium -tracking-tighter">
-                {t("contactInfo.emailLabel") || "Email"}:
+                {translate("contactInfo.emailLabel") || "Email"}:
               </span>
               <span class="text-base-sm block md:text-base">
-                {t("contactInfo.email") || "stella@example.com"}
+                {translate("contactInfo.email") || "stella@example.com"}
               </span>
             </li>
           </ul>

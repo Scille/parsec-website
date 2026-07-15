@@ -10,8 +10,8 @@ import { sortByWeight } from "@/lib/utils/sortFunctions";
 import { filteredEnabled } from "@/lib/utils/filteredEnabled";
 import CustomButton from "@/components/CustomButton.astro";
 
-const t = await useTranslations(Astro.currentLocale as string);
-let main = t("main") as NavigationLink[];
+const translate = await useTranslations(Astro.currentLocale as string);
+let main = translate("main") as NavigationLink[];
 main = filteredEnabled(main);
 
 // Sort menus by weight
@@ -52,7 +52,10 @@ const { stickyHeader, navigationButton } = config.settings;
                   hoverEffect="text-flip"
                   variant="fill"
                   {...navigationButton}
-                  label={navigationButton.label || t("navigation.buttonLabel")}
+                  label={
+                    navigationButton.label ||
+                    translate("navigation.buttonLabel")
+                  }
                   class="btn-primary"
                 />
               )}
@@ -71,7 +74,9 @@ const { stickyHeader, navigationButton } = config.settings;
                 hoverEffect="text-flip"
                 variant="fill"
                 {...navigationButton}
-                label={navigationButton.label || t("navigation.buttonLabel")}
+                label={
+                  navigationButton.label || translate("navigation.buttonLabel")
+                }
                 class="btn-primary"
               />
             )}
