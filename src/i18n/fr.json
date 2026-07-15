@@ -17,17 +17,17 @@
   },
   "contactInfo": {
     "locationLabel": "Adresse",
-    "location": "226 Bd Voltaire, 75011 Paris, France",
+    "location": "11 chemin de Jalès, 33160 Saint-Médard-en-Jalles, France",
     "phoneLabel": "Téléphone",
-    "phone": "+33 1 00 00 00 00",
-    "emailLabel": "Email",
+    "phone": "+33 7 82 07 85 07",
+    "emailLabel": "Nous envoyer un e-mail",
     "email": "contact@parsec.cloud"
   },
   "footer": {
-    "colTitleOne": "Entreprise",
+    "colTitleOne": "Parsec Cloud",
     "colTitleTwo": "Ressources",
     "colTitleThree": "Contact",
     "description": "Parsec Cloud est la solution de stockage et collaboration certifiée ANSSI pour vos données sensibles. Chiffrement de bout en bout, zéro connaissance, souveraineté totale.",
-    "copyright": "Copyright © 2024 Parsec Cloud. Tous droits réservés."
+    "copyright": "Copyright © {currentYear} Parsec Cloud. Tous droits réservés."
   }
 }

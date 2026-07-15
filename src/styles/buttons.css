@@ -3,14 +3,14 @@
 /* ====================================================== */
 
 @utility btn {
-  @apply shadow-button relative inline-block overflow-hidden rounded-full px-8 py-3 leading-tight font-medium whitespace-nowrap uppercase duration-[.35s] disabled:cursor-not-allowed md:px-11;
+  @apply relative inline-block overflow-hidden rounded-full px-2 py-3 leading-tight font-medium whitespace-nowrap duration-[.35s] disabled:cursor-not-allowed md:px-6;
 }
 @utility btn-md {
   @apply px-10 py-4 md:text-lg xl:px-12;
 }
 
 @utility btn-primary {
-  @apply bg-primary text-light;
+  @apply bg-primary text-light shadow-button;
 }
 @utility btn-black {
   @apply text-light bg-black;
@@ -29,7 +29,7 @@
 
 /* Button Outline Variant */
 @utility btn-outline {
-  @apply text-text-default shadow-button border font-medium;
+  @apply text-text-default border font-medium;
 }
 @utility btn-outline-white {
   @apply text-text-default border bg-white;

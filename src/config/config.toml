@@ -6,7 +6,7 @@
   taglineSeparator = "" # default is " - "
   baseUrl          = "https://parsec.cloud" # Base URL for the site and used in OpenGraph meta tags.
   logo             = "/images/logo_row_blue.svg" # Path to the site's logo
-  logoText         = "" # Text displayed next to the logo
+  logoIcon         = "/images/logo_icon_blue.svg" # Path to the site's logo icon
   logoWidth        = "218px" # Used as <img> attribute for aspect ratio hint (CLS prevention)
   logoHeight       = "37px" # Visual size is controlled via CSS (.logo class)
 

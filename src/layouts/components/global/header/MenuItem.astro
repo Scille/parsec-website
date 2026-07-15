@@ -31,9 +31,9 @@ const { pathname } = Astro.url;
             Astro.currentLocale,
           )}
           class:list={[
-            "nav-link",
+            "nav-link text-text-base-label hover:text-text-brand-default font-medium",
             {
-              "nav-link-active":
+              "nav-link-active text-text-brand-default":
                 pathname === `${menu.url}/` || pathname === menu.url,
             },
           ]}>

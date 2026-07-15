@@ -1,7 +1,7 @@
 ---
 import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
-import { markdownify, toSentenceCase } from "@/lib/utils/textConverter";
+import { toSentenceCase } from "@/lib/utils/textConverter";
 
 import config from ".astro/config.generated.json";
 
@@ -29,9 +29,9 @@ let { src, class: className } = Astro.props;
 
 let {
   logo,
+  logoIcon,
   logoWidth = "29px",
   logoHeight = "29px",
-  logoText,
   title,
 } = config.site;
 ---
@@ -40,26 +40,14 @@ let {
   href={getLocaleUrlCTM("/", Astro.currentLocale)}
   class:list={["logo-wrapper", className]}>
   {
-    src || logo ? (
-      <>
-        <OptimizedImage
-          src={src ? src : logo}
-          class="logo"
-          width={getNumber(logoWidth)}
-          height={getNumber(logoHeight)}
-          alt={toSentenceCase("Brand logo of " + title)}
-          style={{
-            height: getNumber(logoHeight) + "px",
-            width: getNumber(logoWidth) + "px",
-          }}
-        />
-
-        {logoText && (
-          <span class="logo-text" set:html={markdownify(logoText)} />
-        )}
-      </>
-    ) : logoText ? (
-      logoText
+    src || logo || logoIcon ? (
+      <OptimizedImage
+        src={src ?? logo ?? logoIcon}
+        class="logo"
+        width={getNumber(logoWidth)}
+        height={getNumber(logoHeight)}
+        alt={toSentenceCase("Brand logo of " + title)}
+      />
     ) : (
       title
     )

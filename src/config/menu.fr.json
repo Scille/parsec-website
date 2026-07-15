@@ -43,70 +43,46 @@
       "name": "Politique de confidentialité",
       "url": "/privacy-policy/",
       "weight": 2
+    },
+    {
+      "enable": true,
+      "name": "Mentions légales",
+      "url": "/legal-notice/",
+      "weight": 3
     }
   ],
   "footerMenuOne": [
     {
       "enable": true,
       "name": "À propos",
-      "url": "/company/",
+      "url": "/about-us/",
       "weight": 1
-    },
-    {
-      "enable": true,
-      "name": "Carrières",
-      "url": "/career/",
-      "weight": 2
     },
     {
       "enable": true,
       "name": "Blog",
       "url": "/blog/",
+      "weight": 2
+    },
+    {
+      "enable": true,
+      "name": "Nos partenaires",
+      "url": "/partners/",
       "weight": 3
-    },
-    {
-      "enable": true,
-      "name": "Presse",
-      "url": "/contact/",
-      "weight": 4
-    },
-    {
-      "enable": true,
-      "name": "Contact",
-      "url": "/contact/",
-      "weight": 5
     }
   ],
   "footerMenuTwo": [
     {
       "enable": true,
-      "name": "Centre d'aide",
+      "name": "Documentation",
       "url": "/",
       "weight": 1
     },
     {
       "enable": true,
-      "name": "Documentation",
-      "url": "/",
+      "name": "Guide utilisateur",
+      "url": "/user-guide/",
       "weight": 2
-    },
-    {
-      "enable": true,
-      "name": "Communauté",
-      "url": "/",
-      "weight": 3
-    },
-    {
-      "enable": true,
-      "name": "Journal des mises à jour",
-      "url": "/changelog/",
-      "weight": 4
-    },
-    {
-      "enable": true,
-      "name": "FAQ",
-      "url": "/faq/",
-      "weight": 5
     }
   ]
 }

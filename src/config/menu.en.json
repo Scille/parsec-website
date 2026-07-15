@@ -43,6 +43,12 @@
       "name": "Privacy Policy",
       "url": "/privacy-policy/",
       "weight": 2
+    },
+    {
+      "enable": true,
+      "name": "Legal Notice",
+      "url": "/legal-notice/",
+      "weight": 3
     }
   ],
   "footerMenuOne": [
@@ -60,7 +66,7 @@
     },
     {
       "enable": true,
-      "name": "Partners",
+      "name": "Our partners",
       "url": "/partners/",
       "weight": 3
     }
@@ -77,14 +83,6 @@
       "name": "User Guide",
       "url": "/user-guide/",
       "weight": 2
-    }
-  ],
-  "footerMenuThree": [
-    {
-      "enable": true,
-      "name": "Contact Us",
-      "url": "/contact/",
-      "weight": 1
     }
   ]
 }
