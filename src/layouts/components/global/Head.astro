@@ -4,10 +4,30 @@ import JsonLD from "../widgets/JsonLD.astro";
 import Favicons from "@/components/seo/Favicons.astro";
 import OpenGraph from "@/components/seo/OpenGraph.astro";
 import config from ".astro/config.generated.json";
-import { Font } from "astro:assets";
 import fontsJson from "@/config/fonts.json";
 
-const fontVariables = fontsJson.map((font) => font.cssVariable) as any[];
+const googleFontsUrl = (() => {
+  const googleFonts = fontsJson.filter((f) => f.provider === "google");
+  if (!googleFonts.length) return null;
+  const families = googleFonts.map((f) => {
+    const hasItalic = f.variants.some(
+      (v: { style: string }) => v.style === "italic",
+    );
+    const weights = [
+      ...new Set(f.variants.map((v: { weight: string }) => v.weight)),
+    ].sort();
+    const name = f.name.replace(/ /g, "+");
+    if (hasItalic) {
+      const parts = f.variants.map(
+        (v: { style: string; weight: string }) =>
+          `${v.style === "italic" ? 1 : 0},${v.weight}`,
+      );
+      return `family=${name}:ital,wght@${parts.join(";")}`;
+    }
+    return `family=${name}:wght@${weights.join(";")}`;
+  });
+  return `https://fonts.googleapis.com/css2?${families.join("&")}&display=swap`;
+})();
 ---
 
 <head>
@@ -58,5 +78,13 @@ const fontVariables = fontsJson.map((font) => font.cssVariable) as any[];
   <!------------------
     Fonts
 -------------------->
-  {fontVariables.map((font) => <Font cssVariable={font} />)}
+  {
+    googleFontsUrl && (
+      <>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="stylesheet" href={googleFontsUrl} />
+      </>
+    )
+  }
 </head>
