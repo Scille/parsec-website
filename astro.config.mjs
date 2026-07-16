@@ -1,4 +1,5 @@
 import mdx from "@astrojs/mdx";
+import vue from "@astrojs/vue";
 import remarkToc from "remark-toc";
 import sitemap from "@astrojs/sitemap";
 // import AutoImport from "astro-auto-import";
@@ -58,6 +59,7 @@ export default defineConfig({
     //   ],
     // }),
     mdx(),
+    vue(),
   ],
   markdown: {
     processor: unified({
