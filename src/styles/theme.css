@@ -226,24 +226,16 @@
 :root {
   /* Surface */
   --parsec-color-surface-base-default: var(--parsec-color-base-white);
-  --parsec-color-surface-base-page: var(--parsec-color-base-gray-10);
-  --parsec-color-surface-base-default-secondary: var(
-    --parsec-color-base-gray-30
-  );
-  --parsec-color-surface-base-page-secondary: var(--parsec-color-base-gray-50);
+  --parsec-color-surface-base-page: var(--parsec-color-grey-10);
+  --parsec-color-surface-base-default-secondary: var(--parsec-color-grey-30);
+  --parsec-color-surface-base-page-secondary: var(--parsec-color-grey-50);
 
-  --parsec-color-surface-elevated-default: var(--parsec-color-base-gray-900);
-  --parsec-color-surface-elevated-default-hover: var(
-    --parsec-color-base-gray-800
-  );
-  --parsec-color-surface-elevated-default-pressed: var(
-    --parsec-color-base-gray-700
-  );
-  --parsec-color-surface-elevated-secondary: var(--parsec-color-base-gray-950);
-  --parsec-color-surface-elevated-subtle: var(--parsec-color-base-gray-800);
-  --parsec-color-surface-elevated-subtle-hover: var(
-    --parsec-color-base-gray-700
-  );
+  --parsec-color-surface-elevated-default: var(--parsec-color-grey-900);
+  --parsec-color-surface-elevated-default-hover: var(--parsec-color-grey-800);
+  --parsec-color-surface-elevated-default-pressed: var(--parsec-color-grey-700);
+  --parsec-color-surface-elevated-secondary: var(--parsec-color-grey-950);
+  --parsec-color-surface-elevated-subtle: var(--parsec-color-grey-800);
+  --parsec-color-surface-elevated-subtle-hover: var(--parsec-color-grey-700);
 
   --parsec-color-surface-brand-default: var(--parsec-color-brand-500);
   --parsec-color-surface-brand-default-hover: var(--parsec-color-brand-600);
@@ -256,21 +248,15 @@
     --parsec-color-brand-100
   );
 
-  --parsec-color-surface-neutral-default: var(--parsec-color-base-gray-800);
-  --parsec-color-surface-neutral-default-hover: var(
-    --parsec-color-base-gray-900
-  );
-  --parsec-color-surface-neutral-default-pressed: var(
-    --parsec-color-base-gray-950
-  );
-  --parsec-color-surface-neutral-default-subtle: var(
-    --parsec-color-base-gray-10
-  );
+  --parsec-color-surface-neutral-default: var(--parsec-color-grey-800);
+  --parsec-color-surface-neutral-default-hover: var(--parsec-color-grey-900);
+  --parsec-color-surface-neutral-default-pressed: var(--parsec-color-grey-950);
+  --parsec-color-surface-neutral-default-subtle: var(--parsec-color-grey-10);
   --parsec-color-surface-neutral-default-subtle-hover: var(
-    --parsec-color-base-gray-30
+    --parsec-color-grey-30
   );
   --parsec-color-surface-neutral-default-subtle-pressed: var(
-    --parsec-color-base-gray-50
+    --parsec-color-grey-50
   );
 
   --parsec-color-surface-error-default: var(--parsec-color-red-600);
@@ -323,8 +309,8 @@
     --parsec-color-blue-100
   );
 
-  --parsec-color-surface-disabled-default: var(--parsec-color-base-gray-200);
-  --parsec-color-surface-disabled-on-color: var(--parsec-color-base-gray-300);
+  --parsec-color-surface-disabled-default: var(--parsec-color-grey-200);
+  --parsec-color-surface-disabled-on-color: var(--parsec-color-grey-300);
 
   --parsec-color-surface-extra-orange-default: var(--parsec-color-orange-600);
   --parsec-color-surface-extra-orange-default-hover: var(
@@ -571,11 +557,9 @@
   --parsec-color-shadow-brand-moderate: var(--parsec-color-shadow-brand-500);
   --parsec-color-shadow-brand-strong: var(--parsec-color-shadow-brand-700);
 
-  --parsec-color-shadow-neutral-lighter: var(--parsec-color-shadow-neutral-300);
-  --parsec-color-shadow-neutral-moderate: var(
-    --parsec-color-shadow-neutral-500
-  );
-  --parsec-color-shadow-neutral-strong: var(--parsec-color-shadow-neutral-700);
+  --parsec-color-shadow-neutral-lighter: var(--parsec-color-shadow-grey-300);
+  --parsec-color-shadow-neutral-moderate: var(--parsec-color-shadow-grey-500);
+  --parsec-color-shadow-neutral-strong: var(--parsec-color-shadow-grey-700);
 
   --parsec-color-shadow-error-lighter: var(--parsec-color-shadow-red-300);
   --parsec-color-shadow-error-moderate: var(--parsec-color-shadow-red-500);
