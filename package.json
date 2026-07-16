@@ -1,8 +1,7 @@
 {
-  "name": "stella",
+  "name": "parsec-website",
   "type": "module",
   "version": "2.0.1",
-  "author": "getastrothemes",
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
@@ -26,6 +25,7 @@
     "node": ">=22.12.0"
   },
   "dependencies": {
+    "@astrojs/vue": "^7.0.1",
     "@floating-ui/dom": "^1.7.6",
     "aos": "^2.3.4",
     "date-fns": "^4.1.0",
@@ -34,7 +34,8 @@
     "motion": "^12.37.0",
     "preline": "^4.1.2",
     "sharp": "^0.34.5",
-    "smoothscroll-for-websites": "^1.5.1"
+    "smoothscroll-for-websites": "^1.5.1",
+    "vue": "^3.5.40"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.8",
