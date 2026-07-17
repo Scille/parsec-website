@@ -3,7 +3,7 @@
 /* ====================================================== */
 
 @utility btn {
-  @apply relative inline-block overflow-hidden rounded-full px-2 py-3 leading-tight font-medium whitespace-nowrap duration-[.35s] disabled:cursor-not-allowed md:px-6;
+  @apply relative inline-block overflow-hidden rounded-full px-6 py-3 leading-tight font-medium whitespace-nowrap duration-[.35s] disabled:cursor-not-allowed;
 }
 @utility btn-md {
   @apply px-10 py-4 md:text-lg xl:px-12;
@@ -29,7 +29,7 @@
 
 /* Button Outline Variant */
 @utility btn-outline {
-  @apply text-text-default border font-medium;
+  @apply text-text-default border-border-base-default bg-surface-base-page border font-medium shadow-xs;
 }
 @utility btn-outline-white {
   @apply text-text-default border bg-white;

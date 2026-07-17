@@ -38,27 +38,27 @@ h6 {
 
 h1,
 .h1 {
-  @apply text-h1-sm md:text-h1 font-semibold;
+  @apply text-h1-sm md:text-h1 leading-h1 tracking-heading font-semibold;
 }
 
 h2,
 .h2 {
-  @apply text-h2-sm md:text-h2 font-semibold;
+  @apply text-h2-sm md:text-h2 leading-h2 font-semibold;
 }
 
 h3,
 .h3 {
-  @apply text-h3-sm md:text-h3 font-semibold;
+  @apply text-h3-sm md:text-h3 leading-h3 font-semibold;
 }
 
 h4,
 .h4 {
-  @apply text-h4-sm md:text-h4;
+  @apply text-h4-sm md:text-h4 leading-h4 font-semibold;
 }
 
 h5,
 .h5 {
-  @apply text-h5-sm md:text-h5;
+  @apply text-h5-sm md:text-h5 leading-h5 font-semibold;
 }
 
 h6,

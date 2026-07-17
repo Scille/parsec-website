@@ -4,6 +4,8 @@ import type { z } from "astro/zod";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import overrideObjects from "@/lib/utils/overrideObjects.ts";
+import CustomButton from "@/components/CustomButton.astro";
+import VideoModal from "@/components/widgets/VideoModal.astro";
 import type { benefitsSectionSchema } from "@/sections.schema";
 import Icons from "@/helpers/Icons.astro";
 import AnimatedText from "../widgets/AnimatedText.astro";
@@ -25,7 +27,13 @@ let actualContent = overrideObjects(
   Astro.props.content,
 ) as benefitsSectionType;
 
-let { enable = true, title, benefits } = actualContent as benefitsSectionType;
+let {
+  enable = true,
+  title,
+  benefits,
+  buttons,
+} = actualContent as benefitsSectionType;
+const videoButton = buttons?.find((button: any) => button.type === "video");
 
 if (!enable) return;
 ---
@@ -75,5 +83,45 @@ if (!enable) return;
         </div>
       )
     }
+
+    <div
+      data-aos="fade-up-sm"
+      data-aos-delay="1000"
+      data-aos-duration="1000"
+      class="has-video-modal flex flex-wrap items-center justify-center gap-6">
+      {
+        buttons &&
+          buttons.map((button: any) =>
+            button.type !== "video" ? (
+              <CustomButton class="btn-md" {...button} />
+            ) : (
+              <CustomButton
+                class="btn-md"
+                {...button}
+                title="Play Video"
+                aria-haspopup="dialog"
+                aria-expanded="false"
+                aria-controls={"#" + button.video.id}
+                data-hs-overlay={"#" + button.video.id}
+                data-hs-overlay-options={`{"emulateScrollbarSpace" : true}`}
+              />
+            ),
+          )
+      }
+    </div>
+
+    <div>
+      {
+        videoButton?.enable && videoButton.video?.src && (
+          <VideoModal
+            video={{
+              id: videoButton.video?.id,
+              src: videoButton.video.src,
+              provider: videoButton.video?.provider,
+            }}
+          />
+        )
+      }
+    </div>
   </div>
 </section>
