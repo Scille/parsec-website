@@ -1,6 +1,6 @@
 ---
 enable: true # Control the visibility of this section across all pages where it is used
-description: "Over 500 successful companies trust Stella."
+description: "They trust Parsec to protect their most sensitive data."
 
 marquee:
   # elementWidth: # width in rem (eg: 10rem or blank if width should be based on item width)
@@ -12,18 +12,18 @@ marquee:
 
 # Add your customer logos (colorful not white) to the images/customers folder
 list:
-  - src: "/images/customers/1.png"
-    alt: "Quotient"
-  - src: "/images/customers/2.png"
-    alt: "Catalog"
-  - src: "/images/customers/3.png"
-    alt: "Sisphus"
-  - src: "/images/customers/4.png"
-    alt: "Hourglass"
-  - src: "/images/customers/5.png"
-    alt: "Layers"
-  - src: "/images/customers/1.png"
-    alt: "Quotient"
-  - src: "/images/customers/2.png"
-    alt: "Catalog"
+  - src: "/images/customers/dinum.png"
+    alt: "Direction Interministérielle du Numérique"
+  - src: "/images/customers/mint.png"
+    alt: "Ministère de l'intérieur et des outre-mer"
+  - src: "/images/customers/cnrs.png"
+    alt: "Centre National de la Recherche Scientifique"
+  - src: "/images/customers/axcel.png"
+    alt: "Axcel Partners"
+  - src: "/images/customers/franceNum.png"
+    alt: "Activateur France Numérique"
+  - src: "/images/customers/uaf.png"
+    alt: "Utilisé par les Armées Françaises"
+  - src: "/images/customers/france2030.png"
+    alt: "France 2030"
 ---
