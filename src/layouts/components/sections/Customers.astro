@@ -1,5 +1,4 @@
 ---
-import Marquee from "@/components/widgets/Marquee.astro";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import overrideObjects from "@/lib/utils/overrideObjects.ts";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
@@ -41,15 +40,6 @@ const {
   lightLogo = true,
 } = Astro.props;
 
-let duplicatedList = list;
-
-// If list length is less then 3 then duplicate the list at at least 3 times
-if (list.length <= 3) {
-  Array.from({ length: 3 }, () => [...list]).flat();
-} else if (list.length > 3) {
-  Array.from({ length: 2 }, () => [...list]).flat();
-}
-
 if (!enable) return;
 ---
 
@@ -60,7 +50,7 @@ if (!enable) return;
         description && (
           <p
             data-aos="fade-up-sm"
-            class="text-center text-lg font-normal md:text-xl"
+            class="h3 text-center"
             set:html={markdownify(description)}
           />
         )
@@ -68,66 +58,16 @@ if (!enable) return;
       <div
         data-aos="fade-up-sm"
         data-aos-delay={200}
-        class="relative mt-6 flex items-center overflow-hidden md:mt-8">
-        <Marquee
-          marqueeElements={duplicatedList.length}
-          marqueePauseOnHover={marquee.pauseOnHover}
-          marqueeReverse={marquee.reverse}
-          marqueeDuration={marquee.duration}
-          marqueeElementWidth={marquee.elementWidth}
-          marqueeElementWidthAuto={marquee.elementWidthAuto}
-          marqueeElementWidthResponsive={marquee.elementWidthInSmallDevices}>
-          {
-            duplicatedList.map((item) => (
-              <div
-                class:list={[
-                  "px-4 md:px-8",
-                  {
-                    "min-w-(--marquee-element-width-responsive) md:min-w-(--marquee-element-width)":
-                      !marquee.elementWidthAuto,
-                  },
-                  {
-                    "min-w-fit": marquee.elementWidthAuto,
-                  },
-                ]}>
-                <OptimizedImage
-                  src={item.src}
-                  alt={item.alt}
-                  height={46}
-                  class:list={[
-                    "h-8 min-h-8 min-w-fit md:h-[46px]",
-                    lightLogo && "brightness-0 invert filter",
-                  ]}
-                />
-              </div>
-            ))
-          }
-          {
-            duplicatedList.map((item) => (
-              <div
-                class:list={[
-                  "px-4 md:px-8",
-                  {
-                    "min-w-(--marquee-element-width-responsive) md:min-w-(--marquee-element-width)":
-                      !marquee.elementWidthAuto,
-                  },
-                  {
-                    "min-w-fit": marquee.elementWidthAuto,
-                  },
-                ]}>
-                <OptimizedImage
-                  src={item.src}
-                  alt={item.alt}
-                  height={46}
-                  class:list={[
-                    "h-8 min-h-8 min-w-fit md:h-[46px]",
-                    lightLogo && "brightness-0 invert filter",
-                  ]}
-                />
-              </div>
-            ))
-          }
-        </Marquee>
+        class="relative mt-6 flex shrink flex-wrap justify-center gap-7 overflow-hidden md:mt-8">
+        {
+          list.map((item) => (
+            <OptimizedImage
+              src={item.src}
+              alt={item.alt}
+              class:list={["h-full max-h-[90px] w-auto md:max-h-[100px]"]}
+            />
+          ))
+        }
       </div>
     </div>
   </div>

@@ -5,6 +5,7 @@ import { generatePaths } from "@/lib/utils/i18nUtils";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import Location from "@/components/sections/Location.astro";
 import HomeHero from "@/components/sections/HomeHero.astro";
+import Customers from "@/components/sections/Customers.astro";
 import HowItWorks from "@/components/sections/HowItWorks.astro";
 import BlogSection from "@/components/sections/BlogSection.astro";
 import Features from "@/components/sections/FeaturesSection.astro";
@@ -21,6 +22,7 @@ const homepage = await getEntryCTM("homepage", "-index", Astro.currentLocale);
 
 <Base {...homepage.data} homepage={true}>
   <HomeHero />
+  <Customers />
   <Features />
   <HowItWorks />
   <Team />
