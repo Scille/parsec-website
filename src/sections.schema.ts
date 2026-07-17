@@ -156,7 +156,7 @@ const heroButtonSchema = sharedButtonBase
 // Hero section schema
 export const heroSectionSchema = z.object({
   enable: z.boolean().default(true),
-  title: z.string(), // e.g., "The **Smartest Way** to Bring Best ROI for Sales"
+  title: z.string(),
   preTitle: preTitleSchema.optional(),
   description: z.string(),
   image: z.string().optional(),
@@ -358,6 +358,7 @@ export const benefitsSectionSchema = z
         icon: z.string(),
       }),
     ),
+    buttons: z.array(heroButtonSchema).optional(),
   })
   .optional();
 
