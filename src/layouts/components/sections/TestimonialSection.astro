@@ -41,11 +41,9 @@ if (limit) {
 }
 ---
 
-<section>
+<section class="bg-dots-fade">
   <div
-    class:list={[
-      Astro.props.minimalLayout ? "container" : "bg-theme-light py-20 md:py-32",
-    ]}>
+    class:list={[Astro.props.minimalLayout ? "container" : "pb-20 md:pb-32"]}>
     <div
       class:list={[
         "space-y-10 md:space-y-16",
@@ -55,7 +53,7 @@ if (limit) {
         title && (
           <div class="mx-auto max-w-4xl text-center">
             {title && (
-              <h2 class="has-italic-text capitalize">
+              <h2 class="has-italic-text text-text-base-heading">
                 <AnimatedText
                   delay={0.2}
                   stagger={0.09}
@@ -69,7 +67,7 @@ if (limit) {
 
       {
         list && (
-          <div class="grid gap-8 overflow-hidden md:grid-cols-2 lg:grid-cols-3">
+          <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {list
               .filter((item) => item.enable !== false)
               .map((testimonial, index) => (
