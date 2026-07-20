@@ -589,16 +589,16 @@
   --parsec-font-heading-h1-line-height: 120%;
   --parsec-font-heading-h1-letter-spacing: 0.1px;
 
-  --parsec-font-heading-h2-size: 1.5rem;
-  --parsec-font-heading-h2-line-height: 2rem;
+  --parsec-font-heading-h2-size: 2.8125rem;
+  --parsec-font-heading-h2-line-height: 1.2;
   --parsec-font-heading-h2-letter-spacing: 0.1px;
 
-  --parsec-font-heading-h3-size: 1.25rem;
-  --parsec-font-heading-h3-line-height: 1.5rem;
+  --parsec-font-heading-h3-size: 1.8rem;
+  --parsec-font-heading-h3-line-height: 1.2;
   --parsec-font-heading-h3-letter-spacing: 0.1px;
 
-  --parsec-font-heading-h4-size: 1.125rem;
-  --parsec-font-heading-h4-line-height: 1.375rem;
+  --parsec-font-heading-h4-size: 1.375rem;
+  --parsec-font-heading-h4-line-height: 1.2;
   --parsec-font-heading-h4-letter-spacing: 0.1px;
 
   --parsec-font-heading-h5-size: 1rem;
@@ -1113,6 +1113,11 @@
     0 2.15px 0.5px -2px rgba(0, 0, 0, 0.25),
     0 24px 24px -16px rgba(8, 8, 8, 0.04), 0 6px 13px 0 rgba(8, 8, 8, 0.03),
     0 6px 4px -4px rgba(8, 8, 8, 0.05), 0 5px 1.5px -4px rgba(8, 8, 8, 0.05);
+  --filter-section: radial-gradient(
+    circle,
+    var(--color-surface-brand-default) 2px,
+    transparent 2px
+  );
 }
 
 @utility bg-dots-fade {

@@ -339,11 +339,22 @@ export const howItWorksSectionSchema = z
     list: z.array(
       z.object({
         step: z.string(), // e.g., "Step 01"
+        image: z
+          .object({
+            src: z.string(),
+            alt: z.string(),
+          })
+          .optional(),
         title: z.string(), // e.g., "Connect & Collaborate"
         description: z.string(), // e.g., "Invite your team..."
-        button: sharedButton,
       }),
     ),
+    button: z
+      .object({
+        label: z.string(),
+        url: z.string(),
+      })
+      .optional(),
   })
   .optional();
 
