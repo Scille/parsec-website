@@ -401,7 +401,6 @@ export const testimonialSectionSchema = z
         z.object({
           enable: z.boolean().default(true).optional(),
           content: z.string(),
-          rating: z.number().min(1).max(5).optional(),
           customer: z.object({
             name: z.string(),
             role: z.string(),
