@@ -1,29 +1,28 @@
 ---
 enable: true
-title: Simplifiez votre **flux de travail**
+title: Comment fonctionne **Parsec Cloud**
 list:
   - step: "Étape *01*"
-    title: Connecter & Collaborer
-    description: Invitez votre équipe et démarrez les projets instantanément.
-    button:
-      label: "Explorer"
-      url: "/features/"
-      target: ""
-      rel: ""
+    image:
+      src: "/images/how-work-step-1.svg"
+      alt: "test"
+    title: Vos accès sont protégés par votre identité
+    description: Seul vous pouvez consulter et modifier vos documents. Les informations d'accès sont liées à votre clé personnelle et ne transitent jamais en clair vers nos serveurs.
   - step: "Étape *02*"
-    title: Surveiller & Analyser
-    description: Suivez en temps réel l'avancement et la satisfaction.
-    button:
-      label: "Explorer"
-      url: "/features/"
-      target: ""
-      rel: ""
+    image:
+      src: "/images/how-work-step-2.svg"
+      alt: "test"
+    title: C’est vous qui décidez où sont stockées vos données
+    description: Les morceaux chiffrés sont répartis sur les hébergeurs de votre choix — hébergement français, infrastructure interne, ou les deux. Vous restez maître de l'emplacement de vos données.
   - step: "Étape *03*"
-    title: Automatiser & Protéger
-    description: Utilisez l'automatisation intelligente et les alertes instantanées.
-    button:
-      label: "Explorer"
-      url: "/features/"
-      target: ""
-      rel: ""
+    image:
+      src: "/images/how-work-step-3.svg"
+      alt: "test"
+    title: Vos fichiers sont fragmentés et chiffrés
+    description: Chaque fichier est découpé en plusieurs morceaux, chacun chiffré indépendamment sur votre appareil. Personne d'autre ne peut y accéder s’il n’y est pas invité.
+button:
+  label: "Découvrir l'application Parsec"
+  url: "/features/"
+  target: ""
+  rel: ""
 ---
