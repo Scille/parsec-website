@@ -475,8 +475,8 @@
   --parsec-color-border-base-default: var(--parsec-color-grey-200);
   --parsec-color-border-base-on-color: var(--parsec-color-grey-300);
 
-  --parsec-color-border-elevated-default: var(--parsec-color-purple-700);
-  --parsec-color-border-elevated-subtle: var(--parsec-color-purple-800);
+  --parsec-color-border-elevated-default: var(--parsec-color-grey-30);
+  --parsec-color-border-elevated-subtle: var(--parsec-color-purple-50);
 
   --parsec-color-border-brand-default: var(--parsec-color-blue-500);
   --parsec-color-border-brand-default-hover: var(--parsec-color-blue-600);
@@ -1113,11 +1113,6 @@
     0 2.15px 0.5px -2px rgba(0, 0, 0, 0.25),
     0 24px 24px -16px rgba(8, 8, 8, 0.04), 0 6px 13px 0 rgba(8, 8, 8, 0.03),
     0 6px 4px -4px rgba(8, 8, 8, 0.05), 0 5px 1.5px -4px rgba(8, 8, 8, 0.05);
-  --filter-section: radial-gradient(
-    circle,
-    var(--color-surface-brand-default) 2px,
-    transparent 2px
-  );
 }
 
 @utility bg-dots-fade {

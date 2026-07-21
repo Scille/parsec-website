@@ -24,15 +24,15 @@
   @apply text-primary border-b-primary border-b;
 }
 @utility btn-text-white {
-  @apply text-light border-b-white;
+  @apply text-text-on-color-label border-border-elevated-default border-b;
 }
 
 /* Button Outline Variant */
 @utility btn-outline {
-  @apply text-text-default border-border-base-default bg-surface-base-page border font-medium shadow-xs;
+  @apply text-text-base-label border-border-base-default border font-medium shadow-xs;
 }
 @utility btn-outline-white {
-  @apply text-text-default border bg-white;
+  @apply text-text-on-color-label border-border-elevated-default border font-medium shadow-xs;
 }
 .btn-outline .gradient-shape {
   @apply text-text-default opacity-30;
@@ -99,12 +99,20 @@
     }
   }
 
-  &.btn-outline,
-  &.btn-outline-white {
+  &.btn-outline {
     .text-flip-inner {
       &::before,
       &::after {
         @apply text-dark;
+      }
+    }
+  }
+
+  &.btn-outline-white {
+    .text-flip-inner {
+      &::before,
+      &::after {
+        @apply text-light;
       }
     }
   }

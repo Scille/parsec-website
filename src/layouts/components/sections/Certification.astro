@@ -1,0 +1,99 @@
+---
+import type { Section } from "@/types";
+import CustomButton from "@/components/CustomButton.astro";
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import overrideObjects from "@/lib/utils/overrideObjects.ts";
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+import AnimatedText from "@/components/widgets/AnimatedText.astro";
+
+// Type for this section data
+type certificationSectionType = Section & {
+  badge: {
+    enable: boolean;
+    label: string;
+  };
+};
+
+type Props = {
+  content?: certificationSectionType;
+};
+
+// Fetching the default content for the this section
+let defaultContent = (
+  await getEntryCTM("sections", "certification", Astro.currentLocale)
+)?.data as certificationSectionType;
+
+// Enables content customization (e.g., title, description) with a fallback to 'defaultContent' if not provided.
+// The 'content' prop should match the structure of 'defaultContent'.
+// Allows using this section with different content across multiple pages.
+// If 'content' is missing, 'defaultContent' will be used.
+let actualContent = overrideObjects(
+  { ...defaultContent },
+  Astro.props.content,
+) as certificationSectionType;
+
+// Extracting required values from 'content' object
+let {
+  enable = true,
+  badge,
+  title,
+  description,
+  button,
+  image,
+} = actualContent as certificationSectionType;
+
+if (!enable) return;
+---
+
+<section class="overflow-hidden py-16">
+  <div
+    data-aos="fade-down-sm"
+    class="from-surface-brand-default-pressed to-surface-elevated-secondary relative container flex max-w-6xl rounded-3xl bg-linear-to-b/oklch py-10 pl-16 md:py-20">
+    <div class="space-y-4 lg:max-w-xl">
+      {
+        badge?.enable && (
+          <span
+            class="bg-surface-brand-default text-text-brand-on-color inline-block gap-1 rounded-full px-3 py-1 text-sm font-normal"
+            set:html={markdownify(badge.label)}
+          />
+        )
+      }
+      {
+        title && (
+          <h2 class="has-italic-text text-h3-sm md:text-h3 text-text-on-color-heading mb-6z leading-[1.15] font-semibold">
+            <AnimatedText
+              delay={0.2}
+              stagger={0.09}
+              content={markdownify(title)}
+            />
+          </h2>
+        )
+      }
+      {
+        description && (
+          <div
+            data-aos="fade-down-sm"
+            data-aos-delay="100"
+            class="text-text-on-color-body mx-auto mb-8 flex max-w-2xl flex-col gap-3 space-y-1"
+            set:html={markdownify(description, true)}
+          />
+        )
+      }
+      {
+        button && button.enable && (
+          <div>
+            <CustomButton
+              class="btn-outline-white"
+              {...button}
+              variant="outline"
+            />
+          </div>
+        )
+      }
+    </div>
+    <div class="mx-auto flex">
+      {image && <OptimizedImage src={image} class="w-70 object-contain" />}
+    </div>
+  </div>
+</section>
