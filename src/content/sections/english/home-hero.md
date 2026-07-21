@@ -1,7 +1,7 @@
 ---
 title: Your **sensitive** **data** deserves uncompromising protection
 preTitle:
-  label: Preview Our New Parsec Website
+  label: Preview our new website
   url: "/blog/"
   badge:
     enable: true

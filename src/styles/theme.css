@@ -374,7 +374,7 @@
   --parsec-color-text-on-color-hero: var(--parsec-color-grey-100);
   --parsec-color-text-on-color-heading: var(--parsec-color-grey-100);
   --parsec-color-text-on-color-body: var(--parsec-color-grey-200);
-  --parsec-color-text-on-color-caption: var(--parsec-color-grey-200);
+  --parsec-color-text-on-color-description: var(--parsec-color-grey-200);
   --parsec-color-text-on-color-label: var(--parsec-color-grey-50);
   --parsec-color-text-on-color-placeholder: var(--parsec-color-grey-400);
 
@@ -848,7 +848,9 @@
   --color-text-on-color-hero: var(--parsec-color-text-on-color-hero);
   --color-text-on-color-heading: var(--parsec-color-text-on-color-heading);
   --color-text-on-color-body: var(--parsec-color-text-on-color-body);
-  --color-text-on-color-caption: var(--parsec-color-text-on-color-caption);
+  --color-text-on-color-description: var(
+    --parsec-color-text-on-color-description
+  );
   --color-text-on-color-label: var(--parsec-color-text-on-color-label);
   --color-text-on-color-placeholder: var(
     --parsec-color-text-on-color-placeholder
