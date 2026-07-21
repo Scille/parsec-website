@@ -420,3 +420,7 @@
     stroke: currentColor !important;
   }
 }
+
+.differentiation h3 > strong {
+  @apply text-text-brand-default;
+}

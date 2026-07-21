@@ -1,0 +1,242 @@
+---
+import type { Section } from "@/types";
+import type { z } from "astro/zod";
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import overrideObjects from "@/lib/utils/overrideObjects.ts";
+import type { differentiationSectionSchema } from "@/sections.schema";
+import AnimatedText from "../widgets/AnimatedText.astro";
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+import CustomButton from "@/components/CustomButton.astro";
+
+// Type
+type SectionType = Section & z.infer<typeof differentiationSectionSchema>;
+type Props = {
+  content?: SectionType;
+};
+
+// Default content fetch
+let defaultContent = (
+  await getEntryCTM("sections", "differentiation", Astro.currentLocale)
+)?.data as SectionType;
+
+let actualContent = overrideObjects(
+  { ...defaultContent },
+  Astro.props.content,
+) as SectionType;
+
+let { enable = true, title, list, button } = actualContent as SectionType;
+
+if (!enable) return;
+---
+
+<section class="differentiation bg-surface-elevated-secondary relative pt-0">
+  <div class="sticky top-0 h-dvh overflow-hidden">
+    <div
+      class="pointer-events-none absolute -top-1/3 -right-1/4 -z-10 h-[140%] w-[70%] rounded-full opacity-70 blur-3xl"
+      style="background: radial-gradient(circle at 30% 30%, color-mix(in oklch, var(--color-pink-500) 40%, transparent), transparent 60%), radial-gradient(circle at 70% 70%, color-mix(in oklch, var(--color-indigo-600) 50%, transparent), transparent 60%);">
+    </div>
+    {
+      list && (
+        <div class="pointer-events-none absolute inset-0 z-10 hidden xl:block">
+          <div class="differentiation-progress-track absolute h-32 -translate-y-1/2 opacity-(--progress-track-opacity,0) transition-opacity duration-300 lg:left-20 xl:top-1/2">
+            {list.map((item, i) => (
+              <button
+                type="button"
+                class="differentiation-progress-step pointer-events-auto absolute left-0 flex -translate-y-1/2 cursor-pointer items-center gap-3"
+                style={`top: ${(i / (list.length - 1)) * 100}%`}
+                data-index={i}
+                aria-label={item.name}>
+                <span class="differentiation-progress-step-dot border-border-base-on-color/40 h-1.5 w-1.5 shrink-0 rounded-full border bg-transparent transition-colors duration-300" />
+                <span
+                  class="differentiation-progress-step-label font-secondary text-text-on-color-label text-nowrap opacity-40 transition-opacity duration-300"
+                  set:html={markdownify(item.name)}
+                />
+              </button>
+            ))}
+          </div>
+        </div>
+      )
+    }
+    <div class="differentiation-slides flex h-full flex-col">
+      <div
+        class="differentiation-slide container mx-6 flex h-dvh w-full max-w-lg shrink-0 flex-col place-content-center gap-6 self-center md:mx-0 md:max-w-2xl">
+        {
+          title && (
+            <h2 class="has-italic-text text-text-on-color-heading text-h2-sm md:text-h2">
+              <AnimatedText
+                delay={0.2}
+                stagger={0.09}
+                content={markdownify(title)}
+              />
+            </h2>
+          )
+        }
+        {
+          list && (
+            <div class="font-secondary text-text-base-placeholder flex justify-items-start gap-2">
+              {list.map(
+                (item) =>
+                  item && (
+                    <p
+                      class="opacity-80 after:content-['_•']"
+                      set:html={markdownify(item.name)}
+                    />
+                  ),
+              )}
+            </div>
+          )
+        }
+      </div>
+      {
+        list?.map((item) => (
+          <div class="differentiation-slide container flex h-dvh shrink-0 grid-cols-2 flex-col justify-center md:grid md:items-center md:gap-16 xl:pl-64">
+            <div class="flex flex-col gap-8 pb-6 pl-6">
+              <div class="flex flex-col gap-5">
+                {item.title && (
+                  <h3 class="md:text-h3 text-h3-sm text-text-on-color-heading font-normal">
+                    <AnimatedText
+                      delay={0.2}
+                      stagger={0.09}
+                      content={markdownify(item.title)}
+                    />
+                  </h3>
+                )}
+                {item.description && (
+                  <div
+                    class="text-text-on-color-description text-body-lg flex flex-col gap-3"
+                    set:html={markdownify(item.description, true)}
+                  />
+                )}
+              </div>
+              {button && (
+                <CustomButton
+                  hoverEffect="text-flip"
+                  variant="fill"
+                  {...button}
+                  label={button.label}
+                  url={button.url}
+                  class="btn-primary w-fit"
+                />
+              )}
+            </div>
+            <div>
+              {item.image && (
+                <OptimizedImage
+                  aos="fade-up-sm"
+                  src={item.image.src}
+                  alt={item.image.alt}
+                  class:list={"mx-auto h-[280px] w-auto md:h-[380px]"}
+                />
+              )}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const section = document.querySelector<HTMLElement>(".differentiation");
+      const slides = section?.querySelector<HTMLElement>(
+        ".differentiation-slides",
+      );
+      if (!section || !slides) return;
+
+      const slideCount = slides.children.length;
+      const steps = Array.from(
+        section.querySelectorAll<HTMLElement>(".differentiation-progress-step"),
+      );
+      let ticking = false;
+      let activeStepIndex = -1;
+
+      section.style.height = `calc(${slideCount} * 100dvh)`;
+
+      function update() {
+        ticking = false;
+
+        if (!section) return;
+
+        const sectionSize = section.getBoundingClientRect();
+        const scrollable = sectionSize.height - window.innerHeight;
+        const distance = (slideCount - 1) * window.innerHeight;
+
+        if (scrollable <= 0 || distance <= 0) {
+          slides!.style.transform = "translateY(0px)";
+          return;
+        }
+
+        const progress = Math.min(
+          1,
+          Math.max(0, -sectionSize.top / scrollable),
+        );
+        const rawIndex = progress * (slideCount - 1);
+        const targetIndex = Math.round(rawIndex);
+        const translateY = -targetIndex * innerHeight;
+
+        slides!.style.transform = `translateY(${translateY}px)`;
+
+        section!.style.setProperty(
+          "--progress-track-opacity",
+          targetIndex > 0 ? "1" : "0",
+        );
+
+        const cardIndex = targetIndex - 1;
+        if (cardIndex !== activeStepIndex) {
+          activeStepIndex = cardIndex;
+          steps.forEach((step, i) => {
+            step.classList.toggle("is-active", i === activeStepIndex);
+          });
+        }
+      }
+
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+
+      update();
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+
+      let resizeTimeout: ReturnType<typeof setTimeout>;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(update, 200);
+      });
+
+      steps.forEach((step, i) => {
+        step.addEventListener("click", () => {
+          const rect = section.getBoundingClientRect();
+          const sectionTop = window.scrollY + rect.top;
+          const scrollable = rect.height - window.innerHeight;
+          const targetProgress = (i + 1) / (slideCount - 1);
+
+          window.scrollTo({
+            top: sectionTop + targetProgress * scrollable,
+            behavior: "smooth",
+          });
+        });
+      });
+    });
+  </script>
+
+  <style>
+    .differentiation-slides {
+      transition: transform 0.8s ease-in-out;
+    }
+
+    .differentiation-progress-step.is-active
+      .differentiation-progress-step-dot {
+      background-color: var(--color-text-on-color-heading);
+      border-color: var(--color-text-on-color-heading);
+    }
+
+    .differentiation-progress-step.is-active
+      .differentiation-progress-step-label {
+      opacity: 1;
+    }
+  </style>
+</section>

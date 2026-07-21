@@ -358,6 +358,32 @@ export const howItWorksSectionSchema = z
   })
   .optional();
 
+export const differentiationSectionSchema = z
+  .object({
+    enable: z.boolean().default(false).optional(),
+    title: z.string().optional(),
+    list: z.array(
+      z.object({
+        name: z.string(),
+        image: z
+          .object({
+            src: z.string(),
+            alt: z.string(),
+          })
+          .optional(),
+        title: z.string(),
+        description: z.string(),
+      }),
+    ),
+    button: z
+      .object({
+        label: z.string(),
+        url: z.string(),
+      })
+      .optional(),
+  })
+  .optional();
+
 export const benefitsSectionSchema = z
   .object({
     enable: z.boolean().default(false).optional(),
@@ -449,6 +475,7 @@ export const sectionsSchema = {
   featuresSectionSchema,
   featuresSectionTwoSchema,
   howItWorksSectionSchema,
+  differentiationSectionSchema,
   faqSectionSchema,
   aboutSectionSchema,
 };
