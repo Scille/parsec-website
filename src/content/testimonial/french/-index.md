@@ -24,7 +24,7 @@ list:
     customer:
       name: "Sonia Perez"
       role: "Assistante sociale"
-      avatar: "/images/customers/avatar/2.jpg"
+      avatar: "/images/customers/avatar/placeholder-woman.jpg"
       company: "Centre Hospitalier Turenne"
   - enable: true
     content: "Contenu avis Pascal Gauffeny"
