@@ -1,228 +1,239 @@
 ---
-enable: true # Contrôlez la visibilité de cette section sur toutes les pages où elle est utilisée
-title: "**Choisissez le plan** qui vous convient le mieux"
-priceComparisonTitle: "Vous hésitez entre plusieurs plans ? **Comparons**"
-
-plans:
-  enable: true
-  list:
-    - selected: true
-      label: Par Mois
-    - selected: false
-      label: Par An
+enable: true
+title: "Choisissez le cloud sécurisé **adapté à vos besoins**"
+description: "Discover our pricing plans and choose the one that best suits your organization's needs."
+caption: "Tableau comparatif des tarifs Parsec Cloud"
 
 list:
-  - enable: true
-    featured: false
-    badge:
-      enable: false
-      label: Meilleur Rapport Qualité/Prix
-    name: Plan Starter
-    description: Parfait pour les startups et petites équipes qui débutent.
-
-    price:
-      - type: Par Mois
-        prependValue: €
-        value: 29
-        appendValue:
-      - type: Par An
-        prependValue: €
-        value: 290
-        appendValue:
-
-    button:
-      enable: true
-      label: Commencer l'essai gratuit
-      url: /contact/?plan=starter
-      hoverEffect: "text-flip"
-
+  # Business plan
   - enable: true
     featured: true
     badge:
       enable: true
-      label: Le plus populaire
-    name: Plan Growth
-    description: Idéal pour les entreprises en croissance nécessitant des fonctionnalités avancées.
+      label: Saas
+    name: Business
+    description: Idéal pour les entreprises qui se lancent dans le cloud sécurisé.
 
     price:
-      - type: Par Mois
-        prependValue: €
-        value: 79
-        appendValue:
-      - type: Par An
-        prependValue: €
-        value: 790
-        appendValue:
+      - billing: Par mois / utilisateur
+        prependValue:
+        value: "25"
+        appendValue: €
+        tax: HT
 
     button:
       enable: true
-      label: Commencer l'essai gratuit
-      url: /contact/?plan=growth
+      label: Choisir cette formule
+      url: /contact/?plan=business
+      rel:
+      target:
+      variant: "fill"
       hoverEffect: "text-flip"
 
+    mainFeaturesList:
+      - value: Certification CSPN
+        isEnabled: true
+      - value: Stockage cloud souverain (100 Go offert)
+        isEnabled: true
+      - value: Chiffrement de bout en bout & Zero-Knowledge
+        isEnabled: true
+      - value: Espaces de travail collaboratifs étanches
+        isEnabled: true
+      - value: Utilisateurs externes (invités) illimités
+        isEnabled: true
+
+  # Govermnent plan
   - enable: true
     featured: false
     badge:
-      enable: false
-      label: Entreprise
-    name: Plan Enterprise
-    description: Solution complète pour les grandes organisations.
+      enable: true
+      label: Saas dédié
+    name: Administration
+    description: Parfait pour les ETI et les administrations ayant des besoins de chiffrement des données.
 
     price:
-      - type: Par Mois
-        prependValue: €
-        value: 199
-        appendValue:
-      - type: Par An
-        prependValue: €
-        value: 1990
-        appendValue:
+      - billing:
+        value: Sur-mesure
 
     button:
       enable: true
-      label: Contacter les ventes
-      url: /contact/?plan=enterprise
+      label: Demander un devis
+      url: /contact/?plan=government
+      rel:
+      target:
       hoverEffect: "text-flip"
 
+    mainFeaturesList:
+      - value: Tout ce qui est inclus dans Business
+        isEnabled: true
+      - value: Hébergement SaaS dédié & Stockage sur-mesure
+        isEnabled: true
+      - value: Autorité de Séquestre
+        isEnabled: true
+      - value: Fédération d'identité (SSO OIDC)
+        isEnabled: true
+      - value: Possibilité d’alignement des directives (NIS2, DORA)
+        isEnabled: true
+
+  # Integrator plan
+  - enable: true
+    featured: false
+    badge:
+      enable: true
+      label: On-premise
+    name: Intégrateur
+    description: Idéal pour les intégrateurs qui souhaitent ajouter Parsec à leur éco-système.
+
+    price:
+      - billing:
+        value: Sur-mesure
+
+    button:
+      enable: true
+      label: Demander un devis
+      url: /contact/?plan=integrator
+      rel:
+      target:
+      hoverEffect: "text-flip"
+
+    mainFeaturesList:
+      - value: Déploiement On-Premise (Docker / Linux)
+        isEnabled: true
+      - value: Chiffrement de bout en bout & Zero-Knowledge
+        isEnabled: true
+      - value: Interface en ligne de commande (CLI)
+        isEnabled: true
+      - value: Support SmartCard (PKI) & OpenBao
+        isEnabled: true
+      - value: Adaptation marque blanche
+        isEnabled: true
+
 comparison:
-  - label: Fonctionnalités principales
+  - label: Infrastructure & Déploiement
     list:
-      - value: Membres de l'équipe
-        showInCard: true
+      - value: Type d'hébergement
         included:
-          - "Jusqu'à 5 utilisateurs"
-          - "Jusqu'à 25 utilisateurs"
-          - "Utilisateurs illimités"
-      - value: Espace de stockage
-        showInCard: true
+          - "Saas (mutualisé)"
+          - "On premise / Saas (dédié)"
+          - "On premise (auto-hébergé)"
+      - value: Hébergement SecNumCloud
         included:
-          - "10Go"
-          - "100Go"
+          - true
+          - "Selon le type d'hébergement"
+          - "Selon le type d'hébergement"
+      - value: Localisation des serveurs
+        included:
+          - "France"
+          - "Selon le type d'hébergement"
+          - "Selon le type d'hébergement"
+
+  - label: Utilisateurs et stockage
+    list:
+      - value: Nombre d'utilisateurs
+        included:
           - "Illimité"
-      - value: Appels API par mois
-        showInCard: true
+          - "Défini selon le contrat"
+          - "Défini selon le contrat"
+      - value: Nombre d'utilisateurs externes (invités)
         included:
-          - "1 000 appels"
-          - "10 000 appels"
           - "Illimité"
-      - value: Accès à l'application mobile
-        showInCard: true
+          - "Défini selon le contrat"
+          - "Défini selon le contrat"
+      - value: Stockage illimité
+        included:
+          - true
+          - false
+          - false
+      - value: Volume de stockage inclus par défaut
+        included:
+          - "100 Go"
+          - "Sur-mesure"
+          - "Sur-mesure"
+      - value: Stockage métadonnées
+        included:
+          - "PostgreSQL mutualisée"
+          - "Sur-mesure"
+          - "Sur-mesure"
+
+  - label: Sécurité & Cryptographie
+    list:
+      - value: Chiffrement bout-en-bout
+        included:
+          - true
+          - true
+          - true
+      - value: Architecture Zero-Knowledge
+        included:
+          - true
+          - true
+          - true
+      - value: Fichier de récupération (Recovery)
+        included:
+          - true
+          - true
+          - true
+      - value: Autorité de Séquestre
+        included:
+          - false
+          - true
+          - true
+      - value: Journaux d'activité (Logs)
         included:
           - true
           - true
           - true
 
-  - label: Analyse et rapports
+  - label: Conformité
     list:
-      - value: Analytique de base
-        showInCard: true
+      - value: Alignement directives NIS2 / DORA / CRA
+        included:
+          - true
+          - _Sur devis supplémentaire_
+          - _Sur devis supplémentaire_
+      - value: Certification CSPN
         included:
           - true
           - true
-          - true
-      - value: Rapports avancés
-        showInCard: true
-        included:
-          - false
-          - true
-          - true
-      - value: Créateur de tableau de bord personnalisé
-        showInCard: true
-        included:
-          - false
-          - true
-          - true
-      - value: Rapports entreprise
-        showInCard: true
-        included:
-          - false
-          - false
           - true
 
-  - label: Intégrations et automatisation
+  - label: Accès et Identité
     list:
-      - value: Intégrations standards
-        showInCard: true
+      - value: Enrôlement sécurisé des terminaux
         included:
-          - "10+ intégrations"
-          - "50+ intégrations"
-          - "Intégrations personnalisées"
-      - value: Flux de travail automatisés
-        showInCard: false
-        included:
-          - false
           - true
           - true
-      - value: Tests A/B
-        showInCard: false
+          - true
+      - value: Double authentification (MFA)
+        included:
+          - true
+          - true
+          - true
+      - value: Fournisseur d'identité OIDC (SSO)
         included:
           - false
           - true
           - true
-      - value: Développement personnalisé
-        showInCard: false
+      - value: Gestion des secrets (OpenBao/Vault)
         included:
           - false
+          - true
+          - true
+      - value: Support SmartCard (PKI)
+        included:
           - false
+          - true
           - true
 
-  - label: Support et sécurité
+  - label: Automatisation & Support
     list:
-      - value: Support par email
-        showInCard: false
+      - value: Interface ligne de commande (CLI)
         included:
-          - "Réponse 24-48h"
-          - "Réponse 4-8h"
-          - "Réponse 1h"
-      - value: Support prioritaire
-        showInCard: false
-        included:
-          - false
           - true
           - true
-      - value: Gestionnaire de compte dédié
-        showInCard: false
-        included:
-          - false
-          - false
           - true
-      - value: Sécurité entreprise (SSO/SAML)
-        showInCard: false
+      - value: Support technique
         included:
-          - false
-          - false
           - true
-      - value: Garantie SLA
-        showInCard: false
-        included:
-          - false
-          - false
-          - "99,9% disponibilité"
-      - value: Conformité (SOC2, RGPD)
-        showInCard: false
-        included:
-          - false
-          - false
           - true
-
-  - label: Personnalisation et marque
-    list:
-      - value: Options en marque blanche
-        showInCard: false
-        included:
-          - false
-          - "Marque de base"
-          - "Marque complète"
-      - value: Onboarding personnalisé
-        showInCard: false
-        included:
-          - false
-          - false
           - true
-      - value: Formation et ateliers
-        showInCard: false
-        included:
-          - false
-          - "Libre-service"
-          - "Formation dédiée"
 ---

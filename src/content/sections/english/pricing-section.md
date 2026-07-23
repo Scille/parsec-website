@@ -1,245 +1,239 @@
 ---
-enable: true # Control the visibility of this section across all pages where it is used
-title: "**Choose the Plan** That Fits You Best"
-priceComparisonTitle: "Not Sure Which Plan? **Let’s Compare**"
-
-plans:
-  enable: true
-  list:
-    # List of available plans. Ensure that these names are used consistently in other places where applicable.
-    - selected: true
-      label: Per Month # Use this value exactly in all corresponding places below.
-    - selected: false
-      label: Per Year # Use this value exactly in all corresponding places below.
+enable: true
+title: "Choose the secure cloud **adapted to your needs**"
+description: "Discover our pricing plans and choose the one that best suits your organization's needs."
+caption: "Comparative table of Parsec Cloud plans"
 
 list:
-  # Starter Plan
-  - enable: true
-    featured: false
-    badge:
-      enable: false
-      label: Best Value
-    name: Starter Plan # Name of the pricing tier.
-    description: Perfect for startups and small teams getting started.
-
-    price:
-      # Pricing details for each plan type.
-      - type: Per Month # Plan type (must match values in the 'plans' section above).
-        prependValue: $
-        value: 29
-        appendValue:
-      - type: Per Year # Plan type (must match values in the 'plans' section above).
-        prependValue: $
-        value: 290
-        appendValue:
-
-    button:
-      enable: true
-      label: Start Free Trial
-      url: /contact/?plan=starterb
-      rel:
-      target:
-      variant: "outline" # "fill", "outline", "text"
-      hoverEffect: "text-flip" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"
-
-  # Growth Plan
+  # Business plan
   - enable: true
     featured: true
     badge:
       enable: true
-      label: Most Popular
-    name: Growth Plan # Name of the pricing tier.
-    description: Ideal for growing businesses that need advanced features.
+      label: Saas
+    name: Business
+    description: Ideal for businesses taking their first steps into the secure cloud.
 
     price:
-      # Pricing details for each plan type.
-      - type: Per Month # Plan type (must match values in the 'plans' section above).
-        prependValue: $
-        value: 79
-        appendValue:
-      - type: Per Year # Plan type (must match values in the 'plans' section above).
-        prependValue: $
-        value: 790
-        appendValue:
+      - billing: Per month / user
+        prependValue:
+        value: "25"
+        appendValue: €
+        tax: Excl. VAT
 
     button:
       enable: true
-      label: Start Free Trial
-      url: /contact/?plan=growth
+      label: Choose this plan
+      url: /contact/?plan=business
       rel:
       target:
-      variant: "fill" # "fill", "outline", "text"
-      hoverEffect: "text-flip" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"
+      variant: "fill"
+      hoverEffect: "text-flip"
 
-  # Enterprise Plan
+    mainFeaturesList:
+      - value: CSPN Certification
+        isEnabled: true
+      - value: Sovereign cloud storage (100GB included)
+        isEnabled: true
+      - value: End-to-end encryption & Zero-Knowledge
+        isEnabled: true
+      - value: Isolated collaborative workspaces
+        isEnabled: true
+      - value: Unlimited external users (guests)
+        isEnabled: true
+
+  # Government plan
   - enable: true
     featured: false
     badge:
-      enable: false
-      label: Enterprise
-    name: Enterprise Plan # Name of the pricing tier.
-    description: Comprehensive solution for large organizations.
+      enable: true
+      label: Dedicated SaaS
+    name: Government
+    description: Perfect for mid-sized companies and public administrations with data encryption needs.
 
     price:
-      # Pricing details for each plan type.
-      - type: Per Month # Plan type (must match values in the 'plans' section above).
-        prependValue: $
-        value: 199
-        appendValue:
-      - type: Per Year # Plan type (must match values in the 'plans' section above).
-        prependValue: $
-        value: 1990
-        appendValue:
+      - billing:
+        value: Custom
 
     button:
       enable: true
-      label: Contact Sales
-      url: /contact/?plan=enterprise
+      label: Request a quote
+      url: /contact/?plan=government
       rel:
       target:
-      variant: "outline" # "fill", "outline", "text"
-      hoverEffect: "text-flip" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"
+      hoverEffect: "text-flip"
 
-# Pricing Comparison & Features
+    mainFeaturesList:
+      - value: Everything included in Business
+        isEnabled: true
+      - value: Dedicated SaaS hosting & custom storage
+        isEnabled: true
+      - value: Escrow Authority
+        isEnabled: true
+      - value: Identity federation (SSO OIDC)
+        isEnabled: true
+      - value: Possible alignment with regulatory directives (NIS2, DORA)
+        isEnabled: true
+
+  # Integrator plan
+  - enable: true
+    featured: false
+    badge:
+      enable: true
+      label: On-premise
+    name: Integrator
+    description: Ideal for integrators looking to add Parsec to their ecosystem.
+
+    price:
+      - billing:
+        value: Custom
+
+    button:
+      enable: true
+      label: Request a quote
+      url: /contact/?plan=integrator
+      rel:
+      target:
+      hoverEffect: "text-flip"
+
+    mainFeaturesList:
+      - value: On-premise deployment (Docker / Linux)
+        isEnabled: true
+      - value: End-to-end encryption & Zero-Knowledge
+        isEnabled: true
+      - value: Command-line interface (CLI)
+        isEnabled: true
+      - value: SmartCard support (PKI) & OpenBao
+        isEnabled: true
+      - value: White-label customization
+        isEnabled: true
+
 comparison:
-  - label: Core Features
+  - label: Infrastructure & Deployment
     list:
-      - value: Team Members
-        showInCard: true
+      - value: Hosting type
         included:
-          - "Up to 5 users" # Starter Plan
-          - "Up to 25 users" # Growth Plan
-          - "Unlimited users" # Enterprise Plan
-      - value: Storage Space
-        showInCard: true
+          - "SaaS (shared)"
+          - "On-premise / SaaS (dedicated)"
+          - "On-premise (self-hosted)"
+      - value: SecNumCloud hosting
         included:
-          - "10GB" # Starter Plan
-          - "100GB" # Growth Plan
-          - "Unlimited" # Enterprise Plan
-      - value: API Calls per Month
-        showInCard: true
+          - true
+          - "Depending on hosting type"
+          - "Depending on hosting type"
+      - value: Server location
         included:
-          - "1,000 calls" # Starter Plan
-          - "10,000 calls" # Growth Plan
-          - "Unlimited" # Enterprise Plan
-      - value: Mobile App Access
-        showInCard: true
-        included:
-          - true # Starter Plan
-          - true # Growth Plan
-          - true # Enterprise Plan
+          - "France"
+          - "Depending on hosting type"
+          - "Depending on hosting type"
 
-  - label: Analytics and Reporting
+  - label: Users and storage
     list:
-      - value: Basic Analytics
-        showInCard: true
+      - value: Number of users
         included:
-          - true # Starter Plan
-          - true # Growth Plan
-          - true # Enterprise Plan
-      - value: Advanced Reports
-        showInCard: true
+          - "Unlimited"
+          - "Defined per contract"
+          - "Defined per contract"
+      - value: Number of external users (guests)
         included:
-          - false # Starter Plan
-          - true # Growth Plan
-          - true # Enterprise Plan
-      - value: Custom Dashboard Builder
-        showInCard: true
+          - "Unlimited"
+          - "Defined per contract"
+          - "Defined per contract"
+      - value: Unlimited storage
         included:
-          - false # Starter Plan
-          - true # Growth Plan
-          - true # Enterprise Plan
-      - value: Enterprise Reporting
-        showInCard: true
+          - true
+          - false
+          - false
+      - value: Default storage volume included
         included:
-          - false # Starter Plan
-          - false # Growth Plan
-          - true # Enterprise Plan
+          - "100GB"
+          - "Custom"
+          - "Custom"
+      - value: Metadata storage
+        included:
+          - "Shared PostgreSQL"
+          - "Custom"
+          - "Custom"
 
-  - label: Integrations and Automation
+  - label: Security & Cryptography
     list:
-      - value: Standard Integrations
-        showInCard: true
+      - value: End-to-end encryption
         included:
-          - "10+ integrations" # Starter Plan
-          - "50+ integrations" # Growth Plan
-          - "Custom integrations" # Enterprise Plan
-      - value: Automation Workflows
-        showInCard: false
+          - true
+          - true
+          - true
+      - value: Zero-Knowledge architecture
         included:
-          - false # Starter Plan
-          - true # Growth Plan
-          - true # Enterprise Plan
-      - value: A/B Testing
-        showInCard: false
+          - true
+          - true
+          - true
+      - value: Recovery file
         included:
-          - false # Starter Plan
-          - true # Growth Plan
-          - true # Enterprise Plan
-      - value: Custom Development
-        showInCard: false
+          - true
+          - true
+          - true
+      - value: Escrow Authority
         included:
-          - false # Starter Plan
-          - false # Growth Plan
-          - true # Enterprise Plan
+          - false
+          - true
+          - true
+      - value: Activity logs
+        included:
+          - true
+          - true
+          - true
 
-  - label: Support and Security
+  - label: Compliance
     list:
-      - value: Email Support
-        showInCard: false
+      - value: NIS2 / DORA / CRA directive alignment
         included:
-          - "24-48h response" # Starter Plan
-          - "4-8h response" # Growth Plan
-          - "1h response" # Enterprise Plan
-      - value: Priority Support
-        showInCard: false
+          - true
+          - _Additional quote required_
+          - _Additional quote required_
+      - value: CSPN Certification
         included:
-          - false # Starter Plan
-          - true # Growth Plan
-          - true # Enterprise Plan
-      - value: Dedicated Account Manager
-        showInCard: false
-        included:
-          - false # Starter Plan
-          - false # Growth Plan
-          - true # Enterprise Plan
-      - value: Enterprise Security (SSO/SAML)
-        showInCard: false
-        included:
-          - false # Starter Plan
-          - false # Growth Plan
-          - true # Enterprise Plan
-      - value: SLA Guarantee
-        showInCard: false
-        included:
-          - false # Starter Plan
-          - false # Growth Plan
-          - "99.9% uptime" # Enterprise Plan
-      - value: Compliance (SOC2, GDPR)
-        showInCard: false
-        included:
-          - false # Starter Plan
-          - false # Growth Plan
-          - true # Enterprise Plan
+          - true
+          - true
+          - true
 
-  - label: Customization and Branding
+  - label: Access and Identity
     list:
-      - value: White-label Options
-        showInCard: false
+      - value: Secure device enrollment
         included:
-          - false # Starter Plan
-          - "Basic branding" # Growth Plan
-          - "Full white-label" # Enterprise Plan
-      - value: Custom Onboarding
-        showInCard: false
+          - true
+          - true
+          - true
+      - value: Two-factor authentication (MFA)
         included:
-          - false # Starter Plan
-          - false # Growth Plan
-          - true # Enterprise Plan
-      - value: Training and Workshops
-        showInCard: false
+          - true
+          - true
+          - true
+      - value: OIDC identity provider (SSO)
         included:
-          - false # Starter Plan
-          - "Self-service" # Growth Plan
-          - "Dedicated training" # Enterprise Plan
+          - false
+          - true
+          - true
+      - value: Secrets management (OpenBao/Vault)
+        included:
+          - false
+          - true
+          - true
+      - value: SmartCard support (PKI)
+        included:
+          - false
+          - true
+          - true
+
+  - label: Automation & Support
+    list:
+      - value: Command-line interface (CLI)
+        included:
+          - true
+          - true
+          - true
+      - value: Technical support
+        included:
+          - true
+          - true
+          - true
 ---
