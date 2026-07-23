@@ -110,13 +110,13 @@ if (!enable) return;
               <div class="flex flex-wrap items-center gap-4">
                 {item.data.type && (
                   <div class="flex items-center gap-2">
-                    <Icons class="text-lg" icon="Clock7" />
+                    <Icons class="text-lg" icon="ClockIcon" />
                     <span set:html={item.data.type} />
                   </div>
                 )}
                 {item.data.deadline && (
                   <div class="flex items-center gap-2">
-                    <Icons class="text-lg" icon="FileClock" />
+                    <Icons class="text-lg" icon="CalendarDaysIcon" />
                     <span set:html={formatRelativeDate(item.data.deadline)} />
                   </div>
                 )}

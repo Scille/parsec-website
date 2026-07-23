@@ -1,10 +1,14 @@
 ---
+import HeroIcon from "./HeroIcon.vue";
+import type { HeroIconName } from "./heroIconNames";
+
 interface Props {
-  icon: keyof typeof import("lucide");
+  icon: HeroIconName;
+  class?: string;
   [key: string]: any;
 }
 
 const { icon, ...restProps } = Astro.props;
 ---
 
-<div data-lucide={icon} {...restProps}></div>
+<HeroIcon icon={icon} {...restProps} />

@@ -18,17 +18,17 @@ list:
       autoplay: true # Optional: true to autoplay, false to start manually (default is false)
       id: test-changelog-video-1 # required if same video is used on multiple time on same page
     types:
-      - icon: Sparkles # [Lucide Icons](https://lucide.dev/icons/?search=) (remember to capitalize the icon name)
+      - icon: SparklesIcon
         label: New Feature
-      - icon: TrendingUp # [Lucide Icons](https://lucide.dev/icons/?search=) (remember to capitalize the icon name)
+      - icon: ArrowTrendingUpIcon
         label: Improvement
-      - icon: CheckCircle # [Lucide Icons](https://lucide.dev/icons/?search=) (remember to capitalize the icon name)
+      - icon: CheckCircleIcon
         label: Fix
-      - icon: Fingerprint # [Lucide Icons](https://lucide.dev/icons/?search=) (remember to capitalize the icon name)
+      - icon: FingerPrintIcon
         label: Security
-      - icon: Ban # [Lucide Icons](https://lucide.dev/icons/?search=) (remember to capitalize the icon name)
+      - icon: NoSymbolIcon
         label: Deprecated
-      - icon: CalendarClock # [Lucide Icons](https://lucide.dev/icons/?search=) (remember to capitalize the icon name)
+      - icon: ExclamationTriangleIcon
         label: Breaking Change
     changes:
       - active: true
@@ -91,17 +91,17 @@ list:
       autoplay: true # Optional: true to autoplay, false to start manually (default is false)
       id: test-changelog-video-2 # required if same video is used on multiple time on same page
     types:
-      - icon: Sparkles # [Lucide Icons](https://lucide.dev/icons/?search=) (remember to capitalize the icon name)
+      - icon: SparklesIcon
         label: New Feature
-      - icon: TrendingUp # [Lucide Icons](https://lucide.dev/icons/?search=) (remember to capitalize the icon name)
+      - icon: ArrowTrendingUpIcon
         label: Improvement
-      - icon: CheckCircle # [Lucide Icons](https://lucide.dev/icons/?search=) (remember to capitalize the icon name)
+      - icon: CheckCircleIcon
         label: Fix
-      # - icon: Fingerprint # [Lucide Icons](https://lucide.dev/icons/?search=) (remember to capitalize the icon name)
+      # - icon: FingerPrintIcon
       #   label: Security
-      # - icon: Ban # [Lucide Icons](https://lucide.dev/icons/?search=) (remember to capitalize the icon name)
+      # - icon: NoSymbolIcon
       #   label: Deprecated
-      # - icon: CalendarClock # [Lucide Icons](https://lucide.dev/icons/?search=) (remember to capitalize the icon name)
+      # - icon: ExclamationTriangleIcon
       #   label: Breaking Change
     changes:
       - active: true
@@ -164,17 +164,17 @@ list:
       autoplay: true # Optional: true to autoplay, false to start manually (default is false)
       id: test-changelog-video-3 # required if same video is used on multiple time on same page
     types:
-      - icon: Sparkles # [Lucide Icons](https://lucide.dev/icons/?search=) (remember to capitalize the icon name)
+      - icon: SparklesIcon
         label: New Feature
-      - icon: TrendingUp # [Lucide Icons](https://lucide.dev/icons/?search=) (remember to capitalize the icon name)
+      - icon: ArrowTrendingUpIcon
         label: Improvement
-      # - icon: CheckCircle # [Lucide Icons](https://lucide.dev/icons/?search=) (remember to capitalize the icon name)
+      # - icon: CheckCircleIcon
       #   label: Fix
-      # - icon: Fingerprint # [Lucide Icons](https://lucide.dev/icons/?search=) (remember to capitalize the icon name)
+      # - icon: FingerPrintIcon
       #   label: Security
-      # - icon: Ban # [Lucide Icons](https://lucide.dev/icons/?search=) (remember to capitalize the icon name)
+      # - icon: NoSymbolIcon
       #   label: Deprecated
-      # - icon: CalendarClock # [Lucide Icons](https://lucide.dev/icons/?search=) (remember to capitalize the icon name)
+      # - icon: ExclamationTriangleIcon
       #   label: Breaking Change
     changes:
       - active: true

@@ -12,6 +12,7 @@ import remarkParseContent from "./src/lib/utils/remarkParseContent.ts";
 import config from "./.astro/config.generated.json";
 import { generateAstroFontsConfig } from "./src/lib/utils/AstroFont.ts";
 import { unified } from "@astrojs/markdown-remark";
+import icon from "astro-icon";
 
 const fonts = generateAstroFontsConfig(fontsJson);
 
@@ -60,6 +61,7 @@ export default defineConfig({
     // }),
     mdx(),
     vue(),
+    icon(),
   ],
   markdown: {
     processor: unified({

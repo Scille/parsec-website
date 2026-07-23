@@ -404,13 +404,12 @@
   @apply h-96 bg-black;
 }
 
-[data-icon],
-[data-lucide] {
+.hero-icon {
   width: 1em;
   height: 1em;
 }
 
-[data-icon]:not(.match-brand-color),
+.hero-icon:not(.match-brand-color),
 .has-inherited-colors {
   *[fill*="#"] {
     fill: currentColor !important;

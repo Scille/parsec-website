@@ -1,6 +1,7 @@
 ---
 import { markdownify } from "@/lib/utils/textConverter";
 import Icons from "@/helpers/Icons.astro";
+import type { HeroIconName } from "@/helpers/heroIconNames";
 
 type Card = {
   icon?: string;
@@ -15,7 +16,6 @@ type Props = Card & {
   class?: any;
   content?: Card;
 };
-type LucideIconName = keyof typeof import("@lucide/astro").icons;
 
 let {
   icon,
@@ -62,7 +62,7 @@ let actualContent = mergeObjects(content, {
       {actualContent?.icon && (
         <Icons
           class="text-text-default text-3xl"
-          icon={actualContent.icon as LucideIconName}
+          icon={actualContent.icon as HeroIconName}
         />
       )}
       <div class="mt-2 space-y-3">
