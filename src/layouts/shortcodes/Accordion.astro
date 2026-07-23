@@ -50,8 +50,11 @@ const isExpanded = expanded === "true";
     aria-controls={"hs-accordion-content-" + uniqueId}>
     <span set:html={label} />
     <span class="hs-accordion-active:rotate-180 transition duration-300">
-      <Icons icon="Plus" class="hs-accordion-active:hidden text-xl" />
-      <Icons icon="Minus" class="hs-accordion-active:block hidden text-xl" />
+      <Icons icon="PlusIcon" class="hs-accordion-active:hidden text-xl" />
+      <Icons
+        icon="MinusIcon"
+        class="hs-accordion-active:block hidden text-xl"
+      />
     </span>
   </button>
   <div

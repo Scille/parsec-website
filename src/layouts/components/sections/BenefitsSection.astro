@@ -9,13 +9,13 @@ import VideoModal from "@/components/widgets/VideoModal.astro";
 import type { benefitsSectionSchema } from "@/sections.schema";
 import Icons from "@/helpers/Icons.astro";
 import AnimatedText from "../widgets/AnimatedText.astro";
+import type { HeroIconName } from "@/helpers/heroIconNames";
 
 // Type
 type benefitsSectionType = Section & z.infer<typeof benefitsSectionSchema>;
 type Props = {
   content?: benefitsSectionType;
 };
-type LucideIconName = keyof typeof import("@lucide/astro").icons;
 
 // Default content fetch
 let defaultContent = (
@@ -63,7 +63,7 @@ if (!enable) return;
               data-aos-delay={(index + 1) * 50}
               data-aos-duration={900}
               class="flex flex-col gap-4 border p-5 md:p-8">
-              <Icons class="text-3xl" icon={item.icon as LucideIconName} />
+              <Icons class="text-3xl" icon={item.icon as HeroIconName} />
               <div class="mt-4 space-y-3">
                 {item.title && (
                   <h3

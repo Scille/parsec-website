@@ -9,8 +9,6 @@
       window.requestIdleCallback ||
       ((callback) => window.setTimeout(callback, 1));
 
-    await initLucide();
-
     // Dynamic Preline imports
     await loadPrelineComponents();
 
@@ -45,34 +43,6 @@
     // Magnetic Hover Animation
     initMagneticHoverAnimation();
   });
-
-  // Lucide Icons
-  async function initLucide() {
-    const iconElems = document.querySelectorAll("[data-lucide]");
-    if (!iconElems.length) return;
-
-    const lucideModule = await import("lucide");
-
-    iconElems.forEach((iconElem) => {
-      const iconName = iconElem.getAttribute("data-lucide");
-      if (!iconName) return;
-
-      // @ts-expect-error
-      const IconDef = lucideModule[iconName];
-      if (!IconDef) {
-        console.warn(`Lucide icon "${iconName}" not found`);
-        return;
-      }
-
-      const svg = lucideModule.createElement(IconDef, {
-        ...Object.fromEntries(
-          [...iconElem.attributes].map((attr) => [attr.name, attr.value]),
-        ),
-      });
-
-      iconElem.replaceWith(svg);
-    });
-  }
 
   // Load Preline components dynamically based on DOM content
   async function loadPrelineComponents() {
