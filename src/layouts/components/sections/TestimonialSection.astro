@@ -41,9 +41,8 @@ if (limit) {
 }
 ---
 
-<section class="bg-dots-fade">
-  <div
-    class:list={[Astro.props.minimalLayout ? "container" : "pb-20 md:pb-32"]}>
+<section class="bg-dots-fade pb-20 md:pb-32">
+  <div class:list={[Astro.props.minimalLayout ? "container" : ""]}>
     <div
       class:list={[
         "space-y-10 md:space-y-16",
@@ -71,15 +70,7 @@ if (limit) {
             {list
               .filter((item) => item.enable !== false)
               .map((testimonial, index) => (
-                <TestimonialCard
-                  content={testimonial}
-                  data-aos={
-                    Math.floor(index / 4) % 2 === 0
-                      ? "fade-left-sm"
-                      : "fade-right-sm"
-                  }
-                  data-aos-delay={((index % 4) + 1) * 100}
-                />
+                <TestimonialCard content={testimonial} />
               ))}
           </div>
         )

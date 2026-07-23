@@ -167,38 +167,9 @@ export const pricingSectionSchema = z
   .object({
     enable: z.boolean().default(false),
     title: z.string().optional(),
+    description: z.string().optional(),
+    caption: z.string().optional(),
     priceComparisonTitle: z.string().optional(),
-    plans: z
-      .object({
-        enable: z.boolean().default(true),
-        list: z.array(
-          z.object({
-            selected: z.boolean().default(false),
-            label: z.string(), // e.g., "Per Month", "Per Year"
-          }),
-        ),
-      })
-      .optional(),
-    globalFeatures: z
-      .array(
-        z.object({
-          id: z.string(),
-          text: z.string(),
-          starter: z.object({
-            enable: z.boolean(),
-            value: z.union([z.string(), z.boolean()]),
-          }),
-          growth: z.object({
-            enable: z.boolean(),
-            value: z.union([z.string(), z.boolean()]),
-          }),
-          enterprise: z.object({
-            enable: z.boolean(),
-            value: z.union([z.string(), z.boolean()]),
-          }),
-        }),
-      )
-      .optional(),
     list: z.array(
       z.object({
         enable: z.boolean().default(true),
@@ -213,14 +184,21 @@ export const pricingSectionSchema = z
         description: z.string(),
         price: z.array(
           z.object({
-            type: z.string(), // e.g., "Per Month", "Per Year"
-            prependValue: z.string(),
-            value: z.number(),
+            billing: z.string().optional(),
+            prependValue: z.string().optional(),
             appendValue: z.string().optional(),
+            tax: z.string().optional(),
+            value: z.string(),
           }),
         ),
         features: z.array(z.string()).optional(), // Keep for backward compatibility
         button: button.optional(),
+        mainFeaturesList: z.array(
+          z.object({
+            value: z.string(),
+            isEnabled: z.boolean(),
+          }),
+        ),
       }),
     ),
     comparison: z
@@ -230,7 +208,6 @@ export const pricingSectionSchema = z
           list: z.array(
             z.object({
               value: z.string(),
-              showInCard: z.boolean(),
               included: z.array(z.union([z.boolean(), z.string()])),
             }),
           ),

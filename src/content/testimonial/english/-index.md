@@ -22,7 +22,7 @@ list:
       avatar: "/images/customers/avatar/alexandre.png"
       company: "Vistory"
   - enable: true
-    content: "N’étant pas des spécialistes en informatique il était primordial pour nous d’avoir un outil qui pouvait être rapidement compréhensible et facile d’utilisation. PARSEC est un outil qui correspond aux besoins de nos structures. Il est « frendly » ce qui a permis aux personnes de se l’approprier assez rapidement."
+    content: "As we are not IT specialists, it was essential for us to have a tool that was quick to get to grips with and easy to use. PARSEC is a tool that meets the needs of our organisations. It is user-friendly, which has enabled people to get to grips with it quite quickly."
     customer:
       name: "Sonia Perez"
       role: "Social worker"

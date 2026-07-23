@@ -10,9 +10,9 @@ interface Props {
   enable?: boolean;
   content: {
     value?: string | number;
-    type?: string; // pricing tye (applicable for pricing page)
     prependValue?: string;
     appendValue?: string;
+    tax?: string;
   };
 }
 
@@ -24,11 +24,6 @@ const {
   childClass: childClassName,
   content,
 } = Astro.props;
-
-// Check number char length and give that number of zero
-const addZero = (content: string) => {
-  return "0".repeat(Number(content.length));
-};
 ---
 
 <div
@@ -49,13 +44,15 @@ const addZero = (content: string) => {
   <span
     {...{
       "data-count": content.value || undefined,
-      "data-type": content.type && content.type.toLowerCase(),
       style: { "--odometer-duration": transitionTime },
     }}
-    class:list={[{ odometer: enable }, childClassName]}
+    class:list={[
+      { odometer: enable && typeof content.value === "string" },
+      childClassName,
+    ]}
     set:html={enable && content.value && animateOn !== "click"
-      ? addZero(content.value as string)
-      : content.value}
+      ? (content.value as string)
+      : "0"}
   />
 
   {
