@@ -109,9 +109,7 @@ if (!enable) return;
                   set:html={markdownify(description)}
                 />
               )}
-              {button && button.enable && (
-                <CustomButton class="btn-black" {...button} />
-              )}
+              {button && button.enable && <CustomButton {...button} />}
             </div>
           </div>
 

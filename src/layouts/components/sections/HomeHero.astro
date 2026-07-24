@@ -105,14 +105,16 @@ let { title, preTitle, description, image, buttons } = (
               <>
                 <CustomButton
                   label={await markdownify(buttons[0].label)}
-                  variant="outline"
+                  variant="fill"
+                  color="white"
                   hoverEffect="magnetic-text-flip"
-                  class="bg-surface-base-default w-full sm:w-auto"
+                  class="w-full sm:w-auto"
                   url={buttons[0].url}
                 />
                 <CustomButton
                   label={await markdownify(buttons[1].label)}
                   variant="fill"
+                  color="primary"
                   hoverEffect="magnetic-text-flip"
                   class="w-full sm:w-auto"
                   url={buttons[1].url}
