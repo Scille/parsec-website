@@ -5,6 +5,8 @@ const {
   label,
   variant,
   title,
+  iconLeft,
+  iconRight,
   isTextFlipHoverEffect,
   isMagneticTextFlipHoverEffect,
 } = Astro.props;
@@ -29,12 +31,14 @@ if (
   (isTextFlipHoverEffect || isMagneticTextFlipHoverEffect) &&
   variant !== "text" ? (
     <>
+      {iconLeft && <Icons class="text-inherit" icon={iconLeft} />}
       <span
         class="text-flip-inner"
         set:html={label}
         data-content={dataContent}
       />
       {addAriaLabel && <span class="sr-only" set:html={title} />}
+      {iconRight && <Icons class="text-inherit" icon={iconRight} />}
     </>
   ) : (
     <>
@@ -48,15 +52,15 @@ if (
   variant === "text" ? (
     <span class="icons-wrapper ms-2 -mb-px inline-flex min-h-[.9em] min-w-[1em] items-center justify-center">
       <span class="icon icon-before flex items-center justify-center">
-        <Icons class="text-inherit" icon="ArrowUpRightIcon" />
+        {iconLeft && <Icons class="text-inherit" icon={iconLeft} />}
       </span>
       <span
         class="icon icon-after flex items-center justify-center"
         aria-hidden="true">
-        <Icons class="text-inherit" icon="ArrowUpRightIcon" />
+        {iconRight && <Icons class="text-inherit" icon={iconRight} />}
       </span>
     </span>
   ) : (
-    <span class="hover-bg" />
+    <> </>
   )
 }

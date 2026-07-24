@@ -19,6 +19,10 @@ let { title, preTitle, description, image, buttons } = (
 ---
 
 <section class="bg-dots-fade home-hero overflow-hidden">
+  <div
+    class="pointer-events-none absolute -top-1/3 -right-1/4 -z-10 h-[140%] w-[70%] rounded-full opacity-70 blur-3xl"
+    style="background: radial-gradient(circle at 50% 90%, color-mix(in oklch, var(--parsec-color-surface-brand-default) 40%, transparent), transparent 60%), radial-gradient(circle at 70% 70%, color-mix(in oklch, var(--color-indigo-600) 50%, transparent), transparent 60%);">
+  </div>
   <div class="relative mb-20">
     <div class="container">
       <div class="relative z-10 mx-auto max-w-4xl space-y-10">
@@ -135,12 +139,15 @@ let { title, preTitle, description, image, buttons } = (
               alt={"About " + plainify(title).toLowerCase()}
             />
           </div>
-          <div class="translate-x-centered absolute bottom-0 -z-10 h-1/4 w-full max-w-425 overflow-hidden">
-            <div class="absolute inset-0 -z-10 bg-linear-to-b from-transparent to-white" />
-          </div>
         </div>
       )
     }
+  </div>
+  <div
+    class="translate-x-centered absolute bottom-0 -z-10 h-1/4 w-full max-w-425 overflow-hidden">
+    <div
+      class="absolute inset-0 -z-10 bg-linear-to-b from-transparent to-white">
+    </div>
   </div>
 
   <script>
