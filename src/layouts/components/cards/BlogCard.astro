@@ -1,6 +1,6 @@
 ---
 import type { Section } from "@/types";
-import dateFormat from "@/lib/utils/dateFormat";
+import readingTime from "@/lib/utils/readingTime";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
 import {
   humanize,
@@ -8,23 +8,23 @@ import {
   plainify,
   slugifyyy,
 } from "@/lib/utils/textConverter";
-import { getLocaleUrlCTM, useTranslations } from "@/lib/utils/i18nUtils";
-import CustomButton from "../CustomButton.astro";
+import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils";
 import Icons from "@/helpers/Icons.astro";
 
 interface Props {
   content: Section & {
     id: string;
     collection: string;
+    body?: string;
   };
   class?: string;
   layout?: "horizontal" | "vertical";
 }
 
-const translate = await useTranslations(Astro.currentLocale as string);
-
 let { content, layout = "vertical", class: className, ...rest } = Astro.props;
-let { title, image, excerpt, date, categories } = content || {};
+let { title, image, excerpt, body, categories } = content || {};
+
+const timeReadingEstimated = body ? readingTime(body) : undefined;
 
 // Format categories
 const categoriesArray = categories?.map((category: string) => ({
@@ -39,25 +39,31 @@ const isHorizontal = layout === "horizontal";
 
 <article
   class:list={[
-    "bg-theme-light rounded-2xl p-6",
-    isHorizontal &&
-      "flex flex-col items-start gap-5 md:flex-row md:items-center md:gap-10",
+    "bg-surface-base-page shadow-card relative flex flex-col rounded-3xl p-6",
+    isHorizontal && "items-start gap-5 md:flex-row md:items-center md:gap-10",
     className,
   ]}
   {...rest}>
+  <a
+    class="group after:from-surface-base-default absolute inset-0 z-30 flex justify-center after:absolute after:inset-0 after:z-10 after:hidden after:rounded-3xl after:bg-linear-to-t after:to-transparent after:transition-opacity after:duration-500 after:md:block after:md:opacity-0 hover:md:after:opacity-100"
+    href={slug}>
+    <div class="relative z-40 h-full w-full">
+      <span
+        class="bg-surface-base-default pointer-events-none absolute top-full left-1/2 z-45 hidden h-16 w-16 -translate-1/2 items-center justify-center rounded-full shadow-2xl transition-[top] duration-500 group-hover:top-4/5 group-hover:rotate-45 md:flex md:opacity-0 group-hover:md:opacity-100">
+        <Icons
+          class="text-icon-brand-default text-2xl"
+          icon="ArrowUpRightIcon"
+        />
+      </span>
+    </div>
+  </a>
   <div
-    class="group after:from-theme-light relative flex items-center justify-center overflow-hidden rounded-xl via-20% after:pointer-events-none after:absolute after:inset-0 after:z-10 after:hidden after:bg-linear-to-t after:to-transparent after:transition-opacity after:duration-500 after:md:block after:md:opacity-0 hover:md:after:opacity-100">
-    <span
-      class="text-dark pointer-events-none absolute z-20 hidden h-16 w-16 items-center justify-center rounded-full bg-white transition duration-500 md:flex md:opacity-0 group-hover:md:opacity-100">
-      <Icons class="text-2xl" icon="ArrowUpRightIcon" />
-    </span>
+    class="border-border-brand-default-subtle group relative flex h-40 min-h-40 items-center justify-center overflow-hidden rounded-xl border-4 via-20% after:pointer-events-none">
     {
       image && (
-        <div class="overflow-hidden rounded-2xl border-4 border-white">
+        <div class="overflow-hidden rounded-2xl">
           <OptimizedImage
             src={image}
-            width={800}
-            height={800}
             alt={"Related to " + title?.toLowerCase()}
             class:list={[
               "min-w-full object-cover transition duration-500 group-hover:scale-105",
@@ -67,25 +73,22 @@ const isHorizontal = layout === "horizontal";
         </div>
       )
     }
-    <a class="absolute inset-0 z-30" href={slug}>
-      <span class="sr-only">
-        {"Learn more about " + title?.toLowerCase()}
-      </span>
-    </a>
+    <span class="sr-only">
+      {"Learn more about " + title?.toLowerCase()}
+    </span>
   </div>
-  <div class:list={["space-y-4", layout !== "horizontal" && "mt-4"]}>
-    <div
-      class="font-primary text-text-default flex flex-wrap items-center gap-x-2.5 gap-y-px text-sm font-medium">
-      <span>{date && dateFormat(date)}</span>
-      <span class="bg-dark inline-block h-0.75 w-0.75 rounded-full"></span>
-
+  <div
+    class:list={[
+      "flex h-full flex-col space-y-4",
+      layout !== "horizontal" && "mt-4",
+    ]}>
+    <div class="flex flex-wrap items-center gap-x-2.5 gap-y-px">
       {
-        categoriesArray?.map((category: any, index: number) => (
+        categoriesArray?.map((category: any) => (
           <>
-            <span class="text-inherit">{humanize(category.name)}</span>
-            {index !== categoriesArray.length - 1 && (
-              <span class="bg-dark inline-block h-0.75 w-0.75 rounded-full" />
-            )}
+            <span class="bg-surface-information-default-subtle text-label-md text-text-information-default border-border-information-default-subtle rounded-2xl border px-3 py-1 leading-none font-medium">
+              {humanize(category.name)}
+            </span>
           </>
         ))
       }
@@ -95,25 +98,28 @@ const isHorizontal = layout === "horizontal";
         <h2
           class:list={[
             isHorizontal
-              ? "md:text-h4 text-h4-sm mb-8 font-medium"
-              : "md:text-h5 text-h5-sm mb-4",
+              ? "md:text-h3 text-h3-sm mb-8 font-medium"
+              : "md:text-h4 text-h4-sm leading-h4 mb-4",
           ]}
           set:html={plainify(title)}
         />
       )
     }
     {
-      isHorizontal && excerpt && (
-        <p class="text-lg" set:html={markdownify(excerpt)} />
+      excerpt && (
+        <p
+          class="text-body-lg text-text-base-body"
+          set:html={markdownify(excerpt)}
+        />
       )
     }
-    <CustomButton
-      variant="outline"
-      hoverEffect="text-flip"
-      class="btn-sm btn-outline-white mt-3 capitalize"
-      title={"Read more about " + title?.toLowerCase()}
-      label={translate("common.readMore")}
-      url={slug}
-    />
+    {
+      timeReadingEstimated && (
+        <p
+          class="text-body-lg text-text-base-description mt-auto"
+          set:html={markdownify(timeReadingEstimated)}
+        />
+      )
+    }
   </div>
 </article>

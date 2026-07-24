@@ -8,7 +8,8 @@ const sharedButtonBase = z
     label: z.string(),
     class: z.string().optional(),
     rel: z.string().optional(),
-    icon: z.string().optional(),
+    iconLeft: z.string().optional(),
+    iconRight: z.string().optional(),
     target: z.string().optional(),
     hoverEffect: z
       .enum(["text-flip", "creative-fill", "magnetic", "magnetic-text-flip"])

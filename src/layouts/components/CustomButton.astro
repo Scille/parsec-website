@@ -33,6 +33,8 @@ const {
   tag = "a",
   title,
   label,
+  iconLeft,
+  iconRight,
   url = "#",
   rel,
   target,
@@ -57,7 +59,7 @@ const resolvedTarget = url.startsWith("http")
   : target || undefined;
 
 const buttonClasses = [
-  "btn",
+  "btn flex items-center gap-4 w-fit",
   {
     "creative-hover-anim": isCreativeHoverEffect,
     "btn-outline": variant === "outline",
@@ -85,6 +87,8 @@ const buttonClasses = [
         {...{
           label,
           title,
+          iconRight,
+          iconLeft,
           variant,
           isCreativeHoverEffect,
           isTextFlipHoverEffect,
@@ -98,6 +102,8 @@ const buttonClasses = [
         {...{
           label,
           title,
+          iconRight,
+          iconLeft,
           variant,
           isCreativeHoverEffect,
           isTextFlipHoverEffect,

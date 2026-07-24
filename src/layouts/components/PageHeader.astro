@@ -18,7 +18,7 @@ const { title, description, overlapShape } = Astro.props;
       {
         title && (
           <h1
-            class="has-italic-text text-h2 max-w-lg capitalize"
+            class="has-italic-text text-h2 max-w-lg"
             set:html={markdownify(title)}
           />
         )
