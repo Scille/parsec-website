@@ -346,7 +346,6 @@ import BenefitsSection from "@/components/sections/BenefitsSection.astro";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import { generatePaths } from "@/lib/utils/i18nUtils";
 import Team from "@/components/sections/Team.astro";
-import Location from "@/components/sections/Location.astro";
 import HomeBanner from "@/components/sections/HomeHero.astro";
 import Features from "@/components/sections/FeaturesSection.astro";
 import HowItWorks from "@/components/sections/HowItWorks.astro";
@@ -368,7 +367,6 @@ const homepage = await getEntryCTM("homepage", "-index", Astro.currentLocale);
   <HowItWorks />
   <Team />
   <BenefitsSection />
-  <Location />
   <PricingSection />
   <TestimonialSection />
   <BlogSection />
