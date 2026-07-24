@@ -423,3 +423,7 @@
 .differentiation h3 > strong {
   @apply text-text-brand-default;
 }
+
+.call-to-action h2.has-italic-text strong {
+  @apply text-text-on-color-heading;
+}

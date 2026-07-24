@@ -9,7 +9,7 @@
   <CustomButton variant="outline" label="Astro Docs" url="https://astro.build" />
 
   // Text variant with hover effect
-  <CustomButton variant="text" hoverEffect="text-flip" label="Learn More" url="/learn" />
+  <CustomButton variant="link" hoverEffect="text-flip" label="Learn More" url="/learn" />
 
   // Button tag for form actions
   <CustomButton tag="button" label="Submit" onClick={() => alert('Submitted!')} />
@@ -40,6 +40,7 @@ const {
   target,
   hoverEffect = "text-flip",
   variant = "fill",
+  color = "primary",
   class: className,
   ...rest
 } = Astro.props;
@@ -59,12 +60,17 @@ const resolvedTarget = url.startsWith("http")
   : target || undefined;
 
 const buttonClasses = [
-  "btn flex items-center gap-4 w-fit",
+  "flex items-center gap-4 w-fit",
   {
     "creative-hover-anim": isCreativeHoverEffect,
+    btn: variant === "fill" || variant === "outline",
     "btn-outline": variant === "outline",
-    "btn-primary": variant === "fill",
-    "btn-text has-icon-moving-animation no-underline": variant === "text",
+    "btn-fill": variant === "fill",
+    "btn-link": variant === "link",
+    "btn-primary": color === "primary",
+    "btn-neutral": color === "neutral",
+    "btn-white": color === "white",
+    "has-icon-moving-animation": iconRight || iconLeft,
   },
 
   (isTextFlipHoverEffect || isMagneticTextFlipHoverEffect) &&
@@ -98,6 +104,7 @@ const buttonClasses = [
     </a>
   ) : (
     <button class:list={buttonClasses} {...rest}>
+      o
       <CustomButtonContent
         {...{
           label,

@@ -5,37 +5,47 @@
 @utility btn {
   @apply relative inline-block overflow-hidden rounded-full px-6 py-3 leading-tight font-medium whitespace-nowrap duration-[.35s] disabled:cursor-not-allowed;
 }
+@utility btn-link {
+  @apply relative inline-block overflow-hidden leading-tight font-medium whitespace-nowrap duration-[.35s] disabled:cursor-not-allowed;
+}
+@utility btn-sm {
+  @apply text-label-md md:text-label-md px-4 py-2.5;
+}
 @utility btn-md {
   @apply px-10 py-4 md:text-lg xl:px-12;
 }
 
-@utility btn-primary {
-  @apply bg-primary text-light shadow-button;
+/* Button Fill */
+.btn-fill.btn-primary {
+  @apply bg-surface-brand-default text-text-on-color-label shadow-button hover:bg-surface-brand-default-hover;
 }
-@utility btn-black {
-  @apply text-light bg-black;
+.btn-fill.btn-neutral {
+  @apply bg-surface-neutral-default text-text-on-color-label shadow-button hover:bg-surface-neutral-default-hover;
 }
-
-/* Button Text Variant */
-@utility btn-text {
-  @apply hover:border-b-primary hover:text-primary inline-block rounded-none border-b p-0 pb-1.5;
-}
-@utility btn-text-primary {
-  @apply text-primary border-b-primary border-b;
-}
-@utility btn-text-white {
-  @apply text-text-on-color-label border-border-elevated-default border-b;
+.btn-fill.btn-white {
+  @apply bg-surface-base-default text-text-base-label;
 }
 
-/* Button Outline Variant */
-@utility btn-outline {
-  @apply text-text-base-label border-border-base-default border font-medium shadow-xs;
+/* Button Outline */
+.btn-outline.btn-primary {
+  @apply border-border-base-default text-text-brand-default border;
 }
-@utility btn-outline-white {
-  @apply text-text-on-color-label border-border-elevated-default border font-medium shadow-xs;
+.btn-outline.btn-neutral {
+  @apply border-border-base-default text-text-base-label border;
 }
-.btn-outline .gradient-shape {
-  @apply text-text-default opacity-30;
+.btn-outline.btn-white {
+  @apply border-border-base-default text-text-base-label border;
+}
+
+/* Button Link */
+.btn-link.btn-primary {
+  @apply text-text-brand-default hover:text-text-brand-default-hover;
+}
+.btn-link.btn-neutral {
+  @apply text-text-base-label hover:text-text-brand-default-hover;
+}
+.btn-link.btn-white {
+  @apply text-text-base-label;
 }
 
 /* Button Animation */
@@ -51,23 +61,6 @@
     transition:
       width 0.7s ease,
       height 0.7s ease;
-  }
-
-  &:hover .hover-bg {
-    width: 56.25rem;
-    height: 56.25rem;
-  }
-
-  &.btn-primary .hover-bg {
-    @apply bg-theme-dark;
-  }
-  &.btn-outline .hover-bg {
-    background: var(--color-primary);
-  }
-  &:hover {
-    &.btn-outline {
-      color: var(--color-white) !important;
-    }
   }
 }
 .text-flip-hover-anim:not([disabled="true"]) {
@@ -99,43 +92,76 @@
     }
   }
 
-  &.btn-outline {
+  /* Variant = outline/link | Color = Primary */
+  &.btn-outline.btn-primary,
+  &.btn-link.btn-primary {
     .text-flip-inner {
       &::before,
       &::after {
-        @apply text-dark;
+        @apply text-text-brand-default;
       }
+    }
+
+    .hero-icon {
+      @apply text-icon-brand-default;
     }
   }
 
-  &.btn-outline-white {
+  /* Variant = outline/link | Color = Neutral/White */
+  &.btn-outline.btn-neutral,
+  &.btn-outline.btn-white,
+  &.btn-link.btn-neutral,
+  &.btn-link.btn-white {
     .text-flip-inner {
       &::before,
       &::after {
-        @apply text-light;
+        @apply text-text-base-label;
       }
+    }
+
+    .hero-icon {
+      @apply text-icon-neutral-default;
+    }
+  }
+
+  /* Variant = fill | Color = White */
+  &.btn-fill.btn-white {
+    .text-flip-inner {
+      &::before,
+      &::after {
+        @apply text-text-base-label;
+      }
+    }
+
+    .hero-icon {
+      @apply text-icon-neutral-default;
     }
   }
 
   &.btn-primary,
+  &.btn-neutral,
   &.btn-black {
     .text-flip-inner {
       &::before,
       &::after {
-        @apply text-light;
+        @apply text-text-on-color-label;
       }
+    }
+
+    .hero-icon {
+      @apply text-text-on-color-label;
     }
   }
 }
 .has-icon-moving-animation {
-  /* @apply overflow-hidden; */
+  @apply overflow-hidden;
   &:hover .icon {
-    &.icon-before {
-      @apply start-full -top-full;
+    &.icon-before .hero-icon {
+      @apply inset-s-full -top-full;
     }
 
-    &.icon-after {
-      @apply start-0 top-0;
+    &.icon-after .hero-icon {
+      @apply inset-s-0 top-0;
     }
   }
 
@@ -143,20 +169,20 @@
     @apply relative overflow-hidden;
   }
 
-  .icon {
-    @apply transition-[top,_left] duration-500 ease-in-out;
+  .hero-icon {
+    @apply transition-[top,left] duration-500 ease-in-out;
 
-    &.icon-before,
-    &.icon-after {
+    &.icon-before .hero-icon,
+    &.icon-after .hero-icon {
       @apply absolute inset-0 size-full;
     }
 
-    &.icon-before {
+    &.icon-before .hero-icon {
       @apply top-0;
     }
 
-    &.icon-after {
-      @apply -start-full top-full;
+    &.icon-after .hero-icon {
+      @apply -inset-s-full top-full;
     }
   }
 }

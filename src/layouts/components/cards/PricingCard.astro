@@ -133,12 +133,8 @@ if (!enable) return;
       button?.enable && (
         <CustomButton
           hoverEffect="magnetic-text-flip"
-          class:list={[
-            "mt-auto text-center",
-            {
-              "bg-surface-neutral-default": !featured,
-            },
-          ]}
+          color={featured ? "primary" : "neutral"}
+          class:list={["mt-auto text-center"]}
           {...button}
         />
       )

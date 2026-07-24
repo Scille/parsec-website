@@ -14,7 +14,8 @@ const sharedButtonBase = z
     hoverEffect: z
       .enum(["text-flip", "creative-fill", "magnetic", "magnetic-text-flip"])
       .optional(),
-    variant: z.enum(["fill", "outline", "text"]).optional(),
+    variant: z.enum(["fill", "outline", "link"]).optional(),
+    color: z.enum(["primary", "neutral", "white"]).optional(),
   })
   .loose();
 
