@@ -237,6 +237,7 @@ const FaqItem = z.object({
 
 const faqCategorySchema = z.object({
   label: z.string(),
+  id: z.string(),
   list: z.array(FaqItem),
 });
 

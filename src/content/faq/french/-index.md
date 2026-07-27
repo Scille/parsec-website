@@ -13,11 +13,13 @@ button:
 
 list:
   - label: "Produit & Fonctionnalités"
+    id: product-features
     list:
       - active: true
-        title: "Que puis-je créer avec ce SaaS ?"
+        title: "Pourquoi choisir Parsec Cloud ?"
         content: |
-          Notre plateforme est conçue pour les startups et les entreprises en croissance. Vous pouvez créer des sites web, gérer du contenu, intégrer des services tiers et automatiser des flux de travail sans compétences techniques avancées.
+          Parsec Cloud est un coffre-fort collaboratif pour le partage des données sensibles et secrètes en Data Zero Trust et Zero Knowledge y compris avec l'extérieur de l'Organisation (comme avec l'Administration ou les clients).
+          C'est simple à déployer, facile à utiliser, chiffré de bout-en-bout (E2EE), bénéficiant du visa de sécurité CSPN de l'ANSSI : c'est comme One Drive, un Sharepoint ou un NAS chiffré de bout-en-bout, partageable avec l'extérieur et résistant aux ruptures de réseau parce qu'asynchrone.
       - active: false
         title: "Proposez-vous des intégrations avec d'autres outils ?"
         content: |
@@ -32,25 +34,23 @@ list:
           Oui, tout est entièrement responsive et optimisé pour toutes les tailles d'écran.
 
   - label: "Tarification & Paiement"
+    id: pricing-billing
     list:
+      - active: true
+        title: "Proposez-vous un essai gratuit ?"
+        content: |
+          Oui, nous offrons un essai gratuit de 15 jours avec accès à toutes les fonctionnalités principales. Aucune carte de crédit requise.
       - active: true
         title: "Quels moyens de paiement acceptez-vous ?"
         content: |
-          Nous acceptons les principales cartes de crédit, PayPal et les virements bancaires. Pour les clients entreprises, la facturation est également disponible.
+          Nous n'acceptons les cartes de crédit que pour la formule « Business ». Les formules « Gouvernement » et « Intégrateur » peuvent être réglées uniquement par virement bancaire.
       - active: false
-        title: "Proposez-vous un essai gratuit ?"
+        title: "Puis-je annuler mon plan plus tard ?"
         content: |
-          Oui, nous offrons un essai gratuit de 14 jours avec accès à toutes les fonctionnalités principales. Pas de carte de crédit requise.
-      - active: false
-        title: "Puis-je changer de plan plus tard ?"
-        content: |
-          Bien sûr ! Vous pouvez upgrader, downgrader ou annuler votre plan à tout moment depuis votre tableau de bord.
-      - active: false
-        title: "Proposez-vous des remboursements ?"
-        content: |
-          Les remboursements sont disponibles dans les 14 jours suivant l'achat si vous n’êtes pas satisfait. Consultez notre politique de remboursement pour plus de détails.
+          Disponible uniquement avec notre formule « Business », vous pouvez annuler votre plan à tout moment depuis votre tableau de bord d'administration.
 
-  - label: "Compte & Onboarding"
+  - label: "Téléchargement & Onboarding"
+    id: download
     list:
       - active: true
         title: "Comment créer un compte ?"
@@ -70,6 +70,7 @@ list:
           Oui, nous fournissons des tutoriels guidés, de la documentation et des sessions d'onboarding en direct pour les nouveaux utilisateurs.
 
   - label: "Sécurité & Données"
+    id: security-data
     list:
       - active: true
         title: "Mes données sont-elles sécurisées ?"

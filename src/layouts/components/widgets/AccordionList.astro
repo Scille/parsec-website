@@ -31,12 +31,12 @@ const {
             class:list={[
               "hs-accordion rounded-lg px-5",
               item.active && "active",
-              bgColor === "light" ? "bg-theme-light" : "bg-white",
+              bgColor === "light" ? "bg-surface-base-default" : "bg-white",
             ]}
             id={"faq-" + uniqueId}>
             <button
               aria-expanded={item.active ? "true" : "false"}
-              class="hs-accordion-toggle flex w-full items-center justify-between py-5 text-start text-xl"
+              class="hs-accordion-toggle text-h4-sm md:text-h4 text-text-base-heading flex w-full items-center justify-between py-5 font-semibold"
               aria-controls={"faq-content-" + uniqueId}>
               <span set:html={item.title} />
               <span
@@ -68,7 +68,7 @@ const {
                 <div class="space-y-4 pb-5 *:space-y-4">
                   {item.list.map((item: any) => (
                     <div>
-                      <div class="inline-flex items-center gap-2 rounded-full bg-white px-2 py-1.5 text-xs">
+                      <div class="bg-surface-base-default inline-flex items-center gap-2 rounded-full px-2 py-1.5 text-xs">
                         <div
                           class={`changelog-badge h-3 w-3 rounded-full changelog-badge-${item.color}`}
                         />
@@ -80,7 +80,7 @@ const {
                 </div>
               ) : (
                 <div
-                  class="prose-styles pb-5 text-lg md:max-w-4xl"
+                  class="prose-styles text-text-base-body text-body-lg pb-5 md:max-w-4xl"
                   set:html={markdownify(item.content, true)}
                 />
               )}
