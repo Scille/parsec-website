@@ -23,7 +23,7 @@
   @apply bg-surface-neutral-default text-text-on-color-label shadow-button hover:bg-surface-neutral-default-hover;
 }
 .btn-fill.btn-white {
-  @apply bg-surface-base-default text-text-base-label;
+  @apply bg-surface-base-default text-text-base-label border-border-base-default border;
 }
 
 /* Button Outline */
@@ -34,7 +34,7 @@
   @apply border-border-base-default text-text-base-label border;
 }
 .btn-outline.btn-white {
-  @apply border-border-base-default text-text-base-label border;
+  @apply border-border-base-default text-text-on-color-label border;
 }
 
 /* Button Link */
@@ -109,13 +109,26 @@
 
   /* Variant = outline/link | Color = Neutral/White */
   &.btn-outline.btn-neutral,
-  &.btn-outline.btn-white,
   &.btn-link.btn-neutral,
   &.btn-link.btn-white {
     .text-flip-inner {
       &::before,
       &::after {
         @apply text-text-base-label;
+      }
+    }
+
+    .hero-icon {
+      @apply text-icon-neutral-default;
+    }
+  }
+
+  /* Variant = outline | Color = White */
+  &.btn-outline.btn-white {
+    .text-flip-inner {
+      &::before,
+      &::after {
+        @apply text-text-on-color-label;
       }
     }
 
@@ -145,6 +158,7 @@
       &::before,
       &::after {
         @apply text-text-on-color-label;
+        @apply text-text-on-color-label;
       }
     }
 
@@ -168,7 +182,6 @@
   .icons-wrapper {
     @apply relative overflow-hidden;
   }
-
   .hero-icon {
     @apply transition-[top,left] duration-500 ease-in-out;
 
