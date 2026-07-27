@@ -16,11 +16,13 @@ button:
 
 list:
   - label: "Product & Features"
+    id: product-features
     list:
       - active: true
-        title: "What can I build with this SaaS?"
+        title: "Why choose Parsec Cloud?"
         content: |
-          Our platform is designed for startups and growing businesses. You can create websites, manage content, integrate third-party services, and automate workflows without needing advanced technical skills.
+          Parsec Cloud is a collaborative vault for sharing sensitive and confidential data using Zero Trust and Zero Knowledge principles, including with parties outside the organisation (such as government bodies or clients).
+          It is simple to deploy, easy to use, end-to-end encrypted (E2EE), holds ANSSI’s CSPN security certification: it is like OneDrive, SharePoint or an end-to-end encrypted NAS, shareable externally and resilient to network outages because it is asynchronous.
       - active: false
         title: "Do you offer integrations with other tools?"
         content: |
@@ -35,25 +37,23 @@ list:
           Yes, everything is fully responsive and optimized for all screen sizes.
 
   - label: "Pricing & Billing"
+    id: pricing-billing
     list:
+      - active: true
+        title: "Do you offer a free trial?"
+        content: |
+          Yes, we offer a 15-day free trial with access to all core features. No credit card required.
       - active: true
         title: "What payment methods do you accept?"
         content: |
-          We accept major credit cards, PayPal, and bank transfers. For enterprise customers, we also support invoicing.
+          We only accept credit cards for "Business" plan. "Gouvernement" and "Integrator" plans can be paid via bank transfer.
       - active: false
-        title: "Do you offer a free trial?"
+        title: "Can I cancel my plan later?"
         content: |
-          Yes, we offer a 14-day free trial with access to all core features. No credit card required.
-      - active: false
-        title: "Can I change my plan later?"
-        content: |
-          Of course! You can upgrade, downgrade, or cancel your plan anytime from your dashboard.
-      - active: false
-        title: "Do you provide refunds?"
-        content: |
-          Refunds are available within 14 days of purchase if you’re not satisfied. Please check our refund policy for details.
+          Available with our "Business" plan only, you can cancel your plan anytime from your admin dashboard.
 
-  - label: "Account & Onboarding"
+  - label: "Download & Onboarding"
+    id: download
     list:
       - active: true
         title: "How do I create an account?"
@@ -73,6 +73,7 @@ list:
           Yes, we provide guided tutorials, documentation, and live onboarding sessions for new users.
 
   - label: "Security & Data"
+    id: security-data
     list:
       - active: true
         title: "Is my data secure?"
