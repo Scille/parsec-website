@@ -478,10 +478,12 @@
   --parsec-color-border-elevated-default: var(--parsec-color-grey-30);
   --parsec-color-border-elevated-subtle: var(--parsec-color-purple-50);
 
-  --parsec-color-border-brand-default: var(--parsec-color-blue-500);
-  --parsec-color-border-brand-default-hover: var(--parsec-color-blue-600);
-  --parsec-color-border-brand-default-subtle: var(--parsec-color-blue-30);
-  --parsec-color-border-brand-default-subtle-hover: var(--parsec-color-blue-50);
+  --parsec-color-border-brand-default: var(--parsec-color-brand-500);
+  --parsec-color-border-brand-default-hover: var(--parsec-color-brand-600);
+  --parsec-color-border-brand-default-subtle: var(--parsec-color-brand-30);
+  --parsec-color-border-brand-default-subtle-hover: var(
+    --parsec-color-brand-50
+  );
 
   --parsec-color-border-neutral-default: var(--parsec-color-grey-700);
   --parsec-color-border-neutral-default-hover: var(--parsec-color-grey-800);
