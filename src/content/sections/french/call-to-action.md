@@ -1,16 +1,12 @@
 ---
 enable: true
-title: Commencez et optimisez votre **flux de travail dès aujourd'hui**
-description: |
-  Aucune carte de crédit requise. Annulez à tout moment
-
-  Profitez d’un essai gratuit de 14 jours — découvrez toutes les fonctionnalités sans risque.
-
+title: Commencez à sécuriser **vos données sensibles** dès aujourd’hui
+description: Profitez d'un essai gratuit de 15 jours. Vous pouvez résilier à tout moment.
 button:
   enable: true
-  label: OBTENIR UNE DÉMO GRATUITE
-  url: /contact/
+  label: Tester gratuitement Parsec
+  url: https://trial.parsec.cloud/client/home?createOrg=trial
   rel: ""
   target: ""
-  hoverEffect: "text-flip" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"
+  hoverEffect: "text-flip"
 ---
