@@ -9,9 +9,11 @@ import {
   slugifyyy,
 } from "@/lib/utils/textConverter";
 import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils";
+import { getEntryCTM } from "@/lib/contentParser.astro";
 import Icons from "@/helpers/Icons.astro";
 
 interface Props {
+  listPage?: boolean;
   content: Section & {
     id: string;
     collection: string;
@@ -21,10 +23,23 @@ interface Props {
   layout?: "horizontal" | "vertical";
 }
 
-let { content, layout = "vertical", class: className, ...rest } = Astro.props;
-let { title, image, excerpt, body, categories } = content || {};
+let {
+  listPage,
+  content,
+  layout = "vertical",
+  class: className,
+  ...rest
+} = Astro.props;
+let { title, image, excerpt, body, categories, author } = content || {};
 
 const timeReadingEstimated = body ? readingTime(body) : undefined;
+
+let authorEntry;
+if (author) {
+  const authorSlug = slugifyyy(author);
+  const entry = await getEntryCTM("author", authorSlug, Astro.currentLocale);
+  authorEntry = entry?.data;
+}
 
 // Format categories
 const categoriesArray = categories?.map((category: string) => ({
@@ -39,8 +54,10 @@ const isHorizontal = layout === "horizontal";
 
 <article
   class:list={[
-    "bg-surface-base-page shadow-card relative flex flex-col rounded-3xl p-6",
-    isHorizontal && "items-start gap-5 md:flex-row md:items-center md:gap-10",
+    "bg-surface-base-page shadow-card relative rounded-3xl p-6",
+    isHorizontal &&
+      "grid h-96 grid-cols-1 items-start gap-5 md:grid-cols-2 md:items-center md:gap-10 md:pr-10",
+    !isHorizontal && "flex flex-col",
     className,
   ]}
   {...rest}>
@@ -58,16 +75,15 @@ const isHorizontal = layout === "horizontal";
     </div>
   </a>
   <div
-    class="border-border-brand-default-subtle group relative flex h-40 min-h-40 items-center justify-center overflow-hidden rounded-xl border-4 via-20% after:pointer-events-none">
+    class="group relative flex h-full max-w-2xl items-center justify-center overflow-hidden rounded-xl via-20% after:pointer-events-none">
     {
       image && (
-        <div class="overflow-hidden rounded-2xl">
+        <div class="h-full overflow-hidden rounded-2xl">
           <OptimizedImage
             src={image}
             alt={"Related to " + title?.toLowerCase()}
             class:list={[
-              "min-w-full object-cover transition duration-500 group-hover:scale-105",
-              isHorizontal ? "h-[300px]! md:h-[400px]!" : "h-62.5!",
+              "h-full min-w-full object-cover transition duration-500 group-hover:scale-105",
             ]}
           />
         </div>
@@ -82,7 +98,11 @@ const isHorizontal = layout === "horizontal";
       "flex h-full flex-col space-y-4",
       layout !== "horizontal" && "mt-4",
     ]}>
-    <div class="flex flex-wrap items-center gap-x-2.5 gap-y-px">
+    <div
+      class:list={[
+        "flex flex-wrap items-center gap-x-2.5 gap-y-px",
+        isHorizontal && "mt-auto",
+      ]}>
       {
         categoriesArray?.map((category: any) => (
           <>
@@ -98,7 +118,7 @@ const isHorizontal = layout === "horizontal";
         <h2
           class:list={[
             isHorizontal
-              ? "md:text-h3 text-h3-sm mb-8 font-medium"
+              ? "md:text-h3 text-h3-sm mb-6 font-semibold"
               : "md:text-h4 text-h4-sm leading-h4 mb-4",
           ]}
           set:html={plainify(title)}
@@ -114,11 +134,30 @@ const isHorizontal = layout === "horizontal";
       )
     }
     {
-      timeReadingEstimated && (
-        <p
-          class="text-body-lg text-text-base-description mt-auto"
-          set:html={markdownify(timeReadingEstimated)}
-        />
+      (authorEntry?.title || timeReadingEstimated) && (
+        <div
+          class:list={[
+            "text-body-lg text-text-base-description flex items-center justify-between",
+            isHorizontal ? "mt-8 mb-4" : "mt-4",
+          ]}>
+          {listPage && (
+            <div class="flex items-center gap-2">
+              {authorEntry.image && (
+                <OptimizedImage
+                  width={32}
+                  height={32}
+                  src={authorEntry.image}
+                  alt={authorEntry.title}
+                  class="h-8 w-8 rounded-full object-cover"
+                />
+              )}
+              <span class="text-body-lg font-medium">{authorEntry.title}</span>
+            </div>
+          )}
+          {timeReadingEstimated && (
+            <p set:html={markdownify(timeReadingEstimated)} />
+          )}
+        </div>
       )
     }
   </div>

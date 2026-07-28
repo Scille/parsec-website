@@ -3,13 +3,15 @@ import type { Section } from "@/types";
 import { sortByDate } from "@/lib/utils/sortFunctions";
 import Pagination from "../widgets/Pagination.astro";
 import { getEntryCTM } from "@/lib/contentParser.astro";
-import { markdownify } from "@/lib/utils/textConverter";
+import { humanize, markdownify, slugifyyy } from "@/lib/utils/textConverter";
 import { getCollectionCTM } from "@/lib/contentParser.astro";
 import overrideObjects from "@/lib/utils/overrideObjects.ts";
 import BlogCard from "@/layouts/components/cards/BlogCard.astro";
 import config from ".astro/config.generated.json";
 import AnimatedText from "@/components/widgets/AnimatedText.astro";
 import CustomButton from "@/components/CustomButton.astro";
+import { getTaxonomy } from "@/lib/taxonomyParser.astro";
+import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils";
 
 const { blogFolder } = config.settings;
 
@@ -24,6 +26,7 @@ type Props = {
     enable: boolean;
     currentPage: number;
   };
+  category?: string;
 };
 
 // Fetching the default content for the this section
@@ -45,15 +48,29 @@ let {
   enable = true,
   limit,
   title,
-  description,
+  subtitle,
   button,
 } = actualContent as blogSectionType;
-let { listPage = false } = Astro.props as Props;
+let { listPage = false, category } = Astro.props as Props;
 
 let posts = await getCollectionCTM(blogFolder as "blog", Astro.currentLocale);
 
 // Sort posts by date
 posts = sortByDate(posts);
+
+// List all distinct categories used across blog posts
+const categories = listPage
+  ? await getTaxonomy(blogFolder, "categories", Astro.currentLocale)
+  : [];
+
+// When browsing a category page, only keep posts tagged with that category
+if (category) {
+  posts = posts.filter((post) =>
+    post.data.categories?.some(
+      (postCategory: string) => slugifyyy(postCategory) === category,
+    ),
+  );
+}
 
 // Limit the number of items to be displayed
 let totalPages = Math.ceil(posts?.length / config.settings.pagination);
@@ -73,7 +90,7 @@ if (Astro.props.pagination) {
 }
 
 // Limit the number of items to be displayed
-if (limit && !Astro.props.pagination) {
+if (limit && !Astro.props.pagination && !category) {
   posts = posts.slice(0, limit);
 }
 
@@ -82,18 +99,19 @@ if (!enable) return;
 
 {
   listPage && featuredPost && Astro.props.pagination?.currentPage === 1 && (
-    <section>
+    <div class="bg-surface-base-default-secondary relative w-full pb-16">
       <div class="container">
         <BlogCard
+          listPage={listPage}
           layout="horizontal"
           content={{ ...featuredPost.data, ...featuredPost }}
         />
       </div>
-    </section>
+    </div>
   )
 }
 
-<section class="relative pb-32">
+<section class="relative pb-32" transition:animate="fade">
   {
     !listPage && (
       <div
@@ -102,33 +120,63 @@ if (!enable) return;
       />
     )
   }
-  <div class="container space-y-10 md:space-y-16">
+  <div
+    class:list={[
+      "container space-y-10",
+      listPage ? "md:space-y-12" : "md:space-y-16",
+    ]}>
     {
-      title && description && (
+      !listPage ? (
         <div class="flex items-end justify-between">
-          <h2 class="has-italic-text max-w-md">
+          {title && (
+            <h2 class="has-italic-text max-w-2xl">
+              <AnimatedText
+                delay={0.2}
+                stagger={0.09}
+                content={markdownify(title)}
+              />
+            </h2>
+          )}
+          {button && (
+            <CustomButton
+              hoverEffect="text-flip"
+              variant="fill"
+              color="white"
+              {...button}
+            />
+          )}
+        </div>
+      ) : (
+        <h3 class="has-italic-text text-h3-sm md:text-h3 max-w-2xl">
+          {subtitle && (
             <AnimatedText
               delay={0.2}
               stagger={0.09}
-              content={markdownify(title)}
+              content={markdownify(subtitle)}
             />
-          </h2>
-          <div class="flex flex-col">
-            {listPage && (
-              <p
-                class="text-text-neutral-on-color inline-block gap-1 rounded-full px-3 py-1 text-sm font-normal"
-                set:html={markdownify(description)}
-              />
-            )}
-            {button && (
-              <CustomButton
-                hoverEffect="text-flip"
-                variant="fill"
-                color="white"
-                {...button}
-              />
-            )}
-          </div>
+          )}
+        </h3>
+      )
+    }
+
+    {
+      listPage && categories.length > 0 && (
+        <div class="flex flex-wrap gap-2.5">
+          {categories.map((categoryItem) => (
+            <a
+              href={getLocaleUrlCTM(
+                `/blog/category/${categoryItem.slug}`,
+                Astro.currentLocale,
+              )}
+              class:list={[
+                "text-label-md rounded-2xl border px-3 py-1 leading-none font-medium",
+                category === categoryItem.slug
+                  ? "bg-surface-brand-default text-text-on-color-label hover:bg-surface-brand-default-hover border-transparent"
+                  : "bg-surface-information-default-subtle text-text-information-default border-border-information-default-subtle hover:bg-surface-information-default-subtle-hover",
+              ]}>
+              {humanize(categoryItem.name)}
+            </a>
+          ))}
         </div>
       )
     }
@@ -138,6 +186,7 @@ if (!enable) return;
         posts &&
           posts.map((post, index) => (
             <BlogCard
+              listPage={listPage}
               content={{ ...post.data, ...post }}
               data-aos-delay={
                 !Astro.props.pagination && ((index % 3) + 1) * 100
@@ -153,7 +202,7 @@ if (!enable) return;
       }
     </div>
     {
-      listPage && (
+      listPage && !category && (
         <Pagination
           collection={blogFolder}
           currentPage={Astro.props.pagination?.currentPage || 1}

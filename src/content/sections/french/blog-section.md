@@ -1,7 +1,7 @@
 ---
 enable: true # Control the visibility of this section across all pages where it is used
 title: "Les dernières actualités <br/> **de nos experts**"
-description: Découvrez nos conseils en matière de cybersécurité avec toute l’actualité de Parsec
+subtitle: "Les derniers articles"
 button:
   enable: true
   label: Voir toutes les actualités

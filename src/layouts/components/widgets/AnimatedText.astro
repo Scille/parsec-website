@@ -19,11 +19,17 @@ let processedContent = "";
 if (content) {
   // @ts-expect-error
   const words = content.split(" "); // Split text into words
+  let index = 0;
   processedContent = words
-    .map(
-      (word: string, index: number) =>
-        `<span class="word" style="--word-index:${index}">${word}</span>`,
-    )
+    .map((word: string) => {
+      // Let <br> tags pass through untouched: wrapping them in their own
+      // inline-block span traps the line break inside that box instead of
+      // breaking the surrounding line.
+      if (/^<br\s*\/?>$/i.test(word.trim())) {
+        return word;
+      }
+      return `<span class="word" style="--word-index:${index++}">${word}</span>`;
+    })
     .join(" ");
 }
 ---
