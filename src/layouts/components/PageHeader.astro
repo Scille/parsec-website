@@ -6,14 +6,14 @@ const { title, description, overlapShape } = Astro.props;
 
 <section
   class:list={[
-    "relative z-10 mt-0 py-14 md:pt-32 md:pb-24",
+    "relative z-10 mt-0 py-14 md:pt-32 md:pb-16",
     Astro.props.class,
   ]}>
   <div class="container">
     <div
       class:list={[
-        "flex max-w-6xl flex-wrap justify-between gap-5 md:gap-10 md:px-8 lg:px-12",
-        overlapShape ? "ms-5 me-5 md:mx-auto" : "mx-auto",
+        "flex max-w-6xl flex-wrap justify-between gap-5 md:gap-10",
+        overlapShape ? "ms-5 me-5 md:mx-0" : "mx-0",
       ]}>
       {
         title && (
