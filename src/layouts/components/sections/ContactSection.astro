@@ -1,13 +1,13 @@
 ---
 import type { Section } from "@/types";
-import ContactForm from "../widgets/ContactForm.astro";
+import ContactForm from "@/components/widgets/ContactForm.astro";
+import CustomButton from "@/components/CustomButton.astro";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import overrideObjects from "@/lib/utils/overrideObjects.ts";
 import type { contactSectionSchema } from "@/sections.schema";
 import type { z } from "astro/zod";
-import { generateStars } from "@/shortcodes/Testimonial.astro";
-import OptimizedImage from "../utilities/OptimizedImage.astro";
+import Icons from "@/helpers/Icons.astro";
 
 type ContactSection = Section & z.infer<typeof contactSectionSchema>;
 
@@ -24,81 +24,198 @@ let actualContent = overrideObjects(
   Astro.props.content,
 ) as ContactSection;
 
-let { enable = true, testimonial, title, description, form } = actualContent;
+let {
+  enable = true,
+  title,
+  description,
+  contactInfo,
+  form,
+  needs,
+} = actualContent;
 
 if (!enable) return null;
+
+const needColorClasses = {
+  brand: {
+    bg: "bg-surface-brand-default-subtle",
+    icon: "text-icon-brand-default",
+  },
+  "extra-purple": {
+    bg: "bg-surface-extra-purple-default-subtle",
+    icon: "text-icon-extra-purple-default",
+  },
+  "extra-orange": {
+    bg: "bg-surface-extra-orange-default-subtle",
+    icon: "text-icon-extra-orange-default",
+  },
+} as const;
 ---
 
 <section class="relative">
   <div class="container">
-    <div class="grid grid-cols-1 grid-rows-1 gap-10 lg:grid-cols-2">
-      <div class="flex flex-col lg:sticky lg:top-32 lg:max-w-md">
-        <div class="mb-10">
+    <div class="flex flex-col gap-10 lg:flex-row">
+      <div class="flex flex-col lg:sticky lg:top-32 lg:max-w-xl">
+        <div class="mb-6 flex flex-col lg:mb-10">
           {
             title && (
               <h2
-                class="has-italic-text capitalize"
+                class="has-italic-text text-h2-sm md:text-h2 text-text-base-heading"
                 set:html={markdownify(title)}
               />
             )
           }
           {
             description && (
-              <p class="mt-6" set:html={markdownify(description)} />
+              <div
+                class="text-text-base-body text-body-xl mt-6 flex flex-col gap-6"
+                set:html={markdownify(description, true)}
+              />
             )
           }
         </div>
-        {
-          testimonial && (
-            <div class="mt-auto">
-              <div class="flex flex-col items-start space-y-4">
-                <div class="mb-6 inline-flex gap-2">
-                  {generateStars(5).map((_) => (
-                    <svg
-                      class="h-6 w-6 fill-current text-yellow-500"
-                      viewBox="0 0 20 20"
-                      fill="currentColor">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-                {testimonial.content && (
-                  <blockquote
-                    class="text-lg leading-relaxed"
-                    set:html={markdownify(testimonial.content)}
-                  />
-                )}
-              </div>
-
-              <div class="mt-8 flex items-center gap-4">
-                {testimonial.customer.avatar && (
-                  <OptimizedImage
-                    src={testimonial.customer.avatar}
-                    alt={testimonial.customer.name}
-                    class="h-12 w-12 rounded-full object-cover"
-                  />
-                )}
-                <div class="min-w-0 flex-1 space-y-1">
-                  {testimonial.customer.name && (
-                    <div class="text-black">{testimonial.customer.name}</div>
-                  )}
-                  {testimonial.customer.role && (
-                    <p class="text-sm">{testimonial.customer.role}</p>
-                  )}
-                </div>
-              </div>
-            </div>
-          )
-        }
-      </div>
-      {
-        form && (
-          <div class="lg:ms-auto">
-            <ContactForm class="w-full max-w-full lg:w-lg" form={form} />
+        <div class="mt-auto hidden lg:block">
+          <div
+            class="border-border-base-default bg-surface-base-page flex w-full flex-col gap-6 border-t p-6 lg:max-w-80">
+            <>
+              {
+                contactInfo && (
+                  <>
+                    <div class="mb-2 flex items-center gap-2">
+                      <p
+                        class="text-text-base-description/80 text-sm font-semibold uppercase"
+                        set:html={markdownify(contactInfo.title)}
+                      />
+                    </div>
+                    <div class="flex gap-6 lg:flex-col">
+                      {contactInfo.list.map((item) => (
+                        <div class="flex w-full flex-col items-center gap-3.5 lg:flex-row lg:items-start">
+                          {item.icon && (
+                            <Icons
+                              class="bg-surface-base-default text-icon-brand-default text-2xl"
+                              icon={item.icon as any}
+                            />
+                          )}
+                          {item.label && item.link ? (
+                            <a
+                              href={item.link}
+                              class="text-text-base-label text-body-xl hover:text-text-brand-default font-medium"
+                              set:html={item.label}
+                            />
+                          ) : (
+                            item.label && (
+                              <p
+                                class="text-text-base-label text-body-xl font-medium"
+                                set:html={item.label}
+                              />
+                            )
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                )
+              }
+            </>
           </div>
-        )
-      }
+        </div>
+      </div>
+      {form && <ContactForm class="w-full max-w-full" form={form} />}
     </div>
+
+    <div class="mt-16 lg:hidden">
+      <div class="flex w-full flex-col gap-6 lg:max-w-80">
+        <p
+          class="text-text-base-description/80 mx-auto text-sm font-semibold uppercase"
+          set:html={markdownify(contactInfo.title)}
+        />
+        <div class="flex flex-col gap-6 md:flex-row lg:flex-col">
+          <>
+            {
+              contactInfo &&
+                contactInfo.list.map((item) => {
+                  const cardContent = (
+                    <>
+                      {item.icon && (
+                        <Icons
+                          class="text-icon-brand-default text-2xl"
+                          icon={item.icon as any}
+                        />
+                      )}
+                      {item.label && (
+                        <p
+                          class="text-text-base-label text-body-xl text-center font-medium"
+                          set:html={item.label}
+                        />
+                      )}
+                    </>
+                  );
+
+                  return item.link ? (
+                    <a
+                      href={item.link}
+                      class="hover:bg-surface-base-page-secondary flex w-full flex-col items-center gap-3.5 rounded-2xl px-5 py-5 transition-colors lg:flex-row lg:items-start">
+                      {cardContent}
+                    </a>
+                  ) : (
+                    <div class="flex w-full flex-col items-center gap-3.5 rounded-2xl px-5 py-5 lg:flex-row lg:items-start">
+                      {cardContent}
+                    </div>
+                  );
+                })
+            }
+          </>
+        </div>
+      </div>
+    </div>
+
+    {
+      needs?.enable && (
+        <div class="mt-16 flex flex-col items-center gap-12">
+          <div class="flex flex-col items-center gap-6">
+            <h3
+              class="has-italic-text text-h3-sm md:text-h3 text-text-base-heading text-center"
+              set:html={markdownify(needs.title)}
+            />
+          </div>
+          <div class="grid w-full grid-cols-1 gap-6 md:grid-cols-3">
+            {needs.list.map((item) => (
+              <div
+                class:list={[
+                  "shadow-card flex flex-col items-start gap-5.5 rounded-xl border p-10",
+                  item.color && needColorClasses[item.color].bg,
+                ]}>
+                {item.icon && (
+                  <Icons
+                    class:list={[
+                      "text-3xl",
+                      item.color && needColorClasses[item.color].icon,
+                    ]}
+                    icon={item.icon as any}
+                  />
+                )}
+                <div class="flex flex-col items-start gap-2">
+                  <h4 class="text-text-base-heading text-h4-sm md:text-h4 font-semibold">
+                    {item.title}
+                  </h4>
+                  <p class="text-text-base-body text-body-lg">
+                    {item.description}
+                  </p>
+                </div>
+                {item.button && (
+                  <CustomButton
+                    hoverEffect="text-flip"
+                    variant="fill"
+                    color="white"
+                    class="shadow-xs"
+                    {...item.button}
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+    }
   </div>
 </section>
 
@@ -148,14 +265,6 @@ if (!enable) return null;
       selectTags.forEach(validateSelectTag);
 
       if (isFormFilled(form)) {
-        // Console.log form data for debugging
-        // const formData = Object.fromEntries(new FormData(form).entries());
-        // console.log(
-        //   Object.entries(formData)
-        //     .map(([key, value]) => `${key}: ${value}`)
-        //     .join("\n\n"),
-        // );
-
         setMessage("Form Submitting!...", true, true, form);
 
         try {
@@ -182,7 +291,7 @@ if (!enable) return null;
         } catch (error) {
           setMessage(
             error +
-              "! Please use this mail - [stella-astro-theme@gmail.com](mailto:stella-astro-theme@gmail.com) to submit a ticket!",
+              "! Please use this mail - [support@parsec.cloud](mailto:support@parsec.cloud) to submit a ticket!",
             false,
             false,
             form,

@@ -72,23 +72,23 @@ list:
         content: |
           Yes, we provide guided tutorials, documentation, and live onboarding sessions for new users.
 
-  - label: "Security & Data"
-    id: security-data
+  - label: "Contact"
+    id: contact
     list:
       - active: true
-        title: "Is my data secure?"
+        title: "How can I get in touch with you?"
         content: |
-          Yes, we use enterprise-grade encryption and secure servers. Your data is always protected with industry best practices.
+          You can fill out the contact form on this page, and our team will get back to you as soon as possible.
       - active: false
-        title: "Do you offer backups?"
+        title: "How long does it take to get a response?"
         content: |
-          Automated backups are included in all plans. You can also request manual backups on demand.
+          We aim to respond to all inquiries within 1 to 2 business days.
       - active: false
-        title: "Is your platform GDPR compliant?"
+        title: "Can I request a demo of Parsec Cloud?"
         content: |
-          Yes, we are fully GDPR compliant and provide tools for data export and deletion upon request.
+          Yes, just mention it in your message through the contact form and our team will set up a demo with you.
       - active: false
-        title: "Where is my data stored?"
+        title: "Do you offer dedicated technical support?"
         content: |
-          Your data is stored in secure cloud infrastructure with regional options available for enterprise clients.
+          Yes, our customers benefit from dedicated technical support. Contact us for more information.
 ---

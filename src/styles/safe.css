@@ -5,12 +5,12 @@
    Form Styling
 ----------------------------- */
 form {
-  @apply prose-a:text-primary prose-a:underline prose-a:underline-offset-2;
+  @apply prose-a:text-text-brand-default prose-a:underline prose-a:underline-offset-2;
 }
 
 /* Selected state style for Preline select component */
 .hs-select select:not(.hs-select-active) + button span[data-title] {
-  @apply opacity-70;
+  @apply text-text-base-placeholder;
 }
 
 /* ----------------------------
@@ -19,8 +19,8 @@ form {
 .form-input,
 .hs-select input.form-input,
 .hs-select button.form-input {
-  @apply border-border-light text-dark placeholder:text-dark/80 h-full w-full rounded-lg border bg-white px-4 py-4 outline-0 [--tw-ring-offset-shadow:none] focus:shadow-none! focus:ring-0!;
-  @apply **:data-title:text-dark;
+  @apply border-border-base-default text-text-base-label placeholder:text-text-base-placeholder text-label-lg bg-surface-base-default h-full w-full rounded-lg border px-4 py-3 outline-0;
+  @apply **:data-title:text-text-base-heading;
 }
 
 /* Focus styles for input types */
@@ -39,13 +39,14 @@ input:where(:not([type])):focus,
 [type="week"]:focus,
 [multiple]:focus,
 textarea:focus,
-select:focus {
-  @apply border-black/20;
+select:focus,
+.hs-select button.form-input:focus {
+  @apply border-border-brand-default-hover shadow-brand;
 }
 
 /* Label Styling */
 .form-label {
-  @apply text-dark mb-4 block font-normal;
+  @apply text-text-base-label text-label-lg block leading-5 font-medium;
 }
 
 /* ----------------------------
@@ -60,7 +61,7 @@ select:focus {
 }
 
 .form-check-label {
-  @apply cursor-pointer text-sm leading-relaxed select-none;
+  @apply text-label-md cursor-pointer leading-relaxed font-medium select-none;
 }
 
 /* Specific sizes */
@@ -76,21 +77,12 @@ select:focus {
    Dropdown Base Styles
 ----------------------------- */
 [data-hs-select-dropdown] {
-  @apply rounded-md border p-1;
+  @apply rounded-xl border p-1;
 }
 
 /* Dropdown Option Item Styles */
 [data-hs-select-dropdown] > div[data-value] + span {
-  @apply text-text-default text-sm focus:outline-none;
-}
-
-/* Dropdown Search Input Wrapper */
-.dropdown-search-input-wrapper {
-  @apply p-0 focus:shadow-none focus:ring-0 focus:outline-none;
-}
-
-.dropdown-search-input-wrapper input {
-  @apply placeholder:text-base-sm border-border-light p-2! ps-3! placeholder:opacity-50 placeholder:md:text-base;
+  @apply text-text-base-label text-sm;
 }
 
 /* Dropdown 'Not Found' Message */
@@ -100,9 +92,9 @@ select:focus {
 
 /* Dropdown Icons */
 .dropdown-icon {
-  @apply text-dark;
+  @apply text-icon-neutral-default;
 }
 
 .dropdown-selected-icon {
-  @apply text-dark;
+  @apply text-icon-brand-default;
 }

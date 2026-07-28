@@ -69,23 +69,23 @@ list:
         content: |
           Oui, nous fournissons des tutoriels guidés, de la documentation et des sessions d'onboarding en direct pour les nouveaux utilisateurs.
 
-  - label: "Sécurité & Données"
-    id: security-data
+  - label: "Contact"
+    id: contact
     list:
       - active: true
-        title: "Mes données sont-elles sécurisées ?"
+        title: "Comment puis-je vous contacter ?"
         content: |
-          Oui, nous utilisons un chiffrement de niveau entreprise et des serveurs sécurisés. Vos données sont toujours protégées selon les meilleures pratiques du secteur.
+          Vous pouvez remplir le formulaire de contact sur cette page, et notre équipe vous répondra dans les plus brefs délais.
       - active: false
-        title: "Proposez-vous des sauvegardes ?"
+        title: "Sous combien de temps recevrai-je une réponse ?"
         content: |
-          Des sauvegardes automatiques sont incluses dans tous les plans. Vous pouvez également demander des sauvegardes manuelles à la demande.
+          Nous nous efforçons de répondre à toutes les demandes sous 1 à 2 jours ouvrés.
       - active: false
-        title: "La plateforme est-elle conforme au RGPD ?"
+        title: "Puis-je demander une démonstration de Parsec Cloud ?"
         content: |
-          Oui, nous sommes entièrement conformes au RGPD et fournissons des outils pour l’export et la suppression des données sur demande.
+          Oui, précisez-le dans votre message via le formulaire de contact et notre équipe organisera une démonstration avec vous.
       - active: false
-        title: "Où mes données sont-elles stockées ?"
+        title: "Proposez-vous un support technique dédié ?"
         content: |
-          Vos données sont stockées dans une infrastructure cloud sécurisée avec des options régionales pour les clients entreprises.
+          Oui, nos clients bénéficient d'un support technique dédié. Contactez-nous pour en savoir plus.
 ---

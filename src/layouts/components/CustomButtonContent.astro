@@ -3,7 +3,6 @@ import Icons from "@/helpers/Icons.astro";
 
 const {
   label,
-  variant,
   title,
   iconLeft,
   iconRight,
@@ -31,16 +30,20 @@ if (
   isTextFlipHoverEffect || isMagneticTextFlipHoverEffect ? (
     <>
       {iconLeft && (
-        <span class="icon icon-before flex items-center justify-center">
+        <span
+          class="icon icon-before flex items-center justify-center"
+          aria-hidden="true">
           <Icons class="text-inherit" icon={iconLeft} />
         </span>
       )}
       <span
-        class="text-flip-inner"
+        class="text-flip-inner w-full text-center"
         set:html={label}
         data-content={dataContent}
       />
-      {addAriaLabel && <span class="sr-only" set:html={title} />}
+      {addAriaLabel && (
+        <span class="sr-only w-full text-center" set:html={title} />
+      )}
       {iconRight && (
         <span
           class="icon icon-after flex items-center justify-center"
@@ -53,7 +56,9 @@ if (
     <>
       {iconLeft && <Icons class="text-inherit" icon={iconLeft} />}
       <Fragment set:html={label} />
-      {addAriaLabel && <span class="sr-only" set:html={title} />}
+      {addAriaLabel && (
+        <span class="sr-only w-full text-center" set:html={title} />
+      )}
       {iconRight && <Icons class="text-inherit" icon={iconRight} />}
     </>
   )

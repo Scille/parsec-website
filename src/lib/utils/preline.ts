@@ -13,13 +13,13 @@ export const getPrelineSelectConfig = ({
     hasSearch,
     searchPlaceholder: hasSearch ? searchPlaceholder || "Search..." : "",
     searchClasses:
-      "form-input block w-full border-gray-200 focus:border-primary focus:ring-primary before:absolute before:inset-0 before:z-1",
+      "form-input block w-full border-border-base-default before:absolute before:inset-0 before:z-1",
     searchWrapperClasses:
       "bg-white p-1 sticky top-0 dropdown-search-input-wrapper",
     placeholder,
     toggleTag: `
     <button type="button" aria-expanded="false">
-      <span class="order-1 text-text-default" data-title></span>
+      <span class="order-1 form-label" data-title></span>
 
       <!-- Markup shown when no option is selected and the form is submitted (error state) -->
       <div class="order-2 hidden hs-success:hidden hs-error:block">
@@ -37,13 +37,13 @@ export const getPrelineSelectConfig = ({
       </div>
     </button>`,
     toggleClasses:
-      "form-input justify-between items-center hs-select-disabled:pointer-events-none relative ps-4 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border border-gray-200 text-start focus:shadow-none focus:outline-none focus:ring-1 focus:ring-primary",
+      "form-input justify-between items-center hs-select-disabled:pointer-events-none relative ps-4 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-surface-base-default border border-border-base-default text-start",
     dropdownClasses:
-      "mt-2 max-h-72 space-y-0.5 z-20 w-full bg-white border border-gray-200 overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300",
+      "mt-2 max-h-72 space-y-0.5 z-20 w-full bg-surface-base-default border border-border-base-default shadow-md overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300",
     optionClasses:
-      "py-1.5 px-4 w-full hover:rounded-lg text-text-default cursor-pointer hover:bg-slate-50 focus:outline-none focus:bg-gray-100",
+      "py-1.5 px-4 w-full hover:rounded-lg text-text-base-label text-label-lg font-medium cursor-pointer hover:bg-surface-base-page-secondary/80 focus:outline-none focus:bg-surface-base-page-secondary",
     optionTemplate:
-      '<div class="flex justify-between items-center w-full"><span data-title></span><span class="hidden hs-selected:block"><svg class="shrink-0 size-3.5 text-blue-600 dark:text-blue-500 dropdown-selected-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div>',
+      '<div class="flex justify-between items-center w-full"><span data-title></span><span class="hidden hs-selected:block"><svg class="shrink-0 size-3.5 text-text-brand-default dropdown-selected-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div>',
     extraMarkup: [],
     disabledOptionClasses: "opacity-50 cursor-not-allowed",
     selectedOptionClasses: "bg-primary text-white",
