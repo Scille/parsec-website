@@ -28,13 +28,6 @@ export const sharedButtonTag = sharedButtonBase.refine(
   },
 );
 
-export const sharedContactItem = z.object({
-  title: z.string(),
-  icon: z.string(),
-  description: z.string(),
-  button: sharedButton.optional(),
-});
-
 export const ImagePositionEnum = z.enum(["left", "right"]);
 export const AppearanceEnum = z.enum(["dark", "light"]);
 export const button = sharedButtonTag;
@@ -256,18 +249,33 @@ export const contactSectionSchema = z
     enable: z.boolean().default(false),
     title: z.string(),
     description: z.string(),
-    image: z.string().optional(),
-    contactInformation: z.array(sharedContactItem),
     form: contactFormSchema,
-    testimonial: z.object({
+    contactInfo: z.object({
       enable: z.boolean().default(true),
-      content: z.string().optional(),
-      customer: z.object({
-        avatar: z.string(),
-        name: z.string(),
-        role: z.string(),
-      }),
+      title: z.string(),
+      list: z.array(
+        z.object({
+          label: z.string(),
+          icon: z.string().optional(),
+          link: z.string().optional(),
+        }),
+      ),
     }),
+    needs: z
+      .object({
+        enable: z.boolean().default(true),
+        title: z.string(),
+        list: z.array(
+          z.object({
+            icon: z.string().optional(),
+            title: z.string(),
+            description: z.string(),
+            color: z.enum(["brand", "extra-purple", "extra-orange"]).optional(),
+            button: sharedButtonBase.optional(),
+          }),
+        ),
+      })
+      .optional(),
   })
   .optional();
 

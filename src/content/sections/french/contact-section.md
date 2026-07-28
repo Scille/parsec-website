@@ -1,127 +1,137 @@
 ---
-enable: true # Contrôle la visibilité de cette section sur toutes les pages où elle est utilisée
-title: "**Des questions ?** <br /> Envoyez-nous un message"
-description: "Remplissez le formulaire ci-dessous et nous vous répondrons dès que possible. Nous nous engageons à fournir un excellent service client et à répondre à toutes vos demandes."
+enable: true
+title: "**Une question ?** <br /> Envoyez-nous un message"
+description: |
+  Pour toute question, n’hésitez pas à nous envoyer un message, nous nous engageons à répondre dans un délai de 2 jours ouvrés.
 
-testimonial:
+  Si la demande est <u>urgente</u>, vous pouvez nous contacter via les canaux de communication ci-dessous.
+
+contactInfo:
   enable: true
-  content: "Notre collaboration à distance s'est considérablement améliorée, économisant d'innombrables heures chaque semaine"
-  customer:
-    avatar: /images/customers/avatar/1.jpg
-    name: kowsi Han
-    role: Directeur Marketing
+  title: "Nos coordonnées"
+  list:
+    - icon: "EnvelopeIcon"
+      label: contact@parsec.cloud
+      link: mailto:contact@parsec.cloud
+    - icon: "PhoneIcon"
+      label: +33 7 82 07 85 07
+      link: tel:+33782078507
+    - icon: "MapPinIcon"
+      label: 1 Rue de la Paix, <br /> 75002 Paris, France
 
-social:
+needs:
   enable: true
-  title: "Suivez-nous sur les réseaux sociaux"
-  # décommentez la liste ci-dessous si vous voulez remplacer les données de `src/config/social.json`
-  # list:
-  #   - enable: true
-  #     label: "facebook"
-  #     icon: "/images/icons/svg/facebook.svg"
-  #     url: "/"
+  title: "Une demande **particulière** ?"
+  list:
+    - icon: "HandRaisedIcon"
+      title: "Créer un partenariat"
+      description: "Nous avons à coeur de travailler avec des partenaires de confiance."
+      color: "brand"
+      button:
+        tag: "a"
+        variant: "link"
+        label: "partenariats@parsec.cloud"
+        url: "mailto:partenariats@parsec.cloud"
+    - icon: "CalendarIcon"
+      title: "Demander une démo"
+      description: "Notre CEO, Thierry Leblond, se fera un plaisir de vous expliquer le produit avec une démo."
+      color: "extra-purple"
+      button:
+        tag: "a"
+        variant: "fill"
+        color: "white"
+        label: "Réserver un créneau"
+        url: "https://calendly.com/thierry-leblond-parsec/30min"
+        target: "_blank"
+    - icon: "ExclamationTriangleIcon"
+      title: "Reporter un problème"
+      description: "Vous avez rencontré un problème sur l'application ou simplement le site internet ?"
+      color: "extra-orange"
+      button:
+        tag: "a"
+        variant: "link"
+        label: "support@parsec.cloud"
+        url: "mailto:support@parsec.cloud"
 
-# Vérifiez le fichier config.toml pour les paramètres liés au formulaire
-# Ceci est également utilisé dans le pied de page de la page d'accueil du portfolio personnel
 form:
-  emailSubject: "Nouvelle soumission de formulaire depuis le site folex" # Objet de l'email personnalisé (applicable lorsqu'une personne soumet le formulaire)
+  emailSubject: "Nouvelle demande de renseignements - Parsec Cloud"
   submitButton:
     enable: true
-    label: "ENVOYER LE MESSAGE"
-    # hoverEffect: "" # Optionnel : text-flip | creative-fill | magnetic | magnetic-text-flip
-    # variant: "" # Optionnel : fill | outline | text
-    # rel: "" # Optionnel
-    # target: "" # Optionnel
+    label: "Envoyer le message"
+    hoverEffect: "text-flip"
+    variant: "fill"
 
   inputs:
-    - label: ""
-      placeholder: "John *"
+    - label: "Nom de l'entreprise"
+      placeholder: "Nom de l'entreprise"
       name: "Nom complet"
-      required: true
+      required: false
       halfWidth: true
       defaultValue: ""
-    - label: ""
-      placeholder: "Doe *"
+    - label: "Nombre de collaborateurs"
+      placeholder: "Nombre de collaborateurs"
+      name: "employee"
+      id: "employee"
+      required: false
+      halfWidth: true
+      dropdown:
+        type: "select"
+        items:
+          - label: "1 - 10"
+            value: "small team"
+            selected: false
+          - label: "11 - 50"
+            value: "medium team"
+            selected: false
+          - label: "51 - 200"
+            value: "large team"
+            selected: false
+          - label: "plus de 200"
+            value: "large team"
+            selected: false
+    - label: "Nom complet"
+      placeholder: "John Doe"
       name: "Nom complet"
       required: true
+      type: "text"
       halfWidth: true
       defaultValue: ""
-    - label: ""
-      placeholder: "john@ko.eoo *"
+    - label: "Adresse email"
+      placeholder: "john@email.com"
       name: "Adresse email"
       required: true
       type: "email"
-      halfWidth: false
+      halfWidth: true
       defaultValue: ""
-    - label: ""
-      placeholder: "Sujet *"
-      name: "Sujet"
+    - label: "À quel sujet ?"
+      placeholder: "Choix du sujet"
+      name: "subject"
+      id: "subject"
       required: false
-      halfWidth: true
+      halfWidth: false
       dropdown:
-        type: ""
-        search:
-          placeholder: ""
+        type: "select"
         items:
-          - label: "Demande générale"
-            value: "Demande générale"
+          - label: "Informations sur les tarifs"
+            value: "Informations sur les tarifs"
             selected: false
-          - label: "Partenariat"
-            value: "Partenariat"
+          - label: "Je souhaite une démonstration"
+            value: "Démonstration"
             selected: false
-          - label: "Investissement"
-            value: "Investissement"
+          - label: "En savoir plus sur Parsec Cloud"
+            value: "En savoir plus"
             selected: false
-    - label: ""
-      placeholder: "Sujet avec recherche *"
-      name: "Sujet avec recherche"
-      required: false
-      halfWidth: true
-      dropdown:
-        type: "search"
-        search:
-          placeholder: "Sujet avec recherche"
-        items:
-          - label: "Demande générale"
-            value: "Demande générale"
+          - label: "Autre demande"
+            value: "Autre demande"
             selected: false
-          - label: "Partenariat"
-            value: "Partenariat"
-            selected: false
-          - label: "Carrière"
-            value: "Carrière"
-            selected: false
-          - label: "Investissement"
-            value: "Investissement"
-            selected: false
-          - label: "Demande média"
-            value: "Demande média"
-            selected: false
-    - label: ""
+    - label: "Dîtes-nous en plus sur votre demande !"
       tag: "textarea"
       defaultValue: ""
-      rows: "2"
-      placeholder: "Comment pouvons-nous vous aider *"
+      rows: "8"
+      placeholder: "Comment pouvons-nous vous aider"
       name: "Message"
       required: true
       halfWidth: false
-    - label: "Recherche Google"
-      checked: false
-      name: "Source utilisateur"
-      required: true
-      groupLabel: "Comment avez-vous entendu parler de nous ?"
-      group: "source"
-      type: "radio"
-      halfWidth: true
-      defaultValue: ""
-    - label: "Réseaux sociaux"
-      name: "Source utilisateur"
-      required: true
-      groupLabel: ""
-      group: "source"
-      type: "radio"
-      halfWidth: true
-      defaultValue: ""
     - label: "J'accepte les termes et conditions et la [politique de confidentialité](/contact/)."
       id: "privacy-policy"
       name: "Consentement vie privée"
@@ -133,8 +143,8 @@ form:
       defaultValue: ""
     - note: success
       parentClass: "hidden text-sm message success"
-      content: "Nous avons reçu votre message ! Nous vous répondrons dès que possible."
+      content: "Nous avons reçu votre message ! Nous vous répondrons aussi rapidement que possible."
     - note: deprecated
       parentClass: "hidden text-sm message error"
-      content: "Une erreur est survenue ! veuillez utiliser ce mail - [folex-astro-theme@gmail.com](mailto:folex-astro-theme@gmail.com) pour soumettre un ticket !"
+      content: "Une erreur est survenue ! veuillez utiliser ce mail - [contact@parsec.cloud](mailto:contact@parsec.cloud) pour soumettre une demande !"
 ---
