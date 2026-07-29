@@ -35,7 +35,7 @@ export const button = sharedButtonTag;
 export const videoConfigSchema = z.object({
   src: z.string(),
   type: z.string().optional(),
-  provider: z.enum(["youtube", "vimeo", "html5"]).optional(),
+  provider: z.enum(["youtube", "dailymotion", "html5"]).optional(),
   poster: z.string().optional(),
   autoplay: z.boolean().optional(),
   id: z.string().optional(),
@@ -127,11 +127,13 @@ const preTitleSchema = z.object({
     .optional(),
 });
 
-// Video schema (reuse your existing videoConfigSchema)
 const heroButtonVideoSchema = z.object({
   src: z.string(),
   type: z.string().optional(),
-  provider: z.enum(["youtube", "vimeo", "html5"]).optional().default("youtube"),
+  provider: z
+    .enum(["youtube", "dailymotion", "html5"])
+    .optional()
+    .default("dailymotion"),
   poster: z.string().optional(),
   autoplay: z.boolean().optional(),
   id: z.string().optional(),
@@ -430,11 +432,12 @@ export const testimonialSectionSchema = z
 export const aboutSectionSchema = z.object({
   enable: z.boolean().default(false),
   title: z.string(),
-  officeImages: z.array(z.string()),
-
+  image: z.object({
+    src: z.string(),
+    alt: z.string(),
+  }),
   about: z.object({
     title: z.string(),
-    description: z.string(),
     image: z.url(), // path to image
     list: z.array(
       z.object({
@@ -443,14 +446,15 @@ export const aboutSectionSchema = z.object({
       }),
     ),
   }),
+});
 
-  stats: z.array(
-    z.object({
-      value: z.string(), // e.g., "20K+"
-      title: z.string(), // e.g., "Happy Customers"
-      description: z.string(), // supporting text
-    }),
-  ),
+export const videoSectionSchema = z.object({
+  enable: z.boolean().default(false),
+  preTitle: z.string().optional(),
+  title: z.string(),
+  description: z.string(),
+  button: sharedButton.optional(),
+  video: videoConfigSchema,
 });
 
 export const partnersSectionSchema = z

@@ -15,9 +15,9 @@ export type customersSectionType = Section & {
 
 // Type for the video configuration
 export type VideoConfig = {
-  src: string; // youtube or vimeo video ID or path to video file
+  src: string; // youtube or dailymotion video ID or path to video file
   type?: string; // Optional: only required for local files (e.g., "video/mp4")
-  provider?: "youtube" | "vimeo" | "html5"; // Accepted providers (default is "youtube")
+  provider?: "youtube" | "html5" | "dailymotion"; // Accepted providers (default is "youtube")
   poster?: string; // Optional: URL or image path for video thumbnail
   autoplay?: boolean; // Optional: true to autoplay, false to start manually (default is false)
   id?: string; // required if same video is used on multiple time on same page

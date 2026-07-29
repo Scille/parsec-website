@@ -13,8 +13,7 @@ list:
     video:
       src: /videos/test-video.mp4
       type: mp3 # video type eg: mp4, webm etc
-      provider: html5 # "youtube" | "vimeo" | "html5" (default is "youtube")
-      poster: /images/video-thumbnail.jpg # Optional: URL or image path for video thumbnail
+      provider: html5
       autoplay: true # Optional: true to autoplay, false to start manually (default is false)
       id: test-changelog-video-1 # required if same video is used on multiple time on same page
     types:
@@ -86,8 +85,7 @@ list:
     video:
       src: /videos/test-video.mp4
       type: mp3 # video type eg: mp4, webm etc
-      provider: html5 # "youtube" | "vimeo" | "html5" (default is "youtube")
-      poster: /images/video-thumbnail.jpg # Optional: URL or image path for video thumbnail
+      provider: html5
       autoplay: true # Optional: true to autoplay, false to start manually (default is false)
       id: test-changelog-video-2 # required if same video is used on multiple time on same page
     types:
@@ -159,8 +157,7 @@ list:
     video:
       src: /videos/test-video.mp4
       type: mp3 # video type eg: mp4, webm etc
-      provider: html5 # "youtube" | "vimeo" | "html5" (default is "youtube")
-      poster: /images/video-thumbnail.jpg # Optional: URL or image path for video thumbnail
+      provider: html5
       autoplay: true # Optional: true to autoplay, false to start manually (default is false)
       id: test-changelog-video-3 # required if same video is used on multiple time on same page
     types:
