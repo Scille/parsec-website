@@ -61,16 +61,18 @@ let list = content.list;
           )}
           {changelog.video && (
             <div class="relative">
-              <OptimizedImage
-                width={900}
-                height={400}
-                src={changelog.video.poster as any}
-                alt={
-                  "video thumbnail related to" +
-                  markdownify(changelog.title.toLocaleLowerCase())
-                }
-                class="h-72! w-full max-w-full! rounded-2xl object-cover md:h-96!"
-              />
+              {changelog.video.poster && (
+                <OptimizedImage
+                  width={900}
+                  height={400}
+                  src={changelog.video.poster as any}
+                  alt={
+                    "video thumbnail related to" +
+                    markdownify(changelog.title.toLocaleLowerCase())
+                  }
+                  class="h-72! w-full max-w-full! rounded-2xl object-cover md:h-96!"
+                />
+              )}
               {changelog.video.src && (
                 <>
                   <button

@@ -13,13 +13,16 @@ let {
 } = Astro.props as VideoConfig & { title?: string };
 
 const isLocalHostedVideo = src?.includes("/videos/") && provider === "html5";
+const dailymotionId = src?.match(
+  /(?:dailymotion\.com\/video\/)?([^/?]+)$/,
+)?.[1];
 poster = poster && (await bgOptimizedImage(poster));
 
 const embedSrc =
   provider === "youtube"
     ? `https://www.youtube-nocookie.com/embed/${src}?rel=0&playsinline=1&autoplay=${autoplay ? 1 : 0}`
-    : provider === "vimeo"
-      ? `https://player.vimeo.com/video/${src}?autoplay=${autoplay ? 1 : 0}`
+    : provider === "dailymotion"
+      ? `https://www.dailymotion.com/embed/video/${dailymotionId}?autoplay=${autoplay ? 1 : 0}`
       : undefined;
 ---
 

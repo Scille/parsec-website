@@ -1,45 +1,18 @@
 ---
 enable: true
-title: "À propos de notre **Entreprise**"
-officeImages:
-  - /images/about/1.jpg
-  - /images/about/2.jpg
-  - /images/about/3.jpg
-  - /images/about/4.jpg
+title: "À propos de **Parsec Cloud**"
+image:
+  src: "/images/about/team-photo.jpg"
+  alt: "Photo de l'équipe Parsec"
 
 about:
-  title: "Transformer la vision de votre startup en réalité. Alimenter l'innovation **depuis 1928**"
-  description: |
-    Innovant. Evolutif. Fiable. Il est difficile de créer des produits qui atteignent chacun de ces objectifs — surtout lorsque vous êtes concentré sur la croissance, les présentations et le service client au quotidien. C’est là que nous intervenons.
+  title: "De la start-up aux ministères. <br /> L'évolution de Parsec **depuis 2014**"
   image: "/images/about/group-photo.jpg"
   list:
-    - title: "Mission"
-      description: "Notre plateforme vous offre tout ce dont vous avez besoin pour construire, lancer et développer votre produit — sans les tracas techniques."
-    - title: "Vision"
-      description: "Permettre aux équipes de toutes tailles d’avancer plus vite et de se développer en toute confiance — en fournissant les outils qui transforment les bonnes idées en entreprises florissantes."
-
-stats:
-  - value: 20
-    prependValue:
-    appendValue: "K+"
-    title: "Clients satisfaits"
-    description: "Soutenir des startups innovantes et des entreprises mondiales à travers le monde"
-
-  - value: 7.5
-    prependValue: ""
-    appendValue: "+"
-    title: "Tâches automatisées"
-    description: "Économiser aux équipes occupées d’innombrables heures productives chaque jour"
-
-  - value: 90
-    prependValue:
-    appendValue: +
-    title: "Pays desservis"
-    description: "Une plateforme mondiale réellement puissante, conçue pour chaque marché"
-
-  - value: 10
-    prependValue:
-    appendValue: x
-    title: "Croissance mondiale"
-    description: "Une boîte à outils puissante conçue pour faire croître les startups partout"
+    - title: "**2014**"
+      description: "L'entreprise a été fondée par Thierry Leblond et Emmanuel Leblond, ingénieur EPITA. La société Scille se spécialise dans la conception et le déploiement de projets de transformation numérique pour les grandes entreprises, en utilisant des technologies open source."
+    - title: "**2016**"
+      description: "En 2016, en collaboration avec le Laboratoire Bordelais de Recherche en Informatique (LaBRI), SCILLE intègre le dispositif RAPID (Régime d’APpui à l’Innovation Duale)  du ministère des Armées avec le projet de recherche Parsec Cloud."
+    - title: "**2026**"
+      description: "Après un an d'audit d’évaluation par l’ANSSI, nous obtenons une seconde fois (la première fois en 2021), la certification CSPN. Notre solution garantit la confidentialité, l’authenticité, et l’intégrité des données sensibles partagées et stockées partout dans le monde quel que soit le cloud de stockage."
 ---

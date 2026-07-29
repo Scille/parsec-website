@@ -286,8 +286,13 @@
     background-size: 100% 100%;
   }
 }
-.has-italic-text strong {
-  @apply font-secondary text-text-brand-default font-normal text-inherit italic;
+.has-italic-text {
+  strong {
+    @apply font-secondary font-normal text-inherit italic;
+  }
+  &:not(.override-color) strong {
+    @apply text-text-brand-default;
+  }
 }
 
 /* Icon Color Override */
@@ -306,11 +311,11 @@
 
 /* Animated Video Play Button */
 .has-animated-waves {
-  @apply bg-primary relative z-10;
-  @apply before:bg-primary/80 after:bg-primary/80;
+  @apply relative z-10;
+  @apply before:bg-surface-brand-default/40 after:bg-surface-brand-default/80;
 
   .icon {
-    @apply ml-2 h-6 w-6 text-white lg:h-8 lg:w-8;
+    @apply ml-1 h-6 w-6 text-white lg:h-8 lg:w-8;
   }
 
   &.waves-sm {
@@ -343,26 +348,23 @@
   &.waves-white {
     @apply bg-white;
 
-    &::before,
-    &::after {
-      @apply bg-white;
-    }
-
     .icon {
       @apply text-primary;
     }
   }
 
-  @apply before:![animation-delay:.2s] after:![animation-delay:0.5s];
+  @apply before:![animation-delay:.5s] after:![animation-delay:0.1s];
 
-  &::before,
-  &::after {
-    @apply absolute -z-10 h-40 w-40 rounded-full opacity-0 content-[""];
-    @apply [animation:waves_2s_linear_infinite];
+  &:hover {
+    &::before,
+    &::after {
+      @apply absolute -z-10 h-30 w-30 rounded-full opacity-0 content-[""];
+      @apply [animation:waves_1.5s_linear_infinite];
+    }
   }
 
   @theme {
-    --animate-waves: waves 1.5s linear infinite;
+    --animate-waves: waves 1s linear infinite;
     @keyframes waves {
       0% {
         transform: scale(0.2, 0.2);
@@ -370,7 +372,7 @@
       }
 
       50% {
-        opacity: 0.9;
+        opacity: 0.95;
       }
 
       100% {

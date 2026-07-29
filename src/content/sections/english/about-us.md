@@ -1,45 +1,18 @@
 ---
 enable: true
-title: "About Our **Company**"
-officeImages:
-  - /images/about/1.jpg
-  - /images/about/2.jpg
-  - /images/about/3.jpg
-  - /images/about/4.jpg
+title: "About **Parsec Cloud**"
+image:
+  src: "/images/about/team-photo.jpg"
+  alt: "Parsec team photo"
 
 about:
-  title: "Turning your startup vision into reality. Powering innovation **since 1928**"
-  description: |
-    Innovative. Scalable. Reliable. It’s challenging to create products that meet each of these goals — especially when you’re focused on growing, pitching, and serving customers every day. That’s where we come in.
+  title: "From startups to ministries. <br /> The evolution of Parsec **since 2014**"
   image: "/images/about/group-photo.jpg"
   list:
-    - title: "Mission"
-      description: "Our platform gives you everything you need to build, launch, and grow your product — without the technical headaches."
-    - title: "Vision"
-      description: "To empower teams of all sizes to move faster and scale with confidence — providing the tools that turn great ideas into thriving businesses."
-
-stats:
-  - value: 20
-    prependValue:
-    appendValue: "K+"
-    title: "Happy Customers"
-    description: "Powering innovative startups and global enterprises worldwide"
-
-  - value: 7.5
-    prependValue: ""
-    appendValue: "+"
-    title: "Tasks Automated"
-    description: "Saving busy teams countless productive hours every single day"
-
-  - value: 90
-    prependValue:
-    appendValue: +
-    title: "Countries Served"
-    description: "A truly powerful global platform built for every market"
-
-  - value: 10
-    prependValue:
-    appendValue: x
-    title: "Global Growth"
-    description: "A powerful toolkit designed to grow startups everywhere"
+    - title: "**2014**"
+      description: "The company was founded by Thierry Leblond and Emmanuel Leblond, engineers from EPITA. The company Scille specializes in designing and deploying digital transformation projects for large enterprises, using open source technologies."
+    - title: "**2016**"
+      description: "In 2016, in collaboration with the Bordelais Laboratory for Computer Science Research (LaBRI), SCILLE integrates the RAPID (Dual Innovation Support Scheme) device of the Ministry of Defence with the Parsec Cloud research project."
+    - title: "**2026**"
+      description: "After one year of evaluation audit by ANSSI, we obtain a second time (the first time in 2021), the CSPN certification. Our solution guarantees the confidentiality, authenticity, and integrity of sensitive data shared and stored anywhere in the world regardless of the storage cloud."
 ---

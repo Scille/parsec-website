@@ -1,6 +1,6 @@
 ---
 enable: true
-title: "Our Core **Values**"
+title: "Our Core **Values** at Parsec Cloud"
 
 benefits:
   - title: "Innovation"
@@ -11,19 +11,19 @@ benefits:
     description: "We believe the best results come from working together and supporting one another."
     icon: "UserGroupIcon"
 
-  - title: "Customer Focus"
-    description: "Our customers are at the heart of everything we do — we build with their needs in mind."
-    icon: "ViewfinderCircleIcon"
+  - title: "Communication"
+    description: "We listen to our customers and develop our services based on their needs."
+    icon: "ChatBubbleLeftRightIcon"
 
-  - title: "Integrity"
-    description: "We act with honesty, transparency, and accountability in all our decisions and actions."
-    icon: "FingerPrintIcon"
+  - title: "Transparence"
+    description: "We act with integrity, transparency, and accountability in all our decisions and actions."
+    icon: "CubeTransparentIcon"
 
-  - title: "Growth"
-    description: "We encourage continuous learning, both as individuals to achieve long-term success."
-    icon: "ArrowTrendingUpIcon"
+  - title: "Formation"
+    description: "We encourage continuous learning to foster long-term success for everyone."
+    icon: "AcademicCapIcon"
 
-  - title: "Excellence"
-    description: "We are committed to delivering high-quality products, services, and experiences every time."
-    icon: "ShieldCheckIcon"
+  - title: "Rigueur"
+    description: "We are committed to providing high-quality products, services, and experiences with every interaction."
+    icon: "StarIcon"
 ---

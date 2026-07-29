@@ -5,7 +5,6 @@ import { getEntryCTM } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import overrideObjects from "@/lib/utils/overrideObjects.ts";
 import CustomButton from "@/components/CustomButton.astro";
-import VideoModal from "@/components/widgets/VideoModal.astro";
 import type { benefitsSectionSchema } from "@/sections.schema";
 import Icons from "@/helpers/Icons.astro";
 import AnimatedText from "../widgets/AnimatedText.astro";
@@ -33,7 +32,6 @@ let {
   benefits,
   buttons,
 } = actualContent as benefitsSectionType;
-const videoButton = buttons?.find((button: any) => button.type === "video");
 
 if (!enable) return;
 ---
@@ -43,7 +41,7 @@ if (!enable) return;
     {
       title && (
         <div class="mx-auto max-w-2xl text-center">
-          <h2 class="has-italic-text capitalize">
+          <h2 class="has-italic-text">
             <AnimatedText
               delay={0.2}
               stagger={0.09}
@@ -62,18 +60,21 @@ if (!enable) return;
               data-aos="fade-up-sm"
               data-aos-delay={(index + 1) * 50}
               data-aos-duration={900}
-              class="flex flex-col gap-4 border p-5 md:p-8">
-              <Icons class="text-3xl" icon={item.icon as HeroIconName} />
-              <div class="mt-4 space-y-3">
+              class="border-border-base-default bg-surface-base-page flex flex-col gap-4 rounded-xl border p-5 shadow-sm md:p-8">
+              <Icons
+                class="text-icon-neutral-default text-2xl"
+                icon={item.icon as HeroIconName}
+              />
+              <div class="flex flex-col gap-2">
                 {item.title && (
                   <h3
-                    class="text-h5-sm md:text-h5"
+                    class="text-h4-sm md:text-h4 font-bold"
                     set:html={markdownify(item.title)}
                   />
                 )}
                 {item.description && (
                   <p
-                    class="opacity-80"
+                    class="text-body-lg text-text-base-description"
                     set:html={markdownify(item.description)}
                   />
                 )}
@@ -107,20 +108,6 @@ if (!enable) return;
               />
             ),
           )
-      }
-    </div>
-
-    <div>
-      {
-        videoButton?.enable && videoButton.video?.src && (
-          <VideoModal
-            video={{
-              id: videoButton.video?.id,
-              src: videoButton.video.src,
-              provider: videoButton.video?.provider,
-            }}
-          />
-        )
       }
     </div>
   </div>

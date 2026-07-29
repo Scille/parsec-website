@@ -1,0 +1,130 @@
+---
+import type { Section } from "@/types";
+import CustomButton from "@/components/CustomButton.astro";
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import overrideObjects from "@/lib/utils/overrideObjects.ts";
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+import type { videoSectionSchema } from "@/sections.schema";
+import VideoModal from "@/components/widgets/VideoModal.astro";
+import AnimatedText from "@/components/widgets/AnimatedText.astro";
+import Icons from "@/helpers/Icons.astro";
+import type { z } from "astro/zod";
+
+type SectionType = Section & NonNullable<z.infer<typeof videoSectionSchema>>;
+
+type Props = {
+  content?: SectionType;
+};
+
+// Fetching the default content for the this section
+let defaultContent = (
+  await getEntryCTM("sections", "video-section", Astro.currentLocale)
+)?.data as SectionType;
+
+// Enables content customization (e.g., title, description) with a fallback to 'defaultContent' if not provided.
+// The 'content' prop should match the structure of 'defaultContent'.
+// Allows using this section with different content across multiple pages.
+// If 'content' is missing, 'defaultContent' will be used.
+let actualContent = overrideObjects(
+  { ...defaultContent },
+  Astro.props.content,
+) as SectionType;
+
+// Extracting required values from 'content' object
+let {
+  enable = true,
+  preTitle,
+  title,
+  description,
+  button,
+  video,
+} = actualContent as SectionType;
+
+if (!enable) return;
+---
+
+<section class="container overflow-hidden">
+  <div
+    data-aos="fade-down-sm"
+    class="from-surface-base-default-secondary to-surface-base-default border-border-base-default relative container flex max-w-6xl flex-col items-center gap-8 rounded-3xl border bg-linear-to-b/oklch p-6 md:flex-row md:p-8">
+    <div class="space-y-3 lg:max-w-xl">
+      {
+        preTitle && (
+          <span
+            class="has-italic-text text-text-base-description text-body-lg mb-6 inline-block rounded-full font-medium"
+            set:html={markdownify(preTitle)}
+          />
+        )
+      }
+      {
+        title && (
+          <h2 class="text-h3-sm md:text-h3 text-text-base-heading mb-4 leading-[1.15] font-semibold">
+            <AnimatedText
+              delay={0.2}
+              stagger={0.09}
+              content={markdownify(title)}
+            />
+          </h2>
+        )
+      }
+      {
+        description && (
+          <div
+            data-aos="fade-down-sm"
+            data-aos-delay="100"
+            class="text-text-base-body mx-auto mb-8 flex max-w-2xl flex-col gap-3 space-y-1"
+            set:html={markdownify(description, true)}
+          />
+        )
+      }
+      {
+        button && button.enable && (
+          <CustomButton class="shadow-sm" {...button} />
+        )
+      }
+    </div>
+    <div class="not-prose relative shrink-0 self-center">
+      {
+        video && video?.src && (
+          <>
+            {video.poster && (
+              <OptimizedImage
+                src={video.poster}
+                alt={title || "Video thumbnail"}
+                class:list={[
+                  "h-auto w-full max-w-[40rem] rounded-2xl object-cover",
+                ]}
+              />
+            )}
+            <button
+              type="button"
+              title="Play Video"
+              aria-haspopup="dialog"
+              aria-expanded="false"
+              aria-controls={"#" + video.id}
+              data-hs-overlay={"#" + video.id}
+              data-hs-overlay-options={`{"emulateScrollbarSpace" : true}`}
+              class="video-modal-toggle translate-centered has-animated-waves waves-white absolute flex h-16 w-16 items-center justify-center rounded-full transition-transform duration-300 hover:scale-110">
+              <div class="bg-surface-base-default/10 hover:bg-surface-base-default relative z-10 flex h-16 w-16 items-center justify-center rounded-full border border-white/20 shadow-lg backdrop-blur-lg">
+                <Icons
+                  icon="PlayIcon"
+                  class="icon fill-surface-elevated-default text-text-base-body"
+                />
+              </div>
+            </button>
+            <VideoModal
+              video={{
+                id: video?.id,
+                src: video.src,
+                provider: video?.provider,
+                poster: video?.poster,
+                autoplay: video?.autoplay,
+              }}
+            />
+          </>
+        )
+      }
+    </div>
+  </div>
+</section>

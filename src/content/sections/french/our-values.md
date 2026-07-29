@@ -1,29 +1,29 @@
 ---
 enable: true
-title: "Nos **Valeurs** Fondamentales"
+title: "Nos **Valeurs** chez Parsec Cloud"
 
 benefits:
   - title: "Innovation"
-    description: "Nous favorisons la créativité et cherchons constamment de nouvelles façons de résoudre les problèmes et d'apporter de la valeur."
+    description: "Nous valorisons l'innovation et cherchons sans cesse des solutions créatives pour apporter de la valeur ajoutée."
     icon: "LightBulbIcon"
 
   - title: "Collaboration"
-    description: "Nous croyons que les meilleurs résultats proviennent du travail en équipe et du soutien mutuel."
+    description: "Nous sommes convaincus que les meilleurs résultats proviennent d'une collaboration étroite et d'un soutien mutuel."
     icon: "UserGroupIcon"
 
-  - title: "Orientation Client"
-    description: "Nos clients sont au cœur de tout ce que nous faisons — nous construisons en tenant compte de leurs besoins."
-    icon: "ViewfinderCircleIcon"
+  - title: "Communication"
+    description: "Nos clients sont au cœur de nos préoccupations : nous les écoutons et développons nos services en fonction de leurs besoins."
+    icon: "ChatBubbleLeftRightIcon"
 
-  - title: "Intégrité"
-    description: "Nous agissons avec honnêteté, transparence et responsabilité dans toutes nos décisions et actions."
-    icon: "FingerPrintIcon"
+  - title: "Transparence"
+    description: "Nous agissons avec intégrité, transparence et responsabilité dans toutes nos décisions et actions."
+    icon: "CubeTransparentIcon"
 
-  - title: "Croissance"
-    description: "Nous encourageons l'apprentissage continu, tant individuellement que collectivement, pour atteindre le succès à long terme."
-    icon: "ArrowTrendingUpIcon"
+  - title: "Formation"
+    description: "Nous encourageons l'apprentissage continu pour favoriser le succès à long terme de chacun."
+    icon: "AcademicCapIcon"
 
-  - title: "Excellence"
-    description: "Nous nous engageons à fournir des produits, services et expériences de haute qualité à chaque fois."
-    icon: "ShieldCheckIcon"
+  - title: "Rigueur"
+    description: "Nous nous engageons à fournir des produits, services et expériences de haute qualité à chaque interaction."
+    icon: "StarIcon"
 ---
