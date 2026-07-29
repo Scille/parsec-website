@@ -453,6 +453,40 @@ export const aboutSectionSchema = z.object({
   ),
 });
 
+export const partnersSectionSchema = z
+  .object({
+    enable: z.boolean().default(false).optional(),
+    title: z.string().optional(),
+    button: sharedButtonBase.optional(),
+    partners: z.object({
+      title: z.string(),
+      list: z.array(
+        z.object({
+          name: z.string(),
+          url: z.string(),
+          image: z.object({
+            src: z.string(),
+            alt: z.string(),
+          }),
+        }),
+      ),
+    }),
+    collaboration: z.object({
+      title: z.string(),
+      list: z.array(
+        z.object({
+          name: z.string(),
+          url: z.string(),
+          image: z.object({
+            src: z.string(),
+            alt: z.string(),
+          }),
+        }),
+      ),
+    }),
+  })
+  .optional();
+
 export const sectionsSchema = {
   contactSection: contactSectionSchema,
   statsSection: statsSectionSchema,
@@ -466,4 +500,5 @@ export const sectionsSchema = {
   differentiationSectionSchema,
   faqSectionSchema,
   aboutSectionSchema,
+  partnersSectionSchema,
 };
