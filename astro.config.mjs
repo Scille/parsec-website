@@ -82,8 +82,8 @@ export default defineConfig({
 
     // Code Highlighter https://github.com/shikijs/shiki
     shikiConfig: {
-      theme: "light-plus", // https://shiki.style/themes
-      wrap: false,
+      theme: "aurora-x", // https://shiki.style/themes
+      wrap: true,
     },
   },
   vite: {

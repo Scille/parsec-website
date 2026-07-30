@@ -7,9 +7,11 @@
     "paginationNext": "Suivant",
     "paginationPrevious": "Précédent",
     "backToHome": "Retour à l'accueil",
+    "backToBlog": "Retour au blog",
     "careerJobOverview": "Aperçu du poste",
     "contactDropdownSearch404": "Aucun résultat trouvé",
-    "careerApplyNow": "Postuler maintenant"
+    "careerApplyNow": "Postuler maintenant",
+    "toc": "Sommaire"
   },
   "navigation": {
     "buttonLabel": "Télécharger Parsec"
