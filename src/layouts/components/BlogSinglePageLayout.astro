@@ -53,7 +53,7 @@ const tocEnabled =
               )
             }
             {
-              (author?.title || timeReadingEstimated) && (
+              (author || timeReadingEstimated) && (
                 <div class="text-body-lg mt-8 flex items-center justify-between">
                   <div class="flex items-center gap-2">
                     {author?.image && (
