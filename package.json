@@ -52,7 +52,7 @@
     "astro": "^7.0.9",
     "cross-env": "^10.1.0",
     "gray-matter": "^4.0.3",
-    "ignore": "^7.0.5",
+    "ignore": "^7.0.6",
     "jest": "^30.3.0",
     "linkedom": "^0.18.12",
     "prettier": "^3.8.1",
