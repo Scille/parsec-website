@@ -156,7 +156,12 @@ export const heroSectionSchema = z.object({
   title: z.string(),
   preTitle: preTitleSchema.optional(),
   description: z.string(),
-  image: z.string().optional(),
+  image: z
+    .object({
+      src: z.string(),
+      alt: z.string(),
+    })
+    .optional(),
   buttons: z.array(heroButtonSchema).optional(),
 });
 
