@@ -1,7 +1,7 @@
 ---
 import { markdownify } from "@/lib/utils/textConverter";
 
-const { title, description, overlapShape } = Astro.props;
+const { title, preTitle, description, overlapShape } = Astro.props;
 ---
 
 <section
@@ -14,15 +14,34 @@ const { title, description, overlapShape } = Astro.props;
       class:list={[
         "flex max-w-6xl flex-wrap justify-between gap-5 md:gap-10",
         overlapShape ? "ms-5 me-5 md:mx-0" : "mx-0",
+        description ? "" : "max-w-full justify-center",
       ]}>
-      {
-        title && (
-          <h1
-            class="has-italic-text text-h2 max-w-lg"
-            set:html={markdownify(title)}
-          />
-        )
-      }
+      <div>
+        {
+          preTitle && (
+            <span
+              class:list={[
+                "text-text-base-description text-body-xl mb-6 inline-block w-full rounded-full font-medium",
+                description ? "text-left" : "text-center",
+              ]}
+              set:html={markdownify(preTitle)}
+            />
+          )
+        }
+        {
+          title && (
+            <h1
+              class:list={[
+                "has-italic-text text-h2",
+                description
+                  ? "max-w-lg"
+                  : "max-w-2xl justify-center text-center",
+              ]}
+              set:html={markdownify(title)}
+            />
+          )
+        }
+      </div>
       {
         description && (
           <p class="md:max-w-sm" set:html={markdownify(description)} />
