@@ -1,0 +1,251 @@
+---
+import type { z } from "astro/zod";
+import type { Section } from "@/types";
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import AnimatedText from "../widgets/AnimatedText.astro";
+import type { heroDownloadSchema } from "@/sections.schema";
+import CustomButton from "@/components/CustomButton.astro";
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+import {
+  getPrelineSelectConfig,
+  getPrelineSelectOptionAttrs,
+} from "@/lib/utils/preline";
+
+// Type for this section data
+type SectionType = Section & NonNullable<z.infer<typeof heroDownloadSchema>>;
+
+// Fetching the content for this section
+let { title, description, image, downloadClient, goOnWeb, moreButton } = (
+  await getEntryCTM("sections", "download-hero", Astro.currentLocale)
+)?.data as SectionType;
+
+const osDropdown = downloadClient.dropdown;
+---
+
+<section class="bg-dots-fade home-hero -mt-20 overflow-hidden pt-30 md:pt-40">
+  <div
+    class="pointer-events-none absolute -top-1/3 -left-1/4 -z-10 h-[140%] w-[70%] rounded-full opacity-70 blur-3xl"
+    style="background: radial-gradient(circle at 20% 120%, color-mix(in oklch, var(--parsec-color-surface-brand-default) 40%, transparent), transparent 60%);">
+  </div>
+  <div
+    class="pointer-events-none absolute -top-1/3 -right-1/4 -z-10 h-[140%] w-[70%] rounded-full opacity-70 blur-3xl"
+    style="background: radial-gradient(circle at 80% 90%, color-mix(in oklch, var(--parsec-color-surface-brand-default) 40%, transparent), transparent 60%)">
+  </div>
+  <div class="border-border-base-default relative border-b">
+    <div class="container pb-20 md:pb-0">
+      <div class="mx-autospace-y-10 relative flex flex-col items-center gap-12">
+        <div class="mx-auto max-w-2xl">
+          {
+            title && (
+              <h2>
+                <AnimatedText
+                  delay={0.1}
+                  class="has-italic-text text-text-base-heading mb-6 text-center md:mb-8"
+                  content={markdownify(title)}
+                />
+              </h2>
+            )
+          }
+          {
+            description && (
+              <AnimatedText
+                delay={0.9}
+                stagger={0.03}
+                content={markdownify(description)}
+                class="text-body-xl text-text-base-body mx-auto max-w-xl text-center"
+              />
+            )
+          }
+        </div>
+
+        <div
+          id="download-dropdown-container"
+          class="flex w-full flex-col justify-center gap-6 lg:grid lg:grid-cols-2">
+          {
+            downloadClient && osDropdown && (
+              <div
+                id="download-client-card"
+                class="bg-surface-base-default shadow-card flex w-full flex-col gap-4 rounded-3xl p-6 lg:ml-auto lg:max-w-sm lg:self-end">
+                <p
+                  class="text-body-md text-text-base-description text-center uppercase"
+                  set:html={markdownify(downloadClient.title)}
+                />
+                {osDropdown && osDropdown.id && (
+                  <select
+                    id={osDropdown.id || osDropdown.name}
+                    data-name={
+                      osDropdown.name ||
+                      osDropdown.label ||
+                      "Please set name value"
+                    }
+                    data-hs-select={JSON.stringify(
+                      getPrelineSelectConfig({
+                        placeholder:
+                          osDropdown.placeholder || "Please set placeholder",
+                      }),
+                    )}
+                    class="download-dropdown">
+                    <option value="">{osDropdown.name}</option>
+                    {osDropdown?.items?.map((option) => (
+                      <option
+                        {...(option.selected && { selected: true })}
+                        {...getPrelineSelectOptionAttrs(option.icon)}
+                        data-url={option.url}
+                        data-code={option.code}
+                        value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                )}
+                {downloadClient.button && (
+                  <CustomButton
+                    id="download-client-button"
+                    hoverEffect="magnetic-text-flip"
+                    class="w-full sm:w-auto"
+                    {...downloadClient.button}
+                  />
+                )}
+                <pre
+                  id="download-client-code"
+                  class="bg-surface-elevated-default text-text-on-color-label hidden w-full items-center justify-between gap-3 overflow-x-auto rounded-lg p-4">
+                  <code class="font-mono text-sm" />
+                </pre>
+              </div>
+            )
+          }
+          {
+            goOnWeb && (
+              <div class="flex min-w-80 flex-col gap-4 p-6 lg:max-w-sm">
+                <p
+                  class="text-body-md text-text-base-description text-center uppercase"
+                  set:html={markdownify(goOnWeb.title)}
+                />
+                {goOnWeb.button && (
+                  <CustomButton
+                    hoverEffect="magnetic-text-flip"
+                    class="bg-surface-base-default w-full sm:w-auto"
+                    {...goOnWeb.button}
+                  />
+                )}
+              </div>
+            )
+          }
+        </div>
+        {moreButton && <CustomButton class="mx-auto mt-16" {...moreButton} />}
+      </div>
+    </div>
+
+    <!-- Banner Image -->
+    {
+      image && (
+        <div class="relative mx-6 mt-12 hidden max-w-425 rounded-b-[6.25rem] pb-20 md:m-0 md:mx-auto md:mt-20 md:block">
+          <div class="banner-image container max-h-50">
+            <OptimizedImage
+              src={image}
+              class="shadow-hero-image mx-auto rounded-3xl border-8 border-white/35 md:rounded-[2.25rem] md:border-[1.25rem]"
+            />
+          </div>
+        </div>
+      )
+    }
+  </div>
+  <div
+    class="translate-x-centered absolute bottom-0 -z-10 h-1/4 w-full max-w-full overflow-hidden">
+    <div
+      class="to-surface-base-default absolute inset-0 -z-10 bg-linear-to-b from-transparent">
+    </div>
+  </div>
+
+  <script>
+    async function detectOsDropdownValue(): Promise<string | null> {
+      const uaData = (navigator as any).userAgentData;
+      const ua = navigator.userAgent;
+      const platform = navigator.platform || "";
+
+      if (uaData?.platform) {
+        const platform = uaData.platform.toLowerCase();
+        if (platform === "windows") return "windows";
+        if (platform === "macos") {
+          const isChrome = /Chrome/i.test(ua) && !/Edg|OPR/i.test(ua);
+          if (!isChrome) return "macosSilicon";
+
+          // this instance 'getHighEntropyValues' is only available in chrome
+          // we have decided to display macOS Silicon by default in other browsers
+          const { architecture } = await uaData.getHighEntropyValues([
+            "architecture",
+          ]);
+          return architecture === "arm" ? "macosSilicon" : "macosIntel";
+        }
+        if (platform === "linux") return "linux";
+        if (platform === "android") return null;
+      }
+
+      if (/Win/i.test(platform) || /Windows/i.test(ua)) {
+        return "windows";
+      }
+
+      if (/Mac/i.test(platform) || /Macintosh/i.test(ua)) {
+        return "macosSilicon";
+      }
+
+      if (/Linux/i.test(platform) || /Linux/i.test(ua)) {
+        return "linux";
+      }
+
+      return null;
+    }
+
+    const osSelect = document.getElementById("os-parsec-client");
+
+    if (osSelect instanceof HTMLSelectElement) {
+      detectOsDropdownValue().then((detectedValue) => {
+        const detectedOption = detectedValue
+          ? osSelect.querySelector(`option[value="${detectedValue}"]`)
+          : null;
+
+        if (detectedOption instanceof HTMLOptionElement) {
+          osSelect
+            .querySelectorAll("option[selected]")
+            .forEach((option) => option.removeAttribute("selected"));
+          detectedOption.setAttribute("selected", "");
+          osSelect.value = detectedValue as string;
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const select = document.getElementById("os-parsec-client");
+      const button = document.getElementById("download-client-button");
+      const codeBlock = document.getElementById("download-client-code");
+      const codeElement = codeBlock?.querySelector("code");
+      const card = document.getElementById("download-client-card");
+
+      if (!(select instanceof HTMLSelectElement) || !button || !codeBlock) {
+        return;
+      }
+
+      const updateButtonUrl = () => {
+        const { url, code } = select.selectedOptions[0]?.dataset ?? {};
+
+        if (code) {
+          button.classList.add("hidden");
+          codeBlock.classList.remove("hidden");
+          codeBlock.classList.add("flex");
+          card?.classList.add("lg:!min-w-xl");
+          if (codeElement) codeElement.textContent = code;
+        } else {
+          button.classList.remove("hidden");
+          codeBlock.classList.add("hidden");
+          codeBlock.classList.remove("flex");
+          card?.classList.remove("lg:!min-w-xl");
+          if (url) button.setAttribute("href", url);
+        }
+      };
+
+      updateButtonUrl();
+      select.addEventListener("change", updateButtonUrl);
+    });
+  </script>
+</section>

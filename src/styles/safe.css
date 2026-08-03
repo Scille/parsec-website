@@ -9,7 +9,10 @@ form {
 }
 
 /* Selected state style for Preline select component */
-.hs-select select:not(.hs-select-active) + button span[data-title] {
+.hs-select
+  select:not(.hs-select-active):not(#os-parsec-client)
+  + button
+  span[data-title] {
   @apply text-text-base-placeholder;
 }
 
