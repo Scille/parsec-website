@@ -160,6 +160,64 @@ export const heroSectionSchema = z.object({
   buttons: z.array(heroButtonSchema).optional(),
 });
 
+const downloadSelectItemSchema = z.object({
+  type: z.string("select"),
+  name: z.string(),
+  label: z.string(),
+  placeholder: z.string(),
+  id: z.string(),
+  items: z.array(
+    z.object({
+      label: z.string(),
+      icon: z.string(),
+      selected: z.boolean().optional(),
+      value: z.string(),
+      url: z.string().optional(),
+      code: z.string().optional(),
+    }),
+  ),
+});
+
+export const heroDownloadSchema = z.object({
+  enable: z.boolean().default(true),
+  title: z.string(),
+  description: z.string(),
+  image: z.string().optional(),
+  downloadClient: z.object({
+    enable: z.boolean().default(true).optional(),
+    title: z.string(),
+    dropdown: downloadSelectItemSchema,
+    button: sharedButtonBase,
+  }),
+  goOnWeb: z.object({
+    enable: z.boolean().default(true).optional(),
+    title: z.string(),
+    button: sharedButtonBase,
+  }),
+  moreButton: sharedButtonBase.optional(),
+});
+
+export const versionDownloadSchema = z.object({
+  enable: z.boolean().default(true),
+  title: z.string(),
+  versions: z.array(
+    z.object({
+      enable: z.boolean().default(true).optional(),
+      os: z.enum(["macos", "linux", "windows"]),
+      icon: z.string(),
+      list: z.array(
+        z.object({
+          enable: z.boolean().default(true).optional(),
+          title: z.string(),
+          icon: z.string().optional(),
+          code: z.string().optional(),
+          button: sharedButtonBase.optional(),
+        }),
+      ),
+    }),
+  ),
+});
+
 export const pricingSectionSchema = z
   .object({
     enable: z.boolean().default(false),
@@ -498,6 +556,8 @@ export const sectionsSchema = {
   testimonialSection: testimonialSectionSchema,
   pricingSectionSchema,
   heroSectionSchema,
+  heroDownloadSchema,
+  versionDownloadSchema,
   featuresSectionSchema,
   featuresSectionTwoSchema,
   howItWorksSectionSchema,

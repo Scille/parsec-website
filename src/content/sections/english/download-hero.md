@@ -1,0 +1,63 @@
+---
+title: "Try **a secure experience** on desktop and the web"
+description: "Store and manage your data securely, with fast access and enhanced protection on your system."
+image: "/images/product-for-hero-logged-en.svg"
+
+downloadClient:
+  enable: true
+  title: "Desktop"
+  dropdown:
+    label: ""
+    placeholder: ""
+    name: ""
+    id: "os-parsec-client"
+    type: "select"
+    items:
+      - label: "Windows"
+        icon: "/images/icons/windows.svg"
+        value: "windows"
+        selected: true
+        url: "https://bms.parsec.cloud/versions/latest/windows"
+      - label: "macOS (Apple Silicon)"
+        icon: "/images/icons/macos.svg"
+        value: "macosSilicon"
+        selected: false
+        url: "https://bms.parsec.cloud/versions/latest/macos_arm"
+      - label: "macOS (Intel processor)"
+        icon: "/images/icons/macos.svg"
+        value: "macosIntel"
+        selected: false
+        url: "https://bms.parsec.cloud/versions/latest/macos"
+      - label: "Linux (Snap)"
+        icon: "/images/icons/linux.svg"
+        value: "linux"
+        selected: false
+        url: "https://github.com/Scille/parsec-cloud/releases/latest"
+        code: "snap install parsec --channel=v3 --classic"
+  button:
+    label: "Download"
+    url: "https://github.com/Scille/parsec-cloud/releases/latest"
+    variant: "fill"
+    color: "primary"
+    hoverEffect: "text-flip"
+
+goOnWeb:
+  enable: true
+  title: "Web"
+  button:
+    tag: "a"
+    label: "Continue on the web"
+    url: "https://app.parsec.cloud/"
+    variant: "outline"
+    color: "primary"
+    iconRight: "ArrowRightIcon"
+    hoverEffect: "text-flip"
+
+moreButton:
+  label: "See other versions"
+  url: "/download#versions"
+  variant: "link"
+  color: "neutral"
+  hoverEffect: "text-flip"
+  iconRight: "ArrowDownIcon"
+---

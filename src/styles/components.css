@@ -488,3 +488,9 @@
     @apply text-text-brand-default hover:text-text-brand-default-hover hover:underline;
   }
 }
+
+#download-dropdown-container {
+  .form-input {
+    @apply bg-surface-neutral-default-subtle! hover:bg-surface-neutral-default-subtle-hover! rounded-full!;
+  }
+}

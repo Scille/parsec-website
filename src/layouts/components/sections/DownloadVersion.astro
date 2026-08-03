@@ -1,0 +1,91 @@
+---
+import type { z } from "astro/zod";
+import type { Section } from "@/types";
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import type { versionDownloadSchema } from "@/sections.schema";
+import CustomButton from "@/components/CustomButton.astro";
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+// Type for this section data
+type SectionType = Section & NonNullable<z.infer<typeof versionDownloadSchema>>;
+
+// Fetching the content for this section
+let { enable, title, versions, image } = (
+  await getEntryCTM("sections", "download-version", Astro.currentLocale)
+)?.data as SectionType;
+---
+
+{
+  enable && (
+    <section class="pt-20" id="versions">
+      <div class="has-italic-text border-border-base-default relative container border-b pb-16">
+        {title && (
+          <h2 set:html={markdownify(title)} class="text-h3 mb-12 text-center" />
+        )}
+        <div class="grid items-center lg:grid-cols-2">
+          {versions && (
+            <div class="flex flex-col">
+              {versions.map(
+                (group, groupIndex) =>
+                  group.enable !== false && (
+                    <div class="flex flex-col py-6 lg:flex-row">
+                      {group.icon && (
+                        <div class="bg-surface-base-default-secondary mx-auto flex w-full min-w-10 items-center justify-center py-2 lg:w-fit lg:py-4">
+                          <OptimizedImage src={group.icon} />
+                        </div>
+                      )}
+                      <div class="border-border-base-default flex w-full min-w-0 flex-col border-t lg:border-t-0 lg:border-l lg:pl-6">
+                        {group.list.map(
+                          (card, cardIndex) =>
+                            card.enable !== false && (
+                              <div
+                                data-aos="fade-up-sm"
+                                data-aos-delay={
+                                  (groupIndex * group.list.length +
+                                    cardIndex +
+                                    1) *
+                                  50
+                                }
+                                data-aos-duration={900}
+                                class="flex min-w-0 items-center gap-4 rounded-xl py-4 has-[pre]:flex-col has-[pre]:items-start">
+                                {card.title && (
+                                  <p
+                                    class="text-body-lg text-text-base-heading shrink-0 font-semibold"
+                                    set:html={markdownify(card.title)}
+                                  />
+                                )}
+                                {card.button && (
+                                  <CustomButton
+                                    tag="a"
+                                    class="ml-auto"
+                                    {...card.button}
+                                  />
+                                )}
+                                {card.code && (
+                                  <pre class="bg-surface-elevated-default text-text-on-color-label flex w-full min-w-0 items-center justify-start gap-3 overflow-x-auto rounded-lg p-4">
+                                    <code class="font-mono text-sm">
+                                      {card.code.trim()}
+                                    </code>
+                                  </pre>
+                                )}
+                              </div>
+                            ),
+                        )}
+                      </div>
+                    </div>
+                  ),
+              )}
+            </div>
+          )}
+          {image && (
+            <OptimizedImage
+              src={image}
+              class="hidden size-full max-h-96 object-contain lg:ml-auto lg:block lg:object-right"
+            />
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}
