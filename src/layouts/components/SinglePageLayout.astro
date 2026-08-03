@@ -10,7 +10,7 @@ interface Props {
 
 const { content, innerPadding } = Astro.props;
 
-const { title, description, excerpt, tocHeadings, tableOfContents } =
+const { preTitle, title, description, excerpt, tocHeadings, tableOfContents } =
   content?.data || {};
 
 const { Content } = content ? await render(content) : { Content: null };
@@ -23,6 +23,7 @@ const tocEnabled =
 <PageHeader
   overlapShape={true}
   hasBgShape={false}
+  preTitle={preTitle}
   title={title}
   description={description || excerpt}
 />

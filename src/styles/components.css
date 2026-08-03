@@ -3,14 +3,14 @@
   @apply prose text-text-default max-w-none;
 
   /* Typography */
-  @apply prose-headings:scroll-mt-32 prose-headings:font-medium prose-headings:mb-[.6em] prose-headings:mt-10 prose-headings:text-dark;
+  @apply prose-headings:scroll-mt-32 prose-headings:font-medium prose-headings:mb-[.6em] prose-headings:mt-10 prose-headings:text-text-base-heading;
   @apply prose-h1:text-h1-sm;
   @apply prose-h2:text-h2-sm;
   @apply prose-h3:text-h3-sm;
   @apply prose-h4:text-h4-sm;
   @apply prose-h5:text-h5-sm;
   @apply prose-h6:text-h6;
-  @apply prose-strong:text-black prose-strong:font-normal;
+  @apply prose-strong:text-black prose-strong:font-semibold;
   @apply prose-pre:bg-white/5;
   @apply prose-a:text-text-default prose-a:transition prose-a:duration-300 prose-a:font-normal [&_a]:no-underline;
   @apply prose-p:text-text-default prose-p:mt-2 prose-p:mb-3;
@@ -38,6 +38,10 @@
   /* Remove Quote for first and last child element inside blockquote */
   blockquote {
     @apply prose-p:my-0;
+  }
+
+  a {
+    @apply text-text-brand-default hover:text-text-brand-default-hover font-medium;
   }
 
   /* Unordered & Ordered List */
@@ -439,7 +443,8 @@
   @apply text-text-on-color-heading;
 }
 
-.article-single {
+.article-single,
+.prose-styles {
   h1 {
     @apply text-article-h1 leading-article-h1 tracking-article-h1 text-text-base-heading font-semibold;
   }
@@ -473,7 +478,7 @@
   }
 
   strong {
-    @apply text-article-body leading-article-body tracking-article-body font-medium;
+    @apply text-article-body leading-article-body tracking-article-body font-semibold;
   }
 
   img {
