@@ -1,6 +1,6 @@
 ---
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
-import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils";
+import { localizedLink } from "@/lib/utils/localizedLink";
 import { slugifyyy } from "@/lib/utils/textConverter";
 import type { SocialLink } from "@/types";
 
@@ -43,14 +43,7 @@ let {
   ...rest
 } = Astro.props as Props; // Ensure Astro.props is typed as Props
 
-slug = slug
-  ? getLocaleUrlCTM(
-      slug,
-      Astro.currentLocale,
-      undefined,
-      import.meta.env.BASE_URL,
-    )
-  : "";
+slug = slug ? localizedLink(slug, Astro.currentLocale) : "";
 list = linkType === "share" ? list : list.filter((social) => social.url);
 
 const shareLinks: { [key: string]: string } = {
@@ -100,7 +93,7 @@ if (disabled) {
                 inlineSvg={true}
                 src={social.icon}
                 class:list={[
-                  "text-dark relative z-10 transition duration-300",
+                  "text-dark fill-text-base-body relative z-10 transition duration-300",
                   {
                     "h-4 w-4": size === "sm",
                     "h-5 w-5": size === "md",
