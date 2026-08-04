@@ -43,7 +43,14 @@ let {
   ...rest
 } = Astro.props as Props; // Ensure Astro.props is typed as Props
 
-slug = slug ? getLocaleUrlCTM(slug, Astro.currentLocale) : "";
+slug = slug
+  ? getLocaleUrlCTM(
+      slug,
+      Astro.currentLocale,
+      undefined,
+      import.meta.env.BASE_URL,
+    )
+  : "";
 list = linkType === "share" ? list : list.filter((social) => social.url);
 
 const shareLinks: { [key: string]: string } = {

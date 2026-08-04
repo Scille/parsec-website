@@ -21,7 +21,7 @@
   <CustomButton hoverEffect="magnetic-text-flip" variant="outline" label="Join Now" url="/join" />
  */
 
-import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils";
+import { localizedLink } from "@/lib/utils/localizedLink";
 import CustomButtonContent from "./CustomButtonContent.astro";
 import type { sharedButton, sharedButtonTag } from "@/sections.schema";
 import type { z } from "astro/zod";
@@ -87,7 +87,7 @@ const buttonClasses = [
       rel={resolvedRel}
       target={resolvedTarget}
       class:list={buttonClasses}
-      href={getLocaleUrlCTM(url, Astro.currentLocale)}
+      href={localizedLink(url, Astro.currentLocale)}
       {...rest}>
       <CustomButtonContent
         {...{

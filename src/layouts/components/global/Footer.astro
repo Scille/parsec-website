@@ -5,7 +5,8 @@ import Icons from "@/helpers/Icons.astro";
 import config from ".astro/config.generated.json";
 import { markdownify } from "@/lib/utils/textConverter";
 import SocialComponent from "@/components/social/Social.astro";
-import { useTranslations, getLocaleUrlCTM } from "@/lib/utils/i18nUtils";
+import { useTranslations } from "@/lib/utils/i18nUtils";
+import { localizedLink } from "@/lib/utils/localizedLink";
 
 const translate = await useTranslations(Astro.currentLocale as string);
 const currentYear = new Date().getFullYear().toString();
@@ -42,7 +43,7 @@ const currentYear = new Date().getFullYear().toString();
                   <li>
                     <a
                       class="has-underline-anim text-text-base-label inline-block py-px"
-                      href={getLocaleUrlCTM(menu.url, Astro.currentLocale)}>
+                      href={localizedLink(menu.url, Astro.currentLocale)}>
                       {menu.name}
                     </a>
                   </li>
@@ -68,7 +69,7 @@ const currentYear = new Date().getFullYear().toString();
                   <li class="inline-block">
                     <a
                       class="has-underline-anim text-text-base-label inline-block py-px"
-                      href={getLocaleUrlCTM(menu.url, Astro.currentLocale)}
+                      href={localizedLink(menu.url, Astro.currentLocale)}
                       set:html={menu.name}
                     />
                   </li>
@@ -96,7 +97,7 @@ const currentYear = new Date().getFullYear().toString();
               <span class="text-base-sm block md:text-base">
                 <a
                   class="text-text-base-description hover:text-text-brand-default-hover flex items-center gap-1 py-px"
-                  href={getLocaleUrlCTM(
+                  href={localizedLink(
                     `mailto:${translate("contactInfo.email")}`,
                     Astro.currentLocale,
                   )}>
@@ -123,7 +124,7 @@ const currentYear = new Date().getFullYear().toString();
             <li class="footer-bottom-menu-item relative inline-block">
               <a
                 class="has-underline-anim text-text-base-description inline-block py-px"
-                href={getLocaleUrlCTM(menu.url, Astro.currentLocale)}
+                href={localizedLink(menu.url, Astro.currentLocale)}
                 set:html={menu.name}
               />
             </li>

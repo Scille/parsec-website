@@ -1,6 +1,6 @@
 ---
 import type { NavigationLink } from "@/types";
-import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils";
+import { localizedLink } from "@/lib/utils/localizedLink";
 import NavMegaMenu from "@/layouts/components/global/header/MegaMenu.astro";
 
 const { recursive } = Astro.props;
@@ -58,7 +58,7 @@ const { pathname } = Astro.url;
           ) : (
             <li class="nav-dropdown-item">
               <a
-                href={getLocaleUrlCTM(
+                href={localizedLink(
                   child.url || Astro.url.origin,
                   Astro.currentLocale,
                 )}

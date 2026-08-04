@@ -3,6 +3,7 @@ import type { z } from "astro/zod";
 import type { Section } from "@/types";
 import { plainify } from "@/lib/utils/textConverter";
 import { getEntryCTM } from "@/lib/contentParser.astro";
+import { localizedLink } from "@/lib/utils/localizedLink";
 import { markdownify } from "@/lib/utils/textConverter";
 import AnimatedText from "../widgets/AnimatedText.astro";
 import type { heroSectionSchema } from "@/sections.schema";
@@ -64,7 +65,7 @@ let { title, preTitle, description, image, buttons } = (
                     <a
                       title={markdownify(preTitle.label) as string}
                       class="absolute inset-0 size-full"
-                      href={preTitle.url}
+                      href={localizedLink(preTitle.url, Astro.currentLocale)}
                     />
                   </div>
                 )}

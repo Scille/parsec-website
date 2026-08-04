@@ -5,7 +5,7 @@
  * This can improve the page's visibility in search engine results and provide users with additional information about the page.
  */
 import { absoluteUrl } from "./absoluteUrl";
-import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils";
+import { localizedLink } from "@/lib/utils/localizedLink";
 import trailingSlashChecker from "./trailingSlashChecker";
 import social from "@/config/social.json";
 
@@ -75,7 +75,7 @@ export default function JsonLdGenerator(content: JSONLDProps, Astro: any) {
       .filter((alt: any) => Astro.currentLocale !== alt.languageCode)
       .map((alt: any) => ({
         "@type": "WebPage",
-        url: getLocaleUrlCTM(canonical, alt.languageCode),
+        url: localizedLink(canonical, alt.languageCode),
         inLanguage: alt.languageCode,
       }));
   }

@@ -8,7 +8,7 @@ import {
   plainify,
   slugifyyy,
 } from "@/lib/utils/textConverter";
-import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils";
+import { localizedLink } from "@/lib/utils/localizedLink";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import Icons from "@/helpers/Icons.astro";
 
@@ -47,7 +47,7 @@ const categoriesArray = categories?.map((category: string) => ({
   slug: slugifyyy(category),
 }));
 
-let slug = getLocaleUrlCTM(content.id, Astro.currentLocale, content.collection);
+let slug = localizedLink(content.id, Astro.currentLocale, content.collection);
 
 const isHorizontal = layout === "horizontal";
 ---

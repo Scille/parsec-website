@@ -8,7 +8,7 @@ import { getCollectionCTM, getEntryCTM } from "@/lib/contentParser.astro";
 import config from ".astro/config.generated.json";
 import formatRelativeDate from "@/lib/utils/formatRelativeDate";
 import CustomButton from "../CustomButton.astro";
-import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils";
+import { localizedLink } from "@/lib/utils/localizedLink";
 import AnimatedText from "../widgets/AnimatedText.astro";
 
 const { careerFolder } = config.settings;
@@ -141,7 +141,7 @@ if (!enable) return;
                   hoverEffect="text-flip"
                   variant="outline"
                   label="Apply Now"
-                  url={getLocaleUrlCTM(
+                  url={localizedLink(
                     item.data.customSlug || item.id,
                     Astro.currentLocale,
                     careerFolder,

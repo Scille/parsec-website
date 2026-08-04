@@ -1,3 +1,4 @@
+import path from "node:path";
 import slug_maker from "slugify";
 import { marked } from "marked";
 
@@ -21,7 +22,13 @@ export const markdownify = (content: string, container?: boolean) => {
       ? `target="_blank" rel="noopener noreferrer nofollow"`
       : "";
 
-    return `<a href="${link.href}" ${targetAttrs}>${link.text}</a>`;
+    // Root-relative internal links need the Astro base path prepended (e.g. GitHub Pages subpath deployments)
+    const href =
+      !isExternal && link.href.startsWith("/")
+        ? path.posix.join(import.meta.env.BASE_URL, link.href)
+        : link.href;
+
+    return `<a href="${href}" ${targetAttrs}>${link.text}</a>`;
   };
 
   // Set the custom renderer
