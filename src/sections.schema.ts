@@ -447,18 +447,19 @@ export const differentiationSectionSchema = z
   })
   .optional();
 
-export const benefitsSectionSchema = z
+export const sectorsSectionSchema = z
   .object({
     enable: z.boolean().default(false).optional(),
     title: z.string().optional(),
-    benefits: z.array(
+    descrption: z.string().optional(),
+    sectors: z.array(
       z.object({
         title: z.string(),
         description: z.string(),
         icon: z.string(),
       }),
     ),
-    buttons: z.array(heroButtonSchema).optional(),
+    button: sharedButton.optional(),
   })
   .optional();
 
