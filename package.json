@@ -18,8 +18,7 @@
     "prettier:check": "prettier . --check",
     "prettier:fix": "prettier . --write",
     "test": "cross-env TS_NODE_PROJECT=\"./tsconfig.jest.json\" jest",
-    "test:watch": "cross-env TS_NODE_PROJECT=\"./tsconfig.jest.json\" jest --watch",
-    "deploy:cf": "wrangler pages deploy"
+    "test:watch": "cross-env TS_NODE_PROJECT=\"./tsconfig.jest.json\" jest --watch"
   },
   "engines": {
     "node": ">=22.12.0"

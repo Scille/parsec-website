@@ -26,6 +26,7 @@ let {
 // https://astro.build/config
 export default defineConfig({
   site: config.site.baseUrl ? config.site.baseUrl : "http://examplesite.com",
+  base: process.env.PAGES_BASE_PATH || "/",
   trailingSlash: config.site.trailingSlash ? "always" : "never",
   build: {
     inlineStylesheets: "always",
