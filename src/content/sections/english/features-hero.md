@@ -12,4 +12,11 @@ button:
   variant: "fill"
   color: "white"
   hoverEffect: "text-flip"
+
+subSection:
+  enabled: true
+  title: "Security designed for **businesses** & **public administrations**"
+  image:
+    src: "/images/features.svg"
+    alt: "Parsec features"
 ---

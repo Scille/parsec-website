@@ -3,7 +3,7 @@ import type { z } from "astro/zod";
 import type { Section } from "@/types";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
-import AnimatedText from "../widgets/AnimatedText.astro";
+import AnimatedText from "@/components/widgets/AnimatedText.astro";
 import type { heroSectionSchema } from "@/sections.schema";
 import CustomButton from "@/components/CustomButton.astro";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
@@ -12,58 +12,89 @@ import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
 type SectionType = Section & NonNullable<z.infer<typeof heroSectionSchema>>;
 
 // Fetching the content for this section
-let { title, description, image, button } = (
+let { title, description, image, button, subSection } = (
   await getEntryCTM("sections", "features-hero", Astro.currentLocale)
 )?.data as SectionType;
 ---
 
-<section
-  class="features-hero after:from-surface-brand-default after:to-surface-brand-default-pressed relative z-20 pt-0 after:pointer-events-none after:absolute after:-top-20 after:-z-10 after:h-[calc(100%+5rem)] after:w-full after:bg-linear-180 after:content-['']">
+<section class="features-hero pt-0">
   <div
-    class="pointer-events-none absolute -top-20 z-10 h-[calc(100%+5rem)] w-full overflow-hidden">
-    <div class="container grid h-full w-full py-20 lg:grid-cols-2">
-      {
-        image && (
-          <div class="relative mt-40 mb-40 hidden w-full md:m-0 md:mx-auto md:mt-20 lg:col-start-2 lg:block">
-            <div class="absolute -right-6/12 z-0">
-              <OptimizedImage
-                src={image.src}
-                class="shadow-hero-image mx-auto rounded-3xl border-8 border-white/35 object-cover md:rounded-[2.25rem] md:border-[1.25rem]"
-              />
-            </div>
-          </div>
-        )
-      }
-    </div>
-  </div>
-  <div class="z-2 container grid w-full py-18 lg:grid-cols-2 lg:py-24">
-    <div class="pb-20 md:pb-0">
-      <div class="relative flex flex-col gap-12">
-        <div class="flex max-w-2xl flex-col gap-6">
-          {
-            title && (
-              <h2>
-                <AnimatedText
-                  delay={0.1}
-                  class="has-italic-text text-text-on-color-heading mb-6 md:mb-4"
-                  content={markdownify(title)}
+    class="after:from-surface-brand-default after:to-surface-brand-default-pressed relative z-20 after:pointer-events-none after:absolute after:-top-20 after:-z-10 after:h-[calc(100%+5rem)] after:w-full after:bg-linear-180 after:content-['']">
+    <div
+      class="pointer-events-none absolute -top-20 z-10 h-[calc(100%+5rem)] w-full overflow-hidden">
+      <div class="container grid h-full w-full py-20 lg:grid-cols-2">
+        {
+          image && (
+            <div class="relative mt-40 mb-40 hidden w-full md:m-0 md:mx-auto md:mt-20 lg:col-start-2 lg:block">
+              <div class="absolute -right-6/12 z-0">
+                <OptimizedImage
+                  src={image.src}
+                  class="shadow-hero-image mx-auto rounded-3xl border-8 border-white/35 object-cover md:rounded-[2.25rem] md:border-[1.25rem]"
                 />
-              </h2>
-            )
-          }
-          {
-            description && (
-              <AnimatedText
-                delay={0.9}
-                stagger={0.03}
-                content={markdownify(description)}
-                class="text-body-xl text-text-on-color-body max-w-xl"
-              />
-            )
-          }
-          {button && <CustomButton class="mt-4" {...button} />}
+              </div>
+            </div>
+          )
+        }
+      </div>
+    </div>
+    <div class="z-2 container grid w-full pt-16 pb-0 lg:grid-cols-2 lg:py-24">
+      <div class="pb-20 md:pb-0">
+        <div class="relative flex flex-col gap-12">
+          <div class="flex max-w-2xl flex-col gap-6">
+            {
+              title && (
+                <h2>
+                  <AnimatedText
+                    delay={0.1}
+                    class="has-italic-text text-text-on-color-heading mb-6 md:mb-4"
+                    content={markdownify(title)}
+                  />
+                </h2>
+              )
+            }
+            {
+              description && (
+                <AnimatedText
+                  delay={0.9}
+                  stagger={0.03}
+                  content={markdownify(description)}
+                  class="text-body-xl text-text-on-color-body max-w-xl"
+                />
+              )
+            }
+            {button && <CustomButton class="mt-4" {...button} />}
+          </div>
         </div>
       </div>
     </div>
   </div>
+  {
+    subSection?.enabled && (
+      <div class="bg-dots-fade pt-20 pb-20 md:pt-32 md:pb-32">
+        <div class="container space-y-16">
+          <div class="mx-auto flex w-full max-w-lg justify-center">
+            {subSection.image && (
+              <OptimizedImage
+                loading="lazy"
+                src={subSection.image.src}
+                alt={subSection.image.alt}
+                class="mx-auto w-full max-w-4xl"
+              />
+            )}
+          </div>
+          {subSection.title && (
+            <div class="mx-auto max-w-xl text-center">
+              <h3 class="has-italic-text text-h3 text-text-base-heading leading-article-h3">
+                <AnimatedText
+                  delay={0.2}
+                  stagger={0.09}
+                  content={markdownify(subSection.title)}
+                />
+              </h3>
+            </div>
+          )}
+        </div>
+      </div>
+    )
+  }
 </section>

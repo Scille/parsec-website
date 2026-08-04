@@ -12,4 +12,11 @@ button:
   variant: "fill"
   color: "white"
   hoverEffect: "text-flip"
+
+subSection:
+  enabled: true
+  title: "La sécurité pensée pour **les entreprises** & **administrations**"
+  image:
+    src: "/images/features.svg"
+    alt: "Fonctionnalités de Parsec"
 ---
