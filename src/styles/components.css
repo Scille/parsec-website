@@ -441,7 +441,7 @@
 
 .call-to-action,
 .features-hero {
-  .has-italic-text strong {
+  h2 .has-italic-text strong {
     @apply text-text-on-color-heading;
   }
 }

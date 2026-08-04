@@ -150,6 +150,15 @@ const heroButtonSchema = sharedButtonBase
     path: ["url"],
   });
 
+const heroSubSectionSchema = z.object({
+  enabled: z.boolean().default(true),
+  title: z.string(),
+  image: z.object({
+    src: z.string(),
+    alt: z.string(),
+  }),
+});
+
 // Hero section schema
 export const heroSectionSchema = z.object({
   enable: z.boolean().default(true),
@@ -163,6 +172,7 @@ export const heroSectionSchema = z.object({
     })
     .optional(),
   buttons: z.array(heroButtonSchema).optional(),
+  subSection: heroSubSectionSchema.optional(),
 });
 
 const downloadSelectItemSchema = z.object({
