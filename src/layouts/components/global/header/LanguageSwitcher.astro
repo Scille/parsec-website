@@ -1,10 +1,11 @@
 ---
-import { getLocaleUrlCTM, supportedLanguages } from "@/lib/utils/i18nUtils";
+import { supportedLanguages } from "@/lib/utils/i18nUtils";
+import { localizedLink } from "@/lib/utils/localizedLink";
 import trailingSlashChecker from "@/lib/utils/trailingSlashChecker";
 
 const currentLocale = Astro.currentLocale;
 const languages = supportedLanguages.map((lang) => {
-  const href = getLocaleUrlCTM(Astro.url.pathname, lang.languageCode as string);
+  const href = localizedLink(Astro.url.pathname, lang.languageCode as string);
 
   // Don't include current locale in url
   if (href === trailingSlashChecker(Astro.url.pathname)) {

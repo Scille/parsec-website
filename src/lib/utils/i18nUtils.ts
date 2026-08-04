@@ -175,15 +175,21 @@ export function generatePaths(): Array<{
  * This function ensures the language code is properly included or excluded in the URL
  * based on language settings, handles anchor IDs, and adds a trailing slash if necessary.
  *
+ * Low-level primitive that requires an explicit base path. In .astro/.ts app code,
+ * prefer `localizedLink` from `./localizedLink` instead, which supplies the Astro
+ * base path automatically — this raw export exists mainly for getLocaleUrlCTM.test.ts.
+ *
  * @param {string} url - The original URL to be localized.
  * @param {string | undefined} providedLang - The language code for the localized URL. Defaults to the default language if not provided.
  * @param {string} [prependValue] - Optional value without any slash (ex: "services") to prepend to the URL.
+ * @param {string} [base] - The Astro base path (import.meta.env.BASE_URL). Defaults to "/".
  * @returns {string} The localized URL.
  */
 export const getLocaleUrlCTM = (
   url: string,
   providedLang: string | undefined,
   prependValue?: string,
+  base = "/",
 ): string => {
   const language = providedLang || defaultLanguage;
   const languageCodes = languagesJSON.map((language) => language.languageCode);
@@ -242,6 +248,11 @@ export const getLocaleUrlCTM = (
     if (url.includes("#")) {
       hash = url.split("#")[1];
     }
+  }
+
+  // Strip an existing base path prefix (e.g. Astro.url.pathname already includes it) so it isn't applied twice
+  if (base !== "/" && updatedUrl.startsWith(base)) {
+    updatedUrl = "/" + updatedUrl.slice(base.length);
   }
 
   // Remove any existing language directories from the URL
@@ -303,6 +314,9 @@ export const getLocaleUrlCTM = (
 
   // Add trailing slash if needed
   updatedUrl = trailingSlashChecker(updatedUrl);
+
+  // Prepend the Astro base path (e.g. "/parsec-website/" on GitHub Pages, "/" otherwise)
+  updatedUrl = path.posix.join(base, updatedUrl);
 
   // Reconstruct the complete URL if the original URL is absolute, meaning it includes both a protocol and a hostname.
   if (isAbsoluteUrl) {

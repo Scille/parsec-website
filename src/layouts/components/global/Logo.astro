@@ -1,5 +1,5 @@
 ---
-import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils";
+import { localizedLink } from "@/lib/utils/localizedLink";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
 import { toSentenceCase } from "@/lib/utils/textConverter";
 
@@ -37,7 +37,7 @@ let {
 ---
 
 <a
-  href={getLocaleUrlCTM("/", Astro.currentLocale)}
+  href={localizedLink("/", Astro.currentLocale)}
   class:list={["logo-wrapper", className]}>
   {
     src || logo || logoIcon ? (

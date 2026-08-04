@@ -11,7 +11,7 @@ import config from ".astro/config.generated.json";
 import AnimatedText from "@/components/widgets/AnimatedText.astro";
 import CustomButton from "@/components/CustomButton.astro";
 import { getTaxonomy } from "@/lib/taxonomyParser.astro";
-import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils";
+import { localizedLink } from "@/lib/utils/localizedLink";
 
 const { blogFolder } = config.settings;
 
@@ -164,7 +164,7 @@ if (!enable) return;
         <div class="flex flex-wrap gap-2.5">
           {categories.map((categoryItem) => (
             <a
-              href={getLocaleUrlCTM(
+              href={localizedLink(
                 `/blog/category/${categoryItem.slug}`,
                 Astro.currentLocale,
               )}

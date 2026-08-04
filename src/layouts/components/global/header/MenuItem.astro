@@ -1,7 +1,7 @@
 ---
 import type { NavigationLink } from "@/types";
 import NavDropdownMenu from "@/layouts/components/global/header/DropdownMenu.astro";
-import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils";
+import { localizedLink } from "@/lib/utils/localizedLink";
 
 const menu = Astro.props.menu as NavigationLink;
 const { pathname } = Astro.url;
@@ -26,7 +26,7 @@ const { pathname } = Astro.url;
               : menu.target || undefined,
           }}
           target={menu.url?.startsWith("http") ? "_blank" : undefined}
-          href={getLocaleUrlCTM(
+          href={localizedLink(
             menu.url || Astro.url.origin,
             Astro.currentLocale,
           )}

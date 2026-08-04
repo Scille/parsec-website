@@ -1,5 +1,6 @@
 ---
-import { getLocaleUrlCTM, supportedLanguages } from "@/lib/utils/i18nUtils";
+import { supportedLanguages } from "@/lib/utils/i18nUtils";
+import { localizedLink } from "@/lib/utils/localizedLink";
 import { plainify, removeWhitespace } from "@/lib/utils/textConverter";
 import config from ".astro/config.generated.json";
 
@@ -35,7 +36,7 @@ description = plainify(
       : config.site.description,
 );
 
-canonical = getLocaleUrlCTM(
+canonical = localizedLink(
   new URL(Astro.url.href, Astro.site).href,
   Astro.currentLocale,
 );
@@ -49,7 +50,7 @@ if (
   supportedLanguages.forEach((lang) => {
     alternateTags.push({
       hreflang: lang.languageCode,
-      href: getLocaleUrlCTM(Astro.url.href, lang.languageCode),
+      href: localizedLink(Astro.url.href, lang.languageCode),
     });
   });
 }

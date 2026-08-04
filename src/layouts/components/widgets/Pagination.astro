@@ -1,6 +1,7 @@
 ---
 import Icons from "@/helpers/Icons.astro";
-import { getLocaleUrlCTM, useTranslations } from "@/lib/utils/i18nUtils";
+import { useTranslations } from "@/lib/utils/i18nUtils";
+import { localizedLink } from "@/lib/utils/localizedLink";
 
 interface Props {
   collection?: string;
@@ -39,7 +40,7 @@ for (let i = 1; i <= totalPages; i++) {
       {/* previous */}
       {hasPrevPage ? (
         <a
-          href={getLocaleUrlCTM(
+          href={localizedLink(
             indexPageLink
               ? `${collection ? "/" + collection : "/"}`
               : `${collection ? "/" + collection : ""}/page/${currentPage - 1}`,
@@ -63,7 +64,7 @@ for (let i = 1; i <= totalPages; i++) {
           </span>
         ) : (
           <a
-            href={getLocaleUrlCTM(
+            href={localizedLink(
               i === 0
                 ? `${collection ? "/" + collection : "/"}`
                 : `${collection ? "/" + collection : ""}/page/${pagination}`,
@@ -79,7 +80,7 @@ for (let i = 1; i <= totalPages; i++) {
       {/* next page */}
       {hasNextPage ? (
         <a
-          href={getLocaleUrlCTM(
+          href={localizedLink(
             `${collection ? "/" + collection : ""}/page/${currentPage + 1}`,
             Astro.currentLocale,
           )}

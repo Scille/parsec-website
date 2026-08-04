@@ -1,7 +1,7 @@
 ---
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
 import type { NavigationLink } from "@/types";
-import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils";
+import { localizedLink } from "@/lib/utils/localizedLink";
 import CustomButton from "@/components/CustomButton.astro";
 import Icons from "@/helpers/Icons.astro";
 
@@ -50,7 +50,7 @@ const IsMultiColMenu = enabledMenus.length >= 2;
                       target={
                         child.url?.startsWith("http") ? "_blank" : undefined
                       }
-                      href={getLocaleUrlCTM(
+                      href={localizedLink(
                         child.url || Astro.url.origin,
                         Astro.currentLocale,
                       )}

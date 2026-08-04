@@ -1,7 +1,7 @@
 ---
 import config from ".astro/config.generated.json";
 
-let faviconPath = "/images/favicons";
+let faviconPath = `${import.meta.env.BASE_URL}images/favicons`;
 
 const favicons = [
   {
