@@ -1,0 +1,102 @@
+---
+import type { Section } from "@/types";
+import type { z } from "astro/zod";
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import overrideObjects from "@/lib/utils/overrideObjects.ts";
+import CustomButton from "@/components/CustomButton.astro";
+import type { sectorsSectionSchema } from "@/sections.schema";
+import Icons from "@/helpers/Icons.astro";
+import AnimatedText from "@/components/widgets/AnimatedText.astro";
+import type { HeroIconName } from "@/helpers/heroIconNames";
+
+// Type
+type sectorsSectionType = Section & z.infer<typeof sectorsSectionSchema>;
+type Props = {
+  content?: sectorsSectionType;
+};
+
+// Default content fetch
+let defaultContent = (
+  await getEntryCTM("sections", "sectors-section", Astro.currentLocale)
+)?.data as sectorsSectionType;
+
+let actualContent = overrideObjects(
+  { ...defaultContent },
+  Astro.props.content,
+) as sectorsSectionType;
+
+let {
+  enable = true,
+  title,
+  description,
+  sectors,
+  button,
+} = actualContent as sectorsSectionType;
+
+if (!enable) return;
+---
+
+<section class="pb-16 lg:pb-32">
+  <div class="container space-y-10 md:space-y-16">
+    <div class="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
+      <div class="flex max-w-xl flex-col gap-8">
+        {
+          title && (
+            <div class="max-w-xl">
+              <h2 class="has-italic-text">
+                <AnimatedText
+                  delay={0.2}
+                  stagger={0.09}
+                  content={markdownify(title)}
+                />
+              </h2>
+            </div>
+          )
+        }
+        {
+          description && (
+            <p
+              class="text-body-xl text-text-base-body"
+              set:html={markdownify(description)}
+            />
+          )
+        }
+      </div>
+      {button && <CustomButton {...button} />}
+    </div>
+
+    {
+      sectors && (
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {sectors.map((item, index) => (
+            <div
+              data-aos="fade-up-sm"
+              data-aos-delay={(index + 1) * 50}
+              data-aos-duration={900}
+              class="bg-surface-base-page border-border-neutral-default-subtle md:shadow-card flex flex-col gap-4 rounded-xl border p-5 md:border-0 md:p-8">
+              <Icons
+                class="text-icon-brand-default text-2xl"
+                icon={item.icon as HeroIconName}
+              />
+              <div class="flex flex-col gap-2">
+                {item.title && (
+                  <h3
+                    class="text-h4-sm md:text-h4 font-bold"
+                    set:html={markdownify(item.title)}
+                  />
+                )}
+                {item.description && (
+                  <p
+                    class="text-body-lg text-text-base-description"
+                    set:html={markdownify(item.description)}
+                  />
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</section>

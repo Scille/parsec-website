@@ -332,7 +332,7 @@ For multi-line code blocks, use triple backticks (\`\`\`):
 ```astro
 ---
 import Base from "@/layouts/Base.astro";
-import BenefitsSection from "@/components/sections/BenefitsSection.astro";
+import SectorsSection from "@/components/sections/SectorsSection.astro";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import { generatePaths } from "@/lib/utils/i18nUtils";
 import Team from "@/components/sections/Team.astro";
@@ -356,7 +356,7 @@ const homepage = await getEntryCTM("homepage", "-index", Astro.currentLocale);
   <Features />
   <HowItWorks />
   <Team />
-  <BenefitsSection />
+  <SectorsSection />
   <PricingSection />
   <TestimonialSection />
   <BlogSection />

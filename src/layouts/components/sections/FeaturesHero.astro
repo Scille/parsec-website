@@ -43,10 +43,10 @@ let { title, description, image, button, subSection } = (
           <div class="flex max-w-2xl flex-col gap-6">
             {
               title && (
-                <h2>
+                <h2 class="has-italic-text">
                   <AnimatedText
                     delay={0.1}
-                    class="has-italic-text text-text-on-color-heading mb-6 md:mb-4"
+                    class="text-text-on-color-heading mb-6 md:mb-4"
                     content={markdownify(title)}
                   />
                 </h2>

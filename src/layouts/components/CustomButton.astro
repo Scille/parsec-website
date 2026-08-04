@@ -60,7 +60,7 @@ const resolvedTarget = url.startsWith("http")
   : target || undefined;
 
 const buttonClasses = [
-  "flex items-center gap-4 w-fit",
+  "flex items-center gap-4 w-fit h-fit shrink-0",
   {
     "creative-hover-anim": isCreativeHoverEffect,
     btn: variant === "fill" || variant === "outline",
