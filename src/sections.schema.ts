@@ -395,6 +395,21 @@ export const featuresSectionTwoSchema = z.object({
   ),
 });
 
+export const openSourceSectionSchema = z.object({
+  enable: z.boolean().default(true),
+  title: z.string(),
+  description: z.string(),
+  button: sharedButtonBase,
+
+  list: z.array(
+    z.object({
+      icon: z.string(),
+      title: z.string(),
+      description: z.string(),
+    }),
+  ),
+});
+
 export const howItWorksSectionSchema = z
   .object({
     enable: z.boolean().default(false).optional(),

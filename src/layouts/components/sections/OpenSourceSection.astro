@@ -1,0 +1,98 @@
+---
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import overrideObjects from "@/lib/utils/overrideObjects.ts";
+import type { openSourceSectionSchema } from "@/sections.schema";
+import type { Section } from "@/types";
+import type { z } from "astro/zod";
+import { markdownify } from "@/lib/utils/textConverter";
+import CustomButton from "@/components/CustomButton.astro";
+import Icons from "@/helpers/Icons.astro";
+import AnimatedText from "@/components/widgets/AnimatedText.astro";
+import type { HeroIconName } from "@/helpers/heroIconNames";
+
+// Type for this section data
+type OpenSourceSectionType = Section &
+  NonNullable<z.infer<typeof openSourceSectionSchema>>;
+
+type Props = {
+  content?: OpenSourceSectionType;
+};
+
+let defaultContent = (
+  await getEntryCTM("sections", "open-source-section", Astro.currentLocale)
+)?.data as OpenSourceSectionType;
+
+let actualContent = overrideObjects(
+  { ...defaultContent },
+  Astro.props.content,
+) as OpenSourceSectionType;
+
+let {
+  enable = true,
+  title,
+  description,
+  button,
+  list,
+} = actualContent as OpenSourceSectionType;
+
+if (!enable) return;
+---
+
+<section class="pb-16 md:pb-32">
+  <div class="container">
+    <div class="grid grid-cols-1 items-center gap-16 lg:grid-cols-2 lg:gap-32">
+      <div class="space-y-8" data-aos="fade-right-sm">
+        {
+          title && (
+            <h2 class="has-italic-text">
+              <AnimatedText
+                delay={0.2}
+                stagger={0.09}
+                content={markdownify(title)}
+              />
+            </h2>
+          )
+        }
+        {
+          description && (
+            <p
+              class="text-body-xl text-text-base-body"
+              set:html={markdownify(description)}
+            />
+          )
+        }
+        {button && <CustomButton {...button} />}
+      </div>
+
+      <div class="space-y-8">
+        {
+          list &&
+            list.map((item, index) => (
+              <div
+                data-aos="fade-left-sm"
+                data-aos-delay={(index + 1) * 50}
+                data-aos-duration={900}
+                class="flex flex-col gap-3">
+                <Icons
+                  class="text-icon-neutral-default text-2xl"
+                  icon={item.icon as HeroIconName}
+                />
+                {item.title && (
+                  <h3
+                    class="text-h3-sm md:text-h4 text-text-base-heading font-semibold"
+                    set:html={markdownify(item.title)}
+                  />
+                )}
+                {item.description && (
+                  <p
+                    class="text-body-lg text-text-base-description"
+                    set:html={markdownify(item.description)}
+                  />
+                )}
+              </div>
+            ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
