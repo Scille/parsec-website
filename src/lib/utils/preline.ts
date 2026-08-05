@@ -37,7 +37,7 @@ export const getPrelineSelectConfig = ({
     toggleTag: `
     <button type="button" aria-expanded="false">
       <div class="order-1 shrink-0 hidden" data-icon></div>
-      <span class="order-1 form-label" data-title></span>
+      <span class="order-1" data-title></span>
 
       <!-- Markup shown when no option is selected and the form is submitted (error state) -->
       <div class="ml-auto order-2 hidden hs-success:hidden hs-error:block">

@@ -290,7 +290,7 @@ export const pricingSectionSchema = z
 export const contactFormSchema = z.object({
   action: z.string().optional(),
   emailSubject: z.string().optional(),
-  note: z.string().optional(),
+  autoResponse: z.string().optional(),
   submitButton: z.object({
     label: z.string(),
   }),

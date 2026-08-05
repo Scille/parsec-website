@@ -114,8 +114,8 @@ export interface InputField {
 export interface ContactFormConfig {
   action: string;
   emailSubject: string;
+  autoResponse?: string;
   submitButton: SubmitButtonConfig;
-  note: string;
   inputs: InputField[];
 }
 

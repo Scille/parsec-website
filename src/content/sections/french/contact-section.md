@@ -1,6 +1,6 @@
 ---
 enable: true
-title: "**Une question ?** <br /> Envoyez-nous un message"
+title: "**Une question ?** Envoyez-nous un message"
 description: |
   Pour toute question, n’hésitez pas à nous envoyer un message, nous nous engageons à répondre dans un délai de 2 jours ouvrés.
 
@@ -49,7 +49,8 @@ needs:
         url: "mailto:support@parsec.cloud"
 
 form:
-  emailSubject: "Nouvelle demande de renseignements - Parsec Cloud"
+  emailSubject: "Nouvelle demande - Parsec Cloud"
+  autoResponse: "Merci pour votre message ! Nous l'avons bien reçu et vous répondrons sous deux jours ouvrés."
   submitButton:
     enable: true
     label: "Envoyer le message"
@@ -59,13 +60,13 @@ form:
   inputs:
     - label: "Nom de l'entreprise"
       placeholder: "Nom de l'entreprise"
-      name: "Nom complet"
+      name: "Nom de l'entreprise"
       required: false
       halfWidth: true
       defaultValue: ""
     - label: "Nombre de collaborateurs"
       placeholder: "Nombre de collaborateurs"
-      name: "employee"
+      name: "Nombre de collaborateurs"
       id: "employee"
       required: false
       halfWidth: true
@@ -73,16 +74,16 @@ form:
         type: "select"
         items:
           - label: "1 - 10"
-            value: "small team"
+            value: "1 - 10"
             selected: false
           - label: "11 - 50"
-            value: "medium team"
+            value: "11 - 50"
             selected: false
           - label: "51 - 200"
-            value: "large team"
+            value: "51 - 200"
             selected: false
           - label: "plus de 200"
-            value: "large team"
+            value: "plus de 200"
             selected: false
     - label: "Nom complet"
       placeholder: "John Doe"
@@ -100,7 +101,7 @@ form:
       defaultValue: ""
     - label: "À quel sujet ?"
       placeholder: "Choix du sujet"
-      name: "subject"
+      name: "Sujet"
       id: "subject"
       required: false
       halfWidth: false
@@ -137,9 +138,6 @@ form:
       halfWidth: false
       defaultValue: ""
     - note: success
-      parentClass: "hidden text-sm message success"
+      parentClass: "hidden" # gardé masqué : sert uniquement de source de contenu pour le panneau "merci" post-envoi
       content: "Nous avons reçu votre message ! Nous vous répondrons aussi rapidement que possible."
-    - note: deprecated
-      parentClass: "hidden text-sm message error"
-      content: "Une erreur est survenue ! veuillez utiliser ce mail - [contact@parsec.cloud](mailto:contact@parsec.cloud) pour soumettre une demande !"
 ---

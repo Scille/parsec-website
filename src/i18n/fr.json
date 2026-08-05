@@ -9,6 +9,8 @@
     "backToHome": "Retour à l'accueil",
     "backToBlog": "Retour au blog",
     "contactDropdownSearch404": "Aucun résultat trouvé",
+    "contactDropdownInvalid": "Veuillez sélectionner une valeur valide.",
+    "contactThankYou": "Merci pour votre message !",
     "toc": "Sommaire"
   },
   "navigation": {
