@@ -38,7 +38,7 @@ const {
               aria-expanded={item.active ? "true" : "false"}
               class="hs-accordion-toggle text-h4-sm md:text-h4 text-text-base-heading flex w-full items-center justify-between py-5 font-semibold"
               aria-controls={"faq-content-" + uniqueId}>
-              <span set:html={item.title} />
+              <span class="w-full text-left" set:html={item.title} />
               <span
                 class:list={[
                   "hs-accordion-active:rotate-180 rounded-sm p-1 transition duration-300",

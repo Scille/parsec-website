@@ -52,11 +52,11 @@ if (!enable) return;
     layout === "regular" ? (
       <div class="container space-y-12 md:space-y-16">
         {title && (
-          <h2 class="mx-auto max-w-lg text-center md:max-w-2xl">
+          <h2 class="mx-auto max-w-lg md:max-w-2xl md:text-center">
             <AnimatedText
               delay={200}
               delay={0.1}
-              class="has-italic-text text-text-base-heading mb-6 text-center md:mb-8"
+              class="has-italic-text text-text-base-heading mb-6 md:mb-8"
               content={markdownify(title)}
             />
           </h2>
@@ -64,7 +64,7 @@ if (!enable) return;
         {list && list.length > 0 && (
           <div
             class:list={[
-              "grid grid-cols-1 gap-x-8 gap-y-6 md:grid-cols-2 md:pb-20 lg:grid-cols-3 xl:gap-x-10",
+              "grid grid-cols-1 gap-x-8 gap-y-6 pb-20 md:grid-cols-2 lg:grid-cols-3 xl:gap-x-10",
             ]}>
             {list.map((item, index) => (
               <PricingCard

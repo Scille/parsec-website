@@ -330,9 +330,7 @@ export const contactSectionSchema = z
       title: z.string(),
       list: z.array(
         z.object({
-          label: z.string(),
           icon: z.string().optional(),
-          link: z.string().optional(),
         }),
       ),
     }),

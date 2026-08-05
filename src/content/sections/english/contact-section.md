@@ -11,13 +11,8 @@ contactInfo:
   title: Our contact information
   list:
     - icon: "EnvelopeIcon"
-      label: contact@parsec.cloud
-      link: mailto:contact@parsec.cloud
     - icon: "PhoneIcon"
-      label: +33 7 82 07 85 07
-      link: tel:+33782078507
     - icon: "MapPinIcon"
-      label: 1 Rue de la Paix, <br /> 75002 Paris, France
 
 needs:
   enable: true
@@ -118,17 +113,17 @@ form:
       dropdown:
         type: "select"
         items:
-          - label: "Pricing Information"
-            value: "Pricing Information"
+          - label: "Pricing information"
+            value: "Pricing"
             selected: false
-          - label: "I'd Like a Demo"
+          - label: "I'd like a demo"
             value: "Demo"
             selected: false
-          - label: "More Information on Parsec Cloud"
-            value: "More Information"
+          - label: "More information on Parsec Cloud"
+            value: "Information"
             selected: false
-          - label: "Other Inquiry"
-            value: "Other Inquiry"
+          - label: "Other inquiry"
+            value: "Other"
             selected: false
     - label: "Tell us more about your request!"
       tag: "textarea"
@@ -138,7 +133,7 @@ form:
       name: "Message" # This is crucial. Its indicate under which name you want to receive this field data
       required: true
       halfWidth: false
-    - label: "I agree to the terms and conditions and [privacy policy](/privacy-policy/)." # only valid for type="checkbox" & type === "radio"
+    - label: "I agree to the [terms & conditions](/terms-and-conditions/) and [privacy policy](/privacy-policy/)." # only valid for type="checkbox" & type === "radio"
       id: "privacy-policy"
       name: "Privacy Consent" # This is crucial. Its indicate under which name you want to receive this field data
       value: "Consent" # Value that will be submit (applicable for type="checkbox" & type === "radio")

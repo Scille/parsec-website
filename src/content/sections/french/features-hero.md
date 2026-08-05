@@ -7,7 +7,7 @@ image:
     alt: "Parsec partage de fichiers sécurisé",
   }
 button:
-  label: "Demander une démo"
+  label: "Réserver un créneau"
   url: "https://calendly.com/thierry-leblond-parsec/30min"
   variant: "fill"
   color: "white"

@@ -60,7 +60,7 @@ if (!enable) return;
     }
     <div class="differentiation-slides flex h-full flex-col">
       <div
-        class="differentiation-slide container mx-6 flex h-dvh w-full max-w-lg shrink-0 flex-col place-content-center gap-6 self-center md:mx-0 md:max-w-2xl">
+        class="differentiation-slide container mx-6 flex h-dvh w-full max-w-lg shrink-0 flex-col place-content-center gap-6 self-center px-8 md:mx-0 md:max-w-2xl md:px-0">
         {
           title && (
             <h2 class="has-italic-text text-text-on-color-heading text-h2-sm md:text-h2">
@@ -74,7 +74,7 @@ if (!enable) return;
         }
         {
           list && (
-            <div class="font-secondary text-text-base-placeholder flex justify-items-start gap-2">
+            <div class="font-secondary text-text-base-placeholder flex flex-col justify-items-start gap-2 md:flex-row">
               {list.map(
                 (item) =>
                   item && (
@@ -91,10 +91,10 @@ if (!enable) return;
       {
         list?.map((item) => (
           <div class="differentiation-slide container flex h-dvh shrink-0 grid-cols-2 flex-col justify-center md:grid md:items-center md:gap-16 xl:pl-64">
-            <div class="flex flex-col gap-8 pb-6 pl-6">
+            <div class="flex flex-col gap-8 px-4 py-6 md:pl-6">
               <div class="flex flex-col gap-5">
                 {item.title && (
-                  <h3 class="md:text-h3 text-h3-sm text-text-on-color-heading font-normal">
+                  <h3 class="text-h3-sm md:text-h3 text-text-on-color-heading font-normal">
                     <AnimatedText
                       delay={0.2}
                       stagger={0.09}
@@ -117,16 +117,14 @@ if (!enable) return;
                 />
               )}
             </div>
-            <div>
-              {item.image && (
-                <OptimizedImage
-                  aos="fade-up-sm"
-                  src={item.image.src}
-                  alt={item.image.alt}
-                  class:list={"mx-auto h-[280px] w-auto md:h-[380px]"}
-                />
-              )}
-            </div>
+            {item.image && (
+              <OptimizedImage
+                aos="fade-up-sm"
+                src={item.image.src}
+                alt={item.image.alt}
+                class:list={"mx-auto h-[220px] w-auto md:h-[380px]"}
+              />
+            )}
           </div>
         ))
       }

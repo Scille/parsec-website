@@ -1,5 +1,6 @@
 ---
 import type { Section } from "@/types";
+import { contact } from "@/config/contact.json";
 import ContactForm from "@/components/widgets/ContactForm.astro";
 import CustomButton from "@/components/CustomButton.astro";
 import { getEntryCTM } from "@/lib/contentParser.astro";
@@ -49,9 +50,18 @@ const needColorClasses = {
     icon: "text-icon-extra-orange-default",
   },
 } as const;
+
+const contactInfoByIcon: Record<string, { label: string; link?: string }> = {
+  EnvelopeIcon: { label: contact.email, link: `mailto:${contact.email}` },
+  PhoneIcon: {
+    label: contact.phone,
+    link: `tel:${contact.phone.replace(/\s+/g, "")}`,
+  },
+  MapPinIcon: { label: contact.location },
+};
 ---
 
-<section class="relative">
+<section class="relative max-lg:pt-12">
   <div class="container">
     <div class="flex flex-col gap-10 lg:flex-row">
       <div class="flex flex-col lg:sticky lg:top-32 lg:max-w-xl">
@@ -87,30 +97,35 @@ const needColorClasses = {
                       />
                     </div>
                     <div class="flex gap-6 lg:flex-col">
-                      {contactInfo.list.map((item) => (
-                        <div class="flex w-full flex-col items-center gap-3.5 lg:flex-row lg:items-start">
-                          {item.icon && (
-                            <Icons
-                              class="bg-surface-base-default text-icon-brand-default text-2xl"
-                              icon={item.icon as any}
-                            />
-                          )}
-                          {item.label && item.link ? (
-                            <a
-                              href={item.link}
-                              class="text-text-base-label text-body-xl hover:text-text-brand-default font-medium"
-                              set:html={item.label}
-                            />
-                          ) : (
-                            item.label && (
-                              <p
-                                class="text-text-base-label text-body-xl font-medium"
-                                set:html={item.label}
+                      {contactInfo.list.map((item) => {
+                        const info = item.icon
+                          ? contactInfoByIcon[item.icon]
+                          : undefined;
+
+                        return (
+                          <div class="flex w-full flex-col items-center gap-3.5 lg:flex-row lg:items-start">
+                            {item.icon && (
+                              <Icons
+                                class="bg-surface-base-default text-icon-brand-default shrink-0 p-0.5 text-2xl"
+                                icon={item.icon as any}
                               />
-                            )
-                          )}
-                        </div>
-                      ))}
+                            )}
+                            {info &&
+                              (info.link ? (
+                                <a
+                                  href={info.link}
+                                  class="text-text-base-label text-body-xl hover:text-text-brand-default font-medium"
+                                  set:html={info.label}
+                                />
+                              ) : (
+                                <p
+                                  class="text-text-base-label text-body-xl font-medium"
+                                  set:html={info.label}
+                                />
+                              ))}
+                          </div>
+                        );
+                      })}
                     </div>
                   </>
                 )
@@ -133,6 +148,10 @@ const needColorClasses = {
             {
               contactInfo &&
                 contactInfo.list.map((item) => {
+                  const info = item.icon
+                    ? contactInfoByIcon[item.icon]
+                    : undefined;
+
                   const cardContent = (
                     <>
                       {item.icon && (
@@ -141,18 +160,18 @@ const needColorClasses = {
                           icon={item.icon as any}
                         />
                       )}
-                      {item.label && (
+                      {info && (
                         <p
                           class="text-text-base-label text-body-xl text-center font-medium"
-                          set:html={item.label}
+                          set:html={info.label}
                         />
                       )}
                     </>
                   );
 
-                  return item.link ? (
+                  return info?.link ? (
                     <a
-                      href={item.link}
+                      href={info.link}
                       class="hover:bg-surface-base-page-secondary flex w-full flex-col items-center gap-3.5 rounded-2xl px-5 py-5 transition-colors lg:flex-row lg:items-start">
                       {cardContent}
                     </a>

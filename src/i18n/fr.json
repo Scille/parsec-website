@@ -18,11 +18,8 @@
   },
   "contactInfo": {
     "locationLabel": "Adresse",
-    "location": "11 chemin de Jalès, 33160 Saint-Médard-en-Jalles, France",
     "phoneLabel": "Téléphone",
-    "phone": "+33 7 82 07 85 07",
-    "emailLabel": "Nous envoyer un e-mail",
-    "email": "contact@parsec.cloud"
+    "emailLabel": "Nous envoyer un e-mail"
   },
   "footer": {
     "colTitleOne": "Parsec Cloud",

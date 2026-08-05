@@ -1080,7 +1080,7 @@
   /* Typography */
   --text-base: 1rem;
   --text-base-scale: 1.22;
-  --text-base-sm: calc(var(--text-base) * 0.9);
+  --text-base-sm: 1rem;
 
   --text-display-1: calc(var(--text-base) * pow(var(--text-base-scale), 7.2));
   --text-display-2: calc(var(--text-base) * pow(var(--text-base-scale), 6.2));

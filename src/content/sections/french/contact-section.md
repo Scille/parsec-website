@@ -11,13 +11,8 @@ contactInfo:
   title: "Nos coordonnées"
   list:
     - icon: "EnvelopeIcon"
-      label: contact@parsec.cloud
-      link: mailto:contact@parsec.cloud
     - icon: "PhoneIcon"
-      label: +33 7 82 07 85 07
-      link: tel:+33782078507
     - icon: "MapPinIcon"
-      label: 1 Rue de la Paix, <br /> 75002 Paris, France
 
 needs:
   enable: true
@@ -113,16 +108,16 @@ form:
         type: "select"
         items:
           - label: "Informations sur les tarifs"
-            value: "Informations sur les tarifs"
+            value: "Information"
             selected: false
           - label: "Je souhaite une démonstration"
-            value: "Démonstration"
+            value: "Demonstration"
             selected: false
           - label: "En savoir plus sur Parsec Cloud"
-            value: "En savoir plus"
+            value: "En-savoir-plus"
             selected: false
           - label: "Autre demande"
-            value: "Autre demande"
+            value: "Autre"
             selected: false
     - label: "Dîtes-nous en plus sur votre demande !"
       tag: "textarea"
@@ -132,7 +127,7 @@ form:
       name: "Message"
       required: true
       halfWidth: false
-    - label: "J'accepte les termes et conditions et la [politique de confidentialité](/privacy-policy/)."
+    - label: "J'accepte les [termes & conditions](/terms-and-conditions/) et la [politique de confidentialité](/privacy-policy/)."
       id: "privacy-policy"
       name: "Consentement vie privée"
       value: "Consentement"

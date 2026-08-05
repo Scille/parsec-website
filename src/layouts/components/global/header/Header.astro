@@ -34,7 +34,7 @@ const { stickyHeader, navigationButton } = config.settings;
       <ul
         id="nav-menu"
         role="list"
-        class="navbar hs-dropdown-menu hs-dropdown-open:flex hs-dropdown-open:mt-2! max-lg:absolute max-lg:transform-none! lg:transform-none!">
+        class="navbar hs-dropdown-menu hs-dropdown-open:flex hs-dropdown-open:mt-2! max-lg:absolute max-lg:transform-none! max-md:shadow-2xl lg:transform-none!">
         {main.map((menu) => <NavMenuItem menu={menu} />)}
 
         {/* Language Switcher For Small Devices */}
@@ -47,7 +47,7 @@ const { stickyHeader, navigationButton } = config.settings;
         }
         {
           navigationButton.enable && (
-            <li class="max-lg:px-4 max-lg:py-2 lg:hidden">
+            <li class="mb-2 max-lg:px-4 max-lg:py-2 lg:hidden">
               {navigationButton.enable && (
                 <CustomButton
                   hoverEffect="text-flip"
