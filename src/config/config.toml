@@ -60,11 +60,8 @@
   pagination   = 6 # Number of posts displayed on each page blog list page
   stickyHeader = true # Enables or disable sticky feature of header
 
-  # documentation - https://formspree.io/ | https://formsubmit.co/ | https://docs.netlify.com/forms/setup/
-  # Form action URL for the contact form (For more settings related to form see "src/content/sections/contact-section.md")
-  contactFormAction = "https://formsubmit.co/temp.gats@gmail.com" # https://formspree.io/f/your_form_id | https://formsubmit.co/your_form_submission_receive_email | "/"
+  contactFormAction = "https://formsubmit.co/contact@parsec.cloud"
 
-  # formspree | formsubmit.co | netlify (default is formsubmit.co)
   contactFormProvider = "formsubmit.co"
 
   brandName         = "Parsec Cloud"

@@ -1,5 +1,4 @@
 // @ts-nocheck
-import { markdownify } from "./textConverter";
 
 /**
  * Resets the form by clearing all input values and removing any success or error classes.
@@ -23,7 +22,7 @@ export function formReset(form: HTMLFormElement) {
 
   selectTags?.forEach((tag) => {
     const selectElement = tag as HTMLSelectElement;
-    const select = window.HSSelect.getInstance(tag);
+    const select = window.HSSelect?.getInstance(tag);
     selectElement.selectedIndex = 0;
 
     if (select) {
@@ -77,50 +76,38 @@ export function isFormFilled(form: HTMLFormElement): boolean {
 }
 
 /**
- * Displays a message in the form's message area based on success or error status.
- * Optionally disables the submit button.
+ * Disables/enables the submit button and, for a terminal (non-transient)
+ * result, notifies the form via a "contactform:result" event so the
+ * template can show its success/error UI.
  *
- * @param message - The message to display.
- * @param success - Whether the message is a success or error message.
+ * @param message - The message to display on error.
+ * @param success - Whether this is a success or error result.
  * @param disableSubmit - Optionally disables the submit button if true.
  * @param form - form element
+ * @param notify - Whether to dispatch "contactform:result". Pass false for
+ *   transient status updates (e.g. "submitting…") that aren't a final result.
  */
 export const setMessage = (
   message: string,
   success: boolean,
   disableSubmit = false,
   form: HTMLFormElement,
+  notify = true,
 ) => {
   const submitButton = form?.querySelector('button[type="submit"]');
-  const messageType = success ? "success" : "error";
-  const allMessages = form.querySelectorAll(".message");
-  const messageElement = form.querySelector(`.message.${messageType}`);
-  const msgEleText = messageElement?.querySelector(".prose-styles");
-  const default_message = msgEleText?.getAttribute("data-default");
 
-  // Hide all messages before showing the selected one
-  allMessages.forEach((msg) => {
-    if (msg !== messageElement) {
-      msg.classList.add("hidden");
-    }
-  });
-
-  if (message === "default" && msgEleText && default_message) {
-    msgEleText.innerHTML = markdownify(default_message, true) as string;
-  }
-
-  // Show the selected message
-  messageElement?.classList.remove("hidden");
-
-  // Disable or enable submit button based on 'disableSubmit'
   if (disableSubmit) {
     submitButton?.setAttribute("disabled", "true");
   } else {
     submitButton?.removeAttribute("disabled");
   }
 
-  if (msgEleText && message !== "default") {
-    msgEleText.innerHTML = markdownify(message, true) as string;
+  if (notify) {
+    form.dispatchEvent(
+      new CustomEvent("contactform:result", {
+        detail: { success, message },
+      }),
+    );
   }
 };
 
@@ -138,6 +125,19 @@ export const formSubmit = async ({
   action: string;
 }) => {
   const data = Object.fromEntries(new FormData(form).entries());
+
+  // FormSubmit only auto-detects a field literally named "email" as the
+  // Reply-To; our visible field is named "Email Address", so set _replyto
+  // explicitly from whichever input has type="email".
+  if (form.getAttribute("data-provider") === "formsubmit.co") {
+    const emailInput = form.querySelector<HTMLInputElement>(
+      'input[type="email"]',
+    );
+    if (emailInput?.value) {
+      data["_replyto"] = emailInput.value;
+    }
+  }
+
   const controller = new AbortController();
   const signal = controller.signal;
   const timeout = 60000;
@@ -193,6 +193,76 @@ export const formSubmit = async ({
 };
 
 /**
+ * Wires up submit handling for a contact form: select-tag validation,
+ * required-field checking, and error messaging on submission failure.
+ *
+ * @param formId - The id of the form element to wire up.
+ */
+export function initContactForm(formId = "contact-form") {
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById(formId) as HTMLFormElement | null;
+
+    let selectTags = form?.querySelectorAll(
+      "[input-wrapper]:not(.hidden) select[data-hs-select]",
+    ) as NodeListOf<HTMLSelectElement>;
+
+    function isSelectStatus(items: HTMLSelectElement[]) {
+      items.forEach((item) => {
+        if (item.value !== "") {
+          item.classList.add("hs-select-active");
+        } else {
+          item.classList.remove("hs-select-active");
+        }
+      });
+    }
+
+    isSelectStatus(Array.from(selectTags));
+
+    selectTags.forEach((tag) => {
+      tag.addEventListener("change", () => {
+        // Ensure only visible select tag value should submitted
+        selectTags.forEach((tag) => {
+          const name = tag.getAttribute("data-name");
+          tag.setAttribute("name", name || "");
+        });
+
+        validateSelectTag(tag);
+
+        isSelectStatus(Array.from(selectTags));
+      });
+    });
+
+    form?.addEventListener("submit", async (e: Event) => {
+      e.preventDefault();
+
+      const action = form?.getAttribute("data-action") || "";
+
+      selectTags = form?.querySelectorAll(
+        "[input-wrapper]:not(.hidden) select[data-hs-select]",
+      ) as NodeListOf<HTMLSelectElement>;
+
+      // Validate all preline select tags
+      selectTags.forEach(validateSelectTag);
+
+      if (isFormFilled(form)) {
+        setMessage("Form Submitting!...", true, true, form, false);
+
+        try {
+          await formSubmit({ form, action });
+        } catch (error) {
+          setMessage(
+            error + "! Please email support@parsec.cloud to submit a ticket!",
+            false,
+            false,
+            form,
+          );
+        }
+      }
+    });
+  });
+}
+
+/**
  * Sends a POST request with a specified timeout and aborts if the timeout is exceeded.
  *
  * @param url - The URL to send the request to.
@@ -219,64 +289,5 @@ export const fetchWithTimeout = async (
 
   if (response.status !== 200) {
     throw new Error("Request failed with status code " + response.status);
-  }
-};
-
-/**
- * Submits form data to the Formspree endpoint as an alternative submission method.
- *
- * @param data - The form data to submit.
- * @param timeout - The timeout duration in milliseconds for the request.
- */
-export const formspreeSubmit = async (
-  data: Record<string, FormDataEntryValue>,
-  timeout: number,
-  form: HTMLFormElement,
-) => {
-  try {
-    await fetchWithTimeout(
-      "https://formspree.io/f/xwpkvjaa",
-      data,
-      new AbortController(),
-      timeout,
-    );
-    setMessage("default", true, false, form);
-    formReset(form);
-  } catch (error) {
-    setMessage(
-      error +
-        "! Please use this mail - [stella-astro-theme@gmail.com](mailto:stella-astro-theme@gmail.com) to submit a ticket!",
-      true,
-      false,
-      form,
-    );
-  }
-};
-
-/**
- * Submits form data for Netlify.
- *
- * @param form - The form element.
- * @param action - The form action endpoint.
- */
-export const netlifySubmit = async (form: HTMLFormElement, action: string) => {
-  const data = new URLSearchParams(new FormData(form) as any).toString();
-  try {
-    const response = await fetch(action, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: data,
-    });
-    if (response.ok) {
-      setMessage("default", true, false, form);
-      formReset(form);
-    } else {
-      throw new Error("Netlify form submission failed.");
-    }
-  } catch (error) {
-    setMessage("Netlify submission error: " + error, false, false, form);
-    throw error;
   }
 };

@@ -1,6 +1,6 @@
 ---
 enable: true # Control the visibility of this section across all pages where it is used
-title: "**Have questions?** <br /> Send us a message"
+title: "**Have questions?** Send us a message"
 description: |
   If you have any questions, please feel free to send us a message; we’ll do our best to reply within two working days.
 
@@ -51,9 +51,9 @@ needs:
 
 # Check config.toml file for form action related settings
 form:
-  emailSubject: "New Inquiry - Parsec Cloud"
+  emailSubject: "New inquiry - Parsec Cloud"
+  autoResponse: "Thanks for reaching out! We've received your message and will get back to you within two working days."
   submitButton:
-    # Refer to the `sharedButton` schema in `src/sections.schema.ts` for all available configuration options (e.g., enable, label, url, hoverEffect, variant, icon, tag, rel, class, target, etc.)
     enable: true
     label: "Send message"
     hoverEffect: "text-flip"
@@ -65,30 +65,31 @@ form:
   inputs:
     - label: "Company name"
       placeholder: "Company name"
-      name: "company" # This is crucial. Its indicate under which name you want to receive this field data
+      name: "Company name" # This is crucial. Its indicate under which name you want to receive this field data
+      id: "company"
       required: false
       halfWidth: true
       defaultValue: ""
     - label: "Number of employees"
       placeholder: "Number of employees"
-      name: "employee" # This is crucial. Its indicate under which name you want to receive this field data
+      name: "Number of employees" # This is crucial. Its indicate under which name you want to receive this field data
       id: "employee"
       required: false
       halfWidth: true
       dropdown:
         type: "select"
         items:
-          - label: "1 - 25"
-            value: "small team"
+          - label: "1 - 10"
+            value: "1 - 10"
             selected: false
-          - label: "26 - 100"
-            value: "medium team"
+          - label: "11 - 50"
+            value: "11 - 50"
             selected: false
-          - label: "101 - 200"
-            value: "large team"
+          - label: "51 - 200"
+            value: "51 - 200"
             selected: false
           - label: "more than 200"
-            value: "large team"
+            value: "more than 200"
             selected: false
     - label: "Full Name"
       placeholder: "John Doe"
@@ -106,7 +107,7 @@ form:
       defaultValue: ""
     - label: "What is this about?"
       placeholder: "Choose a subject"
-      name: "subject" # This is crucial. Its indicate under which name you want to receive this field data
+      name: "Subject" # This is crucial. Its indicate under which name you want to receive this field data
       id: "subject"
       required: false
       halfWidth: false
@@ -135,7 +136,7 @@ form:
       halfWidth: false
     - label: "I agree to the [terms & conditions](/terms-and-conditions/) and [privacy policy](/privacy-policy/)." # only valid for type="checkbox" & type === "radio"
       id: "privacy-policy"
-      name: "Privacy Consent" # This is crucial. Its indicate under which name you want to receive this field data
+      name: "Privacy consent" # This is crucial. Its indicate under which name you want to receive this field data
       value: "Consent" # Value that will be submit (applicable for type="checkbox" & type === "radio")
       checked: false # only valid for type="checkbox" & type === "radio"
       required: true
@@ -143,9 +144,6 @@ form:
       halfWidth: false
       defaultValue: ""
     - note: success # info | warning | success | deprecated | hint
-      parentClass: "hidden text-sm message success"
+      parentClass: "hidden" # kept hidden: only used as the content source for the post-submit thank-you panel
       content: "We have received your message! We'll get back to you as soon as possible."
-    - note: deprecated # info | warning | success | deprecated | hint
-      parentClass: "hidden text-sm message error"
-      content: "Something went wrong! Please use this email - [contact@parsec.cloud](mailto:contact@parsec.cloud) to submit a request!"
 ---

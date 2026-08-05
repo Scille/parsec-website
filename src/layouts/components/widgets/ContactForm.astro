@@ -1,6 +1,7 @@
 ---
 import { markdownify, toLowerCase } from "@/lib/utils/textConverter";
 import CustomButton from "@/components/CustomButton.astro";
+import Icons from "@/layouts/helpers/Icons.astro";
 import type { z } from "astro/zod";
 import type { contactFormSchema } from "@/sections.schema";
 import type { inputFieldSchema } from "@/sections.schema";
@@ -72,12 +73,19 @@ form = {
   inputs: combineRadio(form.inputs),
 };
 
+const successNote = form.inputs.find(
+  (input: z.infer<typeof inputFieldSchema>) => input.note === "success",
+);
+
 const noteStyles = {
-  info: "border-[#1e90ff]/80 bg-[#f2f7fc]",
-  warning: "border-[#FFA500]/80 bg-[#FFF4E5]",
-  success: "border-[#32CD32]/80 bg-[#E6FFE6]",
-  deprecated: "border-[#4CAF50]/80 bg-[#F1F8F1]",
-  hint: "border-[#8A2BE2]/80 bg-[#F4E6FF]",
+  info: "border-border-information-default-subtle bg-surface-information-default-subtle",
+  warning:
+    "border-border-warning-default-subtle bg-surface-warning-default-subtle",
+  success:
+    "border-border-success-default-subtle bg-surface-success-default-subtle",
+  deprecated:
+    "border-border-neutral-default-subtle bg-surface-neutral-default-subtle",
+  hint: "border-border-extra-purple-default-subtle bg-surface-extra-purple-default-subtle",
 };
 ---
 
@@ -86,300 +94,255 @@ const noteStyles = {
   {...{
     "data-action": contactFormAction,
     "data-provider": contactFormProvider,
-    "data-netlify": contactFormProvider === "netlify" ? "true" : undefined,
-    action: contactFormProvider === "netlify" ? contactFormAction : undefined,
   }}
   method="post"
   class:list={[
-    "bg-surface-base-default-secondary shadow-card grid grid-cols-1 gap-x-4 gap-y-6 rounded-xl p-8 md:grid-cols-2 md:p-10",
+    "bg-surface-base-default-secondary shadow-card h-fit rounded-xl",
     Astro.props.class,
   ]}>
-  {/* Some Hidden Inputs For Provider Like Netlify, Formspree Etc. */}
-  {
-    form.emailSubject && (
-      <input
-        type="hidden"
-        name={
-          ["formsubmit.co", "formspree"].includes(contactFormProvider)
-            ? "_subject"
-            : "subject"
-        }
-        value={form.emailSubject}
-      />
-    )
-  }
+  <div
+    id="form-container"
+    class="grid grid-cols-1 gap-x-4 gap-y-6 px-6 py-8 md:grid-cols-2 md:p-10">
+    {
+      form.emailSubject && (
+        <input type="hidden" name={"_subject"} value={form.emailSubject} />
+      )
+    }
 
-  {
-    contactFormProvider === "formsubmit.co" && (
-      <input type="hidden" name="_template" value="table" />
-    )
-  }
+    <input type="hidden" name="_template" value="table" />
 
-  {
-    form.inputs.map((input) => (
-      <div
-        input-wrapper
-        class:list={[
-          "flex flex-col gap-2",
-          input.halfWidth ? "max-md:col-span-2" : "col-span-2",
-          input.parentClass,
-        ]}>
-        {!input.note &&
-          input.type !== "checkbox" &&
-          input.type !== "radio" &&
-          (input.groupLabel || input.label) && (
-            <label for={input.id || input.name} class="form-label">
-              {input.groupLabel || input.label || "Please set label"}
-              {input.required && <span class="text-text-error-default">*</span>}
-            </label>
-          )}
-        {input.dropdown ? (
-          <div id="validation-target">
-            <select
+    {
+      form.autoResponse && (
+        <input type="hidden" name="_autoresponse" value={form.autoResponse} />
+      )
+    }
+
+    {
+      form.inputs.map((input) => (
+        <div
+          input-wrapper
+          class:list={[
+            "flex flex-col gap-2",
+            input.halfWidth ? "max-md:col-span-2" : "col-span-2",
+            input.parentClass,
+          ]}>
+          {!input.note &&
+            input.type !== "checkbox" &&
+            input.type !== "radio" &&
+            (input.groupLabel || input.label) && (
+              <label for={input.id || input.name} class="form-label">
+                {input.groupLabel || input.label || "Please set label"}
+                {input.required && (
+                  <span class="text-text-error-default">*</span>
+                )}
+              </label>
+            )}
+          {input.dropdown ? (
+            <div id="validation-target">
+              <select
+                id={input.id || input.name}
+                data-name={input.name || input.label || "Please set name value"}
+                data-hs-select={JSON.stringify(
+                  getPrelineSelectConfig({
+                    placeholder: input.placeholder || "Please set placeholder",
+                    searchPlaceholder: input.dropdown?.search?.placeholder,
+                    hasSearch: input.dropdown?.type === "search",
+                    notFoundText: translate("common.contactDropdownSearch404"),
+                  }),
+                )}
+                class="hidden">
+                <option value="">Choose</option>
+                {input.dropdown?.items?.map((option) => (
+                  <option
+                    {...(option.selected && { selected: true })}
+                    value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              <p class="hs-error:block text-text-error-default mt-2 hidden text-sm">
+                {translate("common.contactDropdownInvalid")}
+              </p>
+            </div>
+          ) : input.tag === "textarea" ? (
+            <textarea
               id={input.id || input.name}
-              data-name={input.name || input.label || "Please set name value"}
-              data-hs-select={JSON.stringify(
-                getPrelineSelectConfig({
-                  placeholder: input.placeholder || "Please set placeholder",
-                  searchPlaceholder: input.dropdown?.search?.placeholder,
-                  hasSearch: input.dropdown?.type === "search",
-                  notFoundText: translate("common.contactDropdownSearch404"),
-                }),
-              )}
-              class="hidden">
-              <option value="">Choose</option>
-              {input.dropdown?.items?.map((option) => (
-                <option
-                  {...(option.selected && { selected: true })}
-                  value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-            <p class="hs-error:block text-text-error-default mt-2 hidden text-sm">
-              Please select a valid state.
-            </p>
-            <p class="hs-success:flex text-text-base-body mt-2 hidden text-sm">
-              Perfect!
-            </p>
-          </div>
-        ) : input.tag === "textarea" ? (
-          <textarea
-            id={input.id || input.name}
-            rows={input.rows || "4"}
-            name={input.name || input.label || "Please set name value"}
-            placeholder={input.placeholder || "Please set placeholder"}
-            class="form-input"
-            {...(input.required && { required: true })}
-            set:html={input.defaultValue || ""}
-          />
-        ) : input.items ? (
-          <div class="form-check-wrapper">
-            {input.items?.map((input) => (
-              <div class="form-check">
-                <input
-                  {...{
-                    value:
-                      typeof input.value === "boolean"
-                        ? String(input.value)
-                        : input.value || input.label,
-                    checked: input.checked ? true : undefined,
-                  }}
-                  type={input.type}
-                  name={
-                    input.name || input.groupLabel || "Please set name value"
-                  }
-                  id={input.id || genIdFromLabel(input.label || "example-id")}
-                  class:list={[
-                    input.type === "radio" ? "form-radio" : "form-checkbox",
-                  ]}
-                  {...(input.required && { required: true })}
-                />
-                <label
-                  for={input.id || genIdFromLabel(input.label || "example-id")}
-                  class="form-check-label text-text-base-label font-medium"
-                  set:html={markdownify(input.label) || "Example Label"}
-                />
-              </div>
-            ))}
-          </div>
-        ) : input.type === "checkbox" || input.type === "radio" ? (
-          <div class="form-check">
-            <input
-              {...{
-                value:
-                  typeof input.value === "boolean"
-                    ? String(input.value)
-                    : input.value || input.label,
-                checked: input.checked ? true : undefined,
-              }}
-              type={input.type || "text"}
-              name={input.name || "Please set name value"}
-              id={input.id || genIdFromLabel(input.label || "example-id")}
+              rows={input.rows || "4"}
+              name={input.name || input.label || "Please set name value"}
               placeholder={input.placeholder || "Please set placeholder"}
+              class="form-input"
+              {...(input.required && { required: true })}
+              set:html={input.defaultValue || ""}
+            />
+          ) : input.items ? (
+            <div class="form-check-wrapper">
+              {input.items?.map((input) => (
+                <div class="form-check">
+                  <input
+                    {...{
+                      value:
+                        typeof input.value === "boolean"
+                          ? String(input.value)
+                          : input.value || input.label,
+                      checked: input.checked ? true : undefined,
+                    }}
+                    type={input.type}
+                    name={
+                      input.name || input.groupLabel || "Please set name value"
+                    }
+                    id={input.id || genIdFromLabel(input.label || "example-id")}
+                    class:list={[
+                      input.type === "radio" ? "form-radio" : "form-checkbox",
+                    ]}
+                    {...(input.required && { required: true })}
+                  />
+                  <label
+                    for={
+                      input.id || genIdFromLabel(input.label || "example-id")
+                    }
+                    class="form-check-label text-text-base-label font-medium"
+                    set:html={markdownify(input.label) || "Example Label"}
+                  />
+                </div>
+              ))}
+            </div>
+          ) : input.type === "checkbox" || input.type === "radio" ? (
+            <div class="form-check">
+              <input
+                {...{
+                  value:
+                    typeof input.value === "boolean"
+                      ? String(input.value)
+                      : input.value || input.label,
+                  checked: input.checked ? true : undefined,
+                }}
+                type={input.type || "text"}
+                name={input.name || "Please set name value"}
+                id={input.id || genIdFromLabel(input.label || "example-id")}
+                placeholder={input.placeholder || "Please set placeholder"}
+                class:list={[
+                  input.type === "radio" ? "form-radio" : "form-checkbox",
+                ]}
+                {...(input.required && { required: true })}
+              />
+              <label
+                for={input.id || genIdFromLabel(input.label || "example-id")}
+                class="form-check-label"
+                set:html={
+                  (input.label && markdownify(input.label)) ||
+                  input.label ||
+                  "Example Label"
+                }
+              />
+            </div>
+          ) : input.note ? (
+            <div
+              {...{ "data-default": input.content }}
               class:list={[
-                input.type === "radio" ? "form-radio" : "form-checkbox",
-              ]}
+                "form-content text-text-base-body text-body-lg flex items-start gap-2 rounded-xl border px-4 py-3",
+                noteStyles[input.note] || "border-gray-200 bg-gray-50/25",
+              ]}>
+              {input.note === "success" && (
+                <Icons
+                  icon="CheckCircleIcon"
+                  class="text-icon-success-default mt-0.5 shrink-0 text-lg"
+                />
+              )}
+              <div set:html={markdownify(input.content || "", true)} />
+            </div>
+          ) : (
+            <input
+              {...(input.defaultValue && {
+                value: input.defaultValue,
+              })}
+              type={input.type || "text"}
+              name={input.name || input.label || "Please set name value"}
+              id={input.id || input.name}
+              placeholder={input.placeholder || "Please set placeholder"}
+              class="form-input"
               {...(input.required && { required: true })}
             />
-            <label
-              for={input.id || genIdFromLabel(input.label || "example-id")}
-              class="form-check-label"
-              set:html={
-                (input.label && markdownify(input.label)) ||
-                input.label ||
-                "Example Label"
-              }
-            />
-          </div>
-        ) : input.note ? (
-          <div
-            {...{ "data-default": input.content }}
-            class:list={[
-              "prose-styles border px-4 py-2 text-inherit",
-              noteStyles[input.note] || "border-gray-200 bg-gray-50/25",
-            ]}
-            set:html={markdownify(input.content || "", true)}
-          />
-        ) : (
-          <input
-            {...(input.defaultValue && {
-              value: input.defaultValue,
-            })}
-            type={input.type || "text"}
-            name={input.name || input.label || "Please set name value"}
-            id={input.id || input.name}
-            placeholder={input.placeholder || "Please set placeholder"}
-            class="form-input"
-            {...(input.required && { required: true })}
-          />
-        )}
-      </div>
-    ))
-  }
+          )}
+        </div>
+      ))
+    }
 
+    <div
+      id="form-error-message"
+      class="border-border-error-default-subtle bg-surface-error-default-subtle text-text-base-body text-body-lg col-span-2 hidden items-start gap-2 rounded-xl border px-4 py-3">
+      <Icons
+        icon="ExclamationCircleIcon"
+        class="text-icon-error-default mt-0.5 shrink-0 text-lg"
+      />
+      <div id="form-error-message-text"></div>
+    </div>
+
+    {
+      form.submitButton && (
+        <div class="col-span-1 mt-4 flex w-full flex-col">
+          <CustomButton
+            tag="button"
+            type="submit"
+            class="w-full md:w-fit"
+            hoverEffect="text-flip"
+            {...form.submitButton}
+          />
+        </div>
+      )
+    }
+  </div>
   {
-    form.submitButton && (
-      <div class="col-span-1 mt-4 flex w-full flex-col">
-        <CustomButton
-          tag="button"
-          type="submit"
-          class="w-full md:w-fit"
-          hoverEffect="text-flip"
-          {...form.submitButton}
+    successNote && (
+      <div
+        id="thank-you-message"
+        class="hidden flex-col items-center gap-2 p-8 text-center md:p-10">
+        <Icons
+          class="text-icon-brand-default text-3xl"
+          icon="CheckCircleIcon"
+        />
+        <h4 class="text-text-base-heading">
+          {translate("common.contactThankYou")}
+        </h4>
+        <p
+          class="text-body-xl text-text-base-body"
+          set:html={markdownify(successNote.content || "")}
         />
       </div>
-    )
-  }
-  {
-    form.note && (
-      <div
-        class="prose-a:text-primary prose-a:underline prose-a:underline-offset-2 col-span-2 flex flex-col text-sm/normal"
-        set:html={markdownify(form.note, true)}
-      />
     )
   }
 </form>
 
 <script>
-  import {
-    formspreeSubmit,
-    netlifySubmit,
-    formSubmit,
-    isFormFilled,
-    setMessage,
-    validateSelectTag,
-  } from "@/lib/utils/FormHandle";
+  import { initContactForm } from "@/lib/utils/FormHandle";
+
+  initContactForm();
 
   document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById(
       "contact-form",
     ) as HTMLFormElement | null;
 
-    let selectTags = form?.querySelectorAll(
-      "[input-wrapper]:not(.hidden) select[data-hs-select]",
-    ) as NodeListOf<HTMLSelectElement>;
+    form?.addEventListener("contactform:result", (e: Event) => {
+      const { success, message } = (e as CustomEvent).detail;
+      const formContainer = document.querySelector("#form-container");
+      const thankYouMessage = document.getElementById("thank-you-message");
+      const errorMessage = document.getElementById("form-error-message");
+      const errorMessageText = document.getElementById(
+        "form-error-message-text",
+      );
 
-    function isSelectStatus(items: HTMLSelectElement[]) {
-      items.forEach((item) => {
-        if (item.value !== "") {
-          item.classList.add("hs-select-active");
-        } else {
-          item.classList.remove("hs-select-active");
+      if (success) {
+        errorMessage?.classList.add("hidden");
+        errorMessage?.classList.remove("flex");
+        formContainer?.classList.add("hidden");
+        thankYouMessage?.classList.remove("hidden");
+        thankYouMessage?.classList.add("flex");
+      } else {
+        if (errorMessageText) {
+          errorMessageText.textContent = message || "";
         }
-      });
-    }
-
-    isSelectStatus(Array.from(selectTags));
-
-    selectTags.forEach((tag) => {
-      tag.addEventListener("change", () => {
-        // Ensure only visible select tag value should submitted
-        selectTags.forEach((tag) => {
-          const name = tag.getAttribute("data-name");
-          tag.setAttribute("name", name || "");
-        });
-
-        validateSelectTag(tag);
-
-        isSelectStatus(Array.from(selectTags));
-      });
-    });
-
-    form?.addEventListener("submit", async (e: Event) => {
-      e.preventDefault();
-
-      const provider = form?.getAttribute("data-provider") || "";
-      const action = form?.getAttribute("data-action") || "";
-
-      selectTags = form?.querySelectorAll(
-        "[input-wrapper]:not(.hidden) select[data-hs-select]",
-      ) as NodeListOf<HTMLSelectElement>;
-
-      // Validate all preline select tags
-      selectTags.forEach(validateSelectTag);
-
-      if (isFormFilled(form)) {
-        // Console form data for debugging
-        const formData = Object.fromEntries(new FormData(form).entries());
-        console.log(
-          Object.entries(formData)
-            .map(([key, value]) => `${key}: ${value}`)
-            .join("\n\n"),
-        );
-
-        setMessage("Form Submitting!...", true, true, form);
-
-        try {
-          switch (provider) {
-            case "netlify":
-              await netlifySubmit(form, action);
-              break;
-            case "formsubmit.co":
-              await formSubmit({
-                form,
-                action,
-              });
-              break;
-            case "formspree":
-              await formspreeSubmit(
-                Object.fromEntries(new FormData(form).entries()),
-                5000,
-                form,
-              );
-              break;
-            default:
-              throw new Error("Unknown form provider.");
-          }
-        } catch (error) {
-          setMessage(
-            error +
-              "! Please use this mail - [folex-astro-theme@gmail.com](mailto:folex-astro-theme@gmail.com) to submit a ticket!",
-            false,
-            false,
-            form,
-          );
-        }
+        errorMessage?.classList.remove("hidden");
+        errorMessage?.classList.add("flex");
       }
     });
   });
