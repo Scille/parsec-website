@@ -142,6 +142,7 @@ if (!enable) return;
               hoverEffect="text-flip"
               variant="fill"
               color="white"
+              class="hidden md:flex"
               {...button}
             />
           )}
@@ -180,7 +181,6 @@ if (!enable) return;
         </div>
       )
     }
-
     <div class="grid gap-x-6 gap-y-10 md:grid-cols-2 xl:grid-cols-3">
       {
         posts &&
@@ -201,6 +201,19 @@ if (!enable) return;
           ))
       }
     </div>
+
+    {
+      !listPage && button && (
+        <CustomButton
+          hoverEffect="text-flip"
+          variant="outline"
+          color="neutral"
+          class="w-full md:hidden"
+          {...button}
+        />
+      )
+    }
+
     {
       listPage && !category && (
         <Pagination

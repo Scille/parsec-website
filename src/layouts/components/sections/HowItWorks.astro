@@ -51,40 +51,40 @@ if (!enable) return;
         list && (
           <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {list.map((item, index) => (
-              <div
-                data-aos="fade-right-sm"
-                data-aos-delay={(index + 2.5) * 100}
-                class="bg-surface-base-default flex flex-col items-center gap-8 rounded-4xl p-8 shadow-sm md:gap-10">
-                <div class="has-italic-text text-text-base-heading flex w-full flex-wrap gap-y-4 font-medium">
-                  {item.step && (
-                    <div
-                      class="md:text-h3 text-h3-sm"
-                      set:html={markdownify(item.step)}
-                    />
-                  )}
-                </div>
-                <div class="">
+              <div class="bg-surface-base-default shadow-card rounded-4xl p-8">
+                <div
+                  data-aos="fade-right-sm"
+                  data-aos-delay={(index + 2.5) * 100}
+                  class="flex flex-col items-center gap-8 md:gap-10">
+                  <div class="has-italic-text text-text-base-heading flex w-full flex-wrap gap-y-4 font-medium">
+                    {item.step && (
+                      <div
+                        class="md:text-h3 text-h3-sm"
+                        set:html={markdownify(item.step)}
+                      />
+                    )}
+                  </div>
                   {item.image && (
                     <OptimizedImage
                       src={item.image.src}
                       alt={item.image.alt}
-                      class:list={"h-[180px] w-auto"}
+                      class:list={"w-full md:h-[180px] md:w-auto"}
                     />
                   )}
-                </div>
-                <div class="flex flex-col gap-5">
-                  {item.title && (
-                    <h3
-                      class="md:text-h4 text-h4-sm text-text-base-heading"
-                      set:html={markdownify(item.title)}
-                    />
-                  )}
-                  {item.description && (
-                    <p
-                      class="border-border-base-default text-text-base-description border-t pt-4"
-                      set:html={markdownify(item.description)}
-                    />
-                  )}
+                  <div class="flex flex-col gap-5">
+                    {item.title && (
+                      <h3
+                        class="md:text-h4 text-h4-sm text-text-base-heading"
+                        set:html={markdownify(item.title)}
+                      />
+                    )}
+                    {item.description && (
+                      <p
+                        class="border-border-base-default text-text-base-description border-t pt-4"
+                        set:html={markdownify(item.description)}
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
@@ -96,7 +96,7 @@ if (!enable) return;
           <CustomButton
             hoverEffect="text-flip"
             variant="fill"
-            class="self-center"
+            class="w-full self-center md:w-fit"
             {...button}
           />
         )

@@ -27,11 +27,11 @@ const readingTime = (content: string): string => {
   const minutes = Math.ceil(((words - imageAdjust) / WPS + imageSecs) / 60);
 
   if (minutes < 1) {
-    return `< ` + 1 + ` min estimated`;
+    return `< ` + 1 + ` min`;
   } else if (minutes === 1) {
-    return 1 + ` min estimated`;
+    return 1 + ` min`;
   } else {
-    return minutes + ` mins estimated`;
+    return minutes + ` mins`;
   }
 };
 

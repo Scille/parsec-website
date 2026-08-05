@@ -54,9 +54,9 @@ const isHorizontal = layout === "horizontal";
 
 <article
   class:list={[
-    "bg-surface-base-page shadow-card relative rounded-3xl p-6",
+    "bg-surface-base-page md:shadow-card border-border-base-default/50 relative rounded-3xl border p-6 md:border-0",
     isHorizontal &&
-      "grid h-96 grid-cols-1 items-start gap-5 md:grid-cols-2 md:items-center md:gap-10 md:pr-10",
+      "grid h-fit grid-cols-1 items-start gap-5 md:grid-cols-2 md:items-center md:gap-10 md:pr-10",
     !isHorizontal && "flex flex-col",
     className,
   ]}
@@ -75,18 +75,21 @@ const isHorizontal = layout === "horizontal";
     </div>
   </a>
   <div
-    class="group relative flex h-full max-w-2xl items-center justify-center overflow-hidden rounded-xl via-20% after:pointer-events-none">
+    class:list={[
+      "group relative flex max-w-2xl items-center justify-center overflow-hidden rounded-xl via-20% after:pointer-events-none",
+      isHorizontal
+        ? "h-full md:min-h-75"
+        : "max-h-52 min-h-52 lg:max-h-80 lg:min-h-80",
+    ]}>
     {
       image && (
-        <div class="h-full overflow-hidden rounded-2xl">
-          <OptimizedImage
-            src={image}
-            alt={"Related to " + title?.toLowerCase()}
-            class:list={[
-              "h-full min-w-full object-cover transition duration-500 group-hover:scale-105",
-            ]}
-          />
-        </div>
+        <OptimizedImage
+          src={image}
+          alt={"Related to " + title?.toLowerCase()}
+          class:list={[
+            "h-full min-w-full object-cover transition duration-500 group-hover:scale-105",
+          ]}
+        />
       )
     }
     <span class="sr-only">
@@ -138,7 +141,7 @@ const isHorizontal = layout === "horizontal";
         <div
           class:list={[
             "text-body-lg text-text-base-description flex items-center justify-between",
-            isHorizontal ? "mt-8 mb-4" : "mt-4",
+            isHorizontal ? "lg:mt-8 lg:mb-0" : "mt-auto pt-6",
           ]}>
           {listPage && (
             <div class="flex items-center gap-2">

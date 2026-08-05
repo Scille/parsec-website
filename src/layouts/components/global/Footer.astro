@@ -1,5 +1,6 @@
 ---
 import social from "@/config/social.json";
+import { contact } from "@/config/contact.json";
 import Logo from "@/components/global/Logo.astro";
 import Icons from "@/helpers/Icons.astro";
 import config from ".astro/config.generated.json";
@@ -98,12 +99,12 @@ const currentYear = new Date().getFullYear().toString();
                 <a
                   class="text-text-base-description hover:text-text-brand-default-hover flex items-center gap-1 py-px"
                   href={localizedLink(
-                    `mailto:${translate("contactInfo.email")}`,
+                    `mailto:${contact.email}`,
                     Astro.currentLocale,
                   )}>
                   <!-- mail icon -->
                   <Icons class="text-inherit" icon="EnvelopeIcon" />
-                  {translate("contactInfo.email")}
+                  {contact.email}
                 </a>
               </span>
             </li>
@@ -118,10 +119,10 @@ const currentYear = new Date().getFullYear().toString();
           {translate("footer.copyright").replace("{currentYear}", currentYear)}
         </p>
       </div>
-      <ul class="flex items-center gap-8">
+      <ul class="flex flex-col gap-2 md:flex-row md:items-center md:gap-8">
         {
           translate("footerMenu").map((menu: { name: string; url: string }) => (
-            <li class="footer-bottom-menu-item relative inline-block">
+            <li class="footer-bottom-menu-item relative inline-block after:content-none md:after:content-['']">
               <a
                 class="has-underline-anim text-text-base-description inline-block py-px"
                 href={localizedLink(menu.url, Astro.currentLocale)}
@@ -173,7 +174,6 @@ const currentYear = new Date().getFullYear().toString();
   <style>
     .footer-bottom-menu-item:not(:last-child)::after {
       position: absolute;
-      content: "";
       height: 4px;
       width: 4px;
       border-radius: 50%;

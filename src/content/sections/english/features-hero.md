@@ -7,7 +7,7 @@ image:
     alt: "Parsec secure file sharing tool",
   }
 button:
-  label: "Request a demo"
+  label: "Book an appointment"
   url: "https://calendly.com/thierry-leblond-parsec/30min"
   variant: "fill"
   color: "white"
