@@ -25,7 +25,7 @@ title =
 
 // Add tagline & separator to title
 // prettier-ignore
-const alternateLangs =  config.settings.multilingual.enable ? supportedLanguages : []
+const alternateLangs =  config.settings.multilingual.enable ? supportedLanguages : [];
 title += config.site.tagline ? taglineSeparator + config.site.tagline : "";
 description = metaDescription ? metaDescription : description;
 canonical = canonical ? canonical : Astro.url.href;
