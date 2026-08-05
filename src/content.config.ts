@@ -101,7 +101,6 @@ export const collections = {
   blog: blogCollection,
   pages: pagesCollection,
   changelog: changelogCollection,
-  career: defineCollection({ loader: contentLoader("./src/content/career") }),
   sections: defineCollection({
     loader: contentLoader("./src/content/sections"),
   }),
