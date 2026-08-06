@@ -4,6 +4,8 @@ import type { Section } from "@/types";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import AnimatedText from "../widgets/AnimatedText.astro";
+import { Code } from "astro-expressive-code/components";
+import { codeFiles } from "@/lib/utils/codeFiles";
 import type { heroDownloadSchema } from "@/sections.schema";
 import CustomButton from "@/components/CustomButton.astro";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
@@ -21,6 +23,11 @@ let { title, description, image, downloadClient, goOnWeb, moreButton } = (
 )?.data as SectionType;
 
 const osDropdown = downloadClient.dropdown;
+
+// Options that carry a `source`
+const codeOptions = (osDropdown?.items ?? [])
+  .filter((option) => option.source && codeFiles[option.source])
+  .map((option) => ({ value: option.value, ...codeFiles[option.source!] }));
 ---
 
 <section class="bg-dots-fade home-hero -mt-20 overflow-hidden pt-30 md:pt-40">
@@ -92,7 +99,7 @@ const osDropdown = downloadClient.dropdown;
                         {...(option.selected && { selected: true })}
                         {...getPrelineSelectOptionAttrs(option.icon)}
                         data-url={option.url}
-                        data-code={option.code}
+                        data-code={Boolean(option.source)}
                         value={option.value}>
                         {option.label}
                       </option>
@@ -107,11 +114,11 @@ const osDropdown = downloadClient.dropdown;
                     {...downloadClient.button}
                   />
                 )}
-                <pre
-                  id="download-client-code"
-                  class="bg-surface-elevated-default text-text-on-color-label hidden w-full items-center justify-between gap-3 overflow-x-auto rounded-lg p-4">
-                  <code class="font-mono text-sm" />
-                </pre>
+                {codeOptions.map(({ value, code, lang }) => (
+                  <div class="download-client-code hidden" data-value={value}>
+                    <Code code={code} lang={lang} />
+                  </div>
+                ))}
               </div>
             )
           }
@@ -197,52 +204,57 @@ const osDropdown = downloadClient.dropdown;
       return null;
     }
 
-    const osSelect = document.getElementById("os-parsec-client");
-
-    if (osSelect instanceof HTMLSelectElement) {
-      detectOsDropdownValue().then((detectedValue) => {
-        const detectedOption = detectedValue
-          ? osSelect.querySelector(`option[value="${detectedValue}"]`)
-          : null;
-
-        if (detectedOption instanceof HTMLOptionElement) {
-          osSelect
-            .querySelectorAll("option[selected]")
-            .forEach((option) => option.removeAttribute("selected"));
-          detectedOption.setAttribute("selected", "");
-          osSelect.value = detectedValue as string;
-        }
-      });
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const select = document.getElementById("os-parsec-client");
-      const button = document.getElementById("download-client-button");
-      const codeBlock = document.getElementById("download-client-code");
-      const codeElement = codeBlock?.querySelector("code");
+    document.addEventListener("DOMContentLoaded", async () => {
+      const select = document.querySelector("#os-parsec-client");
+      const button = document.querySelector("#download-client-button");
+      const codeBlocks = document.querySelectorAll(".download-client-code");
       const card = document.getElementById("download-client-card");
 
-      if (!(select instanceof HTMLSelectElement) || !button || !codeBlock) {
+      if (!(select instanceof HTMLSelectElement) || !button) {
         return;
       }
 
       const updateButtonUrl = () => {
         const { url, code } = select.selectedOptions[0]?.dataset ?? {};
+        const activeCodeBlock =
+          code === "true"
+            ? Array.from(codeBlocks).find(
+                (block) =>
+                  (block as HTMLElement).dataset.value === select.value,
+              )
+            : undefined;
 
-        if (code) {
+        codeBlocks.forEach((block) => {
+          block.classList.add("hidden");
+          block.classList.remove("flex");
+        });
+
+        if (activeCodeBlock) {
           button.classList.add("hidden");
-          codeBlock.classList.remove("hidden");
-          codeBlock.classList.add("flex");
-          card?.classList.add("lg:!min-w-xl");
-          if (codeElement) codeElement.textContent = code;
+          activeCodeBlock.classList.remove("hidden");
+          activeCodeBlock.classList.add("flex");
+          card?.classList.add("lg:!min-w-md");
         } else {
           button.classList.remove("hidden");
-          codeBlock.classList.add("hidden");
-          codeBlock.classList.remove("flex");
-          card?.classList.remove("lg:!min-w-xl");
-          if (url) button.setAttribute("href", url);
+          card?.classList.remove("lg:!min-w-md");
+          if (url) {
+            button.setAttribute("href", url);
+          }
         }
       };
+
+      const detectedValue = await detectOsDropdownValue();
+      const detectedOption = detectedValue
+        ? select.querySelector(`option[value="${detectedValue}"]`)
+        : null;
+
+      if (detectedOption instanceof HTMLOptionElement) {
+        select
+          .querySelectorAll("option[selected]")
+          .forEach((option) => option.removeAttribute("selected"));
+        detectedOption.setAttribute("selected", "");
+        select.value = detectedValue as string;
+      }
 
       updateButtonUrl();
       select.addEventListener("change", updateButtonUrl);
