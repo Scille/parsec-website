@@ -21,7 +21,7 @@ const { toc, className, marker = true, ...rest } = Astro.props;
   toc && (
     <div
       class:list={[
-        "hs-accordion",
+        "hs-accordion toc",
         { active: tableOfContents?.expanded },
         className,
       ]}
