@@ -120,14 +120,15 @@ const tocEnabled =
         </div>
       </div>
     </div>
-    <div class="container mt-8 flex flex-col gap-16 md:mt-24 md:flex-row">
+    <div
+      class="container mt-8 flex flex-col gap-12 md:mt-24 md:flex-row md:gap-16">
       <!-- Table of Contents -->
       {
         tocEnabled && tocHeadings && (
           <TOC
             toc={tocHeadings}
             marker={false}
-            className="sticky top-28 lg:w-full lg:max-w-75 lg:shrink-0"
+            className="sticky hidden md:block top-28 lg:w-full lg:max-w-75 lg:shrink-0"
           />
         )
       }
@@ -135,7 +136,7 @@ const tocEnabled =
       <!-- Main Content -->
       {
         Content && (
-          <div class="prose-styles content inline-grid w-full">
+          <div class="prose-styles content grid w-full min-w-0 grid-cols-[minmax(0,1fr)]">
             <Content />
           </div>
         )
