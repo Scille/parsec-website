@@ -40,8 +40,12 @@
     @apply prose-p:my-0;
   }
 
-  a {
-    @apply text-text-brand-default hover:text-text-brand-default-hover font-medium break-words;
+  &#toc-collapse a {
+    @apply text-text-base-body/80 hover:text-text-brand-default-hover font-medium;
+  }
+
+  &:not(#toc-collapse) a {
+    @apply text-text-brand-default hover:text-text-brand-default-hover font-medium;
   }
 
   /* Unordered & Ordered List */
