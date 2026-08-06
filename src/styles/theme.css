@@ -1139,6 +1139,12 @@
   --text-article-h4: var(--parsec-font-article-heading-h4-size);
   --text-article-h5: var(--parsec-font-article-heading-h5-size);
 
+  --text-article-h1-sm: calc(var(--text-article-h1) * 0.8);
+  --text-article-h2-sm: calc(var(--text-article-h2) * 0.8);
+  --text-article-h3-sm: calc(var(--text-article-h3) * 0.8);
+  --text-article-h4-sm: calc(var(--text-article-h4) * 0.8);
+  --text-article-h5-sm: calc(var(--text-article-h5) * 0.8);
+
   --leading-article-h1: var(--parsec-font-article-heading-h1-line-height);
   --leading-article-h2: var(--parsec-font-article-heading-h2-line-height);
   --leading-article-h3: var(--parsec-font-article-heading-h3-line-height);

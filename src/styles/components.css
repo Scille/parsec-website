@@ -41,7 +41,7 @@
   }
 
   a {
-    @apply text-text-brand-default hover:text-text-brand-default-hover font-medium;
+    @apply text-text-brand-default hover:text-text-brand-default-hover font-medium break-words;
   }
 
   /* Unordered & Ordered List */
@@ -449,23 +449,23 @@
 .article-single,
 .prose-styles {
   h1 {
-    @apply text-article-h1 leading-article-h1 tracking-article-h1 text-text-base-heading font-semibold;
+    @apply text-article-h1-sm md:text-article-h1 leading-article-h1 tracking-article-h1 text-text-base-heading font-semibold;
   }
 
   h2 {
-    @apply text-article-h2 leading-article-h2 tracking-article-h2 text-text-base-heading font-semibold;
+    @apply text-article-h2-sm md:text-article-h2 leading-article-h2 tracking-article-h2 text-text-base-heading/90 font-semibold;
   }
 
   h3 {
-    @apply text-article-h3 leading-article-h3 tracking-article-h3 text-text-base-heading font-semibold;
+    @apply text-article-h3-sm md:text-article-h3 leading-article-h3 tracking-article-h3 text-text-base-heading/80 font-semibold;
   }
 
   h4 {
-    @apply text-article-h4 leading-article-h4 tracking-article-h4 text-text-base-heading font-semibold;
+    @apply text-article-h4-sm md:text-article-h4 leading-article-h4 tracking-article-h4 text-text-base-heading/70 font-semibold;
   }
 
   h5 {
-    @apply text-article-h5 leading-article-h5 tracking-article-h5 text-text-base-heading font-semibold;
+    @apply text-article-h5-sm md:text-article-h5 leading-article-h5 tracking-article-h5 text-text-base-heading/60 font-semibold;
   }
 
   p {
@@ -485,7 +485,7 @@
   }
 
   img {
-    @apply rounded-xl shadow-lg;
+    @apply h-auto max-w-full min-w-0 rounded-xl shadow-lg;
   }
 
   figcaption p {
