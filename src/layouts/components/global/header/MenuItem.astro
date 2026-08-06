@@ -5,6 +5,7 @@ import { localizedLink } from "@/lib/utils/localizedLink";
 
 const menu = Astro.props.menu as NavigationLink;
 const { pathname } = Astro.url;
+const href = localizedLink(menu.url || Astro.url.origin, Astro.currentLocale);
 ---
 
 {
@@ -26,15 +27,12 @@ const { pathname } = Astro.url;
               : menu.target || undefined,
           }}
           target={menu.url?.startsWith("http") ? "_blank" : undefined}
-          href={localizedLink(
-            menu.url || Astro.url.origin,
-            Astro.currentLocale,
-          )}
+          href={href}
           class:list={[
             "nav-link text-text-base-label hover:text-text-brand-default font-medium",
             {
               "nav-link-active text-text-brand-default":
-                pathname === `${menu.url}/` || pathname === menu.url,
+                pathname === `${href}/` || pathname === href,
             },
           ]}>
           {menu.badge && menu.badge.enable ? (
