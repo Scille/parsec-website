@@ -13,6 +13,7 @@ import config from "./.astro/config.generated.json";
 import { generateAstroFontsConfig } from "./src/lib/utils/AstroFont.ts";
 import { unified } from "@astrojs/markdown-remark";
 import icon from "astro-icon";
+import astroExpressiveCode from "astro-expressive-code";
 
 const fonts = generateAstroFontsConfig(fontsJson);
 
@@ -43,6 +44,9 @@ export default defineConfig({
     },
   },
   integrations: [
+    astroExpressiveCode({
+      themes: "github-dark",
+    }),
     sitemapConfig.enable ? sitemap() : null,
     // should be uncommented when astro-auto-import plugin will be compatible with Astro v7
     // AutoImport({
@@ -80,12 +84,6 @@ export default defineConfig({
         remarkToc,
       ],
     }),
-
-    // Code Highlighter https://github.com/shikijs/shiki
-    shikiConfig: {
-      theme: "aurora-x", // https://shiki.style/themes
-      wrap: true,
-    },
   },
   vite: {
     plugins: [tailwindcss()],
