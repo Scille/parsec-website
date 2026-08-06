@@ -1,3 +1,5 @@
+import path from "node:path";
+
 const SELECT_ICON_CLASSES = "shrink-0 size-4";
 
 // Preline reads per-option icons from a `data-hs-select-option` JSON attribute
@@ -9,7 +11,7 @@ export const getPrelineSelectOptionAttrs = (iconSrc?: string) => {
 
   return {
     "data-hs-select-option": JSON.stringify({
-      icon: `<img src="${iconSrc}" alt="" class="${SELECT_ICON_CLASSES}" />`,
+      icon: `<img src="${path.posix.join(import.meta.env.BASE_URL, iconSrc)}" alt="" class="${SELECT_ICON_CLASSES}" />`,
     }),
   };
 };
