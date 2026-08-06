@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@astrojs/vue": "^7.0.1",
-    "@floating-ui/dom": "^1.7.6",
+    "@floating-ui/dom": "^1.8.0",
     "@heroicons/vue": "^2.2.0",
     "@iconify-json/heroicons": "^1.2.3",
     "aos": "^2.3.4",
