@@ -34,7 +34,7 @@
     "marked": "^17.0.4",
     "motion": "^12.37.0",
     "preline": "^4.2.0",
-    "sharp": "^0.34.5",
+    "sharp": "^0.35.3",
     "smoothscroll-for-websites": "^1.5.1",
     "vue": "^3.5.40"
   },
