@@ -29,6 +29,7 @@
     "@heroicons/vue": "^2.2.0",
     "@iconify-json/heroicons": "^1.2.3",
     "aos": "^2.3.4",
+    "astro-expressive-code": "^0.44.1",
     "astro-icon": "^1.1.5",
     "date-fns": "^4.1.0",
     "marked": "^17.0.4",
