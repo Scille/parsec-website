@@ -188,7 +188,7 @@ const downloadSelectItemSchema = z.object({
       selected: z.boolean().optional(),
       value: z.string(),
       url: z.string().optional(),
-      code: z.string().optional(),
+      source: z.string().optional(),
     }),
   ),
 });
@@ -219,13 +219,12 @@ export const versionDownloadSchema = z.object({
     z.object({
       enable: z.boolean().default(true).optional(),
       os: z.enum(["macos", "linux", "windows"]),
-      icon: z.string(),
+      label: z.string(),
       list: z.array(
         z.object({
           enable: z.boolean().default(true).optional(),
           title: z.string(),
-          icon: z.string().optional(),
-          code: z.string().optional(),
+          codeFile: z.string().optional(),
           button: sharedButtonBase.optional(),
         }),
       ),

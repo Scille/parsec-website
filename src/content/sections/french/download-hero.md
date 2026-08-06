@@ -32,8 +32,7 @@ downloadClient:
         icon: "/images/icons/linux.svg"
         value: "linux"
         selected: false
-        url: "https://github.com/Scille/parsec-cloud/releases/latest"
-        code: "snap install parsec --channel=v3 --classic"
+        source: "linux-snap"
   button:
     label: "Télécharger"
     variant: "fill"

@@ -501,6 +501,22 @@
   }
 }
 
+.expressive-code {
+  @apply w-full;
+
+  .header {
+    @apply !hidden;
+  }
+
+  .frame {
+    @apply !overflow-hidden !rounded-lg !shadow-none;
+  }
+
+  .copy {
+    @apply !inset-bs-3;
+  }
+}
+
 #download-dropdown-container {
   .form-input {
     @apply bg-surface-neutral-default-subtle! hover:bg-surface-neutral-default-subtle-hover! rounded-full!;
