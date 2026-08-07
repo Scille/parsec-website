@@ -5,33 +5,29 @@ import { getEntryCTM } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import overrideObjects from "@/lib/utils/overrideObjects.ts";
 import CustomButton from "@/components/CustomButton.astro";
-import type { benefitsSectionSchema } from "@/sections.schema";
+import type { ourValuesSectionSchema } from "@/sections.schema";
 import Icons from "@/helpers/Icons.astro";
-import AnimatedText from "../widgets/AnimatedText.astro";
+import AnimatedText from "@/components/widgets/AnimatedText.astro";
 import type { HeroIconName } from "@/helpers/heroIconNames";
 
-// Type
-type benefitsSectionType = Section & z.infer<typeof benefitsSectionSchema>;
-type Props = {
-  content?: benefitsSectionType;
-};
+type ourValuesSectionType = Section & z.infer<typeof ourValuesSectionSchema>;
 
 // Default content fetch
 let defaultContent = (
-  await getEntryCTM("sections", "why-us", Astro.currentLocale)
-)?.data as benefitsSectionType;
+  await getEntryCTM("sections", "our-values", Astro.currentLocale)
+)?.data as ourValuesSectionType;
 
 let actualContent = overrideObjects(
   { ...defaultContent },
   Astro.props.content,
-) as benefitsSectionType;
+) as ourValuesSectionType;
 
 let {
   enable = true,
   title,
-  benefits,
-  buttons,
-} = actualContent as benefitsSectionType;
+  values,
+  button,
+} = actualContent as ourValuesSectionType;
 
 if (!enable) return;
 ---
@@ -40,27 +36,25 @@ if (!enable) return;
   <div class="container space-y-10 md:space-y-16">
     {
       title && (
-        <div class="mx-auto max-w-2xl text-center">
-          <h2 class="has-italic-text">
-            <AnimatedText
-              delay={0.2}
-              stagger={0.09}
-              content={markdownify(title)}
-            />
-          </h2>
-        </div>
+        <h2 class="has-italic-text max-w-lg px-6">
+          <AnimatedText
+            delay={0.2}
+            stagger={0.09}
+            content={markdownify(title)}
+          />
+        </h2>
       )
     }
 
     {
-      benefits && (
-        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {benefits.map((item, index) => (
+      values && (
+        <div class="border-border-base-default grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:max-md:[&>*:not(:last-child)]:border-b md:max-lg:[&>*:not(:last-child):nth-child(2n+1)]:border-r lg:[&>*:not(:nth-child(3n))]:border-r md:max-lg:[&>*:not(:nth-last-child(-n+2))]:border-b lg:[&>*:nth-child(-n+3)]:border-b">
+          {values.map((item, index) => (
             <div
               data-aos="fade-up-sm"
               data-aos-delay={(index + 1) * 50}
               data-aos-duration={900}
-              class="border-border-base-default bg-surface-base-page flex flex-col gap-4 rounded-xl border p-5 shadow-sm md:p-8">
+              class="flex flex-col gap-6 px-6 py-6">
               <Icons
                 class="text-icon-neutral-default text-2xl"
                 icon={item.icon as HeroIconName}
@@ -90,25 +84,7 @@ if (!enable) return;
       data-aos-delay="1000"
       data-aos-duration="1000"
       class="has-video-modal flex flex-wrap items-center justify-center gap-6">
-      {
-        buttons &&
-          buttons.map((button: any) =>
-            button.type !== "video" ? (
-              <CustomButton class="btn-md" {...button} />
-            ) : (
-              <CustomButton
-                class="btn-md"
-                {...button}
-                title="Play Video"
-                aria-haspopup="dialog"
-                aria-expanded="false"
-                aria-controls={"#" + button.video.id}
-                data-hs-overlay={"#" + button.video.id}
-                data-hs-overlay-options={`{"emulateScrollbarSpace" : true}`}
-              />
-            ),
-          )
-      }
+      {button && <CustomButton class="btn-md" {...button} />}
     </div>
   </div>
 </section>

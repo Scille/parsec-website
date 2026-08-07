@@ -37,7 +37,7 @@ if (!enable) return;
       {
         title && (
           <div class="mx-auto max-w-lg text-center md:max-w-2xl">
-            <h2 class="has-italic-text text-text-base-heading text-h2-sm md:text-h2">
+            <h2 class="has-italic-text text-text-base-heading">
               <AnimatedText
                 delay={0.2}
                 stagger={0.09}
@@ -59,7 +59,7 @@ if (!enable) return;
                   <div class="has-italic-text text-text-base-heading flex w-full flex-wrap gap-y-4 font-medium">
                     {item.step && (
                       <div
-                        class="md:text-h3 text-h3-sm"
+                        class="md:text-h4 text-h4-sm"
                         set:html={markdownify(item.step)}
                       />
                     )}
@@ -74,7 +74,7 @@ if (!enable) return;
                   <div class="flex flex-col gap-5">
                     {item.title && (
                       <h3
-                        class="md:text-h4 text-h4-sm text-text-base-heading"
+                        class="md:text-h5 text-h5-sm text-text-base-heading"
                         set:html={markdownify(item.title)}
                       />
                     )}

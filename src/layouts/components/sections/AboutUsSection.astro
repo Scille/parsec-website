@@ -7,7 +7,6 @@ import overrideObjects from "@/lib/utils/overrideObjects.ts";
 import type { aboutSectionSchema } from "@/sections.schema";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
 import AnimatedText from "@/components/widgets/AnimatedText.astro";
-import SquareElem from "@/components/widgets/SquareElem.astro";
 
 // Type
 type SectionType = Section & z.infer<typeof aboutSectionSchema>;
@@ -32,36 +31,36 @@ if (!enable) return;
 
 <section class="position overflow-hidden pt-16">
   <div
-    class="bg-surface-base-default-secondary pointer-events-none absolute top-0 left-0 -z-10 h-152 w-full">
+    class="bg-surface-base-default-secondary pointer-events-none absolute top-0 left-0 -z-10 h-140 w-full md:h-175 lg:h-120 xl:h-140">
   </div>
   <div class="container space-y-16 md:space-y-32">
-    <div class="flex flex-col gap-12 lg:flex-row lg:items-center">
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center lg:px-6">
       {
         title && (
-          <div class="mx-auto flex max-w-2xl">
-            <h2 class="has-italic-text">
-              <AnimatedText
-                delay={0.2}
-                stagger={0.09}
-                content={markdownify(title)}
-              />
-            </h2>
-          </div>
+          <h2 class="has-italic-text flex w-full max-w-2xl flex-col lg:mx-auto">
+            <AnimatedText
+              delay={0.2}
+              stagger={0.09}
+              content={markdownify(title)}
+            />
+          </h2>
         )
       }
       {
         image && (
-          <OptimizedImage
-            src={image.src}
-            alt={image.alt}
-            class="size-full max-h-96 object-contain lg:ml-auto lg:object-right"
-          />
+          <div class="max-h-60 overflow-hidden rounded-2xl md:max-h-80 lg:max-h-96">
+            <OptimizedImage
+              src={image.src}
+              alt={image.alt}
+              class="size-full object-cover object-bottom lg:ml-auto lg:object-right"
+            />
+          </div>
         )
       }
     </div>
     {
       about && (
-        <div class="space-y-8 p-0 md:space-y-16 lg:px-12 xl:px-24">
+        <div class="space-y-8 pt-8 md:space-y-16 md:pt-0 lg:px-12 xl:px-24">
           {about.title && (
             <h3
               data-aos="fade-up-sm"
@@ -71,9 +70,7 @@ if (!enable) return;
           )}
           <div class="grid gap-14 md:grid-cols-12">
             {about.image && (
-              <div
-                class="relative h-fit md:col-span-4"
-                data-aos="fade-right-sm">
+              <div class="relative col-span-4 h-fit max-md:mx-auto max-md:w-fit">
                 <OptimizedImage
                   width={310}
                   height={270}
@@ -86,14 +83,10 @@ if (!enable) return;
                   <span class="translate-x-centered absolute -bottom-px h-1 w-[115%] border-b border-dashed border-black/50" />
                   <span class="translate-y-centered absolute -left-px h-[115%] w-1 border-s border-dashed border-black/50" />
                   <span class="translate-y-centered absolute -right-1 h-[115%] w-1 border-s border-dashed border-black/50" />
-                  <SquareElem class="absolute -top-3.5 -left-3.5 fill-white" />
-                  <SquareElem class="absolute -top-3.5 -right-3.5 fill-white" />
-                  <SquareElem class="absolute -bottom-3.5 -left-3.5 fill-white" />
-                  <SquareElem class="absolute -right-3.5 -bottom-3.5 fill-white" />
                 </div>
                 <OptimizedImage
                   src="/images/about/image-shape.png"
-                  class="absolute bottom-0 left-0 w-full"
+                  class="absolute bottom-0 left-0 hidden w-full md:block"
                 />
               </div>
             )}
@@ -106,7 +99,7 @@ if (!enable) return;
                   {about.list.map((item) => (
                     <div class="flex flex-col gap-2 space-y-4 md:flex-row md:gap-8">
                       <h3
-                        class="md:text-h3 has-italic-text override-color text-text-base-description/60 text-3xl font-medium"
+                        class="has-italic-text override-color text-text-base-description/60 text-3xl font-medium"
                         set:html={markdownify(item.title)}
                       />
                       <p

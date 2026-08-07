@@ -22,16 +22,11 @@ let defaultContent = (
   await getEntryCTM("sections", "video-section", Astro.currentLocale)
 )?.data as SectionType;
 
-// Enables content customization (e.g., title, description) with a fallback to 'defaultContent' if not provided.
-// The 'content' prop should match the structure of 'defaultContent'.
-// Allows using this section with different content across multiple pages.
-// If 'content' is missing, 'defaultContent' will be used.
 let actualContent = overrideObjects(
   { ...defaultContent },
   Astro.props.content,
 ) as SectionType;
 
-// Extracting required values from 'content' object
 let {
   enable = true,
   preTitle,
@@ -47,12 +42,12 @@ if (!enable) return;
 <section class="container overflow-hidden">
   <div
     data-aos="fade-down-sm"
-    class="from-surface-base-default-secondary to-surface-base-default border-border-base-default relative container flex max-w-6xl flex-col items-center gap-8 rounded-3xl border bg-linear-to-b/oklch p-6 md:flex-row md:p-8">
-    <div class="space-y-3 lg:max-w-xl">
+    class="from-surface-base-default-secondary to-surface-base-default border-border-base-default relative container flex max-w-6xl flex-col items-center gap-8 rounded-3xl border bg-linear-to-b/oklch p-6 sm:p-8 lg:flex-row lg:p-8">
+    <div class="w-full space-y-3 lg:max-w-xl">
       {
         preTitle && (
           <span
-            class="has-italic-text text-text-base-description text-body-lg mb-6 inline-block rounded-full font-medium"
+            class="has-italic-text text-text-base-description text-body-lg mb-6 hidden rounded-full font-medium lg:inline-block"
             set:html={markdownify(preTitle)}
           />
         )
@@ -84,7 +79,8 @@ if (!enable) return;
         )
       }
     </div>
-    <div class="not-prose relative shrink-0 self-center">
+    <div
+      class="not-prose relative w-full shrink-0 self-center lg:max-w-140 xl:max-w-160">
       {
         video && video?.src && (
           <>
@@ -92,9 +88,7 @@ if (!enable) return;
               <OptimizedImage
                 src={video.poster}
                 alt={title || "Video thumbnail"}
-                class:list={[
-                  "h-auto w-full max-w-[40rem] rounded-2xl object-cover",
-                ]}
+                class:list={["h-auto w-full rounded-2xl object-cover"]}
               />
             )}
             <button

@@ -1,8 +1,8 @@
 ---
 enable: true
-title: "Our Core **Values** at Parsec Cloud"
+title: "Our core **values** at Parsec Cloud"
 
-benefits:
+values:
   - title: "Innovation"
     description: "We embrace creativity and constantly seek new ways to solve problems and deliver value."
     icon: "LightBulbIcon"
@@ -15,15 +15,15 @@ benefits:
     description: "We listen to our customers and develop our services based on their needs."
     icon: "ChatBubbleLeftRightIcon"
 
-  - title: "Transparence"
+  - title: "Transparency"
     description: "We act with integrity, transparency, and accountability in all our decisions and actions."
     icon: "CubeTransparentIcon"
 
-  - title: "Formation"
+  - title: "Training"
     description: "We encourage continuous learning to foster long-term success for everyone."
     icon: "AcademicCapIcon"
 
-  - title: "Rigueur"
+  - title: "Discipline"
     description: "We are committed to providing high-quality products, services, and experiences with every interaction."
     icon: "StarIcon"
 ---

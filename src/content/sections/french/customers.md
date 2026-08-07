@@ -1,6 +1,6 @@
 ---
 enable: true # Control the visibility of this section across all pages where it is used
-description: "Ils font confiance à Parsec pour protéger leurs données les plus sensibles."
+title: "Ils font confiance à Parsec pour protéger leurs données les plus sensibles."
 
 marquee:
   elementWidth: 10rem

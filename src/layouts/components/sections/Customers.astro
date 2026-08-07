@@ -7,7 +7,6 @@ import { markdownify } from "@/lib/utils/textConverter";
 
 type Props = {
   content?: customersSectionType;
-  lightLogo?: boolean;
   class?: string;
   tag?: "div";
 };
@@ -17,28 +16,14 @@ let defaultContent = (
   await getEntryCTM("sections", "customers", Astro.currentLocale)
 )?.data as customersSectionType;
 
-// Enables content customization (e.g., title, description) with a fallback to 'defaultContent' if not provided.
-// The 'content' prop should match the structure of 'defaultContent'.
-// Allows using this section with different content across multiple pages.
-// If 'content' is missing, 'defaultContent' will be used.
 let actualContent = overrideObjects(
   { ...defaultContent },
   Astro.props.content,
 ) as customersSectionType;
 
-// Extracting required values from 'content' object
-let {
-  enable = true,
-  description,
-  marquee,
-  list,
-} = actualContent as customersSectionType;
+let { enable = true, title, list } = actualContent as customersSectionType;
 
-const {
-  tag: Element = "section",
-  class: className,
-  lightLogo = true,
-} = Astro.props;
+const { tag: Element = "section", class: className } = Astro.props;
 
 if (!enable) return;
 ---
@@ -47,11 +32,11 @@ if (!enable) return;
   <div class="container">
     <div class="mx-auto text-center">
       {
-        description && (
-          <p
+        title && (
+          <h3
             data-aos="fade-up-sm"
-            class="h3 text-center"
-            set:html={markdownify(description)}
+            class="text-h4-sm md:text-h4 text-center max-md:mx-auto max-md:w-md"
+            set:html={markdownify(title)}
           />
         )
       }

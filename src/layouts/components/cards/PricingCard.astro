@@ -44,7 +44,11 @@ if (!enable) return;
   <div
     class="bg-surface-base-default-secondary relative z-10 flex min-h-full flex-col gap-5 rounded-3xl p-8">
     <div class="flex w-full justify-between">
-      {name && <h3 class="md:text-h4" set:html={markdownify(name)} />}
+      {
+        name && (
+          <h3 class="text-h5-sm md:text-h5" set:html={markdownify(name)} />
+        )
+      }
       {
         badge && (
           <span
@@ -55,14 +59,14 @@ if (!enable) return;
       }
     </div>
 
-    <div class="border-border-base-default flex flex-col border-b pb-5">
+    <div class="border-border-base-default flex flex-col gap-4 border-b pb-5">
       {
         price?.map((item) => (
           <div
             class:list={[
               "price-wrapper relative flex items-center gap-2.5 transition-all duration-300",
             ]}>
-            <div class="flex gap-0 text-4xl font-medium md:text-5xl/[1.125]">
+            <div class="md:text-h3 flex gap-0 text-4xl font-medium">
               {item.prependValue && (
                 <span set:html={markdownify(item.prependValue)} />
               )}
@@ -74,13 +78,13 @@ if (!enable) return;
             <div class="text-text-base-body text-body-lg flex flex-col">
               {item.tax && (
                 <p
-                  class="text-text-base-body font-bold"
+                  class="text-text-base-description text-body-md"
                   set:html={markdownify(item.tax)}
                 />
               )}
               {item.billing && (
                 <p
-                  class="text-text-base-description"
+                  class="text-text-base-body font-semibold"
                   set:html={markdownify(item.billing)}
                 />
               )}
@@ -91,7 +95,7 @@ if (!enable) return;
       {
         description && (
           <p
-            class="text-body-lg md:text-body-xl text-text-base-body opacity-80 xl:h-15"
+            class="text-body-lg md:text-body-xl text-text-base-body opacity-80"
             set:html={markdownify(description)}
           />
         )

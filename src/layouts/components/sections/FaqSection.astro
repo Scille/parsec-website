@@ -102,10 +102,7 @@ if (!enable) return;
           <div class="flex flex-wrap justify-between gap-6">
             <div class="max-w-sm">
               {title && (
-                <h2
-                  class="has-italic-text capitalize"
-                  set:html={markdownify(title)}
-                />
+                <h2 class="has-italic-text" set:html={markdownify(title)} />
               )}
             </div>
             <div class="max-w-md space-y-6">

@@ -2,7 +2,7 @@
 enable: true
 title: "Nos **Valeurs** chez Parsec Cloud"
 
-benefits:
+values:
   - title: "Innovation"
     description: "Nous valorisons l'innovation et cherchons sans cesse des solutions créatives pour apporter de la valeur ajoutée."
     icon: "LightBulbIcon"

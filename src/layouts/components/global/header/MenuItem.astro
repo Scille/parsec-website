@@ -29,7 +29,7 @@ const href = localizedLink(menu.url || Astro.url.origin, Astro.currentLocale);
           target={menu.url?.startsWith("http") ? "_blank" : undefined}
           href={href}
           class:list={[
-            "nav-link text-text-base-label hover:text-text-brand-default font-medium",
+            "nav-link text-text-base-label hover:text-text-brand-default outline-border-brand-default/20 font-medium hover:shadow-sm active:outline-1",
             {
               "nav-link-active text-text-brand-default":
                 pathname === `${href}/` || pathname === href,

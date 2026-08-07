@@ -13,17 +13,12 @@ export function getStaticPaths() {
 }
 
 const homepage = await getEntryCTM("homepage", "-index", Astro.currentLocale);
-const ourValues = await getEntryCTM(
-  "sections",
-  "our-values",
-  Astro.currentLocale,
-);
 ---
 
 <Base {...homepage.data}>
   <AboutUsSection />
   <VideoSection />
-  <BenefitsSection content={ourValues.data} />
+  <BenefitsSection />
   <TestimonialSection />
   <CallToAction />
 </Base>

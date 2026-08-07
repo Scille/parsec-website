@@ -47,7 +47,7 @@ if (!enable) return;
       <div class="mx-auto space-y-8 text-center lg:max-w-3xl">
         {
           title && (
-            <h2 class="has-italic-text text-h2-sm md:text-h2 text-text-on-color-heading mb-8 text-center leading-[1.15]">
+            <h2 class="has-italic-text text-text-on-color-heading mb-8 text-center leading-[1.15]">
               <AnimatedText
                 delay={0.2}
                 stagger={0.09}
@@ -81,36 +81,6 @@ if (!enable) return;
           )
         }
       </div>
-
-      <div
-        class="pattern-shape pointer-events-none absolute top-0 left-0 -z-10 flex h-full w-[150%] opacity-40 select-none">
-        {
-          new Array(12)
-            .fill("")
-            .map((_, index) => (
-              <div
-                class:list={[
-                  "to-surface-base-default/10 h-full w-1/12 from-transparent md:w-1/5",
-                  index % 2 !== 0 ? "bg-linear-to-t" : "bg-linear-to-b",
-                ]}
-              />
-            ))
-        }
-      </div>
     </div>
   </div>
-  <script>
-    import { animate, scroll } from "motion";
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const section = document.querySelector(".call-to-action");
-      if (!section) return;
-
-      scroll(
-        animate(".pattern-shape", {
-          x: [-1000, 100],
-        }),
-      );
-    });
-  </script>
 </section>
