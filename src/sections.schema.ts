@@ -389,6 +389,21 @@ export const openSourceSectionSchema = z.object({
   ),
 });
 
+export const ourValuesSectionSchema = z.object({
+  enable: z.boolean().default(true),
+  title: z.string(),
+  description: z.string().optional(),
+  button: sharedButtonBase.optional(),
+
+  values: z.array(
+    z.object({
+      icon: z.string(),
+      title: z.string(),
+      description: z.string(),
+    }),
+  ),
+});
+
 export const howItWorksSectionSchema = z
   .object({
     enable: z.boolean().default(false).optional(),
@@ -574,4 +589,5 @@ export const sectionsSchema = {
   faqSectionSchema,
   aboutSectionSchema,
   partnersSectionSchema,
+  ourValuesSectionSchema,
 };

@@ -24,10 +24,6 @@ let defaultContent = (
   await getEntryCTM("sections", "certification", Astro.currentLocale)
 )?.data as certificationSectionType;
 
-// Enables content customization (e.g., title, description) with a fallback to 'defaultContent' if not provided.
-// The 'content' prop should match the structure of 'defaultContent'.
-// Allows using this section with different content across multiple pages.
-// If 'content' is missing, 'defaultContent' will be used.
 let actualContent = overrideObjects(
   { ...defaultContent },
   Astro.props.content,
@@ -62,13 +58,13 @@ if (!enable) return;
         }
         {
           title && (
-            <h2 class="has-italic-text text-h3-sm md:text-h3 text-text-on-color-heading mb-6 leading-[1.15] font-semibold">
+            <h3 class="has-italic-text text-h4-sm md:text-h4 text-text-on-color-heading mb-6 leading-[1.15] font-semibold">
               <AnimatedText
                 delay={0.2}
                 stagger={0.09}
                 content={markdownify(title)}
               />
-            </h2>
+            </h3>
           )
         }
         {

@@ -17,11 +17,11 @@ let { title, description, image, button, subSection } = (
 )?.data as SectionType;
 ---
 
-<section class="features-hero pt-0">
+<section class="features-hero overflow-visible! pt-0">
   <div
     class="after:from-surface-brand-default after:to-surface-brand-default-pressed relative z-20 after:pointer-events-none after:absolute after:-top-20 after:-z-10 after:h-[calc(100%+5rem)] after:w-full after:bg-linear-180 after:content-['']">
     <div
-      class="pointer-events-none absolute -top-20 z-10 h-[calc(100%+5rem)] w-full overflow-hidden">
+      class="from-surface-brand-default to-surface-brand-default-pressed pointer-events-none absolute -top-20 z-10 h-[calc(100%+5rem)] w-full overflow-hidden bg-linear-180">
       <div class="container grid h-full w-full py-20 lg:grid-cols-2">
         {
           image && (
@@ -37,7 +37,8 @@ let { title, description, image, button, subSection } = (
         }
       </div>
     </div>
-    <div class="z-2 container grid w-full pt-16 pb-0 lg:grid-cols-2 lg:py-24">
+    <div
+      class="relative z-20 container grid w-full pt-16 pb-0 lg:grid-cols-2 lg:py-24">
       <div class="pb-20 md:pb-0">
         <div class="relative flex flex-col gap-12">
           <div class="flex max-w-2xl flex-col gap-6">
@@ -55,14 +56,23 @@ let { title, description, image, button, subSection } = (
             {
               description && (
                 <AnimatedText
-                  delay={0.9}
+                  delay={0.5}
                   stagger={0.03}
                   content={markdownify(description)}
                   class="text-body-xl text-text-on-color-body max-w-xl"
                 />
               )
             }
-            {button && <CustomButton class="mt-4" {...button} />}
+            {
+              button && (
+                <CustomButton
+                  class="mt-4"
+                  {...button}
+                  data-aos="fade-right-sm"
+                  data-aos-delay="500"
+                />
+              )
+            }
           </div>
         </div>
       </div>
@@ -84,7 +94,7 @@ let { title, description, image, button, subSection } = (
           </div>
           {subSection.title && (
             <div class="mx-auto max-w-xl text-center">
-              <h3 class="has-italic-text text-h3 text-text-base-heading leading-article-h3">
+              <h3 class="has-italic-text text-text-base-heading leading-article-h3">
                 <AnimatedText
                   delay={0.2}
                   stagger={0.09}

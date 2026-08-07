@@ -69,7 +69,7 @@ const contactInfoByIcon: Record<string, { label: string; link?: string }> = {
           {
             title && (
               <h2
-                class="has-italic-text text-h2-sm md:text-h2 text-text-base-heading flex flex-col"
+                class="has-italic-text text-text-base-heading flex flex-col"
                 set:html={markdownify(title)}
               />
             )
@@ -192,7 +192,7 @@ const contactInfoByIcon: Record<string, { label: string; link?: string }> = {
         <div class="mt-16 flex flex-col items-center gap-12">
           <div class="flex flex-col items-center gap-6">
             <h3
-              class="has-italic-text text-h3-sm md:text-h3 text-text-base-heading text-center"
+              class="has-italic-text text-text-base-heading text-center"
               set:html={markdownify(needs.title)}
             />
           </div>
@@ -213,7 +213,7 @@ const contactInfoByIcon: Record<string, { label: string; link?: string }> = {
                   />
                 )}
                 <div class="flex flex-col items-start gap-2">
-                  <h4 class="text-text-base-heading text-h4-sm md:text-h4 font-semibold">
+                  <h4 class="text-text-base-heading font-semibold">
                     {item.title}
                   </h4>
                   <p class="text-text-base-body text-body-lg">

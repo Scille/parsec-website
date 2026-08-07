@@ -35,7 +35,8 @@ let { enable = true, items } = actualContent as FeatureSectionType;
 if (!enable) return;
 ---
 
-<section class="bg-surface-base-page relative overflow-visible pb-16 lg:pb-64">
+<section
+  class="bg-surface-base-page relative overflow-visible pb-16 shadow-sm lg:pb-32">
   <div class="container flex flex-col gap-16 lg:gap-48">
     {
       items.map((item, index) => (
