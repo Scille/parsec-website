@@ -502,7 +502,7 @@
 }
 
 .expressive-code {
-  @apply w-full;
+  @apply w-full min-w-0;
 
   .header {
     @apply !hidden;

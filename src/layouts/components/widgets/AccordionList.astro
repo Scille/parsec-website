@@ -36,7 +36,7 @@ const {
             id={"faq-" + uniqueId}>
             <button
               aria-expanded={item.active ? "true" : "false"}
-              class="hs-accordion-toggle text-h4-sm md:text-h4 text-text-base-heading flex w-full items-center justify-between py-5 font-semibold"
+              class="hs-accordion-toggle text-h5-sm md:text-h5 text-text-base-heading flex w-full items-center justify-between py-5 font-semibold"
               aria-controls={"faq-content-" + uniqueId}>
               <span class="w-full text-left" set:html={item.title} />
               <span
@@ -80,7 +80,7 @@ const {
                 </div>
               ) : (
                 <div
-                  class="prose-styles text-text-base-body text-body-lg pb-5 md:max-w-4xl"
+                  class="text-text-base-body text-body-lg pb-5 md:max-w-4xl"
                   set:html={markdownify(item.content, true)}
                 />
               )}
