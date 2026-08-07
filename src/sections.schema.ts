@@ -351,31 +351,13 @@ export const contactSectionSchema = z
   })
   .optional();
 
-export const featuresSectionSchema = z
-  .object({
-    enable: z.boolean().default(false).optional(),
-    title: z.string().optional(),
-    featureListLimit: z.number().optional(),
-    list: z.array(
-      z.object({
-        image: z.string().optional(),
-        title: z.string(),
-        description: z.string(),
-        halfWidth: z.boolean(),
-        alternativeDirection: z.boolean(),
-        imageHeight: z.number(),
-      }),
-    ),
-  })
-  .optional();
-
-export const featuresSectionTwoSchema = z.object({
+export const featuresSectionSchema = z.object({
   enable: z.boolean().default(true),
   items: z.array(
     z.object({
-      image: z.url(), // path to image
+      classOverride: z.boolean().optional(),
+      image: z.url(),
 
-      // layout: image on left or right
       imagePosition: z.enum(["left", "right"]).default("left"),
       imageHeight: z.number().optional(),
 
@@ -587,7 +569,6 @@ export const sectionsSchema = {
   heroDownloadSchema,
   versionDownloadSchema,
   featuresSectionSchema,
-  featuresSectionTwoSchema,
   howItWorksSectionSchema,
   differentiationSectionSchema,
   faqSectionSchema,

@@ -1,52 +1,37 @@
 ---
 enable: true
-title: Powerful Features To Grow **Your Business**
+items:
+  - image: "/images/features/zerotrust.svg"
+    classOverride: true
+    imageHeight: 500
+    imagePosition: left
+    title: "Trust **only yourself**"
+    description: "No user, device, or access is trusted by default. Every connection is subject to continuous verification."
+    features:
+      - title: "Zero Trust Principles"
+        description: "Enforce zero trust by default: every access request is analyzed, every activity is tracked. You keep absolute control."
+      - title: "Stay in Control"
+        description: "Access detailed logs and real-time reports to verify every activity yourself, without relying on third parties. Trust cannot be delegated."
 
-# Limit how much features to be displayed in the other page then feature list page
-featureListLimit: 5 # false / number
+  - image: "/images/features/own-data.svg"
+    imageHeight: 390
+    imagePosition: right
+    title: "Your data **belongs to you**"
+    description: "Neither our servers, our administrators, nor any third party can access your data, even in the event of an infrastructure compromise."
+    features:
+      - title: "Siloed Data"
+        description: "Your data is end-to-end encrypted. Only you hold the key. Neither Parsec nor other users can access your data."
+      - title: "Data Protection Through Authentication"
+        description: "In the event of an intrusion, you are the only one able to decrypt the data stored on your device thanks to the authentication method you selected (password, keyring, SSO, or smart card)."
 
-# Feature list
-list:
-  - image: "/images/features/realtime-report.png"
-    imageHeight: 400
-    title: Real-Time Reporting
-    description: Monitor live data streams and respond instantly to important changes.
-    halfWidth: true
-    alternativeDirection: false
-  - image: "/images/features/collaboration.png"
-    imageHeight: 326
-    title: Seamless Collaboration
-    description: Keep your team aligned and move projects forward with ease.
-    halfWidth: true
-    alternativeDirection: true
-  - image: "/images/features/metrics.png"
-    imageHeight: 242
-    title: Satisfaction Metrics
-    description: Track how often, unhappy, or unsatisfied your users are in real time.
-    halfWidth: false
-    alternativeDirection: false
-  - image: "/images/features/ai-automation.png"
-    imageHeight: 235
-    title: Smart Automation Hub
-    description: From planning to coding, get everything done faster without a hitch.
-    halfWidth: false
-    alternativeDirection: true
-  - image: "/images/features/security.png"
-    imageHeight: 237
-    title: Instant Protection Alerts
-    description: Stay informed the moment something unusual happens and take action fast.
-    halfWidth: false
-    alternativeDirection: false
-  - image: "/images/features/update.png"
-    imageHeight: 400
-    title: Real-Time Updates, Zero Delays
-    description: Know what’s happening across your platform the moment it happens — no refresh needed.
-    halfWidth: true
-    alternativeDirection: false
-  - image: "/images/features/growth.png"
-    imageHeight: 326
-    title: Track What Matters Most
-    description: Monitor key metrics and spot opportunities with effortless visual reporting.
-    halfWidth: true
-    alternativeDirection: true
+  - image: "/images/features/privacy.svg"
+    imageHeight: 404
+    imagePosition: left
+    title: "Collaborate without sacrificing **your privacy**"
+    description: "Parsec provides precise access management, automatic synchronization between collaborators, and secure sharing with external partners, all while preserving your working habits."
+    features:
+      - title: "Secure Sharing by Default"
+        description: "Every access is rigorously verified and every action is logged. Collaborate securely without compromising privacy."
+      - title: "Uncompromised Privacy, Seamless Collaboration"
+        description: "No user or device can be considered trusted without proper verification. You retain full control over your exchanges."
 ---
