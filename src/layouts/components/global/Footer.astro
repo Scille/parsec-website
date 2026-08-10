@@ -8,12 +8,31 @@ import { markdownify } from "@/lib/utils/textConverter";
 import SocialComponent from "@/components/social/Social.astro";
 import { useTranslations } from "@/lib/utils/i18nUtils";
 import { localizedLink } from "@/lib/utils/localizedLink";
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+import CustomButton from "@/components/CustomButton.astro";
+import { getEntryCTM } from "@/lib/contentParser.astro";
 
 const translate = await useTranslations(Astro.currentLocale as string);
 const currentYear = new Date().getFullYear().toString();
+
+const footer = await getEntryCTM("footer", "-index", Astro.currentLocale);
+const { title, description, image, button } = footer.data;
 ---
 
-<footer class="bg-surface-base-page relative">
+<footer class="bg-surface-base-page relative pt-16">
+  <div class="container">
+    <div
+      class="from-surface-brand-default-subtle/10 to-surface-brand-default-subtle shadow-card relative mx-auto mb-16 flex max-w-3xl flex-col gap-4 overflow-hidden rounded-2xl bg-linear-to-r/oklch px-6 py-8">
+      <h4 class="has-italic-text" set:html={markdownify(title)} />
+      <p class="text-body-lg" set:html={markdownify(description)} />
+      <CustomButton class="text-text-brand-default! mt-1" {...button} />
+      <OptimizedImage
+        {...image}
+        class="absolute right-0 -bottom-1 hidden max-w-64 md:block"
+      />
+    </div>
+  </div>
+
   <div class="container space-y-8 px-6 md:space-y-12">
     <div class="grid grid-cols-1 gap-y-8 md:grid-cols-2 xl:grid-cols-3">
       <div class="space-y-8 xl:pe-20">
@@ -134,42 +153,6 @@ const currentYear = new Date().getFullYear().toString();
       </ul>
     </div>
   </div>
-
-  <script>
-    // Detect if the page has a call to action section and add a class to the footer accordingly.
-    // This approach adds a section gap between the last section of main tag & footer.
-
-    const ctaSection = document.querySelector(".cta-section");
-    const footer = document.querySelector("footer") as HTMLElement;
-
-    if (!ctaSection) {
-      footer.classList.add("has-call-to-action");
-    }
-
-    function fitText(el: any, { minSize = 12, maxSize = 500 } = {}) {
-      const parent = el.parentElement;
-
-      function resize() {
-        // Reset first so scrollWidth is measured at default size
-        el.style.fontSize = `${maxSize}px`;
-
-        // Calculate scale based on parent width vs. text width
-        const scale = parent.clientWidth / el.scrollWidth;
-
-        // Apply new size (with limits)
-        const newSize = Math.max(minSize, Math.min(maxSize, maxSize * scale));
-        el.style.fontSize = `${newSize}px`;
-      }
-
-      window.addEventListener("resize", resize);
-      resize();
-    }
-
-    // Usage
-    document
-      .querySelectorAll(".responsive-brand-text")
-      .forEach((el) => fitText(el, { minSize: 20, maxSize: 800 }));
-  </script>
 
   <style>
     .footer-bottom-menu-item:not(:last-child)::after {
