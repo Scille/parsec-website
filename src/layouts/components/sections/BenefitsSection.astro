@@ -5,12 +5,13 @@ import { getEntryCTM } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import overrideObjects from "@/lib/utils/overrideObjects.ts";
 import CustomButton from "@/components/CustomButton.astro";
-import type { ourValuesSectionSchema } from "@/sections.schema";
+import type { sectionsSchema } from "@/sections.schema";
 import Icons from "@/helpers/Icons.astro";
 import AnimatedText from "@/components/widgets/AnimatedText.astro";
 import type { HeroIconName } from "@/helpers/heroIconNames";
 
-type ourValuesSectionType = Section & z.infer<typeof ourValuesSectionSchema>;
+type ourValuesSectionType = Section &
+  z.infer<typeof sectionsSchema.ourValuesSection>;
 
 // Default content fetch
 let defaultContent = (

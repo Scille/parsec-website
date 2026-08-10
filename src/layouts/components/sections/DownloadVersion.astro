@@ -5,12 +5,13 @@ import { Code } from "astro-expressive-code/components";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import { codeFiles } from "@/lib/utils/codeFiles";
-import type { versionDownloadSchema } from "@/sections.schema";
+import type { sectionsSchema } from "@/sections.schema";
 import CustomButton from "@/components/CustomButton.astro";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
 
 // Type for this section data
-type SectionType = Section & NonNullable<z.infer<typeof versionDownloadSchema>>;
+type SectionType = Section &
+  NonNullable<z.infer<typeof sectionsSchema.versionDownload>>;
 
 // Fetching the content for this section
 let { enable, title, versions, image } = (

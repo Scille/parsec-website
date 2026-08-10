@@ -4,12 +4,13 @@ import type { Section } from "@/types";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import AnimatedText from "@/components/widgets/AnimatedText.astro";
-import type { heroSectionSchema } from "@/sections.schema";
+import type { sectionsSchema } from "@/sections.schema";
 import CustomButton from "@/components/CustomButton.astro";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
 
 // Type for this section data
-type SectionType = Section & NonNullable<z.infer<typeof heroSectionSchema>>;
+type SectionType = Section &
+  NonNullable<z.infer<typeof sectionsSchema.heroSection>>;
 
 // Fetching the content for this section
 let { title, description, image, button, subSection } = (

@@ -4,12 +4,12 @@ import type { z } from "astro/zod";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import overrideObjects from "@/lib/utils/overrideObjects.ts";
-import type { aboutSectionSchema } from "@/sections.schema";
+import type { sectionsSchema } from "@/sections.schema";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
 import AnimatedText from "@/components/widgets/AnimatedText.astro";
 
 // Type
-type SectionType = Section & z.infer<typeof aboutSectionSchema>;
+type SectionType = Section & z.infer<typeof sectionsSchema.aboutSection>;
 type Props = {
   content?: SectionType;
 };

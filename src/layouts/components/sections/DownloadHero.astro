@@ -3,10 +3,10 @@ import type { z } from "astro/zod";
 import type { Section } from "@/types";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
-import AnimatedText from "../widgets/AnimatedText.astro";
+import AnimatedText from "@/components/widgets/AnimatedText.astro";
 import { Code } from "astro-expressive-code/components";
 import { codeFiles } from "@/lib/utils/codeFiles";
-import type { heroDownloadSchema } from "@/sections.schema";
+import type { sectionsSchema } from "@/sections.schema";
 import CustomButton from "@/components/CustomButton.astro";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
 import {
@@ -15,7 +15,8 @@ import {
 } from "@/lib/utils/preline";
 
 // Type for this section data
-type SectionType = Section & NonNullable<z.infer<typeof heroDownloadSchema>>;
+type SectionType = Section &
+  NonNullable<z.infer<typeof sectionsSchema.heroDownload>>;
 
 // Fetching the content for this section
 let { title, description, image, downloadClient, goOnWeb, moreButton } = (

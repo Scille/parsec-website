@@ -3,14 +3,13 @@ import { markdownify, toLowerCase } from "@/lib/utils/textConverter";
 import CustomButton from "@/components/CustomButton.astro";
 import Icons from "@/layouts/helpers/Icons.astro";
 import type { z } from "astro/zod";
-import type { contactFormSchema } from "@/sections.schema";
-import type { inputFieldSchema } from "@/sections.schema";
+import type { sectionsSchema, inputFieldSchema } from "@/sections.schema";
 import { getPrelineSelectConfig } from "@/lib/utils/preline";
 import config from ".astro/config.generated.json";
 import { useTranslations } from "@/lib/utils/i18nUtils";
 
 interface Props {
-  form: z.infer<typeof contactFormSchema>;
+  form: z.infer<typeof sectionsSchema.contactForm>;
   class?: string;
 }
 

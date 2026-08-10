@@ -5,13 +5,14 @@ import { getEntryCTM } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import overrideObjects from "@/lib/utils/overrideObjects.ts";
 import CustomButton from "@/components/CustomButton.astro";
-import type { sectorsSectionSchema } from "@/sections.schema";
+import type { sectionsSchema } from "@/sections.schema";
 import Icons from "@/helpers/Icons.astro";
 import AnimatedText from "@/components/widgets/AnimatedText.astro";
 import type { HeroIconName } from "@/helpers/heroIconNames";
 
 // Type
-type sectorsSectionType = Section & z.infer<typeof sectorsSectionSchema>;
+type sectorsSectionType = Section &
+  z.infer<typeof sectionsSchema.sectorsSection>;
 type Props = {
   content?: sectorsSectionType;
 };

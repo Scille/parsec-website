@@ -100,7 +100,7 @@ export const inputFieldSchema = z.object({
 // SECTIONS SCHEMA
 // ================================================================================
 
-export const statsSectionSchema = z
+const statsSectionSchema = z
   .object({
     enable: z.boolean().default(false), // Control the visibility of this section
     list: z.array(
@@ -160,7 +160,7 @@ const heroSubSectionSchema = z.object({
 });
 
 // Hero section schema
-export const heroSectionSchema = z.object({
+const heroSectionSchema = z.object({
   enable: z.boolean().default(true),
   title: z.string(),
   preTitle: preTitleSchema.optional(),
@@ -193,7 +193,7 @@ const downloadSelectItemSchema = z.object({
   ),
 });
 
-export const heroDownloadSchema = z.object({
+const heroDownloadSchema = z.object({
   enable: z.boolean().default(true),
   title: z.string(),
   description: z.string(),
@@ -212,7 +212,7 @@ export const heroDownloadSchema = z.object({
   moreButton: sharedButtonBase.optional(),
 });
 
-export const versionDownloadSchema = z.object({
+const versionDownloadSchema = z.object({
   enable: z.boolean().default(true),
   title: z.string(),
   versions: z.array(
@@ -232,7 +232,7 @@ export const versionDownloadSchema = z.object({
   ),
 });
 
-export const pricingSectionSchema = z
+const pricingSectionSchema = z
   .object({
     enable: z.boolean().default(false),
     title: z.string().optional(),
@@ -286,7 +286,7 @@ export const pricingSectionSchema = z
   })
   .optional();
 
-export const contactFormSchema = z.object({
+const contactFormSchema = z.object({
   action: z.string().optional(),
   emailSubject: z.string().optional(),
   autoResponse: z.string().optional(),
@@ -308,7 +308,7 @@ const faqCategorySchema = z.object({
   list: z.array(FaqItem),
 });
 
-export const faqSectionSchema = z.object({
+const faqSectionSchema = z.object({
   title: z.string(),
   description: z.string().optional(),
   draft: z.boolean().default(false),
@@ -318,7 +318,7 @@ export const faqSectionSchema = z.object({
   list: z.array(faqCategorySchema),
 });
 
-export const contactSectionSchema = z
+const contactSectionSchema = z
   .object({
     enable: z.boolean().default(false),
     title: z.string(),
@@ -351,7 +351,7 @@ export const contactSectionSchema = z
   })
   .optional();
 
-export const featuresSectionSchema = z.object({
+const featuresSectionSchema = z.object({
   enable: z.boolean().default(true),
   items: z.array(
     z.object({
@@ -374,7 +374,7 @@ export const featuresSectionSchema = z.object({
   ),
 });
 
-export const openSourceSectionSchema = z.object({
+const openSourceSectionSchema = z.object({
   enable: z.boolean().default(true),
   title: z.string(),
   description: z.string(),
@@ -389,7 +389,7 @@ export const openSourceSectionSchema = z.object({
   ),
 });
 
-export const ourValuesSectionSchema = z.object({
+const ourValuesSectionSchema = z.object({
   enable: z.boolean().default(true),
   title: z.string(),
   description: z.string().optional(),
@@ -404,7 +404,7 @@ export const ourValuesSectionSchema = z.object({
   ),
 });
 
-export const howItWorksSectionSchema = z
+const howItWorksSectionSchema = z
   .object({
     enable: z.boolean().default(false).optional(),
     title: z.string().optional(),
@@ -430,7 +430,7 @@ export const howItWorksSectionSchema = z
   })
   .optional();
 
-export const differentiationSectionSchema = z
+const differentiationSectionSchema = z
   .object({
     enable: z.boolean().default(false).optional(),
     title: z.string().optional(),
@@ -456,7 +456,7 @@ export const differentiationSectionSchema = z
   })
   .optional();
 
-export const sectorsSectionSchema = z
+const sectorsSectionSchema = z
   .object({
     enable: z.boolean().default(false).optional(),
     title: z.string().optional(),
@@ -472,21 +472,7 @@ export const sectorsSectionSchema = z
   })
   .optional();
 
-export const teamSectionSchema = z
-  .object({
-    enable: z.boolean().default(false).optional(),
-    title: z.string().optional(),
-    list: z.array(
-      z.object({
-        name: z.string(),
-        image: z.string(),
-        role: z.string(),
-      }),
-    ),
-  })
-  .optional();
-
-export const testimonialSectionSchema = z
+const testimonialSectionSchema = z
   .object({
     enable: z.boolean().default(false).optional(),
     title: z.string().optional(),
@@ -512,7 +498,7 @@ export const testimonialSectionSchema = z
   })
   .optional();
 
-export const aboutSectionSchema = z.object({
+const aboutSectionSchema = z.object({
   enable: z.boolean().default(false),
   title: z.string(),
   image: z.object({
@@ -531,7 +517,7 @@ export const aboutSectionSchema = z.object({
   }),
 });
 
-export const videoSectionSchema = z.object({
+const videoSectionSchema = z.object({
   enable: z.boolean().default(false),
   preTitle: z.string().optional(),
   title: z.string(),
@@ -575,19 +561,22 @@ export const partnersSectionSchema = z
   .optional();
 
 export const sectionsSchema = {
+  contactForm: contactFormSchema,
   contactSection: contactSectionSchema,
   statsSection: statsSectionSchema,
-  teamSection: teamSectionSchema,
   testimonialSection: testimonialSectionSchema,
-  pricingSectionSchema,
-  heroSectionSchema,
-  heroDownloadSchema,
-  versionDownloadSchema,
-  featuresSectionSchema,
-  howItWorksSectionSchema,
-  differentiationSectionSchema,
-  faqSectionSchema,
-  aboutSectionSchema,
-  partnersSectionSchema,
-  ourValuesSectionSchema,
+  pricingSection: pricingSectionSchema,
+  heroSection: heroSectionSchema,
+  heroDownload: heroDownloadSchema,
+  versionDownload: versionDownloadSchema,
+  featuresSection: featuresSectionSchema,
+  howItWorksSection: howItWorksSectionSchema,
+  differentiationSection: differentiationSectionSchema,
+  faqSection: faqSectionSchema,
+  aboutSection: aboutSectionSchema,
+  partnersSection: partnersSectionSchema,
+  ourValuesSection: ourValuesSectionSchema,
+  openSourceSection: openSourceSectionSchema,
+  videoSection: videoSectionSchema,
+  sectorsSection: sectorsSectionSchema,
 };
