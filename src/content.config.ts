@@ -117,4 +117,5 @@ export const collections = {
     loader: contentLoader("./src/content/homepage"),
   }),
   author: defineCollection({ loader: contentLoader("./src/content/author") }),
+  footer: defineCollection({ loader: contentLoader("./src/content/footer") }),
 };
