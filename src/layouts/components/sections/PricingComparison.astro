@@ -30,18 +30,17 @@ const {
     "space-y-12 overflow-x-scroll overflow-y-visible md:max-w-4xl md:space-y-16 lg:mx-auto lg:w-full lg:max-w-5xl lg:overflow-x-visible lg:px-4 xl:max-w-7xl",
     className,
   ]}>
-  <div
-    class="mx-auto flex flex-wrap items-center justify-center gap-y-4 md:max-w-4xl md:justify-between">
+  <div class="sticky left-0 flex flex-col gap-6 pl-8">
     {
       title && (
-        <h1>
+        <h3>
           <AnimatedText
             delay={200}
             delay={0.1}
-            class="has-italic-text text-text-base-heading mb-6 text-center md:mb-8"
+            class="has-italic-text text-text-base-heading"
             content={markdownify(title)}
           />
-        </h1>
+        </h3>
       )
     }
     {
@@ -50,7 +49,7 @@ const {
           delay={0.9}
           stagger={0.03}
           content={markdownify(description)}
-          class="text-body-xl text-text-base-body mx-auto max-w-xl text-center"
+          class="text-body-xl text-text-base-body max-w-xl"
         />
       )
     }
@@ -59,10 +58,10 @@ const {
     class="relative w-full min-w-180 pr-8 after:-top-40 after:-z-10 lg:pr-0">
     {caption && <caption class="sr-only" set:html={markdownify(caption)} />}
     <colgroup>
-      <col class="w-[30%]" />
-      <col class="w-1/5" />
-      <col class="w-1/5" />
-      <col class="w-1/5" />
+      <col class="w-[20%] md:w-[30%]" />
+      <col class="w-1/6 md:w-1/5" />
+      <col class="w-1/6 md:w-1/5" />
+      <col class="w-1/6 md:w-1/5" />
     </colgroup>
     <thead>
       <tr>
@@ -116,12 +115,12 @@ const {
             <tr class="border-b">
               <td
                 class:list={[
-                  "border-border-base-default bg-surface-base-default sticky left-0 z-10 w-fit border-r pl-8 lg:border-none",
+                  "border-border-base-default bg-surface-base-page-secondary md:bg-surface-base-default sticky left-0 z-10 w-fit border-r pl-2 md:pl-8 lg:border-none",
                   index !== 0 && "pt-16",
                   "py-4",
                 ]}>
                 <span
-                  class="text-text-base-heading block text-lg font-semibold"
+                  class="text-text-base-heading text-md block font-semibold md:text-lg"
                   set:html={markdownify(item.label)}
                 />
               </td>
@@ -133,7 +132,7 @@ const {
             {item.list.map((row) => (
               <tr class="border-border-base-default hover:bg-surface-base-default-secondary/30 border-b">
                 <td
-                  class="border-border-base-default bg-surface-base-default text-text-base-body text-body-lg sticky left-0 z-10 min-w-xs border-r py-4 pl-8 font-medium lg:min-w-fit lg:border-none"
+                  class="border-border-base-default bg-surface-base-default-secondary md:bg-surface-base-default text-text-base-body text-body-md md:text-body-lg sticky left-0 z-10 max-w-44 border-r py-4 pl-2 font-medium md:pl-8 lg:min-w-fit lg:border-none"
                   set:html={markdownify(row.value)}
                 />
                 {row.included.map((includedIn) => (

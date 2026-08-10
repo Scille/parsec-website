@@ -12,7 +12,7 @@ values:
     icon: "UserGroupIcon"
 
   - title: "Communication"
-    description: "Nos clients sont au cœur de nos préoccupations : nous les écoutons et développons nos services en fonction de leurs besoins."
+    description: "Nos clients sont au cœur de nos préoccupations&nbsp;: nous les écoutons et développons nos services en fonction de leurs besoins."
     icon: "ChatBubbleLeftRightIcon"
 
   - title: "Transparence"

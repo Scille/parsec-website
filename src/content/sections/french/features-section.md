@@ -9,7 +9,7 @@ items:
     description: "Aucun utilisateur, appareil ou accès n'est considéré comme fiable par défaut. Chaque connexion fait l'objet d'une vérification continue."
     features:
       - title: "Principes du Zero Trust"
-        description: "Appliquez une confiance nulle par défaut : chaque demande d'accès est analysée, chaque activité est tracée. Vous gardez le contrôle absolu."
+        description: "Appliquez une confiance nulle par défaut&nbsp;: chaque demande d'accès est analysée, chaque activité est tracée. Vous gardez le contrôle absolu."
       - title: "Garder le contrôle"
         description: "Accédez à des logs détaillés et des rapports en temps réel pour vérifier vous-même chaque activité, sans dépendre de tiers. La confiance ne se délègue pas."
 

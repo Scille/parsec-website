@@ -19,7 +19,7 @@ list:
         title: "Pourquoi choisir Parsec Cloud ?"
         content: |
           Parsec Cloud est un coffre-fort collaboratif pour le partage des données sensibles et secrètes en Data Zero Trust et Zero Knowledge y compris avec l'extérieur de l'Organisation (comme avec l'Administration ou les clients).
-          C'est simple à déployer, facile à utiliser, chiffré de bout-en-bout (E2EE), bénéficiant du visa de sécurité CSPN de l'ANSSI : c'est comme One Drive, un Sharepoint ou un NAS chiffré de bout-en-bout, partageable avec l'extérieur et résistant aux ruptures de réseau parce qu'asynchrone.
+          C'est simple à déployer, facile à utiliser, chiffré de bout-en-bout (E2EE), bénéficiant du visa de sécurité CSPN de l'ANSSI&nbsp;: c'est comme One Drive, un Sharepoint ou un NAS chiffré de bout-en-bout, partageable avec l'extérieur et résistant aux ruptures de réseau parce qu'asynchrone.
       - active: false
         title: "Proposez-vous des intégrations avec d'autres outils ?"
         content: |
