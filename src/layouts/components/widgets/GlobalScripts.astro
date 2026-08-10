@@ -88,23 +88,25 @@
 
   // Horizontal scroll with shift + wheel
   function initHorizontalScroll() {
-    document.querySelectorAll("*").forEach((el) => {
-      if (el.scrollWidth > el.clientWidth) {
-        el.addEventListener(
-          "wheel",
-          function (event) {
-            if (event.shiftKey) {
-              event.preventDefault();
-              this.scrollBy({
-                left: event.deltaY * 3,
-                behavior: "smooth",
-              });
-            }
-          },
-          { passive: false },
-        );
-      }
-    });
+    document
+      .querySelectorAll(".overflow-x-auto, .overflow-x-scroll")
+      .forEach((el) => {
+        if (el.scrollWidth > el.clientWidth) {
+          el.addEventListener(
+            "wheel",
+            function (event) {
+              if (event.shiftKey) {
+                event.preventDefault();
+                this.scrollBy({
+                  left: event.deltaY * 3,
+                  behavior: "smooth",
+                });
+              }
+            },
+            { passive: false },
+          );
+        }
+      });
   }
 
   // Creative hover animation for buttons
