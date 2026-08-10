@@ -109,6 +109,9 @@ export const collections = {
   }),
   contact: defineCollection({ loader: contentLoader("./src/content/contact") }),
   faq: defineCollection({ loader: contentLoader("./src/content/faq") }),
+  features: defineCollection({
+    loader: contentLoader("./src/content/features"),
+  }),
   pricing: defineCollection({ loader: contentLoader("./src/content/pricing") }),
   download: defineCollection({
     loader: contentLoader("./src/content/download"),

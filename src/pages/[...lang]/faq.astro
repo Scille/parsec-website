@@ -12,6 +12,11 @@ export function getStaticPaths() {
 }
 
 const faqListPage = await getEntryCTM("faq", "-index", Astro.currentLocale);
+const faqSection = await getEntryCTM(
+  "sections",
+  "faq-section",
+  Astro.currentLocale,
+);
 
 // Remove drafts pages in production
 const response = handleDraftPage(faqListPage?.data);
@@ -19,7 +24,7 @@ if (response) return response;
 ---
 
 <Base {...faqListPage?.data}>
-  <SinglePageLayout content={faqListPage}>
+  <SinglePageLayout content={faqSection}>
     <FaqSection listPage={true} slot="content" />
   </SinglePageLayout>
   <CallToAction />
