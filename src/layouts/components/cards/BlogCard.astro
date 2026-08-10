@@ -61,19 +61,23 @@ const isHorizontal = layout === "horizontal";
     className,
   ]}
   {...rest}>
-  <a
-    class="group after:from-surface-base-default absolute inset-0 z-30 flex justify-center after:absolute after:inset-0 after:z-10 after:hidden after:rounded-3xl after:bg-linear-to-t after:to-transparent after:transition-opacity after:duration-500 after:md:block after:md:opacity-0 hover:md:after:opacity-100"
-    href={slug}>
-    <div class="relative z-40 h-full w-full">
-      <span
-        class="bg-surface-base-default pointer-events-none absolute top-full left-1/2 z-45 hidden h-16 w-16 -translate-1/2 items-center justify-center rounded-full shadow-2xl transition-[top] duration-500 group-hover:top-4/5 group-hover:rotate-45 md:flex md:opacity-0 group-hover:md:opacity-100">
-        <Icons
-          class="text-icon-brand-default text-2xl"
-          icon="ArrowUpRightIcon"
-        />
-      </span>
-    </div>
-  </a>
+  {
+    title && (
+      <a
+        class="group after:from-surface-base-default absolute inset-0 z-30 flex justify-center after:absolute after:inset-0 after:z-10 after:hidden after:rounded-3xl after:bg-linear-to-t after:to-transparent after:transition-opacity after:duration-500 after:md:block after:md:opacity-0 hover:md:after:opacity-100"
+        href={slug}
+        aria-label={"Learn more about " + plainify(title)?.toLowerCase()}>
+        <div class="relative z-40 h-full w-full">
+          <span class="bg-surface-base-default pointer-events-none absolute top-full left-1/2 z-45 hidden h-16 w-16 -translate-1/2 items-center justify-center rounded-full shadow-2xl transition-[top] duration-500 group-hover:top-4/5 group-hover:rotate-45 md:flex md:opacity-0 group-hover:md:opacity-100">
+            <Icons
+              class="text-icon-brand-default text-2xl"
+              icon="ArrowUpRightIcon"
+            />
+          </span>
+        </div>
+      </a>
+    )
+  }
   <div
     class:list={[
       "group relative flex max-w-2xl items-center justify-center overflow-hidden rounded-xl via-20% after:pointer-events-none",

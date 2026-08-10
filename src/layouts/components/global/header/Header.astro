@@ -87,9 +87,6 @@ const { stickyHeader, navigationButton } = config.settings;
     </nav>
   </div>
   <script>
-    import { ref, watch } from "vue";
-    const isScrolled = ref(false);
-
     function stickyHeader(): void {
       const header = document.querySelector(
         ".sticky-header",
@@ -98,10 +95,11 @@ const { stickyHeader, navigationButton } = config.settings;
 
       const fullLogo = header.querySelector(".logo-full") as HTMLElement | null;
       const iconLogo = header.querySelector(".logo-icon") as HTMLElement | null;
-      watch(isScrolled, (scrolled) => {
+
+      const setScrolled = (scrolled: boolean) => {
         fullLogo?.classList.toggle("hidden", scrolled);
         iconLogo?.classList.toggle("hidden", !scrolled);
-      });
+      };
 
       let prevScrollPos = window.scrollY;
       let ticking = false;
@@ -109,7 +107,7 @@ const { stickyHeader, navigationButton } = config.settings;
       // Initial state
       if (prevScrollPos > 0) {
         header.classList.add("scroll-up");
-        isScrolled.value = true;
+        setScrolled(true);
       }
 
       const updateHeader = () => {
@@ -123,17 +121,17 @@ const { stickyHeader, navigationButton } = config.settings;
 
         if (currentScrollPos === 0) {
           header.classList.remove("scroll-up", "scroll-down");
-          isScrolled.value = false;
+          setScrolled(false);
         } else if (prevScrollPos > currentScrollPos) {
           // Scrolling up
           header.classList.remove("scroll-down");
           header.classList.add("scroll-up");
-          isScrolled.value = true;
+          setScrolled(true);
         } else if (prevScrollPos < currentScrollPos) {
           // Scrolling down
           header.classList.remove("scroll-up");
           header.classList.add("scroll-down");
-          isScrolled.value = true;
+          setScrolled(true);
         }
 
         prevScrollPos = currentScrollPos;
