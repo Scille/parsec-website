@@ -52,6 +52,7 @@ goOnWeb:
     hoverEffect: "text-flip"
 
 moreButton:
+  enable: true
   label: "See other versions"
   url: "/download#versions"
   variant: "link"

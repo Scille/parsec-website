@@ -43,7 +43,7 @@ Dans le cadre de ses activités, SCILLE est amenée à collecter des Données à
   - Pays ;
   - Téléphone.
 
-Les Données à Caractère Personnel sont collectées lorsque l'Utilisateur utilise les services du Site et Parsec, notamment pour se créer un Compte ou pour contacter le service client. Scille ne collecte aucune information de paiement : celles-ci sont déléguées à un service dédié (https://stripe.com/fr).
+Les Données à Caractère Personnel sont collectées lorsque l'Utilisateur utilise les services du Site et Parsec, notamment pour se créer un Compte ou pour contacter le service client. Scille ne collecte aucune information de paiement&nbsp;: celles-ci sont déléguées à un service dédié (https://stripe.com/fr).
 
 ### 3. Protection, conservation et suppression des Données à Caractère Personnel
 
@@ -79,7 +79,7 @@ Les Utilisateurs disposent également du droit d'introduire une réclamation aup
 
 Les Utilisateurs disposent du droit de retirer leur consentement à tout moment, lorsque celui-ci avait été demandé, étant précisé que tout traitement antérieur demeurera licite.
 
-Les Utilisateurs peuvent exercer leurs droits en adressant un courriel à l'adresse suivante support@parsec.cloud ou en écrivant à l'adresse suivante : Scille – 11 chemin de Jalès – 33160 Saint-Médard-en-Jalles – FRANCE.
+Les Utilisateurs peuvent exercer leurs droits en adressant un courriel à l'adresse suivante support@parsec.cloud ou en écrivant à l'adresse suivante&nbsp;: Scille – 11 chemin de Jalès – 33160 Saint-Médard-en-Jalles – FRANCE.
 
 ## Politique des cookies utilisés par Scille
 
@@ -111,7 +111,7 @@ SCILLE les invite à se reporter au fichier d'aide de leur logiciel de navigatio
 
 ### 3. Type de cookies utilisés via le site marchand sign.parsec.cloud
 
-Présence uniquement de cookies fonctionnels : Ces cookies sont nécessaires au fonctionnement du site, sans eux vous ne pourriez utiliser l'intégralité des services proposés par le site. Ils sont déposés par Scille et ne concernent que le fonctionnement du site. Ils permettent de :
+Présence uniquement de cookies fonctionnels&nbsp;: Ces cookies sont nécessaires au fonctionnement du site, sans eux vous ne pourriez utiliser l'intégralité des services proposés par le site. Ils sont déposés par Scille et ne concernent que le fonctionnement du site. Ils permettent de :
 
 - sécuriser des espaces réservés et personnels du site, tels que votre compte, grâce à des identifiants ou des jetons d'accès limités dans le temps ;
 - assurer la sécurité du mécanisme d'authentification, notamment en limitant les tentatives d'accès robotisées ou inattendues ;

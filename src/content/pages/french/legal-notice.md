@@ -17,10 +17,10 @@ Ce site est la propriété de :
 
 #### Informations légales
 
-- Dénomination sociale ou raison sociale : SCILLE
-- Forme juridique de la société : SAS
-- Montant du capital social : 91.500,00 €
-- Directeur de la publication du site : Thierry LEBLOND
+- Dénomination sociale ou raison sociale&nbsp;: SCILLE
+- Forme juridique de la société&nbsp;: SAS
+- Montant du capital social&nbsp;: 91.500,00 €
+- Directeur de la publication du site&nbsp;: Thierry LEBLOND
 - Ce site est hébergé par :
 
 Le propriétaire de ce site se réserve le droit de modifier son contenu à tout moment et sans préavis. Il ne pourra être tenu responsable des conséquences de telles modifications. De même, il se réserve le droit d’interrompre ou de suspendre tout ou partie des fonctionnalités du site à tout moment et sans préavis.

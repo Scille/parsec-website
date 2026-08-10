@@ -47,7 +47,11 @@ const { class: className, layout = "regular" } = Astro.props;
 if (!enable) return;
 ---
 
-<section class:list={[layout !== "regular" && "block", className]}>
+<section
+  class:list={[
+    layout !== "regular" && "border-border-base-body mt-16 block border-t",
+    className,
+  ]}>
   {
     layout === "regular" ? (
       <div class="container space-y-12 md:space-y-16">

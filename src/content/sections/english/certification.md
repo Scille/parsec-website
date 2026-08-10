@@ -11,7 +11,7 @@ description: |
 button:
   enable: true
   label: Read article
-  url: /contact/
+  url: /blog/certification-cspn/
   rel: ""
   target: ""
   hoverEffect: "text-flip" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"

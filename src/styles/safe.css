@@ -44,7 +44,7 @@ input:where(:not([type])):focus,
 textarea:focus,
 select:focus,
 .hs-select button.form-input:focus {
-  @apply border-border-brand-default-hover shadow-brand;
+  @apply border-border-brand-default hover:border-border-brand-default shadow-brand ring-0!;
 }
 
 /* Label Styling */

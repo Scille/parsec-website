@@ -19,19 +19,19 @@ sectors:
     icon: "Cog6ToothIcon"
 
   - title: "Santé & hôpital"
-    description: "Dossiers médicaux, données patients, échanges inter-services : Parsec chiffre l'ensemble des informations de santé, assure leur intégrité et simplifie la conformité HDS et RGPD."
+    description: "Dossiers médicaux, données patients, échanges inter-services&nbsp;: Parsec chiffre l'ensemble des informations de santé, assure leur intégrité et simplifie la conformité HDS et RGPD."
     icon: "HeartIcon"
 
   - title: "Expert-comptable"
-    description: "Bilans, déclarations fiscales, documents clients : partagez vos documents sensibles en toute sécurité avec vos clients, auditeurs et partenaires, sans risque d'interception ou de fuite."
+    description: "Bilans, déclarations fiscales, documents clients&nbsp;: partagez vos documents sensibles en toute sécurité avec vos clients, auditeurs et partenaires, sans risque d'interception ou de fuite."
     icon: "CalculatorIcon"
 
   - title: "Administration"
-    description: "Conformité NIS2, hébergement souverain SecNumCloud, déploiement on-premise ou hybride : Parsec répond aux exigences spécifiques des organismes publics et des opérateurs de services essentiels."
+    description: "Conformité NIS2, hébergement souverain SecNumCloud, déploiement on-premise ou hybride&nbsp;: Parsec répond aux exigences spécifiques des organismes publics et des opérateurs de services essentiels."
     icon: "BuildingLibraryIcon"
 
   - title: "Grand groupe"
-    description: "Infrastructures hybrides, environnements multicloud, secret professionnel : Parsec s'intègre à votre architecture existante et sécurise vos données stratégiques à chaque niveau."
+    description: "Infrastructures hybrides, environnements multicloud, secret professionnel&nbsp;: Parsec s'intègre à votre architecture existante et sécurise vos données stratégiques à chaque niveau."
     icon: "BuildingOffice2Icon"
 
   - title: "Intégrateurs"

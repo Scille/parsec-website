@@ -58,5 +58,5 @@ moreButton:
   variant: "link"
   color: "neutral"
   hoverEffect: "text-flip"
-  icon: "ArrowDownIcon"
+  iconRight: "ArrowDownIcon"
 ---

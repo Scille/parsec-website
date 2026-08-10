@@ -8,7 +8,7 @@ La société SCILLE, société par actions simplifiées au capital de 95.967 eur
 
 SCILLE, éditeur de logiciel spécialisé en cybersécurité des données sensibles, édite le logiciel dénommé PARSEC (« Parsec »). Parsec ([https://parsec.cloud](https://parsec.cloud/)) est une solution logicielle open source qui permet de contrôler et de partager, dans un service Cloud, les données sensibles des utilisateurs, en toute sécurité.
 
-L’utilisation faite de Parsec sera régie par les présentes conditions générales de vente (les « CGV »). Les CGV sont fournies aux Utilisateurs au moment de leur inscription. Les Utilisateurs reconnaissent avoir lu et compris les CGV et acceptent d’y être liés. Toute acceptation des CGV emporte acceptation de la Politique de Confidentialité accessible à cette adresse : [https://parsec.cloud/politique-de-confidentialite/](https://parsec.cloud/politique-de-confidentialite/).
+L’utilisation faite de Parsec sera régie par les présentes conditions générales de vente (les « CGV »). Les CGV sont fournies aux Utilisateurs au moment de leur inscription. Les Utilisateurs reconnaissent avoir lu et compris les CGV et acceptent d’y être liés. Toute acceptation des CGV emporte acceptation de la Politique de Confidentialité accessible à cette adresse&nbsp;: [https://parsec.cloud/politique-de-confidentialite/](https://parsec.cloud/politique-de-confidentialite/).
 
 ## Article 1 \- Définitions
 
@@ -90,11 +90,11 @@ Désigne le document établi par SCILLE définissant les droits et obligations e
 
 Désigne les droits des personnes au sein d'une organisation et est défini lors de la procédure d’accueil d’un nouveau membre. Il existe trois types de profil :
 
-- « Administrateur » : Les administrateurs peuvent ajouter ou supprimer des utilisateurs dans une Organisation.
+- « Administrateur »&nbsp;: Les administrateurs peuvent ajouter ou supprimer des utilisateurs dans une Organisation.
 
-- « Membre » : Les membres peuvent créer et partager des espaces de travail avec d'autres utilisateurs au sein de l'organisation. Ces utilisateurs peuvent également accéder aux données des espaces de travail (en fonction de leur rôle dans l'espace de travail). Ils possèdent toutes les fonctionnalités de Parsec, à l'exception de la gestion des utilisateurs.
+- « Membre »&nbsp;: Les membres peuvent créer et partager des espaces de travail avec d'autres utilisateurs au sein de l'organisation. Ces utilisateurs peuvent également accéder aux données des espaces de travail (en fonction de leur rôle dans l'espace de travail). Ils possèdent toutes les fonctionnalités de Parsec, à l'exception de la gestion des utilisateurs.
 
-- « Externe » : Les utilisateurs externes peuvent collaborer (lire ou écrire) sur les espaces de travail auxquels ils sont invités, mais n’ont pas la permission de créer ou de partager des espaces de travail. L’utilisateur externe ne peut pas voir les informations personnelles (telles que l’adresse mail, le nom d'utilisateur ou le nom de l'appareil) des autres utilisateurs.
+- « Externe »&nbsp;: Les utilisateurs externes peuvent collaborer (lire ou écrire) sur les espaces de travail auxquels ils sont invités, mais n’ont pas la permission de créer ou de partager des espaces de travail. L’utilisateur externe ne peut pas voir les informations personnelles (telles que l’adresse mail, le nom d'utilisateur ou le nom de l'appareil) des autres utilisateurs.
 
 **RGPD**  
 Désigne le Règlement européen sur la protection des données personnelles 2016/679 du Parlement européen et du Conseil du 27 avril 2016 ;
@@ -103,16 +103,16 @@ Désigne le Règlement européen sur la protection des données personnelles 201
 
 Désigne les droits de l'utilisateur au sein d'un espace de travail Parsec. Il est défini pour la première fois par un gestionnaire ou un propriétaire de l'espace de travail ou lorsque l'espace de travail est partagé avec un membre.
 
-- « Lecteur » : droit de lire les documents de l’espace de travail ;
+- « Lecteur »&nbsp;: droit de lire les documents de l’espace de travail ;
 
-- « Contributeur » : droits du Lecteur auxquels s’ajoutent les droits d’ajouter et de supprimer des documents dans l’espace de travail ;
+- « Contributeur »&nbsp;: droits du Lecteur auxquels s’ajoutent les droits d’ajouter et de supprimer des documents dans l’espace de travail ;
 
-- « Gestionnaire » : droits du Contributeur auxquels s’ajoute le droit d'inviter des Utilisateurs à partager l'espace de travail ;
+- « Gestionnaire »&nbsp;: droits du Contributeur auxquels s’ajoute le droit d'inviter des Utilisateurs à partager l'espace de travail ;
 
-- « Propriétaire » : droits du Gérant auxquels s’ajoute le droit de retirer un ou plusieurs membres au sein de son espace de travail ce qui se traduit par un rechiffrement de toutes les métadonnées permettant l’accès à l’espace de travail ; un espace de travail est administré par son Propriétaire qui est seul habilité à supprimer un membre ; un espace de travail peut avoir plusieurs Propriétaires.  
+- « Propriétaire »&nbsp;: droits du Gérant auxquels s’ajoute le droit de retirer un ou plusieurs membres au sein de son espace de travail ce qui se traduit par un rechiffrement de toutes les métadonnées permettant l’accès à l’espace de travail ; un espace de travail est administré par son Propriétaire qui est seul habilité à supprimer un membre ; un espace de travail peut avoir plusieurs Propriétaires.  
   Le Propriétaire gère en droit l’ensemble des membres ayant accès à l’espace de travail. Les droits, paramétrables, sont définis à l’article 3.2 des CGV ;
 
-SaaS : Désigne la notion de « Software as a Service » au sens donné par Wikipédia : [https://fr.wikipedia.org/wiki/Logiciel_en_tant_que_service](https://fr.wikipedia.org/wiki/Logiciel_en_tant_que_service). PARSEC est déployé en mode SaaS ;
+SaaS&nbsp;: Désigne la notion de « Software as a Service » au sens donné par Wikipédia : [https://fr.wikipedia.org/wiki/Logiciel_en_tant_que_service](https://fr.wikipedia.org/wiki/Logiciel_en_tant_que_service). PARSEC est déployé en mode SaaS ;
 
 **SaaS dédié**
 
@@ -157,7 +157,7 @@ Parsec permet aux Utilisateurs de stocker, partager et accéder à leurs Donnée
 
 Parsec permet de contrôler et de partager les Données chiffrées en toute sécurité dans les Clouds, qu’ils soient privés ou publics.
 
-Le Terminal devient la seule entité de confiance contrôlant les clés de chiffrement et de signature permettant de sécuriser ces données sensibles. Une présentation détaillée de Parsec est consultable à l’adresse suivante : [https://docs.parsec.cloud/fr/stable/architecture.html](https://docs.parsec.cloud/fr/stable/architecture.html)
+Le Terminal devient la seule entité de confiance contrôlant les clés de chiffrement et de signature permettant de sécuriser ces données sensibles. Une présentation détaillée de Parsec est consultable à l’adresse suivante&nbsp;: [https://docs.parsec.cloud/fr/stable/architecture.html](https://docs.parsec.cloud/fr/stable/architecture.html)
 
 ### Article 3.2 \- Modèles d’hébergement de Parsec
 
@@ -165,10 +165,10 @@ Le Terminal devient la seule entité de confiance contrôlant les clés de chiff
 
 L’offre SaaS de Parsec repose sur un hébergement sécurisé dans le cloud, permettant à nos clients d'accéder à Parsec sans se soucier des aspects techniques liés à l'hébergement ou à la maintenance. Cette offre s’appuie sur notre partenariat avec l’hébergeur cloud souverain 3D-Outscale de Dassault Systèmes qui est certifié SecNumCcloud par l’ANSSI. Les caractéristiques de cette offre sont :
 
-- Haute disponibilité : Les infrastructures cloud de 3D-Outscale sont conçues pour garantir une disponibilité maximale des services.
-- Sécurité renforcée : Un chiffrement de bout en bout et une architecture Zero Trust assurent une protection optimale des données.
+- Haute disponibilité&nbsp;: Les infrastructures cloud de 3D-Outscale sont conçues pour garantir une disponibilité maximale des services.
+- Sécurité renforcée&nbsp;: Un chiffrement de bout en bout et une architecture Zero Trust assurent une protection optimale des données.
 - Mise à jour automatique des dernières versions du logiciel, avec des améliorations de sécurité et de fonctionnalité.
-- Gestion simplifiée : Nous prenons en charge toute la gestion technique, permettant à l’Utilisateur de se concentrer sur son activité tout en assurant une conformité continue avec les exigences de sécurité.
+- Gestion simplifiée&nbsp;: Nous prenons en charge toute la gestion technique, permettant à l’Utilisateur de se concentrer sur son activité tout en assurant une conformité continue avec les exigences de sécurité.
 
 Ce modèle est adapté aux entreprises souhaitant une solution rapide à déployer, évolutive, et sans contraintes d’infrastructure.
 
@@ -176,10 +176,10 @@ Ce modèle est adapté aux entreprises souhaitant une solution rapide à déploy
 
 L’option SaaS dédiée de Parsec permet aux clients de bénéficier des avantages du cloud tout en ayant un environnement réservé et personnalisé selon leurs besoins spécifiques. Ce modèle offre :
 
-- Environnement dédié : les données sont hébergées sur une infrastructure 3d-Outscale qui est exclusivement dédiée au client, garantissant un contrôle total sur les ressources et les performances.
-- Configurations personnalisées : Parsec s’adapte aux besoins techniques spécifiques en termes de sécurité, de connectivité, et d'intégration avec les systèmes internes.
-- Support technique dédié : Un accompagnement par notre équipe de support, pour garantir une expérience optimale et répondre aux besoins spécifiques.
-- Conformité : L’hébergement SaaS dédié permet de mieux répondre aux exigences strictes de conformité et de réglementation spécifiques au secteur du client.
+- Environnement dédié&nbsp;: les données sont hébergées sur une infrastructure 3d-Outscale qui est exclusivement dédiée au client, garantissant un contrôle total sur les ressources et les performances.
+- Configurations personnalisées&nbsp;: Parsec s’adapte aux besoins techniques spécifiques en termes de sécurité, de connectivité, et d'intégration avec les systèmes internes.
+- Support technique dédié&nbsp;: Un accompagnement par notre équipe de support, pour garantir une expérience optimale et répondre aux besoins spécifiques.
+- Conformité&nbsp;: L’hébergement SaaS dédié permet de mieux répondre aux exigences strictes de conformité et de réglementation spécifiques au secteur du client.
 
 Ce modèle est idéal pour les entreprises qui nécessitent un niveau supérieur de personnalisation, de sécurité et de contrôle tout en bénéficiant des avantages du cloud.
 
@@ -187,9 +187,9 @@ Ce modèle est idéal pour les entreprises qui nécessitent un niveau supérieur
 
 L’offre On Premise Parsec permet d’héberger les données directement sur les infrastructures locales du client, offrant ainsi un contrôle total sur les données et leur gestion. Les caractéristiques de ce modèle incluent :
 
-- Contrôle total : gestion entièrement par le client de l’installation, l’hébergement, et la maintenance de la solution sur ses serveurs, garantissant ainsi un contrôle maximal sur la sécurité et les performances de ses systèmes.
-- Support technique intégré : Parsec assure l’accompagnement lors de l’installation, ainsi qu’un support continu pour garantir une mise en œuvre réussie et une gestion efficace.
-- Conformité stricte : Idéal pour les clients soumis à des réglementations de confidentialité rigoureuses qui exigent une gestion des données sur leurs propres infrastructures.
+- Contrôle total&nbsp;: gestion entièrement par le client de l’installation, l’hébergement, et la maintenance de la solution sur ses serveurs, garantissant ainsi un contrôle maximal sur la sécurité et les performances de ses systèmes.
+- Support technique intégré&nbsp;: Parsec assure l’accompagnement lors de l’installation, ainsi qu’un support continu pour garantir une mise en œuvre réussie et une gestion efficace.
+- Conformité stricte&nbsp;: Idéal pour les clients soumis à des réglementations de confidentialité rigoureuses qui exigent une gestion des données sur leurs propres infrastructures.
 
 Ce modèle convient aux entreprises ou administrations ayant des exigences particulières en matière de confidentialité, de sécurité et de gestion interne des données, ainsi qu'à celles disposant des ressources pour gérer l'hébergement en interne.
 
@@ -321,13 +321,13 @@ L’Administrateur peut ajouter et/ou retirer des Utilisateurs de l’Organisati
 
 Tout utilisateur a la possibilité de créer un nombre illimité d’espaces de travail au sein d’une organisation. L'utilisateur qui crée un espace de travail en devient le propriétaire et peut inviter autant de membres qu'il le souhaite. Le propriétaire peut également définir les droits d'accès pour les utilisateurs de cet espace de travail, selon les niveaux de privilèges suivants, du moins au plus élevé :
 
-- « Lecteur » : droit de lire les documents d'espace de travail ;
+- « Lecteur »&nbsp;: droit de lire les documents d'espace de travail ;
 
-- « Contributeur » : droits du Lecteur auxquels s’ajoute le droit de copier des documents dans l’espace de travail ;
+- « Contributeur »&nbsp;: droits du Lecteur auxquels s’ajoute le droit de copier des documents dans l’espace de travail ;
 
-- « Gestionnaire » : droits du Contributeur auxquels s’ajoute le droit d'inviter des Utilisateurs à partager la documentation de l’espace de travail ;
+- « Gestionnaire »&nbsp;: droits du Contributeur auxquels s’ajoute le droit d'inviter des Utilisateurs à partager la documentation de l’espace de travail ;
 
-- « Propriétaire » : droits du Gérant auxquels s’ajoute le droit de révoquer un ou plusieurs membres au sein de son espace de travail ce qui se traduit par un rechiffrement de toutes les métadonnées permettant l’accès à l’espace de travail ; un espace de travail est administré par son Propriétaire qui est seul habilité à supprimer un membre ; un espace de travail peut avoir plusieurs Propriétaires.  
+- « Propriétaire »&nbsp;: droits du Gérant auxquels s’ajoute le droit de révoquer un ou plusieurs membres au sein de son espace de travail ce qui se traduit par un rechiffrement de toutes les métadonnées permettant l’accès à l’espace de travail ; un espace de travail est administré par son Propriétaire qui est seul habilité à supprimer un membre ; un espace de travail peut avoir plusieurs Propriétaires.  
   Le Propriétaire gère en droit l’ensemble des membres ayant accès à l’espace de travail.
 
 Un Utilisateur a donc accès à une Organisation au sein de laquelle il accède aux espaces de travail.
@@ -340,24 +340,24 @@ Un Utilisateur a donc accès à une Organisation au sein de laquelle il accède 
 
 La mise à disposition de la solution Parsec dans le cadre de l’offre SaaS se fait par le biais d’un accès direct à Parsec suite au téléchargement et installation du logiciel. Dès la souscription de l’abonnement, le client peut accéder à l’ensemble des fonctionnalités de la solution selon le plan choisi.
 
-- Durée du contrat : Le contrat est conclu pour une durée indéterminée, Sauf résiliation par l'une des parties conformément aux termes définis à l'article 4.5 des présentes CGVU.
-- Accès à la solution : L’accès à la solution Parsec est disponible 24/7, sous réserve du respect des conditions d’abonnement et des règles d’utilisation définies dans ces CGVU.
-- Fin de contrat : À l’expiration du contrat, l’accès à la solution sera suspendu, et le client pourra faire une extraction de ses données, dans les conditions prévues à l'article 4.5.
+- Durée du contrat&nbsp;: Le contrat est conclu pour une durée indéterminée, Sauf résiliation par l'une des parties conformément aux termes définis à l'article 4.5 des présentes CGVU.
+- Accès à la solution&nbsp;: L’accès à la solution Parsec est disponible 24/7, sous réserve du respect des conditions d’abonnement et des règles d’utilisation définies dans ces CGVU.
+- Fin de contrat&nbsp;: À l’expiration du contrat, l’accès à la solution sera suspendu, et le client pourra faire une extraction de ses données, dans les conditions prévues à l'article 4.5.
 
 #### Mise à disposition et durée du contrat pour l’offre SaaS dédié
 
 Pour l’offre SaaS dédiée, Parsec met à disposition une infrastructure cloud entièrement dédiée au client, offrant un environnement personnalisé et sécurisé. L’accès à cette solution se fait de la même manière qu’un service SaaS classique, mais avec des configurations et des ressources dédiées à l’entreprise du client.
 
-- Durée du contrat : Le contrat pour l’offre SaaS dédié est conclu pour une durée initiale de 12 mois, renouvelable automatiquement par tacite reconduction pour des périodes successives de 12 mois, sauf résiliation par l'une des parties conformément aux termes définis à l'article 4.5 des présentes CGVU.
-- Conditions spécifiques : L'offre SaaS dédié est soumise à des conditions particulières de personnalisation et de support, qui peuvent entraîner des engagements spécifiques et des délais supplémentaires pour l’intégration initiale et les ajustements personnalisés.
-- Fin de contrat : À la fin du contrat, le client peut faire une extraction de ses données dans le respect des délais et modalités précisées dans l'article 4.5, avec la possibilité de migrer vers une autre solution ou de passer à l’offre SaaS standard.
+- Durée du contrat&nbsp;: Le contrat pour l’offre SaaS dédié est conclu pour une durée initiale de 12 mois, renouvelable automatiquement par tacite reconduction pour des périodes successives de 12 mois, sauf résiliation par l'une des parties conformément aux termes définis à l'article 4.5 des présentes CGVU.
+- Conditions spécifiques&nbsp;: L'offre SaaS dédié est soumise à des conditions particulières de personnalisation et de support, qui peuvent entraîner des engagements spécifiques et des délais supplémentaires pour l’intégration initiale et les ajustements personnalisés.
+- Fin de contrat&nbsp;: À la fin du contrat, le client peut faire une extraction de ses données dans le respect des délais et modalités précisées dans l'article 4.5, avec la possibilité de migrer vers une autre solution ou de passer à l’offre SaaS standard.
 
 #### Mise à disposition et durée du contrat pour l’offre On Premise
 
 Dans le cadre de l'offre On Premise, Parsec fournit la solution de chiffrement de données qui sera installée sur les infrastructures du client.
 
-1. Durée du contrat : Le contrat pour l’offre On Premise est conclu pour une durée initiale de 12 mois. À l’issue de cette période, le contrat peut être renouvelé pour des périodes successives, ou résilié selon les modalités définies à l'article 4.5.
-2. Installation et mise en service : La mise à disposition de l'offre On Premise inclut l'installation et la configuration initiale du logiciel sur les infrastructures du client, avec un accompagnement technique selon les besoins.
+1. Durée du contrat&nbsp;: Le contrat pour l’offre On Premise est conclu pour une durée initiale de 12 mois. À l’issue de cette période, le contrat peut être renouvelé pour des périodes successives, ou résilié selon les modalités définies à l'article 4.5.
+2. Installation et mise en service&nbsp;: La mise à disposition de l'offre On Premise inclut l'installation et la configuration initiale du logiciel sur les infrastructures du client, avec un accompagnement technique selon les besoins.
 
 ### Article 4.2 \- Mise à disposition du Support
 
@@ -379,7 +379,7 @@ Le Support est ouvert du lundi au vendredi de 9H00 à 17H00.
 
 #### Précisions spécifiques pour SaaS dédié,
 
-Pour les clients ayant opté pour l'hébergement chez SaaS dédié, nous proposons un support technique accessible durant nos horaires d'ouverture, soit de 09h à 18h, du lundi au vendredi, hors jours fériés. Ce support est mis à disposition via l'adresse email dédiée : support@parsec.cloud.
+Pour les clients ayant opté pour l'hébergement chez SaaS dédié, nous proposons un support technique accessible durant nos horaires d'ouverture, soit de 09h à 18h, du lundi au vendredi, hors jours fériés. Ce support est mis à disposition via l'adresse email dédiée&nbsp;: support@parsec.cloud.
 
 Nos équipes techniques qualifiées se tiennent à disposition pour résoudre toute question technique ou problématique rencontrée par nos clients. Nous nous engageons à répondre dans les meilleurs délais, garantissant une prise en charge rapide et efficace de toutes les demandes, qu'il s'agisse de questions liées à l'utilisation de la solution Parsec, à la gestion des infrastructures, ou à d'autres aspects techniques.
 
@@ -405,9 +405,9 @@ SCILLE mettra tout en œuvre pour maintenir l’accès à PARSEC. Toutefois, sa 
 
 Les engagements de SCILLE sont strictement limités aux conditions générales de vente des services Cloud auxquels auront recours les Utilisateurs, notamment aux conditions générales de vente du PaaS Scalingo & du fournisseur de cloud (IaaS) SecNumCloud 3DS Outscale:
 
-- Conditions générales de vente de l’IaaS Outscale : [https://fr.outscale.com/wp-content/uploads/2023/06/CG-OUTSCALE-Juin-2023.pdf](https://fr.outscale.com/wp-content/uploads/2023/06/CG-OUTSCALE-Juin-2023.pdf)
+- Conditions générales de vente de l’IaaS Outscale&nbsp;: [https://fr.outscale.com/wp-content/uploads/2023/06/CG-OUTSCALE-Juin-2023.pdf](https://fr.outscale.com/wp-content/uploads/2023/06/CG-OUTSCALE-Juin-2023.pdf)
 
-- Conditions générales de vente du PaaS Scalingo : [https://scalingo.com/fr/blog/nos-conditions-generales-evoluent](https://scalingo.com/fr/blog/nos-conditions-generales-evoluent)
+- Conditions générales de vente du PaaS Scalingo&nbsp;: [https://scalingo.com/fr/blog/nos-conditions-generales-evoluent](https://scalingo.com/fr/blog/nos-conditions-generales-evoluent)
 
 SCILLE garantit la compatibilité de l’interopérabilité du Logiciel avec les services Cloud.
 
@@ -464,7 +464,7 @@ Responsabilités de SCILLE :
 
   SCILLE prend en charge la sauvegarde régulière des données dans le respect des normes de sécurité et des politiques de confidentialité de ses fournisseurs.
 
-- Garantir une disponibilité du service : 9h-18h du lundi au vendredi hors jour férié :
+- Garantir une disponibilité du service&nbsp;: 9h-18h du lundi au vendredi hors jour férié :
 
   SCILLE garantit une disponibilité du service durant les horaires de bureau classiques, avec une équipe dédiée pour résoudre toute question ou incident. Les clients peuvent nous contacter via notre support à l'adresse support@parsec.cloud.
 
@@ -492,17 +492,17 @@ L'option d'hébergement côté client permet à ce dernier de garder un contrôl
 
 Responsabilités du client :
 
-- Installation et mise en service des serveurs et des prérequis techniques : Le client est responsable de la mise en place initiale des serveurs et de la configuration de l'infrastructure nécessaire pour faire fonctionner l'application Parsec. Cette étape inclut la configuration des serveurs selon les prérequis techniques spécifiés par SCILLE.
-- Maintenance matérielle et mise à jour des infrastructures : Le client doit assurer le suivi et la maintenance des composants matériels, en effectuant les mises à jour nécessaires pour garantir que l'infrastructure reste performante et sécurisée.
-- Gestion des sauvegardes des données sensibles : Le client doit organiser et gérer ses propres sauvegardes, en s'assurant que les données sensibles sont protégées et accessibles en cas de besoin.
-- Protection des accès physiques et logiques au serveur (pare-feu, authentification) : Le client doit mettre en place des mesures de sécurité pour protéger les serveurs des attaques externes et des intrusions, en utilisant des pare-feu appropriés, des systèmes de détection d'intrusion, et des mécanismes d'authentification forte pour les utilisateurs.
-- Surveillance des performances pour assurer le bon fonctionnement de Parsec : Le client a la responsabilité de surveiller en continu les performances du système pour éviter tout dysfonctionnement ou toute dégradation de service qui pourrait impacter l'utilisation de Parsec.
+- Installation et mise en service des serveurs et des prérequis techniques&nbsp;: Le client est responsable de la mise en place initiale des serveurs et de la configuration de l'infrastructure nécessaire pour faire fonctionner l'application Parsec. Cette étape inclut la configuration des serveurs selon les prérequis techniques spécifiés par SCILLE.
+- Maintenance matérielle et mise à jour des infrastructures&nbsp;: Le client doit assurer le suivi et la maintenance des composants matériels, en effectuant les mises à jour nécessaires pour garantir que l'infrastructure reste performante et sécurisée.
+- Gestion des sauvegardes des données sensibles&nbsp;: Le client doit organiser et gérer ses propres sauvegardes, en s'assurant que les données sensibles sont protégées et accessibles en cas de besoin.
+- Protection des accès physiques et logiques au serveur (pare-feu, authentification)&nbsp;: Le client doit mettre en place des mesures de sécurité pour protéger les serveurs des attaques externes et des intrusions, en utilisant des pare-feu appropriés, des systèmes de détection d'intrusion, et des mécanismes d'authentification forte pour les utilisateurs.
+- Surveillance des performances pour assurer le bon fonctionnement de Parsec&nbsp;: Le client a la responsabilité de surveiller en continu les performances du système pour éviter tout dysfonctionnement ou toute dégradation de service qui pourrait impacter l'utilisation de Parsec.
 
 Responsabilités de SCILLE :
 
-- Assistance à l'installation initiale de Parsec (fourniture du support technique) : SCILLE s'engage à fournir un support technique pour aider le client lors de l'installation initiale de Parsec, afin d'assurer que l'intégration se déroule sans problème.
-- Fourniture des mises à jour logicielles et correctifs : SCILLE est responsable de fournir les mises à jour et les correctifs nécessaires pour garantir que Parsec fonctionne avec les dernières fonctionnalités et sécurités disponibles.
-- Documentation sur les prérequis techniques : SCILLE met à la disposition du client toute la documentation nécessaire pour assurer une installation correcte de l'application Parsec et des infrastructures requises.
+- Assistance à l'installation initiale de Parsec (fourniture du support technique)&nbsp;: SCILLE s'engage à fournir un support technique pour aider le client lors de l'installation initiale de Parsec, afin d'assurer que l'intégration se déroule sans problème.
+- Fourniture des mises à jour logicielles et correctifs&nbsp;: SCILLE est responsable de fournir les mises à jour et les correctifs nécessaires pour garantir que Parsec fonctionne avec les dernières fonctionnalités et sécurités disponibles.
+- Documentation sur les prérequis techniques&nbsp;: SCILLE met à la disposition du client toute la documentation nécessaire pour assurer une installation correcte de l'application Parsec et des infrastructures requises.
 
 _Clause de limitation de responsabilité :_
 
@@ -621,29 +621,29 @@ Les éléments disponibles sur PARSEC tels que les outils, textes, photographies
 
 Le prix mensuel d’une licence d’utilisation est mis à jour sur le site [https://parsec.cloud](https://parsec.cloud/) et est fonction du nombre d’Utilisateurs de l’Organisation et de la volumétrie de stockage global de l’Organisation, historique compris. La souscription à l’offre SaaS de Parsec se fait directement via notre site internet parsec.cloud, où le client choisit le plan d’abonnement correspondant. Une fois la souscription effectuée, les conditions suivantes s'appliquent :
 
-- Modalités de paiement : Le client sera prélevé mensuellement par carte bancaire, selon le tarif applicable à l’abonnement choisi. Le prélèvement sera effectué automatiquement à la date anniversaire de la souscription, sauf demande spécifique de modification par le client.
-- Accès aux factures : Toutes les factures relatives à l’abonnement seront disponibles dans l’espace compte client, accessible via l’application Parsec. Le client pourra consulter, télécharger et imprimer ses factures à tout moment.
-- Révision des tarifs : Parsec se réserve le droit de réviser les tarifs de l’abonnement en fonction des évolutions des services ou des conditions économiques, avec un préavis de 30 jours avant toute modification des montants facturés.
+- Modalités de paiement&nbsp;: Le client sera prélevé mensuellement par carte bancaire, selon le tarif applicable à l’abonnement choisi. Le prélèvement sera effectué automatiquement à la date anniversaire de la souscription, sauf demande spécifique de modification par le client.
+- Accès aux factures&nbsp;: Toutes les factures relatives à l’abonnement seront disponibles dans l’espace compte client, accessible via l’application Parsec. Le client pourra consulter, télécharger et imprimer ses factures à tout moment.
+- Révision des tarifs&nbsp;: Parsec se réserve le droit de réviser les tarifs de l’abonnement en fonction des évolutions des services ou des conditions économiques, avec un préavis de 30 jours avant toute modification des montants facturés.
 
 #### Cas de la licence d’utilisation pour un hébergement Saas dédié et On premise
 
 **Termes de Facturation**
 
-- Organisation unique : Chaque facture est associée à une organisation spécifique, dont le nom figure dans les informations détaillées présentes en dernière page de la facture ou du devis.
-- Nombre d’utilisateurs **administrateurs** prédéfinis : Le nombre d’utilisateurs administrateurs est fixé au préalable par le client lors de la signature du contrat.
-- Nombre d’utilisateurs **membres** prédéfinis : Le nombre d’utilisateurs membres est déterminé à l’avance par le client, en fonction de ses besoins.
-- Nombre d’utilisateurs **externes** prédéfini : Le nombre d’utilisateurs externes est également spécifié en fonction des exigences du client.
-- Volume de stockage prédéfini : Un volume de stockage spécifique est attribué à l’organisation, dans le cas où Parsec héberge les données.
-- Installation du compteur de licence : À la fin de chaque année, le client doit fournir les données du compteur afin d’établir la consommation réelle des utilisateurs.
+- Organisation unique&nbsp;: Chaque facture est associée à une organisation spécifique, dont le nom figure dans les informations détaillées présentes en dernière page de la facture ou du devis.
+- Nombre d’utilisateurs **administrateurs** prédéfinis&nbsp;: Le nombre d’utilisateurs administrateurs est fixé au préalable par le client lors de la signature du contrat.
+- Nombre d’utilisateurs **membres** prédéfinis&nbsp;: Le nombre d’utilisateurs membres est déterminé à l’avance par le client, en fonction de ses besoins.
+- Nombre d’utilisateurs **externes** prédéfini&nbsp;: Le nombre d’utilisateurs externes est également spécifié en fonction des exigences du client.
+- Volume de stockage prédéfini&nbsp;: Un volume de stockage spécifique est attribué à l’organisation, dans le cas où Parsec héberge les données.
+- Installation du compteur de licence&nbsp;: À la fin de chaque année, le client doit fournir les données du compteur afin d’établir la consommation réelle des utilisateurs.
   - Si le client reconduit son contrat, le devis suivant sera ajusté en fonction de la consommation réelle de l’année précédente.
   - Si le client met fin à son contrat et que la consommation dépasse le nombre d’utilisateurs ou de stockage défini lors de la signature du devis, Parsec se réserve le droit de facturer la différence correspondant à l'excédent de consommation.
 
 **Coût de Facturation des Différents Éléments**
 
-- Nombre d’utilisateurs administrateurs : voir prix public sur le site parsec.cloud
-- Nombre d’utilisateurs membres : voir prix public sur le site parsec.cloud
-- Nombre d’utilisateurs externes : voir prix public sur le catalogue produits Parsec
-- Volume de stockage : voir prix public sur le catalogue produits Parsec
+- Nombre d’utilisateurs administrateurs&nbsp;: voir prix public sur le site parsec.cloud
+- Nombre d’utilisateurs membres&nbsp;: voir prix public sur le site parsec.cloud
+- Nombre d’utilisateurs externes&nbsp;: voir prix public sur le catalogue produits Parsec
+- Volume de stockage&nbsp;: voir prix public sur le catalogue produits Parsec
 
 **Besoin client pour un développement spécifique**
 
@@ -680,16 +680,16 @@ SCILLE s’engage à traiter, via le Navigateur PARSEC déployé sur le Terminal
 
 La sécurité et la confidentialité des données sont des priorités absolues pour SCILLE, et ce, quel que soit le mode d'hébergement choisi par le client. Nous nous engageons à garantir une protection de haut niveau des informations sensibles tout au long de leur cycle de vie, depuis leur traitement jusqu'à leur stockage, en passant par leur transmission.
 
-- Chiffrement des données :  
+- Chiffrement des données&nbsp;:  
   Dans les deux options d'hébergement, nous appliquons des pratiques de chiffrement avancées pour garantir que les données du client restent sécurisées à chaque étape. Toutes les données traitées par Parsec sont systématiquement chiffrées localement avant toute transmission vers le cloud. Ce chiffrement garantit que même en cas de compromission du réseau ou de l'infrastructure de transmission, les informations demeurent illisibles sans la clé de déchiffrement appropriée. Par conséquent, les données sont protégées contre toute interception ou manipulation malveillante.
 
-- Accès aux données :  
+- Accès aux données&nbsp;:  
   SCILLE met en place une gestion des clés de chiffrement strictement côté client. Cela signifie que SCILLE n'a jamais accès aux données en clair. En d'autres termes, seules les personnes autorisées et habilitées par le client ont la possibilité de déchiffrer et d'accéder à ces informations sensibles. Cette approche permet d'assurer une confidentialité maximale, car SCILLE ne détient pas les clés nécessaires pour accéder directement aux données. Le contrôle des données reste ainsi entre les mains du client, renforçant la confiance dans l'intégrité du système.
 
-- Engagement envers le respect des normes RGPD :  
+- Engagement envers le respect des normes RGPD&nbsp;:  
   SCILLE s'engage pleinement à respecter les normes du Règlement Général sur la Protection des Données (RGPD). Nous appliquons toutes les pratiques nécessaires pour garantir que les données personnelles des utilisateurs sont traitées de manière conforme aux exigences légales de l'Union Européenne. Cela inclut des processus stricts de gestion des consentements, de respect des droits des utilisateurs, et de notification en cas de violation de données, le cas échéant.
 
-- Protocoles de sécurité stricts :  
+- Protocoles de sécurité stricts&nbsp;:  
   Afin de prévenir toute fuite de données, SCILLE met en œuvre des protocoles de sécurité rigoureux, conformes aux standards les plus élevés de l'industrie. Cela inclut l'utilisation de technologies de chiffrement avancées, de mécanismes de contrôle d'accès forts, ainsi que des audits réguliers pour identifier et corriger toute vulnérabilité. En outre, nous appliquons des contrôles stricts sur les accès au système, en veillant à ce que seules les personnes autorisées puissent interagir avec les données sensibles.
 
 #### Garantie de confidentialité

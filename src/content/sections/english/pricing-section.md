@@ -1,6 +1,7 @@
 ---
 enable: true
 title: "Choose the secure cloud **adapted to your needs**"
+priceComparisonTitle: "Plan details"
 description: "Discover our pricing plans and choose the one that best suits your organization's needs."
 caption: "Comparative table of Parsec Cloud plans"
 
@@ -23,10 +24,11 @@ list:
 
     button:
       enable: true
+      tag: "a"
       label: Choose this plan
-      url: /contact/?plan=business
-      rel:
-      target:
+      url: "https://sign.parsec.cloud/"
+      rel: "noopener noreferrer"
+      target: "_blank"
       variant: "fill"
       hoverEffect: "text-flip"
 
