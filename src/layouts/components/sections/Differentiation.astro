@@ -4,13 +4,14 @@ import type { z } from "astro/zod";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import overrideObjects from "@/lib/utils/overrideObjects.ts";
-import type { differentiationSectionSchema } from "@/sections.schema";
-import AnimatedText from "../widgets/AnimatedText.astro";
+import type { sectionsSchema } from "@/sections.schema";
+import AnimatedText from "@/components/widgets/AnimatedText.astro";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
 import CustomButton from "@/components/CustomButton.astro";
 
 // Type
-type SectionType = Section & z.infer<typeof differentiationSectionSchema>;
+type SectionType = Section &
+  z.infer<typeof sectionsSchema.differentiationSection>;
 type Props = {
   content?: SectionType;
 };

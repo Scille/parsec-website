@@ -5,11 +5,12 @@ import type { FAQCategory, Section } from "@/types";
 import { markdownify } from "@/lib/utils/textConverter";
 import AccordionList from "@/layouts/components/widgets/AccordionList.astro";
 import type { z } from "astro/zod";
-import type { faqSectionSchema } from "@/sections.schema";
+import type { sectionsSchema } from "@/sections.schema";
 import CustomButton from "@/components/CustomButton.astro";
 
 // Type for this section data
-type FaqSectionType = Section & NonNullable<z.infer<typeof faqSectionSchema>>;
+type FaqSectionType = Section &
+  NonNullable<z.infer<typeof sectionsSchema.faqSection>>;
 
 type Props = {
   faqType?: string;

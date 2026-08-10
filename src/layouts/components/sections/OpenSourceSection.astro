@@ -1,7 +1,7 @@
 ---
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import overrideObjects from "@/lib/utils/overrideObjects.ts";
-import type { openSourceSectionSchema } from "@/sections.schema";
+import type { sectionsSchema } from "@/sections.schema";
 import type { Section } from "@/types";
 import type { z } from "astro/zod";
 import { markdownify } from "@/lib/utils/textConverter";
@@ -12,7 +12,7 @@ import type { HeroIconName } from "@/helpers/heroIconNames";
 
 // Type for this section data
 type OpenSourceSectionType = Section &
-  NonNullable<z.infer<typeof openSourceSectionSchema>>;
+  NonNullable<z.infer<typeof sectionsSchema.openSourceSection>>;
 
 type Props = {
   content?: OpenSourceSectionType;

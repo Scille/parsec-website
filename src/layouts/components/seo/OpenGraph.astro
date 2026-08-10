@@ -65,16 +65,3 @@ if (!disableTagline) {
 {ogType && <meta property="og:type" content={ogType} />}
 {ogLocale && <meta property="og:locale" content={ogLocale} />}
 {pageUrl && <meta property="og:url" content={pageUrl} />}
-
-<!------------------------
-    Twitter Open Graph
--------------------------->
-{twitter && <meta name="twitter:creator" content={removeWhitespace(twitter)} />}
-{title && <meta name="twitter:title" content={removeWhitespace(title)} />}
-{
-  description && (
-    <meta name="twitter:description" content={removeWhitespace(description)} />
-  )
-}
-{twitterCard && <meta name="twitter:card" content={twitterCard} />}
-{image && <meta name="twitter:image" content={absoluteUrl(image, Astro)} />}

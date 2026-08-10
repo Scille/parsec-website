@@ -3,13 +3,13 @@ import type { Section } from "@/types";
 import type { z } from "astro/zod";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
-import TestimonialCard from "../cards/TestimonialCard.astro";
+import TestimonialCard from "@/components/cards/TestimonialCard.astro";
 import overrideObjects from "@/lib/utils/overrideObjects.ts";
-import type { testimonialSectionSchema } from "@/sections.schema";
-import AnimatedText from "../widgets/AnimatedText.astro";
+import type { sectionsSchema } from "@/sections.schema";
+import AnimatedText from "@/components/widgets/AnimatedText.astro";
 
 // Type
-type SectionType = Section & z.infer<typeof testimonialSectionSchema>;
+type SectionType = Section & z.infer<typeof sectionsSchema.testimonialSection>;
 type Props = {
   content?: SectionType;
   minimalLayout?: boolean;

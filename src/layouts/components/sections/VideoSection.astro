@@ -5,13 +5,14 @@ import { getEntryCTM } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import overrideObjects from "@/lib/utils/overrideObjects.ts";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
-import type { videoSectionSchema } from "@/sections.schema";
+import type { sectionsSchema } from "@/sections.schema";
 import VideoModal from "@/components/widgets/VideoModal.astro";
 import AnimatedText from "@/components/widgets/AnimatedText.astro";
 import Icons from "@/helpers/Icons.astro";
 import type { z } from "astro/zod";
 
-type SectionType = Section & NonNullable<z.infer<typeof videoSectionSchema>>;
+type SectionType = Section &
+  NonNullable<z.infer<typeof sectionsSchema.videoSection>>;
 
 type Props = {
   content?: SectionType;
