@@ -19,8 +19,9 @@ type Props = {
 };
 
 // Fetching the default content for the this section
-let defaultContent = (await getEntryCTM("faq", "-index", Astro.currentLocale))
-  ?.data as FaqSectionType;
+let defaultContent = (
+  await getEntryCTM("sections", "faq-section", Astro.currentLocale)
+)?.data as FaqSectionType;
 
 // Enables content customization (e.g., title, description) with a fallback to 'defaultContent' if not provided.
 // The 'content' prop should match the structure of 'defaultContent'.

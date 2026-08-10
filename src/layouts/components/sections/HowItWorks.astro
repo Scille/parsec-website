@@ -11,10 +11,7 @@ import CustomButton from "@/components/CustomButton.astro";
 
 // Type
 type SectionType = Section & z.infer<typeof sectionsSchema.howItWorksSection>;
-type Props = {
-  content?: SectionType;
-  hideButton?: boolean;
-};
+type Props = { content?: SectionType };
 
 // Default content fetch
 let defaultContent = (

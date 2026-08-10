@@ -311,7 +311,6 @@ const faqCategorySchema = z.object({
 const faqSectionSchema = z.object({
   title: z.string(),
   description: z.string().optional(),
-  draft: z.boolean().default(false),
   button: sharedButton.optional(),
   showTitle: z.boolean().default(false),
   showCategories: z.boolean().default(false),
