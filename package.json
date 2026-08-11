@@ -30,7 +30,7 @@
     "astro-auto-import": "^0.5.2",
     "astro-expressive-code": "^0.44.1",
     "astro-icon": "^1.1.5",
-    "date-fns": "^4.1.0",
+    "date-fns": "^4.4.0",
     "marked": "^17.0.4",
     "motion": "^12.37.0",
     "preline": "^4.2.0",
