@@ -671,8 +671,8 @@
 
 @theme inline {
   /* Configure font families in `src/config/fonts.json` */
-  --font-primary: "Albert Sans", sans-serif;
-  --font-secondary: "Orbit", sans-serif;
+  --font-primary: var(--font-primary-face), sans-serif;
+  --font-secondary: var(--font-secondary-face), sans-serif;
 
   --leading-body: 1.8;
   --leading-inherit: inherit;
