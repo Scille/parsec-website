@@ -19,7 +19,7 @@ list:
       src: "/images/how-work-step-3.svg"
       alt: "test"
     title: Your files are fragmented and encrypted
-    description: Each file is split into several parts, each of which is encrypted independently on your device. No one else can access them unless they are granted permission to do so..
+    description: Each file is split into several parts, each of which is encrypted independently on your device. No one else can access them unless they are granted permission to do so.
 button:
   label: "Discover the Parsec app"
   url: "/features/"
