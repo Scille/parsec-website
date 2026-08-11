@@ -1,0 +1,5 @@
+##### Assets in this directory are content-hashed by Astro's build (filename
+##### changes whenever content changes), so they can be cached for a long time.
+<filesMatch ".(css|js|jpg|jpeg|png|webp|gif|svg|ico|woff|woff2|eot|ttf)$">
+  Header set Cache-Control "max-age=31536000, public, immutable"
+</filesMatch>
