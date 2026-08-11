@@ -19,10 +19,15 @@
         "weight": "700"
       }
     ],
-    "preload": false,
+    "preload": [
+      { "weight": 400 },
+      { "weight": 500 },
+      { "weight": 600 },
+      { "weight": 700 }
+    ],
     "display": "swap",
     "cssVariable": "--font-primary-face",
-    "provider": "npm",
+    "provider": "fontsource",
     "subsets": ["latin"],
     "fallback": "sans-serif"
   },
@@ -34,10 +39,10 @@
         "weight": "400"
       }
     ],
-    "preload": false,
+    "preload": [{ "weight": 400 }],
     "display": "swap",
     "cssVariable": "--font-secondary-face",
-    "provider": "npm",
+    "provider": "fontsource",
     "subsets": ["latin"],
     "fallback": "sans-serif"
   }
