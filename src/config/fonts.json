@@ -21,7 +21,7 @@
     ],
     "preload": false,
     "display": "swap",
-    "cssVariable": "--astro-font-primary",
+    "cssVariable": "--font-primary",
     "provider": "google",
     "subsets": ["latin"],
     "fallback": "sans-serif"
@@ -36,7 +36,7 @@
     ],
     "preload": false,
     "display": "swap",
-    "cssVariable": "--astro-font-secondary",
+    "cssVariable": "--font-secondary",
     "provider": "google",
     "subsets": ["latin"],
     "fallback": "sans-serif"

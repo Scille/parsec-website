@@ -15,7 +15,6 @@ let {
   twitterCard = config.opengraph.twitterCard,
   ogType = config.opengraph.ogType,
   ogLocale = config.opengraph.ogLocale,
-  ogTitle = config.opengraph.ogTitle,
 } = Astro.props;
 
 // Get the possible value for title and description and remove any line breaks and extra spaces
@@ -49,6 +48,7 @@ if (!disableTagline) {
 --------------------------->{
   image && <meta property="og:image" content={absoluteUrl(image, Astro)} />
 }
+{title && <meta property="og:title" content={removeWhitespace(title)} />}
 {
   config.site.title && (
     <meta
@@ -62,20 +62,6 @@ if (!disableTagline) {
     <meta property="og:description" content={removeWhitespace(description)} />
   )
 }
-{ogTitle && <meta property="og:title" content={removeWhitespace(ogTitle)} />}
 {ogType && <meta property="og:type" content={ogType} />}
 {ogLocale && <meta property="og:locale" content={ogLocale} />}
 {pageUrl && <meta property="og:url" content={pageUrl} />}
-
-<!-------------------------
-    X (Twitter) Card
---------------------------->
-{twitterCard && <meta name="twitter:card" content={twitterCard} />}
-{title && <meta name="twitter:title" content={removeWhitespace(title)} />}
-{
-  description && (
-    <meta name="twitter:description" content={removeWhitespace(description)} />
-  )
-}
-{image && <meta name="twitter:image" content={absoluteUrl(image, Astro)} />}
-{twitter && <meta name="twitter:site" content={twitter} />}
