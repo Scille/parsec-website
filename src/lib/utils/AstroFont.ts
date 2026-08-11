@@ -40,6 +40,9 @@ export function generateAstroFontsConfig(fontsJson: Array<any>): Array<any> {
       // case 'adobe':
       //   provider = fontProviders.adobe();
       //   break;
+      case "npm":
+        provider = fontProviders.npm({ remote: false });
+        break;
       case "local":
         provider = "local";
         break;

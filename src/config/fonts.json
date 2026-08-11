@@ -21,8 +21,8 @@
     ],
     "preload": false,
     "display": "swap",
-    "cssVariable": "--font-primary",
-    "provider": "google",
+    "cssVariable": "--font-primary-face",
+    "provider": "npm",
     "subsets": ["latin"],
     "fallback": "sans-serif"
   },
@@ -36,8 +36,8 @@
     ],
     "preload": false,
     "display": "swap",
-    "cssVariable": "--font-secondary",
-    "provider": "google",
+    "cssVariable": "--font-secondary-face",
+    "provider": "npm",
     "subsets": ["latin"],
     "fallback": "sans-serif"
   }
