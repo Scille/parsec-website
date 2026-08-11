@@ -2,7 +2,7 @@ import mdx from "@astrojs/mdx";
 import vue from "@astrojs/vue";
 import remarkToc from "remark-toc";
 import sitemap from "@astrojs/sitemap";
-// import AutoImport from "astro-auto-import";
+import AutoImport from "astro-auto-import";
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import fontsJson from "./src/config/fonts.json";
@@ -50,22 +50,22 @@ export default defineConfig({
       themes: "github-dark",
     }),
     sitemapConfig.enable ? sitemap() : null,
-    // should be uncommented when astro-auto-import plugin will be compatible with Astro v7
-    // AutoImport({
-    //   imports: [
-    //     "@/components/CustomButton.astro",
-    //     "@/shortcodes/Accordion.astro",
-    //     "@/shortcodes/Notice.astro",
-    //     "@/shortcodes/Tabs.astro",
-    //     "@/shortcodes/Tab.astro",
-    //     "@/shortcodes/Testimonial.astro",
-    //     "@/shortcodes/CardGrid.astro",
-    //     "@/shortcodes/ImageList.astro",
-    //     "@/shortcodes/ImageItem.astro",
-    //     "@/shortcodes/Card.astro",
-    //     "@/shortcodes/VideoInline.astro",
-    //   ],
-    // }),
+
+    AutoImport({
+      imports: [
+        "@/components/CustomButton.astro",
+        "@/shortcodes/Accordion.astro",
+        "@/shortcodes/Notice.astro",
+        "@/shortcodes/Tabs.astro",
+        "@/shortcodes/Tab.astro",
+        "@/shortcodes/Testimonial.astro",
+        "@/shortcodes/CardGrid.astro",
+        "@/shortcodes/ImageList.astro",
+        "@/shortcodes/ImageItem.astro",
+        "@/shortcodes/Card.astro",
+        "@/shortcodes/VideoInline.astro",
+      ],
+    }),
     mdx(),
     vue(),
     icon(),
