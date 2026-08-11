@@ -150,7 +150,7 @@ let { title, preTitle, description, image, buttons } = (
   <div
     class="translate-x-centered absolute bottom-0 -z-10 h-1/4 w-full overflow-hidden">
     <div
-      class="absolute inset-0 -z-10 bg-linear-to-b from-transparent to-white">
+      class="to-surface-base-default absolute inset-0 -z-10 bg-linear-to-b from-transparent">
     </div>
   </div>
 
@@ -159,25 +159,31 @@ let { title, preTitle, description, image, buttons } = (
       const section = document.querySelector(".home-hero");
       if (!section) return;
 
+      const runWhenIdle =
+        window.requestIdleCallback ||
+        ((callback) => window.setTimeout(callback, 1));
+
       const mediaQuery = window.matchMedia("(min-width: 1024px)");
 
-      async function initAnimation() {
+      function initAnimation() {
         if (mediaQuery.matches && section) {
-          const { animate, scroll } = await import("motion");
+          runWhenIdle(async () => {
+            const { animate, scroll } = await import("motion");
 
-          scroll(
-            animate(".banner-image", {
-              transform: [
-                "perspective(75em) rotateX(20deg)",
-                "perspective(75em) rotateX(0deg)",
-              ],
-              zoom: ["0.8", "1"],
-            }),
-            {
-              target: section,
-              offset: ["start start", "90% end"],
-            },
-          );
+            scroll(
+              animate(".banner-image", {
+                transform: [
+                  "perspective(75em) rotateX(20deg)",
+                  "perspective(75em) rotateX(0deg)",
+                ],
+                zoom: ["0.8", "1"],
+              }),
+              {
+                target: section,
+                offset: ["start start", "90% end"],
+              },
+            );
+          });
         }
       }
 
