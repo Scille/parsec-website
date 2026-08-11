@@ -670,11 +670,9 @@
 }
 
 @theme inline {
-  /* Configure font families in `src/config/fonts.json`.
-     Actual fonts are loaded via the <Font> component in Head.astro,
-     which sets --astro-font-primary/--astro-font-secondary at runtime. */
-  --font-primary: var(--astro-font-primary), sans-serif;
-  --font-secondary: var(--astro-font-secondary), sans-serif;
+  /* Configure font families in `src/config/fonts.json` */
+  --font-primary: "Albert Sans", sans-serif;
+  --font-secondary: "Orbit", sans-serif;
 
   --leading-body: 1.8;
   --leading-inherit: inherit;
