@@ -1,9 +1,8 @@
 {
   "name": "parsec-website",
-  "type": "module",
-  "version": "2.0.1",
-  "license": "UNLICENSED",
   "private": true,
+  "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "dev": "npm run toml:watch -- --watch & astro dev",
     "web:open": "npm run toml:watch -- --watch & astro dev --open",
