@@ -14,6 +14,9 @@ button:
   url: /blog/certification-cspn/
   rel: ""
   target: ""
-  hoverEffect: "text-flip" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"
+  hoverEffect: "text-flip"
 image: "/images/certification.png"
+logoCSPN:
+  src: "/images/logo-cspn.png"
+  alt: "Logo CSPN"
 ---
