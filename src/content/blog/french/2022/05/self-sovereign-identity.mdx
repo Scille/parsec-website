@@ -1,0 +1,206 @@
+---
+title: "Identité auto-souveraine : comprendre le concept SSI"
+image: "gestion-identite-one-identity-balabit.jpg"
+date: 2022-05-30
+author: "Thierry Leblond"
+categories:
+  - Technologie
+draft: false
+
+excerpt: "L'identité auto-souveraine (SSI) est un modèle décentralisé qui donne aux utilisateurs le contrôle de leur identité numérique, sans autorité centrale."
+---
+
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+(Self-Sovereign Identity - SSI)
+
+## Qu’est-ce que l’identité ?
+
+Une identité est propre à chaque individu et elle évolue avec lui tout au long de sa vie. L’identité est garantie par un tiers de confiance, généralement l’État et regroupe un ensemble de données qui permettent d’identifier un individu : prénom, nom, date de naissance, caractéristiques physiques, filiation… D’autres attributs peuvent compléter cette identification comme le statut marital, les empreintes digitales ou encore l’emploi exercé.
+
+En termes juridiques, l’identité c'est l’ensemble des éléments qui, aux termes de la loi, concourent à l’identification d’une personne physique (dans la société, au regard de l’état civil) : nom, prénom, date de naissance, filiation, etc.
+
+## Qu’est-ce que l’identité numérique ? 1
+
+L’identité numérique prolonge cette définition en y ajoutant des attributs numériques comme les identifiants de connexion (adresse email, mot de passe) ou encore l’adresse IP. Plus généralement, l’identité numérique représente l’ensemble des attributs et données qui permettent d’identifier un individu, une organisation ou une entreprise en ligne.
+
+Notre identité numérique n'est donc pas une chose unique, mais plutôt la somme totale de tous les attributs qui existent à notre sujet dans le domaine numérique - une collection de points de données en constante augmentation et évolution. Ces données sont généralement sous le contrôle d'entités extérieures à l'individu auquel elles se rapportent.
+
+L'identité numérique est donc un lien technologique entre une entité réelle qui peut être une personne, un objet ou un organisme et des entités virtuelles qui sont des représentations numériques.
+
+Elle permet l'identification en ligne de l’entité ainsi que la mise en relation de celle-ci avec des communautés virtuelles sur le Web. L'identité numérique est à la fois :
+
+- construite par l'entité réelle ou le « Sujet »,
+- et influencée par le rapport qu'entretient ce dernier à son contexte d’interaction numérique.
+
+<OptimizedImage src="issuer-holder-verifier-trust-triangle.png" alt="" />
+
+Schéma de “Trust over IP” fondation (V1—2020-05-05) [\[2\]](https://trustoverip.org/wp-content/uploads/2020/05/toip_introduction_050520.pdf)
+
+L’identité numérique repose sur une structure de confiance à trois niveaux appelée « le triangle de confiance » :
+
+- l’Émetteur (Issuer)
+- le Titulaire ou détenteur (Holder)
+- le Vérificateur (Verifier)
+
+## Le référentiel européen eIDAS d’identité numérique
+
+#### [3]
+
+Electronic IDentification Authentication and trust Services (eIDAS) est un règlement de l'UE sur l'identification électronique et les services de confiance. eIDAS supervise l'identification électronique et les services de confiance pour les transactions électroniques au sein de l'Union Européenne.
+
+Il régule la signature électronique, les transactions électroniques, pour fournir un moyen sûr aux transactions en ligne comme le transfert électronique de fonds ou les transactions avec les services publics. À la fois, le signataire et le destinataire ont accès à un niveau supérieur de confort et de sécurité. Au lieu de s'appuyer sur des méthodes traditionnelles, telles que le courrier, la télécopie (fax), ou de délivrer en personne des documents sur papier, ils peuvent désormais effectuer des transactions à distance - y compris à travers les frontières internationales.
+
+Il offre un cadre d’interopérabilité pour l’ensemble des États membres de l’Union européenne pour l’identification et les transactions électroniques et permet ainsi le développement d’un marché unique de la confiance numérique.
+
+Le règlement eIDAS prévoit trois niveaux de garantie pour les moyens d’identifications électroniques qui sont accordés en fonction du respect des spécifications, normes et procédures minimales :
+
+- le niveau de sécurité faible qui permet simplement de réduire le risque d’utilisation abusive ou l’altération d’identité
+- le niveau de sécurité substantiel, qui permet de réduire substantiellement le risque d’utilisation abusive ou d’altération d’identité
+- le niveau de sécurité élevé, qui permet d’empêcher l’utilisation abusive ou l’altération de l’identité
+
+## Identité numérique centralisée ou fédérée ?
+
+#### [4]
+
+La plupart des services de gestion des identités numériques sont centralisés. Ils reposent sur la création d’un compte utilisateur par individu pour l’accès à une offre, un service ou plus généralement à une plateforme. Dans ce format, l’individu a autant d’identités numériques qu’il a de profils (chaque personne a, en moyenne, 150 comptes Internet).
+
+Le terme "centralisé” ne signifie pas qu'il existe une source unique et centrale d'identités numériques, mais plutôt que les identités numériques sont presque toujours fournies par une autorité tierce (souvent une entreprise privée) dans un but spécifique. Les informations relatives à l'identité sont "centralisées" au sein de cette entité.
+
+Avec la recrudescence des failles de sécurité ces dernières années, on a vu émerger des systèmes fédérés comme par exemple le service FranceConnect. Avec une seule identité numérique unique on accède à des services sur différents sites. Il est ainsi courant d'utiliser son compte Google pour se créer un compte sur un site e-commerce ou d’utiliser son compte Facebook pour accéder au service Netflix… Une approche qui est bien plus pratique mais qui se confronte toujours à la nécessité de se créer plusieurs comptes chez plusieurs fournisseurs car il n’existe pas un fournisseur d’identité qui fonctionne avec tous les sites.
+
+Ces deux systèmes ne sont pas satisfaisants :
+
+- Les systèmes centralisés nécessitent de créer un compte pour chaque service, ce qui est fastidieux et peut aboutir à l’utilisateur d’un mot de passe unique source de vulnérabilité
+- Les systèmes fédérés offrent un faible niveau de sécurité car une fuite de données chez un fournisseur d’identité compromet tous les accès reliés à ce fournisseur. Par ailleurs, les données personnelles peuvent être exploitées sans aucun contrôle possible.
+
+## Qu’est ce que l’identité auto-souveraine ou décentralisée ?
+
+#### [5]
+
+L'identité auto-souveraine (ou SSI pour Self-Sovereign Identity) ou « identité numérique décentralisée » est un mécanisme permettant aux utilisateurs d’administrer directement leur propre identité numérique. C’est un concept émergent, pouvant (mais ce n’est pas obligatoire) s'appuyer sur les technologies de la blockchain appliquées à la gestion de l’identité dans le monde numérique. Centré sur l'utilisateur , il vise à donner aux utilisateurs le contrôle total de leur propre identité, sans dépendre d'aucune autorité centralisée.
+
+**L'identité auto-souveraine  est une approche de l'identité numérique qui donne aux individus le contrôle de leur identité numérique.**
+
+Au lieu de créer et de gérer manuellement des comptes (identité centralisée) ou de faire confiance à des fournisseurs d’identité (identité fédérée), l’identité décentralisée place l’individu - le titulaire de ses attributs d’identité - au centre de chacune de ses interactions numériques avec un émetteur - l’auteur des documents justifiant les attributs d’identité d’une personne et un vérificateur - l’entité qui souhaite vérifier l’identité de l’utilisateur pour l’accès à ses services / produits. Cette relation tripartite - qu’on appelle également le triangle de la confiance - offre un niveau de sécurité et de contrôle inédit.
+
+<OptimizedImage src="self-sovereign-identity-comparison-table.png" alt="" />
+
+Le SSI vise à établir la confiance dans une interaction numérique. Afin d'être digne de confiance, une partie dans une interaction présentera des informations d'identification aux autres parties, et ces parties utilisatrices peuvent vérifier que les informations d'identification proviennent d'un émetteur en qui elles ont confiance. De cette manière, la confiance du vérificateur dans l'émetteur est transférée au titulaire du justificatif d'identité.
+
+Pour qu'un système d'identité soit autonome, les utilisateurs doivent contrôler les informations d'identification vérifiables qu'ils détiennent et leur consentement est requis pour utiliser ces informations d'identification. Cela réduit le partage involontaire des données personnelles des utilisateurs . Ce paradigme est donc totalement différent de celui de l'identité centralisée fournie par une entité extérieure.
+
+Dans un système SSI, les titulaires génèrent et contrôlent des identifiants uniques appelés identifiants décentralisés. La plupart des systèmes SSI sont décentralisés et les informations d'identification y sont gérées à l'aide de portefeuilles cryptographiques et vérifiées à l'aide d'une cryptographie à clé publique ancrée sur un registre distribué. Les informations d'identification peuvent contenir des données provenant de la base de données d'un émetteur, d'un compte de réseau social, d'un historique des transactions sur un site de commerce électronique ou d'une attestation d'amis ou de collègues.
+
+## eIDAS et identité auto-souveraine
+
+### Introduction
+
+La communauté blockchain en Europe a commencé à travailler sur la mise en œuvre de l’identité auto-souveraine, certains groupes ont fait part de leurs doutes et de leurs inquiétudes quant à l'alignement de ce concept sur le cadre juridique européen, en particulier le RGPD et le règlement eIDAS.[\[6\]](https://www.eublockchainforum.eu/sites/default/files/report_identity_v0.9.4.pdf)
+
+Un groupe de travail de l’Observatoire eIDAS[\[7\]](https://ec.europa.eu/futurium/en/eidas-observatory/ssi-and-eidas-vision-how-they-are-connected-share-your-views.html) a produit le 20 mai 2019 un premier document de réflexion sur la faisabilité de l’Identité Auto-souveraine dans un contexte de normalisation européenne.[\[8\]](https://ec.europa.eu/futurium/en/system/files/ged/eidas_supported_ssi_may_2019_0.pdf) Ce paragraphe en reprend les principales conclusions.
+
+### « Self-Sovereign Identity (SSI) » et eIDAS : une vision
+
+Le fonctionnement de l'identité numérique pose des problèmes de plus en plus persistants. Vu de l’usager, l'expérience est fragmentée, avec peu de normes d'interopérabilité et peu sûre, comme en témoignent les piratages et les violations de données.
+
+La cause originelle de ces dysfonctionnements apparaît de plus en plus intrinsèque comme lié à la nature « centralisée » du cadre actuel de l'identité numérique. (9)
+
+Or les progrès technologiques actuels notamment en cryptologie et en blockchain permettent d’imaginer de nouveaux cadres d'identité basés sur le concept d'identités décentralisées, incluant  un sous-ensemble connu sous le nom d'identité auto-souveraine (SSI).
+
+Notre identité numérique n'est pas une chose unique, mais la somme totale de tous les attributs qui existent à notre sujet dans le domaine numérique, un ensemble de points de données en constante évolution. Ces données sont sous le contrôle d'entités extérieures à l'individu auquel elles se rapportent.
+
+Le paradigme de l'identité décentralisée, consiste à placer l'utilisateur au centre du cadre et à supprimer ainsi le recours aux tierces parties. Dans ce monde, l'utilisateur « crée » sa propre identité, généralement un identifiant unique décentralisé ou « Decentralized Identifiers » ou « DID », puis associe des informations d'identité à cet identifiant.
+
+En associant des références vérifiables provenant d'autorités reconnues, par exemple des gouvernements, les utilisateurs peuvent créer les équivalents numériques de références du monde physique comme les cartes d'identité nationales et les permis de conduire.       
+
+- _L'utilisateur contrôle ainsi **ses identités auto-souveraines (SSI)**, c’est à dire non seulement son identité mais aussi les données qui lui sont associées. Il est libre d'utiliser les données d'identité qu'ils souhaitent que ce soit des informations d'identification vérifiables, des données provenant d'un compte de média social, d'un historique de transactions sur un site de commerce électronique ou d'attestations de ses propres tiers de confiance. Il n'y a aucune limite._
+
+Cette capacité à collecter et à utiliser l'identité permet d'exercer un contrôle beaucoup plus fin qu'aujourd'hui sur les informations personnelles qu'ils partagent selon le contexte des échanges.
+
+Le cadre de mise en œuvre de l'identité décentralisée apparaît de prime abord complexe de mise en œuvre. Il faut en effet :
+
+- des mécanismes permettant aux individus de créer leurs propres identités, souvent appelées identifiants décentralisés (DID),
+- des moyens de stocker les données personnelles, par exemple dans des enclaves de données personnelles.
+- des « portefeuilles » numériques ou d'autres agents utilisateurs pour permettre aux gens de gérer et d'utiliser leurs identités.
+
+### Decentralized Identifiers (DIDs)
+
+### [10]
+
+Les identifiants décentralisés (DID) sont un nouveau type d'identifiant qui permet une identité numérique vérifiable et décentralisée. Un DID fait référence à tout sujet (par exemple, une personne, une organisation, une chose, un modèle de données, une entité abstraite, etc.) tel que déterminé par le contrôleur du DID. Contrairement aux identificateurs fédérés classiques, les DID sont conçus de manière à pouvoir être découplés des registres centralisés, des fournisseurs d'identité et des autorités de certification. Plus précisément, le contrôleur d'un DID peut prouver son contrôle sans avoir besoin de la permission d'une autre partie.
+
+### L’identité numérique décentralisée à l’échelle européenne ?
+
+La proposition de règlement EUid déposée par la commission européenne en juin 2021 va dans le même sens que ce projet d’identité décentralisé déjà bien amorcé un peu partout dans le monde. Le but est de proposer à tous les citoyens et entreprises un accès à une identité numérique nationale qui puisse être reconnue à travers l’Union européenne. En d’autres termes, il s’agit de fournir un portefeuille numérique et gratuit à chaque citoyen, qui lui permettra s’il le souhaite de s’identifier de la même manière où qu’il se trouve dans l’Union européenne sur les grandes plateformes en ligne. Le règlement eIDAS version 2 permet à tous les acteurs technologiques de s’approprier l’identité décentralisée pour créer une solution qui assure sécurité et contrôle des données personnelles des individus.
+
+### L’approche par la Blockchain
+
+La blockchain, si elle n'est pas indispensable à l'identité décentralisée, peut constituer une solution pour traiter le cadre d'identification décentralisée. Elle peut par exemple :
+
+- prendre en charge la création et l'enregistrement des DID ou l'authentification et ses justificatifs,
+- fournir une infrastructure décentralisée pour le contrôle d'accès et le consentement à l'utilisation des données,
+- et éventuellement de relier les justificatifs aux contrats intelligents pour, par exemple, déclencher des paiements automatiques.
+
+En tant que grands livres entièrement numériques, les blockchains sont par définition des documents électroniques au sens de l'eIDAS. Cela signifie que les blockchains, ou plus précisément les données, y compris les contrats intelligents, qu'elles contiennent, ne peuvent se voir refuser une force juridique, du moins pas uniquement en raison de leur nature électronique.
+
+<OptimizedImage src="blockchain-public-utility.png" alt="" />
+
+Schéma de “Trust over IP” fondation (V1—2020-05-05) [\[11\]](https://trustoverip.org/wp-content/uploads/2020/05/toip_introduction_050520.pdf)
+
+Les blockchains pourraient également être utiles pour l'horodatage d'une manière conforme à eIDAS et les transactions basées sur les blockchains doivent pouvoir être considérées comme signées numériquement au bon niveau de signature dans le cadre d'eIDAS.
+
+### L’identité décentralisée est avant tout une question de choix politique
+
+La question est avant tout politique : quel est l’intérêt dans nos sociétés démocratiques européennes de favoriser le développement de l'identité décentralisée ?
+
+Pour pouvoir répondre à cette question, il faut :
+
+- clarifier les questions réglementaires en suspens, en particulier autour du statut des signatures et des horodatages basés sur la blockchain dans le cadre d'eIDAS.
+- contribuer à l'amorçage du cadre d'identité numérique décentralisée en formant les agences gouvernementales et en les encourageant à s'impliquer dans sa mise en place, par exemple en tant qu'émetteurs d'informations d'identification vérifiables.
+- Que l’UE poursuive le travail qu’elle a engagé sur l'identité décentralisée et les SSI, par exemple par le biais des travaux sur l'infrastructure européenne de services de blockchain.
+
+## Un cas d’usage d’identité mixte : Parsec
+
+[PARSEC](https://parsec.cloud/) est un logiciel de cyberprotection dédié au partage "zero trust" et "anti-ransomware" des données sensibles sur le Cloud. PARSEC est un logiciel cryptographique open source de distribution décentralisée de la confiance de bout en bout, zero trust et anti-ransomware, [certifié par l'ANSSI (CSPN)](https://www.ssi.gouv.fr/entreprise/certification_cspn/parsec-version-2-0-0/) et développé en partenariat avec la DGA (ministère des Armées)
+
+Ce système est  et en cours de déploiement dans l’administration française (ministères régaliens) et pour d'autres clients du secteur privé, pour le partage de fichiers sensibles en utilisant le cloud.
+
+S’agissant d’un système de sécurité end-to-end (E2E) de protection des données sensibles, la question de l’identité des usagers est centrale car elle conditionne la confiance.
+
+PARSEC concilie ainsi deux choix orthogonaux et complémentaires :
+
+- des cas où une identité est apportée par une « Infrastructure de Gestion de Clés » centralisée » (IGC) ou « Public Key Infrastructure » (PKI) garant de l’identité de la personne. L’avantage est de s’appuyer sur un annuaire de confiance sans avoir à refaire une procédure d’enrôlement pour chaque membre de l’organisation de confiance.
+- D’autres cas où l’identité peut être « auto-déclarative » ce qui permet d’enrôler un usager par exemple anonyme, ou en tout cas n’appartenant pas à l’infrastructure de confiance de l’IGC, mais dont l’identité est ponctuellement attestée par l’Administrateur de l’Organisation. L’avantage est ici de permettre des échanges de confiance entre usagers interne à l’annuaire de la PKI mais également externe à  l’annuaire comme par exemple des sous-traitants travaillant sur des plans confidentiels.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+Co-rédigé par :
+
+[Thierry Leblond](https://www.linkedin.com/search/results/all/?keywords=thierry%20leblond&origin=RICH_QUERY_SUGGESTION&position=0&searchId=558cb6b8-1aa1-465a-8c08-7172114196d3&sid=aS0), CEO Scille/Parsec
+
+[Najah Naffah](https://www.linkedin.com/in/najah-naffah-427121/), président de Quantum Blockchain
+
+---
+
+[\[1\]](#_ftnref1)     [https://fr.wikipedia.org/wiki/Identit%C3%A9_num%C3%A9rique](https://fr.wikipedia.org/wiki/Identit%C3%A9_num%C3%A9rique)
+
+[\[2\]](#_ftnref2) [https://trustoverip.org/wp-content/uploads/2020/05/toip_introduction_050520.pdf](https://trustoverip.org/wp-content/uploads/2020/05/toip_introduction_050520.pdf)
+
+[\[3\]](#_ftnref3)     [https://fr.wikipedia.org/wiki/Electronic_identification_and_trust_services](https://fr.wikipedia.org/wiki/Electronic_identification_and_trust_services)
+
+[\[4\]](#_ftnref4)     [https://www.archipels.io/post/quest-ce-que-lidentite-numerique](https://www.archipels.io/post/quest-ce-que-lidentite-numerique)
+
+[\[5\]](#_ftnref5)     [https://en.wikipedia.org/wiki/Self-sovereign_identity](https://en.wikipedia.org/wiki/Self-sovereign_identity)
+
+[\[6\]](#_ftnref6)     [https://www.eublockchainforum.eu/sites/default/files/report_identity_v0.9.4.pdf](https://www.eublockchainforum.eu/sites/default/files/report_identity_v0.9.4.pdf)
+
+[\[7\]](#_ftnref7)     [https://ec.europa.eu/futurium/en/eidas-observatory/ssi-and-eidas-vision-how-they-are-connected-share-your-views.html](https://ec.europa.eu/futurium/en/eidas-observatory/ssi-and-eidas-vision-how-they-are-connected-share-your-views.html)
+
+[\[8\]](#_ftnref8)     [https://ec.europa.eu/futurium/en/system/files/ged/eidas_supported_ssi_may_2019_0.pdf](https://ec.europa.eu/futurium/en/system/files/ged/eidas_supported_ssi_may_2019_0.pdf)
+
+[\[9\]](#_ftnref9)     Le terme "centralisé" ne signifie pas qu'il existe une source unique et centrale d'identités numériques, mais plutôt que les identités numériques sont presque toujours fournies par une autorité tierce (souvent une entreprise privée) dans un but spécifique. Les informations relatives à l'identité sont "centralisées" au sein de cette entité.
+
+[\[10\]](#_ftnref10)    [https://www.w3.org./TR/did-core/](https://www.w3.org./TR/did-core/)
+
+[\[11\]](#_ftnref11) [https://trustoverip.org/wp-content/uploads/2020/05/toip_introduction_050520.pdf](https://trustoverip.org/wp-content/uploads/2020/05/toip_introduction_050520.pdf)

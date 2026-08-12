@@ -1,0 +1,119 @@
+---
+title: "Digital Transformation Strategy Built on Security by Design"
+date: 2020-06-24
+author: "Thierry Leblond"
+categories:
+  - Digital Transformation
+draft: false
+
+excerpt: "A digital transformation strategy rests on four pillars: cloud security, data protection, agility, and mobility. Learn how to build yours by design."
+---
+
+{/* TODO: add main image, e.g. image: "main-image.png" in the frontmatter above */}
+
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+#### Reference
+
+For company managers, the "_digital transformation_" strategy is the result of a new vision of their information systems. Right from the design stage, it is broken down into four strategic axes "_by design_":
+
+**_security in the cloud, personal data protection, agility and mobility._**
+
+Against this backdrop, guaranteeing secure data sharing on the Internet is becoming a major challenge for any company's digital strategy.
+
+In a fast-changing economic and technological environment, all organization leaders now understand that the success of their "_digital transformation_" is strategic, even vital. But to name things is first to define them.
+
+### From perimeter security to "security by design"
+
+The first observation is that the Internet and the cloud are now inescapable. Since the invention of networks and the web, corporate IT security has been based on a vision of perimeter protection, which considers that only anything outside a protected network is the enemy. Protection is provided by network control and supervision technologies: firewalls, intrusion detection systems (IDS), pass-throughs, bastions, network connection control, deep packet inspection (DPI), security management centers (SOC).
+
+At the same time, access to data from outside the company requires network encryption technologies such as virtual private networks (VPNs).
+
+But this [Maginot Line-type](https://fr.wikipedia.org/wiki/Ligne_Maginot) protection strategy is not enough.
+
+It is inoperative in the face of new threats. And how can we ensure general access to company data when some countries prohibit or control VPNs?
+
+There are two main types of threat:
+
+- Data breaches: Yahoo: 3 billion user accounts, Uber: 57 million customers and 600,000 drivers, the Pentagon: 1.8 billion messages, i.e. several TB of data;
+- Data unavailability, even corruption: [NotPetya](https://fr.wikipedia.org/wiki/Cyberattaque_NotPetya) caused St Gobain to lose €250 million in orders. At the Cybersecurity 2020 Forum, the Director General of ANSSI estimated that **_4 out of 10 companies with fewer than 50 employees were victims of a cyber attack in 2019, while VSEs/SMEs account for almost 99.8% of French companies._**
+
+From now on, corporate IT security must begin at the design stage of the information system, based on the principle that the main vulnerability is the user terminal. In other words, it's the terminal, including its human dimension, that guarantees the level of security.
+
+For maximum security, data confidentiality and integrity must be ensured by the secrecy of private keys, which ideally should not leave the user terminal. The public cloud ensures resilience and availability. Authentication may need to be strong multi-factor, to guarantee user legitimacy.
+
+The general principle is to integrate security at the design stage of the information system or [Security by-design: analysis of the 3 main principles - Silicon](https://www.silicon.fr/avis-expert/securite-by-design-analyse-des-3-grands-principes). From now on, data confidentiality will have to be ensured exclusively by the client workstation, which is the only trusted entity. The encryption model will be "[Zero knowledge](https://www.parsec.cloud/product/technological-innovation.html)", with zero dissemination of knowledge, meaning that only the customer will know the encryption keys. Neither the administrator nor any other administrative authority will be able to access the encryption keys.
+
+Full data [historization and traceability](https://www.parsec.cloud/security/parsec-functionalities.html) will enable the authorized user to control the changes made to the data, and restore the content to a previous version.
+
+That's why the system must be built on triple trust:
+
+- Confidence in access: guaranteeing identity and associated rights
+- Confidence in transport: HTTPS offers an excellent guarantee
+- Trust in sharing: manage private keys at user level
+
+### Personal data protection and the GDPR or "Privacy by design"
+
+The General Data Protection Regulation or [GDPR](https://parsec.cloud/blog/enjeux_rgpd/) is a European regulation. Unlike a directive that must be transposed into national law, it took effect in every national law as of May 25, 2018 in organizations with more than 250 employees. In the event of non-compliance, penalties range up to 4% of worldwide annual sales. The company becomes responsible for the processing, automated or otherwise, of personal data, direct or indirect, concerning an identified or identifiable natural person.
+
+The data controller is considered to be the responsible economic player; this is the principle of accountability, and as such, it is up to him or her to take the necessary measures:
+
+- guarantee the protection of personal data,
+- to determine our goals,
+- document treatments,
+- collect explicit consent,
+- provide access to data,
+- allow them to be erased or ported.
+
+A second general principle is data protection by design, **_[Privacy By Design](https://www.rgpd-express.com/rgpd-le-principe-de-privacy-by-design-rgpd-express/)_**. This principle ties in with the previous one at system design level.
+
+### The Mobility By Design concept
+
+4G and wifi are almost everywhere in the world.
+
+Terminals have become massively mobile, and this is the majority mode of Internet consumption. Mobility has a direct impact on the way work is organized, and the spread of remote collaborative organizations means that the physical boundaries of the company are disappearing.
+
+As a result, information systems will have to be natively **_responsive by design_**. The basic rule for page design is "_user experience_" or UX, which also includes accessibility standards.
+
+**_"Agility By Design" and "Open Source" rather than Integrated Management Software Packages_**
+
+After 10 to 20 years, a company that has built up its information system in application bricks as its business needs have to manage a legacy of several hundred, or even thousands of independent applications, most of which process similar data, notably personal user data.
+
+All these applications are generally built on obsolete "three-tier" or "client-server" architectures, which are riddled with security holes. It's impossible to plug all the holes.
+
+In the best of cases, companies have organized their processes around integrated management software packages (ERP), which are supposed to cover all their functional needs, subject to business-specific configuration, but generally require numerous specific developments and a long, painful period of migration and change.
+
+**In the age of the digital revolution, continuing to organize your information system around software packages and application solutions is a strategic mistake, and raises many questions:**
+
+- How to ensure universal access to the company's information system?
+- How do you adapt your information system on a day-to-day basis to your company's ever-changing strategy, processes and organizations?
+- How can we guarantee that all data of the same nature will be processed in the same way and in sync?
+
+### Société Générale, for example, has announced a winning strategy
+
+- Migrate applications, middleware and infrastructure to open source solutions
+- Natively generalize the use of open-source software in new projects
+- Gradually replace traditional applications with open source alternatives
+- Turning IT staff into active contributors
+
+Ultimately, such a project will involve rebuilding the entire information system on the basis of an inter-system exchange platform. This will be done on the basis of free bricks built, on the one hand, from business processes (the frontend), and on the other, from a business restructuring of data (the backend).
+
+For the user, the transition will be smooth, since the platform will integrate an inter-system messaging system that will synchronize all legacy applications with the platform via application programming interfaces, or APIs.
+
+An organization's choice of open source ensures reversibility and longevity. Opening up the code is a further guarantee that security flaws will be corrected more quickly.
+
+The rapid adoption of Kubernetes, designed by Google to automate application deployment and scaling, is another example of the strength of the open source model.
+
+**In summary: Digital transformation = Security + Protection + Agility + Mobility + Open Source**
+
+### Digital transformation is the result of a vision
+
+The information system is now divided into five strategic "_By Design_" areas:
+
+- Security in the cloud
+- Personal data protection
+- Mobility
+- Agility
+- Open source
+
+For company managers, the "digital transformation" strategy is the result of a new vision of their information systems. Right from the design stage, it is broken down into four strategic by-design axes: security in the cloud, protection of personal data, agility and mobility. In this context, guaranteeing the secure sharing of data over the Internet has become a major challenge for the company's digital strategy.

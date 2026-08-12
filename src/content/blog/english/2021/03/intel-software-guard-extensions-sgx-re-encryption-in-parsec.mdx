@@ -1,0 +1,281 @@
+---
+title: "Intel SGX Re-Encryption Proof of Concept in Parsec"
+image: "intel-sgx.jpg"
+date: 2021-03-10
+author: "Thierry Leblond"
+categories:
+  - Technology
+draft: false
+
+excerpt: "This technical deep dive explains how Intel SGX enclaves enable secure key re-encryption in Parsec, detailing the proof-of-concept and implementation code."
+---
+
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+### INTRO
+
+This article follows on from the one [presenting SGX technology](https://parsec.cloud/intel_software_guard_extensions/). We will look at the technical application of SGX for a **proof of concept** (POC) carried out on the Parsec application.
+
+### PARSEC IN AES
+
+`Parsec` uses the `PyNacl` library (Python module based on `Libsodium` written in `C`) to encrypt information. As this library `Libsodium` is not officially compatible with SGX enclaves, due to the very limited number of instructions in an enclave, we had to modify the encryption part of Parsec. We decided to use [`AES`](https://fr.wikipedia.org/wiki/Advanced_Encryption_Standard) with the Galois Counter Mode ([`GCM`](https://en.wikipedia.org/wiki/Galois/Counter_Mode)).
+
+```
+def encrypt(self, data):
+        time_stamp = struct.pack(">Q", int(time.time()))
+        iv = os.urandom(12)
+        cipher = Cipher(algorithms.AES(self), modes.GCM(iv))
+        encryptor = cipher.encryptor()
+        ciphered = encryptor.update(data) + encryptor.finalize()
+        tag = encryptor.tag
+        version = b"\x80"
+        token = version + time_stamp + iv + tag + ciphered
+        return token
+```
+
+```
+    def decrypt(self, token):
+        version = token[0:1]
+        time_stamp = token[1:9]
+        iv = token[9:21]
+        tag = token[21:37]
+        ciphered = token[37:]
+        if version != b"\x80":
+            raise CryptoError("Invalid token")
+        if time_stamp > struct.pack(">Q", int(time.time())):
+            raise CryptoError("Invalid token")
+        try:
+            cipher = Cipher(algorithms.AES(self), modes.GCM(iv, tag))
+            decryptor = cipher.decryptor()
+            decrypted_message = decryptor.update(ciphered) + decryptor.finalize()
+            return decrypted_message
+        except (InvalidTag, ValueError) as exc:
+            raise CryptoError(str(exc)) from exc
+```
+
+The encryption function above encrypts the data and creates a **token** composed of different information:
+
+- 1 byte: the `version` by convention `\x80`
+- 8 bytes: the `time_stamp` of encryption
+- 12 bytes: the `vecteur d'initialisation`(`IV`)
+- the `tag` used by `AES` and the encrypted message `ciphered` written in multiples of 128 bytes.
+
+The purpose of the token is to facilitate retrieval of the various data for decryption from the enclave. Initially, data encryption and decryption are carried out locally, from the client, for performance reasons.
+
+### RECHIFFREMENT
+
+During the re-encryption process, the encrypted blocks (in the form of `token`) are sent from Parsec's `backend` to the SGX enclave, using SGX library functions. The old and new encryption keys are also sent to the enclave. To ensure that the old and new keys are not compromised, they are also encrypted from the client of the administrator who initiated the re-encryption. Only the enclave has the decryption key.
+
+```
+async def reencrypt_data(self, encrypted_old_key, encrypted_new_key, token: bytes):
+        ecall_reencryptText = LibSgx.ecall_reencryptText
+        ecall_reencryptText.restype = POINTER(c_char_p)
+        token_len = len(token)
+        status_code = c_int()
+        reencrypted_token_ptr = ecall_reencryptText(
+            byref(status_code), encrypted_old_key, len(encrypted_old_key), encrypted_new_key, len(encrypted_new_key), token, token_len
+        )
+        if status_code.value != SgxStatus.SGX_SUCCESS.value:
+            print(
+                "\nReencryption went wrong, status_code = ",
+                SgxStatus(status_code.value).name,
+                "\n\n",
+            )
+            return b""
+        else:
+            reencrypted_token = cast(reencrypted_token_ptr, POINTER(c_uint8 * token_len))
+            reencrypted_token = bytes(list(reencrypted_token.contents))
+            print("Reencryption SUCCESS")
+            return reencrypted_token
+```
+
+To use the SGX library, we use the [`ctypes`](https://docs.python.org/3/library/ctypes.html)which enables calls to be made from Python to functions written in `C`. The `status_code` is returned directly from the function called from the library, to indicate any errors during re-encryption in the enclave.
+
+### SGX POC
+
+`SGX` is divided into two parts:
+
+- The application part is converted into a dynamic library (`.dll` or `.so`) so that functions can be called from Python. As this library is executed from`OS`, it can potentially be compromised. The functions used will be described as `Untrusted`.
+- The enclave part, which uses a private area of memory. We call these functions `Trusted`.
+
+The application part enables calls to be made to enclave functions, via `E-CALL`.
+
+<OptimizedImage src="e-call.jpg" alt="" />
+
+The principle of data re-encryption with the enclave is therefore to transmit encrypted data and encryption/decryption keys via `E-CALL`. This makes it possible to perform re-encryption in the `Trusted` zone. It is also possible to call library functions from the enclave via methods called `O-CALL`, for example, to display text from the enclave. We had no use for this in `POC`.
+
+#### Library
+
+Below, we can see the library's `Untrusted` function, which we use for data re-encryption. The function takes as arguments `status_code`, the old encrypted key, the new encrypted key and the encrypted token with their respective sizes.
+
+```
+uint8_t *ecall_reencryptText(int *status_code, const uint8_t *encrypted_old_key, size_t encrypted_old_key_len, const uint8_t *encrypted_new_key, size_t encrypted_new_key_len,  const uint8_t *input_token, size_t token_len)
+{
+
+    sgx_status_t ret = SGX_ERROR_UNEXPECTED;
+
+	/*Debug Variables*/
+	char debug[50];
+	uint8_t debug_size = 50;
+
+    ret = reencryptText(global_eid, encrypted_old_key, encrypted_old_key_len, encrypted_new_key, encrypted_new_key_len, (char *)input_token, token_len, debug, debug_size);
+    printf("DEBUG = %s\n", debug);
+    if (strcmp(debug, "SUCCESS") != 0) {
+        if (ret == SGX_SUCCESS)
+            ret = SGX_ERROR_UNEXPECTED;
+        *status_code = ret;
+        printf("status code end of app = %i\n", *status_code);
+        return NULL;
+	}
+	if (ret != SGX_SUCCESS)
+    {
+        *status_code = ret;
+        return NULL;
+    }
+
+    return (uint8_t *)input_token;
+}
+```
+
+The line of interest here is :
+
+```
+ret = reencryptText(global_eid, encrypted_old_key, encrypted_old_key_len, encrypted_new_key, encrypted_new_key_len, (char *)input_token, token_len, debug, debug_size);
+
+```
+
+This is the`E-CALL` that calls the enclave's re-encryption function. This `E-CALL` returns a status `SGX_STATUS` indicating whether the operation was successful or whether there are any potential errors.
+
+#### .edl files
+
+Before delving deeper into the enclave's re-encryption function, it's important to understand how data is exchanged between the library and the enclave. The enclave's memory is always private and independent from that of the library, which is executed from`OS`. There is no data transfer as such, but a copy of the variables inserted in the function call.
+
+To indicate in which direction the variable copy must operate, it is important to understand the files of type `.edl`:
+
+```
+enclave {
+
+    from "sgx_tstdc.edl" import sgx_oc_cpuidex;
+    include "sgx_tcrypto.h"
+
+    untrusted {
+        [cdecl] void emit_debug([string,in] const char *str);
+    };
+    trusted {
+        public void reencryptText([in,size=encrypted_old_key_len] const uint8_t *p_encrypted_old_key, size_t encrypted_old_key_len,
+        [in,size=encrypted_new_key_len] const uint8_t *p_encrypted_new_key, size_t encrypted_new_key_len, [in, out, size=token_len] char *token, size_t
+        token_len, [out,size=debug_size]char *debug, uint8_t debug_size);
+    };
+
+};
+```
+
+The file `Libc.edl` in the enclave section above tells the library how to proceed for each variable during a `E-CALL`. Let's take the example of the line corresponding to`E-CALL` for re-encryption in the `trusted` section:
+
+The direction of copying is indicated in square brackets before variables are declared. `in` indicates that the variable is copied from the library to the enclave (before execution of the function in the enclave), `out` from the enclave to the library (at the end of execution of the function in the enclave). `in, out` copies in both directions. In this case, the token will be copied from the library function to the enclave, and the re-encrypted token will be copied from the enclave to the library function. The pointer size must also be specified.
+
+When the enclave is compiled, the automatic tool supplied with SGX (`edger8r`) converts the methods defined in the various edl files into `C` functions.
+
+#### Enclave
+
+We're only interested in the enclave function called for re-encryption:
+
+```
+void reencryptText(const uint8_t *p_encrypted_old_key, size_t encrypted_old_key_len, const uint8_t *p_encrypted_new_key, size_t encrypted_new_key_len, char *token, size_t token_len, char *debug, uint8_t debug_size)
+{
+	sgx_status_t status;
+	char *error_msg = "SUCCESS";
+
+    sgx_aes_gcm_128bit_key_t    old_key;
+    sgx_aes_gcm_128bit_key_t    new_key;
+
+	uint8_t version[SIZE_VERSION];
+	uint8_t time_stamp[SIZE_TIMESTAMP];
+	uint8_t iv[SGX_AESGCM_IV_SIZE];
+	sgx_aes_gcm_128bit_tag_t tag[SIZE_TAG];
+
+    ...
+}
+```
+
+The function takes the same arguments as the library function, with the exception of the `status_code` directly returned by the enclave and a variable for debugging purposes. The first step is to decompose the `token` received:
+
+```
+    ...
+    unsigned long long len_ciphered = encrypted_old_key_len - (SIZE_VERSION + SIZE_TIMESTAMP + SGX_AESGCM_IV_SIZE + SIZE_TAG);
+	uint8_t ciphered_old_key[len_ciphered];
+
+	memcpy(version, p_encrypted_old_key, SIZE_VERSION);
+	memcpy(time_stamp, &(p_encrypted_old_key[SIZE_VERSION]), SIZE_TIMESTAMP);
+	memcpy(iv, &p_encrypted_old_key[SIZE_VERSION + SIZE_TIMESTAMP], SGX_AESGCM_IV_SIZE);
+	memcpy(tag, &p_encrypted_old_key[SIZE_VERSION + SIZE_TIMESTAMP + SGX_AESGCM_IV_SIZE], SIZE_TAG);
+	memcpy(ciphered_old_key, &p_encrypted_old_key[SIZE_VERSION + SIZE_TIMESTAMP + SGX_AESGCM_IV_SIZE + SIZE_TAG], len_ciphered);
+    ...
+```
+
+We then check the :
+
+```
+	...
+    // Checking version
+	if (memcmp((const void *)version, "\x80", 1))
+	{
+		error_msg = "Bad token";
+		memcpy(debug, error_msg, strlen(error_msg));
+		return;
+	}
+    ...
+```
+
+For this `POC` we don't check `time_stamp` but for a deployed version, it would be interesting to check that `date_time` is less than the current date. As the old and new encryption keys are themselves encrypted, we first need to put them in clear in the enclave:
+
+```
+	...
+    status = sgx_rijndael128GCM_decrypt(
+		&aes_key,
+		ciphered_old_key,
+		len_ciphered,
+		old_key,
+		aes_iv,
+		SGX_AESGCM_IV_SIZE,
+		NULL,
+		0,
+		tag
+	);
+	if (status != SGX_SUCCESS) {
+		printf("status = %i\n", status);
+		error_msg = "Problem with data decryption";
+		memcpy(debug, error_msg, strlen(error_msg));
+		return;
+	}
+    ...
+```
+
+For the example POC, the key is stored directly in the enclave and encrypted symmetrically using AES. An SGX-specific process called [data_sealing](https://software.intel.com/content/www/us/en/develop/blogs/introduction-to-intel-sgx-sealing.html) would enable this key to be kept between different instances of an enclave. A future enhancement would be to use asymmetric encryption, with an encryption key in the Parsec client and a unique decryption key known by the enclave. `RSA` encryption is available in the enclave and could enable this asymmetric encryption.
+
+Since we're also using AES for the encrypted `token`, the process is identical to that for decrypting the keys. We decompose `token` and decrypt it using the `sgx_rijndael128GCM_decrypt(&old_key, ...)` function. We encrypt `token` with the new key in the same way, using the `sgx_rijndael128GCM_encrypt(&new_key, ...)` function.
+
+```
+	...
+    // Creating token again : version || time_stamp || iv || tag || ciphered
+	memcpy(token, "\x80", SIZE_VERSION);
+	memcpy(&(token[SIZE_VERSION]), time_stamp, SIZE_TIMESTAMP);
+	memcpy(&(token[SIZE_VERSION + SIZE_TIMESTAMP]), iv, SGX_AESGCM_IV_SIZE);
+	memcpy(&(token[SIZE_VERSION + SIZE_TIMESTAMP +SGX_AESGCM_IV_SIZE]), tag, SIZE_TAG);
+	memcpy(&(token[SIZE_VERSION + SIZE_TIMESTAMP + SGX_AESGCM_IV_SIZE + SIZE_TAG]), ciphered, len_ciphered);
+    ...
+```
+
+The `token` is created again and sent back to the library function with the new `time_stamp`, the new `IV`, the new `tag` and the re-encrypted message. The version remains the same, `\x80`. The `token` is then sent back to Parsec's `backend`.
+
+### CONCLUSION
+
+In this article, we've looked at the various steps involved in re-encrypting data from a Parsec workspace in an SGX enclave. On the Parsec side, we modified the encryption part to use AES with GCM mode, compatible with the instructions available in an SGX enclave. We then added the reencryption API from the backend, which calls on an SGX library.
+
+We have created a re-encryption function in the SGX library and the corresponding function in the enclave. A number of possible improvements have been discussed, including asymmetric encryption of reencryption keys and [data_sealing](https://software.intel.com/content/www/us/en/develop/blogs/introduction-to-intel-sgx-sealing.html), which would enable decryption keys unique to the enclave to be stored.
+
+### REFERENCES
+
+\[1\] [SGX](https://www.intel.fr/content/www/fr/fr/architecture-and-technology/software-guard-extensions.html) \[2\] [parsec-sgx-poc](https://github.com/Scille/parsec-sgx-poc) \[3\] [use-aes-in-parsec-poc](https://github.com/Scille/parsec-cloud/pull/1492) \[4\] [ctypes](https://docs.python.org/3/library/ctypes.html) \[5\] [data_sealing](https://software.intel.com/content/www/us/en/develop/blogs/introduction-to-intel-sgx-sealing.html) \[6\] [AES](https://fr.wikipedia.org/wiki/Advanced_Encryption_Standard) \[7\] [GCM](https://en.wikipedia.org/wiki/Galois/Counter_Mode)
+
+By Malo BOUCE (SCILLE/PARSEC intern) and Antoine DUPRE (SCILLE/PARSEC engineer)

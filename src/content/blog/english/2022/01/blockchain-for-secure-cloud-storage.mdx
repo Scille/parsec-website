@@ -1,0 +1,73 @@
+---
+title: "Ghost Blockchain Secures Parsec Cloud Storage Data"
+image: "blockchain.jpg"
+date: 2022-01-04
+author: "Thierry Leblond"
+categories:
+  - Technology
+draft: false
+
+excerpt: "Parsec and CEA built a ghost blockchain technique to detect a compromised metadata server and secure cloud storage integrity. Learn how it works."
+---
+
+Work has been carried out in partnership with the CEA to integrate additional security guarantees into the Parsec software. This solution is based on blockchain \[link to the first 2 articles: https://parsec.cloud/la\_blockchain\_au\_service\_du\_stockage\_cloud\_securise/ [/](https://parsec.cloud/la_blockchain_au_service_du_stockage_cloud_securise/) https:/ [/parsec.cloud/la_blockchain_au_service_du_stockage_cloud_securise_2/\]](https://parsec.cloud/la_blockchain_au_service_du_stockage_cloud_securise_2/).
+
+Parsec guarantees the confidentiality, integrity and authenticity of data stored in the cloud. However, in its current security model, the metadata server is assumed to be "honest but curious". This means that the server is "honest", it does not deviate from the protocol, but it is also "curious" about the data it sees in transit. In this model, data encryption is sufficient to preserve confidentiality vis-à-vis the server. Our work focuses on the case where the server is "malicious", attempting to compromise data integrity.
+
+### A look at how Parsec works
+
+Parsec comprises three entities: the client workstation, the metadata server and the cloud (Figure 1).
+
+Data to be stored in the cloud is sent by clients to the metadata server. The server acts as a coordination service between the clients and the cloud. The encrypted, block-cut data is then stored in the cloud.
+
+{/* TODO: image not available locally - https://lh6.googleusercontent.com/Y3AST5RkVz-gx4mo75jDWp_H_eKa_hJ5PbH7bU6Q-QtJvhGFRVU5bd5AvyO80MrRj8Mz0uIgI8vpXW33M2DxdZSWSDmn8U5W4M9L5w-unmSb-aVBR35NzOr58t1XTXksRJzqYTdN */}
+
+_Figure 1: Security model and Parsec software entities_
+
+### New safety model
+
+In Parsec, the client is trusted and the server is considered "honest but curious". Only the cloud is considered an active attacker.
+
+However, the project now focuses on the case where the server has been attacked and is now malicious. It is considered to be attempting to compromise data integrity. The data may be invalid or out-of-date. This is possible if, for example, the server does not take into account modifications from clients.
+
+### Solution
+
+- **Ghost blockchain**
+
+The concept of ghost blockchain comes from the article Ghostor[(https://eprint.iacr.org/2020/648.pdf)](https://eprint.iacr.org/2020/648.pdf). This article proposes a file-sharing system based on a client-server architecture in which the server is considered compromised. The system guarantees both client anonymity and data integrity through a verifiable history.
+
+The history is stored in a blockchain and includes read and write operations performed by customers and checkpoints carried out at regular intervals.
+
+Verification is carried out by customers who have access to the data written to the blockchain.
+
+- **Applying ghost blockchain to Parsec**
+
+To address the issue of data integrity, the ghost blockchain concept has been applied to Parsec.
+
+The architecture of the new system is shown in Figure 2 below.
+
+{/* TODO: image not available locally - https://lh6.googleusercontent.com/1eSEw9NWTKwBIFiAfOqAxlKW0vVBV5ijm1qNyNRuOZN095z2xRxjuJyxoJJ7nn503jcBUYWFYa-XRFo5k7tEu5JcL4XxYnzJx-pCecOWPMp6TGm50I76caPbLqHB8-PQ4AuxYXjv */}
+
+_Figure 2: Parsec architecture including blockchain_
+
+The system includes a blockchain, which can be read and written by the server and clients.
+
+Every read or write operation performed by a client is signed. It is recorded both locally by the client and by the server.
+
+To check that the server has taken client operations into account, an epoch and history checking mechanism is set up.
+
+{/* TODO: image not available locally - https://lh4.googleusercontent.com/FoGD75BosI7ND64ZIPS0gnl7mye7bqzs_dkoroKWfXEm4uauiJYQWj0HX-y1hROBziOqZTID16Xr4hRg3bBH34nSnmCoaBJjyDyPiwnmVa7jShqod0g7APpAQmzX694h0Xpd3Mv1 */}
+
+_Figure 3: History verification mechanism_
+
+At the end of each epoch (regular time interval), the hash of the last transaction stored by the server is placed in the blockchain. Clients can also request a history (between two epochs) from the server. This mechanism is illustrated in Figure 3. Three checks are possible on the basis of this history:
+
+1. each client can check that its local operations are present in the server's history version
+2. by joining forces, customers can also check that all their transactions have been taken into account
+3. clients can finally verify that the hash in the blockchain corresponds to the last operation performed by the server.
+
+Customers can therefore check the history of operations taken into account by the server.
+
+This solution detects whether the server has been compromised and has not followed the protocol concerning operations received by clients. The solution does not prevent malicious behavior, but rather detects it a posteriori.
+
+This solution also detects a corrupt PARSEC metadata server when several instances of the parsec server are deployed. Indeed, in order to guarantee higher availability and protect against denial-of-service attacks, several instances of the metadata server can be deployed. The ghost blockchain algorithms developed in partnership with the CEA can also be used to detect a compromised server and thus protect against [Byzantine Fault](https://en.wikipedia.org/wiki/Byzantine_fault) attacks.

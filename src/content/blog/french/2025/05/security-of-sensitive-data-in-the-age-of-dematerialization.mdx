@@ -1,0 +1,128 @@
+---
+title: "Sécurité des données sensibles : dépasser les limites du VPN"
+date: 2020-05-29
+author: "Thierry Leblond"
+categories:
+  - Transformation numérique
+draft: false
+
+excerpt: "La dématérialisation accélérée des processus a révélé les failles du VPN. Découvrez pourquoi une approche Zero Trust et Zero Knowledge s'impose désormais."
+---
+
+{/* TODO: ajouter l'image principale, ex. image: "main-image.png" dans le frontmatter ci-dessus */}
+
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+#### Repères
+
+La crise du Covid19 et son corollaire, la brutale mise en confinement des entreprises ont amené de nombreux DSI à déployer dans l'urgence des solutions numériques pour permettre aux salariés de travailler depuis leurs domiciles notamment depuis leur propre terminal informatique. Cette situation impose aux entreprises qui n'y étaient pas vraiment préparées, une dématérialisation risquée, SUR INTERNET, des processus de travail classiques ce qui pose la question des outils offrant les garanties de sécurité maximum pour des données sensibles désormais partagées et stockées dans des clouds publics par essences insécurisés. Confronté à ces exigences, les responsables informatiques se sont généralement appuyés sur des réseaux privés virtuels ou VPN.
+
+Mais dans un monde où le télétravail devient la norme et où l'environnement informatique est en pleine révolution, le modèle de sécurité reposant sur la protection du réseau et son corollaire internet, le VPN, Alpha et Omega du modèle traditionnel de la sécurité des données de l'entreprise, devient l'objet de tous les maux. Nous esquissons en conclusion de cet article deux pistes de solutions selon les besoins de l'entreprise.
+
+### En quoi consiste la dématérialisation ?
+
+Dématérialiser un document, revient à le produire directement dans un format numérique à partir d'un système d'information. Au-delà de la production du document, dématérialiser implique de réorganiser en profondeur le processus de traitement : tâches, intervenants, outils, procédures. Il est donc plus pertinent de parler de dématérialisation des processus documentaires.
+
+La dématérialisation est le premier pas dans la chaîne de gestion et de conservation des documents par la transition numérique. Après cette étape, une fois les documents numériques générés, se posent plusieurs questions :
+
+- Comment partager les documents en toute sécurité ? Qui sera autorisé à accéder à l'information ? Quels sont les droits (lecture, modification, partage) ?
+- Comment garantir la sécurité du stockage des documents numériques ?
+- Comment l'intégrité des documents sera-t-elle garantie ?
+- Comment le droit à en connaître sera-t-il maîtrisé ?
+
+Les solutions traditionnelles de Gestion Electronique des Documents (GED) et d'archivage répondent généralement bien au besoin de dématérialisation ; mais, dans l'environnement hostile du Cloud public et de l'Internet, peu de solutions garantissent, à 100% la sécurité du partage de documents sensibles (travail collaboratif et échanges de fichiers) et de leur stockage (cloud privés ou publics), tout en alliant simplicité d'usage, ergonomie et collaboratif. Confronté à ces exigences fortes de mise en sécurité du partage des documents sensibles de l'Entreprise, les responsables informatiques se sont généralement appuyés sur des réseaux privés virtuels ou VPN.
+
+### Qu'est-ce qu'un VPN ?
+
+En premier lieu, il convient d'évacuer une première confusion quand on parle de VPN. L'un de ses emplois consiste, depuis un réseau interne, à aller surfer sur Internet avec l'adresse IP de quelqu'un d'autre, une façon de se déresponsabiliser des activités de ses employés.
+
+« En résumé, le VPN « sur site » est une fonction présente sur le routeur de l'entreprise et qui fait la passerelle entre le réseau privé d'une entreprise, le LAN, et le monde extérieur, le WAN2. Il permet depuis internet d'accéder à des machines uniquement présente sur le LAN »
+
+Une PME qui cherche au contraire à connecter des salariés accédant depuis internet sur son réseau interne protégé et souhaite leur donner accès à tous les services de l'entreprise comme s'ils étaient dans ses locaux. L'analogie du château-fort entouré de douves et auquel on accède par un pont-levis s'impose alors.
+
+Le modèle de sécurité traditionnel reste inchangé : ceux qui sont à l'extérieur du réseau protégé sont les ennemis et ceux qui sont à l'intérieur appartiennent au périmètre de confiance. Le réseau interne est le château-fort. Le bastion et les pare-feux sont les douves et le VPN est le pont-levis.
+
+### Le modèle de sécurité périmétrique VPN atteint ses limites
+
+La presse rapporte régulièrement des cas d'entreprises dont les documents importants ont été violés parce qu'un employé ou un prestataire s'est fait piéger par hameçonnage ; parce qu'un hacker a réussi à contrôler des serveurs de données sensibles.
+
+Face à l'essor des appareils mobiles et face à des situations où tous les employés travaillent hors des murs physiques de l'entreprise, il devient impossible de demander à des employés de se connecter depuis un nombre limité de serveurs de VPN centraux.
+
+Dans une telle organisation centralisée, le VPN, seule porte d'entrée aux données de l'entreprise, devient, vu de l'employé, un goulet d'étranglement alors que dans cette situation où on lui demande de plus en plus d'autonomie, il est incité à utiliser ses propres machines informatiques, même en voyage pour ses besoins professionnels.
+
+Cette situation de latence et les connexions très lentes au VPN, voire instables, génèrent beaucoup de frustration et de réclamations au services informatiques. Il arrive forcément que les utilisateurs, qui ne peuvent plus supporter ces contraintes, mettent en place leur propre solution de contournement, autant de pont-levis non sécurisés enjambant les douves et ouvrant un accès caché au château-fort.
+
+Un des moindres paradoxes devient alors que l'excès de sécurité devient le principal vecteur du risque redouté : la mise en insécurité des données sensibles de l'entreprise.
+
+Enfin, le canal des VPN en ligne passant généralement par l'oreille des États et de leurs lois extraterritoriales comme le Cloud Act américain, exposant les entreprises à l'insécurité juridique et à de potentiels problèmes réglementaires.
+
+### L'organisation du travail en entreprise et la gestion des documents sont en pleine révolution
+
+La distanciation physique change durablement l'organisation du travail. Le télétravail, qui ne peut se faire sans la dématérialisation des processus, devient la norme.
+
+De ce fait le poste de travail personnel physique (« Bring Your Own Devices » ou BYOD) devient l'outil par défaut pour accéder à l'informatique de l'entreprise et le vieux desktop professionnel rejoint la machine à écrire au musée des outils du passé.
+
+1. L'accès par internet devient la norme quand l'intranet et les réseaux privés deviennent des handicaps de mobilité.
+2. Le Cloud Public et les applications en SaaS, « Low Cost », par leur agilité et leur scalabilité, deviennent la norme à condition de maîtriser la sécurité des documents échangés car les situations d'adaptation en mobilité sont de moins en moins prévisibles. Ils permettent de s'adapter très rapidement aux changements. Les infrastructures « On Premise » ou dédiées vont devenir l'exception.
+3. Le nouvel écosystème de collaboration sécurisé doit aussi faire mieux pour moins cher tout en apportant ergonomie et simplicité d'usage : la sécurité ne doit pas se payer au prix d'une complexification des usages sous peine de rejet immédiat par l'utilisateur.
+4. Enfin, on ne sait pas avec qui on va devoir travailler demain ! Les échanges de documents sensibles aujourd'hui dématérialisés, doivent être structurés comme des réseaux de résistance pendant la guerre : il faut bannir toute gestion centralisée des données et cloisonner les Groupes de personnes et les Organisations. À l'extrême, l'annuaire devient invisible.
+
+Cette nouvelle organisation des rapports humains via l'internet accroît le champ des menaces. La sécurité des données dans ce nouvel écosystème doit être bâtie sur le principe de **« [Zero Trust](https://www.paloaltonetworks.com/cyberpedia/what-is-a-zero-trust-architecture) »** avec une approche de protection micro-périmétrique. Le RGPD renforce encore cette exigence. Les lois d'extraterritorialité menacent la souveraineté des États et créent de l'insécurité juridique pour les dirigeants. Les échanges sensibles doivent désormais se faire avec ce paradigme de « Zero Trust » sur des réseaux et des serveurs potentiellement hostiles comme sur le Cloud Public.
+
+### La sécurité des données passe obligatoirement par une délégation de confiance
+
+Commençons par énoncer une vérité : il n'y a pas de sécurité absolue. La mise en sécurité consiste à réduire des risques identifiés en s'appuyant sur un tiers de confiance à la hauteur de la menace identifiée.
+
+- Si je ne fais pas confiance à ma machine Lenovo sous système d'exploitation Windows, je vais circonscrire mes échanges à un réseau étanche sans communication avec l'extérieur ;
+- Si je ne fais pas confiance à Amazon Web Services, à Microsoft Azure ou à Google à cause du CLOUD Act, je vais m'organiser sur une infrastructure labellisée SecNumCloud par l'ANSSI ;
+- Si je ne fais confiance à personne mais que je suis obligé pour des raisons matérielles ou économiques d'accéder à mes services depuis internet, je vais devoir chiffrer en point à point tous mes échanges tout en restant sous la menace d'une compromission de ma machine par une faille « Zero Day ».
+
+Le VPN étant devenu au mieux inutile, pire, gênant pour les utilisateurs voire dangereux pour la sécurité des données car donnant un faux sentiment de sécurité, comment s'en libérer sans compromettre la sécurité des données sensibles de l'entreprise ?
+
+### Le paradigme de la triple confiance
+
+Il s'agit désormais de réduire autant que possible son exposition à des acteurs de confiance tels que le cloud public soumis aux lois extraterritoriales comme le CLOUD Act, les administrateurs et les réseaux, tout en utilisant leurs services pour ce qu'ils apportent d'efficace et d'économique. En premier lieu, et quel que soit le choix d'architecture de sécurité, il faut comprendre que la mise en sécurité des données passe par cette triple confiance :
+
+La confiance dans la sécurité du réseau et du transport permet de garantir qu'un tiers n'est pas en capacité d'intercepter le flux de données. Il y a également plusieurs réponses à ce problème dont les principales sont le VPN, le réseau dédié ou propriétaire, et le HTTPS :
+
+- Le VPN répond en partie à ce besoin, parce que comme on l'a vu, les États disposent de la capacité d'interception.
+- Le HTTPS est utilisé de façon universelle sur internet : c'est la manière la plus efficace et la moins coûteuse de sécuriser un transport.
+
+La confiance dans la sécurité de l'authentification permet de garantir que celui qui accède à un service est bien la personne qu'elle prétend être. Il y a plusieurs réponses à ce problème bien résolu sur le plan technique et fonctionnel :
+
+- La fédération d'identité doublée d'un mécanisme à double facteur d'authentification répond à ce besoin ; elle doit s'appuyer elle-même sur un annuaire sécurisé doublé d'une infrastructure de gestion de clés adaptée au besoin de sécurité de l'entreprise. Ce type de service répond à des organisations souhaitant centraliser leur informatique et maîtriser intégralement les données. Elle n'est pas adaptée à une architecture en « multi-organisation » où les gens ne sont pas censés se connaître tous.
+- L'auto-génération de clé sur le terminal de travail doublée d'un mécanisme d'enrôlement de confiance répond à une organisation beaucoup plus éclatée de type « réseaux de résistance ». Elle ne nécessite pas d'annuaire central. C'est le concept de CCYOK ou « Create and Control Your Own Key » implémenté par SCILLE dans sa solution de cybersécurité **[PARSEC](https://parsec.cloud/)**.
+
+La confiance dans la sécurité du partage permet de garantir qu'entre plusieurs personnes régulièrement authentifiées, les échanges resteront intègres et confidentiels vis-à-vis des prestataires informatiques, administrateurs, hébergeurs, cloud, réseaux voire même des États étrangers.
+
+La solution **[PARSEC](https://parsec.cloud/)** est conçue principalement pour répondre à ce besoin.
+
+### Une première solution candidate : Le réseau physique « Zero Trust » dédié ou délégué à confiance nulle
+
+Certains prestataires candidats au statut de fournisseur de confiance, proposent, depuis n'importe quel point du globe relié à internet, un accès à l'infrastructure interne de l'entreprise en s'appuyant sur leur réseau physique propriétaire indépendant de celui de l'internet. L'entreprise cliente apporte ses applications hébergées en interne et son système de fédération d'identité. Le prestataire met à disposition ses réseaux physiques propriétaires, ses points d'accès internet et son système de sécurité applicatif. C'est sans doute une bonne solution « zero-trust réseau » pour exploiter en sécurité une infrastructure applicative « legacy » ; elle oblige de faire confiance à un nouvel acteur potentiellement lui aussi soumis au CLOUD Act. Cette solution ne répond pas de façon satisfaisante à notre problème de sécurité.
+
+### Une seconde solution : la sécurité logicielle by design « Zero Trust » et « Zero Knowledge »
+
+Le **[Zero Knowledge](https://study.com/academy/answer/what-is-zero-knowledge-cloud-storage.html)**, ou preuve à divulgation nulle de connaissance, est une brique de base utilisée en cryptologie dans le cadre de l'authentification et de l'identification. Par extension, **[PARSEC](https://parsec.cloud/)** est Zero Knowledge parce que tout ce qui sort du terminal est totalement inexploitable pour un tiers.
+
+_« **[PARSEC](https://parsec.cloud/)** propose un concept original de solution logicielle « [Zero Trust](https://www.paloaltonetworks.com/cyberpedia/what-is-a-zero-trust-architecture) » et Zero Knowledge by design qui ne nécessite que de faire confiance à son terminal, à l'exception de tout autre acteur de confiance. »_
+
+### PARSEC, Trust the cloud
+
+**[PARSEC](https://parsec.cloud/)** permet de partager et de cloisonner des documents sensibles en toute sécurité dans les clouds privés ou publics. Il s'agit d'un ensemble de composants logiciels Open source, disponible sous la forme de logiciel desktop, pour la gestion collaborative de fichiers.
+
+#### Comment ça marche ?
+
+Le partage sécurisé est effectué par point de montage ou via une interface utilisateur dédiée. **[PARSEC](https://parsec.cloud/)** sécurise les données sensibles avant qu'elles ne soient stockées sur les clouds publics, en garantissant :
+
+- La confidentialité,
+- L'intégrité,
+- L'historisation,
+- Le contrôle d'accès,
+- La non-répudiation,
+- L'authenticité et
+- La gestion des opérations concurrentes.
+
+Le chiffrement des documents se fait de bout en bout à partir de clés personnelles auto-générées par le terminal de l'utilisateur. **[PARSEC](https://parsec.cloud/)** permet ainsi un contrôle micro-périphérique des données et leur partage en mode multi-organisations, même avec des organisations qui ne font pas partie de notre périmètre de confiance.
+
+**[PARSEC](https://parsec.cloud/)** est un composant de haute sécurité Open Source, sous licence AGPL, développé avec le soutien du ministère des Armées et en partenariat avec le monde de la recherche.

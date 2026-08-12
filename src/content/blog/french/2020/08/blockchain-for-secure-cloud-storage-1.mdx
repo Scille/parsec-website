@@ -1,0 +1,82 @@
+---
+title: "Blockchain : la technologie clé du stockage cloud sécurisé"
+image: "blockchain.jpg"
+date: 2020-08-13
+author: "Thierry Leblond"
+categories:
+  - Technologie
+draft: false
+
+excerpt: "La blockchain assure un stockage décentralisé, sécurisé et durable des données sans tiers de confiance. Découvrez son fonctionnement en blocs chaînés."
+---
+
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+#### REPÈRES
+
+La blockchain est une technologie apparue au 21e siècle pour décentraliser les virements bancaires et s’est fait connaître grâce à l’essor des cryptomonnaies, mais c’est avant tout une technologie qui permet un stockage durable, sécurisé et décentralisé d’informations. La blockchain ne demande en effet pas de faire confiance à un tiers.
+
+Cette technologie est aussi fondamentalement open-source : n’importe qui ayant des connaissances en programmation peut explorer le code source des logiciels blockchain, et n’importe qui ayant lu cet article pourra en comprendre le fonctionnement. Cette transparence est en réalité une caution de sécurité et non une faille, comme l’énonçait [Kerckhoffs](https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle) au 19e siècle : “un crypto système doit être sécurisé même si toutes ses composantes sont publiques, à l’exception des clés privées”. [Shannon](https://en.wikipedia.org/wiki/Claude_Shannon) , au 20e siècle, poussera même la maxime jusqu’à partir du principe que l’attaquant connaîtra intégralement et instantanément le système.
+
+Dans ce cadre de sécurité Zero-Trust et Zero-Knowledge, la blockchain est une technologie qui s’applique particulièrement au stockage Cloud sécurisé pour entreprise. Ce cadre de sécurité est un cadre d’avenir, et devient un besoin fondamental à toutes entreprises qui souhaitent sécuriser des données sensibles.
+
+### Blocks et blockchain
+
+Comme son nom l’indique, la blockchain n’est rien de plus qu’une liste chaînée de blocs.
+
+Un bloc, ou block, est une structure qui contient un paquet d’informations. Ces informations peuvent être des relevés de transactions bancaires, comme dans le cas des cryptomonnaies, mais cela peut-être virtuellement n’importe quelle information que l’on souhaite stocker de façon pérenne.
+
+Par exemple, un bloc Bitcoin est composé de 5 constituants.
+
+<figure>
+
+<OptimizedImage src="blockchain_block_arch-1.png" alt="" />
+
+<figcaption>
+
+_Fig.1 : Architecture simplifiée d’un block Bitcoin_
+
+</figcaption>
+
+</figure>
+
+Il y a bien sûr le paquet d’information que l’on souhaite stocker, puis il y a deux « empreintes » qui servent à relier les blocs entre eux, de manière à créer un historique cohérent et immuable. Enfin, il y a une signature qui permet de sceller le paquet d’information à de l’ajouter à la blockchain, et une « preuve de travail » qui permet de valider un bloc et de l’inscrire dans la blockchain.
+
+Une fois validé par la preuve de travail, le bloc en cours de traitement peut être ajouté à la blockchain Bitcoin. L’information qu’il contient y est alors inscrite à jamais. Cette nouvelle version de la blockchain devient donc une mise à jour pour tous les contributeurs de Bitcoin.
+
+<figure>
+
+<OptimizedImage src="blockchain_blocks_chaining.png" alt="" />
+
+<figcaption>
+
+_Fig.2 : Agencement des blocks Bitcoin en blockchain_
+
+</figcaption>
+
+</figure>
+
+### Décentralisation et sécurité
+
+La blockchain ne présente pas de structure de données centralisée comme une banque possèderait un serveur stockant toutes les transactions effectuées avec ses comptes. A l’inverse, ce sont tous les contributeurs de la blockchain qui stockent cette base de données. Par exemple, la blockchain Bitcoin fait environ 150 Go en 2020.
+
+Si un bloc est « miné » par un détenteur de la blockchain, c’est-à-dire s’il complète la « preuve de travail », alors il communique à tous les autres collaborateurs sa trouvaille, ces derniers mettent à jour leur version de la blockchain et s’attaquent alors au bloc suivant.
+
+Si un bloc est « miné » à deux endroits de la planète simultanément, alors le premier à communiquer ses résultats à une majorité de contributeurs l’emporte sur l’autre. Pour éviter cette situation, les cryptomonnaies actuelles font en sorte que le minage d’un bloc prenne un certain temps (environ 10 minutes dans le cas de Bitcoin).
+
+Via l’algorithme de preuve de travail, la blockchain Bitcoin est sécurisée tant qu’au moins la moitié des contributeurs ne sont pas malicieux. Plus généralement, un attaquant isolé d’une blockchain générique devrait posséder plus de puissance de calcul que tous les autres pour en modifier l’historique. La blockchain est donc une solution optimale au [problème des généraux Byzantins](https://fr.wikipedia.org/wiki/Probl%C3%A8me_des_g%C3%A9n%C3%A9raux_byzantins) , problème dans lequel un réseau de communication présente un certain nombre F de noeuds malicieux. Pour pouvoir assurer que le réseau total continue à fonctionner de manière nominale, il faut avoir 3F+1 noeuds (2F+1 dans le cas de Bitcoin, mais cette solution comporte un aspect probabiliste que nous ne détaillerons pas ici).
+
+Mais « miner » un bloc (voir le paragraphe sur les fonctions de hachage pour plus de détails) demande en pratique beaucoup de puissance de calcul et donc d’électricité. Pour récompenser ces mineurs de leur dur labeur, chaque bloc miné leur rapporte une fraction de la cryptomonnaie en question. En pratique, cette récompense dépasse largement les coûts nécessaires à dépasser la puissance de calcul de tous les autres mineurs.
+
+Ce fonctionnement décentralisé permet donc de stocker des informations de manière sécurisée et uniforme pour tous les contributeurs de la blockchain. La décision de la validité d’un historique n’est pas déléguée à un tiers, mais au contraire est soumise à un vote démocratique automatisé.
+
+La fiabilité de la blockchain ainsi que la pérennité des informations qu’elle contient sont donc garanties par les faits que les blocs sont liés entre eux et que les mineurs travaillent de manière honnête et collaborative. Pour mieux comprendre ce que sont ces empreintes et la preuve de travail Bitcoin, nous aurons besoin de comprendre l’outil de base de la cryptographie appliquée : la fonction de hachage, qui sera présentée dans la deuxième partie de l’article.
+
+{/* TODO: image not available locally - https://parsec.cloud/blog/la_blockchain_au_service_du_stockage_cloud_securise/gaspard.jpg */} **Gaspard Sagot** ; *Stagiaire R&D en cryptographie appliquée chez* [SCILLE.](https://scille.eu/)
+
+_Sources_
+
+- [Principe de Kerckhoffs — Wikipédia](https://fr.wikipedia.org/wiki/Principe_de_Kerckhoffs)
+- [Le problème des généraux byzantins – Comprendre la cryptomonnaie](https://viresinnumeris.fr/probleme-generaux-byzantins/)
+- [Blockchain Explorer - Parcourir la Blockchain | BTC | ETH](https://www.blockchain.com/explorer?view=btc)
+- [https://bitconseil.fr/blockchain-bitcoin/](https://bitconseil.fr/blockchain-bitcoin/)

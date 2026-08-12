@@ -1,0 +1,82 @@
+---
+title: "Blockchain for Secure Cloud Storage, Explained Simply"
+image: "blockchain.jpg"
+date: 2020-08-13
+author: "Thierry Leblond"
+categories:
+  - Technology
+draft: false
+
+excerpt: "Blockchain enables decentralized, tamper-proof data storage without a trusted third party. Learn how blocks, chaining, and proof of work secure your data."
+---
+
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+#### KEY FIGURES
+
+Blockchain is a technology that emerged in the 21st century to decentralize bank transfers, and has made a name for itself thanks to the rise of cryptocurrencies, but it is above all a technology that enables sustainable, secure and decentralized storage of information. Indeed, blockchain does not require trust in a third party.
+
+This technology is also fundamentally open-source: anyone with programming knowledge can explore the source code of blockchain software, and anyone who has read this article will be able to understand how it works. This transparency is actually a guarantee of security, not a flaw, as [Kerckhoffs](https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle) stated in the 19th century: "a crypto system must be secure even if all its components are public, with the exception of the private keys". In the 20th century, [Shannon](https://en.wikipedia.org/wiki/Claude_Shannon) would even go so far as to assume that the attacker would instantly know the entire system.
+
+In this Zero-Trust and Zero-Knowledge security framework, blockchain is a technology that is particularly applicable to secure enterprise cloud storage. This security framework is a framework for the future, and is becoming a fundamental requirement for all companies wishing to secure sensitive data.
+
+### Blocks and blockchain
+
+As its name suggests, blockchain is nothing more than a chained list of blocks.
+
+A block is a structure containing a packet of information. This information can be bank transaction records, as in the case of cryptocurrencies, but it can also be virtually any information you wish to store permanently.
+
+For example, a Bitcoin block is made up of 5 components.
+
+<figure>
+
+<OptimizedImage src="blockchain_block_arch-1.png" alt="" />
+
+<figcaption>
+
+_Fig.1: Simplified architecture of a Bitcoin block_
+
+</figcaption>
+
+</figure>
+
+There is, of course, the packet of information you wish to store, and then there are two "fingerprints" that serve to link the blocks together, so as to create a coherent and immutable history. Finally, there's a signature to seal the packet of information before adding it to the blockchain, and a "proof of work" to validate a block and register it on the blockchain.
+
+Once validated by the proof of work, the block being processed can be added to the Bitcoin blockchain. The information it contains is then written there forever. This new version of the blockchain thus becomes an update for all Bitcoin contributors.
+
+<figure>
+
+<OptimizedImage src="blockchain_blocks_chaining.png" alt="" />
+
+<figcaption>
+
+_Fig.2: Layout of Bitcoin blocks in blockchain_
+
+</figcaption>
+
+</figure>
+
+### Decentralization and safety
+
+The blockchain doesn't have a centralized data structure, like a bank with a server storing all the transactions made with its accounts. Instead, all the contributors to the blockchain store this database. For example, the Bitcoin blockchain is around 150 GB in 2020.
+
+If a block is "mined" by a blockchain holder, i.e. if he completes the "proof of work", then he communicates his find to all the other collaborators, who then update their version of the blockchain and move on to the next block.
+
+If a block is "mined" in two places on the planet simultaneously, then the first to communicate its results to a majority of contributors wins out over the other. To avoid this situation, today's cryptocurrencies ensure that mining a block takes a certain amount of time (around 10 minutes in the case of Bitcoin).
+
+Via the proof-of-work algorithm, the Bitcoin blockchain is secure as long as at least half the contributors are not malicious. More generally, an isolated attacker of a generic blockchain would need to possess more computing power than all the others to modify its history. The blockchain is therefore an optimal solution to the [Byzantine generals' problem](https://fr.wikipedia.org/wiki/Probl%C3%A8me_des_g%C3%A9n%C3%A9raux_byzantins) , in which a communication network has a certain number F of malicious nodes. To ensure that the entire network continues to function nominally, 3F+1 nodes are required (2F+1 in the case of Bitcoin, but this solution has a probabilistic aspect that we won't go into here).
+
+In practice, however, "mining" a block (see the paragraph on hash functions for more details) requires a great deal of computing power, and therefore electricity. To reward these miners for their hard work, each mined block earns them a fraction of the cryptocurrency in question. In practice, this reward far exceeds the costs required to outstrip the computing power of all other miners.
+
+This decentralized operation means that information can be stored securely and uniformly for all contributors to the blockchain. The decision as to whether a history is valid or not is not delegated to a third party, but is instead subject to an automated democratic vote.
+
+The reliability of the blockchain and the permanence of the information it contains are therefore guaranteed by the fact that blocks are linked together and that miners work in an honest and collaborative manner. To better understand what these fingerprints and the Bitcoin proof-of-work are, we'll need to understand the basic tool of applied cryptography: the hash function, which will be presented in the second part of the article.
+
+{/* TODO: image not available locally - https://parsec.cloud/blog/la_blockchain_au_service_du_stockage_cloud_securise/gaspard.jpg */} **Gaspard Sagot** ; _R&D intern in applied cryptography at_ [SCILLE.](https://scille.eu/)
+
+_Sources_
+
+- [Kerckhoffs principle - Wikipedia](https://fr.wikipedia.org/wiki/Principe_de_Kerckhoffs)
+- [](https://viresinnumeris.fr/probleme-generaux-byzantins/)[The problem of the Byzantine generals - Understanding cryptocurrency](https://viresinnumeris.fr/probleme-generaux-byzantins/)
+- [Blockchain Explorer - Browse Blockchain | BTC | ETH](https://www.blockchain.com/explorer?view=btc)
+- [https://bitconseil.fr/blockchain-bitcoin/](https://bitconseil.fr/blockchain-bitcoin/)

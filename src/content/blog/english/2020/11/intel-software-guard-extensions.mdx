@@ -1,0 +1,62 @@
+---
+title: "Intel SGX: Securing Data Re-Encryption in the Cloud"
+image: "intel-sgx.jpg"
+date: 2020-11-04
+author: "Thierry Leblond"
+categories:
+  - Technology
+draft: false
+
+excerpt: "When access is revoked, data must be re-encrypted securely. Discover how Intel SGX enclaves protect this process from compromised cloud servers."
+---
+
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+### INTRO
+
+Against a backdrop of health crises, companies are increasingly working with remote employees. Various solutions are available to guard against cyber-attacks and protect critical data.
+
+At Parsec, we apply a zero-trust policy: all data is encrypted so that only users who have been granted access to workspaces by an administrator can decrypt documents.
+
+One problem remains, however: when revoking a user's data access rights, how do you ensure that the user is unable to decrypt past and future data?
+
+The solution to this problem is, of course, to re-encrypt the data in question with a new key distributed  
+to non-revoked users. In addition, this re-encryption must take place in a secure environment, in order to comply with zero-trust policy.
+
+A first solution to ensure a secure environment is to perform the re-encryption directly on the workstation of an administrator of the workspace concerned. Although theoretically simple, this solution can lead to problems in practice:
+
+- data must be transmitted over the workstation, which implies high bandwidth requirements
+- the re-encryption operation may be paused indefinitely if the  
+   workstation is switched off or offline.
+- the re-encryption operation is time-consuming and labour-intensive, which can degrade the user experience
+
+A second solution that will be developed in this article is data re-encryption on a remote server, in an SGX enclave.
+
+### What is an SGX enclave?
+
+[**Intel SGX**](https://software.intel.com/en-us/sgx)_(Software Guard Extensions_) is a set of instructions available on recent versions of Intel's x86_64 processors, enabling the user to allocate private memory regions known as **enclaves**, or **Trusted Execution Environments (TEE)** in more general terms. These enclaves are protected from any program or administrator present on the operating system. We'll concentrate on SGX in this article, but there are other comparable solutions, such as [**ARM Trustzone**](https://www.arm.com/why-arm/technologies/trustzone-for-cortex-a) or the **gravity core** from [**Sanctum**](http://www.sanctum.com/products.html).
+
+Only certain operations can be used to transmit data to the enclave, and these operations are secured so that plaintext data can only be accessed from the enclave.
+
+### Using SGX to re-encrypt data
+
+Data re-encryption can also be carried out directly on a remote server. However, to avoid having to rely on a third party (host, cloud provider...), we want to implement an additional layer of protection and ensure that we have a secure environment for data re-encryption.  
+Performing data re-encryption in an SGX enclave allows us to protect ourselves from a corrupt server by performing critical operations in the private memory area.
+
+### Using SGX in practice
+
+To illustrate a use case for SGX with Parsec, let's take the following example:  
+A company employee's computer has been compromised (stolen, lost, etc.). Data re-encryption is then required to make the data inaccessible from this device.
+
+<OptimizedImage src="workspace-compromis-SGX.jpg" alt="" />
+
+An administrator then decides to launch workspace re-encryption from his Parsec client.
+
+<OptimizedImage src="process-rechiffrement-SGX.jpg" alt="" />
+
+The server sends the encrypted data, together with the decryption key and the new encryption key, to the private memory area (enclave) using the instructions available in SGX, and asks the enclave to re-encrypt the data. To ensure that the server has no knowledge of the keys transmitted, the two keys are also encrypted upstream by the administrator's client, and only the enclave has the key to decrypt them.  
+Once the re-encryption operation is complete, the data is returned and the new decryption keys are transmitted to the Parsec clients of users with access rights to the workspace. The compromised device no longer has access to the data.
+
+### CONCLUSION
+
+In this article, we look at the use of an SGX enclave for data re-encryption. This example illustrates the importance of SGX in protecting against potential attacks on a remote server. This ensures that data can only be accessed from the enclave's private memory space and by users authorized by an administrator. SGX is not a technology that replaces the application's built-in security practices, but rather provides an additional layer of protection.

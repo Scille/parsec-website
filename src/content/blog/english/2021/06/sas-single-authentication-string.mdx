@@ -1,0 +1,212 @@
+---
+title: "SAS Explained: How Parsec Securely Enrolls New Users"
+image: "SAS-1.png"
+date: 2021-06-11
+author: "Thierry Leblond"
+categories:
+  - Technology
+draft: false
+
+excerpt: "Learn how Parsec's Single Authentication String (SAS) uses Diffie-Hellman key exchange to safely enroll new users without a man-in-the-middle attack."
+---
+
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+Parsec is a system that provides its users with digital safes. Access to these safes can be shared with other users in the same Parsec organization.
+
+**How to share and transmit the safe keys to a new Parsec user without compromising the system's security? How can we guarantee the identity of this user, and the confidentiality and integrity of the secrets in a digital safe?**[](https://github.com/Scille/parsec-website-suckless/blob/sas/content/blog/20210413_SAS/content-fr.md#parsec-la-construction-dune-cha%C3%AEne-denr%C3%B4lement)
+
+## Parsec, building an enrolment chain
+
+In PARSEC, only the user terminal is considered a trust zone. In addition to the concept of "Zero knowledge", where any information leaving the user terminal is unusable by a third party, PARSEC is also based on the concept of ["Zero Trust"](https://parsec.cloud/5-nouveaux-paradigmes-de-la-securite-des-donnees-dans-un-monde-ultra-connecte/). This paradigm implies the use of end-to-end encryption using keys known only to the user. These keys must therefore be certified and distributed between members of the same organization.
+
+Part of the encryption key generation/distribution/certification process takes place during a ritual to enroll a new user (or a new terminal for an existing user) into the organization. The organization's administrator has the power to invite a new user and certify his or her identity (as the administrator has previously undergone an enrolment process, his or her identity is also guaranteed and certified). In this way, Parsec enrolment is no longer based on the "top-down" principle, but on the concept of distributing trust from one person to the next.
+
+The PARSEC enrolment phase is therefore a crucial stage, where cryptographic information will be exchanged. This phase must therefore be protected from man-in-the-middle attacks:
+
+- Guarantee of a secure transmission channel for transmitting and certifying the encryption keys to be used Guarantee and certification of the guest user's identity.
+
+It is important to understand that this enrolment step is mainly used to transmit and/or certify encryption keys that will be stored locally (and locally encrypted) on the user terminal, or stored (for public keys) in PARSEC's metadata server.
+
+Adding a new terminal to an existing user differs slightly from the mechanism for adding an invitation to a new user in that certain user keys are not generated, but only transmitted from one terminal to another. The principle is identical, however, and can be seen as a single-user enrolment.[](https://github.com/Scille/parsec-website-suckless/blob/sas/content/blog/20210413_SAS/content-fr.md#la-proc%C3%A9dure-denr%C3%B4lement)
+
+## Enrolment procedure
+
+### The procedure from the user's point of view
+
+Let's get to the heart of the matter: the user/terminal enrolment procedure. From the user's point of view, the enrolment procedure is as follows:
+
+Alice is the administrator of a PARSEC organization and would like to invite Bob.
+
+- Alice fills in Bob's e-mail address via the Parsec interface.
+- Bob receives an e-mail containing the PARSEC installation procedure and a link that allows him to claim the invitation.
+- Alice and Bob start a conversation via a third-party communication channel; in our example, Alice calls Bob on the telephone. This step is crucial to ensure Bob's identity and enable secret communication via a communication channel independent of the PARSEC metadata server.
+- Bob uses the invitation link to start the invitation procedure.
+- Alice uses the Parsec interface to start the invitation procedure.
+- Once both procedures have been started, Bob communicates a 4-letter code to Alice via the third-party channel, which is displayed on her terminal.
+- Alice must choose from 4 code proposals the one Bob indicates to her.
+- A 4-letter code is now displayed on Alice's interface, and she communicates it to Bob via the third-party channel.
+- Bob validates the 4-digit code.
+- The channel is now secure, so information and keys can be transmitted and signed in complete confidence.
+- Bob fills in his user information.
+- Alice validates the information.
+- Bob chooses a password to protect the secrets stored locally on his terminal (keys and organization information).
+
+https://www.youtube.com/watch?v=Un4g1-gLLkk
+
+## What's really going on?
+
+### Establishing a trusted channel
+
+Alice and Bob don't communicate directly with each other, but through the Parsec metadata server. A trusted communication channel must therefore be established, guaranteeing the secrecy of the communication and the authenticity of both endpoints (the guest's terminal and the administrator's terminal). This means that an adversary cannot interfere and carry out a man-in-the-middle attack. You also need to protect the metadata server and ensure that it receives no secrets.
+
+> A man-in-the-middle attack is an attack aimed at intercepting communications between two parties, without either of them suspecting that the communication channel between them has been compromised.
+
+**Communicate with the backend:**
+
+In the first step, both parties (guest and administrator) connect, using the metadata server as a transmission channel, and begin the invitation procedure. The guest is identified by the invitation link he or she has received by e-mail. The metadata server uses this invitation link to provide both parties with a unique token to identify the invitation procedure. The metadata server now prevents any further requests to use the invitation link, as it is currently in use.
+
+Alice and Bob now need to determine a symmetrical encryption key to encrypt and decrypt the sensitive data to be exchanged. This key cannot travel directly over the communication channel via the metadata server (man-in-the-middle attack). It is therefore necessary for Alice and Bob to exchange a minimum amount of information in order to derive the same encryption key, without the data exchanged allowing a third party to calculate the key.
+
+**The Diffie Hellman algorithm:**
+
+Key derivation in Parsec consists of a Diffie-Hellman key exchange based on elliptic curves. The idea is to establish an asymmetrical private/public key exchange protocol (based on elliptic curves and the [X25519](https://fr.wikipedia.org/wiki/Curve25519) algorithm) in order to obtain a shared secret (in this case, a symmetrical encryption key) over an insecure communication channel (all exchanges over the communication channel must be considered visible to attackers).
+
+Let's put elliptic curves to one side and concentrate on the basic idea behind Diffie Hellman. The algorithm is structured as follows:
+
+- Alice and Bob agree on shared numbers, known to all.
+- Alice chooses a very large random number which she keeps secret.
+- Bob chooses another large number which he keeps secret.
+- From the secret number and the known numbers, Alice calculates an intermediate number, which is the result of a calculation. This number is then transmitted to Bob
+- Bob also calculates a number derived from his secret number and the common numbers and passes this result on to Alice.
+- Alice uses a special algorithm to combine her secret number and the numbers it has in common with the number Bob has transmitted (already the result of a calculation involving Bob's secret).
+- Bob makes the same combination on his side.
+
+The algorithm used must guarantee that Alice and Bob arrive at the same result. This result cannot be guessed by an attacker, as the factorization to find Alice and Bob's secret numbers is too complicated to be solved by a machine.
+
+<OptimizedImage src="diffie.png" alt="" />
+
+In Parsec, Diffie-Hellman key exchange is based on elliptic curves, but the principle remains the same. Both parties use cryptographically compatible asymmetric keys on a common elliptic curve (Curve25519). They then exchange the public parts and keep the private parts. This makes it possible to derive a common symmetrical key[(find out more](https://fr.wikipedia.org/wiki/%C3%89change_de_cl%C3%A9s_Diffie-Hellman_bas%C3%A9_sur_les_courbes_elliptiques) )[.](https://fr.wikipedia.org/wiki/%C3%89change_de_cl%C3%A9s_Diffie-Hellman_bas%C3%A9_sur_les_courbes_elliptiques)
+
+_**The attacker's point of view**_
+
+The complexity of the numbers and the complexity of the factorization make it impossible for an attacker to recalculate the numbers that do not pass through the network and remain secret.[](https://github.com/Scille/parsec-website-suckless/blob/sas/content/blog/20210413_SAS/content-fr.md#short-authenticated-strings-sas-)
+
+### Short Authenticated Strings (SAS) :
+
+**What are the risks?**
+
+The next step is to make sure that the metadata server hasn't carried out a man-in-the-middle attack, a type of attack in which the server would have intercepted the public keys and transmitted false public encryption keys to each party, establishing two secret keys instead of one. In this type of scenario, the metadata server has the ability to transparently decode messages between Alice and Bob.
+
+<OptimizedImage src="man_in_the_middle.png" alt="" />
+
+The classic response to this attack is to sign value exchanges using an asymmetric key pair certified by a reliable third party. In our case, we don't want to use an intermediary, so there is no certification authority to play this role.
+
+**How can I protect myself?**
+
+To protect themselves from the metadata server, Alice and Bob must ensure that they have the same encryption key, without communicating any information about it. To do this, we need to use a third-party communication channel (in our case, Alice and Bob call each other directly) to communicate information without it passing through the metadata server. This information must also be unusable if the third-party channel is compromised.
+
+To certify that the derived encryption key is identical on Alice's and Bob's terminals, both devices generate random nonces (random numbers used once). The idea is to verify that transforming Alice's number by her local key produces the same result as transforming Alice's number by Bob's key. Bob and Alice will therefore exchange their random numbers.
+
+**How does verification work?**
+
+Bob and Alice exchange their respective random numbers via the metadata server communication channel. Bob uses his secret key to combine Alice's number with his own (key hash). Alice then performs the same operation.
+
+If the two keys are identical, the operation should give the same result for Alice and Bob. The result of this operation is a 40-bit number.
+
+The last 20 bits of the generated number will be used as authentication tokens. PARSEC's interface will represent this number as a 4-letter code and display it on Bob's interface. The same operation will be performed on Alice's terminal using the number she has calculated. This time, the interface will generate 3 other random 4-letter codes.
+
+<OptimizedImage src="sas.png" alt="" />
+
+At this stage, it is necessary to use the third-party communication channel to validate that the two numbers obtained are identical. The attacker cannot intercept exchanges on this communication channel. What's more, the information exchanged over this channel does not contain any elements that would enable the encryption key shared by Alice and Bob to be reconstructed.
+
+Bob will therefore communicate via the out-of-band channel (by telephone in our case) the 4-letter token. If the encryption key is identical for Alice and Bob, Alice must have this number available among the 4 options proposed. If the number is not available, the key is different and the channel is compromised, so no exchange can be established.
+
+The same operation is carried out in the other direction, this time using the first 20 bits of the number calculated on each terminal. This time, it's Alice who communicates her 4-digit code and Bob who validates it among 4 propositions on the PARSEC interface.
+
+We can now guarantee that the communication channel between Alice and Bob is secure, since they are both the sole owners of a symmetrical key that can be used to encrypt and decrypt messages. In this way, confidential information linked to a user's enrolment can be exchanged.
+
+**How can we be sure that the attacker hasn't intercepted the random numbers?**
+
+In the case of a man-in-the-middle attack, the attacker can intercept the random numbers generated by Bob and Alice and generate new ones. It must therefore be guaranteed that the number Alice receives is actually Bob's. Prior to the steps described above, it must be guaranteed that the numbers exchanged between Alice and Bob have not been falsified.
+
+To do this, Bob first calculates a hash of his random number (before transmitting it). A hash function is a transformation of a number that calculates a digital fingerprint used to quickly identify the initial data (in this case, Bob calculates [HMAC-SHA256](https://fr.wikipedia.org/wiki/Keyed-hash_message_authentication_code)).
+
+Bob transmits only the hash of his random number to Alice. Alice acknowledges receipt of Bob's hash. Alice transmits its number to Bob. Bob then transmits the random number he has generated.
+
+As described above, the hash of the number is a kind of fingerprint of the number. It's easy to calculate the hash from the number, but impossible to calculate the number from the hash.
+
+Alice performs the same hash operation on Bob's number and compares it with the hash Bob previously transmitted. If the number has not been modified, Alice obtains the same result as Bob. Security here is based on the fact that it is impossible for an attacker to recalculate Bob's number from the hash he receives. Thus, the attacker cannot falsify Bob's number, as Alice verifies that the hash of the number transmitted by Bob is identical to the hash she calculates from the number sent by Bob. Bob and Alice are now certain of having the same number in common.
+
+<OptimizedImage src="sha.png" alt="" />
+
+_**The attacker's point of view**_
+
+At this stage of enrolment, an attacker using a "man in the middle" attack would have transmitted false information to Bob and Alice. The encryption keys are therefore different on each workstation. From now on, the attacker must succeed in falsifying the secret code exchange. However, it is almost impossible for the attacker to falsify the numbers A and B (1 chance in 1000 billion), as the numbers are sent in several stages. Let's take the attacker's point of view. Since the attacker knows Alice's key (sk_alice), he cannot modify the number A generated by Alice. He must intercept Bob's number B and provide Alice with a B_fake number. If the attacker knows Bob's key (sk_bob), he cannot modify the number B generated by Bob. The attacker must intercept Alice's number A and supply Alice with an A_fake number. The attacker must therefore calculate the numbers A_fake and B_fake such that:
+
+```
+sk_alice(A + B_fake) = sk_bob(A_fake + B)
+```
+
+However, the numbers are not transmitted directly. The attacker first receives the number B hasher, without knowing either A or B. The attacker must therefore calculate B_fake without knowing either A or B, as he must transmit the hash of B_fake to Alice. The attacker is then blocked because he must then transmit A_fake from A, without knowing B, even though he has already transmitted information about B_fake to Alice. There is therefore very little chance that the attacker will be able to calculate the numbers A_fake and B_fake that validate the previous equation. The attacker's only chance is to try to find the number B when transmitting his hash, but he will come up against hash collisions to calculate B (a pair of distinct data from his starting set whose checksums are identical).[](https://github.com/Scille/parsec-website-suckless/blob/sas/content/blog/20210413_SAS/content-fr.md#l%C3%A9change-de-donn%C3%A9es-lors-de-lenr%C3%B4lement)
+
+## Data exchange during enrolment
+
+### Cryptographic keys in Parsec
+
+Let's take a closer look at Parsec's cryptographic mechanisms.
+
+A user possesses several encrypted keys (to secure exchanges and access information) and signature keys (to guarantee the integrity of data and exchanges).
+
+**The User Encryption Key**
+
+A Parsec user has an asymmetric encryption key which is used to receive encrypted messages. An asymmetric key is made up of two keys, a public key used to encrypt information, and a private key used to decrypt the information encrypted by the public key. The public part of the key is transmitted to the Parsec metadata server and is used when a message is to be sent to the user. The private part of the key is preciously stored on each user terminal, ensuring that only the terminal user can read messages sent to him/her.
+
+**Terminal signature key**
+
+Each terminal has its own signature key. Like the encryption key, which is specific to the user, the signing key is attached to a terminal. Among other things, this key is used to sign modifications sent to the metadata server (this mechanism guarantees data integrity). As with the user's encryption key, this signing key is asymmetrical and made up of two parts:
+
+- A private part that remains on the client terminal and is used to sign modifications.
+- A public part which is sent to the metadata server and allows other users to verify the signature.
+
+**Symmetric key for user metadata**
+
+User metadata, stored in the metadata server, must be accessible only by the user. This metadata serves as an entry point into the system, listing the shared workspaces available and the information needed to access them (identifier and key for decrypting workspace metadata). This user metadata is stored on the metadata server. It is encrypted and decrypted by a symmetrical key present on each user's terminal.
+
+**Local encryption key**
+
+All data downloaded and decrypted by Parsec on the client workstation is re-encrypted locally on the terminal by a local encryption key used only on the workstation. This key ensures that data cannot be accessed if the user is not identified in Parsec.
+
+**In a nutshell**
+
+A user has local access to all these terminals:
+
+- The user's private key for receiving messages (the public part is available on the metadata server).
+- A symmetrical encryption key to decrypt the Parsec server metadata linked to the user's account.
+
+It also has the following local features on each terminal (unique to each workstation)
+
+- A terminal key to sign modifications.
+- A local encryption key to access data already present on the terminal.
+
+These 4 keys are stored in a configuration file on the terminal. This file is itself encrypted with a key derived from the user password (Challenge/Response encryption).
+
+### The user invitation mechanism
+
+Once the trust channel has been established between the two terminals (a process explained in the previous section), Bob can retrieve sensitive information and generate and transmit these encryption keys. Alice will certify Bob's identity by signing these public keys.
+
+Bob's Parsec client starts by generating an asymmetric user encryption key and an asymmetric terminal signature key.
+
+Bob encrypts these two public keys with the secret symmetrical key shared by Alice and Bob when a trusted channel was created. This key is known only to Alice and Bob.
+
+Bob then sends his two encrypted public keys to Alice via the metadata server. Alice can then use the secret key to decrypt the message sent by Bob.
+
+Alice signs Bob's public keys, which she has just received, with her own terminal signing key. This guarantees the identity and integrity of Bob's public keys. It is therefore possible for a user wishing to send a message to Bob to check that the public encryption key has not been compromised, by looking at the signature performed by Alice. The integrity of Alice's signing key can itself be verified by the user, as this key was also signed when Alice was enrolled. It is therefore possible to certify the entire chain of trust by verifying signatures up to the first user in the organization. Parsec thus provides a chain of trust.
+
+Alice will send Bob a message (encrypted with the communication channel's secret key) containing the organization's root key. This root key is the first signing key used to certify the key of the first Parsec user. This allows Bob to verify the signature chain.
+
+Finally, Alice sends new user Bob's certified public keys to the metadata server, which sends Bob's Parsec client confirmation of his registration.
+
+Bob, for his part, has also generated the encryption key for his user manifest and the encryption key for the locally stored data. Bob encrypts his user manifest and sends it to the metadata server.
+
+All information that must not be transmitted outside the Parsec terminal is stored in a local file. Bob enters his password on the Parsec interface, which is used to derive an encryption key to protect and encrypt this local file.
