@@ -80,10 +80,26 @@ const isHorizontal = layout === "horizontal";
   }
   <div
     class:list={[
+      "from-surface-elevated-secondary/30 absolute top-6 left-6 z-30 flex flex-wrap items-center gap-x-2.5 gap-y-px rounded-tl-xl rounded-tr-xl bg-linear-to-b/oklch to-transparent px-4 pt-4 pb-8",
+      isHorizontal && "mt-auto w-[calc(100%-3rem)] md:w-[calc(50%-3.25rem)]",
+      !isHorizontal && "w-[calc(100%-3rem)]",
+    ]}>
+    {
+      categoriesArray?.map((category: any) => (
+        <>
+          <span class="bg-surface-information-default-subtle text-label-md text-text-information-default border-border-information-default-subtle rounded-2xl border px-3 py-1 leading-none font-medium">
+            {humanize(category.name)}
+          </span>
+        </>
+      ))
+    }
+  </div>
+  <div
+    class:list={[
       "group relative flex max-w-2xl items-center justify-center overflow-hidden rounded-xl via-20% after:pointer-events-none",
       isHorizontal
         ? "h-full md:min-h-75"
-        : "max-h-52 min-h-52 lg:max-h-80 lg:min-h-80",
+        : "max-h-52 min-h-52 lg:max-h-60 lg:min-h-60",
     ]}>
     {
       image && (
@@ -105,27 +121,12 @@ const isHorizontal = layout === "horizontal";
       "flex h-full flex-col space-y-4",
       layout !== "horizontal" && "mt-4",
     ]}>
-    <div
-      class:list={[
-        "flex flex-wrap items-center gap-x-2.5 gap-y-px",
-        isHorizontal && "mt-auto",
-      ]}>
-      {
-        categoriesArray?.map((category: any) => (
-          <>
-            <span class="bg-surface-information-default-subtle text-label-md text-text-information-default border-border-information-default-subtle rounded-2xl border px-3 py-1 leading-none font-medium">
-              {humanize(category.name)}
-            </span>
-          </>
-        ))
-      }
-    </div>
     {
       title && (
         <h2
           class:list={[
             isHorizontal
-              ? "md:text-h3 text-h3-sm mb-6 font-semibold"
+              ? "md:text-h3 text-h3-sm mt-auto mb-6 font-semibold"
               : "md:text-h4 text-h4-sm leading-h4 mb-4",
           ]}
           set:html={plainify(title)}
@@ -144,8 +145,8 @@ const isHorizontal = layout === "horizontal";
       (authorEntry?.title || timeReadingEstimated) && (
         <div
           class:list={[
-            "text-body-lg text-text-base-description flex items-center justify-between",
-            isHorizontal ? "lg:mt-8 lg:mb-0" : "mt-auto pt-6",
+            "text-body-lg text-text-base-description flex items-center justify-between pt-6",
+            isHorizontal ? "lg:mt-8 lg:mb-0" : "mt-auto",
           ]}>
           {listPage && (
             <div class="flex items-center gap-2">
