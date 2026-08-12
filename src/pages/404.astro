@@ -1,20 +1,52 @@
 ---
 import CustomButton from "@/components/CustomButton.astro";
 import CallToAction from "@/components/sections/CallToAction.astro";
-import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
 import Base from "@/layouts/Base.astro";
-import { useTranslations } from "@/lib/utils/i18nUtils";
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
 
-const translate = await useTranslations(Astro.currentLocale as string);
+const error404 = await getEntryCTM("error404", "-index", Astro.currentLocale);
+const { title, description, preTitle, buttons } = error404.data;
 ---
 
-<Base status={404} title="Page Not Found" disableTagline={true}>
-  <section class="overflow-x-hidden">
-    <div class="container py-10">
-      <div class="relative mx-auto max-w-2xl py-12 text-center">
-        <div class="flex flex-col items-center gap-y-10">
-          <OptimizedImage src="/images/404.svg" width={400} />
-          <h1 class="h2 md:text-h1 text-center">Page Not Found</h1>
+<Base status={404} title={title} disableTagline={true}>
+  <section class="relative overflow-hidden px-4 py-4 md:py-24">
+    <div
+      class="pointer-events-none absolute -top-1/4 -left-1/4 -z-10 h-[110%] w-[50%] rounded-full opacity-30 blur-3xl"
+      style="background: radial-gradient(circle at 50% 90%, color-mix(in oklch, var(--parsec-color-surface-brand-default) 40%, transparent), transparent 60%), radial-gradient(circle at 70% 70%, color-mix(in oklch, var(--parsec-color-surface-brand-default) 50%, transparent), transparent 60%);">
+    </div>
+    <div
+      class="pointer-events-none absolute -right-1/4 -bottom-1/4 -z-10 h-[80%] w-[70%] rounded-full opacity-50 blur-3xl"
+      style="background: radial-gradient(circle at 50% 90%, color-mix(in oklch, var(--parsec-color-surface-brand-default) 40%, transparent), transparent 60%), radial-gradient(circle at 70% 70%, color-mix(in oklch, var(--parsec-color-surface-brand-default) 50%, transparent), transparent 60%);">
+    </div>
+    <div class="container p-4 py-10">
+      <div
+        class="relative mx-auto flex max-w-2xl flex-col items-center justify-center gap-8 px-4 py-12 text-center md:gap-12">
+        {
+          preTitle && (
+            <span
+              class="font-secondary from-surface-brand-default to-surface-brand-default-pressed mx-auto inline-block bg-linear-to-t bg-clip-text text-center text-[6rem] leading-none text-transparent md:text-[10rem]"
+              set:html={markdownify(preTitle)}
+            />
+          )
+        }
+        <div class="flex flex-col items-center gap-6">
+          {
+            title && (
+              <h1
+                class="has-italic-text text-h2-sm md:text-h2 text-center"
+                set:html={markdownify(title)}
+              />
+            )
+          }
+          {
+            description && (
+              <p
+                class="text-body-xl text-text-base-body text-center"
+                set:html={markdownify(description)}
+              />
+            )
+          }
         </div>
         <div class="pointer-events-none absolute inset-0 size-full select-none">
           <span
@@ -30,12 +62,15 @@ const translate = await useTranslations(Astro.currentLocale as string);
             class="translate-y-centered absolute -right-1 h-[115%] w-1 border-s border-dashed border-black/10">
           </span>
         </div>
-        <CustomButton
-          class="mt-10"
-          url="/"
-          hoverEffect="magnetic-text-flip"
-          label={translate("common.backToHome")}
-        />
+        <div
+          class="flex w-full flex-col items-center justify-center gap-4 md:flex-row md:gap-6">
+          {
+            buttons &&
+              buttons.map((item) => (
+                <CustomButton class="w-full md:w-fit" {...item} />
+              ))
+          }
+        </div>
       </div>
     </div>
   </section>
