@@ -31,6 +31,13 @@ const pagesCollection = defineCollection({
   schema: page,
 });
 
+const error404Collection = defineCollection({
+  loader: contentLoader("./src/content/404"),
+  schema: page.extend({
+    buttons: z.array(button).optional(),
+  }),
+});
+
 // Post collection schema
 const blogCollection = defineCollection({
   loader: contentLoader("./src/content/blog"),
@@ -101,6 +108,7 @@ export const collections = {
   blog: blogCollection,
   pages: pagesCollection,
   changelog: changelogCollection,
+  error404: error404Collection,
   sections: defineCollection({
     loader: contentLoader("./src/content/sections"),
   }),
