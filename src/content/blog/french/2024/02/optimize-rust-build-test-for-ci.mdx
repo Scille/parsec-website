@@ -1,0 +1,89 @@
+---
+title: "Optimiser la CI Rust avec cache et parallélisation"
+image: "ci-cd-pipeline-icon.png"
+date: 2024-02-09
+author: "Thierry Leblond"
+categories:
+  - Technologie
+draft: false
+
+excerpt: "Nous avons optimisé notre CI Rust sur GitHub Actions : parallélisation des jobs, cache des artefacts et cargo-nextest. Découvrez nos astuces en détail."
+---
+
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+<OptimizedImage src="ci-cd-pipeline-icon.png" alt="" />
+
+L'année dernière, nous avons migré notre CI vers [GitHub Actions](https://github.com/features/actions) après avoir utilisé [Azure Pipelines](https://azure.microsoft.com/products/devops/pipelines). Nous avons profité de cette migration pour améliorer notre CI. Cet article résume les différentes étapes que nous avons suivies pour l'optimiser lorsque nous travaillons avec Rust.
+
+## Paralléliser l'exécution
+
+Avec notre ancienne CI sur [Azure Pipelines](https://azure.microsoft.com/products/devops/pipelines), nous exécutions le même job sur différentes plateformes (Windows/Linux/macOS). Ce job lançait à la fois les tests et la validation du style de code pour les bases Python et Rust. Avec la migration, nous avons scindé ce job monolithique en plusieurs jobs plus petits :
+
+- Un job pour tester le code Python sur toutes les plateformes.
+- Un autre job pour tester le code Rust.
+- Un job pour vérifier la qualité et le style de tout ce qui n'est ni Python ni Rust.
+
+Avoir plusieurs jobs permet une exécution parallèle.
+
+> Plutôt que de tester le code Python puis le code Rust séquentiellement, nous pouvons désormais tester les deux simultanément, ce qui fait gagner du temps sur la boucle de retour pour les développeurs.
+
+## Simplifier encore les jobs de CI
+
+Avec la migration et la division de notre job monolithique en plusieurs jobs plus petits, nous avons également profité de la [multitude de GitHub Actions](https://github.com/marketplace?type=actions) disponibles pour factoriser les étapes communes. Ces étapes communes incluent notamment :
+
+- L'installation d'une version spécifique de Python.
+- Le téléchargement des artefacts de cache puis leur envoi une fois le job terminé.
+- L'exécution de pre-commit.
+- L'envoi des artefacts.
+
+## Mettre en cache les artefacts de build
+
+Sur le runner GitHub par défaut, la compilation des artefacts Rust prend un certain temps (~5 min / 40 sec sans/avec cache). Comme tous les artefacts ne sont pas modifiés à chaque pull request, il est pertinent de les mettre en cache pour réduire la quantité de code à recompiler. Heureusement, [GitHub propose un cache](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#about-caching-workflow-dependencies) que nous pouvons utiliser pour stocker nos artefacts de build, mais il faut rester vigilant car GitHub n'offre que [10 Go de cache](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#usage-limits-and-eviction-policy). Nous utilisons l'action toute faite [Swatinem/rust-cache](https://github.com/Swatinem/rust-cache) pour mettre en cache les artefacts Rust. Cette action ne met en cache intelligemment que les dépendances tierces qui ne changent pas en dehors des mises à jour. Comme les entrées de cache sur GitHub sont partagées de la branche principale vers les branches filles (c'est-à-dire qu'une branche issue de la branche principale peut utiliser les entrées de cache de celle-ci), nous avons choisi de ne sauvegarder les entrées que sur la branche principale. Tout cela vise à économiser un maximum d'espace sur le cache GitHub limité, afin de permettre à un plus grand nombre de branches d'utiliser le cache sans que GitHub ne l'invalide.
+
+> Lorsque vous utilisez plus de cache que disponible, GitHub commence à supprimer les anciennes entrées jusqu'à revenir sous la limite des 10 Go.
+
+## Optimiser le build de la CI
+
+En plus de mettre en cache les artefacts Rust, nous avons également configuré le [profil de compilation cargo](https://doc.rust-lang.org/cargo/reference/profiles.html). Nous avons créé deux nouveaux profils utilisés dans notre CI et modifié le profil `dev` par défaut. Pour le profil `dev`, nous avons modifié le niveau d'optimisation de nos dépendances tierces ainsi :
+
+```
+[profile.dev.package."*"]
+opt-level = 1
+```
+
+> Cela nous permet d'exécuter les tests plus rapidement au prix d'un temps de compilation accru, mais c'est un bon compromis puisque les artefacts Rust sont mis en cache.
+
+En plus de modifier le profil `dev`, nous avons créé deux nouveaux profils qui héritent de `dev` :
+
+```
+[profile.ci-rust]
+inherits = "dev"
+debug = false
+incremental = false
+
+[profile.ci-python]
+inherits = "ci-rust"
+opt-level = 1
+```
+
+Le premier profil `ci-rust` est utilisé par la partie de la CI qui exécute/build/teste le code Rust. Il désactive les paramètres `debug` et `incremental` :
+
+- Avec `debug` désactivé, aucune information de débogage n'est générée (comme sur un build `release`). Nous avons choisi de les désactiver car cela réduit la taille des artefacts générés (et la quantité de données générées en général), ce qui réduit l'utilisation du cache. En cas d'échec d'un test sur la CI, nous n'avons pas de traceback précis, mais nous considérons qu'il est toujours plus simple de déboguer sur la machine de développement.
+- Nous désactivons le paramètre `incremental` car nous ne mettons pas en cache les artefacts de nos crates internes (une crate en Rust est une unité de compilation — une bibliothèque ou un binaire). Cela simplifie la compilation et réduit la taille des artefacts.
+
+Le second profil `ci-python` est presque identique à `ci-rust`, à ceci près qu'il propose un build légèrement optimisé pour nos artefacts Rust (`opt-level = 1`) car ceux-ci ont un impact sur la vitesse des tests Python.
+
+## Vérifier le formatage et le linting du code
+
+Dans le cadre de notre processus de développement, nous utilisons [`rustfmt`](https://github.com/rust-lang/rustfmt) et [`cargo-clippy`](https://github.com/rust-lang/rust-clippy) pour appliquer le style de code et des améliorations via la configuration [`pre-commit`](https://pre-commit.com/) que nous avons créée pour le projet. Cependant, comme `cargo-clippy` nécessite des artefacts de compilation, nous avons décidé d'exécuter ces étapes dans la partie de la CI dédiée à Rust. Cela nous permet de mettre ces artefacts en cache et évite également d'exécuter des étapes inutiles (si nous ne modifions pas de code Rust, nous n'avons pas besoin de les exécuter). Nous avons choisi d'utiliser `cargo-clippy` via `pre-commit` car il n'est actuellement pas facile de configurer `clippy` pour l'ensemble du workspace. Cette limitation sera levée lorsque [cargo#12115](https://github.com/rust-lang/cargo/issues/12115) sera implémenté, potentiellement dans la version [`rust-1.75`](https://releases.rs/docs/1.75.0/).
+
+## Exécuter les tests
+
+Nous utilisons [`cargo-nextest`](https://nexte.st/) plutôt que `cargo-test` pour exécuter nos tests car :
+
+- Il offre une sortie plus agréable que `cargo-test` par défaut (similaire à [`jest`](https://jestjs.io/) ou [`pytest --verbose`](https://docs.pytest.org/en/7.1.x/how-to/output.html)).
+- Il peut être configuré pour interrompre les tests qui prennent trop de temps.
+- Il permet de relancer les tests instables (un test instable, ou « flaky », est un test qui peut échouer une première fois puis réussir en le relançant).
+
+Il est cependant important de noter que `nextest` a un modèle d'exécution spécifique où [chaque test s'exécute dans un processus dédié](https://nexte.st/book/how-it-works.html). Cela signifie que la mémoire partagée entre ces tests n'est pas possible.

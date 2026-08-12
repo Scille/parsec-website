@@ -1,0 +1,55 @@
+---
+title: "Parsec V3 : la migration complète de Python vers Rust"
+image: "parsec-python-to-rust-migration.jpg"
+date: 2023-07-31
+author: "Thierry Leblond"
+categories:
+  - Technologie
+draft: false
+
+excerpt: "Parsec a migré son code de Python vers Rust pour améliorer la portabilité mobile et web sans interrompre ses versions. Découvrez pourquoi et comment."
+---
+
+# Introduction
+
+L’outil Parsec est originellement développé en Python. Ce langage interprété est facilement lisible et permet de développer et d’itérer très rapidement. Il a également l’avantage de tourner nativement sur les principales plateformes de type bureau (Windows, MacOS et Linux). Une interface graphique a été développée en PyQt, un [binding](https://fr.wikipedia.org/wiki/Binding) Python pour la bibliothèque Qt. Une application Android a également été développée en utilisant [Python4Android](https://github.com/kivy/python-for-android). Cette application est toutefois difficile à maintenir et met en avant les limitations du Python pour les plateformes mobiles ou web, contraignant les utilisateurs de Parsec à l’installation d’un client lourd. S’ajoutent à ce problème l’interface graphique vieillissante ainsi que l’intégration complexe avec d’autres services (utilisation de Parsec dans un outil tiers).
+
+## Objectifs
+
+Les objectifs principaux sont de rendre l’utilisation de l’application possible dans un navigateur web, ainsi que de faciliter la portabilité sur les plateformes mobiles, de préférence en utilisant une interface homogène qui évite une réécriture complète pour chaque plateforme et une meilleure homogénéité de l’interface.
+
+Il a été décidé de porter le code de l’application vers le langage Rust, un langage compilé qui offre une alternative sécurisée au C et C++. Le Rust peut être exécuté nativement sur différentes plateformes, notamment mobiles et même [web](https://fr.wikipedia.org/wiki/WebAssembly). Pour chaque plateforme, une petite couche de binding doit être écrite pour interagir avec les langages natifs (Java pour Android, JavaScript pour le web, …). La partie serveur de Parsec peut quant à elle rester en Python. L’interface doit également faire peau neuve avec des technologies web, offrant plus de possibilités que Qt.
+
+## Contraintes
+
+La base de code de Parsec, vieille de plusieurs années, est d’une taille conséquente. La traduire vers Rust représente une lourde tâche. L’équipe de développement est réduite et nous devons être en mesure de sortir de nouvelles versions de l’application Parsec pendant la traduction : il nous est impossible de simplement arrêter les développements pour se concentrer intégralement sur la version Rust.
+
+L’application en Rust doit être compatible avec l’application existante, elle doit pouvoir utiliser les mêmes interfaces, protocoles ou fichiers, et doit conserver les mêmes fonctionnalités.
+
+Elle doit par ailleurs être compatible web, ce qui limite les bibliothèques Rust utilisables et oblige à rajouter des abstractions spécifiques (gestion du système des fichiers, du réseau, du point de montage, …).
+
+# Démarche
+
+Pour répondre à ces contraintes, plutôt qu’une réécriture complète en parallèle de l’application Python, il a été décidé de faire une transition douce en ré-écrivant un à un les modules Python en Rust et en les remplaçant au sein de l’application. Le programme lui-même reste dans un premier temps en Python, mais embarque des modules écrits en Rust.
+
+La première étape a été de nettoyer le code Python et d’ajouter les informations de type. Le Python est typé dynamiquement (à l’exécution), le Rust statiquement (à la compilation). Les informations de type en Python nous permettent de faciliter la traduction vers le Rust et ont également permis de remonter des bugs dans l’application.
+
+L’application a ensuite été découpée en modules, afin que chaque module puisse être individuellement traduit. La traduction implique d’écrire le module Rust, en ajoutant une couche de binding via l’outil [PyO3](https://pyo3.rs/v0.19.0/) afin de faciliter l’utilisation de ce code Rust en Python (et vice versa, de pouvoir utiliser le code Python dans le code Rust). Le module Rust fonctionne alors comme le module Python, à l’utilisation les deux sont indiscernables. Cela signifie qu’il est possible d’utiliser l’intégralité de notre suite de tests écrite en Python. Si les tests passent, nous avons une garantie forte que le comportement du code Rust est bien le même que celui du code Python remplacé.
+
+Le portage graduel de l’application nous permet également de continuer notre cycle de release, en intégrant le code Rust au fur et à mesure des nouvelles versions.
+
+## Problèmes rencontrés
+
+Si l’intégration de module Python écrits en Rust est simplifiée par PyO3, elle reste toutefois compliquée, notamment parce que les idiotismes entre les langages sont différents (Rust ne possède pas les context managers du Python par exemple), ce qui force à réécrire une partie du code Python pour utiliser une syntaxe plus générique.
+
+Un autre souci rencontré est que Parsec fonctionne en asynchrone et que les deux écosystèmes ont chacun leur boucle d’événements que nous devons être capable de faire communiquer, ce qui force à écrire du code de glue compliqué avec l’utilisation de threads et peut mener à des bugs difficiles à détecter et résoudre.
+
+Notre processus d’intégration continue a également dû être consolidé avec notamment des systèmes de cache pour réduire les temps de compilation et la gestion de la compilation et du packaging sur plusieurs plateformes.
+
+Enfin, si dans l’ensemble les modules peuvent être portés un à un, la réécriture de la glue entre ces modules doit être faite d’une traite et oblige à des changements conséquents et bloquants.
+
+# Conclusion
+
+Notre stratégie s’est avérée payante : nous avons pu continuer notre cycle de releases Parsec pendant la transition. Bien que l’intégralité du code ne soit pas encore porté, nous sommes sereins quant à sa qualité grâce à notre processus d’intégration continue et notre suite de test qui nous ont permis de valider les différents modules au fur et à mesure de leur écriture.
+
+Une partie du code Rust est par ailleurs déjà intégrée au sein de la nouvelle interface graphique de Parsec (en cours de développement) capable d’être exécutée intégralement dans un navigateur web.

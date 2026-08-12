@@ -1,0 +1,104 @@
+---
+title: "Sécurité des données : 5 nouveaux paradigmes essentiels"
+image: "1.jpg"
+date: 2021-01-25
+author: "Thierry Leblond"
+categories:
+  - Cybersécurité
+draft: false
+
+excerpt: "Découvrez les 5 nouveaux paradigmes de sécurité des données, comme le Zero Trust et le Zero Knowledge, pour protéger votre entreprise ultra-connectée."
+---
+
+# Repères
+
+En 2020, le coût mondial de la menace cyber est chiffrée à 4 Md$ avec une croissance annuelle de 50 %. La menace cyber devenant à la fois endogène et exogène au réseau intranet périmétrique, la protection périmétrique de type « ligne Maginot » ou « château-fort médiéval » est un modèle de sécurité de moins en moins adapté à notre monde ultra-connecté.
+
+La stratégie de protection des organisations doit évoluer vers un nouveau paradigme de sécurité mettant en œuvre cinq principes :
+
+- la confiance nulle ou « [Zero Trust](https://parsec.cloud/securite/) »
+- la diffusion de connaissance nulle ou « [Zero Knowledge](https://parsec.cloud/innovation-securite-cloud/) »,
+- le modèle centré sur l'utilisateur ou « User-centered Security Model »
+- la « micro-segmentation des données »
+- Write Once Read Many (WORM)
+
+## Dans un monde ultra-connecté, la menace est partout
+
+L'arrivée massive de la 5G et du Cloud Public transforment l'internet en un gigantesque réseau d'entreprise et explose la volumétrie des données partagées et la surface d'attaque. Les données sensibles des organisations, de plus en plus exposées, accessibles et manipulables par les gouvernements, hackers et autres compétiteurs, deviennent l'objet d'une guerre invisible dans le monde du numérique. La souveraineté des entreprises et des États commence à être durement mise à l'épreuve.
+
+Au cours des dernières années, les attaques cyber contre les infrastructures vitales et les entreprises stratégiques se sont multipliées :
+
+- Le 12 avril 2012, l'Élysée met en évidence une opération d'espionnage attribuée de façon formelle aux États-Unis ;
+- Le 23 décembre 2015, un piratage des systèmes industriels SCADA, basé sur le programme « BlackEnergy » et le logiciel malveillant, KillDisk provoque une importante coupure d'électricité dans la région d'Ivano-Frankivsk, dans l'ouest de l'Ukraine ;
+- le 16 novembre 2019 : le CHU de Rouen, paralysé par un rançongiciel a été contraint de revenir à « la bonne vieille méthode du papier et du crayon »
+- le 27 juillet 2020 : la société Carlson WagonLit victime d'un rançongiciel est bloquée deux jours et paye 4,5 M$ de rançon pour récupérer ses données.
+- Le 20 octobre 2020, Sopra Steria, entreprise de 46000 personnes et 4,4 Md€ de chiffre d'affaire arrête très rapidement une attaque par le rançongiciel Ryuk qui affecte le système d'authentification et entraîne le chiffrement d'une partie de ses données.
+- le 13 décembre 2020, SolarWinds éditeur du logiciel de gestion de réseaux annonce être victime depuis début 2020, d'une gigantesque attaque de cyberespionnage qui a visé, par rebond, des centaines de grands comptes, organismes gouvernementaux et grandes entreprises. Il s'agit vraisemblablement de la plus grande cyberattaque jamais réalisée.
+
+Toutes ces attaques ont un point commun : elles opèrent sur des enclaves réseau périmétriques considérées sures et gérées de manière centrale. L'utilisateur est également géré de façon pyramidale, en mode top – down. Mais dans un monde ultra-connecté, il est impossible d'imaginer un réseau intégralement sécurisé car les données, en volumes innombrables, sont au centre de tout.
+
+Le paradigme de sécurité qui considère que tout ce qui est à l'extérieur d'un réseau protégé est une menace et qu'on peut faire confiance à tout ce qui est à l'intérieur de ce même réseau ne fonctionne plus dans un monde ou les organisations externalisent de plus en plus centres de données et traitements dans le Cloud et permettent le travail à distance.
+
+## Le « Zero Trust » face à la menace endogène
+
+Le modèle « Zero Trust » est né d'un constat : en matière de Système d'Information, la distinction entre les zones « externes » et « internes » a tendance à disparaître. L'approche Zero-Trust peut être résumée en cinq points :
+
+1. Tout réseau est considéré comme hostile.
+2. Les menaces internes et externes sont présentes à tout moment sur le réseau.
+3. Être à l'intérieur d'un réseau interne n'est jamais un gage de confiance absolue.
+4. Chaque terminal, chaque utilisateur et chaque flux réseau doivent être authentifiés et autorisés.
+5. Les politiques de sécurité sont dynamiques et agissent sur chaque sources de données.
+
+Ce modèle revient essentiellement à « ne faire confiance à personne ». Il pose le principe que personne n'est totalement fiable, que l'accès doit être aussi limité que possible, et que la confiance est une vulnérabilité. Un modèle « Zero-Trust » assure que les bonnes questions soient posées en fonction du profil de risque de chaque utilisateur, de chaque terminal et de la ressource dont l'accès est demandé :
+
+- Authentification : l'utilisateur est-il celui qu'il prétend être ?
+- Autorisation : l'utilisateur est-il autorisé ?
+- Accès aux données : quel est le droit en connaître de l'utilisateur ?
+
+Par construction, corollaire du modèle « Zero Trust » consiste à ne faire confiance qu'à son terminal ce qui suppose que le terminal soit maîtrisé, également selon une politique de type « Zero Trust » :
+
+- maîtrise des logiciels installés
+- maîtrise du système d'exploitation
+- et à l'extrême, maîtrise des composants matériels constituant le terminal.
+
+Forrester [1](https://parsec.cloud/blog/20210105_Zero_Trust_Zero-Knowledge_User-centered-security/#fn:1) a publié en 2018 un résumé de la mise en œuvre du « Zero Trust » articulé en cinq étapes :
+
+1. Identifier et classer par catégorie les données sensibles, leur lieu de stockage et leur mode de transmission.
+2. Définir les voies par lesquelles ces données peuvent être partagées et bloquer tout dispositif et utilisateur des processus de sortie des données par des canaux non autorisés.
+3. Appliquer la micro-périmétrie à toutes les données sensibles et vérifier tous les accès à ces données.
+4. Surveiller le système grâce à un ensemble d'analyses de sécurité globales, en ayant choisi avec soin un fournisseur qui comprend votre entreprise, votre secteur et votre infrastructure informatique.
+5. Automatiser les protocoles de sécurité et effectuer des tests fréquents de cette automatisation.
+
+Disons-le tout net : c'est irréalisable dans le monde réel des organisations utilisant des applications patrimoniales qui cumulent une dette technique considérable et basées sur des architectures non-sécurisée par conception. Pour y arriver, il faut repenser son système et son organisation en repartant de zero et s'appuyer sur de nouveaux outils.
+
+## Le « zero-knowledge » face à la menace exogène
+
+L'environnement extérieur sur lequel on interagit étant une menace potentielle, toutes les fonctions de sécurité attachées aux données manipulées doivent être réalisées exclusivement au niveau du terminal de confiance. Ce qui induit que tous les flux de données atteignant la carte réseau pour sortir de la machine doivent être totalement inexploitable et incorruptible par un tiers.
+
+## L'utilisateur final, nœud de la distribution de confiance
+
+Dans le cas d'une « Infrastructure de gestion de clés classique (IGC ou PKI) », le processus de délivrance des clés part d'une « Autorité de Certification (AC) » qui signe des certificats dont la distribution est garantie par les différentes « Autorités d'Enregistrement (AE) ».
+
+Par ailleurs, dans tous les systèmes sécurisés, les droits d'administration sont confiés aux titulaires d'un compte à privilège qui, de par ses droits, peut accéder aux données. C'est la raison pour laquelle, les bonnes pratiques imposent de mettre en œuvre le « principe de moindre privilège ».
+
+Cette politique de sécurité des systèmes apporte sur le papier des garanties de sécurité mais s'avère complexe de mise en œuvre et ne permet pas de se prémunir d'une action malveillante d'un administrateur système.
+
+A bien y réfléchir, il est tentant d'inverser le processus de distribution de la confiance en partant de l'utilisateur final. En effet, qui mieux que l'utilisateur peut être le garant de sa propre identité ? Qui mieux que lui peut accorder sa confiance à un tiers sur tout ou partie de son propre périmètre de confiance ?
+
+Le concept distribution décentralisée de la confiance s'affranchit du principe « top – down », très complexe de mise en œuvre et considère que le point-clé de la distribution de la confiance est l'utilisateur lui-même. C'est un changement de paradigme dans un monde traditionnellement gouverné par les organisations pyramidales mais c'est la conséquence logique de l'ultra connectivité et de l'évolution vers des zones de confiance de plus en plus atomisées.
+
+## La micro-segmentation des données apporte la résilience
+
+Partant du constat universellement partagé que le maillon crucial de la cybersécurité est l'utilisateur lui-même, d'autant que pratiquement toutes les cyberattaques exploitent des erreurs humaines plutôt que des failles du système, la micro-segmentation apparaît naturellement comme la quatrième composante naturelle d'une politique de sécurité bien conduite. Elle consiste à traiter chaque connexion aux données comme un environnement distinct, avec ses propres exigences de sécurité de façon totalement transparente pour l'utilisateur. Elle considère chaque paire utilisateur-ressource comme totalement indépendante, à la fois de l'origine de la connexion, mais aussi des autres connexions applicatives qui pourraient être actives sur le même terminal.
+
+Au même titre que le modèle Zero Trust, la micro-segmentation considère que le plus petit élément significatif est la paire utilisateur-application ou utilisateur-données, peu importe le terminal, la nature de la connexion et l'emplacement de chaque extrémité.
+
+Sans point de concentration des données sur un serveur central, un attaque réussie ne permet plus de compromettre tout un système de données mais seulement une infime partie, celle liée à l'utilisateur compromis.
+
+## Write Once Read Many ou WORM contre rançongiciel
+
+Une bonne pratique de base consiste à sauvegarder régulièrement ses données. Mais cette précaution ne suffit pas, pour la simple et bonne raison que les attaques par rançongiciel, ciblent également les infrastructures de backup. La meilleure des barrières est le « Write Once Read Many ». WORM désigne une méthode de stockage qui consiste à écrire une seule fois la donnée avant de la rendre accessible en lecture seule. Dès lors que la sauvegarde, implicite et native, devient totalement immuable et aucune modification ne peut y être apportée. Un ransomware qui aurait pénétré le réseau ne peut plus dénaturer les données et il est également possible de visualiser l'état du système à n'importe quel moment du passé ainsi que d'imputer toute action malveillante.
+
+---
+
+1. [https://www.forrester.com/report/Five+Steps+To+A+Zero+Trust+Network/-/E-RES120510](https://www.forrester.com/report/Five+Steps+To+A+Zero+Trust+Network/-/E-RES120510) [↩](https://parsec.cloud/blog/20210105_Zero_Trust_Zero-Knowledge_User-centered-security/#fnref:1)

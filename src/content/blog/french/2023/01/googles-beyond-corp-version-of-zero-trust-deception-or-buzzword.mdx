@@ -1,0 +1,135 @@
+---
+title: "Zero Trust et Beyond Corp de Google : mythe ou réalité ?"
+image: "what-is-zero-trust-explainer.png"
+date: 2023-01-30
+author: "Thierry Leblond"
+categories:
+  - Actualités
+draft: false
+
+excerpt: 'Google présente "Beyond Corp" comme une avancée Zero Trust. Découvrez notre analyse pour distinguer marketing et sécurité réelle des données.'
+---
+
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+Novembre dernier, Google cloud communique sur une avancée technologique engagée dès 2011, se présentant comme relevant du principe du Zero-trust, nommée “Beyond Corp”, qui permettrait d’assurer une meilleure sécurité des données de leurs clients entreprises [\[1\]](#_ftn1)
+
+## Le Zero Trust, c’est quoi ?
+
+En Août 2020, le US NIST a produit un standard de recommandations d’architectures sur le Zero Trust.[\[2\]](#_ftn2)
+
+En 2021, la stratégie Zero Trust a fait l’objet de deux publications françaises de référence :
+
+- d’une part un avis scientifique de l’ANSSI[\[3\]](#_ftn3)
+- d’autre part un rapport du CIGREF[\[4\]](#_ftn4)
+
+Le concept de Zero Trust, ce n’est pas une solution clé en main, mais c’est un modèle de **Confiance Implicite tourné vers l’Utilisateur** qui s’appuie sur des contrôles dynamiques et granulaires :
+
+- l’accès aux ressources doit être accordé sur la base du besoin d’en connaître ;
+- l’accès doit être donné sur la base du plus faible niveau de privilège nécessaire pour réaliser la tâche ;
+- les demandes d’accès doivent être contrôlées de la même manière quelles que soient leurs origines (le périmètre « intérieur » ou « extérieur » de l’entité) ;
+- la politique d’accès aux ressources doit être dynamique et prendre en compte un large nombre d’attributs (identités de l’accédant et de la ressource accédée, sensibilité des ressources sollicitées, analyse comportementale de l’utilisateur, horaires d’accès, etc .) ;
+- l’entité doit veiller à la sécurité de tous ses actifs à l’occasion des demandes d’accès et de manière récurrente durant l’usage ;
+- Les authentifications et autorisations d’accès aux ressources doivent faire l’objet de réévaluations régulières.
+
+Enfin, en novembre 2022, le US DoD édicte sa stratégie Zero Trust.[\[5\]](#_ftn5)
+
+**Nous avons demandé à l'intelligence artificielle ChatGPT de définir ces principes... et le résultat est incroyablement pertinent.**
+
+_Le principe de zero trust est une approche de sécurité qui consiste à ne pas accorder automatiquement confiance à un utilisateur, un dispositif ou un service, même si ces derniers se trouvent à l'intérieur de la zone réseau protégée. Cela signifie que toutes les demandes d'accès sont authentifiées et autorisées avant d'être accordées, indépendamment de l'emplacement ou de la connaissance préalable de l'utilisateur. Ce principe est souvent utilisé pour renforcer la sécurité des réseaux d'entreprise et des systèmes cloud._
+
+_Le principe de zero knowledge, quant à lui, est une approche de confidentialité des données qui permet de protéger les informations sensibles tout en les gardant accessibles aux utilisateurs autorisés. Il s'agit d'une méthode de cryptage qui permet à un tiers de vérifier les informations sans pour autant pouvoir les lire. Cela signifie que les données sont cryptées de telle sorte que seul le propriétaire peut les déchiffrer, même si elles sont stockées ou transitent par un tiers. Cette technique est souvent utilisée dans les systèmes de stockage en nuage, les systèmes de messagerie chiffrée et les systèmes de paiement en ligne._
+
+## Le “Zero Trust” : un principe en rupture enfin à l'ordre du jour !
+
+La bonne nouvelle dans cette communication de Google sur le Zero Trust  c’est que, dans la continuité du NIST et du DoD, et un mois après qu’Apple ait annoncé la disponibilité un stockage chiffré de bout-en-bout sur i-Cloud[\[6\]](#_ftn6), un nouveau pilier des GAFAM reconnaît officiellement qu'il faut une nouvelle couche de sécurité de bout-en-bout (end-to-end Security) pour utiliser en toute confiance ses serveurs de données hébergés sur le cloud.
+
+A l’heure où les menaces cyber n’ont jamais été aussi importantes (espionnage, sabotage et judiciarisation extra-territoriale), à l’heure où l'Europe veut imposer la souveraineté numérique à ses Administrations, ses Entreprises et ses Citoyens, parler de sécurité, et notamment du Zero Trust, devient enfin un argument commercial obligatoire qui arrive en force  sur le marché et qui devient incontournable pour vendre du service sécurisé de qualité sur le Cloud.
+
+**La sécurité selon Google : “Aie confiance !”**
+
+Il faut bien reconnaître que parler de Zero Trust comme le fait Google dans cet article technico-marketing, relève un peu de la supercherie !
+
+<figure>
+
+<OptimizedImage src="trust-me-snake-illustration.png" alt="" />
+
+<figcaption>
+
+"Aie confiance en Google..." (dessin généré par DALL.-E)
+
+</figcaption>
+
+</figure>
+
+Tout au mieux pourrait-on parler de “**Google Trust**”. L’approche de Google relève en effet d’une vision classique de la sécurité qui consiste à considérer que seul ce qui est dans le réseau interne est de confiance même si elle apporte avec Beyond Corp une indéniable couche de gestion fine des droits au niveau du réseau.
+
+Le Zéro Trust selon Google se présenterait finalement comme un modèle de sécurité basé sur la vérification permanente des requêtes réseau mais restant délégué à un tiers, Google en l’occurrence. **Aie confiance en Google !**
+
+Mais le ZERO TRUST, n’est-ce que cela ?
+
+**_L’approche “Beyond Corp” ne serait finalement qu'une implémentation classique de la gestion des droits qui fait confiance à un nouveau service Google d’intermédiation et de filtrage des flux._**[\[1\]](#_msocom_1) 
+
+## Le Zero Trust selon Google = Le “Google Trust”
+
+L'approche Google relève d'un fonctionnement assez basique du système d'information qui reste basé sur l'identité et le contrôle des flux par un système de confiance propriétaire qui accède à toutes les informations.
+
+<OptimizedImage src="blindfolded-trust-google-cartoon.png" alt="" />
+
+[\[2\]](#_msocom_2) [\[3\]](#_msocom_3) 
+
+Le problème de cette approche c’est qu’elle consiste à toujours faire confiance à trois espions :
+
+1. l'admirateur honnête mais curieux  interne à l’entreprise
+2. le fournisseur de cloud Google
+3. l'administration américaine et les lois extraterritoriales US.
+
+Dans cette vision on passe d'un intranet où tout le monde à accès à tout, à une approche du Zéro Trust  qui revient à dire :
+
+**_"S'il vous plaît, implémentez enfin un contrôle d'accès satisfaisant."_**
+
+C’est une approche nécessaire mais non suffisante car son implémentation consiste à faire confiance à un unique acteur extérieur à savoir Google, et derrière lui le cadre fixé par l’administration américaine.
+
+Même si elle permet de se prémunir de certaines menaces cyber externes notamment, la principale menace cyber, la judiciarisation extraterritoriale, n’est absolument pas convertie. Ainsi, un administrateur malhonnête pourrait changer les données sans l'aval du propriétaire et un administrateur honnête mais curieux pourrait lire les données par dessus l’épaule de son légitime propriétaire.
+
+<OptimizedImage src="google-beyondcorp-zero-trust-diagram.png" alt="" />
+
+**_Mais au fait, qui détient VRAIMENT les clés de mes données ?_**
+
+## Le Zero Trust selon Parsec = l’utilisateur final ne fait confiance qu’à lui-même
+
+_L’approche Parsec[\[7\]](#_ftn6)_ [\[8\]](#_ftn6) _c'est au contraire du Zero Trust [\[9\]](#_ftn6) et Zero Knowledge [\[10\]](#_ftn6) "ultimes" où la confiance n'est jamais déléguée_ : l'utilisateur reste le seul et ultime maître de ses données.
+
+<OptimizedImage src="parsec-trust-cartoon-2021.jpg" alt="" />
+
+Au-delà de l’impression première de marketing fourre-tout ou buzzword, le concept de Zero trust revêt au contraire une notion de sécurité informatique de fond qui va bien au-delà de ce que les architectures actuelles basées sur le web centralisé peuvent apporter.
+
+Ce concept consiste à se défier de tous les intermédiaires : fournisseurs de Cloud, prestataire d’infogérance, prestataire d’infrastructure réseau ou internet, administrateur-système « honnête mais curieux », lois extra-territoriales et, a contrario, à confier à l’utilisateur final la responsabilité de sa sécurité sur son périmètre de responsabilité, notamment celle des données, au plan matériel, humain et logiciel.
+
+**Comparaison des menaces entre les deux modèles “Zero Trust”**
+
+<OptimizedImage src="parsec-vs-google-beyondcorp-comparison-table.png" alt="" />
+
+---
+
+[\[1\]](#_ftnref1) [https://cloud.google.com/blog/fr/topics/developers-practitioners/le-zero-trust-et-beyondcorp-de-google-cloud?hl=fr&pref=k](https://cloud.google.com/blog/fr/topics/developers-practitioners/le-zero-trust-et-beyondcorp-de-google-cloud?hl=fr&pref=k)
+
+[\[2\]](#_ftnref2)  SP 800-207 Zero Trust Architecture : [https://csrc.nist.gov/publications/detail/sp/800-207/final](https://csrc.nist.gov/publications/detail/sp/800-207/final)
+
+[\[3\]](#_ftnref3) [https://www.ssi.gouv.fr/agence/publication/le-modele-zero-trust/](https://www.ssi.gouv.fr/agence/publication/le-modele-zero-trust/)
+
+[\[4\]](#_ftnref4)[https://www.cigref.fr/wp/wp-content/uploads/2022/02/Vers-une-philosophie-Zero-Trust-Une-rupture-dans-la-continuite-pour-la-securite-des-applications-fevrier-2022.pdf](https://www.cigref.fr/wp/wp-content/uploads/2022/02/Vers-une-philosophie-Zero-Trust-Une-rupture-dans-la-continuite-pour-la-securite-des-applications-fevrier-2022.pdf)
+
+[\[5\]](#_ftnref5) [https://dodcio.defense.gov/Portals/0/Documents/Library/DoD-ZTStrategy.pdf](https://dodcio.defense.gov/Portals/0/Documents/Library/DoD-ZTStrategy.pdf)
+
+[\[6\]](#_ftnref6)[https://www.apple.com/newsroom/2022/12/apple-advances-user-security-with-powerful-new-data-protections/](https://www.apple.com/newsroom/2022/12/apple-advances-user-security-with-powerful-new-data-protections/)
+
+[\[7\]](#_ftnref7) Logiciel à code source ouvert : [https://github.com/Scille/parsec-cloud/](https://github.com/Scille/parsec-cloud/)
+
+[\[8\]](#_ftnref8) Logiciel certifié CSPN par l’ANSSI : [https://www.ssi.gouv.fr/entreprise/certification_cspn/parsec-version-2-0-0/](https://www.ssi.gouv.fr/entreprise/certification_cspn/parsec-version-2-0-0/)
+
+[\[9\]](#_ftnref9) **Personne d’autre que moi n’a la clé de mes données.**
+
+[\[10\]](#_ftnref10) **Personne d’autre que moi n’a connaissance de mes données en clair.**
+
+---

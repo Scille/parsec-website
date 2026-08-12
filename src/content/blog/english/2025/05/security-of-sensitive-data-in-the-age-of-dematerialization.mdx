@@ -1,0 +1,128 @@
+---
+title: "Zero Trust: Securing Sensitive Data Beyond the VPN"
+date: 2020-05-29
+author: "Thierry Leblond"
+categories:
+  - Digital Transformation
+draft: false
+
+excerpt: "As VPNs reach their limits, companies need Zero Trust and Zero Knowledge to secure sensitive data in the cloud. Discover why Parsec offers a better path."
+---
+
+{/* TODO: add main image, e.g. image: "main-image.png" in the frontmatter above */}
+
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+#### Key figures
+
+The Covid19 crisis and its corollary, the brutal confinement of companies, have prompted many CIOs to urgently deploy digital solutions to enable employees to work from home, in particular from their own computer terminals. This situation is forcing unprepared companies to take the risky step of dematerializing traditional work processes ON THE INTERNET, which raises the question of which tools can guarantee maximum security for sensitive data, now shared and stored in public clouds that are essentially insecure. Faced with these requirements, IT managers have generally relied on virtual private networks or VPNs.
+
+But in a world where telecommuting is becoming the norm and the IT environment is undergoing a revolution, the security model based on network protection and its Internet corollary, the VPN, the Alpha and Omega of the traditional corporate data security model, is becoming the object of all evils. We conclude this article by outlining two possible solutions, depending on the company's needs.
+
+### What does dematerialization involve?
+
+Dematerializing a document means producing it directly in digital format from an information system. Beyond document production, dematerialization implies an in-depth reorganization of the handling process: tasks, participants, tools and procedures. It is therefore more appropriate to speak of the dematerialization of document processes.
+
+Dematerialization is the first step in the chain of document management and preservation through the digital transition. After this step, once the digital documents have been generated, several questions arise:
+
+- How to share documents securely? Who will be authorized to access the information? What are the rights (read, modify, share)?
+- How can you guarantee secure storage of digital documents?
+- How will document integrity be guaranteed?
+- How will the right to know be controlled?
+
+Traditional Electronic Document Management (EDM) and archiving solutions generally meet the need for dematerialization; but in the hostile environment of the public cloud and the Internet, few solutions guarantee 100% security for the sharing of sensitive documents (collaborative work and file exchanges) and their storage (private or public clouds), while combining ease of use, ergonomics and collaboration. Faced with these demanding security requirements for sharing sensitive company documents, IT managers have generally relied on virtual private networks or VPNs.
+
+### What is a VPN?
+
+First of all, it's important to clear up the initial confusion surrounding VPNs. One of its uses is to enable you to surf the Internet from an internal network using someone else's IP address - a way of taking responsibility for your employees' activities off your hands.
+
+"In a nutshell, an "on-site" VPN is a function on a company's router that bridges the gap between a company's private network, the LAN, and the outside world, the WAN2. It enables access from the Internet to machines present only on the LAN."
+
+An SME, on the other hand, is looking to connect employees accessing its protected internal network from the Internet, and wants to give them access to all the company's services as if they were on its premises. The analogy of a fortified castle surrounded by a moat and accessed by a drawbridge is obvious.
+
+The traditional security model remains unchanged: those outside the protected network are the enemy, and those inside belong to the trusted perimeter. The internal network is the fortress. The bastion and firewalls are the moat, and the VPN is the drawbridge.
+
+### The VPN perimeter security model is reaching its limits
+
+The press regularly reports cases of companies whose important documents have been breached because an employee or service provider has been tricked by phishing; because a hacker has managed to gain control of sensitive data servers.
+
+With the rise of mobile devices, and situations where all employees work outside the company's physical walls, it's becoming impossible to ask employees to connect from a limited number of central VPN servers.
+
+In such a centralized organization, the VPN, as the only gateway to corporate data, becomes a bottleneck for employees, who are encouraged to use their own computers, even when traveling for business purposes.
+
+This situation of latency and very slow, even unstable, connections to the VPN generates a great deal of frustration and complaints to the IT department. Users who can no longer tolerate these constraints inevitably set up their own workarounds, like unsecured drawbridges over the moat, providing hidden access to the castle.
+
+One of the slightest paradoxes is that excessive security becomes the main vector of the dreaded risk: the insecurity of sensitive company data.
+
+Finally, the online VPN channel generally falls on the ears of states and their extraterritorial laws like the US Cloud Act, exposing companies to legal insecurity and potential regulatory problems.
+
+### Work organization and document management are undergoing a revolution
+
+Physical distance is changing the way work is organized. Telecommuting, which cannot take place without the dematerialization of processes, is becoming the norm.
+
+As a result, the personal physical workstation ("Bring Your Own Devices" or BYOD) becomes the default tool for accessing corporate IT, and the old professional desktop joins the typewriter in the museum of tools of the past.
+
+1. Internet access is becoming the norm, while intranets and private networks are becoming mobility handicaps.
+2. Public Cloud and low-cost SaaS applications are becoming the norm, thanks to their agility and scalability, provided that the security of exchanged documents is controlled, as mobile adaptation situations are less and less predictable. They enable rapid adaptation to change. "On Premise" or dedicated infrastructures will become the exception.
+3. The new secure collaboration ecosystem also needs to do better for less, while offering user-friendliness and simplicity: security must not come at the price of increased complexity, or risk immediate rejection by the user.
+4. Finally, we don't know who we'll be working with tomorrow! Today's dematerialized exchanges of sensitive documents must be structured like resistance networks during the war: we must banish all centralized data management and compartmentalize Groups of people and Organizations. In the extreme, the directory becomes invisible.
+
+This new organization of human relations via the Internet increases the scope of threats. Data security in this new ecosystem must be built on the principle of **"[Zero Trust](https://www.paloaltonetworks.com/cyberpedia/what-is-a-zero-trust-architecture)"**, with a micro-perimeter protection approach. The RGPD further reinforces this requirement. Extraterritoriality laws threaten the sovereignty of States and create legal insecurity for managers. Sensitive exchanges must now take place with this "Zero Trust" paradigm on potentially hostile networks and servers such as the Public Cloud.
+
+### Data security requires a delegation of trust
+
+Let's start by stating the truth: there is no such thing as absolute security. Security involves reducing identified risks by relying on a trusted third party commensurate with the identified threat.
+
+- If I don't trust my Lenovo machine running Windows, I'm going to confine my exchanges to a watertight network with no communication with the outside world;
+- If I don't trust Amazon Web Services, Microsoft Azure or Google because of the CLOUD Act, I'm going to organize myself on an infrastructure labeled SecNumCloud by the ANSSI;
+- If I don't trust anyone, but for material or economic reasons I have to access my services from the Internet, I'll have to encrypt all my exchanges point-to-point, while remaining under the threat of my machine being compromised by a "Zero Day" flaw.
+
+Now that VPNs have become, at best, useless and, at worst, inconvenient for users, or even dangerous for data security because they give a false sense of security, how can we free ourselves from them without compromising the security of sensitive corporate data?
+
+### The triple trust paradigm
+
+From now on, it's all about minimizing exposure to trusted players such as public clouds subject to extraterritorial laws such as the CLOUD Act, administrators and networks, while using their services for what they provide in terms of efficiency and economy. First and foremost, and whatever the choice of security architecture, it's important to understand that data security requires this triple trust:
+
+Confidence in network and transport security ensures that a third party cannot intercept the data flow. There are several answers to this problem, the main ones being VPN, dedicated or proprietary networks, and HTTPS:
+
+- VPNs partly meet this need, because as we've seen, states have the ability to intercept.
+- HTTPS is universally used on the Internet: it's the most efficient and least expensive way of securing transport.
+
+Trust in the security of authentication guarantees that the person accessing a service is who they claim to be. There are several answers to this technically and functionally well-solved problem:
+
+- Identity federation, coupled with a two-factor authentication mechanism, meets this need; it must itself be based on a secure directory, backed up by a key management infrastructure adapted to the company's security requirements. This type of service is ideal for organizations wishing to centralize their IT and have complete control over their data. It is not suited to a "multi-organization" architecture, where people are not expected to know each other.
+- Key auto-generation on the work terminal, coupled with a trusted enrolment mechanism, responds to a much more fragmented "resistance network" type of organization. It does not require a central directory. This is the CCYOK or "Create and Control Your Own Key" concept implemented by SCILLE in its **[PARSEC](https://parsec.cloud/en/)** solution.
+
+Confidence in the security of data sharing guarantees that exchanges between several regularly authenticated people will remain honest and confidential with regard to IT service providers, administrators, hosts, clouds, networks and even foreign states.
+
+The **[PARSEC](https://parsec.cloud/en/)** solution is designed primarily to meet this need.
+
+### A first candidate solution: The dedicated or delegated zero-trust physical network
+
+Some service providers who have applied for the status of trusted supplier offer access to a company's internal infrastructure from anywhere in the world connected to the Internet, using their own proprietary physical network, independent of the Internet. The customer brings its own internally-hosted applications and identity federation system. The service provider provides its proprietary physical networks, Internet access points and application security system. This is undoubtedly a good "network zero-trust" solution for the secure operation of a legacy application infrastructure, but it requires trust in a new player who may also be subject to the CLOUD Act. This solution does not provide a satisfactory answer to our security problem.
+
+### A second solution: "Zero Trust" and "Zero Knowledge" software security by design
+
+**[Zero Knowledge](https://study.com/academy/answer/what-is-zero-knowledge-cloud-storage.html)** is a basic building block used in cryptology for authentication and identification. By extension, **[PARSEC](https://parsec.cloud/en/)** is Zero Knowledge because everything that leaves the terminal is totally unusable by a third party.
+
+_"**[PARSEC](https://parsec.cloud/en/)** offers an original concept of "[Zero Trust](https://www.paloaltonetworks.com/cyberpedia/what-is-a-zero-trust-architecture)" and Zero Knowledge by design software solution that only requires you to trust your terminal, to the exclusion of any other trusted actor."_
+
+### PARSEC, Trust the cloud
+
+**[PARSEC](https://parsec.cloud/en/)** enables sensitive documents to be shared and partitioned securely in private or public clouds. It is a set of open source software components, available as desktop software, for collaborative file management.
+
+#### How does it work?
+
+Secure sharing is carried out by mounting point or via a dedicated user interface. **[PARSEC](https://parsec.cloud/en/)** secures sensitive data before it is stored on public clouds, guaranteeing:
+
+- Confidentiality,
+- Integrity,
+- Historicization,
+- Access control,
+- Non-repudiation,
+- Authenticity and
+- Managing concurrent operations.
+
+Documents are encrypted end-to-end using personal keys auto-generated by the user's terminal. **[PARSEC](https://parsec.cloud/en/)** enables micro-perimeter control of data and multi-organizational data sharing, even with organizations outside our trusted perimeter.
+
+**[PARSEC](https://parsec.cloud/en/)** is an Open Source, AGPL-licensed high-security component developed with the support of the French Ministry of the Armed Forces and in partnership with the research community.

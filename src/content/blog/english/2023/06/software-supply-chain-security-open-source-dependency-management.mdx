@@ -1,0 +1,153 @@
+---
+title: "Software Supply Chain Security: Key Takeaways and Tools"
+image: "industrial-engineer-laptop-supply-chain.png"
+date: 2023-06-27
+author: "Thierry Leblond"
+categories:
+  - Technology
+draft: false
+
+excerpt: "Key takeaways from a Software Supply Chain Security event covering SBOM, the SLSA framework, ScoreCards, and dependency risk tools we discovered."
+---
+
+The supply chain is the process by which projects are developed, distributed, operated and maintained.
+
+With the growing use of software components, multiple source contributions, accelerated code release rates and more, modern software development has become faster and more complex. Recent cyberattacks on the integrity of the software production chain (Log4shell, SolarWinds, LastPass) have led to a global awareness of the associated risks.
+
+Depending on the environment, it is often easier for an attacker to target a sub-element of the project (a supplier with lesser security, for example).
+
+The consequences can be disastrous from a monetary point of view, but also from a legislative point of view (cf; RGPD and Cyber Resilience Act). The cyber risks to the supply chain are manifold, from design to maintenance. Cyber attacks can lead to data inaccessibility, corruption or theft.
+
+Awareness and the adoption of effective cybersecurity strategies are therefore the only levers for tackling this threat and ensuring that all links in the supply chain are satisfactorily secured.
+
+## Topics covered
+
+We took part in the _Software Supply Chain Security_ event organized by Systematic on Thursday June 1, 2023[(link to the event](https://systematic-paris-region.org/evenement/securite-de-la-supply-chain-logicielle-gestion-des-dependances-open-source/)).
+
+Here's what we took away from the day:
+
+- [](#d%C3%A9finition-de-sbom)[Definition of SBOM](#d%C3%A9finition-de-sbom)
+
+- [](#comment-la-sncf-g%C3%A8re-son-parc-dimages-docker-avec-des-labels)[How SNCF manages its Docker image pool with labels](#comment-la-sncf-g%C3%A8re-son-parc-dimages-docker-avec-des-labels)
+
+- [](#pr%C3%A9sentation-du-framework-slsa)[Introducing the SLSA framework](#pr%C3%A9sentation-du-framework-slsa)
+
+- [](#pr%C3%A9sentation-de-loutil-scorecards)[Introducing ScoreCards](#pr%C3%A9sentation-de-loutil-scorecards)
+
+- [](#pr%C3%A9sentation-de-loutil-step-security)[Step Security tool presentation](#pr%C3%A9sentation-de-loutil-step-security)
+
+- [](#pr%C3%A9sentation-de-loutil-otterdog)[Introducing the OtterDog tool](#pr%C3%A9sentation-de-loutil-otterdog)
+
+- [](#pr%C3%A9sentation-des-outils-trivy-et-grype)[Presentation of Trivy and Grype tools](#pr%C3%A9sentation-des-outils-trivy-et-grype)
+
+- [](#limportance-davoir-un-syst%C3%A8me-de-build-reproductible)[The importance of a reproducible build system](#limportance-davoir-un-syst%C3%A8me-de-build-reproductible)
+
+- [](#pr%C3%A9sentation-du-projet-software-archive)[Presentation of the software archive project](#pr%C3%A9sentation-du-projet-software-archive)
+
+- [](#pr%C3%A9sentation-du-projet-risk-explorer)[Risk explorer project presentation](#pr%C3%A9sentation-du-projet-risk-explorer)
+
+### Definition of SBOM
+
+Software Bills of Material or SBOM is a list of dependencies used for a project.
+
+Generally speaking, this list contains the name, version and checksum[\[1\]](#_ftn1) of a dependency, and takes the form of a file. There are currently two standards for the file format: [CycloneDX](https://cyclonedx.org/) and [SPDX](https://spdx.dev/).
+
+The SBOM is commonly used to monitor the vulnerabilities that would be published for the dependencies used. Note that it can also be used as a reference list when you want to build an older version of a project.
+
+### How SNCF manages its Docker image pool with labels
+
+The SNCF presented a REX[\[2\]](#_ftn2) on its Docker infrastructure and the practices implemented:
+
+- The limitation to a few basic Docker images.
+
+- Labeling (adding metadata) of images (e.g. adding a unique ID, listing the tools the image contains, etc.).
+
+- Implementation of Docker monitoring tools (such as Datadog).
+
+During the Log4J / Log4Shell episode, these practices enabled us to know which Docker containers were affected by the vulnerability, and to monitor the remediation.
+
+### Introducing the SLSA framework
+
+The current version of the Supply-chain Levels for Software Artifacts (SLSA) framework (available here: [https://slsa.dev/)](https://slsa.dev/) describes the different security levels of a built artifact (0 to 4, 0 being the basic level with nothing special done, and 4 being the most robust level).
+
+### Introducing ScoreCards
+
+ScoreCards[(https://securityscorecards.dev/)](https://securityscorecards.dev/) is a tool maintained by [OpenSSF](https://openssf.org/) that enables simple auditing of a Github repo.
+
+The tool checks whether the repo applies certain best practices and gives it a score from 0 (bad) to 10 (very good).
+
+### Step Security tool presentation
+
+The Step Security tool[(https://www.stepsecurity.io/)](https://www.stepsecurity.io/) consists of 2 products:
+
+- A robot that applies the suggestions proposed here [https://app.stepsecurity.io/securerepo](https://app.stepsecurity.io/securerepo) for a Github repo.
+  - It can update Dependabot's configuration[\[3\]](#_ftn3).
+  - Suggest*pinning* certain versions of dependencies (e.g. in Docker using the SHA256 of a base image).
+
+For example, here is a Pull-requests where it proposes to restrict the permissions of a Github workflow: [https://github.com/apache/cloudstack/pull/6802.](https://github.com/apache/cloudstack/pull/6802)
+
+- A Github Action[\[4\]](#_ftn4) [https://github.com/step-security/harden-runner](https://github.com/step-security/harden-runner) to reinforce the security of a github workflow.
+
+### Introducing the OtterDog tool
+
+OtterDog (available here: [https://gitlab.eclipse.org/eclipsefdn/security/otterdog)](https://gitlab.eclipse.org/eclipsefdn/security/otterdog) lets you configure your organization and Github repo via code in the same way as other IaC-type tools[\[5\]](#_ftn5).
+
+### Presentation of Trivy and Grype tools
+
+The [Trivy](https://github.com/aquasecurity/trivy) and [Grype](https://github.com/anchore/grype) tools are used to search for vulnerabilities in:
+
+- Docker images.
+
+- A file directory.
+
+Trivy specializes in infrastructure analysis (Docker, AWS, Kubernetes). Grype, on the other hand, focuses more on language-specific analysis (Rust, Java, Python, Javascript), using the [Syft](https://github.com/anchore/syft) tool.
+
+### The importance of a reproducible build system
+
+Have a build pipeline that can build the same output for the same input.
+
+This requires enumerating the dependencies used for generation (third-party lib, compilation tool, ...) (some tools make network requests, some set up a proxy to replay the response to these requests).
+
+The main advantage is that an external person is able to verify the integrity of the supplied application (its built version is identical to ours). If you need to backport an older version, you can always build your own.
+
+[https://reproducible-builds.org/](https://reproducible-builds.org/)
+
+### Presentation of the software archive project
+
+The project, which can be accessed here [https://archive.softwareheritage.org,](https://archive.softwareheritage.org) aims to provide a stable archive of all publicly written code.
+
+As an example, here is the Parsec code: https: [//archive.softwareheritage.org/browse/origin/directory/?origin_url=https://github.com/Scille/parsec-cloud.](https://archive.softwareheritage.org/browse/origin/directory/?origin_url=https://github.com/Scille/parsec-cloud)
+
+Perhaps useful to provide an additional source in the SBOM.
+
+### Risk explorer project presentation
+
+This project provides an interface for exploring the various cybersecurity risks that exist, as well as a list of publications related to a given risk.
+
+[https://sap.github.io/risk-explorer-for-software-supply-chains/](https://sap.github.io/risk-explorer-for-software-supply-chains/)
+
+## Conclusion
+
+It was a very rewarding day, as we were able to discover new tools and practices and get feedback on their use.
+
+We will be implementing some of these tools and best practices at Parsec. This will be the subject of future articles!
+
+---
+
+\[[1\]](#_ftnref1)Checksum, also called hash or checksum, generated from a block of data to verify its integrity.
+
+\[[2\]](#_ftnref2)Feedback
+
+\[[3\]](#_ftnref3)Dependabot is a tool (a robot) that will propose pull-requests to update the dependencies used in a Github project.
+
+\[[4\]](#_ftnref4)A Github action is a block of code that can be reused in a Github workflow.
+
+\[[5\]](#_ftnref5)Infrastructure as Code
+
+Article written by :
+
+> Florian Bennetot
+>
+> Marcos Medrano
+>
+> 2023-06-08

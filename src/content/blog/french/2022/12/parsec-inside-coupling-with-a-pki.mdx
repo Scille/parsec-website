@@ -1,0 +1,69 @@
+---
+title: "Parsec et PKI : simplifier l'enrôlement par certificat X509"
+image: "cle-femme-fond-gris-clair.jpg"
+date: 2022-12-08
+author: "Thierry Leblond"
+categories:
+  - Technologie
+draft: false
+
+excerpt: "Parsec se couple désormais à une infrastructure PKI pour simplifier l'enrôlement des utilisateurs grâce à des certificats X509, sans connexion simultanée."
+---
+
+## Contexte
+
+PARSEC est en pleine évolution via un financement de recherche et développement lié au plan de relance et BPI France (plus de détails ici [https://parsec.cloud/retour-sur-notre-projet-parsec-event-horizon-laureat-de-laap-national-sur-les-technologies-innovantes-cyber/](https://parsec.cloud/retour-sur-notre-projet-parsec-event-horizon-laureat-de-laap-national-sur-les-technologies-innovantes-cyber/)).
+
+Dans cette optique, PARSEC est désormais compatible avec des infrastructures de gestion clés (PKI), et offre plusieurs procédures d'enrôlement afin de facilité la synchronisation avec des infrastructures d’annuaires d’entreprise (LDAP/AD) afin de permettre un déploiement facilité.
+
+## L'étape de l'enrôlement
+
+L’enrôlement de parsec est une étape clé (voir [https://parsec.cloud/sas-single-authentification-string/](https://parsec.cloud/sas-single-authentification-string/)) où des secrets cryptographiques sensibles vont être échangées.
+
+Cette étape est réalisée de manière synchrone entre un invité et un administrateur. Il est nécessaire que les deux parties soient connectées en même temps et qu’elles communiques via un canal tiers afin d’assurer que le canal d’échange est sécurisé et de certifier l’identité de la personne enrôlée.
+
+C’**est via ce mécanisme d'enroulement pair à pair que l’on construit dans une chaîne de confiance.**
+
+Cette étape peut devenir laborieuse lorsque parsec est déployé à grande échelle car elle nécessite autant d'enrôlement que d’utilisateurs, mais surtout, les utilisateurs doivent être connectés en même temps que l’administrateur. En revanche, elle offre de fortes garanties de sécurité, car ce système est entièrement indépendant et ne nécessite pas d’organisme de certification (pour l'enrôlement ou même pour l’établissement de canaux sécurisés).
+
+## Utilisation d’une PKI.
+
+Afin de faciliter la procédure d’invitation et de permettre l'enrôlement via carte à puce IGC, ou par annuaire d’entreprise, il est nécessaire de déléguer une partie des tâches et des garanties de sécurité réalisées lors de  l'enrôlement par SAS code à une infrastructure de gestion de certificat et de clé PKI.
+
+L'enrôlement par PKI doit se raprocher au maximum de la procédure par SAS code, procédure qui permet:
+
+- d’établir un canal sécurisé
+- de certifier l’identité de l’utilisateur via un canal tier
+- de permettre l’échange de clés et secrets cryptographiques de manière sécurisé (clé d’utilisateur, clé publique racine de l’organisation … )
+
+L'infrastructure PKI doit désormais être considérée comme de confiance. Cette infrastructure permet de certifier et de valider des profils utilisateurs grace à l'utilisation de certificat (type X509)
+
+## Autorité de certification.
+
+Cette infrastructure est externe au projet PARSEC, elle est considérée comme une infrastructure de confiance. L’autorité de certification permet d'émettre des certificats à destination d'utilisateurs. Ces certificats contiennent des clés cryptographiques (pouvant être utilisées pour signer des données) ainsi que l’identité de l’utilisateur (ne peut être modifié).
+
+Cette autorité de certification est également capable de produire des fichiers permettant de valider les certificats et de s’assurer de la provenance et de l'authenticité des certificats (fichier à destination d’une autorité de validation)
+
+{/* TODO: image not available locally - https://lh3.googleusercontent.com/EpgR_oAcTw3UIL_nY2DgG3k-xwjcTburtRtXiKHwloSsqLV_TbPxZmFjQCnxxckhjmCW0T0IvhLvnCK9n9yJBUjzHmv5URCDEk20keVOK576YMOdCWr6kaocx-8uUiOCJW7CvB3Ry-eSQf6VP2U0r8f1_rUJFvpfv7Nc9B0FW8iGGifvQd8k8DCbojJPew */}
+
+## Autorité de validation
+
+L’autorité de validation a pour rôle de vérifier les certificats utilisés pour soumettre une requête d'enrôlement. Les administrateurs d’une organisation PARSEC endossent désormais le rôle d’autorité de validation, en contrôlant les demandes d'enrôlement grâce aux informations d’identité contenues dans les certificats. De plus, l’administrateur dispose des fichiers de validation fournis par l'autorité de certification afin de contrôler la validité des certificats (et s’assurer qu’ils émanent bien de la bonne autorité). 
+
+## Procédure d'enrôlement asynchrone
+
+D’un point de vue utilisateur, la procédure d'enrôlement est la suivante:
+
+- Un nouvel utilisateur décide de soumettre une demande d’invitation pour rejoindre une organisation PARSEC. Il utilise son certificat et envoie la demande
+- La demande est stockée dans le serveur de métadonnées PARSEC
+- Un administrateur PARSEC voit toutes les demandes pour rejoindre l’organisation. Les certificats des demandes sont validés (autorité de validation) sur le poste de l’administrateur avec les informations provenant de l’autorité de certification.
+- Si le certificat d’une demande est valide, l’administrateur peut accepter (et spécifier le rôle) ou refuser la demande.
+- Le nouvel utilisateur se connecte ultérieurement et voie que ça demande a été acceptée. Il peut désormais utiliser son certificat pour s’identifier
+
+Les clés de chiffrement et de signature utilisateur sont toujours générées par Parsec sur le poste client. Les certificats servent seulement à vérifier l'identité de l'utilisateur, signer les requêtes, et certifier la provenance de la demande (vérification réalisée ultérieurement via SAS code par la mise en relation de l'invité de l'administrateur par un canal tiers ). L'administrateur possède également un certificat, ce qui permet à l'invité de s'assurer que les informations qui lui sont transmises proviennent belle et bien d'un administrateur enregistré sur la même PKI. L'administrateur peut donc également signer les réponses d'enrôlement et garantir que les informations qui sont transmises à l'invité sont correctes.
+
+## Conclusion
+
+Il est désormais possible de coupler Parsec à des PKI afin de simplifier la procédure d'enrôlement. La PKI doit fournir des certificats X509 qui sont utilisés pour sécuriser l'enrôlement et garantir l'identité des acteurs. Les certificats peuvent être stockés sur des smartcards type IGC (cartes à puce ou token USB utilisées dans les ministères). Ce nouvel enrôlement ne nécessite plus d'avoir un invité et un administrateur connecté en même temps, Parsec stock désormais toutes les requêtes d'enrôlement et permet de les valider de manière asynchrone.
+
+Les deux procédures d'enrôlement peuvent co-exister au sein d'une meme organisation, il est donc toujours possible d'enrôler quelqu'un de manière synchrone, sans tier de confiance (la PKI).

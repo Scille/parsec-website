@@ -1,0 +1,221 @@
+---
+title: "Cipher: Data-Centric Security for Zero Trust Architecture"
+date: 2023-07-11
+author: "Thierry Leblond"
+categories:
+  - Technology
+draft: false
+
+excerpt: "A TERATEC 2023 talk on how PARSEC's Zero Trust and Zero Knowledge architecture secures data end-to-end, converging with NATO's security standard."
+---
+
+**TERATEC 2023 - Thierry Leblond**
+
+**1st June 2023**
+
+## Introduction
+
+Historically, all IT solutions are schematically built on a web architecture known as "three-tier":
+
+- 1st tier: a web browser to manage the presentation
+- 2nd tier: a server that manages the request and processes and accesses the data
+- 3rd tier: a database that manages data
+
+In such a world, security has long been treated as an issue of network perimeter control: the good guys are inside the corporate network, and the bad guys are outside. As for the Internet, from a security point of view it is considered to be the ultimate evil.
+
+Over the past 20 years, with the arrival of mobile terminals and the widespread use of the cloud, and with the acceleration of telecommuting over the past two years, the Internet has become the only professional network. The threats are roughly of three kinds:
+
+- confidentiality, which the General Data Protection Regulation has taken well in hand;
+- data integrity, of which ransomware is the main example today;
+- and finally, the most serious threat to organizational sovereignty: extraterritorial laws and the massive trawling of corporate data for the benefit of spy states.
+
+> **In a world where data is transmitted unencrypted, data security is a real problem. What can be done to solve it?**
+>
+> Thierry Leblond, CEO Scille / PARSEC
+
+Regulations and standards are emerging. Let me mention three of the most recent:
+
+- The European NIS2 directive, which came into force in December 2022 and applies until the end of 2024;
+- The US DoD's Zero Trust strategy, released in December 2022, and the NIST (National Institute of Standards and Technology) Zero Trust standard, released in August 2020;
+- NATO's standardization on Data Centric Security, 2020.
+
+We can quickly draw the following conclusions:
+
+- data security must be cryptographically managed as close as possible to the user;
+- this crypto protection must cover all basic security functions: confidentiality, integrity, non-repudiation, authenticity, anonymization, traceability, archiving, revocation, etc.
+
+The world of end-to-end cyber protection of sensitive data therefore seems to us to be converging on new fundamentals:
+
+- The **"Zero Trust"** principle: "always verify, never trust".
+- The **"Zero Knowledge"** principle: encapsulate data in cryptographic enclaves guaranteeing all security functions — confidentiality, integrity, authenticity, traceability, historicization, revocation.
+- The **"Cipher Data Centric Security"** approach, which consists of:
+  - ensuring data security as close as possible to the user and the device;
+  - cryptographically controlling the flow of data between enclaves and organizations, and guaranteeing compliance with classification and authorizations.
+
+In a few words, end-to-end encryption (E2EE) is becoming a crucial defensive weapon at the heart of future geopolitical and sovereignty issues.
+
+## I) Mr. Everyman's information system
+
+When it comes to IT cybersecurity, we need to consider the attack path and the system's vulnerabilities. Where will the attacker be positioned?
+
+Here's Mr. Anybody's infrastructure: **Users** Alice, Bob and Charlie work on **devices** that communicate with **remote servers** and **remote clouds** via **either Internet or intranet perimeter networks**.
+
+{/* TODO: image not available locally - https://lh6.googleusercontent.com/stL17dHTy81YWe8_K5KWh1vi51E1tJNvoneQO5JJ40gU7b40d_T90Qx7nl89dpO6NqlIpHwBZd9helN1rz_v6SY6h3u6Dl9idcfcNiLTTJrVsM9ISpSaNLoq6_2JXCis2IFL2tFkksnZIf38gCWzQWgyJmesjqEX */}
+
+The first attack targets users: this is the domain of social engineering. In technical terms, the countermeasures are strong authentication of the "Multi-Factor Authentication" (MFA) type, with the whole range of biometric-based solutions, or single-use tokens. These technologies are mature.
+
+The second attack targets devices: this is the domain of viruses and zero-day vulnerabilities. Today, the answer lies in "Endpoint Detection & Response" (EDR) solutions, or more broadly XDR solutions for "Extended Detection and Response". These are SaaS tools that provide comprehensive, optimized security by integrating security products into simplified solutions (correlated incidents, analytics, automated detection and response, AI and machine learning, and automatic remediation of affected resources).
+
+The third attack targets the physical machines in infrastructures and clouds: these are the servers that encode and store data. How much confidence can I really have in an IT department, a service provider or my outsourcer or cloud provider, especially if they are subject to the extraterritorial laws of their country? Is the data hosted on a server that potentially accesses all my data really well protected from the outside?
+
+The fourth attack involves internal and external networks. How can network requests be controlled when they can potentially come from anywhere? One solution is Zero Trust Network Access (ZTNA), which can be cleverly combined with VPN solutions.
+
+Finally, the fifth attack is on the data itself. Do I really trust the private companies that run the intercontinental fibers? Do I trust the outsourcer who holds the keys to all my data? Do I trust my "honest but curious" system administrator? Are the information superhighways being listened in on by the "Five Eyes" or by Chinese 5G routers?
+
+**This is where PARSEC comes in, encapsulating documents in attack-proof cryptographic envelopes.**
+
+The Zero Trust strategy of the US Department of Defense is a good illustration of this global issue, with its seven pillars.
+
+<figure>
+
+{/* TODO: image not available locally - https://lh6.googleusercontent.com/YXuWQB9HdwPevWhkp6WfkdAB1yFgRXW6evGex6Xx8-VKW8_BEhwc4jOwb9bVpx2I_Hl8JuJQfxBIpqGXLTR2y0FnnXqymTvEA846_o_sSyxyB0k9m838P4CAl7MfE7wIP3qZZEkoPZTQZ_ATaoIgZCjiqfFX1VXd */}
+
+<figcaption>
+
+The 7 pillars of Zero Trust
+
+</figcaption>
+
+</figure>
+
+## II) Data Zero Trust
+
+Having identified the risks, we now focus exclusively on the issue of **cyber data protection**.
+
+PARSEC has made a fundamental strategic choice to protect data: use signature and encryption everywhere, on every share or exchange between PARSEC clients (human actors) and servers (non-human actors).
+
+Each user generates and uses their own encryption keys, and each device generates and uses its own signature keys:
+
+- Data passing between two devices is systematically encrypted end-to-end.
+- Data leaving a device is systematically signed.
+- Data between client and server is systematically signed.
+
+{/* TODO: image not available locally - https://lh3.googleusercontent.com/g-2rOK3dypLhetlq94ezZGHwz2vBJOTkEF6rqkGkvJbNqTbCEA_nTyQZj2UkA7PWtLkaXQAttwR5f4jjlnEDRNcAXwapeY2cSV9Q-wOifMPSdvONxyKP5GgddAMBK-f_oVrsyx_4qnpSDjWhIpFzF0p4sJbYJyNX */}
+
+### Problem No. 1: How to distribute keys easily?
+
+Signing and encryption have been around for 30 years, and since the invention of PGP, the standard solution used by everyone is X509 certificates issued by a certification authority. The difficulty with this concept is not the encryption itself, but the transfer of keys, because the average user doesn't have the ability to understand what they're doing when managing keys and their transfer. When they fetch their contact's public key from a PGP key server, how do they really know it's the right person's public key? In fact, they don't even know that it's the right person's public key, and yet they still retrieve the key and use it.
+
+We did try to find a solution with the "web of trust", which is supposed to create a network of trust by having public keys signed by third parties, but it failed because we reached the limit of human understanding: it's too complicated, so nobody uses it. Theoretically it's viable, but in practice it's unusable by the average person.
+
+{/* TODO: image not available locally - https://lh5.googleusercontent.com/zQyQGMnu9kTtZVPeLUhT32NdTnPFTQhBYEHeF9xhLZOO9ZNj80pB8dFyS3Z47grYyyhCrHT9bZKP-nvZa2YUlgoIXecugcjcECMakYqBrea2qMucZ6VZ53Y7318gvRof2wrn5tNmDiQtZLVBxAHllaScByQNSNQF */}
+
+**Our response to this problem was to integrate the trust mechanism into the application itself to solve this complexity problem.** This is why PARSEC includes a dedicated PKI. The principle is very similar to that of a standard PKI system, with enrollment processes at the time of token delivery and signature. But here, we no longer go through a central PKI: we integrate the PKI into the application — it's a **"turnkey PKI"**.
+
+### Problem No. 2: How do you build initial trust when the enrolled user is unknown?
+
+We have chosen to integrate an enrollment mechanism involving a cross-exchange of secret tokens. This is the SAS mechanism, for "Short Authentication String".
+
+{/* TODO: image not available locally - https://lh5.googleusercontent.com/jolImqo4MyISlTvgBZZGpxx_Vb_cpFZQOtB3fTPsI-yW0nE1Rto6mN6pbRg0MbpJE3Yx4KmK15PUe38ddRNiOiodMLbuCo3-5l2bpgwmJxIicnUMQT9iVIMee8YKcCf8IEAjONT8ZAXbElkOYpL-3S47Vy6UlDzW */}
+
+From the user's point of view, it looks like this:
+
+{/* TODO: image not available locally - https://lh6.googleusercontent.com/Vn7pPCVDVqWVNyiPwxTCBjo7njn96aNWL27GIQhWWPLujlazpocb2UJyvK6Bqa76OzNjxTow0HtJ2y0EQJzXD-1FDYGqdefT25qvuC9bUduui_iSIvoh6Qw_XQgC9-s6ErPypOwohQHjyTEBGr1_aOQ9GqWVkpiV */}
+
+The basic principle is that only humans can create trust, and crypto is the guarantee of this. It's radically the same as opening an account on a remote web server.
+
+### Problem No. 3: Once we've got the keys, how do we validate the data in Zero Trust mode? In other words, always verify and never trust.
+
+PARSEC's Zero Trust & Zero Knowledge system operates on two security levels:
+
+- client-side cryptographic security, which manages user enrollment and controls the decryption and verification of cryptographic signatures for documents in a given enclave;
+- server-side security, which manages the rights of authorized users on the enclave.
+
+In this radically new architecture, the server fulfills a "simple" role of routing encrypted and signed packets.
+
+{/* TODO: image not available locally - https://lh6.googleusercontent.com/Ov-Go1BBfOndnLXluh9zl4zaz0iXqiwjCqbdpCUNdKqd8Plhp0FleLwqQ6X8Ydyy_SqYbhNUIlEnxiWf3HtO5seUi7F0znjaQIi62f0KJHAZJe5beiX9BGnEkbZyrW71Dq2xD4DHoW9ecdDFOSH3H2KZ6TL0BA-r */}
+
+Every time an operation is carried out, it is signed, so it can be systematically verified.
+
+This check is carried out:
+
+- in terms of server access rights;
+- end-to-end on the client.
+
+### Problem No. 4: What is data, and at what granular level should we work?
+
+We generally work at the macroscopic level of the document or file. This is the case when you send a PGP-encrypted email attachment. This is practical, but it's becoming less and less appropriate as the number of exchanges increases, making it increasingly complex to manage: you need to encrypt, decrypt, store locally, synchronize and finally share.
+
+The reality is that systems are becoming more and more integrated, and manipulating richer and richer data. To share data with others, we generally send a link to a data stream. The downside is that this is not as secure as an encrypted attachment.
+
+The finiteness of data and its physical representation disappear completely because modern web tools provide advanced functionality. The document thus disappears in favor of the notion of a service — technically, the file is replaced by a data stream accessible via a URL link.
+
+How do you secure your data?
+
+As a result, there is a growing need for integration between the security layer and the application layer.
+
+The answer to this problem appeared to us in securing (by design) the entire solution and resolutely tackling the issue at the level of flows, not documents. Cryptographic security is provided by the application itself.
+
+{/* TODO: image not available locally - https://lh4.googleusercontent.com/h4maDNrW20pxOpO6y9pMDjllpMVqIA4cFaqdQXBICFdZb_Q_Y6yLzP0gNY7CeD5z98rwTvejgy9RMZ439AuOvAEKfXe0ca_2ZJSYM7vuKSLyyZpfaytuask3SBMvHGyBBJ45xMV2WwrwHHvZcGFLPlVkYkDZJjYO */}
+
+With these problems solved, we are now faced with some very important challenges, most of which we have solved over five years of hard work.
+
+### Challenge No. 1: Backward compatibility on data models
+
+This challenge is a very good example of a technical lock, because the end-to-end encryption problem exacerbates the problem of upward data compatibility.
+
+In a classic web application, the process is straightforward: an update to functionality leads to an evolution of the data model, which is trivial on a centralized database.
+
+But in an approach that no longer trusts the central server, how can you add a new backward-compatible function (such as data classification in DCS) when all the data is signed and encrypted and the central server sees nothing?
+
+### Challenge No. 2: Integrate security into the application
+
+We can illustrate this challenge with a simple example: how do you share very large files?
+
+Uploading a 1 MB file atomically is indeed easy to do; but uploading a 1 GB file is impossible, hence the choice of data block-level atomicity.
+
+But when the server receives blocks, what guarantee is there that it will receive the other blocks or the encrypted table that reconciles the entire document? Hence the idea of solving the atomic management of a large document from the user's point of view.
+
+### Challenge No. 3: How do you manage decorrelation between client and server systems?
+
+**Definition**: **Eventual consistency** is the guarantee that when an update is made in a distributed database, this update will ultimately be reflected in all nodes storing the data, resulting in the same response each time the data is queried.
+
+A classic web system is made up of a "dumb" web browser client that only displays, and an intelligent server that manipulates the data.
+
+But in the PARSEC model, we have to deal with the server's lack of intelligence and defer the processing of encrypted data to the client. The consequence is that you have to be able to work with uncorrelated systems, and "in the end" they have to agree.
+
+Since the client system moves as fast as the user, at some point there's bound to be a decorrelation between client and server states that needs to be managed.
+
+Whereas in the case of conventional web applications you have to talk to the server for every operation, with PARSEC you'll be working locally, which means you'll be able to work more quickly depending on the use case, while coping with network outages or low bandwidth, as the correlation is made a posteriori by design.
+
+## The future: integrating the Data Centric Security principle and security classification management
+
+The general idea behind DCS is to attach XML metadata to the file or document, providing it with classification, signature and encryption functionality in line with NATO standards: these are Stanag 4774 (Label Syntax) and 4778 (Labeling Profiles).
+
+{/* TODO: image not available locally - https://lh6.googleusercontent.com/R7kwO6BCA1SutwCSMRU9hj3KUVRRLQfeNPXziNzVx_xiDCsS1co53s21cFqKyKoI3v5smSq6FrNgjbNEwB3TDr-R9i6CoouTHxAKgmDq30vZ6DrTJyGhq0tF_lIoq88HzxTlvm0h9KYg7lLpuG2MoigE6tUNEuIf */}
+
+It's a vision with consequences:
+
+1. Since Zero Trust must accept different protocols from one partner to another, a pivot format is needed to guarantee interoperability between organizations via standard formats.
+2. DCS must include metadata characteristic of usage, hence data standardization and pivot data formats for data exchange between organizations.
+
+The more the application passes under the user's control, the more we're going to have compatibility problems with organization-specific formatting.
+
+The proposed architecture enables data flow exchanges within a French organization.
+
+The proposed inter-nation architecture includes two interfaces:
+
+- a Parsec-to-DCS gateway for exporting documents in DCS format;
+- a dedicated Parsec PKI identity server (auto-enrollment) interconnected with the internal or partner organization's PKI (enrollment delegated to the central PKI).
+
+A central issue remains that of classifying the sharing of data flows as flows, since the NATO DCS standard is document-oriented, not flow-oriented.
+
+{/* TODO: image not available locally - https://lh3.googleusercontent.com/LQ0qdm9VKLgJFlFOx8rHF2Oefvn8lW6372MlBizopiqFdfFqMXRCBi-XJU4PAfF7brHvjj_fEBWEzd6VAdHzgAaS4rTjGOH0o45KVwQYzD4TSdtVh_Kf0698kvakrBxhv7c94A0RwLE_vT486mj0G86gd3Tois2L */}
+
+In this case, the solution is to adopt a single flow-oriented application solution at the national level.
+
+## Conclusion
+
+The PARSEC system is natively capable of supporting compatibility with Data Centric Security (DCS) and even going beyond it, enabling much more advanced functionality to be managed between the various players using PARSEC.
+
+For example, we can label flows, which is not possible with the DCS pivot for unitary documents.

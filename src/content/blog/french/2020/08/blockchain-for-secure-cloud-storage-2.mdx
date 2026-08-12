@@ -1,0 +1,120 @@
+---
+title: "Fonction de hachage, pilier de la sécurité blockchain"
+image: "blockchain.jpg"
+date: 2020-08-20
+author: "Thierry Leblond"
+categories:
+  - Technologie
+draft: false
+
+excerpt: "La fonction de hachage relie et sécurise les blocs de la blockchain sans jamais exposer les données d'origine. Découvrez son rôle essentiel."
+---
+
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+#### REPÈRES
+
+La blockchain n’est rien de plus qu’une liste chaînée de blocs dont la fiabilité ainsi que la pérennité des informations qu’elle contient sont garanties par la liaison entre ces blocs. [(voir partie 1)](https://parsec.cloud/blog/la_blockchain_au_service_du_stockage_cloud_securise/)
+
+Il s’agit d’ une technologie apparue au 21e siècle pour décentraliser les virements bancaires. Elle s’est faite connaître grâce à l’essor des cryptomonnaies, mais c’est avant tout une technologie qui permet un stockage durable, sécurisé et décentralisé d’informations.
+
+La blockchain ne demande en effet pas de faire confiance à un tiers, on parle de sécurité zero-trust et zero knowledge.
+
+Dans ce cadre la blockchain est une technologie particulièrement utile aux entreprises pour le stockage sécurisé des données sensibles dans le Cloud. La sécurité zero trust combiné au chiffrement zero knowledge représente l’avenir de la cybersécurité des données sensibles, et devient un besoin fondamental à toutes entreprises qui se tournent de plus en plus vers le cloud public pour le stockages des leurs données.
+
+### Les fonctions de hachages
+
+Que se passe-t-il lorsque vous rentrez votre identifiant et votre mot de passe sur un site internet ?
+
+Votre identifiant lui permet de savoir à quel compte vous souhaitez vous connecter, et votre mot de passe est ce qui lui permet de savoir que c’est bien vous.
+
+Mais naturellement, le site internet n’entretient pas une base de données des mots de passe de ses utilisateurs, par souci de sécurité informatique. Comment le site internet peut-il donc vérifier que votre mot de passe est bien le bon tout en ne le connaissant pas ?
+
+Le site internet, tout comme la blockchain, utilise une fonction de hachage.
+
+Une fonction de hachage est une fonction mathématique qui transforme un texte d’entrée (un mot de passe par exemple) en un autre texte illisible, que l’on appelle une signature.
+
+Une fonction de hachage est différente d’un fonction de cryptage. Alors qu’une fonction de cryptage doit avoir une réciproque, c’est à dire une fonction inverse qui transforme un message codé en message lisible, une fonction de hachage ne doit pas pouvoir admettre de réciproque. L’objectif d’une telle fonction est de noyer l’information, afin qu’il soit impossible d’y remonter même en connaissant l’empreinte et les mécanismes internes de la fonction de hachage.
+
+<figure>
+
+<OptimizedImage src="hash_function_result.png" alt="" />
+
+<figcaption>
+
+_Fig.1 : Exemples de résultats de la fonction de hachage SHA256_
+
+</figcaption>
+
+</figure>
+
+Pour y parvenir, les fonctions de hachage sont extrêmement sensibles aux moindres petits détails. Ce dessous voici le résultat de la fonction de hachage SHA256 (utilisée pour beaucoup de cryptomonnaies ainsi que pour parsec.cloud) appliquée à diverses entrées. On voit que la simple modification d’une majuscule en minuscule modifie complètement la signature résultante.
+
+Mais que fait donc le site internet dans lequel je rentre mon mot de passe ? Précisément, il ne stocke pas le mot de passe mais en calcule la signature : le hash. Comme personne ne peut remonter à un mot de passe depuis un hash, ces derniers peuvent bien être stockés sur une base de données en ligne. Le site compare donc le hash du mot de passe que je lui ai donné au hash du mot de passe stocké à la création de mon compte. Il constate que les deux signatures sont identiques, et donc l’authenticité de ma connexion est établie.
+
+<figure>
+
+<OptimizedImage src="blockchain_block_arch.png" alt="" />
+
+<figcaption>
+
+_Fig.2 : Architecture simplifiée d’un block Bitcoin_
+
+</figcaption>
+
+</figure>
+
+### Fonction de hachage et blockchain
+
+Parallèlement, la fonction de hachage est aussi l’outil central de la blockchain. Elle permet à la fois de lier les blocs entre eux et de sécuriser la blockchain en faisant travailler les mineurs.
+
+En effet, dans chaque block de la chaîne on stocke le hash du bloc précédent. C’est dans ce sens que les blocs forment une chaîne. Comme la fonction de hachage est hautement sensible à la moindre modification, les données stockées dans le bloc précédent ne peuvent pas être modifiée par un utilisateur de la blockchain sous peine de devoir modifier tous les blocs qui suivent.
+
+Ainsi la blockchain exploite une première propriété des fonctions de hachage, celle de « sensibilité » à la moindre modification de la variable d’entrée. La preuve de travail, innovation apportée par Bitcoin, en exploite une autre : celle d’impossibilité, étant donné un hash, d’en trouver un antécédent.
+
+En effet, ce que l’on demande aux mineurs est presque l’impossible : trouver un antécédent à un hash. Précisément, le mineur doit trouver un texte (une chaîne de caractère) qui, ajoutée après les données et la signature du mineur, fait que le hash du bloc total commence par un nombre prédéfini de zéros. Tout est arbitraire dans ce choix : pourquoi des zéros, combien, etc.
+
+<figure>
+
+<OptimizedImage src="proof_of_work.png" alt="" />
+
+<figcaption>
+
+_Fig.3 : On entre des chaînes de caractères dans la fonction SHA256 jusqu’à tomber sur un hash qui commence par un zéro_
+
+</figcaption>
+
+</figure>
+
+En essayant de le faire à la main pour SHA256 pour que le hash d’un bloc fictif commence par un unique zéro, on voit qu’il faut arriver au 13ième essai. Mais bien sûr, la complexité augmente de façon exponentielle à la fois lorsque l’on cherche plusieurs zéros de suite et lorsque le fichier qui précède la preuve de travail grandit en taille (la taille limite d’un bloc de Bitcoin est de 1 Mo, soit environ 64 000 fois plus que “PreuveDeTravail:”). Le 15 juillet 2020, c’est environ 123 milliards de milliards de hashs par seconde qui ont été testés.
+
+Mais cette complexification artificielle de la blockchain Bitcoin est la raison pour laquelle elle fonctionne, puisque sans cette preuve de travail les blocks seraient minés chaque minute si ce n’est chaque seconde, ne rendant l’opération de synchronisation de la blockchain entre les mineurs que beaucoup plus délicate.
+
+Puisque les fonctions de hachages actuelles n’admettent pas d’algorithme capable de remonter d’un résultat à un antécédent, la seule approche possible reste donc de tester des myriades de chaînes de caractères jusqu’à tomber sur la preuve de travail : celle qui permet au hash du bloc entier de commencer par, par exemple, 20 zéros. Ces tests en séries sont précisément ce que font les mineurs Bitcoin qui s’équipent de milliers d’euros de cartes graphiques et de processeurs, et c’est cette dépense énergétique qui est accompagnée d’une compensation crypto-monétaire.
+
+### Sécurité des données grâce à la blockchain
+
+Les architectures de sécurité centralisées montrant d'années en années plus de vulnérabilités aux attaques et aux fuites de données, il est primordial de comprendre les technologies qui nous permettrons, aujourd’hui et demain, de vivre dans un monde toujours plus connecté sans sacrifier nos vies privées et professionnelles.
+
+**Même si la blockchain s’est fait connaître via les cryptomonnaies et en particulier Bitcoin avec l’algorithme de preuve de travail** , **c’est avant tout une solution de stockage décentralisée qui garantit pérennité et infalsifiabilité des données qu’elle contient.** **Il est donc possible de la mettre à profit pour le stockage cloud des données sensibles.**
+
+<OptimizedImage src="cloud-header-graphic-parsec.png" alt="" />
+
+La solution [PARSEC](https://www.parsec.cloud/) , est un tel logiciel conçut dans cette optique d'optimisation de la sécurité des données sensibles stockées dans le cloud. L’équipe de R&D de PARSEC est actuellement en partenariat avec [le Commissariat à l’Energie Atomique (CEA)](https://parsec.cloud/blog/la_blockchain_au_service_du_stockage_cloud_securise_2/) pour intégrer la blockchain à PARSEC, de manière à optimiser d'avantage la sécurité Zero-Trust et Zero-Knowledge qu'offre le logiciel.
+
+_De quoi s'agit-il ?_
+
+Ce projet de recherche, unique au monde, ajoute au modèle de sécurité de PARSEC l’attaque directe du serveur de métadonnées .
+
+Pour contrer cette attaque, l’objectif est de décentraliser le serveur de métadonnées en l’intégrant dans une blockchain. La fédération des serveurs de métadonnées est alors en mesure de détecter et de corriger toute attaque sur l’un des serveurs.
+
+Pour créer une blockchain grâce aux serveurs de métadonnées, PARSEC et le CEA ont opté pour l’outil open source [Hyperledger](https://www.hyperledger.org/) .
+
+{/* TODO: image not available locally - https://parsec.cloud/blog/la_blockchain_au_service_du_stockage_cloud_securise_2/gaspard.jpg */} **Gaspard Sagot** ; *Stagiaire R&D en cryptographie appliquée chez* [SCILLE.](https://scille.eu/)
+
+_Sources_
+
+- [Principe de Kerckhoffs — Wikipédia](https://fr.wikipedia.org/wiki/Principe_de_Kerckhoffs)
+- [Problème des généraux byzantins](https://viresinnumeris.fr/probleme-generaux-byzantins/)
+- [Blockchain Explorer - Parcourir la Blockchain | BTC | ETH](https://www.blockchain.com/explorer?view=btc)
+- [Blockchain Bitcoin : Tout comprendre à la première des blockchains • BitConseil](https://bitconseil.fr/blockchain-bitcoin/)

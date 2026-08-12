@@ -1,0 +1,104 @@
+---
+title: "5 Data Security Paradigms for an Ultra-Connected World"
+image: "1.jpg"
+date: 2021-01-25
+author: "Thierry Leblond"
+categories:
+  - Cybersecurity
+draft: false
+
+excerpt: "Explore five new data security paradigms, including Zero Trust and Zero Knowledge, specifically built for today's ultra-connected, high-risk digital world."
+---
+
+# Reference
+
+In 2020, the global cost of the cyber threat is estimated at $4 billion, with annual growth of 50%. As the cyber threat becomes both endogenous and exogenous to the perimeter intranet network, perimeter protection of the "Maginot Line" or "medieval fortress" type is a security model less and less suited to our ultra-connected world.
+
+Organizations' protection strategies must evolve towards a new security paradigm based on five principles:
+
+- Zero [Trust](https://parsec.cloud/securite/)
+- Zero [Knowledge](https://parsec.cloud/innovation-securite-cloud/) " dissemination,
+- the User-centered Security Model
+- micro-segmentation of data
+- Write Once Read Many (WORM)
+
+## In an ultra-connected world, the threat is everywhere
+
+The massive arrival of 5G and the Public Cloud is transforming the internet into a gigantic corporate network, exploding the volume of shared data and the attack surface. The sensitive data of organizations, increasingly exposed, accessible and manipulable by governments, hackers and other competitors, is becoming the object of an invisible war in the digital world. The sovereignty of companies and states is beginning to be severely tested.
+
+Over the past few years, cyber attacks against vital infrastructures and strategic companies have multiplied:
+
+- On April 12, 2012, the Élysée highlighted an espionage operation formally attributed to the United States;
+- On December 23, 2015, a hack of industrial SCADA systems, based on the "BlackEnergy" program and the malware, KillDisk caused a major power outage in the Ivano-Frankivsk region of western Ukraine ;
+- November 16, 2019: Rouen University Hospital, paralyzed by ransomware was forced to revert to "the good old paper-and-pencil method"
+- July 27, 2020: ransomware victim Carlson WagonLit is blocked for two days and pays $4.5 million in ransom to recover its data.
+- On October 20, 2020, Sopra Steria, a company with 46,000 employees and sales of €4.4 billion, quickly stopped a Ryuk ransomware attack that affected the authentication system and led to the encryption of part of its data.
+- December 13, 2020, SolarWinds, publisher of network management software, announces that since early 2020, it has been the victim of a gigantic cyberespionage attack that has targeted, by rebound, hundreds of major accounts, government agencies and large corporations. It is likely to be the largest cyberattack ever carried out.
+
+All these attacks have one thing in common: they operate on perimeter network enclaves considered secure and managed centrally. The user is also managed in a top-down, pyramidal fashion. But in today's ultra-connected world, it's impossible to imagine a completely secure network, because data - in innumerable volumes - is at the heart of everything.
+
+The security paradigm that considers everything outside a protected network to be a threat, and everything inside that same network to be trustworthy, no longer works in a world where organizations are increasingly outsourcing data centers and processing to the cloud, and enabling remote working.
+
+## Zero Trust" in the face of the endogenous threat
+
+The "Zero Trust" model was born out of an observation: when it comes to Information Systems, the distinction between "external" and "internal" zones is tending to disappear. The Zero-Trust approach can be summarized in five points:
+
+1. Any network is considered hostile.
+2. Internal and external threats are always present on the network.
+3. Being part of an internal network is never a guarantee of absolute confidence.
+4. Every terminal, every user and every network flow must be authenticated and authorized.
+5. Security policies are dynamic and act on every data source.
+
+This model essentially amounts to "trust no one". It assumes that no-one is totally reliable, that access should be as limited as possible, and that trust is a vulnerability. A "Zero-Trust" model ensures that the right questions are asked according to the risk profile of each user, each terminal and the resource to which access is requested:
+
+- Authentication: is the user who he claims to be?
+- Authorization: is the user authorized?
+- Data access: what is the user's right to know?
+
+By construction, the corollary of the "Zero Trust" model is to trust only one's terminal, which presupposes that the terminal is controlled, also according to a "Zero Trust" policy:
+
+- mastery of installed software
+- operating system expertise
+- and in the extreme, control of the hardware components making up the terminal.
+
+Forrester [1](https://parsec.cloud/blog/20210105_Zero_Trust_Zero-Knowledge_User-centered-security/#fn:1) published in 2018 a summary of the implementation of "Zero Trust" articulated in five steps:
+
+1. Identify and categorize sensitive data, where it is stored and how it is transmitted.
+2. Define the channels through which this data can be shared, and block all devices and users from outputting data through unauthorized channels.
+3. Apply micro-perimetry to all sensitive data and check all accesses to this data.
+4. Monitor the system with a comprehensive set of security analyses, having carefully chosen a supplier who understands your business, your industry and your IT infrastructure.
+5. Automate safety protocols and test automation frequently.
+
+To put it bluntly: it's unfeasible in the real world of organizations using legacy applications that accumulate considerable technical debt and are based on architectures that are insecure by design. To get there, you need to rethink your system and organization from the ground up, using new tools.
+
+## Zero-knowledge in the face of exogenous threats
+
+Since the external environment in which we interact is a potential threat, all security functions attached to the data handled must be performed exclusively at the trusted terminal. This means that all data flows reaching the network card and leaving the machine must be totally inoperable and incorruptible by a third party.
+
+## The end-user, the hub of trust distribution
+
+In the case of a "Traditional Key Management Infrastructure (PKI)", the key issuance process starts with a "Certification Authority (CA)", which signs certificates whose distribution is guaranteed by the various "Registration Authorities (RA)".
+
+Furthermore, in all secure systems, administration rights are entrusted to the holders of a privileged account, who, by virtue of their rights, can access data. For this reason, best practice dictates that the "principle of least privilege" should be implemented.
+
+On paper, this system security policy provides security guarantees, but it is complex to implement and cannot protect against malicious action by a system administrator.
+
+On reflection, it's tempting to reverse the process of distributing trust, starting with the end-user. Who better than the user to be the guarantor of his or her own identity? Who better than the end-user to trust a third party with all or part of his or her own perimeter of trust?
+
+The concept of decentralized distribution of trust breaks away from the "top-down" principle, which is very complex to implement, and considers that the key point in the distribution of trust is the user himself. It's a paradigm shift in a world traditionally governed by pyramidal organizations, but it's the logical consequence of ultra-connectivity and the evolution towards increasingly atomized zones of trust.
+
+## Data micro-segmentation brings resilience
+
+Given that the crucial link in cybersecurity is the user, and that virtually all cyberattacks exploit human error rather than system flaws, micro-segmentation is the fourth natural component of a well-managed security policy. It involves treating each data connection as a separate environment, with its own security requirements, in a way that is totally transparent to the user. It treats each user-resource pair as totally independent, both from the origin of the connection and from any other application connections that may be active on the same terminal.
+
+Like the Zero Trust model, micro-segmentation considers the smallest significant element to be the user-application or user-data pair, regardless of the terminal, the nature of the connection or the location of each endpoint.
+
+Without a central data concentration point, a successful attack can no longer compromise an entire data system, but only a very small part of it - the part linked to the compromised user.
+
+## Write Once Read Many or WORM against ransomware
+
+A basic good practice is to back up your data regularly. But this precaution is not enough, for the simple reason that ransomware attacks also target backup infrastructures. The best barrier is "Write Once Read Many". WORM stands for "Write Once Read Many", and refers to a storage method in which data is written only once, before being made accessible in read-only mode. As a result, the implicit, native backup becomes totally immutable, and no changes can be made to it. Ransomware that has penetrated the network can no longer distort the data, and it is also possible to view the state of the system at any time in the past, as well as to impute any malicious action.
+
+---
+
+1. [https://www.forrester.com/report/Five+Steps+To+A+Zero+Trust+Network/-/E-RES120510](https://www.forrester.com/report/Five+Steps+To+A+Zero+Trust+Network/-/E-RES120510)[](https://parsec.cloud/blog/20210105_Zero_Trust_Zero-Knowledge_User-centered-security/#fnref:1)

@@ -42,8 +42,7 @@ export async function getStaticPaths() {
             post.data?.customSlug ||
             post.id
               .replace(/\.mdx?|\.md/g, "")
-              .split("/")
-              .pop(),
+              .replace(new RegExp(`^${lang.contentDir}/`), ""),
         },
         props: {
           post,

@@ -1,0 +1,230 @@
+---
+title: "Parsec sur le Web : sécurité face aux défis techniques"
+image: "MacOs-Parsec1.png"
+date: 2022-09-13
+author: "Thierry Leblond"
+categories:
+  - Technologie
+draft: false
+
+excerpt: "Découvrez comment Parsec s'adapte au web avec Rust et VueJS : montage du disque virtuel, distribution de l'application et sécurité Zero Trust."
+---
+
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+<OptimizedImage src="MacOs-Parsec1.png" alt="" />
+
+Avec la réécriture du core en Rust et la nouvelle interface VueJS toute neuve, Parsec pourra bientôt fonctionner sur le web \o/
+
+Voyons ici les spécificités de la plateforme web et les évolutions nécessaires pour s'y adapter.
+
+## 1) Point de montage du disque virtuel
+
+### Le problème
+
+Pour des raisons de sécurité évidentes, il n'existe aucune API web permettant à un site quelconque de monter un disque virtuel sur la machine de l'utilisateur. C'est également vrai pour les extensions de navigateur.
+
+Le disque virtuel est le principal moyen d'interagir avec les données stockées dans Parsec lorsqu'on utilise les clients desktop et mobile.
+
+Sur le web, cela est remplacé par deux approches :
+
+1. l'application Parsec embarque du code capable d'afficher/éditer les formats de fichiers les plus courants
+2. pour les autres formats de fichiers, l'utilisateur doit télécharger le fichier afin de pouvoir l'ouvrir avec un logiciel installé sur son ordinateur
+
+Cela implique :
+
+- Dans le cas « 2) », si le fichier a été modifié, il doit être renvoyé manuellement par l'utilisateur
+- Dans le cas « 2) », le fichier se retrouve en clair sur l'ordinateur de l'utilisateur. Ce n'est pas idéal en termes de sécurité, d'autant que l'utilisateur doit supprimer le fichier manuellement, ce qui est fastidieux et pour lequel il n'a pas vraiment d'incitation à le faire
+- Le cas « 1) » est évidemment bien plus pratique pour l'utilisateur ;-)
+- Le cas « 1) » est déjà simple pour afficher des PDF et des images
+- nous travaillons dur pour que le cas « 1) » prenne en charge l'affichage et l'édition des fichiers Office ^^
+
+### Développements
+
+Le disque virtuel reste donc indispensable pour tout usage avancé, mais pouvoir afficher et éditer les types de fichiers les plus courants directement depuis l'application Parsec est un vrai plus. Et cela est vrai même sur la version non-web de Parsec :
+
+- sur Android, ouvrir un fichier avec une application externe déclenche souvent l'export et la synchronisation du fichier (par exemple, ouvrir un fichier docx avec la suite Google déclenche Google Drive qui veut sauvegarder le fichier coûte que coûte...)
+- la prise en charge des fichiers Office dans Parsec nous permet d'ajouter le support de l'édition collaborative \o/
+
+## 2) Modèle de distribution et de mise à jour de l'application
+
+Du point de vue des données échangées avec l'extérieur, le cycle de vie d'une application peut être décomposé en deux parties :
+
+1. installation/mise à jour de l'application
+2. utilisation de l'application
+
+{/* TODO: image not available locally - https://lh4.googleusercontent.com/tw4oqjP2NTBmnCaXYpPhUaZWNQ6GMMLRgu5fKqmIOikSUdn14QUWS5JzQawGRKClTTcUzoJxxs0GbZMMXksKx9JVtrXLHfiTc_CDfmVqP3fAuQ7GhOyUfZbs2wwFrOUu58jmdEZPul0uErfY50QGIFprAqoqC2mleel9SNp0tzKCCvaWDGFi6aXx_JRq */}
+
+Ce que l'on constate, c'est qu'une application native bénéficie d'une séparation forte entre l'étape d'installation/mise à jour et celle d'utilisation. À l'inverse, un site web doit à la fois envoyer l'application cliente que le navigateur doit exécuter _et_ gérer la logique applicative et les données par la suite.
+
+Ce n'est pas un problème dans un scénario traditionnel :
+
+- Le navigateur du client dispose d'un bac à sable solide, donc un serveur compromis ne peut pas lui nuire.
+- Le serveur a accès en clair à toutes les données de l'application, donc un attaquant n'a pas besoin d'envoyer du code malveillant pour récupérer ces données.
+
+### Le problème
+
+Cependant, les choses sont différentes pour une application Zero Trust comme Parsec :
+
+- L'application cliente est responsable de garantir le Zero Trust
+- Corrompre la source qui fournit l'application cliente peut donc briser le Zero Trust
+
+Bien sûr, n'importe quelle source d'application peut être corrompue, la vraie question est plutôt : « à quel point est-ce compliqué » de le faire :
+
+Pour une application native, l'attaquant doit usurper la source de confiance (ce qui devient plus difficile maintenant que les utilisateurs installent leurs applications depuis des stores plutôt que de les télécharger depuis des sites quelconques). Ou bien il doit obtenir l'accès au compte développeur de l'app store.
+
+Dans les deux cas, l'attaque est visible :
+
+- l'application corrompue doit être largement diffusée (en général, tout utilisateur de Parsec recevra la mise à jour corrompue)
+- il est difficile pour l'attaquant de dissimuler son attaque (il doit retirer l'application de l'app store et la désinstaller de tous les ordinateurs), ce qui facilite grandement l'analyse post-mortem
+- l'attaquant doit trouver un moyen d'exfiltrer les données de l'application
+
+À l'inverse, une application web permet des attaques bien plus discrètes :
+
+- Le serveur peut servir un code différent à différents clients (par exemple selon leur adresse IP) pour ne cibler qu'une cible spécifique
+- Le code corrompu ne reste que peu de temps dans le cache du navigateur du client
+- Le vecteur d'exfiltration est trivial : il suffit de renvoyer les données au serveur (elles peuvent même être déguisées en données chiffrées légitimes pour rendre la détection encore plus difficile !)
+- Il n'est plus nécessaire de pirater le développeur de l'application : avoir accès au serveur qui sert l'application suffit
+- L'attaquant peut être l'administrateur du serveur lui-même !
+
+Ce dernier point est très important, si l'on considère un acteur hébergeant un serveur Parsec qui se retrouverait dans l'obligation légale de briser le Zero Trust :
+
+- Avec des utilisateurs sur application native, il n'y a aucun moyen de briser le Zero Trust (à part mettre également le développeur de l'application sous obligation légale, ce qui crée une porte dérobée publiquement visible)
+- Avec des utilisateurs sur application web, il est possible de servir une version modifiée du client Parsec qui renvoie les clés privées des utilisateurs au serveur
+
+### L'application web Parsec est-elle donc totalement cassée (et donc inutile) ?
+
+Comme nous l'avons vu, une application web réduit la sécurité par rapport à une application native. Cependant, cela peut être un compromis acceptable pour certains cas d'usage :
+
+1. Faire découvrir Parsec. Proposer Parsec en tant qu'application web simplifie grandement la prise en main et la découverte du produit par les utilisateurs.
+2. En environnement d'entreprise. Dans ce cas, il n'y a pas de défiance entre les utilisateurs et les administrateurs du serveur Parsec, puisque les deux font partie de la même entreprise. De plus, les administrateurs d'une grande entreprise sont responsables de la gestion des postes de travail et ont donc déjà toute latitude pour installer un keylogger ou un logiciel espion. Dans ce contexte, Parsec s'inscrit dans une stratégie de « défense en profondeur » pour protéger les ressources de l'entreprise, et assouplir la garantie Zero Trust peut être acceptable (voir par exemple la fonctionnalité optionnelle d'organisation séquestrée, qui permet à l'entreprise de récupérer des données chiffrées).
+3. En environnement de petite entreprise. Les petites entreprises n'ont pas les ressources pour une administration/hébergement/formation des utilisateurs avancés ; les choses doivent donc rester simples. Leur principal modèle de menace est plutôt les cryptolockers et les fuites de données (typiquement un ordinateur contenant des informations financières en clair qui se fait voler). Dans ce cas, faire confiance à un tiers comme Parsec SAAS peut être considéré comme acceptable.
+
+Autrement dit, utiliser Parsec en tant qu'application web dépend de la sensibilité des données échangées et de la confiance accordée à l'hébergeur ¯\\\_(ツ)\_/¯
+
+Enfin, une application web peut également être distribuée sous forme d'extension de navigateur. Dans ce cas, le modèle de distribution est similaire à celui d'une application native classique (l'application est fournie par le développeur et disponible publiquement sur le store d'extensions Mozilla/Chrome). L'inconvénient de cette approche est bien sûr que l'utilisateur doit installer une extension, ce qui est plus contraignant que de simplement naviguer sur un site.
+
+### Une étude de cas : Bitwarden
+
+Le [gestionnaire de mots de passe Bitwarden](https://bitwarden.com/) ressemble à Parsec à bien des égards :
+
+- Il est open source et très cool ;-)
+- C'est une [solution Zero Trust de bout en bout](https://bitwarden.com/images/resources/security-white-paper-download.pdf/) (toutes les données sont chiffrées côté client avec une clé symétrique elle-même protégée par une clé dérivée du mot de passe de l'utilisateur)
+- Il prend en charge un [large éventail de plateformes](https://bitwarden.com/download/) : natif, mobile, web et extension web
+
+Leur [documentation](https://bitwarden.com/help/what-encryption-is-used/) est également très claire pour [expliquer](https://bitwarden.com/crypto.html) ce qu'ils font !
+
+Un point intéressant chez Bitwarden est qu'il utilise une authentification unique pour accéder aux données de l'utilisateur et s'authentifier (le mot de passe de l'utilisateur est dérivé de deux façons différentes pour créer un secret partagé avec le serveur à des fins d'authentification, et un secret jamais partagé utilisé pour déchiffrer la clé de chiffrement des données).
+
+## 3) Appareil Parsec
+
+### Une clé Parsec par machine
+
+Dans Parsec, il y a une séparation entre un utilisateur et ses appareils : chaque machine différente depuis laquelle l'utilisateur veut accéder à une organisation Parsec possède sa propre clé de signature (alors que les clés de déchiffrement sont partagées entre toutes les machines, puisqu'elles constituent le point d'entrée vers ce à quoi l'utilisateur peut accéder).
+
+L'avantage de cette approche est de pouvoir identifier précisément quel appareil a été utilisé pour ajouter une information au système (les manifestes/certificats/etc. doivent être signés par un appareil pour être considérés comme valides).
+
+Le corollaire de cette approche est que chaque nouvelle machine doit être enrôlée par une machine existante.
+
+D'un point de vue sécurité, c'est une bonne chose puisque cela fonctionne de manière similaire à une authentification à deux facteurs.
+
+En revanche, cela rend la création d'un nouvel appareil plus complexe.
+
+Les choses se compliquent encore avec Parsec web :
+
+- Le stockage local d'une page web offre une durabilité faible, voire nulle. Il ne semble donc pas possible d'y stocker uniquement des données aussi importantes que le fichier de clé d'appareil.
+- L'utilisateur peut se connecter depuis la même machine avec différents navigateurs (qui ne partagent pas leur stockage local). Cela augmente encore le nombre d'enrôlements d'appareils et peut désorienter l'utilisateur s'il ne se souvient plus quel navigateur a été utilisé pour créer son appareil précédent.
+
+### Informations d'appareil stockées localement
+
+Toutes les informations privées dont un appareil a besoin (à la fois la clé de signature de l'appareil et les clés de déchiffrement de l'utilisateur) ne sont stockées que localement, dans un « fichier de clé d'appareil » (DKF).
+
+Les raisons en sont doubles :
+
+- Permettre l'utilisation de Parsec hors ligne : si le fichier de clé d'appareil était stocké côté serveur, il serait impossible de se connecter sans accès au serveur
+- Éviter le risque de « tout mettre dans le même panier », où tous les fichiers de clé d'appareil seraient stockés côté serveur, chiffrés avec le mot de passe de l'utilisateur — la principale menace étant les attaques par force brute si l'utilisateur choisit un mot de passe faible
+
+Cette approche présente cependant un inconvénient majeur : chaque machine ayant son propre fichier de clé d'appareil indépendant, chacune a aussi sa propre façon indépendante de le sécuriser.
+
+Ainsi, changer le mot de passe protégeant un fichier de clé d'appareil sur une machine n'a aucun effet sur une autre machine. C'est contre-intuitif par rapport au fonctionnement de la plupart des applications :/
+
+### Développements
+
+Il apparaît clairement que Parsec web nécessite de stocker le DKF côté serveur.
+
+De plus, les deux raisons justifiant le stockage local des appareils peuvent être surmontées :
+
+1. Forcer les utilisateurs à choisir un mot de passe fort est de toute façon une bonne pratique
+2. Le DKF peut être conservé dans un cache local après la première connexion
+
+Bien sûr, les utilisateurs avancés voudront conserver le niveau de sécurité maximal, donc le stockage du DKF côté serveur ne doit pas être la seule option. « Heureusement », nous n'avons pas d'autre choix que de continuer à prendre en charge l'approche DKF locale existante pour des raisons de rétrocompatibilité ;-)
+
+Une façon de prendre en charge à la fois le DKF en ligne et local :
+
+{/* TODO: image not available locally - https://lh3.googleusercontent.com/7M1IplZESEntCD62eK6MyOOy3M6gBXgWqWAdJnIXcQOBejKTGBl0rezGTz_2PPQk44k6T5h_IpjW0ixVYRgndvBgdPYCjziVVGL7aNmToPbJ2BZDnjucPxl-YhI8Ee9axhB4ZjTm-TNFyLz_mqF-sBrtXfvIPl670sCHi2JBjRmBqb9Nwoc4af4mKNYC */}
+
+- Une partie de la page de connexion permet de se connecter depuis un serveur. Un bouton « avancé » est également présent pour afficher une configuration supplémentaire (à savoir l'adresse du serveur à utiliser).
+- Tous les fichiers de clé d'appareil existants sont listés sur la page de connexion
+
+Lors de la sélection d'une connexion existante ou de la saisie d'une nouvelle connexion, la boîte de dialogue suivante apparaît :
+
+{/* TODO: image not available locally - https://lh4.googleusercontent.com/xOpypKI0A6ermwo1lVPK5NbEaXn8vov6NFlfBYOkX_uOBlrf5l6pOg6moy31V6SO8VC2d4QCdUBrAMWDhXoCroZzss2ILNOcAoMNFsatYsPmgWzlkgry-8hpTpMBnsRyQ6ACtritPiyQtpoJ6Oru9Nt7dyu25xrt8mKQoApCgKoXGQDMaIZgohZOkpIX */}
+
+Cette boîte de dialogue devrait également permettre d'afficher des informations avancées sur la connexion (typiquement l'adresse du serveur, et si le fichier de clé est stocké sur le serveur ou seulement en local).
+
+Depuis cette boîte de dialogue, un bouton de configuration devrait être présent pour modifier la protection de la connexion (basculer vers/depuis la protection par carte à puce, envoyer le fichier de clé vers le serveur, supprimer le fichier de clé d'appareil de la machine, etc.).
+
+Avec cette approche, le format du fichier de clé d'appareil devrait être mis à jour pour ajouter un drapeau booléen `stored_in_server`. Ce drapeau permettrait de traiter le cache d'un DKF stocké en ligne comme un DKF classique stocké uniquement en local.
+
+De plus, la configuration de l'organisation (et donc l'API `organization_config`) devrait être mise à jour pour ajouter un booléen indiquant si le stockage en ligne du DKF est autorisé ou non.
+
+### Récupérer le DKF depuis le serveur
+
+Nous devrions probablement faire quelque chose de similaire à [ce que fait Bitwarden](https://bitwarden.com/images/resources/security-white-paper-download.pdf) :
+
+{/* TODO: image not available locally - https://lh6.googleusercontent.com/teTHz047G5fi10d5w919AR-xBO364Mdi9V_3A-X5PNR0LatPAavcuMUvpDhXL3yPepC2rVQMBRJnqlDZtEwKEUVJeu73VnrPdo-dDpqYhPorgCgdNrJ4GEKe_PnGAwIdnzIiorBdgM3Xg7JfL3VV1q3PNAHSHF_WVVfIxUyyf0_qJWX0pvrVON473f1e */}
+
+L'idée est la suivante :
+
+- s'authentifier d'abord auprès du serveur pour récupérer le DKF chiffré
+- puis déchiffrer le DKF localement
+
+Ainsi, un attaquant ne peut pas se contenter de télécharger le DKF chiffré et tenter de le casser par force brute.
+
+### L'appareil de récupération
+
+Lorsque les appareils sont stockés en ligne, la récupération est bien plus simple : seule la clé chiffrant le DKF doit être exportée.
+
+L'interface graphique devrait probablement prendre en charge les deux méthodes d'export (exporter un fichier d'appareil accompagné de la clé de récupération, ou seulement la clé de récupération) selon que le DKF est stocké en ligne ou non.
+
+## 4) Authentification Parsec SAAS
+
+### Le problème
+
+Lors de l'hébergement de Parsec sur le SAAS, il existe deux types d'authentification :
+
+- L'authentification Parsec : l'authentification classique, utilisée pour déchiffrer le fichier de clé d'appareil présent localement sur la machine et commencer à utiliser les données chiffrées
+- L'authentification SAAS : elle n'est possible que pour l'utilisateur qui a créé l'organisation Parsec sur le site web du SAAS. Elle sert à gérer l'abonnement SAAS (créer une nouvelle organisation, consulter l'utilisation des données de l'organisation, configurer le paiement, récupérer les factures, etc.)
+
+Le point clé ici est que ces deux authentifications n'ont techniquement rien en commun, mais paraissent très similaires du point de vue de l'utilisateur (avoir deux types de comptes différents pour le même service est assez déroutant).
+
+Pire : il est probable que l'utilisateur confonde ses mots de passe et envoie à l'authentification SAAS le mot de passe protégeant son fichier de clé d'appareil !
+
+À l'heure actuelle, le site SAAS ne peut rien faire de ce mot de passe puisque le fichier de clé d'appareil n'est stocké que localement, mais 1) ce n'est tout de même pas idéal pour la sécurité et 2) Parsec web nous obligera très probablement à stocker le fichier de clé d'appareil côté serveur :(
+
+### Développements
+
+Une bonne amélioration ici serait d'unifier les authentifications Parsec et SAAS.
+
+Cependant, comme l'authentification Parsec n'est possible que dans le client Parsec (puisqu'il s'agit en fait du déchiffrement d'un fichier de clé d'appareil), unifier l'authentification signifie que l'authentification SAAS ne serait possible que depuis le client Parsec (mais avec le client web Parsec, cela reste assez transparent du point de vue de l'utilisateur).
+
+C'est actuellement faisable avec l'interface graphique basée sur Qt5, mais cela devrait être bien plus simple avec l'interface web :
+
+{/* TODO: image not available locally - https://lh5.googleusercontent.com/o45xyNYDKmXVVnhdjHRvRcVx5fEnc8cLin1Rt9-E6R8SXPSZJGItmHwwbZSym711haCD3rKYCTzvYmf38UgOxigi6kunpVTRu3_4en2d6w5bEb_pk9a4pbYTbcjKIlDYtgHMaPNkak9jN56MFRHuzHIcJDKJc9wG7Lnd3MtmyHWH5PuOLnLm7dTKg4jp */}
+
+1. L'utilisateur s'authentifie sur le client Parsec, la clé de signature de l'appareil est désormais disponible. Le client Parsec détecte que l'organisation courante est hébergée sur le SAAS et que l'utilisateur en est propriétaire ; il propose alors un bouton « Gérer l'abonnement » pour accéder au site SAAS depuis le client.
+2. Lorsque ce bouton est cliqué, le client Parsec utilise la clé de signature de l'appareil pour signer un jeton d'authentification (typiquement du JSON contenant l'ID d'organisation/l'ID utilisateur/un timestamp).
+3. Le client Parsec crée alors une iframe pointant vers le site SAAS et transmet le jeton d'authentification dans l'URL.
+4. Le site SAAS transmet le jeton d'authentification au serveur Parsec, qui vérifie sa signature et renvoie le contenu du payload.
+5. Le site SAAS peut alors répondre à la page web avec un cookie de session.
+6. Si le site SAAS commence à refuser le cookie de session (par exemple parce qu'il est devenu trop ancien), la page web utilise l'API [`Window.postMessage()`](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) pour notifier le client Parsec. Dans ce cas, le client Parsec n'a qu'à reprendre l'opération depuis l'étape 2 pour résoudre le problème.

@@ -1,0 +1,39 @@
+---
+title: "Cryptographie à transfert de clé pour les données de santé"
+image: "parsec-healthcare-data-protection-poster.png"
+date: 2023-03-21
+author: "Thierry Leblond"
+categories:
+  - Technologie
+draft: false
+
+excerpt: "Parsec propose une cryptographie à transfert de clé innovante pour sécuriser le partage de données de santé. Découvrez cette technologie."
+---
+
+**Bien connu dans l’administration publique et dans plusieurs ministères régaliens, l’éditeur Scille met un pied dans le secteur de la santé en proposant sa solution PARSEC de sécurisation des données sensibles avec le cloud comme pivot de partage. Les explications de Thierry Leblond, CEO et cofondateur de Scille.**
+
+Dès 2015, la Jeune Entreprise Innovante (JEI), créée en 2014, développe en moins de 8 mois le système de guichet unique permettant le traitement des dossiers des demandeurs d’asile, puis jusqu’à aujourd’hui de tous les étrangers en France, depuis toutes les préfectures et les centres d’accueils des migrants.
+
+**Une nouvelle approche de la sécurité**
+
+C’est en 2016 que Scille prend un virage important en proposant aux armées françaises une technologie innovante de partage des données qui autorise le contrôle de la donnée par des clefs locales hébergées sur le terminal. « Notre technologie est un peu contradictoire, puisqu’elle répond à la fois à la volonté de contrôler la donnée au plus près de l’utilisateur par des méthodes crypto à partir du terminal, et de permettre malgré tout leur partage avec des personnes autorisées », a déclaré Thierry Leblond. Technologie de rupture, très complexe, PARSEC a demandé 5 années de mise au point pour atteindre la certification CSPN par l’ANSSI et ses premières réussites commerciales. L’idée de PARSEC, nom du logiciel de partage et de cloisonnement cryptographique de Scille, est de reporter la sécurité le plus loin possible du serveur central, au niveau de l’utilisateur et du device. « Ces technologies Zero Trust/Zero Knowledge de sécurisation de la donnée n'ont plus rien à voir avec les serveurs web classiques », a ajouté le CEO.
+
+**Zero Trust/Zero Knowledge**
+
+Le Zero Trust (ZT) est une approche de sécurité qui consiste à ne pas accorder automatiquement confiance à un utilisateur, un dispositif ou un service, même si ces derniers se trouvent à l'intérieur de la zone réseau protégée. « _Cela signifie que toutes les demandes d'accès sont authentifiées et autorisées avant d'être accordées, indépendamment de l'emplacement ou de la connaissance préalable de l'utilisateur. Ce principe est souvent utilisé pour renforcer la sécurité des réseaux d'entreprise et des systèmes cloud_ », a expliqué le CEO de Scille. Le Zero Knowledge (ZK) quant à lui, est une approche de confidentialité des données qui permet de protéger les informations sensibles tout en les gardant accessibles aux utilisateurs autorisés. « _Cela signifie que les données sont cryptées de telle sorte que seul le propriétaire peut les déchiffrer, même si elles sont stockées ou transitent par un tiers_ », a-t-il ajouté.
+
+**Construire une organisation de confiance**
+
+Toute l'intelligence relative à la lecture des données se trouve localement sur le terminal, le serveur ayant un rôle très minimaliste de serveur de métadonnées, elles-mêmes chiffrées, dont le rôle est de router des paquets chiffrés vers les utilisateurs qui en font la demande. Tous les paquets sont systématiquement contrôlés par le logiciel sur le terminal à travers la signature crypto en local. « _Avec un tel mécanisme, le serveur manipule très peu de données, et toute la difficulté de ce type de technologie se situe dans la capacité à développer un logiciel embarqué local, qui assure en asynchrone toutes les fonctions de crypto et de partage_ », a expliqué M. Leblond.
+
+En pratique, PARSEC se présente comme un navigateur dans lequel chaque onglet correspond à une organisation de confiance, c'est-à-dire un ensemble de personnes préalablement enrôlées par un mécanisme de confiance faisant intervenir des secrets partagés. « _C’est l’administrateur qui construit l’organisation et enrôle les individus par des mécanismes d'échange de token. Chaque utilisateur pourra partager les données de ses coffres-forts avec un sous-ensemble de cette organisation de confiance. La sécurité est renforcée par un mécanisme de révocation accessible à l'administrateur comme au propriétaire de chaque enclave crypto_ », a ajouté Thierry Leblond. Fonctionnellement, l’approche est similaire à celle de Dropbox, sauf qu’ici, seules les personnes qui partagent les données peuvent y avoir accès. « _Il est possible d’installer PARSEC sur des serveurs physiques dans un centre informatique ou de le déployer directement sur un Cloud Outscale SecNumCloud, labellisé hébergement de données de santé HDS. On pourrait même imaginer de déployer en 1 jour un service Cloud PARSEC dédié à la Fonction Hospitalière_ », a précisé le CEO. À noter que PARSEC, certifié ANSSI depuis avril 2021, est en cours de déploiement dans cet environnement pour le compte de quatre ministères régaliens sous maîtrise d’Ouvrage de la Direction Interministérielle du Numérique (DINUM).
+
+De l’échange de dossiers ultra confidentiels Parsec a été retenu en 2022 par l’hôpital de Négrepelisse pour le partage multi-sites de dossiers ultra confidentiels ce qui permet aux équipes de gagner plusieurs jours dans le transfert et le traitement des dossiers patients.
+
+Dans un autre registre, le CHU de Nantes a récemment rapporté le cas de la mise en place d’un correctif de sécurité sur le bastion internet ayant entraîné 630 incidents de sécurité liés au partage de documents de santé confidentiels sur Dropbox. C’est typiquement le type de partage où PARSEC apporte une réponse clé en main pour résoudre la question de la sécurité « by design » du stockage et du partage des données confidentielles de santé en garantissant, par des mécanismes de cloisonnement cryptographique, que la donnée n’est accessible qu’à celui qui a « à en connaître » et en excluant de la zone de confiance tous les tiers, hébergeur compris. M. Leblond cite également le cas d’une administration qui recherche une solution de chiffrement des postes de travail multiOS pour 20 000 collaborateurs. « A part Parsec, il n’existe pas de solution globale ni industrialisée qui permet de gérer les données de façon crypto avec un admin global ; la sécurisation des postes de travail est souvent le fait d’initiatives locales personnelles d’administrateurs, avec BitLocker et Active Directory », a indiqué M. Leblond.
+
+Parmi les autres avantages de la solution, le CEO cite la simplicité du mécanisme de transfert des clés, le prix, l’ouverture du code, et une évolution prochaine vers un écosystème collaboratif zero trust & zero knowledge complet : éditique, messagerie, indexation.
+
+Enfin, PARSEC a été proposé à la Centrale d’Achat de l’Informatique Hospitalière pour rejoindre le marché ELODI. La mise en service de la solution se fait en moins d’une journée.
+
+Pour découvrir le magazine **_TECHNOLOGIES & INNOVATIONS HOSPITALIERES_** : \***\*[https://magtih.com/tih-45-2/](https://magtih.com/tih-45-2/)\*\***

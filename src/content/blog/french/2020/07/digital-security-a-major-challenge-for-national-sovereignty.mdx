@@ -1,0 +1,110 @@
+---
+title: "Sécurité numérique : un enjeu de souveraineté nationale"
+image: "global-data-security-padlock.jpg"
+date: 2020-07-27
+author: "Thierry Leblond"
+categories:
+  - Transformation numérique
+draft: false
+
+excerpt: "La sécurité numérique by design conditionne la souveraineté nationale face aux cybermenaces. Découvrez les principes du Zero Knowledge et du RGPD."
+---
+
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+#### REPERES
+
+Pour le dirigeant d’une entreprise, la stratégie de « transformation digitale» procède d’une vision nouvelle de son système d’information. Dès le stade de la conception, il se décline en quatre axes stratégiques « by design » : la sécurité dans le cloud, la protection des données personnelles, l’agilité et la mobilité. Dans ce contexte, garantir un partage sécurisé des données sur internet devient l’enjeu majeur de la stratégie numérique de l’entreprise.
+
+### Passer d’une sécurité périmétrique à une « sécurité by design »
+
+Dans un environnement économique et technologique en pleine mutation, tous les dirigeants d’organisation ont désormais compris que la réussite de leur « transformation numérique ou digitale » est stratégique voire vitale. Mais nommer les choses c’est d’abord les définir.
+
+Le premier constat est qu’internet et le cloud sont désormais incontournables. Or la sécurité informatique de l’entreprise repose, depuis l’invention des réseaux et du web, sur une vision de protection périmétrique qui considère que seul ce qui est à l’extérieur d’un réseau protégé est l’ennemi. La protection est réalisée par des technologies de contrôle et de supervision du réseau : pare-feux, systèmes de détection d’intrusion (IDS), passe-plats, bastions, contrôle des connexions réseau, « deep packet inspection » (DPI), centre de gestion de sécurité (SOC). Parallèlement, l’accès aux données depuis l’extérieur de l’entreprise passe par des technologies de chiffrement réseau comme les réseau privés virtuels : " *Internet et le cloud sont désormais incontournable"*
+
+### Parer les nouvelles menaces
+
+Mais cette stratégie de protection, de type « Ligne Maginot » n’est pas suffisante.
+
+<figure>
+
+<OptimizedImage src="ligne-de-magnot.png" alt="" />
+
+<figcaption>
+
+_Ligne Maginot_
+
+</figcaption>
+
+</figure>
+
+Elle est inopérante face aux nouvelles menaces. Et puis, comment assurer parallèlement l’accès généralisé aux données de l’entreprise alors que certains pays interdisent les réseaux privés virtuels ?
+
+Mais cette stratégie de protection, de type « ligne Maginot », n’est pas suffisante. Elle est inefficace face aux nouvelles menaces. Et puis, comment assurer parallèlement l’accès généralisé aux données de l’entreprise alors que certains pays interdisent les réseaux privés virtuels ? Les menaces sont principalement de deux natures :
+
+- d’une part, la violation des données ( cas du Pentagone : 1,8 milliard de messages soit plusieurs To de données attaquées) ;
+- et d’autre part l’indisponibilité des données, voire leur corruption (cas de la cyberattaque du rançongiciel [NotPetya](<https://parsec.cloud/blog/la_securite_numerique_enjeu_majeur_pour_la_souverainete_nationale/[Cyberattaque%20NotPetya%20%E2%80%94%20Wikip%C3%A9dia](https://fr.wikipedia.org/wiki/Cyberattaque_NotPetya)>) qui a fait perdre à Saint-Gobain 250 Me de commandes).
+
+### Penser la sécurité dès le départ
+
+La sécurité informatique de l’entreprise doit désormais commencer dès le stade de la conception du système d’information en partant du principe que la vulnérabilité principale est le terminal utilisateur ; en d’autres termes que c’est le terminal (y compris sa dimension humaine) qui garantit le niveau de sécurité.
+
+Dans ce cas, la confidentialité des données reposera sur le secret de la clé privé qui ne devra pas sortir du terminal utilisateur. Le cloud public assurera quant à lui la résilience et la disponibilité. L’authentification, éventuellement forte à plusieurs facteurs, garantira la légitimité de l’utilisateur.
+
+Le principe général est d’intégrer la sécurité au stade de la conception du système d’information ou « security by design ».
+
+##### 1) Partir du poste client
+
+La confidentialité des données devra désormais être assurée exclusivement par le poste client qui est la seule entité de confiance. Le modèle de chiffrement sera « zero knowledge » (Ou à diffusion nulle de connaissance), ce qui veut dire que seul le client connaîtra les clés de chiffrement. Ni l'administrateur, ni une quelconque autre autorité administrative ne pourra accéder aux clés de chiffrement. L'historisation permettra de voir quels changements ont été faits sur les données, et de restaurer le contenu à une version précédente.
+
+##### 2) Une construction à trois niveaux
+
+Il faut construire le système sur une triple confiance :
+
+- confiance dans les accès pour garantir l’identité et les droits associés ;
+- confiance dans le transport, par exemple en utilisant le protocole HTTPS qui offre une excellente garantie ;
+- confiance dans le partage qui implique de gérer les clés privées au niveau de l’utilisateur.
+
+##### 3) Un cadre européen pour la protection des données
+
+Le Règlement Général sur la Protection des Données ou RGPD est un règlement européen. Contrairement à une directive qui doit être transposé en loi nationale, il prend effet dans chaque loi nationale à compter du 25 mai 2018. En cas de manquement, les sanctions vont jusqu’à 4 % du chiffre d’affaire annuel mondial. L’entreprise devient responsable du traitement, automatisé ou non, des données personnelles, directes ou indirectes, concernant une personne physique identifiée ou identifiable.
+
+Le responsable du traitement est considéré comme l’acteur économique responsable (principe d’accountability) et en tant que tel, il lui revient de prendre les mesures pour garantir la protection des données personnelles : déterminer les finalités, documenter les traitements, recueillir les consentements explicites, donner accès aux données, permettre leur effacement ou leur portage.
+
+Le principe général est la protection des données dès la conception ou encore « privacy by design ». Ce principe rejoint le précédent au niveau de la conception du système.
+
+##### 4) Des terminaux majoritairement mobiles: "mobility by design"
+
+La 4G et le wifi sont quasiment généralisés partout et, à Lisbonne, les membres de la 3GPP - la coopération internationale qui fixe les standards de télécommunications - se sont accordés en décembre 2017 sur les spécifications de la [5GNR](<https://parsec.cloud/blog/la_securite_numerique_enjeu_majeur_pour_la_souverainete_nationale/[5G%20NR%20%E2%80%94%20Wikip%C3%A9dia](https://fr.wikipedia.org/wiki/5G_NR)>) (New Radio). Les terminaux sont devenus massivement mobiles et c’est d’ailleurs le mode majoritaire de consommation d'internet.
+
+La mobilité a un impact direct sur l’organisation du travail : la généralisation des organisations collaboratives à distance entraîne la disparition des frontières physiques de l’entreprise.
+
+La conséquence, c’est que les systèmes d’informations devront être nativement « responsive ». L'ergonomie devra donc s’adapter naturellement au terminal; la règle de base de conception des pages étant l’expérience utilisateur, cela comprend également les normes d’accessibilité.
+
+##### 5) Eviter les progiciels de gestion intégrés (PGI)
+
+Une entreprise qui a construit son système d’information par briques applicatives au fil de ses besoins métiers doit gérer au bout de 10 à 20 ans un patrimoine de plusieurs centaines voire milliers d’applications indépendantes traitant pour la plupart des données similaires, notamment des données personnelles ayant trait aux utilisateurs.
+
+Toutes ces applications sont généralement construites sur des architectures obsolètes « trois tiers » ou « client -serveur » qui comportent de nombreuses failles de sécurité. Il est impossible de boucher tous les trous.
+
+Dans le meilleur des cas, l’entreprise a organisé ses processus autour de progiciels de gestion intégrés ou PGI, censés couvrir tous ses besoins fonctionnels, moyennant un paramétrage métier, mais nécessitant généralement de nombreux développements spécifiques et une longue et douloureuse période de migration et de changement.
+
+A l’heure de la révolution numérique, continuer à organiser son système d’information autour de progiciels et de solutions applicatives est une erreur stratégique. Comment assurer un accès universel au système d’information de l’entreprise ? Comment adapter quotidiennement le système d’information à la stratégie de l’entreprise, aux processus et aux organisations en perpétuel mouvement ? Et comment garantir que toutes les données de même nature seront traitées de la même façon et de façon synchrones ?
+
+### Privilégier l'open source, une stratégie gagnante
+
+“Face aux inconvénients des progiciels intégrés, une stratégie gagnante est par exemple celle annoncée par la Société Générale à l’occasion du Paris Open Source Summit 2017 : migrer ses applications, son middleware et son infrastructure sur des solutions open-source. Il s’agit de généraliser nativement le recours au "libre" dans les nouveaux projets; de convertir progressivement les applicatifs traditionnels par leurs alternatives en open source; et de faire de ses informaticiens des contributeurs actifs
+
+Au final, la meilleure approche consiste à reconstruire intégralement le système d’information à partir d’une plateforme d’échange inter-systèmes, sur la base de briques libres construites, d’une part à partir des processus métiers (le frontend), et d’autre part, sur la base d’une restructuration métiers des données (le backend). Pour l’utilisateur, la transition sera douce puisque la plateforme intégrera une messagerie inter-systèmes qui synchronisera tous les applicatifs historiques avec la plate-forme via des interfaces de programmation applicatives ou API.
+
+Le choix de l’open source par une organisation permettra d’assurer la réversibilité et la pérennité, et l’ouverture du code sera une garantie supplémentaire que les failles de sécurité seront plus rapidement corrigées.
+
+L'adoption très rapide de Kubernetes, conçu par Google pour automatiser le déploiement et la montée en charge d'applications, est un autre exemple qui illustre la force du modèle open source.
+
+### Une nouvelle vision du système d'information
+
+La conclusion pourrait s'écrire sous forme d'une équation:
+
+« ***Transformation numérique*** \= ***Sécurité*** + ***Protection*** + ***Agilité*** + ***Mobilité*** »
+
+Cette transformation numérique procède d’une vision nouvelle du système d’information qui se décline désormais en quatre axes stratégiques « by design »: sécurité dans le cloud, protection des données personnelles, mobilité, agilité et open source.

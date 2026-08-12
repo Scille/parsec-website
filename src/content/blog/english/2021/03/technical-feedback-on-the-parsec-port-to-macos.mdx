@@ -1,0 +1,154 @@
+---
+title: "Porting Parsec to macOS: Technical Feedback and Fixes"
+image: "config_dark.png"
+date: 2021-03-02
+author: "Thierry Leblond"
+categories:
+  - Technology
+draft: false
+
+excerpt: "Discover the technical challenges of porting Parsec to macOS, from FUSE mount-point issues to dark theme fixes, and how the team solved each one."
+---
+
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+# Introduction
+
+After development on [Linux](https://docs.parsec.cloud/fr/latest/userguide/installation.html) and [Windows](https://parsec.cloud/get-parsec/), it's now [MacOS'](https://parsec.cloud/get-parsec/) s turn to welcome [Parsec](https://parsec.cloud/en/). This port was based on the Linux version, whose architecture is much closer to MacOS than to Windows. This article details the technical difficulties and solutions employed to bring this new version to fruition.
+
+## Bugs and incompatibilities
+
+### Mounting points
+
+Mount points have been the biggest source of incompatibilities, with differences in file system operation between Linux and MacOS.
+
+#### FUSE
+
+The first compatibility problem we encountered was with **FUSE**, which enables filesystems to be mounted and is central to Parsec's operation on Linux. The code had to be adapted to a version compatible with MacOS : [**macFUSE**](https://osxfuse.github.io). Some of **FUSE** 's mount options do not exist with macFUSE, in particular `auto_unmount`, which allows you to cleanly unmount any active mount point in the event of an application crash. If this is not done, mount points remain as empty folders and force subsequent ones to be renamed (`Mountpoint` becomes `Mountpoint (1)`, then `Mountpoint (2)` if the case is repeated, etc.). The solution chosen was to clean up the mount folder at each connection, making sure to delete only these empty folders and not any active mount points:
+
+```
+async def cleanup_macos_mountpoint_folder(base_mountpoint_path): for dirs in os.listdir(base_mountpoint_path): dir_path = str(base_mountpoint_path) + "/" + str(dirs) stats = os.statvfs(dir_path) if stats.f_blocks == 0 and stats.f_ffree == 0 and stats.f_bavail == 0: await trio.run_process(["diskutil", "unmount", dir_path]) if dirs in os.listdir(base_mountpoint_path): await trio.run_process(["rm", "-d", dir_path])
+```
+
+Note the call to `diskutil unmount` in another process. This is one of the changes necessary for this version: under Linux, `fuse_exit()` was used to unmount mount points, but this function does not exist with macFUSE. The call to `diskutil`, natively present on macOS, enables this limitation to be circumvented.
+
+We also had to mention macFUSE-specific options for the mount point, such as the name and icon to be displayed in the file explorer:
+
+```
+if sys.platform == "darwin": fuse_platform_options = { "local": True, "volname": workspace_fs.get_workspace_name(), "volicon": Path(resources.__file__).absolute().parent / "parsec.icns", } else: fuse_platform_options = {"auto_unmount": True}
+```
+
+Here we find the aforementioned `auto_unmount`, incompatible with macFUSE and therefore only used for the Linux version. The `local` option allows the mount point to be displayed on the _Finder_ sidebar, and more generally to be considered as a classic external disk.
+
+#### Zero-capacity mounting points
+
+Another problem surfaced on MacOS, the source of which was also present on Linux without being problematic: each mount point appeared with a usable volume of 0 bytes, which blocked any file transfer via the _Finder_.
+
+To overcome this problem, we had to specify sizes manually, defined arbitrarily:
+
+```
+def statfs(self, path: FsPath): return { "f_bsize": 512 * 1024, "f_frsize": 512 * 1024, "f_blocks": 512 * 1024, "f_bfree": 512 * 1024, "f_bavail": 512 * 1024, }
+```
+
+#### Temporary and hidden files
+
+Under MacOS, temporary copies of files regularly appear when they are used or modified. These copies are not visible from the _Finder_, but were visible from Parsec, and any interaction with them led to crashes and freezes. It was therefore necessary to filter them in the workspace display.
+
+It was also necessary to filter out certain files and folders such as `.DS_Store` and `.fseventsd`, which are unique to MacOS and generated automatically. Users don't have to interact with these files, and hiding them prevents bugs and unintentional modifications.
+
+This filtering not only has an aesthetic advantage, however, it is also applied to cloud synchronization to prevent such local or temporary files from being sent to Parsec and thus shared between users.
+
+#### Error messages
+
+Testing all the errors and incompatibilities led to seeing a lot of error messages, sometimes not perfectly adapted to the situation or even providing no useful information at all. This part of the porting helped to highlight these imperfect or non-existent messages and to improve Parsec's error handling in general.
+
+A good example of this would be `Qt`, where certain errors would slip through the logging system in place, hampering the interface debugging process.
+
+### Graphic bugs
+
+#### Dark theme
+
+MacOS offers a choice between a default light theme and a dark theme, both of which impact all native applications such as Safari or the Mail application.
+
+This dark theme proved relatively invasive on Parsec's interface, transforming all color values left by default from light to dark (or vice versa), be they windows, widgets or text. We therefore had to list all the elements affected and manually specify a color for them, so that the entire interface remained fixed, whatever theme was used.
+
+#### Miscellaneous
+
+Numerous other graphical bugs appeared on the Mac: badly centered text, incorrect tab sizes, scrollbars appearing and scrolling on an empty background... Some were specific to MacOS, others were also present on Linux and Windows, but never detected.
+
+<OptimizedImage src="org_dark.png" alt="" />
+<OptimizedImage src="config_dark.png" alt="" />
+
+Above are two examples of graphic bugs due in part to the dark theme.
+
+## Packaging
+
+This section details the entire packaging process, from Python code to a version that can be distributed on MacOS.
+
+### PyInstaller
+
+The first step was to compile the Python code in `.app` format, which is the basic format for most applications on MacOS. The choice was made to use [`PyInstaller`](https://pyinstaller.readthedocs.io/en/stable/index.html)which, among other things, enables this conversion. To achieve this, we had to write a few configuration files to guide compilation.
+
+#### Launch script
+
+`PyInstaller` generally works with Python scripts contained in a single file, and is used by giving this file as an argument. One of the advantages of PyInstaller is that if several `.py` files are used in the program, it will automatically detect them from the file used as an access point and take them into account during compilation.
+
+It was therefore necessary to write a file `launch_script.py` to be used as an access point to launch compilation, in which we find the command to launch the GUI:
+
+```
+import parsec.cli import sys import os import locale os.environ["SENTRY_URL"] = "https://863e60bbef39406896d2b7a5dbd491bb@sentry.io/1212848" os.environ["PREFERRED_ORG_CREATION_BACKEND_ADDR"] = "parsec://saas.parsec.cloud/" locale.setlocale(locale.LC_ALL, "") sys.argv = [sys .argv[0], "core", "gui", *sys.argv[1:]] parsec.cli.cli.main()
+```
+
+Note that environment variables are also defined in this script. It is also necessary to call the `setlocale()` command to force default encoding in UTF-8 when opening the app. Otherwise, `locale` values will default to `None` and some Parsec dependencies will encounter errors (`Click` in particular), preventing the application from running. Manipulating `sys.argv` to reorganize them is necessary when opening Parsec with an invitation link, in order to obtain the expected behavior.
+
+#### .spec file
+
+`PyInstaller` automatically creates a file at `.spec` after running it once with the script. This file must then be completed and filled in to configure details and give compilation instructions.
+
+It contains, for example, the information that will end up in the [`Info.plist`](https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/AboutInformationPropertyListFiles.html) configuration file common to all `.app` on MacOS.
+
+It's also in this file that you'll find all the non-code resources that need to be taken into account in the package, such as the application icon, for example.
+
+### Distribution procedures
+
+Apple imposes certain requirements on its developers before they can publish an application. These include guaranteeing that the application is safe for the user downloading it, and avoiding a surfeit of disturbing pop-ups on first launch.
+
+#### Codesign
+
+The code is signed using the `codesign` command, available natively on all Macs. To use it, you need to provide an app ID, previously created on the Apple website with an active developer account following the purchase of an annual license.
+
+This process signs all the dependencies and packages integrated into the app, in addition to the application's own code.
+
+#### Notarization
+
+After signing, the signed package must be sent directly to Apple for processing. [`notarize`](https://developer.apple.com/documentation/xcode/notarizing_macos_software_before_distribution). Cela correspond grossièrement à faire approuver l'application, et à certifier qu'elle est sûre d'utilisation et respecte les [lignes directrices de développement d'Apple](https://developer.apple.com/app-store/review/guidelines/).
+
+_Notarization_ is performed on the command line at `.zip`, which contains the application.
+
+Note that this process is only required for applications distributed outside the Apple App Store. For those that are, this step is performed automatically when the application is uploaded to the store.
+
+#### Stapling
+
+This quick step "staples" the _notarization_ to the application.
+
+By default, when an application is first launched, the user's machine will check online whether it is correctly _notarized_. The _staple_ allows this process to be carried out offline, by attaching this certification to the package itself.
+
+#### parsec.dmg
+
+The final step in packaging, and one of the most important on the user side, is to put the application in a format that is easy to distribute and with which a user can easily install the application.
+
+We chose the `.dmg` format, which contains both the application and a shortcut to `/Applications`, the default installation folder for all apps. `.dmg` itself is compressed _and_ signed before distribution.
+
+Opening a `.dmg` involves the following steps:
+
+1. Decompressing data from `.dmg`
+2. The content is then mounted locally on the Mac's file system (see image below).
+3. The installation point displays `.app` next to the shortcut. Simply _drag & drop_ the application to install it.
+
+<OptimizedImage src="dmg_opened.png" alt="" />
+
+## Conclusion
+
+This porting of Parsec to MacOS can be reduced to a succession of small errors, bugs and incompatibilities that were difficult to pinpoint and resolve. The advantage of this is that the additions made to the code base are not very numerous, and the main problems have been sufficiently well identified that MacOS version tracking and long-term maintenance can be carried out without great difficulty. The support of an additional OS has also enabled us to detect problems and errors common to all platforms, and thus to improve versions of other operating systems.
+
+[Try Parsec free of charge](https://parsec.cloud/get-parsec/)

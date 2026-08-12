@@ -1,0 +1,212 @@
+---
+title: "SAS : la chaîne d'enrôlement sécurisée dans Parsec"
+image: "SAS-1.png"
+date: 2021-06-11
+author: "Thierry Leblond"
+categories:
+  - Technologie
+draft: false
+
+excerpt: "Voyez comment Parsec sécurise l'enrôlement des usagers face aux attaques man-in-the-middle grâce au SAS, sa chaîne d'authentification unique et sécurisée."
+---
+
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+Parsec est un système qui met à disposition de ses utilisateurs des coffres forts numériques. L’accès à ces coffres fort peut être partagé avec les autres utilisateurs d'une même organisation Parsec.
+
+**Comment partager et transmettre les clés du coffre fort à un nouvel utilisateur de Parsec sans compromettre la sécurité du système ? Comment garantir l’identité de cet utilisateur, la confidentialité et l’intégrité des secrets d’un coffre fort numérique ?**[](https://github.com/Scille/parsec-website-suckless/blob/sas/content/blog/20210413_SAS/content-fr.md#parsec-la-construction-dune-chaîne-denrôlement)
+
+## Parsec, la construction d'une chaîne d'enrôlement
+
+Seul le terminal utilisateur est considéré comme une zone de confiance dans PARSEC. Outre le concept de "Zero knowledge", où toute information qui sort du terminal utilisateur est inexploitable par un tiers, PARSEC est également basé sur le concept de ["Zero Trust"](https://parsec.cloud/5-nouveaux-paradigmes-de-la-securite-des-donnees-dans-un-monde-ultra-connecte/). Ce paradigme implique notamment l'utilisation du chiffrement bout-en-bout par des clés exclusivement connues de l'utilisateur. Ces clés doivent donc être certifiées et distribuées entre les membres d'une même organisation.
+
+Une partie de la génération/distribution/certification des clés de chiffrement est réalisée lors d'un rituel d'enrôlement d'un nouvel utilisateur (ou d'un nouveau terminal d'un utilisateur existant) dans l'organisation. L'administrateur de cette organisation a le pouvoir d'inviter un nouvel utilisateur et de certifier son identité (l'administrateur ayant lui-même précédemment subi un processus d'enrôlement, son identité est donc également garantie et certifiée). Ainsi, l'enrôlement dans Parsec s'affranchit du principe "top - down" et se base sur un concept de distribution de la confiance de proche en proche.
+
+La phase d'enrôlement dans PARSEC est donc une étape cruciale, où des informations cryptographiques vont être échangées. Il est donc nécessaire que cette phase soit protégée des attaques (type man in the middle) par:
+
+- La garantie d'un canal de transmission sécurisé pour transmettre et certifier les clés de chiffrement qui seront utilisées la garantie et la certification de l'identité de l'utilisateur invité.
+
+Il est important de comprendre que cette étape d'enrôlement sert principalement à transmettre et/ou certifier des clés de chiffrement qui seront stockées localement (et chiffrées localement) sur le terminal utilisateur, ou stockées (pour le clés publiques) dans le serveur de métadonnées de PARSEC.
+
+L'ajout d'un nouveau terminal d'un utilisateur existant diffère légèrement du mécanisme d'ajout d'invitation d'un nouvel utilisateur dans la mesure où certaines clés utilisateurs ne sont pas générées mais seulement transmises d'un terminal à un autre. Le principe en soit est cependant identique et peut être vu comme un enrôlement à un seul utilisateur.[](https://github.com/Scille/parsec-website-suckless/blob/sas/content/blog/20210413_SAS/content-fr.md#la-procédure-denrôlement)
+
+## La procédure d'enrôlement
+
+### La procédure d’un point de vu utilisateur
+
+Entrons dans le vif du sujet, la procédure d'enrôlement utilisateur/terminal. D'un point de vue utilisateurs la procédure d'enrôlement se déroule de la manière suivante:
+
+Alice est administrateur d'une organisation PARSEC et souhaite inviter Bob.
+
+- Alice renseigne l'adresse e-mail de Bob via l'interface Parsec.
+- Bob reçoit un e-mail contenant la procédure d'installation de PARSEC ainsi qu'un lien qui lui permet de revendiquer l'invitation.
+- Alice et Bob démarre une conversation via un canal de communication tiers ; dans notre exemple Alice appelle Bob au téléphone. Cette étape est crucial pour s'assurer de l'identité de Bob et permettre la communication de secret via un canal de communication indépendant du serveur de métadonnées PARSEC.
+- Bob utilise le lien d'invitation pour démarrer la procédure d'invitation.
+- Alice utilise l'interface de Parsec pour démarrer la procédure d'invitation.
+- Un fois les deux procédures démarrées, Bob communique à Alice via le canal tiers un code des 4 lettres qui s'affiche sur son terminal.
+- Alice doit choisir parmi à 4 propositions de code celle que Bob lui indique
+- Un code à 4 lettres s'affiche désormais sur l'interface de Alice, elle le communique de même à Bob via le canal tiers.
+- Bob valide le code à 4 chiffres parmi les 4 proposés.
+- Le canal est maintenant sécurisé, les informations et clés peuvent être donc transmises et signées en tout confiance.
+- Bob renseigne ses informations d'utilisateur.
+- Alice valide les informations.
+- Bob choisit un mot de passe pour protéger les secrets localement sur son terminal (les clés et informations sur l'organisation).
+
+https://www.youtube.com/watch?v=Un4g1-gLLkk
+
+## Que ce passe t-il réellement ?
+
+### Établissement d'un canal de confiance
+
+Alice et Bob ne communiquent pas directement l'un avec l'autre mais à travers le serveur de métadonnées Parsec. Il faut donc établir un canal de communication de confiance qui doit garantir le secret de la communication et l'authenticité des deux points d'extrémités (Le terminal de l'invité et le terminal de l'administrateur). Cela signifie qu'un adversaire ne peut pas interférer et effectuer une attaque man-in-the-middle. Il faut également se protéger du serveur de métadonnées et s'assurer que celui-ci ne reçoit aucun secret.
+
+> L'attaque man-in-the-middle est une attaque qui vise à intercepter les communications entre deux parties, sans que ni l'une ni l'autre ne puisse se douter que le canal de communication entre elles a été compromis.
+
+**Communiquer avec le backend:**
+
+Au cours de la première étape, les deux parties (l'invité et l'administrateur) se connectent, en utilisant le serveur de métadonnées comme canal de transmission, et commencent la procédure d'invitation. L'invité est identifié grâce au lien d'invitation qu'il a reçu par mail. Le serveur de métadonnées utilise ce lien d'invitation pour fournir aux deux parties un jeton unique qui permet d'identifier la procédure d'invitation. Le serveur de métadonnées empêche désormais toutes autres demandes d'utilisation du lien d'invitation car celui-ci est en cours d'utilisation.
+
+Alice et Bob doivent désormais déterminer une clé de chiffrement symétrique afin de chiffrer et de déchiffrer les données sensibles à échanger. Cette clé ne peut voyager directement sur le canal de communication via le serveur de métadonnées (attaque man-in-the-middle). Il est nécessaire donc que Alice et Bob échangent un minimum d’informations pour arriver à dériver la même clé de chiffrement sans que les données échangées permettent à une tierce-personne de calculer la clé.
+
+**L’algorithme Diffie Hellman:**
+
+La dérivation des clés dans Parsec consiste en un échange de clés Diffie-Hellman basé sur les courbes elliptiques. L’idée est d'établir un protocole d'échange de clés asymétriques privée/publique (basé sur les courbes elliptique et l’algorithme [X25519](https://fr.wikipedia.org/wiki/Curve25519)) afin d’obtenir un secret partagé (à savoir ici une clé de chiffrement symétrique) à travers un canal de communication non sécurisé (Il faut considérer tous les échanges sur le canal de communication comme étant visible par les attaquants).
+
+Mettons de côté les courbes elliptiques pour se concentrer sur l’idée fondamentale du Diffie Hellman. L’algorithme s’articule de la manière suivante:
+
+- Alice et Bob se mettent d’accord sur des nombres partagé, connue de tous.
+- Alice choisit un très grand nombre aléatoire qu’elle garde secret.
+- Bob choisit un autre grand nombre qu’il garde secret.
+- A partir du nombre secret et des nombres connus, Alice calcule un nombre intermédiaire qui est le résultat d’un calcul. Ce nombre est ensuite transmise à Bob
+- Bob calcule également un nombre dérivé de son nombre secret et des nombres communs et transmet ce résultat a Alice.
+- Alice combine, avec un algorithme spécial, son nombre secret et les nombres communs avec le nombre que Bob a transmis (déjà issue d’un calcul impliquant le secret de Bob).
+- Bob fait la même combinaison de son côté.
+
+L’algorithme utilisé doit garantir que Alice et Bob arrivent au même résultat. Ce résultat ne peut pas être deviné par un attaquant car la factorisation pour retrouver les nombres secrets de Alice et Bob est trop compliquée pour être résolue par une machine.
+
+<OptimizedImage src="diffie.png" alt="" />
+
+Dans Parsec l’échange de clés Diffie-Hellman est basé sur des courbes elliptiques, mais le principe reste le même. Les deux parties utilisent des clés asymétriques compatibles avec la cryptographie sur une courbe elliptique commune (Curve25519). Ils échangent alors les parties publiques et conservent les parties privées. Il est ainsi possible de dériver une clé symétrique commune ([en savoir plus](https://fr.wikipedia.org/wiki/%C3%89change_de_cl%C3%A9s_Diffie-Hellman_bas%C3%A9_sur_les_courbes_elliptiques) )
+
+_**Point de vue de l'attaquant**_
+
+Un attaquant ici voit seulement passer une partie de l'information, la complexité des nombres et la complexité de la factorisation fait qu'il est impossible pour un attaquant de recalculer les nombres qui ne transitent pas sur le réseau et qui restent secrets.[](https://github.com/Scille/parsec-website-suckless/blob/sas/content/blog/20210413_SAS/content-fr.md#short-authenticated-strings-sas-)
+
+### Short Authenticated Strings (SAS) :
+
+**Quels sont les risques ?**
+
+Il faut maintenant s'assurer que le serveur de métadonnées n'a pas réalisé d'attaque man-in-the middle, un type d'attaque où le serveur aurait intercepté les clés publiques et transmis de fausse clés de chiffrement publiques a chaque parties, établissant deux clés secrètes au lieu d'une. Dans ce type de scénario, le serveur de métadonnées possède la capacité de décoder les messages entre Alice et Bob en toute transparence.
+
+<OptimizedImage src="man_in_the_middle.png" alt="" />
+
+La parade classique à cette attaque consiste à signer les échanges de valeurs à l'aide d'une paire de clés asymétriques certifiées par une tierce partie fiable. Dans notre cas, nous ne souhaitons pas utiliser d'intermédiaire, il n'y a donc pas d'autorité de certification qui puisse jouer ce rôle.
+
+**Comment se protéger ?**
+
+Pour se protéger du serveur de métadonnées, il faut que Alice et Bob s'assurent qu'ils possèdent la même clé de chiffrement, sans communiquer d'information sur cette dernière. Pour cela, il est nécessaire d'utiliser un canal de communication tiers (dans notre cas Alice et Bob s'appelle directement) afin de communiquer de l'information sans que celle-ci transite par le serveur de métadonnées. Cette information doit également être inexploitable en cas de compromission du canal tiers.
+
+Pour certifier que la clé de chiffrement dérivée est identique sur les terminaux de Alice et de Bob, les deux appareils génèrent des nonces aléatoires (nombres aléatoires utilisés une fois). L’idée est de vérifier que la transformation du nombre d’Alice par sa clé locale produit le même résultat que la transformation du nombre d’Alice par la clé de Bob. Bob et Alice vont donc s’échanger leur nombre aléatoire.
+
+**Comment la vérification fonctionne t-elle ?**
+
+Bob et Alice s'échangent leur nombre aléatoire respectif via le canal de communication passant par le serveur de métadonnées. Bob va utiliser sa clé secrète pour combiner le nombre d’Alice avec le sien (hachage à clé.) Alice procède de son côté à la même opération.
+
+Si les deux clés sont bien identiques, l’opération doit donner le même résultat pour Alice et pour Bob. Le résultat de cette opération est un nombre de 40 bits.
+
+Les 20 derniers bits du nombre ainsi généré vont être utilisés comme jetons d’authentification. L’interface de PARSEC va représenter ce nombre sous la forme d’un code à 4 lettres et l’afficher sur l’interface de Bob. La même opération va être réalisée sur le terminal d’Alice a partir du nombre qu’elle a calculé. Cette fois-ci, l’interface va générer 3 autres codes à 4 lettres aléatoires.
+
+<OptimizedImage src="sas.png" alt="" />
+
+A ce stade, il est nécessaire d’utiliser le canal de communication tiers pour valider que les deux nombres obtenus sont identiques. L’attaquant ne peut intercepter les échanges sur ce canal de communication. De plus, l'information échangée sur ce canal ne comporte aucun élément permettant de reconstituer la clé de chiffrement commune entre Alice et Bob.
+
+Bob va donc communiquer via le canal hors bande (par téléphone dans notre cas) le jeton a 4 lettres. Si la clé de chiffrement est identique pour Alice et Bob, Alice doit avoir ce nombre disponible parmi les 4 options proposées. Si le nombre n’est pas disponible, la clé est différente et le canal est compromis, aucun échange ne peut être établi.
+
+La même opération est réalisée dans l’autre sens mais cette fois avec les 20 premiers bits du nombre calculé sur chaque terminal. Cette fois-ci, c’est Alice qui communique son code à 4 chiffres et Bob qui le valide parmi 4 propositions sur l’interface PARSEC.
+
+Désormais, nous pouvons garantir que le canal de communication est sécurisé entre Alice et Bob car ils sont tous les deux les seuls possesseurs d’une clé symétrique qui va permettre de chiffrer et déchiffrer des messages. Ainsi les informations confidentielles liées à l'enrôlement d’un utilisateur vont pouvoir être échangées.
+
+**Comment être sûr que l’attaquant n’a pas intercepté les nombres aléatoires ?**
+
+Dans le cas d’une attaque man-in-the-middle, l’attaquant peut intercepter les nombres aléatoires générés par Bob et Alice et en générer de nouveau. Il faut garantir donc que le nombre que Alice reçoit est bien celui de Bob. Avant les étapes décrites précédemment, il faut donc garantir que les nombres échangés entre Alice et Bob n’ont pas été falsifiés.
+
+Pour cela Bob calcule dans un premier temps un hash de son nombre aléatoire (avant de transmettre celui-ci). Une fonction de hachage est une transformation du nombre qui permet de calculer une empreinte numérique servant à identifier rapidement la donnée initiale (ici Bob calcule le [HMAC-SHA256](https://fr.wikipedia.org/wiki/Keyed-hash_message_authentication_code)).
+
+Bob transmet seulement le hash de son nombre aléatoire à Alice. Alice accuse réception de l'empreinte du nombre de Bob. Alice Transmet son nombre a Bob. Bob transmet ensuite le nombre aléatoire qu’il a généré.
+
+Comme décrit précédemment, le hash du nombre est en quelque sorte une forme d'empreinte du nombre. Il est facile de calculer l'empreinte à partir du nombre mais il est impossible de calculer le nombre à partir de l'empreinte.
+
+Alice va réaliser de son côté la même opération de hachage sur le nombre de Bob et le comparer au hash que Bob lui a transmis précédemment. Si le nombre n’a pas été modifié, Alice obtient le même résultat que Bob. Ici la sécurité est basée sur le fait qu’il est impossible pour un attaquant de recalculer le nombre de Bob à partir du hash qu’il reçoit. Ainsi l’attaquant ne peut pas falsifier le nombre de Bob car Alice vérifie que l'empreinte du nombre transmis par Bob est identique à l’empreinte qu’elle calcule à partir du nombre envoyé par Bob. Bob et Alice sont désormais certain d’avoir le même nombre en commun
+
+<OptimizedImage src="sha.png" alt="" />
+
+_**Point de vue de l'attaquant**_
+
+A ce stade de l'enrôlement, un attaquant qui aurait procédé à une attaque \`man in the middle' aurait transmis de fausses informations à Bob et Alice. Les clés de chiffrement sont donc différentes sur chaque poste de travail. Désormais, l'attaquant doit réussir à falsifier l'échange de code secret. Il est pourtant presque impossible pour l'attaquant de falsifier les nombres A et B (1 chance sur 1000 milliard) car l'envoie des nombres est fait en plusieurs étapes. Prenons le point de vue de l'attaquant. L'attaquant connaît la clé d'Alice (sk_alice), il ne peut pas modifier le nombre A qui a été généré par Alice. Il doit intercepter le nombre B de Bob et fournir un nombre B_fake a Alice. L'attaquant connaît la clé de Bob (sk_bob), il ne peut pas modifier le nombre B qui a été généré par Bob. Il doit intercepter le nombre A d'Alice et fournir un nombre A_fake a Alice. L'attaquant doit donc calculer les nombres A_fake et B_fake tel que:
+
+```
+sk_alice(A + B_fake) = sk_bob(A_fake + B)
+```
+
+Cependant, les nombres ne sont pas transmis directement. L'attaquant reçoit d'abord le nombre B hasher, sans connaître A ni B. Il faut donc que l'attaquant calcule B_fake sans connaître ni A ni B car il doit transmettre le hash de B_fake a Alice. L'attaquant est alors bloqué car il doit ensuite transmettre A_fake a partir de A, sans connaître B, alors qu'il a déjà transmis de l'information sur B_fake à Alice. Il y a donc très peu de chance que l'attaquant puisse ainsi calculer les nombres A_fake et B_fake qui valident l'équation précédente. La seule chance de l'attaquant est d'essayer de retrouver le nombre B lors de la transmission de son hash, mais celui-ci va se heurter au collisions de hash pour calculer B(un couple de données distinctes de son ensemble de départ dont les sommes de contrôle sont identiques.).[](https://github.com/Scille/parsec-website-suckless/blob/sas/content/blog/20210413_SAS/content-fr.md#léchange-de-données-lors-de-lenrôlement)
+
+## L’échange de données lors de l'enrôlement
+
+### Les clés cryptographiques dans Parsec
+
+Attardons nous un petit peu sur les mécanismes cryptographiques de Parsec.
+
+Un utilisateur possède plusieurs clés chiffrées (qui permettent de sécuriser des échanges et d'accéder à de l’information) et des clés de signatures (qui permettent de garantir l’intégrité des données et des échanges).
+
+**La Clé de chiffrement utilisateur**
+
+Un utilisateur de Parsec dispose d'une clé de chiffrement asymétrique qui sert à recevoir des messages chiffrés. Une clé asymétrique est composée de deux clés, une clé publique qui sert à chiffrer de l'information, et une clé privée qui sert à déchiffrer l'information chiffrée par la clé publique. La partie publique de la clé est transmise au serveur de métadonnées Parsec et est utilisée lorsqu'un message doit être envoyé à l'utilisateur. La partie privée de la clé est précieusement stockée sur chaque terminal utilisateur, elle garantit ainsi que seul l'utilisateur du terminal peut lire les messages qui lui sont envoyés.
+
+**Clé de signature du terminal**
+
+Chaque terminal dispose d'une clé de signature. A l'instar de la clé de chiffrement qui est propre à l'utilisateur, la clé de signature est attachée à un terminal. Cette clé permet, entre autres, de signer les modifications qui sont envoyées au serveur de métadonnées (ce mécanisme permet de garantir l'intégrité des données). Comme pour la clé de chiffrement utilisateur, cette clé de signature est asymétrique et est composée de deux parties:
+
+- Une partie privée qui reste sur le terminal client et qui permet de signer les modifications
+- Une partie publique qui est envoyée au serveur de métadonnées et qui permet aux autres utilisateurs de vérifier la signature.
+
+**Clé symétrique de métadonnées utilisateurs**
+
+Les métadonnées de l'utilisateur, stockées dans le serveur de métadonnées, doivent être accessibles uniquement par l'utilisateur. Ces métadonnées servent de point d’entrée dans le système en listant les espaces partagés disponibles ainsi que les informations pour y accéder (identifiant et clé permettant de déchiffrer les métadonnées d'un espace de travail). Ces métadonnées utilisateurs sont stockées sur le serveur de métadonnées. Elles sont chiffrées et déchiffrées par une clé symétrique présente sur chaque terminal d'un utilisateur.
+
+**Clé de chiffrement locale**
+
+Toutes les données téléchargées et déchiffrées par Parsec sur le poste client sont re-chiffrées localement sur le terminal par une clé local de chiffrement utilisée uniquement sur le poste de travail. Cette clé permet de garantir que les données ne sont pas accessibles si l’utilisateur n’est pas identifié dans Parsec.
+
+**En résumé**
+
+Un utilisateur possède localement sur tous ces terminaux :
+
+- La clé privé d'utilisateur pour recevoir des messages, (la partie publique est disponible sur le serveur de métadonnées).
+- Une clé symétrique de chiffrement pour déchiffrer les métadonnées du serveur Parsec lié à son compte utilisateur.
+
+Il possède en plus localement sur chaque terminal (unique à chaque poste)
+
+- Une clé de terminal pour signer les modifications.
+- Une clé de chiffrement local pour accéder au données déjà présente sur le terminal.
+
+Ces 4 clés sont stockées dans un fichier de configuration sur le terminal. Ce fichier est lui-même chiffré par une clé dérivée du mot de passe utilisateur (chiffrement Challenge/Response).
+
+### Le mécanisme d'invitation d’un utilisateur
+
+Un fois le canal de confiance établie entre les deux terminaux (processus expliqué dans la partie précédente), Bob va pouvoir récupérer des informations sensibles, générer et transmettre ces clés de chiffrement. Alice va certifier l'identité de Bob en signant ces clés publiques.
+
+Le client Parsec de Bob commence par générer une clé asymétrique de chiffrement d’utilisateur et une clé asymétrique de signature du terminal.
+
+Bob chiffre ces deux clés publiques avec la clé symétrique secrète commune entre Alice et Bob établie lors de la création d’un canal de confiance. Seul Alice et Bob ont connaissance de cette clé.
+
+Bob envoie alors ses deux clés publiques chiffrées à Alice via le serveur de métadonnées. Alice peut alors déchiffrer grâce à la clé secrète le message envoyé par Bob.
+
+Alice signe les clés publiques de Bob qu’elle vient de recevoir avec sa propre clé de signature de terminal. Elle garantit ainsi de l’identité et de l’intégrité des clés publiques de Bob. Il est donc possible pour un utilisateur qui souhaite envoyer un message a Bob de vérifier que la clé publique de chiffrement n’est pas compromise, en regardant la signature réalisée par Alice. L’intégrité de la clé de signature d’Alice peut elle-même être vérifiée par l’utilisateur, car cette clé à également été signée lors de l'enrôlement d’Alice. Il est donc possible de certifier la totalité de la chaîne de confiance en vérifiant les signatures jusqu'à arriver au premier utilisateur de l’organisation. Parsec fournit ainsi une chaîne de confiance.
+
+Alice va envoyer à Bob un message (chiffré par la clé secrète du canal de communication) qui contient la clé racine de l’organisation. Cette clé racine est la première clé de signature utilisée pour certifier la clé du premier utilisateur de Parsec. Bob peut ainsi vérifier la chaîne de signature.
+
+Enfin, Alice envoie au serveur de métadonnées les clés publiques certifiées du nouvel utilisateur Bob, qui envoie au client Parsec de Bob la confirmation qu’il est bien enregistré.
+
+Bob, de son côté a également généré la clé de chiffrement de son manifeste utilisateur et la clé de chiffrement des données stockées localement. Bob chiffre son manifeste utilisateur et l’envoie au serveur de métadonnées.
+
+Toutes les informations qui ne doivent pas transiter hors du terminal Parsec sont enregistrées dans un fichier local. Bob renseigne son mot de passe sur l’interface Parsec, et celui-ci est utilisé pour dériver une clé de chiffrement qui sert à protéger et chiffrer ce fichier local.

@@ -1,0 +1,129 @@
+---
+title: "Zero Trust : la nouvelle stratégie de sécurité informatique"
+image: "Dessins-flock.png"
+date: 2022-11-07
+author: "Thierry Leblond"
+categories:
+  - Technologie
+draft: false
+
+excerpt: "Le modèle Zero Trust bouleverse la sécurité informatique en supprimant la confiance implicite accordée aux utilisateurs, réseaux et appareils connectés."
+---
+
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+Sous-titre\*\* : Je n'ai confiance que quand le seul tiers de confiance, c'est moi !
+
+**Accroche** :  
+Au delà de l'impression première de marketing fourre-tout (ou buzz word), le concept de Zero trust revêt au contraire une notion de sécurité informatique de fond qui va bien au delà de ce que les architectures actuelles basées sur le web centralisé peuvent apporter. Ce concept consiste à se défier de tous les intermédiaires : fournisseurs de Cloud, infogéreur Infrastructure réseau ou internet, administrateur-système "honnête mais curieux", lois extra-territoriales et, a contrario, à confier à l'utilisateur final la responsabilité de sa sécurité sur son périmètre de responsabilité, notamment celle des données, au plan matériel, humain et logiciel.
+
+**Corps de l'article**
+
+#### Les menaces
+
+Nos systèmes d'information font l'objet de menaces qui commencent à être bien connus : cyber-espionnage, cyber-sabotage, et cyber-judiciarisation. Le modèle Zero Trust propose d'apporter une réponse en rupture radical avec le modèle de sécurité périmétrique historique.
+
+<OptimizedImage src="data-threats-security-functions-table.png" alt="" />
+
+#### Historique du modèle Zero Trust
+
+Le concept de modèle Zero Trust est né lors du forum de Jéricho en mai 2007[\[1\]](#_ftn1) qui introduisit 11 commandements de sécurité dont notamment le n°6 « ***Toutes les personnes, tous les processus et toutes les technologies doivent avoir des niveaux de confiance déclarés et transparents pour que toute transaction puisse avoir lieu. »*** et le n°7 « ***Les niveaux d'assurance de confiance mutuelle doivent être déterminables***. »
+
+En 2010, le cabinet Forrester en simplifie la philosophie : « ***le trafic réseau n'est pas fiable »***[\[2\]](#_ftn2). C'est en quelque sorte la fin du modèle de sécurité basé sur les protection périmétrique : l'ennemi est désormais à l’intérieur du réseau. Puis, en 2011, il relie le concept à l'ancien modèle - « ***Trust but Verify inverts it »***[\[3\]](#_ftn3).
+
+En 2018, enfin, Palo-Alto renforce le modèle avec un principe radical de « **\_ne jamais faire confiance, toujours vérifier »[**\[4\]**](#_ftn4)_**. Cette dernière définition est utilisée dans l'industrie comme principe de confiance zéro.
+
+En 2020, l’évolution des menaces conduisent le NIST à normaliser les architectures Zero Trust. Le NIST SP 800-207 « Zero Trust Architecture »[\[5\]](#_ftn5) [\[6\]](#_ftn6) propose un schéma directeur pour l’implémentation d’une architecture Zero Trust, des modèles de déploiement et des cas d’utilisation généraux où la stratégie Zero Trust peut améliorer la posture de sécurité globale d’une entreprise en matière de technologie de l’information.
+
+La confiance zéro (Zero Trust ou ZT) devient le terme utilisé pour désigner un ensemble de paradigmes de cybersécurité, qui font passer les défenses des périmètres statiques basés sur le réseau aux utilisateurs, aux actifs et aux ressources. La confiance zéro suppose qu'aucune confiance implicite n'est accordée aux biens ou aux comptes d'utilisateurs sur la seule base de leur emplacement physique ou réseau ou sur la base de la propriété des biens. L'authentification et l'autorisation (de l’utilisateur et du dispositif) sont des fonctions distinctes réalisées avant l'établissement d'une session vers une ressource d'entreprise.
+
+En 2021, la stratégie Zero Trust a fait notamment l'objet de deux publications françaises de référence :
+
+- d'une part un avis scientifique de l'ANSSI[\[7\]](#_ftn7)
+- d'autre part un rapport du CIGREF[\[8\]](#_ftn8)
+
+Le concept de Zero Trust n'est pas une solution clé en main, mais un modèle de Confiance Implicite tourné vers l'Utilisateur qui s'appuie sur des contrôles dynamiques et granulaires :
+
+- l’accès aux ressources doit être accordé sur la base du besoin d’en connaître ;
+- l’accès doit être donné sur la base du plus faible niveau de privilège nécessaire pour réaliser la tâche ;
+- les demandes d’accès doivent être contrôlées de la même manière quelles que soient leurs origines (le périmètre « intérieur » ou « extérieur » de l’entité) ;
+- la politique d’accès aux ressources doit être dynamique et prendre en compte un large nombre d’attributs (identités de l'accédant et de la ressource accédée, sensibilité des ressources sollicitées, analyse comportementale de l'utilisateur, horaires d'accès, etc .) ;
+- l’entité doit veiller à la sécurité de tous ses actifs à l’occasion des demandes d’accès et de manière récurrente durant l'usage ;
+- les authentifications et autorisations d’accès aux ressources doivent faire l'objet de réévaluations régulières.
+
+<OptimizedImage src="zero-trust-strategy-anssi-principles.png" alt="" />
+
+#### Les besoins de sécurité Zero Trust et les solutions
+
+Les besoins de sécurité se présentent un peu comme un empilement de poupées russes au centre desquelles se trouvent les données à protéger.
+
+En partant du plus central au plus périphérique, il est nécessaire, sans être exhaustif, de couvrir différentes fonctions de sécurité qui s'additionnent comme les peaux d'un oignon :
+
+- sécurité des identités et authentifications par MFA[\[9\]](#_ftn9) ou PKI[\[10\]](#_ftn10) ;
+- sécurité des terminaux notamment par des XDR[\[11\]](#_ftn11) ;
+- sécurité des applications centrales web ;
+- sécurité sur les réseaux par ZTNA[\[12\]](#_ftn12) ou VPN[\[13\]](#_ftn13) ;
+- Sécurité des infrastructures par certification SecNumCloud[\[14\]](#_ftn14) ou par des enclaves cryptographiques ;
+- Sécurité des données de bout-en-bout notamment par E2EE[\[15\]](#_ftn15).
+
+<OptimizedImage src="besoin-securite-zero-trust" alt="" />
+
+Dans les architectures de confiance zéro, la sécurité est supposée se situer au plus près de l'utilisateur et de son terminal, donc à la périphérie du système d'information et non niveau de infrastructure central :
+
+- Identification et authentification, voire identité auto-souveraine
+- Moindre privilège
+- Journalisation et historisation
+- Micro-segmentation des environnements de confiance pour les données
+- WORM : Write Once / Read Many (anti-ransonware)
+- Contrôle exclusif des données par des clés locales
+- Multi-Cloud
+
+Les limites du modèle et les réponses
+
+Des scientifiques s'interrogent avec pertinence sur la pertinence de ce modèle comme Boris Tarantine[\[16\]](#_ftn16) qui invite à ne pas faire confiance aux contrôles pointant le paradoxe du concept ou encore Simon Wiseman[\[17\]](#_ftn17) : dans un système finis de composants de sécurité, il ne peut exister de sécurité absolue puisque le dernier vérificateur ne peut pas être vérifié.
+
+Le modèle Zero Trust, comme tout système de sécurité a ses propres limites car pour vérifier, nous devons accepter comme « de confiance » un ultime tiers de confiance, celui qui est charge de la vérification. Une façon de contourner ce paradoxe consiste accepter quelques axiomes de base :
+
+- Le seul utilisateur en qui j'ai confiance, c'est moi. Et moi seul suis habilité à distribuer ma confiance. Je suis le seul **utilisateur** tiers de confiance
+- A partir du moment où j'accepte de travailler sur un réseau (public ou non), mon terminal d'accès à ce réseau est ma seule entité **matérielle** de confiance
+- Enfin mon système logiciel Zero Trust, obligatoirement local, doit être ma seule entité de confiance **logicielle** : . Pour cela, le code doit être "Open Source" donc auditable, signé et certifié par une autorisation de confiance ultime (l'ANSSI en France)
+
+#### « Zero Trust » ou « 10-n Trust » ?
+
+La sécurité des systèmes est une lutte incessante entre le glaive et le bouclier. Il n’y a pas de sécurité ultime et pourtant il est de plus en plus vital de s’en rapprocher. En ce sens, on peut dire que la stratégie de la Confiance Zero, s’apparente plutôt  à une **asymptote Zero Trust** comme la flèche de Zénon d’Élée qui n’atteint jamais sa cible mais s’en rapproche à l’infini.
+
+---
+
+[\[1\]](#_ftnref1)[https://collaboration.opengroup.org/jericho/commandments_v1.2.pdf](https://collaboration.opengroup.org/jericho/commandments_v1.2.pdf)
+
+[\[2\]](#_ftnref2)[https://www.ndm.net/firewall/pdf/palo_alto/Forrester-No-More-Chewy-Centers.pdf](https://www.ndm.net/firewall/pdf/palo_alto/Forrester-No-More-Chewy-Centers.pdf)
+
+[\[3\]](#_ftnref3)[https://www.ndm.net/firewall/pdf/palo_alto/Forrester-Applying-Zero-Trust.pdf](https://www.ndm.net/firewall/pdf/palo_alto/Forrester-Applying-Zero-Trust.pdf)
+
+[\[4\]](#_ftnref4)"Never Trust, Always verify » : [https://www.paloaltonetworks.com/cyberpedia/what-is-a-zero-trust-architecture](https://www.paloaltonetworks.com/cyberpedia/what-is-a-zero-trust-architecture)
+
+[\[5\]](#_ftnref5)NIST SP 800-207 « Zero Trust Architecture » : [https://csrc.nist.gov/publications/detail/sp/800-207/final](https://csrc.nist.gov/publications/detail/sp/800-207/final)
+
+[\[6\]](#_ftnref6) Zero Trust Cloud Native Access Point  : [https://www.learnwithnic.com/programs/case-study-cnap-26ae1c](https://www.learnwithnic.com/programs/case-study-cnap-26ae1c)
+
+[\[7\]](#_ftnref7)Agence Nationale de Sécurité des Systèmes d'Information : [https://www.ssi.gouv.fr/agence/publication/le-modele-zero-trust/](https://www.ssi.gouv.fr/agence/publication/le-modele-zero-trust/)
+
+[\[8\]](#_ftnref8)CIGREF "Vers une philosophie Zero Trust - Une rupture dans la continuité pour la sécurité des applications" : [https://www.cigref.fr/wp/wp-content/uploads/2022/02/Vers-une-philosophie-Zero-Trust-Une-rupture-dans-la-continuite-pour-la-securite-des-applications-fevrier-2022.pdf](https://www.cigref.fr/wp/wp-content/uploads/2022/02/Vers-une-philosophie-Zero-Trust-Une-rupture-dans-la-continuite-pour-la-securite-des-applications-fevrier-2022.pdf)
+
+[\[9\]](#_ftnref9)MFA : Multi-Factors Authentication ou authentification multifacteur
+
+[\[10\]](#_ftnref10)PKI : Public Key Infrastructure ou Infrastructure de Gestion de Clés
+
+[\[11\]](#_ftnref11)XDR : End-Point-Detection & Response
+
+[\[12\]](#_ftnref12)ZTNA : Zero Trust Netwoerk Access
+
+[\[13\]](#_ftnref13)VPN : Virtual Private Network ou réseau Privé Virtuel
+
+[\[14\]](#_ftnref14)SecNumCloud : référentiel de sécurité édictée par l'ANSSI en vue de permettre la qualification de prestataires de services d’informatique en nuage, dit Cloud.
+
+[\[15\]](#_ftnref15)E2EE : End-to-End Encryption
+
+[\[16\]](#_ftnref16)Boris Taratine « Zero-Trust (paradox) » : [https://www.linkedin.com/pulse/zero-trust-paradox-boris-taratine/](https://www.linkedin.com/pulse/zero-trust-paradox-boris-taratine/)
+
+[\[17\]](#_ftnref17)Simon Wiseman « Can You Trust the Zero Trust Approach to Networking ? » : [https://www.linkedin.com/pulse/can-you-trust-zero-approach-networking-simon-wiseman/](https://www.linkedin.com/pulse/can-you-trust-zero-approach-networking-simon-wiseman/)

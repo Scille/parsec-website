@@ -1,0 +1,129 @@
+---
+title: "Zero Trust Strategy: A New Horizon for IT Security"
+image: "Dessins-flock.png"
+date: 2022-11-07
+author: "Thierry Leblond"
+categories:
+  - Technology
+draft: false
+
+excerpt: "Explore the origins and principles of the Zero Trust security model, from the 2007 Jericho Forum to NIST standards, and why it matters for IT security."
+---
+
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+Subtitle\*\* I can only trust you when the only third party you can trust is me!
+
+**Teaser**  
+Beyond the initial impression of a marketing catch-all (or buzz word), the Zero Trust concept actually embodies a fundamental notion of IT security that goes far beyond what current centralized web-based architectures can deliver. This concept consists in defying all intermediaries: cloud providers, network or internet infrastructure outsourcers, "honest but curious" system administrators, extra-territorial laws and, on the contrary, entrusting the end-user with the responsibility for his or her own security, including data security, at hardware, human and software levels.
+
+**Article body**
+
+#### The threats
+
+Our information systems are subject to threats that are becoming well known: cyber-espionage, cyber-sabotage and cyber-judicialization. The Zero Trust model is a radical departure from the traditional perimeter security model.
+
+<OptimizedImage src="data-threats-security-functions-table.png" alt="" />
+
+#### History of the Zero Trust model
+
+The concept of the Zero Trust model was born at the Jericho Forum in May 2007[\[1\]](#_ftn1), which introduced 11 security commandments, including no. 6: "All people, processes and technologies must have declared and transparent levels of trust in order for any transaction to take place. **_All people, processes and technologies must have declared and transparent levels of trust for any transaction to take place."_** and #7 " **_Assurance levels of mutual trust must be determinable._**. "
+
+In 2010, Forrester simplified the philosophy: "Network traffic is unreliable. **_network traffic is unreliable"._**[\[2\]](#_ftn2). This marked the end of the perimeter-based security model: the enemy is now inside the network. Then, in 2011, he links the concept to the old model - " **_Trust but Verify inverts it"_**[\[3\]](#_ftn3).
+
+Finally, in 2018, Palo-Alto reinforces the model with a radical principle of "never trust, always verify". **\_never trust, always verify"[**\[4\]**](#_ftn4)_**. This latter definition is used in industry as the zero-trust principle.
+
+In 2020, the evolution of threats has led NIST to standardize Zero Trust architectures. NIST SP 800-207 "Zero Trust Architecture"[\[5\]](#_ftn5) [\[6\]](#_ftn6) provides a blueprint for implementing a Zero Trust architecture, deployment models and general use cases where the Zero Trust strategy can improve an organization's overall IT security posture.
+
+Zero Trust (ZT) is becoming the term used to designate a set of cybersecurity paradigms, which shift defenses from static network-based perimeters to users, assets and resources. Zero trust assumes that no implicit trust is placed in assets or user accounts solely on the basis of their physical or network location, or on the basis of asset ownership. Authentication and authorization (of the user and the device) are separate functions performed before a session is established to an enterprise resource.
+
+In 2021, the Zero Trust strategy was the subject of two leading French publications:
+
+- on the one hand, a scientific opinion from ANSSI[\[7\],](#_ftn7) and
+- and a CIGREF report[\[8\]](#_ftn8).
+
+The Zero Trust concept is not a turnkey solution, but an Implicit Trust model focused on the User, based on dynamic and granular controls:
+
+- access to resources must be granted on a need-to-know basis;
+- access must be granted on the basis of the lowest level of privilege required to perform the task;
+- access requests must be controlled in the same way regardless of their origin (the entity's "internal" or "external" perimeter);
+- the resource access policy must be dynamic, taking into account a wide range of attributes (identities of the accessor and the resource accessed, sensitivity of the resources requested, user behavioral analysis, access times, etc.);
+- the entity must ensure the security of all its assets at the time of access requests and on a recurring basis during use;
+- resource authentication and access authorizations must be regularly reassessed.
+
+<OptimizedImage src="zero-trust-strategy-anssi-principles.png" alt="" />
+
+#### Zero Trust security needs and solutions
+
+Security needs are a bit like a stack of Russian dolls, with the data to be protected at the center.
+
+Starting from the most central to the most peripheral, it is necessary, without being exhaustive, to cover different safety functions that add up like the skins of an onion:
+
+- identity and authentication security via MFA[\[9\]](#_ftn9) or PKI[\[10\]](#_ftn10) ;
+- terminal security with XDR[\[11\]](#_ftn11) ;
+- security for core web applications ;
+- network security via ZTNA[\[12\]](#_ftn12) or VPN[\[13\]](#_ftn13) ;
+- Infrastructure security through SecNumCloud[\[14\]](#_ftn14) certification or cryptographic enclaves;
+- End-to-end data security with E2EE[\[15\]](#_ftn15).
+
+<OptimizedImage src="besoin-securite-zero-trust" alt="" />
+
+In zero-trust architectures, security is supposed to be located as close as possible to the user and his or her terminal, i.e. at the periphery of the information system and not at the level of the central infrastructure:
+
+- Identification and authentication, even self-sovereign identity
+- Less privilege
+- Logging and history
+- Micro-segmentation of trusted data environments
+- WORM: Write Once / Read Many (anti-ransonware)
+- Exclusive data control with local keys
+- Multi-Cloud
+
+Model limitations and responses
+
+Scientists such as Boris Tarantine[\[16\]](#_ftn16) who urges us not to trust controls, pointing out the paradox of the concept, and Simon Wiseman[\[17\]](#_ftn17) Simon Wiseman: in a finite system of safety components, there can be no absolute safety, since the last verifier cannot be verified.
+
+The Zero Trust model, like all security systems, has its own limitations: to verify, we have to accept as "trusted" an ultimate third party, the one in charge of verification. One way around this paradox is to accept a few basic axioms:
+
+- The only user I trust is myself. And only I can distribute my trust. I'm the only trusted third-party **user**
+- From the moment I agree to work on a network (public or not), my access terminal to this network is my only trusted **hardware** entity.
+- Finally, my Zero Trust software system, which must be local, must be my only trusted **software** entity: . To achieve this, the code must be "Open Source", i.e. auditable, signed and certified by an ultimate trust authority (ANSSI in France).
+
+#### "Zero Trust" or "10-n Trust"?
+
+System security is a constant battle between sword and shield. There is no ultimate security, and yet it is increasingly vital to get as close as possible to it. In this sense, we could say that the Zero Trust strategy is more like a **Zero Trust asymptote** like Zeno of Elea's arrow, which never reaches its target, but gets infinitely closer.
+
+---
+
+[\[1\]](#_ftnref1)[https://collaboration.opengroup.org/jericho/commandments_v1.2.pdf](https://collaboration.opengroup.org/jericho/commandments_v1.2.pdf)
+
+[\[2\]](#_ftnref2)[https://www.ndm.net/firewall/pdf/palo_alto/Forrester-No-More-Chewy-Centers.pdf](https://www.ndm.net/firewall/pdf/palo_alto/Forrester-No-More-Chewy-Centers.pdf)
+
+[\[3\]](#_ftnref3)[https://www.ndm.net/firewall/pdf/palo_alto/Forrester-Applying-Zero-Trust.pdf](https://www.ndm.net/firewall/pdf/palo_alto/Forrester-Applying-Zero-Trust.pdf)
+
+\[[4\]](#_ftnref4)"Never Trust, Always Verify": https: [//www.paloaltonetworks.com/cyberpedia/what-is-a-zero-trust-architecture](https://www.paloaltonetworks.com/cyberpedia/what-is-a-zero-trust-architecture)
+
+\[[5\]](#_ftnref5)NIST SP 800-207 "Zero Trust Architecture": https: [//csrc.nist.gov/publications/detail/sp/800-207/final](https://csrc.nist.gov/publications/detail/sp/800-207/final)
+
+\[[6\]](#_ftnref6) Zero Trust Cloud Native Access Point: https: [//www.learnwithnic.com/programs/case-study-cnap-26ae1c](https://www.learnwithnic.com/programs/case-study-cnap-26ae1c)
+
+\[[7\]](#_ftnref7)Agence Nationale de Sécurité des Systèmes d'Information: https: [//www.ssi.gouv.fr/agence/publication/le-modele-zero-trust/](https://www.ssi.gouv.fr/agence/publication/le-modele-zero-trust/)
+
+\[[8\]](#_ftnref8)CIGREF "Towards a Zero Trust philosophy - A break in continuity for application security": https: [//www.cigref.fr/wp/wp-content/uploads/2022/02/Vers-une-philosophie-Zero-Trust-Une-rupture-dans-la-continuite-pour-la-securite-des-applications-fevrier-2022.pdf](https://www.cigref.fr/wp/wp-content/uploads/2022/02/Vers-une-philosophie-Zero-Trust-Une-rupture-dans-la-continuite-pour-la-securite-des-applications-fevrier-2022.pdf)
+
+\[[9\]](#_ftnref9)MFA: Multi-Factors Authentication
+
+[\[10\]](#_ftnref10)PKI: Public Key Infrastructure
+
+[\[11\]](#_ftnref11)XDR: End-Point-Detection & Response
+
+[\[12\]](#_ftnref12)ZTNA: Zero Trust Netwoerk Access
+
+[\[13\]](#_ftnref13)VPN: Virtual Private Network
+
+[\[14\]](#_ftnref14)SecNumCloud: a security standard issued by ANSSI to qualify cloud computing service providers.
+
+[\[15\]](#_ftnref15)E2EE: End-to-End Encryption
+
+[\[16\]](#_ftnref16)Boris Taratine "Zero-Trust (paradox)": https: [//www.linkedin.com/pulse/zero-trust-paradox-boris-taratine/](https://www.linkedin.com/pulse/zero-trust-paradox-boris-taratine/)
+
+[\[17\]](#_ftnref17)Simon Wiseman "Can You Trust the Zero Trust Approach to Networking?" : [https://www.linkedin.com/pulse/can-you-trust-zero-approach-networking-simon-wiseman/](https://www.linkedin.com/pulse/can-you-trust-zero-approach-networking-simon-wiseman/)

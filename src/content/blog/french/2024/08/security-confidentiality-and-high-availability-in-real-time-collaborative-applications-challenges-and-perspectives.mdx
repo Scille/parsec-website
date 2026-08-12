@@ -1,0 +1,62 @@
+---
+title: "Cohérence faible et sécurité des apps collaboratives"
+image: "futuristic-arrow-chart-tech-background-with-big-data-business-growth-currency-stock-investment.jpg"
+date: 2024-08-23
+author: "Thierry Leblond"
+categories:
+  - Actualités
+draft: false
+
+excerpt: "Cette thèse CIFRE étudie la cohérence faible pour un cloud zero-trust, alliant sécurité et disponibilité dans les applications collaboratives temps réel."
+---
+
+Je travaille en tant que doctorant au Laboratoire d’Informatique et des Systèmes sur une thèse financée dans le cadre d’un contrat CIFRE avec Parsec. Mon sujet étant l’étude de la cohérence dans les systèmes distribués, je m’attache depuis septembre 2023 à explorer le domaine complexe de la “Cohérence faible pour le cloud zero-trust”. En collaboration avec Parsec, mon objectif est de relever les défis cruciaux liés à la sécurité, à la confidentialité, et à la haute disponibilité dans les applications collaboratives en temps réel. Cette recherche s’ancre dans un contexte contemporain marqué par la généralisation de l’usage d’applications en tant que service (SaaS), mettant en lumière l’importance de repenser les architectures traditionnelles client-serveur.
+
+## Introduction
+
+Les applications collaboratives en temps réel ont gagnés en popularité avec la généralisation du travail à distance. Cependant, la plupart de ces applications reposent sur des architectures client-serveur centralisées, soulevant des préoccupations majeures en matière de sécurité et de confidentialité. La confiance accordée à un tiers pour la gestion des données et les vulnérabilités aux attaques par déni de service sont autant de défis à surmonter.
+
+## Les Problématiques
+
+En effet, nous sommes bien loin de l’époque de Leslie Lamport (le père de l’informatique distribuée) où la question d’acteurs travaillant à une tâche commune ne concernait que les processeurs multi-coeur. Aujourd’hui ce problème s’étend à des contextes et des applications bien plus larges nous forçant à considérer des paramètres multiples comme la latence et la sécurité.
+
+Aujourd’hui les systèmes sont asynchrones (chaque membre s’exprime à son rythme), en proie aux crashs, aux attaques malveillantes, aux délais de communication importants et irréguliers, et aux pertes intempestives de messages. Cela rend la réalisation de tâches collaboratives en temps réel très complexe, nécessitant la mise en place de compromis important impactant la résilience, la cohérence, ou la disponibilité du système (ce que démontre le théorème CAP énoncé par Brewer)[\[Brewer99\]](http://ieeexplore.ieee.org/document/798396/).
+
+## Vers des Solutions Innovantes
+
+Pour répondre à ces défis, une exploration des solutions sans tiers de confiance à travers des approches zero-trust et/ou pair à pair est suggérée. Ces approches visent à garantir un niveau élevé de sécurité tout en assurant la résilience du système. Cependant, maintenir des performances robustes, en particulier en haute disponibilité, nécessite la mise en place de solutions innovantes et une réflexion sur les compromis réalisables.
+
+Ces réflexions nous emmènent à considérer la définition même de la cohérence de notre système, et à envisager des faiblesses dans cette cohérence afin de gagner en résilience et en disponibilité. Les chercheurs en algorithmie distribuée qualifie ces solutions de cohérences faibles [\[Dubois86\]](https://dl.acm.org/doi/10.1145/17356.17406), définissant différentes familles de cohérence faibles en fonction des cas d’usages recherchés.
+
+## La Cohérence Faible au Cœur des Solutions
+
+Le paysage des propriétés de cohérences faibles peut être découpé en groupe satisfaisant chacun une propriété bien précise[\[Perrin17\]](https://books.google.fr/books?id=6DRlDwAAQBAJ&lpg=PP1&ots=AMV5YkIpbw&dq=Concurrence%20et%20coh%C3%A9rence%20dans%20les%20syst%C3%A8mes%20r%C3%A9partis&lr&hl=fr&pg=PP1#v=onepage&q=Concurrence%20et%20coh%C3%A9rence%20dans%20les%20syst%C3%A8mes%20r%C3%A9partis&f=false). Ces groupes ne sont pas exclusifs et peuvent se chevaucher. Evidemment, plus le critère de cohérence satisfait de propriétés et plus il est couteux à mettre en place, demandant de contraindre la résilience et la disponibilité du système.
+
+L’objectif est donc de trouver un équilibre entre ces différentes propriétés pour garantir un niveau de cohérence suffisant tout en maintenant des performances robustes. Cela nécessite une compréhension approfondie des compromis entre les différentes propriétés de cohérence et des solutions algorithmiques pour les garantir.
+
+## Résultats Algorithmiques
+
+Les travaux récents ont exploré des solutions algorithmiques pour garantir la cohérence faible dans des environnements cloud, en tenant compte des crashs possibles, de l’ouverture du système ou encore des comportements malveillants \[[Frey23](http://arxiv.org/abs/2311.13936), [Kleppman22](https://dl.acm.org/doi/10.1145/3517209.3524042), [Nicolaescu16](https://dl.acm.org/doi/10.1145/2957276.2957310)\]. Les recherches montrent des avancées prometteuses, mais les défis persistent, et les solutions présentées contraignent fortement les applications finales limitant ainsi les fonctionnalités possibles.
+
+## Vers un Cloud Zero-Trust
+
+Affaiblir la cohérence de notre système permet donc de gagner en résilience et en disponibilité, mais elle ne fournit pas à elle seule une réponse à tous les enjeux induits par la collaboration en temps réel. Reste en suspens les questions liées à la sécurité et à la confidentialité des données. Avoir un système hautement résilient et disponible n’a pas de sens si les données manipulées ne sont pas sécurisées. C’est ici que la notion de cloud zero-trust (que nous explicitons sur cet [article](https://parsec.cloud/en/la-strategie-de-confiance-nulle-ou-zero-trust-nouvel-horizon-de-securite-informatique/)) peut venir jouer un premier rôle qui est celui de la réduction de la surface d’attaque. En effet, en imaginant un système où les intermédiaires de confiance n’existent pas, les seuls acteurs malveillants du système sont réduits aux utilisateurs finaux qui exploitent la donnée.
+
+Malheureusement, ce choix de sécurité n’est pas sans conséquence sur l’architecture du système et nous contraint dans les solutions possibles pour atteindre une cohérence faible. L’approche zero-trust place le (ou les) serveur central dans un rôle de simple relayeur de message, faisant de notre système quelque chose très proche d’un système pair à pair. Exit donc les solutions où un serveur central assumerait une charge algorithmique importante pour résoudre les problèmes de cohérence, limitant encore les solutions possibles.
+
+## Sécurité Centrée sur la Donnée
+
+Même si la cohérence faible permet de gagner en résilience et en disponibilité, et que l’approche zero-trust permet de réduire la surface d’attaque, les données manipulées par le système restent vulnérables à travers l’action des utilisateurs finaux. C’est néanmoins un risque qui peut être maitrisé en adoptant une approche de sécurité centrée sur la donnée. Sujet que nous présentons dans cet [article](https://www.parsec.cloud/cipher-data-centric-security).
+
+## Conclusion
+
+L’équilibre entre sécurité, confidentialité, et performances dans les applications collaboratives en temps réel représente un défi majeur. L’étude des cohérences faibles et l’exploration de solutions innovantes ouvrent la voie à des développements prometteurs, mais des questions subsistent quant à leur application pratique dans un contexte zero-trust. Les recherches futures devraient se concentrer sur la formalisation de ces concepts pour une mise en œuvre effective.
+
+## Sources
+
+\[Frey23\] [Process-Commutative Distributed Objects: From Cryptocurrencies to Byzantine-Fault-Tolerant CRDTs](http://arxiv.org/abs/2311.13936)  
+\[Kleppmann22\] [Making CRDTs Byzantine fault tolerant](https://dl.acm.org/doi/10.1145/3517209.3524042)  
+\[Perrin17\] [Concurrence et cohérence dans les systèmes répartis](https://books.google.fr/books?id=6DRlDwAAQBAJ&lpg=PP1&ots=AMV5YkIpbw&dq=Concurrence%20et%20coh%C3%A9rence%20dans%20les%20syst%C3%A8mes%20r%C3%A9partis&lr&hl=fr&pg=PP1#v=onepage&q=Concurrence%20et%20coh%C3%A9rence%20dans%20les%20syst%C3%A8mes%20r%C3%A9partis&f=false)  
+\[Nicolaescu16\] [Near Real-Time Peer-to-Peer Shared Editing on Extensible Data Types](https://dl.acm.org/doi/10.1145/2957276.2957310)  
+\[Dubois86\] [Memory access buffering in multiprocessors](https://dl.acm.org/doi/10.1145/17356.17406)  
+\[Brewer99\] [Harvest, yield, and scalable tolerant systems](http://ieeexplore.ieee.org/document/798396/)
