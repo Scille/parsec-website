@@ -2,10 +2,26 @@
 import { supportedLanguages } from "@/lib/utils/i18nUtils";
 import { localizedLink } from "@/lib/utils/localizedLink";
 import trailingSlashChecker from "@/lib/utils/trailingSlashChecker";
+import { translateCategorySlug } from "@/lib/utils/categoryTranslation";
 
 const currentLocale = Astro.currentLocale;
+
+const CATEGORY_PATH = /^(.*\/blog\/category\/)([^/]+)(\/?)$/;
+
 const languages = supportedLanguages.map((lang) => {
-  const href = localizedLink(Astro.url.pathname, lang.languageCode as string);
+  let pathname = Astro.url.pathname;
+  const categoryMatch = pathname.match(CATEGORY_PATH);
+  if (categoryMatch && currentLocale) {
+    const [, prefix, categorySlug, suffix] = categoryMatch;
+    const translatedSlug = translateCategorySlug(
+      categorySlug,
+      currentLocale,
+      lang.languageCode as string,
+    );
+    pathname = `${prefix}${translatedSlug}${suffix}`;
+  }
+
+  const href = localizedLink(pathname, lang.languageCode as string);
 
   // Don't include current locale in url
   if (href === trailingSlashChecker(Astro.url.pathname)) {
