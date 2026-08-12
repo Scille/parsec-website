@@ -16,4 +16,7 @@ button:
   target: ""
   hoverEffect: "text-flip" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"
 image: "/images/certification.png"
+logoCSPN:
+  src: "/images/logo-cspn.png"
+  alt: "Logo CSPN"
 ---

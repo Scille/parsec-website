@@ -1094,7 +1094,7 @@
   --text-h5: var(--parsec-font-heading-h5-size);
   --text-h6: var(--parsec-font-heading-h6-size);
 
-  --text-h1-sm: calc(var(--text-h1) * 0.7);
+  --text-h1-sm: calc(var(--text-h1) * 0.65);
   --text-h2-sm: calc(var(--text-h2) * 0.7);
   --text-h3-sm: calc(var(--text-h3) * 0.7);
   --text-h4-sm: calc(var(--text-h4) * 0.9);

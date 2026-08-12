@@ -13,6 +13,10 @@ type certificationSectionType = Section & {
     enable: boolean;
     label: string;
   };
+  logoCSPN: {
+    src: string;
+    alt: string;
+  };
 };
 
 type Props = {
@@ -37,6 +41,7 @@ let {
   description,
   button,
   image,
+  logoCSPN,
 } = actualContent as certificationSectionType;
 
 if (!enable) return;
@@ -45,9 +50,18 @@ if (!enable) return;
 <section
   class="border-border-base-default/50 overflow-hidden border-t py-16 md:py-32">
   <div data-aos="fade-down-sm" class="relative container">
+    {
+      logoCSPN && (
+        <OptimizedImage
+          src={logoCSPN.src}
+          alt={logoCSPN.alt}
+          class="-top absolute right-6 mx-auto my-4 flex max-w-52 object-contain md:hidden"
+        />
+      )
+    }
     <div
       class="from-surface-brand-default-pressed to-surface-elevated-secondary mx-auto flex max-w-6xl flex-col rounded-3xl bg-linear-to-b/oklch px-8 py-12 shadow-xl md:flex-row md:py-20 md:pl-16">
-      <div class="space-y-4 lg:max-w-xl">
+      <div class="mt-8 space-y-4 lg:max-w-xl">
         {
           badge?.enable && (
             <span
@@ -79,10 +93,16 @@ if (!enable) return;
         }
         {
           button && button.enable && (
-            <CustomButton variant="fill" color="white" {...button} />
+            <CustomButton
+              variant="fill"
+              color="white"
+              class="w-full md:w-fit"
+              {...button}
+            />
           )
         }
       </div>
+
       <div class="mx-auto hidden md:flex">
         {image && <OptimizedImage src={image} class="w-70 object-contain" />}
       </div>
