@@ -66,6 +66,7 @@ const embedSrc =
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen
               data-video-embed
+              data-provider={provider}
               data-src={embedSrc}
               src="about:blank"
             />
@@ -77,6 +78,15 @@ const embedSrc =
 }
 
 <script>
+  declare global {
+    interface Window {
+      tarteaucitron?: {
+        state?: Record<string, boolean>;
+        userInterface?: { openPanel: () => void };
+      };
+    }
+  }
+
   function cleanupModal(dialog: HTMLDialogElement): void {
     const iframe =
       dialog.querySelector<HTMLIFrameElement>("[data-video-embed]");
@@ -91,9 +101,19 @@ const embedSrc =
     }
   }
 
+  function needsConsent(iframe: HTMLIFrameElement): boolean {
+    if (iframe.dataset.provider !== "dailymotion") return false;
+    return window.tarteaucitron?.state?.dailymotion !== true;
+  }
+
   function openModal(dialog: HTMLDialogElement): void {
     const iframe =
       dialog.querySelector<HTMLIFrameElement>("[data-video-embed]");
+    if (iframe && needsConsent(iframe)) {
+      window.tarteaucitron?.userInterface?.openPanel();
+      return;
+    }
+
     if (iframe && iframe.dataset.src) {
       iframe.src = iframe.dataset.src;
       iframe.classList.remove("hidden");

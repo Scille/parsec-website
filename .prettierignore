@@ -1,1 +1,3 @@
 src/plugins/odometer/odometer.min.js
+public/tarteaucitron/**/*.min.js
+public/tarteaucitron/**/*.min.css
