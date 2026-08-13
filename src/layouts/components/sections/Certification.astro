@@ -48,7 +48,8 @@ if (!enable) return;
 ---
 
 <section
-  class="border-border-base-default/50 overflow-hidden border-t py-16 md:py-32">
+  class="border-border-base-default/50 overflow-hidden border-t py-16 md:py-32"
+  id="certification">
   <div data-aos="fade-down-sm" class="relative container">
     {
       logoCSPN && (
@@ -60,8 +61,8 @@ if (!enable) return;
       )
     }
     <div
-      class="from-surface-brand-default-pressed to-surface-elevated-secondary mx-auto flex max-w-6xl flex-col rounded-3xl bg-linear-to-b/oklch px-8 py-12 shadow-xl md:flex-row md:py-20 md:pl-16">
-      <div class="mt-8 space-y-4 lg:max-w-xl">
+      class="from-surface-brand-default-pressed to-surface-elevated-secondary mx-auto flex max-w-6xl flex-col rounded-3xl bg-linear-to-b/oklch px-8 py-12 shadow-xl md:flex-row md:py-16 md:pl-16">
+      <div class="space-y-4 max-md:mt-8 lg:max-w-xl">
         {
           badge?.enable && (
             <span

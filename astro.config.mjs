@@ -9,8 +9,9 @@ import fontsJson from "@/config/fonts.json";
 import remarkParseContent from "@/lib/utils/remarkParseContent.ts";
 import { enabledLanguages } from "@/lib/utils/i18nUtils.ts";
 import { generateAstroFontsConfig } from "@/lib/utils/AstroFont.ts";
+import { buildRedirects } from "@/lib/utils/buildRedirects.ts";
 import rehypeExternalLinks from "rehype-external-links";
-import config from "./.astro/config.generated.json";
+import config from ".astro/config.generated.json";
 import { unified } from "@astrojs/markdown-remark";
 import icon from "astro-icon";
 import astroExpressiveCode from "astro-expressive-code";
@@ -24,6 +25,8 @@ let {
   },
 } = config;
 
+const redirects = buildRedirects();
+
 // https://astro.build/config
 export default defineConfig({
   site:
@@ -31,6 +34,7 @@ export default defineConfig({
     (config.site.baseUrl ? config.site.baseUrl : "http://examplesite.com"),
   base: process.env.PAGES_BASE_PATH || "/", //remove when final deploy on parsec.cloud
   trailingSlash: config.site.trailingSlash ? "always" : "never",
+  redirects: redirects,
   build: {
     inlineStylesheets: "always",
   },
