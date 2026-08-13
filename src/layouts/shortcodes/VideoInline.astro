@@ -27,9 +27,7 @@ poster = poster && (await bgOptimizedImage(poster));
 const embedSrc =
   provider === "youtube"
     ? `https://www.youtube-nocookie.com/embed/${src}?rel=0&playsinline=1&autoplay=${autoplay ? 1 : 0}`
-    : provider === "dailymotion"
-      ? `https://www.dailymotion.com/embed/video/${dailymotionId}?autoplay=${autoplay ? 1 : 0}`
-      : undefined;
+    : undefined;
 ---
 
 {
@@ -45,6 +43,16 @@ const embedSrc =
           {...(autoplay ? { autoplay: true, muted: true } : {})}>
           <source src={src} type={type} />
         </video>
+      ) : provider === "dailymotion" ? (
+        <div
+          class="dailymotion_player aspect-video w-full"
+          title={title}
+          data-videoid={dailymotionId}
+          data-allowfullscreen="1"
+          data-autoplay={autoplay ? "1" : "0"}
+          data-showinfo="0"
+          data-api="0"
+        />
       ) : (
         <iframe
           class="aspect-video w-full"

@@ -1,0 +1,31 @@
+---
+import cookieIcon from "@/assets/images/cookie-icon.svg";
+import { localizedLink } from "@/lib/utils/localizedLink";
+
+const privacyUrl = localizedLink("/privacy-policy/", Astro.currentLocale);
+---
+
+<script is:inline src="/tarteaucitron/tarteaucitron.min.js"></script>
+<script is:inline src="/tarteaucitron/tarteaucitron.services.min.js"></script>
+<link rel="stylesheet" href="/tarteaucitron/custom.css" />
+
+<script is:inline define:vars={{ iconSrc: cookieIcon.src, privacyUrl }}>
+  tarteaucitron.init({
+    privacyUrl: privacyUrl,
+    hashtag: "#tarteaucitron",
+    cookieName: "tarteaucitron",
+    orientation: "bottom",
+    showAlertSmall: false,
+    cookieslist: true,
+    acceptAllCta: true,
+    denyAllCta: true,
+    highPrivacy: true,
+    handleBrowserDNTRequest: false,
+    removeCredit: true,
+    moreInfoLink: true,
+    useExternalCss: false,
+    iconSrc: iconSrc,
+  });
+
+  (tarteaucitron.job = tarteaucitron.job || []).push("dailymotion");
+</script>
