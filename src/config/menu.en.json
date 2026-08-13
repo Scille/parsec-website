@@ -75,7 +75,7 @@
     {
       "enable": true,
       "name": "Documentation",
-      "url": "/",
+      "url": "https://docs.parsec.cloud/en/",
       "weight": 1
     },
     {
