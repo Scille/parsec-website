@@ -15,6 +15,8 @@ import config from ".astro/config.generated.json";
 import { unified } from "@astrojs/markdown-remark";
 import icon from "astro-icon";
 import astroExpressiveCode from "astro-expressive-code";
+import react from "@astrojs/react";
+import keystatic from "@keystatic/astro";
 
 const fonts = generateAstroFontsConfig(fontsJson);
 
@@ -27,13 +29,28 @@ let {
 
 const redirects = buildRedirects();
 
+// Astro's function-form `defineConfig(({ command }) => ({...}))` triggers a build
+// bug in this Astro/Vite/rolldown combo (breaks Vue SFC style parsing via
+// postcss-import — confirmed by bisection, unrelated to React/Vue/Keystatic
+// themselves). Read the command from argv instead, with a plain object config.
+const isDev = process.argv.includes("dev");
+
 // https://astro.build/config
 export default defineConfig({
   site:
     process.env.PAGES_SITE_URL ||
     (config.site.baseUrl ? config.site.baseUrl : "http://examplesite.com"),
   base: process.env.PAGES_BASE_PATH || "/", //remove when final deploy on parsec.cloud
-  trailingSlash: config.site.trailingSlash ? "always" : "never",
+  // GitHub Pages serves the production build as static files, with no server to
+  // run Keystatic's /keystatic and /api/keystatic SSR routes. Editors use the
+  // Keystatic admin locally via `astro dev` instead (see keystatic.config.ts),
+  // so those routes — and the "ignore" trailing-slash relaxation they need — only
+  // apply to the dev command. The production build keeps the site's own setting.
+  trailingSlash: isDev
+    ? "ignore"
+    : config.site.trailingSlash
+      ? "always"
+      : "never",
   redirects: redirects,
   build: {
     inlineStylesheets: "always",
@@ -73,6 +90,10 @@ export default defineConfig({
     mdx(),
     vue(),
     icon(),
+    // React is only used by Keystatic's admin UI, and GitHub Pages can't serve
+    // Keystatic's SSR routes anyway — keep both dev-only.
+    isDev ? react() : null,
+    isDev ? keystatic() : null,
   ],
   markdown: {
     processor: unified({
