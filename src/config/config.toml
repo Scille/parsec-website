@@ -84,9 +84,11 @@
 
   # Navigation Button In Header
   [settings.navigationButton]
-    enable = true
-    label  = "" # Check src/i18n/en.json and src/i18n/fr.json for changing the navigation button label in different languages or directly add value here if you are not using internationalization feature
-    url    = "/download/"
+    enable                    = true
+    label                     = "" # Check src/i18n/en.json and src/i18n/fr.json for changing the navigation button label in different languages or directly add value here if you are not using internationalization feature
+    url                       = "/download/"
+    data-umami-event          = "download-button"
+    data-umami-event-location = "header-nav"
 
   [settings.markup.tableOfContents]
     enable     = true

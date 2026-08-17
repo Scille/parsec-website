@@ -12,6 +12,8 @@ button:
   variant: "fill"
   color: "white"
   hoverEffect: "text-flip"
+  data-umami-event: "book-appointment"
+  data-umami-event-location: "features-hero"
 
 subSection:
   enabled: true

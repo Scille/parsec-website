@@ -11,10 +11,14 @@ versions:
         button:
           label: "Télécharger"
           url: "https://bms.parsec.cloud/versions/latest/macos_arm"
+          data-umami-event: "download-button"
+          data-umami-event-location: "download-versions-macos-arm"
       - title: "macOS - Intel processor"
         button:
           label: "Télécharger"
           url: "https://bms.parsec.cloud/versions/latest/macos"
+          data-umami-event: "download-button"
+          data-umami-event-location: "download-versions-macos-intel"
 
   - os: "linux"
     label: "Linux"
@@ -29,4 +33,6 @@ versions:
         button:
           label: "Télécharger"
           url: "https://bms.parsec.cloud/versions/latest/windows"
+          data-umami-event: "download-button"
+          data-umami-event-location: "download-versions-windows"
 ---

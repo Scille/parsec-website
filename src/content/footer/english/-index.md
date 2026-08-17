@@ -11,4 +11,6 @@ button:
   label: "Book an appointment"
   url: "https://calendly.com/thierry-leblond-parsec/30min"
   target: "_blank"
+  data-umami-event: "book-appointment"
+  data-umami-event-location: "footer"
 ---

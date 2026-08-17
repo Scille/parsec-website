@@ -37,6 +37,8 @@ needs:
         color: "white"
         label: "Réserver un créneau"
         url: "https://calendly.com/thierry-leblond-parsec/30min"
+        data-umami-event: "book-appointment"
+        data-umami-event-location: "contact-section"
         target: "_blank"
     - icon: "ExclamationTriangleIcon"
       title: "Reporter un problème"
