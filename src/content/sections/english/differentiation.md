@@ -4,7 +4,7 @@ title: In the face of **cybersecurity threats** and even against the most advanc
 list:
   - name: ZeroTrust
     image:
-      src: "/images/zerotrust-architecture-en.svg"
+      src: "/images/zerotrust-architecture-en.png"
       alt: "ZeroTrust architecture"
     title: "**ZeroTrust** architecture"
     description: |
@@ -13,7 +13,7 @@ list:
       Parsec ensures that no user, device or access is considered trustworthy by default — including within the organisation’s own network. This helps to maintain complete data confidentiality.
   - name: ZeroKnowledge
     image:
-      src: "/images/zeroknowledge-architecture-en.svg"
+      src: "/images/zeroknowledge-architecture-en.png"
       alt: "ZeroKnowledge architecture"
     title: "**ZeroKnowledge** architecture"
     description: |
@@ -22,7 +22,7 @@ list:
       Decryption keys are generated and stored exclusively on users' own devices, never on Parsec's servers. This gives your organisation full, independent ownership of its data at all times.
   - name: Anti-ransomware
     image:
-      src: "/images/anti-ransomware-protection-en.svg"
+      src: "/images/anti-ransomware-protection-en.png"
       alt: "anti-ransomware protection"
     title: "**Anti-ransomware** protection"
     description: |

@@ -4,7 +4,7 @@ title: Face aux **menaces de cybersécurité** et même les plus sophistiquées,
 list:
   - name: ZeroTrust
     image:
-      src: "/images/zerotrust-architecture-fr.svg"
+      src: "/images/zerotrust-architecture-fr.png"
       alt: "architecture ZeroTrust"
     title: Architecture **ZeroTrust**
     description: |
@@ -13,7 +13,7 @@ list:
       Parsec assure Aucun utilisateur, aucun appareil, aucun accès n'est considéré comme fiable par défaut — y compris à l'intérieur du réseau de l'organisation. Cela permet de préserver la confidentialité totale des données.
   - name: ZeroKnowledge
     image:
-      src: "/images/zeroknowledge-architecture-fr.svg"
+      src: "/images/zeroknowledge-architecture-fr.png"
       alt: "architecture ZeroKnowledge"
     title: Architecture **ZeroKnowledge**
     description: |
@@ -22,7 +22,7 @@ list:
       Les clés de déchiffrement sont générées et stockées exclusivement sur les appareils des utilisateurs, jamais sur les serveurs de Parsec. Cela donne à votre organisation une propriété complète et indépendante de ses données à tout moment.
   - name: Anti-ransomware
     image:
-      src: "/images/anti-ransomware-protection-fr.svg"
+      src: "/images/anti-ransomware-protection-fr.png"
       alt: "protection anti-ransomware"
     title: Protection **Anti-ransomware**
     description: |

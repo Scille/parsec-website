@@ -7,10 +7,19 @@ const tarteaucitronLang = Astro.currentLocale ?? "en";
 const tarteaucitronLangSrc = `/tarteaucitron/lang/tarteaucitron.${tarteaucitronLang}.min.js`;
 ---
 
-<script is:inline src="/tarteaucitron/tarteaucitron.min.js"></script>
-<script is:inline src="/tarteaucitron/tarteaucitron.services.min.js"></script>
+<script
+  is:inline
+  src={`${import.meta.env.BASE_URL}tarteaucitron/tarteaucitron.min.js`}>
+</script>
+<script
+  is:inline
+  src={`${import.meta.env.BASE_URL}tarteaucitron/tarteaucitron.services.min.js`}>
+</script>
+<link
+  rel="stylesheet"
+  href={`${import.meta.env.BASE_URL}tarteaucitron/custom.css`}
+/>
 <script is:inline src={tarteaucitronLangSrc}></script>
-<link rel="stylesheet" href="/tarteaucitron/custom.css" />
 
 <script is:inline define:vars={{ iconSrc: cookieIcon.src, privacyUrl }}>
   tarteaucitron.init({
