@@ -38,6 +38,8 @@ downloadClient:
     variant: "fill"
     color: "primary"
     hoverEffect: "text-flip"
+    data-umami-event: "download-button"
+    data-umami-event-location: "download-hero"
 
 goOnWeb:
   enable: true

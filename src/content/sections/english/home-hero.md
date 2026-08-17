@@ -16,6 +16,8 @@ buttons:
     hoverEffect: "magnetic-text-flip"
     url: "/download"
     rel: ""
+    data-umami-event: "download-button"
+    data-umami-event-location: "home-hero"
   - enable: true
     label: "Request a demo"
     variant: "fill"

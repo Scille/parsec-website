@@ -39,6 +39,8 @@ needs:
         url: "https://calendly.com/thierry-leblond-parsec/30min"
         target: "_blank"
         hoverEffect: "text-flip"
+        data-umami-event: "book-appointment"
+        data-umami-event-location: "contact-section"
     - icon: "ExclamationTriangleIcon"
       title: "Report an issue"
       description: "Ran into a problem with the app or the website?"

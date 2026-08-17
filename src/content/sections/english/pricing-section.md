@@ -31,6 +31,8 @@ list:
       target: "_blank"
       variant: "fill"
       hoverEffect: "text-flip"
+      data-umami-event: "pricing-cta"
+      data-umami-event-location: "business"
 
     mainFeaturesList:
       - value: CSPN Certification
@@ -64,6 +66,8 @@ list:
       rel:
       target:
       hoverEffect: "text-flip"
+      data-umami-event: "pricing-cta"
+      data-umami-event-location: "government"
 
     mainFeaturesList:
       - value: Everything included in Business
@@ -97,6 +101,8 @@ list:
       rel:
       target:
       hoverEffect: "text-flip"
+      data-umami-event: "pricing-cta"
+      data-umami-event-location: "integrator"
 
     mainFeaturesList:
       - value: On-premise deployment (Docker / Linux)

@@ -11,4 +11,6 @@ button:
   label: "Réserver un créneau"
   url: "https://calendly.com/thierry-leblond-parsec/30min"
   target: "_blank"
+  data-umami-event: "book-appointment"
+  data-umami-event-location: "footer"
 ---
