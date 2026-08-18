@@ -2,7 +2,7 @@
 title: Your **sensitive** **data** deserves uncompromising protection
 preTitle:
   label: Parsec is CPSN-certified
-  url: "/blog/"
+  url: "/blog/" #/blog/2026/09/certification-cspn/
   badge:
     enable: true
     label: "New"

@@ -1,0 +1,62 @@
+---
+title: "Parsec obtient une nouvelle fois la certification CSPN"
+image: "/images/blog/parsec-cspn-2026-certification-fr.png"
+date: 2026-08-18
+author: "Thierry Leblond"
+categories:
+  - News
+  - Cybersecurity
+draft: true
+excerpt: "Parsec renouvelle sa certification CSPN (délivré par l'ANSSI) pour la version Parsec v3.7.10."
+---
+
+Nous sommes fière d'annoncer que l'Agence nationale de la sécurité des systèmes d'information (ANSSI), nous a délivré, une nouvelle fois, la Certification de Sécurité de Premier Niveau, référencée **ANSSI-CSPN-2026/18**. Le rapport, signé le 27 juillet 2026, porte sur la version **3.7.10** du produit, développé par SCILLE SAS et évalué par le centre agréé OPPIDA.
+
+Cette certification s'inscrit dans la continuité de la toute première certification CSPN de PARSEC, obtenue en 2021. Depuis, la cible de sécurité du produit a été mise à jour à quatre reprises pour suivre l'évolution du logiciel : de la version 1.0 publiée en avril 2024 jusqu'à la version 1.4, datée du 2 février 2026, qui accompagne ce nouveau rapport.
+
+### Ce que couvre cette nouvelle certification
+
+Le rapport de certification précise que l'évaluation a porté sur huit fonctions de sécurité :
+
+- la confidentialité des données ;
+- l'intégrité des données, la non-répudiation et l'authenticité ;
+- l'authentification des utilisateurs ;
+- la transmission sécurisée des informations lors de l'enrôlement et l'authentification des terminaux ;
+- la sécurité du contrôle d'accès et la rotation de la clé de chiffrement d'un espace de travail ;
+- la gestion des utilisateurs et de leurs droits ;
+- l'administration du serveur de métadonnées ;
+- la sécurité des données de séquestre.
+
+Le rapport indique qu'aucune restriction d'usage n'est associée à ce certificat et que toutes les fonctions testées se sont révélées conformes à la cible de sécurité du produit.
+
+### Une nouveauté : la sécurité des données de séquestre
+
+Par rapport aux certifications précédentes, cette évaluation introduit une fonction supplémentaire, dédiée à la sécurité des données de séquestre. Le séquestre est une fonctionnalité activable uniquement à la création d'une organisation PARSEC. Elle permet, dans des cas définis - par exemple une enquête menée par un service d'inspection -, de **déchiffrer l'ensemble des données** d'une organisation à l'aide de clés dédiées.
+
+Selon la cible de sécurité, ces clés sont générées et conservées hors ligne, dans un environnement sécurisé, et plusieurs copies en sont conservées dans des lieux séparés.
+
+### Comment s'est déroulée l'évaluation
+
+L'évaluation a été confiée à OPPIDA, centre d'évaluation agréé. Elle a porté sur une plateforme composée de deux postes clients Windows (Windows 10 Enterprise LTSC 21H2 et Windows 11 Enterprise LTSC 24H2) et d'un serveur sous Ubuntu 24.04, déployé via Docker avec une base PostgreSQL, un stockage compatible S3 (Minio) et un serveur SMTP de test (Mailhog).
+
+Le rapport précise que l'installation du client s'effectue en moins de cinq minutes et peut être suivie sans difficulté par un utilisateur non technique, tandis que le déploiement du serveur de métadonnées demande des compétences d'administration système. L'évaluateur a par ailleurs revu l'intégralité du code source du produit, celui-ci étant publié en open source, et a mené des tests d'intrusion sur chacune des fonctions de sécurité : aucune vulnérabilité exploitable n'a été mise en évidence pour le niveau d'attaquant visé.
+
+L'analyse des mécanismes cryptographiques, réalisée selon la procédure ANSSI-CC-CRY-P01, a relevé plusieurs écarts par rapport au référentiel de l'ANSSI. Ces écarts n'ont toutefois pas donné lieu, une fois intégrés à l'analyse de vulnérabilité indépendante, à la découverte d'une faille exploitable pour le niveau d'attaquant retenu. Le générateur d'aléa du produit, quant à lui, n'a fait l'objet d'aucune non-conformité par rapport au référentiel ANSSI Crypto.
+
+### Ce que cela signifie pour les RSSI, DSI et DPO
+
+Pour les équipes sécurité et conformité, une certification CSPN reste l'un des rares visas techniques indépendants disponibles en France pour évaluer un outil de partage de fichiers. Elle donne au RSSI un socle documentaire - cible de sécurité, rapport de certification - pour justifier un choix d'outil auprès de sa direction ou d'un auditeur.
+
+Pour un DPO, la cible de sécurité confirme qu'en dehors du mode séquestre, ni SCILLE ni l'hébergeur cloud n'ont accès aux clés permettant de déchiffrer les données : un élément technique qui peut appuyer une démonstration de conformité au RGPD.
+
+Ce type de certification retient en particulier l'attention des organisations soumises à des exigences de sécurité renforcées : opérateurs d'importance vitale et opérateurs de services essentiels suivis par l'ANSSI, entités entrant dans le périmètre de la directive NIS 2, acteurs de la base industrielle et technologique de défense, établissements de santé, cabinets d'avocats ou services de R&D manipulant des données sensibles, ainsi que les administrations qui recommandent l'usage de produits certifiés ANSSI pour le traitement de données internes.
+
+### Conclusion
+
+Cette nouvelle certification CSPN 2026/18 confirme, cinq ans après la première certification de PARSEC, que la version 3.7.10 du produit répond aux exigences de sécurité fixées par l'ANSSI, avec une fonction supplémentaire couvrant désormais la sécurité des données de séquestre. Elle vient s'ajouter à la documentation technique disponible pour les équipes qui évaluent PARSEC dans un contexte réglementé.
+
+## Source
+
+- Rapport de certification ANSSI-CSPN-2026/18, PARSEC version 3.7.10 (SGDSN/ANSSI, 27 juillet 2026)
+- Cible de Sécurité CSPN PARSEC, référence PARSEC-CSPN-CDS-01, version 1.4 (SCILLE SAS, 2 février 2026)
+- Première certification CSPN de PARSEC (2021) : _https://www.ssi.gouv.fr/entreprise/certification_cspn/parsec-version-2-0-0_

@@ -1,0 +1,62 @@
+---
+title: "Parsec Earns a New ANSSI CSPN Certification"
+image: "/images/blog/parsec-cspn-2026-certification-en.png"
+date: 2026-08-18
+author: "Thierry Leblond"
+categories:
+  - News
+  - Cybersecurity
+draft: true
+excerpt: "Parsec renewed its CSPN certification (issued by ANSSI) for Parsec v3.7.10."
+---
+
+We're proud to announce that France's national cybersecurity agency, ANSSI, has issued us a new first-level security certification, referenced **ANSSI-CSPN-2026/18**. The report, signed on July 27, 2026, covers version **3.7.10** of Parsec, evaluated by the accredited center OPPIDA.
+
+This certification builds on our very first CSPN certification, obtained in 2021. Since then, we've revised our security target four times to track the software's evolution - from version 1.0, published in April 2024, to version 1.4, dated February 2, 2026, which accompanies this new report.
+
+### What this certification covers
+
+The certification report states that the evaluation covered eight security functions:
+
+- data confidentiality;
+- data integrity, non-repudiation, and authenticity;
+- user authentication;
+- secure transmission of information during enrollment, and device authentication;
+- access control security and workspace encryption key rotation;
+- user and rights management;
+- metadata server administration;
+- escrow data security.
+
+The report notes that the certificate carries no usage restrictions, and that every function tested was found compliant with our security target.
+
+### What's new: escrow data security
+
+Compared with earlier certifications, this evaluation adds a function dedicated to escrow data security. Escrow is a feature that can only be activated when creating a Parsec organization. In defined cases - an investigation carried out by an inspection body, for example - it allows **all of an organization's data to be decrypted** using dedicated keys.
+
+According to our security target, we generate these keys and keep them offline, in a secure environment, with multiple copies stored in separate locations.
+
+### How the evaluation was carried out
+
+OPPIDA, an accredited evaluation center, ran the assessment on a platform made up of two Windows client machines (Windows 10 Enterprise LTSC 21H2 and Windows 11 Enterprise LTSC 24H2) and an Ubuntu 24.04 server, deployed via Docker with a PostgreSQL database, S3-compatible storage (Minio), and a test SMTP server (Mailhog).
+
+The report notes that client installation takes under five minutes and can be completed without difficulty by a non-technical user, while deploying the metadata server requires systems administration skills. The evaluator also reviewed our entire source code, which we publish as open source, and ran penetration tests against every security function; no exploitable vulnerability was found for the targeted attacker level.
+
+The analysis of our cryptographic mechanisms, carried out under ANSSI's ANSSI-CC-CRY-P01 procedure, flagged several deviations from the reference framework. Once factored into the evaluator's independent vulnerability analysis, though, these deviations did not lead to any exploitable flaw for the targeted attacker level. Our random number generator, for its part, showed no non-conformity against the ANSSI Crypto reference.
+
+### What it means for CISOs, IT leads, and DPOs
+
+For security and compliance teams, we believe a CSPN certification remains one of the few independent technical validations available in France for assessing a file-sharing tool. It gives a CISO a documented basis - the security target, the certification report - to justify a tool choice to leadership or to an auditor.
+
+For a DPO, our security target confirms that, outside escrow mode, neither we nor the cloud host can access the keys needed to decrypt the data - a technical detail that can support a GDPR compliance case.
+
+This kind of certification tends to draw particular attention from organizations facing heightened security requirements: operators of vital importance and essential services overseen by ANSSI, entities falling within the scope of the NIS 2 directive, players in the defense industrial and technological base, healthcare institutions, law firms or R&D departments handling sensitive data, and public administrations that recommend ANSSI-certified products for internal data processing.
+
+### Conclusion
+
+This new CSPN 2026/18 certification confirms, five years after our first certification, that version 3.7.10 of Parsec meets ANSSI's security requirements, now with an additional function covering escrow data security. It adds to the technical documentation available to teams evaluating Parsec in a regulated context.
+
+## Source
+
+- Certification report ANSSI-CSPN-2026/18, Parsec version 3.7.10 (SGDSN/ANSSI, July 27, 2026)
+- Parsec CSPN Security Target, reference PARSEC-CSPN-CDS-01, version 1.4 (SCILLE SAS, February 2, 2026)
+- Parsec's first CSPN certification (2021): _https://www.ssi.gouv.fr/entreprise/certification_cspn/parsec-version-2-0-0_
