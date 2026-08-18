@@ -94,14 +94,6 @@ export function generateAstroFontsConfig(fontsJson: Array<any>): Array<any> {
       astroFont.variants = font.variants;
     }
 
-    // The npm provider defaults to the package's index.css, which only
-    // ships the 400 weight. Point it at the per-subset CSS file instead,
-    // which bundles every weight for that subset.
-    if (font.provider === "npm" && font.subsets?.length === 1) {
-      // @ts-expect-error
-      astroFont.options = { file: `${font.subsets[0]}.css` };
-    }
-
     return astroFont;
   });
 

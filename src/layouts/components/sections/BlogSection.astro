@@ -72,15 +72,15 @@ if (category) {
   );
 }
 
-// Limit the number of items to be displayed
-let totalPages = Math.ceil(posts?.length / config.settings.pagination);
-
 const featuredPost = posts.find((post) => post.data.featured);
 
 // Remove featured posts from the main list
 if (featuredPost) {
   posts = posts.filter((post) => post.data.featured !== true);
 }
+
+// Limit the number of items to be displayed
+let totalPages = Math.ceil(posts?.length / config.settings.pagination);
 
 if (Astro.props.pagination) {
   const indexOfLastPost =

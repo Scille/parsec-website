@@ -75,7 +75,7 @@ if (!isRemoteImage) {
     const key = Object.keys(images).find((k) => k.includes(src));
     SVG = key ? await imagesRaw[key]() : null;
 
-    if (SVG.length > 1) {
+    if (SVG && SVG.length > 1) {
       SVG = SVG.split("<svg"); // Split at the opening <svg> tag
 
       if (SVG.length > 1) {
