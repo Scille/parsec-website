@@ -11,7 +11,7 @@ description: |
 button:
   enable: true
   label: Read article
-  url: /blog/certification-cspn/
+  url: "/blog/" #/blog/2026/09/certification-cspn/
   rel: ""
   target: ""
   hoverEffect: "text-flip"

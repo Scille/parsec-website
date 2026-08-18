@@ -2,7 +2,7 @@
 title: Vos **données** **sensibles** méritent une protection sans compromis
 preTitle:
   label: Parsec est certifié CSPN
-  url: "/blog/"
+  url: "/blog/" #/blog/2026/09/certification-cspn/
   badge:
     enable: true
     label: "Nouveau"
