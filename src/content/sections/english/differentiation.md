@@ -31,7 +31,9 @@ list:
       This means an attack can be neutralised in minutes, without negotiating with attackers or relying on a separate backup infrastructure.
 button:
   label: "Try Parsec for free"
-  url: "/download/"
+  url: https://trial.parsec.cloud/client/home?createOrg=trial
   target: ""
   rel: ""
+  data-umami-event: "start-trial-button"
+  data-umami-event-location: "differentiation-section"
 ---

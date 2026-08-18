@@ -31,7 +31,9 @@ list:
       Cela signifie qu'une attaque peut être neutralisée en quelques minutes, sans avoir à négocier avec les attaquants ni à recourir à une infrastructure de secours distincte.
 button:
   label: "Essayer Parsec gratuitement"
-  url: "/download/"
+  url: https://trial.parsec.cloud/client/home?createOrg=trial
   target: ""
   rel: ""
+  data-umami-event: "start-trial-button"
+  data-umami-event-location: "differentiation-section"
 ---

@@ -6,12 +6,14 @@ description: If you are responsible for data security within your organisation, 
 button:
   enable: true
   label: Try Parsec for free
-  url: /download/
+  url: https://trial.parsec.cloud/client/home?createOrg=trial
   rel: ""
   target: ""
-  hoverEffect: "text-flip" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"
+  hoverEffect: "text-flip"
   color: primary
   variant: outline
+  data-umami-event: "start-trial-button"
+  data-umami-event-location: "video-section"
 video:
   src: "https://dailymotion.com/video/xabgvly"
   type: mp4

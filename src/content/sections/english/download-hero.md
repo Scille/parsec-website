@@ -52,6 +52,8 @@ goOnWeb:
     color: "primary"
     iconRight: "ArrowRightIcon"
     hoverEffect: "text-flip"
+    data-umami-event: "web-app-button"
+    data-umami-event-location: "download-hero"
 
 moreButton:
   enable: true
