@@ -4,7 +4,7 @@ import { localizedLink } from "@/lib/utils/localizedLink";
 
 const privacyUrl = localizedLink("/privacy-policy/", Astro.currentLocale);
 const tarteaucitronLang = Astro.currentLocale ?? "en";
-const tarteaucitronLangSrc = `/tarteaucitron/lang/tarteaucitron.${tarteaucitronLang}.min.js`;
+const tarteaucitronLangSrc = `${import.meta.env.BASE_URL}tarteaucitron/lang/tarteaucitron.${tarteaucitronLang}.min.js`;
 ---
 
 <script
