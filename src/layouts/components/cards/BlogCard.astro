@@ -31,6 +31,7 @@ let {
   ...rest
 } = Astro.props;
 let { title, image, excerpt, body, categories, author } = content || {};
+const displayImage = image || "placeholder-article.png";
 
 const timeReadingEstimated = body ? readingTime(body) : undefined;
 
@@ -101,17 +102,13 @@ const isHorizontal = layout === "horizontal";
         ? "h-full md:min-h-75"
         : "max-h-52 min-h-52 lg:max-h-60 lg:min-h-60",
     ]}>
-    {
-      image && (
-        <OptimizedImage
-          src={image}
-          alt={"Related to " + title?.toLowerCase()}
-          class:list={[
-            "h-full min-w-full object-cover transition duration-500 group-hover:scale-105",
-          ]}
-        />
-      )
-    }
+    <OptimizedImage
+      src={displayImage}
+      alt={"Related to " + title?.toLowerCase()}
+      class:list={[
+        "h-full min-w-full object-cover transition duration-500 group-hover:scale-105",
+      ]}
+    />
     <span class="sr-only">
       {"Learn more about " + title?.toLowerCase()}
     </span>
