@@ -8,7 +8,6 @@ import PageHeader from "@/components/PageHeader.astro";
 import { supportedLanguages } from "@/lib/utils/i18nUtils";
 import BlogSection from "@/components/sections/BlogSection.astro";
 import { getTaxonomy } from "@/lib/taxonomyParser.astro";
-import { humanize } from "@/lib/utils/textConverter";
 
 export async function getStaticPaths() {
   const { blogFolder } = config.settings;
@@ -57,7 +56,7 @@ if (response) return response;
 <Base {...postIndex?.data} fitToScreen={false}>
   <PageHeader
     hasBgShape={true}
-    title={humanize(categoryName)}
+    title={categoryName}
     description={postIndex?.data.description}
   />
   <BlogSection listPage={true} category={category} />

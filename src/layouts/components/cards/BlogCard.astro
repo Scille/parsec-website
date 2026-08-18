@@ -2,12 +2,7 @@
 import type { Section } from "@/types";
 import readingTime from "@/lib/utils/readingTime";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
-import {
-  humanize,
-  markdownify,
-  plainify,
-  slugifyyy,
-} from "@/lib/utils/textConverter";
+import { markdownify, plainify, slugifyyy } from "@/lib/utils/textConverter";
 import { localizedLink } from "@/lib/utils/localizedLink";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import Icons from "@/helpers/Icons.astro";
@@ -88,7 +83,7 @@ const isHorizontal = layout === "horizontal";
       categoriesArray?.map((category: any) => (
         <>
           <span class="bg-surface-information-default-subtle text-label-md text-text-information-default border-border-information-default-subtle rounded-2xl border px-3 py-1 leading-none font-medium">
-            {humanize(category.name)}
+            {category.name}
           </span>
         </>
       ))

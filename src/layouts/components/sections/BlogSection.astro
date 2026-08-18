@@ -3,7 +3,7 @@ import type { Section } from "@/types";
 import { sortByDate } from "@/lib/utils/sortFunctions";
 import Pagination from "@/components/widgets/Pagination.astro";
 import { getEntryCTM } from "@/lib/contentParser.astro";
-import { humanize, markdownify, slugifyyy } from "@/lib/utils/textConverter";
+import { markdownify, slugifyyy } from "@/lib/utils/textConverter";
 import { getCollectionCTM } from "@/lib/contentParser.astro";
 import overrideObjects from "@/lib/utils/overrideObjects.ts";
 import BlogCard from "@/layouts/components/cards/BlogCard.astro";
@@ -175,7 +175,7 @@ if (!enable) return;
                   ? "bg-surface-brand-default text-text-on-color-label hover:bg-surface-brand-default-hover border-transparent"
                   : "bg-surface-information-default-subtle text-text-information-default border-border-information-default-subtle hover:bg-surface-information-default-subtle-hover",
               ]}>
-              {humanize(categoryItem.name)}
+              {categoryItem.name}
             </a>
           ))}
         </div>
