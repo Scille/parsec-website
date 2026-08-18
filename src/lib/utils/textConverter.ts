@@ -39,32 +39,6 @@ export const markdownify = (content: string, container?: boolean) => {
   return container ? marked.parse(content) : marked.parseInline(content);
 };
 
-// humanize
-export const humanize = (content: string) => {
-  if (content)
-    return content
-      .replace(/^[\s_]+|[\s_]+$/g, "")
-      .replace(/[_\s]+/g, " ")
-      .replace(/[-\s]+/g, " ")
-      .replace(/^[a-z]/, function (m) {
-        return m.toUpperCase();
-      });
-};
-
-// Function for converting string to capitalized words
-export const titleify = (content: string) => {
-  if (!content) {
-    console.warn("No content provided to titleify " + content);
-    return "";
-  }
-
-  const humanized = humanize(content) || "";
-  return humanized
-    .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-};
-
 // plainify
 export const plainify = (content: string) => {
   const parseMarkdown: any = marked.parse(content);
