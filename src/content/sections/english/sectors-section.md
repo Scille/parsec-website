@@ -4,10 +4,12 @@ title: "The sectors served by **Parsec Cloud**"
 description: Parsec meets the requirements of environments where data confidentiality is not optional.
 button:
   label: "Try Parsec Cloud for free"
-  url: "/download"
+  url: https://trial.parsec.cloud/client/home?createOrg=trial
   variant: "fill"
   color: "primary"
   hoverEffect: "text-flip"
+  data-umami-event: "start-trial-button"
+  data-umami-event-location: "sectors-section"
 
 sectors:
   - title: "Banking & Insurance"

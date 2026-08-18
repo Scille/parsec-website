@@ -9,4 +9,6 @@ button:
   rel: ""
   target: ""
   hoverEffect: "text-flip"
+  data-umami-event: "start-trial-button"
+  data-umami-event-location: "call-to-action-section"
 ---

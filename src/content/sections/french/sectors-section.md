@@ -4,10 +4,12 @@ title: "Les secteurs concernées par **Parsec Cloud**"
 description: Parsec répond aux exigences des environnements où la confidentialité des données n'est pas optionnelle.
 button:
   label: "Essayer gratuitemment Parsec Cloud"
-  url: "/download"
+  url: https://trial.parsec.cloud/client/home?createOrg=trial
   variant: "fill"
   color: "primary"
   hoverEffect: "text-flip"
+  data-umami-event: "start-trial-button"
+  data-umami-event-location: "sectors-section"
 
 sectors:
   - title: "Banque & assurance"
