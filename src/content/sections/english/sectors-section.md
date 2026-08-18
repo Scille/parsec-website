@@ -1,6 +1,6 @@
 ---
 enable: true
-title: "The Sectors Serves by **Parsec Cloud**"
+title: "The sectors served by **Parsec Cloud**"
 description: Parsec meets the requirements of environments where data confidentiality is not optional.
 button:
   label: "Try Parsec Cloud for free"

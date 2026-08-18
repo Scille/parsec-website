@@ -6,6 +6,7 @@ import {
   type CollectionEntry,
   type CollectionKey,
 } from "astro:content";
+import { collectionCache, entryCache } from "@/lib/contentParserCache";
 
 export const getCollectionCTM = async <C extends CollectionKey>(
   collectionName: C,
@@ -14,30 +15,43 @@ export const getCollectionCTM = async <C extends CollectionKey>(
   const { defaultLanguage } = config.settings.multilingual;
 
   const selectedLanguageCode = lang || defaultLanguage;
+  const cacheKey = `${collectionName}:${selectedLanguageCode}`;
 
-  const language = languages.find(
-    (l: any) => l.languageCode == selectedLanguageCode,
-  );
-
-  if (!language) {
-    throw new Error("Language not found");
+  if (import.meta.env.PROD && collectionCache.has(cacheKey)) {
+    return collectionCache.get(cacheKey) as Promise<CollectionEntry<C>[]>;
   }
 
-  const { contentDir } = language;
+  const result = (async () => {
+    const language = languages.find(
+      (l: any) => l.languageCode == selectedLanguageCode,
+    );
 
-  const pages: CollectionEntry<C>[] = (await getCollection(
-    collectionName as any,
-    (item: any) => {
-      return item.id.startsWith(contentDir) && !item.id.includes("-index");
-    },
-  )) as CollectionEntry<C>[];
+    if (!language) {
+      throw new Error("Language not found");
+    }
 
-  // Prevent generation of pages with `draft: true` in production
+    const { contentDir } = language;
+
+    const pages: CollectionEntry<C>[] = (await getCollection(
+      collectionName as any,
+      (item: any) => {
+        return item.id.startsWith(contentDir) && !item.id.includes("-index");
+      },
+    )) as CollectionEntry<C>[];
+
+    // Prevent generation of pages with `draft: true` in production
+    if (import.meta.env.PROD) {
+      return pages.filter((page) => !page.data.draft);
+    }
+
+    return pages;
+  })();
+
   if (import.meta.env.PROD) {
-    return pages.filter((page) => !page.data.draft);
+    collectionCache.set(cacheKey, result);
   }
 
-  return pages;
+  return result;
 };
 
 export const getEntryCTM = async <C extends CollectionKey>(
@@ -48,27 +62,40 @@ export const getEntryCTM = async <C extends CollectionKey>(
   const { defaultLanguage } = config.settings.multilingual;
 
   const selectedLanguageCode = lang || defaultLanguage;
+  const cacheKey = `${collectionName}:${subCollectionName}:${selectedLanguageCode}`;
 
-  const language = languages.find(
-    (l: any) => l.languageCode === selectedLanguageCode,
-  );
-
-  if (!language) {
-    throw new Error(`Language '${selectedLanguageCode}' not found.`);
+  if (import.meta.env.PROD && entryCache.has(cacheKey)) {
+    return entryCache.get(cacheKey) as Promise<CollectionEntry<C>>;
   }
 
-  const contentDir = language.contentDir;
-  const path = subCollectionName
-    ? `${contentDir}/${subCollectionName}`
-    : contentDir;
+  const result = (async () => {
+    const language = languages.find(
+      (l: any) => l.languageCode === selectedLanguageCode,
+    );
 
-  const entries = await getCollection(collectionName, ({ id }: any) => {
-    // Remove extension like .md or .mdx
-    const extensionExcluded = id.replace(/\.mdx?$/, "");
+    if (!language) {
+      throw new Error(`Language '${selectedLanguageCode}' not found.`);
+    }
 
-    return extensionExcluded === path;
-  });
+    const contentDir = language.contentDir;
+    const path = subCollectionName
+      ? `${contentDir}/${subCollectionName}`
+      : contentDir;
 
-  return entries && (entries[0] as CollectionEntry<C>);
+    const entries = await getCollection(collectionName, ({ id }: any) => {
+      // Remove extension like .md or .mdx
+      const extensionExcluded = id.replace(/\.mdx?$/, "");
+
+      return extensionExcluded === path;
+    });
+
+    return entries && (entries[0] as CollectionEntry<C>);
+  })();
+
+  if (import.meta.env.PROD) {
+    entryCache.set(cacheKey, result);
+  }
+
+  return result;
 };
 ---

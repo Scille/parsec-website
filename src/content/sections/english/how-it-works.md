@@ -1,6 +1,6 @@
 ---
 enable: true
-title: How work **Parsec Cloud**
+title: How **Parsec Cloud** works
 list:
   - step: "Step **01**"
     image:

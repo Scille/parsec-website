@@ -23,9 +23,13 @@ const { pathname } = Astro.url;
     class:list={[
       "nav-dropdown-toggle hs-dropdown-toggle flex items-center",
       {
-        active:
-          menu.children?.map(({ url }) => url).includes(pathname) ||
-          menu.children?.map(({ url }) => `${url}/`).includes(pathname),
+        active: menu.children?.some(({ url }) => {
+          const href = localizedLink(
+            url || Astro.url.origin,
+            Astro.currentLocale,
+          );
+          return pathname === href || pathname === `${href}/`;
+        }),
       },
       recursive
         ? "nav-dropdown-link justify-between"
@@ -53,37 +57,39 @@ const { pathname } = Astro.url;
         class="nav-dropdown-list hs-dropdown-menu hs-dropdown-open:mt-2! hs-dropdown-open:pointer-events-auto hs-dropdown-open:opacity-100 pointer-events-none absolute top-0 mt-4 hidden opacity-0 transition-[opacity,margin] max-lg:m-0! max-lg:transform-none!"
         {...(recursive ? { "aria-orientation": "vertical" } : {})}>
         {menu.children?.map((child) =>
-          child.hasChildren ? (
-            child.hasChildren && <Astro.self recursive menu={child} />
-          ) : (
-            <li class="nav-dropdown-item">
-              <a
-                href={localizedLink(
+          child.hasChildren
+            ? child.hasChildren && <Astro.self recursive menu={child} />
+            : (() => {
+                const href = localizedLink(
                   child.url || Astro.url.origin,
                   Astro.currentLocale,
-                )}
-                {...{
-                  // Set `rel` attribute for external links or use provided value
-                  rel: child.url?.startsWith("http")
-                    ? child.rel || "noopener noreferrer"
-                    : child.rel || undefined,
+                );
+                return (
+                  <li class="nav-dropdown-item">
+                    <a
+                      href={href}
+                      {...{
+                        // Set `rel` attribute for external links or use provided value
+                        rel: child.url?.startsWith("http")
+                          ? child.rel || "noopener noreferrer"
+                          : child.rel || undefined,
 
-                  // Set `target` to "_blank" for external links unless otherwise specified
-                  target: child.url?.startsWith("http")
-                    ? child.target || "_blank"
-                    : child.target || undefined,
-                }}
-                class:list={[
-                  "nav-dropdown-link block",
-                  {
-                    active:
-                      pathname === `${child.url}/` || pathname === child.url,
-                  },
-                ]}>
-                {child.name}
-              </a>
-            </li>
-          ),
+                        // Set `target` to "_blank" for external links unless otherwise specified
+                        target: child.url?.startsWith("http")
+                          ? child.target || "_blank"
+                          : child.target || undefined,
+                      }}
+                      class:list={[
+                        "nav-dropdown-link block",
+                        {
+                          active: pathname === href || pathname === `${href}/`,
+                        },
+                      ]}>
+                      {child.name}
+                    </a>
+                  </li>
+                );
+              })(),
         )}
       </ul>
     )

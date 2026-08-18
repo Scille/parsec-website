@@ -1,10 +1,8 @@
 import trailingSlashChecker from "./trailingSlashChecker";
+import { shouldOmitDefaultLangPrefix } from "./i18nUtils";
 import config from "../../../.astro/config.generated.json";
 
 const {
-  settings: {
-    multilingual: { defaultLanguage, showDefaultLangInUrl },
-  },
   site: { trailingSlash },
 } = config;
 
@@ -66,8 +64,7 @@ export function buildRedirectDestination(
   newSlug: string,
 ): string {
   const isAbsolute = newSlug.startsWith("/");
-  const langPrefix =
-    lang !== defaultLanguage || showDefaultLangInUrl ? `/${lang}` : "";
+  const langPrefix = shouldOmitDefaultLangPrefix(lang) ? "" : `/${lang}`;
   const rawDestination = isAbsolute
     ? `${langPrefix}${newSlug}`
     : `${langPrefix}/${newSlug}`;
@@ -80,7 +77,7 @@ export type RedirectEntry = { status: number; destination: string };
 export function buildRedirects(): Record<string, RedirectEntry> {
   return Object.fromEntries(
     Object.entries(oldToNewSlug).flatMap(([lang, slugs]) =>
-      Object.entries(slugs).flatMap(([oldSlug, newSlug]) => {
+      Object.entries(slugs).map(([oldSlug, newSlug]) => {
         const baseOldSlug = lang === "fr" ? `/${oldSlug}` : `/en/${oldSlug}`;
         const entry: RedirectEntry = {
           status: 302,
@@ -89,7 +86,7 @@ export function buildRedirects(): Record<string, RedirectEntry> {
 
         const key = trailingSlash ? `${baseOldSlug}/` : baseOldSlug;
 
-        return [[key, entry]];
+        return [key, entry] as const;
       }),
     ),
   );

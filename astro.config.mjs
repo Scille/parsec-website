@@ -67,7 +67,6 @@ export default defineConfig({
         "@/shortcodes/ImageList.astro",
         "@/shortcodes/ImageItem.astro",
         "@/shortcodes/Card.astro",
-        "@/shortcodes/VideoInline.astro",
       ],
     }),
     mdx(),

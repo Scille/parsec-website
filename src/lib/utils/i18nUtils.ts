@@ -28,6 +28,16 @@ export const getEnabledLocales = (): string[] => {
 export const enabledLanguages = getEnabledLocales();
 
 /**
+ * Whether a language's URL prefix should be omitted (i.e. it's the default
+ * language and the site is configured to hide the default-language prefix).
+ * Single source of truth for this rule — reused by generatePaths(), route
+ * getStaticPaths() functions, and buildRedirects().
+ */
+export function shouldOmitDefaultLangPrefix(languageCode: string): boolean {
+  return languageCode === defaultLanguage && !showDefaultLangInUrl;
+}
+
+/**
  * Fetches the translations for a given language. If the requested language is disabled
  * or not found, it defaults to the configured default language.
  *
@@ -160,10 +170,9 @@ export function generatePaths(): Array<{
   const supportedLanguages = getSupportedLanguages();
   const paths = supportedLanguages.map((lang) => ({
     params: {
-      lang:
-        lang.languageCode === defaultLanguage && !showDefaultLangInUrl
-          ? undefined
-          : lang.languageCode,
+      lang: shouldOmitDefaultLangPrefix(lang.languageCode)
+        ? undefined
+        : lang.languageCode,
     },
   }));
 
