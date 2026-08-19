@@ -1,5 +1,6 @@
 #tarteaucitronRoot #tarteaucitronAlertBig #tarteaucitronPersonalize2,
 #tarteaucitron #tarteaucitronServices #tarteaucitronAllAllowed,
+#tarteaucitron #tarteaucitronSaveButton,
 #tarteaucitronRoot .tarteaucitronAllow {
   background: #373753 !important;
   color: #ededf3 !important;
@@ -7,7 +8,7 @@
   border-radius: 9999px !important;
   padding: 0.75rem 1.5rem !important;
   font-weight: 500 !important;
-  font-size: 0.875rem !important;
+  font-size: 1rem !important;
   line-height: 1 !important;
   text-decoration: none !important;
   box-shadow:
@@ -25,7 +26,6 @@
 
 #tarteaucitronRoot #tarteaucitronAlertBig #tarteaucitronAllDenied2,
 #tarteaucitronRoot #tarteaucitronAlertBig #tarteaucitronCloseAlert,
-#tarteaucitron #tarteaucitronServices #tarteaucitronAllDenied,
 #tarteaucitronRoot .tarteaucitronDeny {
   background: transparent !important;
   color: #454569 !important;
@@ -38,6 +38,11 @@
   line-height: 1 !important;
   text-decoration: none !important;
   transition-duration: 0.35s !important;
+}
+
+#tarteaucitron .tarteaucitronCheck,
+#tarteaucitron .tarteaucitronCross {
+  display: none !important;
 }
 
 #tarteaucitronRoot #tarteaucitronAlertBig #tarteaucitronAllDenied2:hover,
@@ -68,6 +73,10 @@
   line-height: 1 !important;
   text-decoration: none !important;
   transition-duration: 0.35s !important;
+}
+
+#tarteaucitronRoot #tarteaucitron [aria-pressed="true"] {
+  text-shadow: none !important;
 }
 
 #tarteaucitron #tarteaucitronPrivacyUrlDialog:hover {
@@ -109,17 +118,17 @@
   width: auto !important;
   padding: 1.5rem 16px 2rem !important;
   border-radius: 16px !important;
-  display: flex !important;
   flex-wrap: wrap !important;
   align-items: center !important;
   justify-content: flex-end !important;
   column-gap: 0.75rem !important;
   row-gap: 0.75rem !important;
   text-align: left !important;
+  display: flex !important;
 }
 
 #tarteaucitronRoot #tarteaucitronAlertBig #tarteaucitronDisclaimerAlert {
-  flex: 1 1 320px;
+  margin-right: auto;
   text-align: left;
 }
 
@@ -142,14 +151,55 @@
   border: 0 !important;
 }
 
-/* close button: small outline-neutral pill, inset instead of flush to the corner.
-   #tarteaucitronServices .tarteaucitronMainLine (a sibling rendered after this button in the DOM)
-   has its own position:relative, so with both boxes at z-index:auto it paints on top and covers
-   the button; an explicit z-index lifts the button back above it. */
+/* ---------- Allow/Deny toggle buttons inside the modal: outline when unselected, filled when selected ---------- */
+/* #tarteaucitronSaveButton shares the .tarteaucitronAllow class but never receives an aria-pressed
+   attribute (it's a one-shot "commit" action, not a toggle), so it never matches the [aria-pressed]
+   rules below and keeps the neutral filled look from the base .tarteaucitronAllow rule. */
+#tarteaucitron
+  #tarteaucitronServices
+  #tarteaucitronAllAllowed[aria-pressed="false"],
+#tarteaucitronRoot #tarteaucitron .tarteaucitronAllow[aria-pressed="false"] {
+  background: transparent !important;
+  color: #454569 !important;
+  border: 1px solid #e0e0eb !important;
+  box-shadow: none !important;
+}
+
+#tarteaucitron
+  #tarteaucitronServices
+  #tarteaucitronAllAllowed[aria-pressed="false"]:hover,
+#tarteaucitronRoot
+  #tarteaucitron
+  .tarteaucitronAllow[aria-pressed="false"]:hover {
+  background: #eaeaf1 !important;
+}
+
+#tarteaucitron
+  #tarteaucitronServices
+  #tarteaucitronAllDenied[aria-pressed="true"],
+#tarteaucitronRoot #tarteaucitron .tarteaucitronDeny[aria-pressed="true"] {
+  background: #c20a22 !important;
+  color: #ededf3 !important;
+  border: 0 !important;
+  box-shadow:
+    0 1px 6px 1px rgba(0, 0, 0, 0.1),
+    0 -2px 4px 0 rgba(255, 255, 255, 0.25) inset,
+    0 0 4px 0 rgba(0, 0, 0, 0.22) inset !important;
+}
+
+#tarteaucitron
+  #tarteaucitronServices
+  #tarteaucitronAllDenied[aria-pressed="true"]:hover,
+#tarteaucitronRoot
+  #tarteaucitron
+  .tarteaucitronDeny[aria-pressed="true"]:hover {
+  background: #910819 !important;
+}
+
 #tarteaucitron #tarteaucitronClosePanel {
   top: 16px !important;
-  right: 16px !important;
-  z-index: 5 !important;
+  right: 42px !important;
+  z-index: 20000 !important;
   background: #fff !important;
   color: #454569 !important;
   border: 1px solid #e0e0eb !important;
@@ -178,10 +228,9 @@
 }
 
 #tarteaucitron #tarteaucitronInfo {
-  position: static !important;
-  display: block !important;
+  display: flex !important;
   max-width: none !important;
-  padding: 0.75rem 0 0 !important;
+  padding: 0.75rem 0 !important;
   color: #454569 !important;
   font-size: 0.875rem !important;
   font-weight: 400 !important;
@@ -208,9 +257,10 @@
   color: #232334 !important;
   font-size: 0.9375rem !important;
   font-weight: 600 !important;
-  padding: 0.5rem 2rem !important;
-  margin: 0.5rem 0 0 !important;
+  padding: 0.5rem !important;
+  margin: 0.5rem 0 0 1.5rem !important;
   border-radius: 8px !important;
+  width: 100%;
 }
 
 #tarteaucitron #tarteaucitronServices .tarteaucitronTitle button:hover {
@@ -224,6 +274,5 @@
 }
 
 #tarteaucitron #tarteaucitronServices .tarteaucitronName .tarteaucitronH3 {
-  font-weight: 600 !important;
   color: #232334 !important;
 }
