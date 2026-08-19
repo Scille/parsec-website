@@ -17,20 +17,16 @@ list:
       - active: true
         title: "Pourquoi choisir Parsec Cloud ?"
         content: |
-          Parsec Cloud est un coffre-fort collaboratif pour le partage des données sensibles et secrètes en Data Zero Trust et Zero Knowledge y compris avec l'extérieur de l'Organisation (comme avec l'Administration ou les clients).
-          C'est simple à déployer, facile à utiliser, chiffré de bout-en-bout (E2EE), bénéficiant du visa de sécurité CSPN de l'ANSSI&nbsp;: c'est comme One Drive, un Sharepoint ou un NAS chiffré de bout-en-bout, partageable avec l'extérieur et résistant aux ruptures de réseau parce qu'asynchrone.
+          Parsec Cloud est un coffre-fort collaboratif pour le partage des données sensibles et secrètes, selon les principes Zero Trust et Zero Knowledge, y compris avec l'extérieur de l'organisation (comme avec l'Administration ou les clients).
+          C'est simple à déployer, facile à utiliser, chiffré de bout en bout (E2EE), et bénéficie du visa de sécurité CSPN de l'ANSSI.
       - active: false
-        title: "Proposez-vous des intégrations avec d'autres outils ?"
+        title: "Quelle différence avec les services de cloud comme Dropbox, OneDrive, Google Drive etc ?"
         content: |
-          Oui, nous nous intégrons aux services populaires tels que Slack, Zapier, Stripe, GitHub et plus encore. Consultez notre page d'intégrations pour la liste complète.
-      - active: false
-        title: "Puis-je personnaliser l'apparence ?"
-        content: |
-          Absolument ! Notre système inclut des thèmes flexibles, des composants et des options de style pour correspondre à votre identité de marque.
+          Contrairement aux services de partage de données comme Google Drive ou Dropbox, Parsec vient sécuriser votre collaboration avec des tiers externes même en dehors de votre périmètre de confiance. Les données sont chiffrées et stockées uniquement sur votre appareil. Vous, et vous seul, êtes en mesure de déchiffrer ces données pour les consulter et les modifier (principe du Zero Knowledge).
       - active: false
         title: "La plateforme est-elle adaptée aux mobiles ?"
         content: |
-          Oui, tout est entièrement responsive et optimisé pour toutes les tailles d'écran.
+          La version mobile est encore en phase de développement, elle reste utilisable mais n'est pas encore aboutie.
 
   - label: "Tarification & Paiement"
     id: pricing-billing
@@ -38,15 +34,15 @@ list:
       - active: true
         title: "Proposez-vous un essai gratuit ?"
         content: |
-          Oui, nous offrons un essai gratuit de 15 jours avec accès à toutes les fonctionnalités principales. Aucune carte de crédit requise.
+          Oui, nous offrons un essai gratuit de 15 jours avec accès à toutes les fonctionnalités principales. Aucune carte de crédit requise. Seule précision, les données ne seront pas conservées après la période d'essai.
       - active: true
         title: "Quels moyens de paiement acceptez-vous ?"
         content: |
-          Nous n'acceptons les cartes de crédit que pour la formule « Business ». Les formules « Gouvernement » et « Intégrateur » peuvent être réglées uniquement par virement bancaire.
+          Nous n'acceptons les cartes de crédit que pour la formule "Business". Les formules "Administration" et "Intégrateur" peuvent être réglées uniquement par virement bancaire.
       - active: false
         title: "Puis-je annuler mon plan plus tard ?"
         content: |
-          Disponible uniquement avec notre formule « Business », vous pouvez annuler votre plan à tout moment depuis votre tableau de bord d'administration.
+          Disponible uniquement avec notre formule "Business", vous pouvez annuler votre plan à tout moment depuis votre tableau de bord d'administration. Les formules "Administration" et "Intégrateur" sont définies selon la durée du contrat.
 
   - label: "Téléchargement & Onboarding"
     id: download
@@ -54,7 +50,7 @@ list:
       - active: true
         title: "Comment créer un compte ?"
         content: |
-          Cliquez sur le bouton **S'inscrire** sur notre page d'accueil et suivez les étapes. Vous pouvez commencer à utiliser la plateforme en quelques minutes.
+          Si vous souhaitez créer une organisation depuis notre Saas, il vous faudra un espace client, vous pouvez vous y rendre en allant sur [sign.parsec.cloud](https://sign.parsec.cloud). Après avoir souscrit à l'offre Saas (Business), vous pourrez créer votre organisation.
       - active: false
         title: "Puis-je inviter des membres de mon équipe ?"
         content: |
@@ -62,11 +58,12 @@ list:
       - active: false
         title: "Comment réinitialiser mon mot de passe ?"
         content: |
-          Cliquez sur le lien **Mot de passe oublié** sur la page de connexion et suivez les instructions pour définir un nouveau mot de passe.
+          Parsec étant une solution Zero Trust, vous avez deux solutions pour récupérer votre mot de passe. Soit via un autre appareil qui est connecté avec votre compte, soit via un fichier de récupération + clé secrète que vous devez avoir préalablement téléchargé.
+          Quel que soit votre choix, cliquez sur le lien **Mot de passe oublié** sur la page de connexion et suivez les instructions pour définir un nouveau mot de passe.
       - active: false
         title: "Proposez-vous de l'assistance à l'onboarding ?"
         content: |
-          Oui, nous fournissons des tutoriels guidés, de la documentation et des sessions d'onboarding en direct pour les nouveaux utilisateurs.
+          Oui, nous fournissons un guide utilisateur et une documentation pour vous aider à utiliser l'application. Nous sommes en mesure de vous former, ou de former vos équipes si besoin, avec des sessions sur site ou à distance.
 
   - label: "Contact"
     id: contact
@@ -78,7 +75,7 @@ list:
       - active: false
         title: "Sous combien de temps recevrai-je une réponse ?"
         content: |
-          Nous nous efforçons de répondre à toutes les demandes sous 1 à 2 jours ouvrés.
+          Nous nous efforçons de répondre à toutes les demandes sous 2 à 3 jours ouvrés.
       - active: false
         title: "Puis-je demander une démonstration de Parsec Cloud ?"
         content: |
