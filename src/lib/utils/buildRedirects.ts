@@ -8,6 +8,7 @@ const {
 
 export const oldToNewSlug: Record<string, Record<string, string>> = {
   fr: {
+    "demarrer-parsec": "download",
     // solutions
     "solution-zero-trust": "features",
     "solution-data-loss-prevention": "features",
@@ -28,13 +29,18 @@ export const oldToNewSlug: Record<string, Record<string, string>> = {
     "securite-hebergement-cloud": "",
     // pricing
     tarifs: "pricing",
+    tarification: "pricing",
     //misc
     "a-propos": "about-us",
     "nous-rejoindre": "contact",
     partenaires: "partners",
     "open-source": "features/#open-source",
+    //legal
+    "cgvu-parsec": "terms-conditions",
+    "politique-de-confidentialite": "privacy-policy",
   },
   en: {
+    "start-parsec": "download",
     // solutions
     "zerotrust-encryption-solution": "features",
     "anti-ransomware-solution": "features",
@@ -52,10 +58,15 @@ export const oldToNewSlug: Record<string, Record<string, string>> = {
     // security
     "security-cspn-certification": "#certification",
     "security-cloud-hosting": "",
+    // pricing
+    pricing: "pricing",
     //misc
     "join-parsec": "contact",
     partners__trashed: "partners",
     "open-source": "features/#open-source",
+    //legal
+    "gtcs-parsec": "terms-conditions",
+    "politique-de-confidentialite": "privacy-policy",
   },
 };
 
