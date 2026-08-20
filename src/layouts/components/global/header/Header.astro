@@ -1,5 +1,6 @@
 ---
 import Logo from "@/components/global/Logo.astro";
+import Icons from "@/helpers/Icons.astro";
 import config from ".astro/config.generated.json";
 import LanguageSwitcher from "@/layouts/components/global/header/LanguageSwitcher.astro";
 import NavMenuItem from "@/layouts/components/global/header/MenuItem.astro";
@@ -9,6 +10,7 @@ import { useTranslations } from "@/lib/utils/i18nUtils";
 import { sortByWeight } from "@/lib/utils/sortFunctions";
 import { filteredEnabled } from "@/lib/utils/filteredEnabled";
 import CustomButton from "@/components/CustomButton.astro";
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
 
 const translate = await useTranslations(Astro.currentLocale as string);
 let main = translate("main") as NavigationLink[];
@@ -27,7 +29,7 @@ const { stickyHeader, navigationButton } = config.settings;
   ]}>
   <div class="relative container">
     <nav
-      class="hs-dropdown relative flex items-center justify-between px-2 py-2 [--auto-close:inside] [--gpu-acceleration:false] [--strategy:absolute] lg:[--strategy:static]">
+      class="hs-dropdown relative z-2 flex items-center justify-between px-2 py-2 [--auto-close:inside] [--gpu-acceleration:false] [--strategy:absolute] lg:[--strategy:static]">
       <Logo class="logo-full mx-4" src={config.site.logo} />
       <Logo class="logo-icon mx-4 hidden" src={config.site.logoIcon} />
 
