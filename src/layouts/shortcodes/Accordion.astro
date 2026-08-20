@@ -40,23 +40,31 @@ const isExpanded = expanded === "true";
 <div
   data-group={group}
   class:list={[
-    "hs-accordion hs-accordion-active:bg-theme-light bg-theme-light my-4 rounded-xl border-0",
+    "hs-accordion border-border-base-default hover:bg-surface-base-default my-4 overflow-hidden rounded-xl border bg-transparent transition-colors duration-300",
     isExpanded && "active",
   ]}
   id={"hs-accordion-" + uniqueId}>
-  <button
-    aria-expanded={isExpanded ? "true" : "false"}
-    class="hs-accordion-toggle flex w-full items-center justify-between px-6 py-4 text-start"
-    aria-controls={"hs-accordion-content-" + uniqueId}>
-    <span set:html={label} />
-    <span class="hs-accordion-active:rotate-180 transition duration-300">
-      <Icons icon="PlusIcon" class="hs-accordion-active:hidden text-xl" />
-      <Icons
-        icon="MinusIcon"
-        class="hs-accordion-active:block hidden text-xl"
+  <h3 class="hs-accordion-heading m-0">
+    <button
+      aria-expanded={isExpanded ? "true" : "false"}
+      class:list={[
+        "hs-accordion-toggle flex w-full items-center justify-between px-6 py-4 text-start",
+        "hs-accordion-active:bg-surface-neutral-default-subtle-hover",
+      ]}
+      aria-controls={"hs-accordion-content-" + uniqueId}>
+      <span
+        set:html={label}
+        class="hs-accordion-active:opacity-50 transition-opacity duration-300"
       />
-    </span>
-  </button>
+      <span class="hs-accordion-active:rotate-180 transition duration-300">
+        <Icons icon="PlusIcon" class="hs-accordion-active:hidden text-xl" />
+        <Icons
+          icon="MinusIcon"
+          class="hs-accordion-active:block hidden text-xl"
+        />
+      </span>
+    </button>
+  </h3>
   <div
     role="region"
     id={"hs-accordion-content-" + uniqueId}
@@ -65,7 +73,7 @@ const isExpanded = expanded === "true";
       "hs-accordion-content overflow-hidden transition-[height] duration-300",
       !isExpanded && "hidden",
     ]}>
-    <div class="prose-styles mx-6 pb-4">
+    <div class="prose-styles mx-6 px-2 py-8">
       <slot />
     </div>
   </div>
