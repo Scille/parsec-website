@@ -1,6 +1,6 @@
 import { defineCollection } from "astro:content";
 import config from ".astro/config.generated.json";
-import { button, videoConfigSchema } from "./sections.schema";
+import { button, sharedButton, videoConfigSchema } from "./sections.schema";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
@@ -46,6 +46,21 @@ const blogCollection = defineCollection({
     author: z.string().optional(),
     excerpt: z.string().optional(),
     featured: z.boolean().optional(),
+  }),
+});
+
+const bannerCollection = defineCollection({
+  loader: contentLoader("./src/content/banner"),
+  schema: z.object({
+    enable: z.boolean(),
+    buttons: z
+      .array(
+        sharedButton.extend({
+          icon: z.string().optional(),
+          image: z.string().optional(),
+        }),
+      )
+      .optional(),
   }),
 });
 
@@ -109,6 +124,7 @@ export const collections = {
   pages: pagesCollection,
   changelog: changelogCollection,
   error404: error404Collection,
+  banner: bannerCollection,
   sections: defineCollection({
     loader: contentLoader("./src/content/sections"),
   }),

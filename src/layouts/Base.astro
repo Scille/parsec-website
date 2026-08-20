@@ -4,6 +4,7 @@ import "@/styles/global.css";
 import Head from "@/components/global/Head.astro";
 import Footer from "@/components/global/Footer.astro";
 import Header from "@/components/global/header/Header.astro";
+import Banner from "@/components/global/header/Banner.astro";
 import type { JSONLDProps } from "@/lib/utils/JsonLdGenerator";
 import PageLoader from "./components/utilities/PageLoader.astro";
 import GlobalScripts from "./components/widgets/GlobalScripts.astro";
@@ -44,6 +45,7 @@ const sectionSpacingClass =
   <Head {...Astro.props} structuredData={structuredData} />
   <body>
     {!Astro.props.homepage && <PageLoader />}
+    {Astro.props.homepage && <Banner />}
     <Header {...Astro.props} />
     <main class:list={[sectionSpacingClass, Astro.props.class]}>
       <slot />
