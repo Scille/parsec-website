@@ -10,7 +10,7 @@ list:
     description: Only you can view and edit your documents. Your login details are linked to your personal key and are never transmitted in plain text to our servers.
   - step: "Step **02**"
     image:
-      src: "/images/how-work-step-2.svg"
+      src: "/images/how-work-step-2.png"
       alt: "test"
     title: You decide where your data is stored
     description: The encrypted data is distributed across the hosting providers of your choice — French hosting providers, in-house infrastructure, or both. You retain full control over where your data is stored.

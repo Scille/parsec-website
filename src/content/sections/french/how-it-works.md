@@ -10,7 +10,7 @@ list:
     description: Seul vous pouvez consulter et modifier vos documents. Les informations d'accès sont liées à votre clé personnelle et ne transitent jamais en clair vers nos serveurs.
   - step: "Étape **02**"
     image:
-      src: "/images/how-work-step-2.svg"
+      src: "/images/how-work-step-2.png"
       alt: "test"
     title: C’est vous qui décidez où sont stockées vos données
     description: Les morceaux chiffrés sont répartis sur les hébergeurs de votre choix — hébergement français, infrastructure interne, ou les deux. Vous restez maître de l'emplacement de vos données.
