@@ -643,15 +643,15 @@
   --parsec-font-label-sm-letter-spacing: 0.2px;
 
   /* Article Heading */
-  --parsec-font-article-heading-h1-size: 2.5rem;
+  --parsec-font-article-heading-h1-size: 2rem;
   --parsec-font-article-heading-h1-line-height: 120%;
   --parsec-font-article-heading-h1-letter-spacing: -1.5px;
 
-  --parsec-font-article-heading-h2-size: 2rem;
+  --parsec-font-article-heading-h2-size: 1.5rem;
   --parsec-font-article-heading-h2-line-height: normal;
   --parsec-font-article-heading-h2-letter-spacing: 0.1px;
 
-  --parsec-font-article-heading-h3-size: 1.625rem;
+  --parsec-font-article-heading-h3-size: 1.25rem;
   --parsec-font-article-heading-h3-line-height: normal;
   --parsec-font-article-heading-h3-letter-spacing: 0.1px;
 
@@ -664,7 +664,7 @@
   --parsec-font-article-heading-h5-letter-spacing: 0.1px;
 
   /* Article Body */
-  --parsec-font-article-body-default-size: 1.125rem;
+  --parsec-font-article-body-default-size: 1rem;
   --parsec-font-article-body-default-line-height: 1.7;
   --parsec-font-article-body-default-letter-spacing: 0.1px;
 }

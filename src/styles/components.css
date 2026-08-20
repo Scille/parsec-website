@@ -26,18 +26,23 @@
   @apply prose-img:mt-2.5 prose-img:max-w-full;
 
   /* Table */
-  @apply prose-thead:border-border-light prose-thead:bg-white/5;
+  @apply prose-thead:border-border-light prose-thead:bg-surface-neutral-default-subtle-hover;
   @apply prose-tr:border-border-light;
-  @apply prose-td:relative prose-td:z-10 prose-td:px-3 prose-td:py-[1.125rem];
-  @apply prose-th:relative prose-th:z-10 prose-th:px-4 prose-th:py-[1.125rem] prose-th:text-black;
+  @apply prose-td:relative prose-td:z-10 prose-td:px-4 prose-td:py-3 prose-td:align-middle prose-td:text-sm;
+  @apply prose-th:relative prose-th:z-10 prose-th:px-4 prose-th:py-3 prose-th:text-sm prose-th:text-black;
+  @apply prose-thead:prose-th:text-base;
   @apply prose-table:relative prose-table:overflow-hidden prose-table:before:absolute prose-table:before:left-0 prose-table:before:top-0 prose-table:before:h-full prose-table:before:w-full prose-table:before:border-border-light prose-table:before:rounded-[inherit] prose-table:before:border prose-table:before:content-[""];
 
-  /* Blockquote */
-  @apply prose-blockquote:prose-p:first-of-type:before:hidden prose-blockquote:prose-p:last-of-type:after:hidden prose-blockquote:!space-y-4 prose-blockquote:font-normal prose-blockquote:border-l prose-blockquote:bg-primary/5 prose-blockquote:!border-primary prose-blockquote:px-8 prose-blockquote:py-4 prose-blockquote:not-italic;
+  tbody tr:nth-child(even) {
+    @apply bg-white/5;
+  }
 
-  /* Remove Quote for first and last child element inside blockquote */
+  /* Blockquote */
+  @apply prose-blockquote:prose-p:first-of-type:before:hidden prose-blockquote:prose-p:last-of-type:after:hidden prose-blockquote:!space-y-4 prose-blockquote:font-normal prose-blockquote:border-l prose-blockquote:bg-primary/5 prose-blockquote:!border-primary prose-blockquote:px-8 prose-blockquote:py-4 prose-blockquote:not-italic prose-blockquote:text-sm;
+
+  /* Remove Quote for first and last child element inside blockquote, and drop the default ul spacing */
   blockquote {
-    @apply prose-p:my-0;
+    @apply prose-p:my-0 prose-ul:my-0;
   }
 
   &#toc-collapse a {
@@ -94,13 +99,6 @@
       @apply me-4 mb-4;
     }
   }
-  > .hs-accordion {
-    @apply border-b;
-    &:not(& + .hs-accordion) {
-      @apply border-t;
-    }
-  }
-
   /* Remove spacing for first and last child */
   & > *:first-child {
     @apply mt-0;
@@ -170,9 +168,13 @@
   .hs-accordion-content {
     p,
     li {
-      @apply text-text-default/80;
+      @apply text-text-base-body;
     }
   }
+}
+
+.hs-accordion-content .prose-styles img {
+  @apply shadow-none;
 }
 
 /* marquee style */
@@ -466,7 +468,7 @@
   }
 
   strong {
-    @apply text-article-body leading-article-body tracking-article-body font-semibold;
+    @apply leading-article-body tracking-article-body font-semibold text-inherit;
   }
 
   img {
