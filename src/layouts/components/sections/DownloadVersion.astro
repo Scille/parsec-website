@@ -1,0 +1,85 @@
+---
+import type { z } from "astro/zod";
+import type { Section } from "@/types";
+import { Code } from "astro-expressive-code/components";
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import { codeFiles } from "@/lib/utils/codeFiles";
+import type { sectionsSchema } from "@/sections.schema";
+import CustomButton from "@/components/CustomButton.astro";
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+// Type for this section data
+type SectionType = Section &
+  NonNullable<z.infer<typeof sectionsSchema.versionDownload>>;
+
+// Fetching the content for this section
+let { enable, title, versions, image } = (
+  await getEntryCTM("sections", "download-version", Astro.currentLocale)
+)?.data as SectionType;
+---
+
+{
+  enable && (
+    <section class="pt-20" id="versions">
+      <div class="has-italic-text border-border-base-default relative container border-b pb-16">
+        {title && (
+          <h2 set:html={markdownify(title)} class="text-h3 mb-12 text-center" />
+        )}
+        <div class="grid items-center lg:grid-cols-2">
+          {versions && (
+            <div class="flex min-w-0 flex-col">
+              {versions.map(
+                (group) =>
+                  group.enable !== false && (
+                    <div class="flex flex-col gap-8 py-6">
+                      {group.label && (
+                        <h4 set:html={markdownify(group.label)} />
+                      )}
+                      <div class="bg-surface-base-page shadow-card flex w-full min-w-0 flex-col rounded-xl">
+                        {group.list.map((card) => {
+                          const code = card.codeFile
+                            ? codeFiles[card.codeFile]
+                            : undefined;
+                          return (
+                            card.enable !== false && (
+                              <div class="border-border-base-default/80 flex min-w-0 items-center gap-4 p-6 not-last:border-b has-[pre]:flex-col has-[pre]:items-start">
+                                {card.title && (
+                                  <p
+                                    class="text-body-lg text-text-base-heading shrink-0 font-semibold"
+                                    set:html={markdownify(card.title)}
+                                  />
+                                )}
+                                {card.button && (
+                                  <CustomButton
+                                    tag="a"
+                                    color="primary"
+                                    variant="link"
+                                    class="ml-auto"
+                                    {...card.button}
+                                  />
+                                )}
+                                {code && (
+                                  <Code code={code.code} lang={code.lang} />
+                                )}
+                              </div>
+                            )
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ),
+              )}
+            </div>
+          )}
+          {image && (
+            <OptimizedImage
+              src={image}
+              class="hidden size-full max-h-96 object-contain lg:ml-auto lg:block lg:object-right"
+            />
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}

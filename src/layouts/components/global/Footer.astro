@@ -1,0 +1,170 @@
+---
+import social from "@/config/social.json";
+import { contact } from "@/config/contact.json";
+import Logo from "@/components/global/Logo.astro";
+import Icons from "@/helpers/Icons.astro";
+import config from ".astro/config.generated.json";
+import { markdownify } from "@/lib/utils/textConverter";
+import SocialComponent from "@/components/social/Social.astro";
+import { useTranslations } from "@/lib/utils/i18nUtils";
+import { localizedLink } from "@/lib/utils/localizedLink";
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+import CustomButton from "@/components/CustomButton.astro";
+import { getEntryCTM } from "@/lib/contentParser.astro";
+
+const translate = await useTranslations(Astro.currentLocale as string);
+const currentYear = new Date().getFullYear().toString();
+
+const footer = await getEntryCTM("footer", "-index", Astro.currentLocale);
+const { title, description, image, button } = footer.data;
+---
+
+<footer class="bg-surface-base-page relative pt-16">
+  <div class="container">
+    <div
+      class="from-surface-brand-default-subtle/10 to-surface-brand-default-subtle shadow-card relative mx-auto mb-16 flex max-w-3xl flex-col gap-4 overflow-hidden rounded-2xl bg-linear-to-r/oklch px-6 py-8">
+      <h4 class="has-italic-text" set:html={markdownify(title)} />
+      <p class="text-body-lg" set:html={markdownify(description)} />
+      <CustomButton class="text-text-brand-default! mt-1" {...button} />
+      <OptimizedImage
+        {...image}
+        class="absolute right-0 -bottom-1 hidden max-w-64 md:block"
+      />
+    </div>
+  </div>
+
+  <div class="container space-y-8 px-6 md:space-y-12">
+    <div class="grid grid-cols-1 gap-y-8 md:grid-cols-2 xl:grid-cols-3">
+      <div class="space-y-8 xl:pe-20">
+        <Logo src={config.site.logo} />
+        <p set:html={markdownify(translate("footer.description"))} />
+        <SocialComponent
+          layout="minimal"
+          class="*:h-6 *:w-6"
+          linkType="follow"
+          list={social.main.filter((social) => social.enable)}
+        />
+      </div>
+
+      <div class="col-span-2 grid gap-y-10 md:grid-cols-3 xl:pl-56">
+        <div>
+          {
+            translate("footer.colTitleOne") && (
+              <h3
+                class="text-text-base-heading mb-4 text-xl md:mb-6"
+                set:html={translate("footer.colTitleOne")}
+              />
+            )
+          }
+          <ul class="flex flex-col gap-y-1.5">
+            {
+              translate("footerMenuOne")?.map(
+                (menu: { name: string; url: string }) => (
+                  <li>
+                    <a
+                      class="has-underline-anim text-text-base-label inline-block py-px"
+                      href={localizedLink(menu.url, Astro.currentLocale)}>
+                      {menu.name}
+                    </a>
+                  </li>
+                ),
+              )
+            }
+          </ul>
+        </div>
+
+        <div>
+          {
+            translate("footer.colTitleTwo") && (
+              <h3
+                class="text-text-base-heading mb-4 text-xl md:mb-6"
+                set:html={translate("footer.colTitleTwo")}
+              />
+            )
+          }
+          <ul class="flex flex-col gap-2">
+            {
+              translate("footerMenuTwo").map(
+                (menu: { name: string; url: string }) => (
+                  <li class="inline-block">
+                    <a
+                      class="has-underline-anim text-text-base-label inline-block py-px"
+                      href={localizedLink(menu.url, Astro.currentLocale)}
+                      set:html={menu.name}
+                    />
+                  </li>
+                ),
+              )
+            }
+          </ul>
+        </div>
+        <div>
+          {
+            translate("footer.colTitleThree") && (
+              <h3
+                class="text-text-base-heading mb-4 text-xl md:mb-6"
+                set:html={translate("footer.colTitleThree")}
+              />
+            )
+          }
+
+          <ul class="flex flex-col gap-3">
+            <li>
+              <span
+                class="text-text-base-description mb-1.5 inline-block text-sm/none font-medium">
+                {translate("contactInfo.emailLabel") || "Email"}:
+              </span>
+              <span class="text-base-sm block md:text-base">
+                <a
+                  class="text-text-base-description hover:text-text-brand-default-hover flex items-center gap-1 py-px"
+                  href={localizedLink(
+                    `mailto:${contact.email}`,
+                    Astro.currentLocale,
+                  )}>
+                  <!-- mail icon -->
+                  <Icons class="text-inherit" icon="EnvelopeIcon" />
+                  {contact.email}
+                </a>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap justify-between gap-x-8 gap-y-6 border-t py-8">
+      <div class="text-text-base-description">
+        <p>
+          {translate("footer.copyright").replace("{currentYear}", currentYear)}
+        </p>
+      </div>
+      <ul class="flex flex-col gap-2 md:flex-row md:items-center md:gap-8">
+        {
+          translate("footerMenu").map((menu: { name: string; url: string }) => (
+            <li class="footer-bottom-menu-item relative inline-block after:content-none md:after:content-['']">
+              <a
+                class="has-underline-anim text-text-base-description inline-block py-px"
+                href={localizedLink(menu.url, Astro.currentLocale)}
+                set:html={menu.name}
+              />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  <style>
+    .footer-bottom-menu-item:not(:last-child)::after {
+      position: absolute;
+      height: 4px;
+      width: 4px;
+      border-radius: 50%;
+      top: 50%;
+      right: -1.1rem;
+      transform: translateY(-50%);
+      background-color: var(--parsec-color-text-base-description);
+      opacity: 0.3;
+    }
+  </style>
+</footer>

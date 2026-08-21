@@ -1,0 +1,333 @@
+---
+preTitle: "Édition 2026"
+title: "Guide utilisateur"
+description: "Guide utilisateur de Parsec : installation, prise en main, administration de l'organisation, espace client et bonnes pratiques de sécurité."
+metaDescription: "Guide utilisateur de Parsec : installation, prise en main, administration de l'organisation, espace client et bonnes pratiques de sécurité."
+draft: false
+---
+
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+<OptimizedImage src="user-guide-banner.png" alt="Guide utilisateur Parsec" />
+
+<Accordion label="Introduction" expanded="false">
+
+# À qui ce guide s'adresse-il ?
+
+Parsec est une solution de sécurité robuste vous permettant de sécuriser, gérer et partager vos données de manière confidentielle et intègre, le tout dans un outil ergonomique et simple d'usage.
+
+Ce guide vous permettra de mettre pas à pas votre organisation en marche, d'inviter vos collaborateurs et de gérer l'accès à vos données.
+
+**Utilisateur·rices**
+
+Les personnes et les équipes qui utilisent Parsec au quotidien pour accéder, partager et protéger leurs données sensibles. Ce guide leur offrira une compréhension claire des fonctionnalités et des bonnes pratiques pour une utilisation sécurisée de Parsec.
+
+**Administrateur·rices de l'organisation**
+
+Les personnes chargées de la mise en œuvre d'outils, de l'invitation des collaborateurs au sein de l'organisation et du suivi de la bonne utilisation de Parsec.
+
+**Professionnel·les de la sécurité informatique tels que le DPO**
+
+Les responsables de la protection des données contre les menaces et les vulnérabilités, qui trouveront dans ce guide des informations essentielles pour l'intégration de Parsec dans leurs stratégies de sécurité.
+
+**Administrateur·rices de systèmes (RSSI, DSI…)**
+
+Les personnes gérant les infrastructures informatiques et/ou responsables de l'installation, de la configuration et de la maintenance de Parsec au sein de leur organisation.
+
+</Accordion>
+
+<Accordion label="Présentation" expanded="false">
+
+# Présentation
+
+Parsec vous permet de partager facilement vos données en toute confidentialité. Il apporte la garantie cryptographique que les données partagées ne sont ni lues ni modifiées par un tiers non autorisé.
+
+Parsec permet d'élargir considérablement les possibilités d'échanges sécurisés dans un environnement de collaboration interne et externe.
+
+#### Les plus de Parsec
+
+- Solution [certifiée par l'ANSSI](https://cyber.gouv.fr/produits-certifies/parsec-version-200) sur une cible de sécurité couvrant les fonctions de confidentialité, intégrité, historisation, non répudiation, révocation et authenticité.
+- Solution asynchrone permettant un travail en mode déconnecté (offline) ou avec une liaison réseau intermittente.
+- Le serveur de synchronisation n'a aucun accès en clair aux données sensibles.
+- Sécurité de bout en bout, avec des clés de chiffrement et de signature uniques et personnelles.
+- Support des Infrastructures de Gestion de Clés (PKI) pour l'établissement de la confiance entre utilisateurs.
+- Ergonomique et simple à utiliser.
+- [Open source](https://github.com/Scille/parsec-cloud)
+
+</Accordion>
+
+<Accordion label="Installation & mise à jour" expanded="false">
+
+# Installation & mise à jour
+
+Parsec est disponible sur desktop en client lourd (application) ou directement via le web. Vous pouvez utiliser Parsec quelque soit votre appareil.
+
+- **Application desktop** (uniquement sur macOS, Windows et Linux) : [téléchargement](/fr/download/)
+- **Application web** : [app.parsec.cloud](https://app.parsec.cloud)
+
+> **Astuce :** pensez à vérifier la configuration requise de votre système avant l'installation.
+
+### Mises à jour
+
+Nous vous conseillons de mettre à jour l'application si vous avez un message vous indiquant qu'une mise à jour est disponible.
+
+- Les mises à jour sont faites automatiquement lors du démarrage de l'application.
+- Lorsque l'application est en cours d'utilisation, un message vient s'afficher dans l'application. Il suffit de cliquer sur le message pour mettre à jour l'application.
+
+<OptimizedImage src="update_available.png" alt="Mise à jour de Parsec" />
+
+</Accordion>
+
+<Accordion label="Utilisation de Parsec" expanded="false">
+
+# Premiers pas avec Parsec
+
+## Rejoindre une organisation
+
+Une fois l'application ouverte (desktop ou web), vous allez pouvoir rejoindre l'organisation. Pour cela, deux solutions :
+
+- Cliquez directement sur le lien dans le mail: "**Rejoindre l'organisation**".
+- Copier/coller le lien commençant par **https://app.parsec.cloud…** dans le champ "Vous avez reçu un lien d'invitation".
+
+<OptimizedImage src="logged_out.en.png" alt="Page d'accueil Parsec" />
+
+## Processus d'invitation
+
+Vous allez devoir effectuer un échange de code. Celui-ci permet de garantir la confidentialité entre vous et la personne qui vous a invité. À présent, cliquez sur le code que vous fournit l'administrateur.
+
+<OptimizedImage src="code_invitation.png" alt="Fenêtre du code d'invitation" />
+
+Saisissez vos coordonnées et choisissez le mode d'authentification que vous souhaitez (celui-ci pourra être modifié à tout moment dans votre profil) :
+
+- **Mot de passe**
+- **Authentification de votre ordinateur** (solution la plus simple)
+- **Carte PKI** (si votre organisation le permet)
+- **SSO** (si votre organisation le permet)
+
+<OptimizedImage
+  src="authentications.png"
+  alt="Méthodes d'authentification Parsec"
+/>
+
+## Aperçu de l'interface
+
+<OptimizedImage
+  src="first_steps_gui_overview.en.png"
+  alt="Aperçu de l'interface Parsec"
+/>
+
+1. **Changer d'organisation** sans vous déconnecter
+2. **Accéder aux informations** (si vos droits le permettent) de l'organisation, comprenant les utilisateurs et les données globales (configuration, etc.)
+3. **Retrouver les espaces de travail partagés** (uniquement les espaces partagés avec vous). Si vous êtes invité en tant que membre externe, vous n'aurez pas la possibilité de créer de nouveaux espaces.
+4. **Consulter vos documents récents** — Lorsque vous ouvrez un document dans Parsec, il viendra automatiquement s'ajouter dans cette section.
+5. **Modifier votre profil**, y compris votre méthode d'authentification et vos appareils.
+6. **Espaces de travail et documents** — Retrouvez les espaces de travail et les documents associés en accédant à l'espace souhaité.
+
+## Partager un espace de travail
+
+- Allez sur l'écran d'accueil (vous pouvez y accéder via l'icône "maison").
+- Cliquez sur l'icône de partage ou l'icône "**•••**" puis "**Partage et rôles**".
+- Recherchez la personne à laquelle vous souhaitez partager l'espace et définissez son rôle (ses droits).
+
+<OptimizedImage
+  src="share_workspace.en.png"
+  alt="Partager un espace de travail"
+  class="mx-auto max-h-[500px] w-auto"
+/>
+
+## Se connecter avec de nouveaux appareils
+
+Sur Parsec, chaque appareil possède une authentification unique, cela signifie qu'il est unique afin de garantir une sécurité renforcée. Pour démarrer l'ajout d'un nouvel appareil, il sera nécessaire que vous ayez les deux appareils connectés à internet avec l'application ouverte.
+
+**Pour ajouter un nouvel appareil :**
+
+- Depuis votre appareil existant, allez dans votre profil (via le menu en haut à droite) puis "**Mon profil**".
+- Dans la section "Mes appareils", cliquez sur "**Ajouter**".
+- Envoyez le lien vers votre second appareil (par email, messagerie instantanée, etc.).
+- Au niveau de l'appareil invité, copiez ce lien et collez-le dans "**Rejoindre une organisation**".
+- Vous allez effectuer un échange de code entre vos appareils.
+
+<OptimizedImage src="add_devices.en.png" alt="Ajouter un appareil sur Parsec" />
+
+C'est tout bon, vous pouvez à présent vous connecter avec votre nouvel appareil !
+
+## Accéder à vos paramètres
+
+Dans le menu déroulant en haut à droite, vous trouverez "Paramètres" qui permettra de gérer la **langue**, le **thème**, etc.
+
+<OptimizedImage src="profile_settings.en.png" alt="Page des paramètres" />
+
+</Accordion>
+
+<Accordion label="Administration de l'organisation" expanded="false">
+
+# Administration de l'organisation
+
+> ⚠️ **Prérequis :**
+>
+> - Avoir souscrit à une offre via notre [page tarifs](/fr/pricing/)
+> - Être inscrit en tant que client
+
+## Gérer votre organisation
+
+Depuis la barre latérale vous allez pouvoir :
+
+- Gérer les utilisateurs de l'organisation (ajouter, supprimer, changer des profils, etc.)
+- Gérer les invitations envoyées et reçues (processus d'ajout nécessaire pour les invitations par email)
+- Voir les informations générales (membre externe autorisé, adresse de l'organisation, etc.)
+
+## Inviter un nouveau membre
+
+### Envoi de l'invitation
+
+Allez dans la partie "**Utilisateurs**" puis, dans le menu d'action, cliquez sur "**Inviter un utilisateur**".
+Vous pouvez également le faire depuis l'onglet "**Invitations & Demandes**".
+
+<OptimizedImage src="invite_user.en.png" alt="Inviter un utilisateur" />
+
+Une fois l'email saisi, l'invitation est envoyée par mail au destinataire. Vous pouvez retrouver simplement vos demandes dans l'onglet "**Invitation et demandes**": il vous informe des invitations que vous avez effectuées et en cours de validation.
+
+> **Pourquoi a-t-on besoin de valider une invitation ?**
+> Une invitation permet de créer un lien sécurisé entre vous et l'invité. Pour valider cette opération, il faut que l'application Parsec soit ouverte pour les deux personnes.
+
+### Accueillir le nouveau membre
+
+| Vous (administrateur)                                                                                    | Invité                                                        |
+| -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| Depuis l'onglet d'invitations, cliquez sur le bouton "**Accueillir**" de la ligne de la personne invitée | Dans l'email reçu, cliquez sur "**Rejoindre l'organisation**" |
+
+Vous allez devoir effectuer un échange de code. Celui-ci permet de garantir la confidentialité entre vous et la personne invitée. À présent, cliquez sur le code que vous fournit l'invité.
+
+<OptimizedImage src="code_pairing.png" alt="Échange de code" />
+
+### Choix du profil
+
+Vous allez devoir choisir le profil de la personne. Le profil définit les droits d'une personne au sein de l'organisation. Voici un récapitulatif des différents droits pour chaque profil :
+
+| Tâches                                                  | Administrateur | Membre | Externe |
+| ------------------------------------------------------- | :------------: | :----: | :-----: |
+| Créer des espaces de travail                            |       ✅       |   ✅   |   🚫    |
+| Partager des espaces de travail                         |       ✅       |   ✅   |   🚫    |
+| Collaborer dans des espaces de travail                  |       ✅       |   ✅   |   ✅    |
+| Voir les noms/emails des utilisateurs de l'organisation |       ✅       |   ✅   |   🚫    |
+| Ajouter/Supprimer des utilisateurs à l'organisation     |       ✅       |   🚫   |   🚫    |
+| Copier les droits d'un membre à un autre                |       ✅       |   ✅   |   🚫    |
+
+> **Nota :** un profil _Externe_ ne pourra pas être modifié.
+
+</Accordion>
+
+<Accordion label="Utilisation de l'espace client" expanded="false">
+
+# Utilisation de l'espace client
+
+**Personnes concernées :**
+
+- Souhaitant souscrire à une offre via notre [page tarifs](/fr/pricing/)
+- Inscrites en tant que client et administrateur de l'organisation
+
+## Souscrire à une offre
+
+> **Note :** Si vous avez déjà souscrit à une offre Parsec, vous pouvez directement passer à la partie suivante **Débuter sur l'espace client**.
+
+1. Rendez-vous sur notre [page tarifs](/fr/pricing/).
+2. Choisissez l'offre dont vous avez besoin (abonnement mensuel ou sur-mesure).
+3. Suivez le parcours d'inscription après avoir validé votre adresse mail.
+4. Une fois arrivé à la page de téléchargement, installez l'application selon votre plateforme (Windows, macOS ou Linux).
+5. Ouvrez l'application Parsec.
+6. Vous pouvez accéder simplement à l'espace client via le bouton en haut à droite.
+
+## Débuter sur l'espace client
+
+Parsec Client va vous permettre de gérer efficacement vos organisations, consulter les membres et le stockage utilisés, gérer votre mode de paiement et consulter vos factures.
+
+1. **Changer et accéder simplement à votre organisation** — vous avez également l'information sur l'état de celle-ci (active ou gelée).
+2. **Accédez aux différentes rubriques de votre espace** (résumé global, statistiques, factures, moyen de paiement et coordonnées de facturation).
+3. **Modifier vos préférences de profil** (informations personnelles et professionnelles ainsi que votre méthode d'authentification).
+4. **Contenu de la page** — retrouvez les informations concernant la rubrique choisie.
+
+<OptimizedImage
+  src="dashboard_admin.en.png"
+  alt="Tableau de bord administrateur"
+/>
+
+## Paiement
+
+### Moyens de paiement
+
+Sur Parsec, il existe deux moyens de paiement :
+
+- **Carte bancaire** → permet d'être autonome sur la création de son organisation et de pouvoir changer à tout moment de carte bancaire (sans engagement).
+- **Virement bancaire** → fonctionne sous la forme d'un contrat avec engagement sur une période de temps déterminée entre le payeur de l'organisation et notre commercial.
+
+Le moyen de paiement est déterminé selon votre choix pendant le choix de l'offre.
+
+### Stopper un abonnement
+
+**Paiement par carte bancaire**
+
+Vous pouvez arrêter un abonnement à tout moment dans la rubrique "Moyen de paiement".
+
+**Paiement par virement bancaire**
+
+Dans le cas d'une commande sur-mesure, vous êtes engagé sur un temps défini (voir le détail dans votre contrat). Vous ne pouvez donc pas arrêter un abonnement tant que la durée de celui-ci n'est pas écoulée.
+
+Un contrat n'est pas automatiquement reconduit.
+
+</Accordion>
+
+<Accordion label="Support technique" expanded="false">
+
+# Support technique
+
+Pour toute demande de support, veuillez nous contacter à l'adresse mail suivante : **[support@parsec.cloud](mailto:support@parsec.cloud)**
+
+## Rapports de bugs
+
+En cas de bug ou problème, veuillez préciser les informations suivantes :
+
+- **Version de Parsec**
+  - Affichée en haut à gauche sur l'écran d'accueil en cliquant sur le "**i**"
+  - ainsi que dans le menu du profil (haut à gauche)
+- **Plateforme** : Linux, macOS, Windows
+- **Description du problème** avec les étapes à suivre pour le reproduire
+- Toute autre information supplémentaire pour mieux comprendre le problème (message d'erreur, capture d'écran, etc.)
+
+## Propositions de fonctionnalités
+
+Une fonctionnalité vous manque dans Parsec ? Afin de mieux répondre à votre besoin, veuillez nous contacter avec les informations suivantes :
+
+- Description de votre cas d'usage et l'objectif que vous souhaitez atteindre
+- En quoi cette fonctionnalité est importante pour vous et de quelle manière vous vous en servirez
+- Avez-vous envisagé des solutions alternatives ou des contournements ?
+
+</Accordion>
+
+<Accordion label="Sécurité et Confidentialité" expanded="false">
+
+# Sécurité et Confidentialité
+
+- **Bonnes pratiques de sécurité** : recommandations pour renforcer la sécurité.
+- **Politique de confidentialité** : informations sur la collecte et l'utilisation des données par le logiciel.
+
+## Bonnes pratiques de sécurité
+
+Pour garantir la sécurité de vos données, il est recommandé de suivre ces bonnes pratiques :
+
+1. **Utiliser un mot de passe fort** : optez pour des mots de passe complexes et uniques pour chaque utilisateur et appareil.
+2. **Sauvegarder régulièrement vos clés privées** : les clés privées sont essentielles pour accéder à vos données. Il est crucial de les sauvegarder de manière sécurisée.
+3. **Enregistrer plusieurs appareils** : afin de prévenir la perte de données en cas de perte ou de vol d'un appareil, il est conseillé d'enregistrer plusieurs appareils.
+4. **Effectuer des vérifications de sécurité régulières** : vérifiez régulièrement les accès et les modifications apportées aux espaces de travail pour détecter toute activité suspecte.
+
+## Politique de confidentialité
+
+Parsec met un point d'honneur à protéger la confidentialité de vos données. Voici comment nous gérons la collecte et l'utilisation des informations :
+
+1. **Chiffrement de bout en bout** : toutes les données et métadonnées sont chiffrées côté client, ce qui signifie que seules les personnes autorisées peuvent les lire.
+2. **Collecte minimale de données** : Parsec ne collecte que les informations nécessaires à l'utilisation du service, telles que les adresses e-mail pour les invitations.
+3. **Pas de lecture des données** : Parsec, même en tant que fournisseur de services, n'a pas la capacité de lire vos données car elles sont chiffrées avant d'être envoyées aux serveurs.
+4. **Transparence et contrôle utilisateur** : les utilisateurs ont le contrôle total sur leurs données, y compris la possibilité de révoquer des accès et de gérer leurs clés de chiffrement.
+
+Pour en savoir plus, consultez notre [politique de confidentialité](/fr/privacy-policy/) complète.
+
+</Accordion>

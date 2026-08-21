@@ -1,0 +1,65 @@
+---
+import Icons from "@/helpers/Icons.astro";
+
+const {
+  label,
+  title,
+  iconLeft,
+  iconRight,
+  isTextFlipHoverEffect,
+  isMagneticTextFlipHoverEffect,
+} = Astro.props;
+
+// Applcable only if button have the text-flip hover animation
+let dataContent;
+if (isTextFlipHoverEffect || isMagneticTextFlipHoverEffect) {
+  dataContent = label;
+}
+
+// Check if the label contain "learn more" "read more" type of text that need to add support for accessibility
+let addAriaLabel = false;
+if (
+  label?.toLowerCase().includes("learn more") ||
+  label?.toLowerCase().includes("read more")
+) {
+  addAriaLabel = true;
+}
+---
+
+{
+  isTextFlipHoverEffect || isMagneticTextFlipHoverEffect ? (
+    <>
+      {iconLeft && (
+        <span
+          class="icon icon-before flex items-center justify-center"
+          aria-hidden="true">
+          <Icons class="text-inherit" icon={iconLeft} />
+        </span>
+      )}
+      <span
+        class="text-flip-inner w-full text-center"
+        set:html={label}
+        data-content={dataContent}
+      />
+      {addAriaLabel && (
+        <span class="sr-only w-full text-center" set:html={title} />
+      )}
+      {iconRight && (
+        <span
+          class="icon icon-after flex items-center justify-center"
+          aria-hidden="true">
+          <Icons class="text-inherit" icon={iconRight} />
+        </span>
+      )}
+    </>
+  ) : (
+    <>
+      {iconLeft && <Icons class="text-inherit" icon={iconLeft} />}
+      <Fragment set:html={label} />
+      {addAriaLabel && (
+        <span class="sr-only w-full text-center" set:html={title} />
+      )}
+      {iconRight && <Icons class="text-inherit" icon={iconRight} />}
+    </>
+  )
+}

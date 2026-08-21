@@ -1,0 +1,285 @@
+---
+title: "How Reqwest Streams HTTP Responses in a Browser Context"
+date: 2023-11-30
+author: "Thierry Leblond"
+categories:
+  - Technology
+draft: false
+
+excerpt: "A deep dive into how Rust's reqwest client streams response bytes on wasm32 instead of blocking, and why that matters for Parsec's SSE in the browser."
+---
+
+We are working on implementing Server-Sent Events (SSE) on all platforms supported by Parsec using `reqwest`, an HTTP client written in Rust. Among these platforms, it must support a web browser context.
+
+We wanted to know how the implementation was done for the web browser context, to see if it didn't cause any performance problems or leaks.
+
+## Versions
+
+For the study case, we will use the following versions:
+
+- [reqwest-eventsource@0.4.0](https://github.com/jpopesculian/reqwest-eventsource/tree/5f425f52a919076b3bedd6c9862f5f303369cfa7)
+- [eventsource-stream@0.2.3](https://github.com/jpopesculian/eventsource-stream/tree/3d46f1c758f9ee4681e9da0427556d24c53f9c01)
+- [reqwest@0.11.18](https://github.com/seanmonstar/reqwest/tree/00be85efd9683768f51f5bc75895fe8693914014)
+- [wasm-streams@0.2.3](https://github.com/MattiasBuelens/wasm-streams/tree/3960e8bd6836a9fb822fdb433bcd66379a732251)
+
+## Context
+
+On native platforms, the OS provides APIs to open TCP/UDP sockets. The application then uses those sockets as it sees fit — for example, adding SSL/TLS and HTTP layers to implement the HTTPS protocol, or implementing any other protocol such as BitTorrent or Tor.
+
+On the web, the browser provides much higher-level APIs, such as HTTP or WebSocket. This is really handy and makes it easy to implement web applications in the browser (which plays the role of an OS in a web context). However, depending on the API implementation details, the results may not be as efficient as a native implementation.
+
+### The slow server
+
+Let's implement a server that takes some time to respond. This should help us mimic what would happen when sending SSE responses.
+
+The following example uses Python to implement a server sending a response one byte at a time.
+
+```
+import socket
+import asyncio
+
+async def handle_client(loop: asyncio.AbstractEventLoop, client: socket.socket, _address):
+  peer_name = client.getpeername()
+  resp = (
+    b"HTTP/1.1 418 I'm a teapot\r\n"
+    b"Content-Length: 5\r\n"
+    b"Access-Control-Allow-Origin: *\r\n"
+    b"Access-Control-Expose-Headers: The-Answer-You-Are-Looking-For\r\n"
+    b"The-Answer-You-Are-Looking-For: 42\r\n"
+    b"\r\n"
+  )
+  await loop.sock_sendall(client, resp)
+  # Simulate a slow body being sent.
+  try:
+    for c in b"12345":
+      await asyncio.sleep(1)
+      print(f"Sending byte {c} to {peer_name}")
+      await loop.sock_sendall(client, c.to_bytes())
+  except (ConnectionResetError, BrokenPipeError):
+    pass
+  client.close()
+
+async def run_server(server: socket.socket):
+  loop = asyncio.get_running_loop()
+  while True:
+    client, address = await loop.sock_accept(server)
+    await asyncio.create_task(handle_client(loop, client, address))
+
+server = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
+server.bind(('localhost', 8418))
+server.listen(4)
+asyncio.run(run_server(server))
+```
+
+### The web client: a naive approach
+
+The following JavaScript example uses the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) to request a resource from the slow HTTP server.
+
+```
+async function client() {
+  console.time("Fetch request");
+  let response = await fetch("http://localhost:8418");
+  console.timeLog("Fetch request", "Received response")
+  console.assert(response.headers.get('The-Answer-You-Are-Looking-For') === '42');
+  console.timeEnd("Fetch request");
+}
+
+client().then(() => console.log("Finished"))
+```
+
+The `fetch()` would take a couple of seconds (~5s in my case, using Firefox) until receiving the full response from our slow server.
+
+> Note: that code behaves differently on `node` — the fetch itself takes ~20ms, but the script takes ~5s to exit.
+
+### The native client
+
+Instead of blocking to read the response as a whole, we would prefer reading partial data as soon as it becomes available. In Rust, we would do something like this:
+
+```
+use reqwest::{self, header::HeaderValue};
+use std::time::{Duration, Instant};
+
+#[tokio::main(flavor = "current_thread")]
+async fn main() -> anyhow::Result<()> {
+  let timer = Instant::now();
+  let response = reqwest::get("http://localhost:8418").await?;
+  assert_eq!(
+      response.headers().get("TheAnswerYouAreLookingFor"),
+      Some(&HeaderValue::from_static("42"))
+  );
+  let elapsed = timer.elapsed();
+
+  assert!(elapsed < Duration::from_secs(5));
+  println!("Request took {}ms", elapsed.as_millis());
+  Ok(())
+}
+```
+
+The `reqwest::get` call would take ~10ms.
+
+> Being able to avoid processing the complete request is useful. For instance, some [web servers can abort a request early if it is invalid](https://github.com/python-hyper/h11/blob/a2c68948accadc3876dffcf979d98002e4a4ed27/h11/_receivebuffer.py#L138-L151).
+
+This is why we don't want to rely on the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) when working with SSE on the web.
+
+The client should be able to read the data as soon as possible, without blocking for the complete HTTP response to arrive.
+
+### SSE in Parsec
+
+The Parsec server needs to send events to the client using the SSE protocol.
+
+The SSE protocol is built over HTTP and serializes events into the HTTP response. Theoretically, the HTTP response never ends, since the connection needs to be kept open in order to keep sending events.
+
+It's like a very slow HTTP response.
+
+The fact that the HTTP response never ends doesn't play nice with the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch), which would wait for the end of it.
+
+Fortunately, on the web we can use the [SSE API](https://developer.mozilla.org/docs/Web/API/Server-sent_events/Using_server-sent_events).
+
+In Parsec, SSE is implemented using `reqwest-eventsource`, which relies on `reqwest` for the actual HTTP. Here is the method that handles the HTTP response from `reqwest`, at [reqwest-eventsource/src/event_source.rs:145-150](https://github.com/jpopesculian/reqwest-eventsource/blob/6d43085d31ad6936f7cd6b311e3f491fb576d711/src/event_source.rs#L145-L150):
+
+```
+fn handle_response(&mut self, res: Response) {
+    self.last_retry.take();
+    let mut stream = res.bytes_stream().eventsource();
+    stream.set_last_event_id(self.last_event_id.clone());
+    self.cur_stream.replace(Box::pin(stream));
+}
+```
+
+The important line here is:
+
+```
+let mut stream = res.bytes_stream().eventsource();
+```
+
+Where `res` is a [`reqwest::Response`](https://docs.rs/reqwest/0.11.18/reqwest/struct.Response.html). The [`.eventsource()`](https://docs.rs/eventsource-stream/0.2.3/eventsource_stream/trait.Eventsource.html#tymethod.eventsource) method is provided by the trait [`eventsource-stream::Eventsource`](https://docs.rs/eventsource-stream/0.2.3/eventsource_stream/trait.Eventsource.html); it consumes the stream returned by [`.bytes_stream()`](https://docs.rs/reqwest/0.11.18/reqwest/struct.Response.html#method.bytes_stream). `.bytes_stream()` consumes the response and returns a stream that yields bytes.
+
+## So, what's under the hood?
+
+The goal is to understand how `reqwest` implements [`Response::bytes_stream`](https://docs.rs/reqwest/0.11.18/reqwest/struct.Response.html#method.bytes_stream) for the target `wasm32-unknown-unknown`.
+
+## Reverse engineering
+
+### Reqwest
+
+`reqwest` has a `stream` feature that enables [`Response::bytes_stream`](https://docs.rs/reqwest/0.11.18/reqwest/struct.Response.html#method.bytes_stream) in `Cargo.toml`:
+
+```
+[package]
+name = "reqwest"
+version = "0.11.18" # remember to update html_root_url
+description = "higher level HTTP client library"
+
+# ...
+
+[features]
+# ...
+
+stream = ["tokio/fs", "tokio-util", "wasm-streams"]
+
+# ...
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+js-sys = "0.3.45"
+serde_json = "1.0"
+wasm-bindgen = "0.2.68"
+wasm-bindgen-futures = "0.4.18"
+wasm-streams = { version = "0.2", optional = true }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies.web-sys]
+version = "0.3.25"
+features = [
+    "AbortController",
+    "AbortSignal",
+    "Headers",
+    "Request",
+    "RequestInit",
+    "RequestMode",
+    "Response",
+    "Window",
+    "FormData",
+    "Blob",
+    "BlobPropertyBag",
+    "ServiceWorkerGlobalScope",
+    "RequestCredentials",
+    "File",
+    "ReadableStream"
+]
+
+# ...
+```
+
+When the `stream` feature is enabled, the `wasm-streams` dependency is added. This dependency is used only once in the `reqwest` codebase, at [reqwest/src/wasm/response.rs:135-157](https://github.com/seanmonstar/reqwest/blob/00be85efd9683768f51f5bc75895fe8693914014/src/wasm/response.rs#L135-L157). Those lines correspond to the implementation of [`Response::bytes_stream`](https://docs.rs/reqwest/0.11.18/reqwest/struct.Response.html#method.bytes_stream) 😄
+
+```
+impl Response {
+    /// Convert the response into a `Stream` of `Bytes` from the body.
+    #[cfg(feature = "stream")]
+    pub fn bytes_stream(self) -> impl futures_core::Stream<Item = crate::Result<Bytes>> {
+        let web_response = self.http.into_body();
+        let abort = self._abort;
+        let body = web_response
+            .body()
+            .expect("could not create wasm byte stream");
+        let body = wasm_streams::ReadableStream::from_raw(body.unchecked_into());
+        Box::pin(body.into_stream().map(move |buf_js| {
+            // Keep the abort guard alive as long as this stream is.
+            let _abort = &abort;
+            let buffer = Uint8Array::new(
+                &buf_js
+                    .map_err(crate::error::wasm)
+                    .map_err(crate::error::decode)?,
+            );
+            let mut bytes = vec![0; buffer.length() as usize];
+            buffer.copy_to(&mut bytes);
+            Ok(bytes.into())
+        }))
+    }
+}
+```
+
+Let's try to understand what this code is doing:
+
+1. `self.http.into_body()` returns `web_sys::Response`, as per the definition of `body` at [reqwest/src/wasm/response.rs:19-26](https://github.com/seanmonstar/reqwest/blob/00be85efd9683768f51f5bc75895fe8693914014/src/wasm/response.rs#L19-L26):
+
+   ```
+   /// A Response to a submitted `Request`.
+   pub struct Response {
+     http: http::Response<web_sys::Response>,
+     _abort: AbortGuard,
+     // Boxed to save space (11 words to 1 word), and it's not accessed
+     // frequently internally.
+     url: Box<Url>,
+   }
+   ```
+
+   `http::Response` is a wrapper around the inner type `web_sys::Response`. `into_body` returns the inner `web_sys::Response`.
+
+2. `body.unchecked_into()` converts the `web_sys::Response` into a `wasm_streams::readable::sys::ReadableStream`.
+3. `wasm_streams::ReadableStream::from_raw()` consumes the `sys::ReadableStream`.
+4. Finally, it converts the `ReadableStream` into a `Stream`.
+
+### Wasm-streams
+
+`wasm-streams` is a crate whose main goal is to communicate with the browser's stream API:
+
+> Working with the Web [Streams API](https://developer.mozilla.org/docs/Web/API/Streams_API) in Rust.
+>
+> This crate provides wrappers around `ReadableStream`, `WritableStream` and `TransformStream`. It also supports converting to and from `Stream`s and `Sink`s from the `futures` crate.
+>
+> — [wasm-streams/src/lib.rs:1-6](https://github.com/MattiasBuelens/wasm-streams/blob/3960e8bd6836a9fb822fdb433bcd66379a732251/src/lib.rs#L1-L6)
+
+We're interested in two elements provided by that crate:
+
+1. [`wasm_streams::readable::sys::ReadableStream`](https://docs.rs/wasm-streams/0.2.3/wasm_streams/readable/sys/struct.ReadableStream.html), a wrapper around the [`ReadableStream` browser API](https://developer.mozilla.org/docs/Web/API/ReadableStream)
+2. [`wasm_streams::readable::ReadableStream`](https://docs.rs/wasm-streams/0.2.3/wasm_streams/readable/struct.ReadableStream.html), a struct that allows converting a JS/Rust stream into a Rust/JS stream. In the case of `reqwest`, it's used to convert from a JS stream to a Rust stream.
+
+## Conclusion
+
+The `reqwest` implementation of `bytes_stream` for WebAssembly relies on the browser's [Streams API](https://developer.mozilla.org/docs/Web/API/Streams_API). This should allow implementing SSE in Parsec with an efficient use of resources, avoiding leaks outside the browser's internal implementation.
+
+> Article written by:
+>
+> - Florian Bennetot
+> - Marcos Medrano
+> - Emmanuel Leblond

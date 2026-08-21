@@ -1,0 +1,64 @@
+---
+import { markdownify } from "@/lib/utils/textConverter";
+
+const { title, preTitle, description, overlapShape } = Astro.props;
+---
+
+<section
+  class:list={[
+    "relative z-10 mt-0 py-14 md:pt-32 md:pb-16",
+    Astro.props.class,
+  ]}>
+  <div class="container">
+    <div
+      class:list={[
+        "mx-auto flex max-w-6xl flex-wrap justify-between gap-5 self-center md:gap-6",
+        description ? "flex-col justify-center" : "",
+      ]}>
+      <div>
+        {
+          preTitle && (
+            <span
+              class:list={[
+                "text-text-base-description text-body-xl mb-4 inline-block w-full rounded-full font-medium",
+                description ? "text-left" : "text-center",
+              ]}
+              set:html={markdownify(preTitle)}
+            />
+          )
+        }
+        {
+          title && (
+            <h1
+              class:list={[
+                "has-italic-text text-h2-sm md:text-h2",
+                description
+                  ? "max-w-lg"
+                  : "max-w-2xl justify-center text-center",
+              ]}
+              set:html={markdownify(title)}
+            />
+          )
+        }
+      </div>
+      {
+        description && (
+          <p
+            class="text-text-base-body text-lg md:max-w-xl"
+            set:html={markdownify(description)}
+          />
+        )
+      }
+    </div>
+  </div>
+  {
+    Astro.props.hasBgShape && (
+      <div
+        class:list={[
+          "bg-theme-light pointer-events-none absolute left-0 -z-10 h-250 w-full",
+          overlapShape ? "-bottom-full" : "bottom-0",
+        ]}
+      />
+    )
+  }
+</section>

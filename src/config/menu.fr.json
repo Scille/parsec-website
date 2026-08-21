@@ -1,0 +1,88 @@
+{
+  "main": [
+    {
+      "enable": true,
+      "name": "Accueil",
+      "weight": 1,
+      "url": "/"
+    },
+    {
+      "enable": true,
+      "name": "Nos solutions",
+      "weight": 2,
+      "url": "/features/"
+    },
+    {
+      "enable": true,
+      "name": "Tarifs",
+      "weight": 3,
+      "url": "/pricing/"
+    },
+    {
+      "enable": true,
+      "name": "Blog",
+      "weight": 4,
+      "url": "/blog/"
+    },
+    {
+      "enable": true,
+      "name": "Nous contacter",
+      "weight": 5,
+      "url": "/contact/"
+    }
+  ],
+  "footerMenu": [
+    {
+      "enable": true,
+      "name": "Conditions d'utilisation",
+      "url": "/terms-conditions/",
+      "weight": 1
+    },
+    {
+      "enable": true,
+      "name": "Politique de confidentialité",
+      "url": "/privacy-policy/",
+      "weight": 2
+    },
+    {
+      "enable": true,
+      "name": "Mentions légales",
+      "url": "/legal-notice/",
+      "weight": 3
+    }
+  ],
+  "footerMenuOne": [
+    {
+      "enable": true,
+      "name": "À propos",
+      "url": "/about-us/",
+      "weight": 1
+    },
+    {
+      "enable": true,
+      "name": "Blog",
+      "url": "/blog/",
+      "weight": 2
+    },
+    {
+      "enable": true,
+      "name": "Nos partenaires",
+      "url": "/partners/",
+      "weight": 3
+    }
+  ],
+  "footerMenuTwo": [
+    {
+      "enable": true,
+      "name": "Documentation",
+      "url": "https://docs.parsec.cloud/fr/",
+      "weight": 1
+    },
+    {
+      "enable": true,
+      "name": "Guide utilisateur",
+      "url": "/user-guide/",
+      "weight": 2
+    }
+  ]
+}

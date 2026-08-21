@@ -1,0 +1,68 @@
+---
+import type { NavigationLink } from "@/types";
+import NavDropdownMenu from "@/layouts/components/global/header/DropdownMenu.astro";
+import { localizedLink } from "@/lib/utils/localizedLink";
+
+const menu = Astro.props.menu as NavigationLink;
+const { pathname } = Astro.url;
+const href = localizedLink(menu.url || Astro.url.origin, Astro.currentLocale);
+---
+
+{
+  (menu.hasChildren || menu.hasMegaMenu) && menu.name ? (
+    <NavDropdownMenu menu={menu} />
+  ) : (
+    menu.name && (
+      <li class="nav-item">
+        <a
+          {...{
+            // Set `rel` attribute for external links or use provided value
+            rel: menu.url?.startsWith("http")
+              ? menu.rel || "noopener noreferrer"
+              : menu.rel || undefined,
+
+            // Set `target` to "_blank" for external links unless otherwise specified
+            target: menu.url?.startsWith("http")
+              ? menu.target || "_blank"
+              : menu.target || undefined,
+          }}
+          target={menu.url?.startsWith("http") ? "_blank" : undefined}
+          href={href}
+          class:list={[
+            "nav-link text-text-base-label hover:text-text-brand-default outline-border-brand-default/20 font-medium hover:shadow-sm active:outline-1",
+            {
+              "nav-link-active text-text-brand-default":
+                pathname === `${href}/` || pathname === href,
+            },
+          ]}>
+          {menu.badge && menu.badge.enable ? (
+            menu.badge.type === "dot" ? (
+              <span class="relative inline-block">
+                {menu.name}
+                <sup
+                  class:list={[
+                    "badge badge-dot",
+                    menu.badge.color && `badge-${menu.badge.color}`,
+                  ]}
+                />
+              </span>
+            ) : (
+              <>
+                {menu.name}
+                <span
+                  class:list={[
+                    "badge",
+                    menu.badge.color && `badge-${menu.badge.color}`,
+                  ]}>
+                  {menu.badge.label}
+                </span>
+              </>
+            )
+          ) : (
+            menu.name
+          )}
+        </a>
+      </li>
+    )
+  )
+}

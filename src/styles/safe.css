@@ -1,0 +1,103 @@
+@import "./buttons.css";
+@import "./utilities.css";
+
+/* ----------------------------
+   Form Styling
+----------------------------- */
+form {
+  @apply prose-a:text-text-brand-default prose-a:underline prose-a:underline-offset-2;
+}
+
+/* Selected state style for Preline select component */
+.hs-select
+  select:not(.hs-select-active):not(#os-parsec-client)
+  + button
+  span[data-title] {
+  @apply text-text-base-placeholder;
+}
+
+/* ----------------------------
+   Input Field Styles
+----------------------------- */
+.form-input,
+.hs-select input.form-input,
+.hs-select button.form-input {
+  @apply border-border-base-default text-text-base-label placeholder:text-text-base-placeholder text-label-lg bg-surface-base-default h-fit w-full rounded-lg border px-4 py-3 outline-0;
+  @apply **:data-title:text-text-base-heading;
+}
+
+/* Focus styles for input types */
+[type="text"]:focus,
+input:where(:not([type])):focus,
+[type="email"]:focus,
+[type="url"]:focus,
+[type="password"]:focus,
+[type="number"]:focus,
+[type="date"]:focus,
+[type="datetime-local"]:focus,
+[type="month"]:focus,
+[type="search"]:focus,
+[type="tel"]:focus,
+[type="time"]:focus,
+[type="week"]:focus,
+[multiple]:focus,
+textarea:focus,
+select:focus,
+.hs-select button.form-input:focus {
+  @apply border-border-brand-default hover:border-border-brand-default shadow-brand ring-0!;
+}
+
+/* Label Styling */
+.form-label {
+  @apply text-text-base-label text-label-lg block leading-5 font-medium;
+}
+
+/* ----------------------------
+   Checkbox and Radio Styling
+----------------------------- */
+.form-check-wrapper {
+  @apply space-y-2;
+}
+
+.form-check {
+  @apply flex gap-3;
+}
+
+.form-check-label {
+  @apply text-label-md cursor-pointer leading-relaxed font-medium select-none;
+}
+
+/* Specific sizes */
+.form-checkbox {
+  @apply mt-0.5 h-4 w-4 rounded-sm; /* typical checkbox size */
+}
+
+.form-radio {
+  @apply mt-0.5 h-4 w-4 rounded-full; /* typical radio size */
+}
+
+/* ----------------------------
+   Dropdown Base Styles
+----------------------------- */
+[data-hs-select-dropdown] {
+  @apply rounded-xl border p-1;
+}
+
+/* Dropdown Option Item Styles */
+[data-hs-select-dropdown] > div[data-value] + span {
+  @apply text-text-base-label text-sm;
+}
+
+/* Dropdown 'Not Found' Message */
+[data-hs-select-dropdown] > span {
+  @apply text-base-sm block px-3 py-2.5 opacity-80 md:text-base;
+}
+
+/* Dropdown Icons */
+.dropdown-icon {
+  @apply text-icon-neutral-default;
+}
+
+.dropdown-selected-icon {
+  @apply text-icon-brand-default;
+}

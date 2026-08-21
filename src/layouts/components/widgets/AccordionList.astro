@@ -1,0 +1,116 @@
+---
+import Icons from "@/helpers/Icons.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+
+interface Props {
+  changelogContent?: boolean;
+  content: any[];
+  class?: string;
+  bgColor?: string;
+  [key: string]: any;
+}
+
+const {
+  content: list,
+  bgColor = "white",
+  changelogContent,
+  ...rest
+} = Astro.props;
+---
+
+<div {...rest}>
+  <div class="hs-accordion-group space-y-5">
+    {
+      list.map((item, index) => {
+        const uniqueId = rest.tabIndex
+          ? rest.tabIndex + "-" + (index + 1)
+          : index + 1;
+
+        return (
+          <div
+            class:list={[
+              "hs-accordion rounded-lg px-5",
+              item.active && "active",
+              bgColor === "light" ? "bg-surface-base-default" : "bg-white",
+            ]}
+            id={"faq-" + uniqueId}>
+            <button
+              aria-expanded={item.active ? "true" : "false"}
+              class="hs-accordion-toggle text-h5-sm md:text-h5 text-text-base-heading flex w-full items-center justify-between py-5 font-semibold"
+              aria-controls={"faq-content-" + uniqueId}>
+              <span class="w-full text-left" set:html={item.title} />
+              <span
+                class:list={[
+                  "hs-accordion-active:rotate-180 rounded-sm p-1 transition duration-300",
+                  bgColor === "light"
+                    ? "hs-accordion-active:bg-white"
+                    : "hs-accordion-active:bg-theme-light",
+                ]}>
+                <Icons
+                  icon="PlusIcon"
+                  class="hs-accordion-active:hidden text-xl"
+                />
+                <Icons
+                  icon="MinusIcon"
+                  class="hs-accordion-active:block hidden text-xl"
+                />
+              </span>
+            </button>
+            <div
+              role="region"
+              id={"faq-content-" + uniqueId}
+              aria-labelledby={"faq-" + uniqueId}
+              class:list={[
+                "hs-accordion-content overflow-hidden transition-[height] duration-300",
+                !item.active && "hidden",
+              ]}>
+              {changelogContent ? (
+                <div class="space-y-4 pb-5 *:space-y-4">
+                  {item.list.map((item: any) => (
+                    <div>
+                      <div class="bg-surface-base-default inline-flex items-center gap-2 rounded-full px-2 py-1.5 text-xs">
+                        <div
+                          class={`changelog-badge h-3 w-3 rounded-full changelog-badge-${item.color}`}
+                        />
+                        {markdownify(item.label)}
+                      </div>
+                      <div set:html={markdownify(item.content)} />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div
+                  class="text-text-base-body text-body-lg pb-5 md:max-w-4xl"
+                  set:html={markdownify(item.content, true)}
+                />
+              )}
+            </div>
+          </div>
+        );
+      })
+    }
+  </div>
+  <script>
+    // Recalculate AOS Elements positions after accordion is opened
+    // @ts-nocheck
+    import AOS from "aos";
+    import { HSAccordion } from "preline";
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const accordions = document.querySelectorAll(".hs-accordion");
+
+      accordions?.forEach((accordion) => {
+        setTimeout(() => {
+          const { element } = HSAccordion.getInstance(
+            `#${accordion.getAttribute("id")}`,
+            true,
+          );
+
+          element.on("open", () => {
+            AOS.refresh();
+          });
+        }, 1000);
+      });
+    });
+  </script>
+</div>

@@ -1,0 +1,119 @@
+---
+/**
+ * Example Usage
+
+  // Default button (anchor tag)
+  <CustomButton label="Visit Home" url="/" />
+
+  // Outline variant linking externally
+  <CustomButton variant="outline" label="Astro Docs" url="https://astro.build" />
+
+  // Text variant with hover effect
+  <CustomButton variant="link" hoverEffect="text-flip" label="Learn More" url="/learn" />
+
+  // Button tag for form actions
+  <CustomButton tag="button" label="Submit" onClick={() => alert('Submitted!')} />
+
+  // Creative hover effect with fill variant
+  <CustomButton hoverEffect="creative-fill" label="Explore" url="/explore" />
+
+  // Magnetic text flip with outline variant
+  <CustomButton hoverEffect="magnetic-text-flip" variant="outline" label="Join Now" url="/join" />
+ */
+
+import { localizedLink } from "@/lib/utils/localizedLink";
+import CustomButtonContent from "./CustomButtonContent.astro";
+import type { sharedButton, sharedButtonTag } from "@/sections.schema";
+import type { z } from "astro/zod";
+
+type Props = z.infer<typeof sharedButton | typeof sharedButtonTag>;
+
+const {
+  enable = true,
+  tag = "a",
+  title,
+  label,
+  iconLeft,
+  iconRight,
+  url = "#",
+  rel,
+  target,
+  hoverEffect = "text-flip",
+  variant = "fill",
+  color = "primary",
+  class: className,
+  ...rest
+} = Astro.props;
+
+if (!enable) return;
+
+const isCreativeHoverEffect = hoverEffect === "creative-fill";
+const isTextFlipHoverEffect = hoverEffect === "text-flip";
+const isMagneticHoverEffect = hoverEffect === "magnetic";
+const isMagneticTextFlipHoverEffect = hoverEffect === "magnetic-text-flip";
+
+const resolvedRel = url.startsWith("http")
+  ? rel || "noopener noreferrer"
+  : rel || undefined;
+const resolvedTarget = url.startsWith("http")
+  ? target || "_blank"
+  : target || undefined;
+
+const buttonClasses = [
+  "flex items-center gap-4 w-fit h-fit shrink-0",
+  {
+    "creative-hover-anim": isCreativeHoverEffect,
+    btn: variant === "fill" || variant === "outline",
+    "btn-outline": variant === "outline",
+    "btn-fill": variant === "fill",
+    "btn-link": variant === "link",
+    "btn-primary": color === "primary",
+    "btn-neutral": color === "neutral",
+    "btn-white": color === "white",
+    "has-icon-moving-animation": iconRight || iconLeft,
+  },
+
+  (isTextFlipHoverEffect || isMagneticTextFlipHoverEffect) &&
+    "text-flip-hover-anim",
+  (isMagneticHoverEffect || isMagneticTextFlipHoverEffect) &&
+    "magnetic-hover-anim",
+  className,
+];
+---
+
+{
+  tag === "a" ? (
+    <a
+      rel={resolvedRel}
+      target={resolvedTarget}
+      class:list={buttonClasses}
+      href={localizedLink(url, Astro.currentLocale)}
+      {...rest}>
+      <CustomButtonContent
+        {...{
+          label,
+          title,
+          iconRight,
+          iconLeft,
+          isCreativeHoverEffect,
+          isTextFlipHoverEffect,
+          isMagneticTextFlipHoverEffect,
+        }}
+      />
+    </a>
+  ) : (
+    <button class:list={buttonClasses} {...rest}>
+      <CustomButtonContent
+        {...{
+          label,
+          title,
+          iconRight,
+          iconLeft,
+          isCreativeHoverEffect,
+          isTextFlipHoverEffect,
+          isMagneticTextFlipHoverEffect,
+        }}
+      />
+    </button>
+  )
+}

@@ -1,0 +1,89 @@
+---
+title: "Optimize Rust CI Build and Test Speed with GitHub Actions"
+image: "ci-cd-pipeline-icon.png"
+date: 2024-02-09
+author: "Thierry Leblond"
+categories:
+  - Technology
+draft: false
+
+excerpt: "Discover how we sped up our Rust CI with GitHub Actions: parallel jobs, artifact caching, tuned cargo profiles, and cargo-nextest for faster test runs."
+---
+
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+<OptimizedImage src="ci-cd-pipeline-icon.png" alt="" />
+
+Last year, we migrated our CI to [GitHub Actions](https://github.com/features/actions) after previously using [Azure Pipelines](https://azure.microsoft.com/products/devops/pipelines). We took advantage of the migration to improve our CI. This article will summarize the different steps we have taken to enhance our CI when working with Rust.
+
+## Parallelize run
+
+With our previous CI on [Azure Pipelines](https://azure.microsoft.com/products/devops/pipelines), we ran the same job on different platforms (Windows/Linux/macOS). The job involved running tests and validating code style for both the Python and Rust codebases. With the migration, we split the monolithic job into multiple smaller jobs:
+
+- One job for testing the Python code on all platforms.
+- Another job for testing the Rust code.
+- A job to verify the quality and style of anything other than Python and Rust.
+
+Having multiple jobs allows for parallel execution.
+
+> Instead of testing the Python code and then the Rust code sequentially, we can now test both of them simultaneously, saving time on the feedback loop for developers.
+
+## Simplify the CI jobs even further
+
+With the migration and the split of our monolithic job into multiple smaller jobs, we also took advantage of the [myriad of GitHub Actions](https://github.com/marketplace?type=actions) available to factorize common steps. Common steps could include:
+
+- Installing a specific Python version.
+- Downloading cache artifacts and then uploading them once the job is finished.
+- Running pre-commit.
+- Uploading artifacts.
+
+## Caching build artifacts
+
+On the default GitHub runner, compiling the Rust artifacts takes some time (~5 min / 40 sec without/with caching). Since not all artifacts are modified with each pull request, it makes sense to cache them to reduce the amount of code that needs to be compiled. Fortunately, [GitHub provides a cache](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#about-caching-workflow-dependencies) that we can use to store our build artifacts, but we need to be careful as GitHub only offers [10 GB of cache](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#usage-limits-and-eviction-policy). We use the ready-made action [Swatinem/rust-cache](https://github.com/Swatinem/rust-cache) to cache the Rust artifacts. This action smartly caches only the third-party dependencies that don't change outside of updates. Since cache entries on GitHub are shared from the main branch to the children branches (i.e., a branch originating from the main branch can use the cache entries of the main branch), we choose to save the entries only on the main branch. All of this is done to save the maximum amount of data on the limited GitHub cache, allowing for an increased number of branches that can use the cache without GitHub invalidating it.
+
+> When you use more cache than available, GitHub starts removing old entries until it returns within the 10 GB limit.
+
+## Optimize CI build
+
+In addition to caching the Rust artifacts, we also configured the [cargo compilation profile](https://doc.rust-lang.org/cargo/reference/profiles.html). We created two new profiles used in our CI and modified the default `dev` profile. For the `dev` profile, we modified the level of optimization for our third-party dependencies to:
+
+```
+[profile.dev.package."*"]
+opt-level = 1
+```
+
+> This allows us to run the tests faster at the cost of increased compilation time, but it's a good trade-off since the Rust artifacts are cached.
+
+In addition to modifying the `dev` profile, we have created two new profiles that inherit from `dev`:
+
+```
+[profile.ci-rust]
+inherits = "dev"
+debug = false
+incremental = false
+
+[profile.ci-python]
+inherits = "ci-rust"
+opt-level = 1
+```
+
+The first profile `ci-rust` is used by the CI part that runs/builds/tests the Rust code. It disables the `debug` and `incremental` settings:
+
+- With `debug` disabled, no debug info is generated (like on a `release` build). We chose to disable them since it reduces the size of the generated artifacts (and the amount of generated data per se), resulting in reduced cache usage. In case of a test failure on the CI, we don't have a precise traceback, but we consider it is always simpler to debug it on the development machine.
+- We toggle off the `incremental` settings since we don't cache the artifacts for our internal crates (a crate in Rust is a compilation unit — a library or a binary). This simplifies compilation and reduces the artifact size.
+
+The second profile `ci-python` is almost identical to `ci-rust` except that it has a slightly optimized build for our Rust artifacts (`opt-level = 1`) as they have an impact on the Python tests' speed.
+
+## Verify code format and lint
+
+As part of our development process, we use [`rustfmt`](https://github.com/rust-lang/rustfmt) and [`cargo-clippy`](https://github.com/rust-lang/rust-clippy) to apply code style and improvements through the [`pre-commit`](https://pre-commit.com/) configuration we have created for the project. However, since `cargo-clippy` requires compilation artifacts, we have decided to execute these steps inside the CI part dedicated to Rust. This allows us to cache those artifacts and also prevents running unnecessary steps (if we don't modify Rust code, we don't need to run those steps). We have chosen to use `cargo-clippy` through `pre-commit` because currently we cannot easily configure `clippy` for the entire workspace. This limitation will be addressed when [cargo#12115](https://github.com/rust-lang/cargo/issues/12115) is implemented, possibly in the [`rust-1.75`](https://releases.rs/docs/1.75.0/) release.
+
+## Run test
+
+We use [`cargo-nextest`](https://nexte.st/) instead of `cargo-test` to run our tests because:
+
+- It provides a nicer output than the default `cargo-test` (similar to [`jest`](https://jestjs.io/) or [`pytest --verbose`](https://docs.pytest.org/en/7.1.x/how-to/output.html)).
+- It can be configured to abort tests that take too long to finish.
+- It allows us to retry flaky tests (a flaky test is a test that is unstable, meaning it might fail first but succeed on a retry).
+
+However, it's important to note that `nextest` has a specific execution model where [each test runs in a dedicated process](https://nexte.st/book/how-it-works.html). This means that shared memory between these tests is not possible.

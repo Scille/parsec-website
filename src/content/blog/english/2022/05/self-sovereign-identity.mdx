@@ -1,0 +1,206 @@
+---
+title: "Self-Sovereign Identity Explained: A New Trust Model"
+image: "gestion-identite-one-identity-balabit.jpg"
+date: 2022-05-30
+author: "Thierry Leblond"
+categories:
+  - Technology
+draft: false
+
+excerpt: "Self-sovereign identity gives individuals control over their own digital identity data. Discover how SSI works and how eIDAS supports it in Europe."
+---
+
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+(Self-Sovereign Identity - SSI)
+
+## What is identity?
+
+An identity is unique to each individual and evolves with him or her throughout life. Identity is guaranteed by a trusted third party, usually the State, and comprises a set of data that identify an individual: first name, surname, date of birth, physical characteristics, parentage, etc. Other attributes can complete this identification, such as marital status, fingerprints or occupation.
+
+In legal terms, identity is the set of elements which, under the law, contribute to the identification of a physical person (in society, with regard to civil status): surname, first name, date of birth, filiation, etc. The identity of a person is defined by the law.
+
+## What is digital identity? 1
+
+Digital identity extends this definition by adding digital attributes such as login credentials (email address, password) and IP address. More generally, digital identity represents all the attributes and data that identify an individual, organization or company online.
+
+Our digital identity is therefore not a single thing, but rather the sum total of all the attributes that exist about us in the digital domain - a constantly growing and evolving collection of data points. This data is generally under the control of entities external to the individual to whom it relates.
+
+Digital identity is therefore a technological link between a real entity, which can be a person, an object or an organization, and virtual entities, which are digital representations.
+
+It enables an entity to be identified online, and to connect with virtual communities on the Web. Digital identity is both :
+
+- constructed by the real entity or "Subject",
+- and influenced by the latter's relationship to the context of digital interaction.
+
+<OptimizedImage src="issuer-holder-verifier-trust-triangle.png" alt="" />
+
+Trust over IP" foundation diagram (V1-2020-05-05) [\[2\]](https://trustoverip.org/wp-content/uploads/2020/05/toip_introduction_050520.pdf)
+
+Digital identity is based on a three-level trust structure known as the "triangle of trust":
+
+- the Issuer
+- the Holder
+- the Verifier
+
+## The European eIDAS digital identity framework
+
+#### [3]
+
+Electronic IDentification Authentication and trust Services (eIDAS) is an EU regulation on electronic identification and trust services. eIDAS oversees electronic identification and trust services for electronic transactions within the European Union.
+
+It regulates the electronic signature, electronic transactions, to provide a secure medium for online transactions such as electronic funds transfer or transactions with utilities. Both signatory and recipient have access to a higher level of comfort and security. Instead of relying on traditional methods such as mail, facsimile (fax), or delivering paper documents in person, they can now carry out transactions remotely - even across international borders.
+
+It provides an interoperability framework for all EU member states for electronic identification and transactions, enabling the development of a single market for digital trust.
+
+The eIDAS regulation provides for three levels of guarantee for electronic means of identification, which are granted on the basis of compliance with minimum specifications, standards and procedures:
+
+- the low security level, which simply reduces the risk of misuse or identity alteration
+- a substantial level of security, substantially reducing the risk of misuse or alteration of identity
+- high level of security, to prevent misuse or alteration of identity
+
+## Centralized or federated digital identity?
+
+#### [4]
+
+Most digital identity management services are centralized. They are based on the creation of one user account per individual for access to an offer, a service or, more generally, a platform. In this format, the individual has as many digital identities as he or she has profiles (each person has, on average, 150 Internet accounts).
+
+The term "centralized" does not mean that there is a single, central source of digital identities, but rather that digital identities are almost always provided by a third-party authority (often a private company) for a specific purpose. Identity information is "centralized" within this entity.
+
+With the upsurge in security breaches in recent years, federated systems have emerged, such as the FranceConnect service. With a single digital identity, you can access services on different sites. So it's common to use your Google account to create an account on an e-commerce site, or to use your Facebook account to access the Netflix service... An approach that's much more practical, but still comes up against the need to create several accounts with several providers, as there isn't one identity provider that works with all sites.
+
+Both systems are unsatisfactory:
+
+- Centralized systems require you to create an account for each service, which is time-consuming and can lead to the use of a single password, a source of vulnerability.
+- Federated systems offer a low level of security, as a data leak at one identity provider compromises all accesses linked to that provider. In addition, personal data can be exploited without any possible control.
+
+## What is self-sovereign or decentralized identity?
+
+#### [5]
+
+Self-Sovereign Identity (SSI) or "decentralized digital identity" is a mechanism enabling users to directly manage their own digital identity. It is an emerging concept, which can (but need not) be based on blockchain technologies applied to identity management in the digital world. User-centric, it aims to give users total control over their own identity, without depending on any centralized authority.
+
+**Self-sovereign identity is an approach to digital identity that gives individuals control over their digital identity.**
+
+Instead of manually creating and managing accounts (centralized identity) or trusting identity providers (federated identity), decentralized identity places the individual - the holder of his or her identity attributes - at the center of each of his or her digital interactions with an issuer - the author of the documents justifying a person's identity attributes - and a verifier - the entity wishing to verify the user's identity for access to its services/products. This tripartite relationship - also known as the triangle of trust - offers an unprecedented level of security and control.
+
+<OptimizedImage src="self-sovereign-identity-comparison-table.png" alt="" />
+
+ISS aims to establish trust in a digital interaction. In order to be trusted, one party in an interaction will present credentials to other parties, and these user parties can verify that the credentials come from an issuer they trust. In this way, the verifier's trust in the issuer is transferred to the credential holder.
+
+For an identity system to be autonomous, users must control the verifiable credentials they hold, and their consent is required to use these credentials. This reduces the inadvertent sharing of users' personal data. This paradigm is therefore totally different from that of centralized identity provided by an external entity.
+
+In an IMS system, holders generate and control unique identifiers called decentralized identifiers. Most IMS systems are decentralized, and credentials are managed using cryptographic wallets and verified using public-key cryptography anchored on a distributed ledger. Credentials may contain data from an issuer's database, a social network account, a transaction history on an e-commerce site, or attestation from friends or colleagues.
+
+## eIDAS and self-sovereign identity
+
+### Introduction
+
+As the blockchain community in Europe has begun to work on the implementation of self-sovereign identity, some groups have expressed doubts and concerns about the alignment of this concept with the European legal framework, in particular the RGPD and the eIDAS regulation.[\[6\]](https://www.eublockchainforum.eu/sites/default/files/report_identity_v0.9.4.pdf)
+
+A working group of the eIDAS Observatory[\[7\]](https://ec.europa.eu/futurium/en/eidas-observatory/ssi-and-eidas-vision-how-they-are-connected-share-your-views.html) produced on May 20, 2019 an initial discussion paper on the feasibility of Self-Sovereign Identity in a European standardization context.[\[8\]](https://ec.europa.eu/futurium/en/system/files/ged/eidas_supported_ssi_may_2019_0.pdf) This paragraph summarizes the main conclusions.
+
+### "Self-Sovereign Identity (SSI) and eIDAS: one vision
+
+The way digital identity works is posing increasingly persistent problems. From the user's point of view, the experience is fragmented, with few interoperability standards and little security, as evidenced by hacks and data breaches.
+
+The original cause of these malfunctions appears increasingly intrinsic, as linked to the "centralized" nature of the current digital identity framework. (9)
+
+Yet current technological advances, particularly in cryptology and blockchain, mean that we can imagine new identity frameworks based on the concept of decentralized identities, including a subset known as self-sovereign identity (SSI).
+
+Our digital identity is not a single thing, but the sum total of all the attributes that exist about us in the digital domain, a constantly evolving set of data points. This data is under the control of entities external to the individual to whom it relates.
+
+The decentralized identity paradigm places the user at the center of the framework, eliminating the need for third parties. In this world, the user "creates" his or her own identity, usually a Decentralized Identifiers or "DID", and then associates identity information with this identifier.
+
+By combining verifiable references from recognized authorities, such as governments, users can create digital equivalents of physical-world references such as national identity cards and driving licenses.
+
+- _Users thus control **their self-sovereign identities (SSI)**, i.e. not only their identity but also the data associated with it. They are free to use any identity data they wish, whether it's verifiable credentials, data from a social media account, transaction history on an e-commerce site, or attestations from their own trusted third parties. The sky's the limit._
+
+This ability to collect and use identity means they can exercise much greater control than they do today over the personal information they share, depending on the context of the exchanges.
+
+The framework for implementing decentralized identity appears complex at first glance. It requires :
+
+- mechanisms enabling individuals to create their own identities, often referred to as decentralized identifiers (DIDs),
+- means of storing personal data, for example in personal data enclaves.
+- digital "wallets" or other user agents to enable people to manage and use their identities.
+
+### Decentralized Identifiers (DIDs)
+
+### [10]
+
+Decentralized identifiers (DIDs) are a new type of identifier that enable a verifiable, decentralized digital identity. A DID refers to any subject (e.g., a person, organization, thing, data model, abstract entity, etc.) as determined by the DID controller. Unlike traditional federated identifiers, DIDs are designed to be decoupled from centralized registries, identity providers and certification authorities. Specifically, the controller of a DID can prove its control without needing permission from any other party.
+
+### Decentralized digital identity on a European scale?
+
+The EUid regulation proposal tabled by the European Commission in June 2021 goes in the same direction as this decentralized identity project already well underway just about everywhere in the world. The aim is to offer all citizens and businesses access to a national digital identity that can be recognized throughout the European Union. In other words, the aim is to provide every citizen with a free digital wallet, enabling them to identify themselves in the same way on major online platforms, wherever they are in the European Union. The eIDAS version 2 regulation enables all technological players to appropriate decentralized identity to create a solution that ensures the security and control of individuals' personal data.
+
+### The blockchain approach
+
+Blockchain, while not indispensable for decentralized identity, can be a solution for dealing with the decentralized identification framework. It can, for example:
+
+- handle the creation and registration of DIDs or authentication and supporting documents,
+- provide a decentralized infrastructure for access control and consent to data use,
+- and possibly link receipts to smart contracts to trigger automatic payments, for example.
+
+As fully digital ledgers, blockchains are by definition electronic documents within the meaning of eIDAS. This means that blockchains, or more precisely the data, including smart contracts, they contain, cannot be denied legal force, at least not solely because of their electronic nature.
+
+<OptimizedImage src="blockchain-public-utility.png" alt="" />
+
+Trust over IP" foundation diagram (V1-2020-05-05) [\[11\]](https://trustoverip.org/wp-content/uploads/2020/05/toip_introduction_050520.pdf)
+
+Blockchains could also be useful for time-stamping in an eIDAS-compliant way, and blockchain-based transactions must be able to be considered digitally signed at the right signature level under eIDAS.
+
+### Decentralized identity is above all a matter of political choice
+
+The question is above all a political one: what's the point in our European democratic societies of encouraging the development of a decentralized identity?
+
+To answer this question, we need :
+
+- clarify outstanding regulatory issues, in particular around the status of blockchain-based signatures and time stamps under eIDAS.
+- help kick-start the decentralized digital identity framework by training government agencies and encouraging them to get involved in its implementation, for example as issuers of verifiable identification information.
+- That the EU continues the work it has started on decentralized identity and ISS, for example through work on the European Blockchain Services Infrastructure.
+
+## A mixed identity use case: Parsec
+
+[PARSEC](https://parsec.cloud/en/) is a cyber protection software dedicated to "zero trust" and "anti-ransomware" sharing of sensitive data on the Cloud. PARSEC is an open source cryptographic software for decentralized end-to-end trust distribution, zero trust and anti-ransomware, [certified by the ANSSI (CSPN)](https://www.ssi.gouv.fr/entreprise/certification_cspn/parsec-version-2-0-0/) and developed in partnership with the DGA (French Ministry of the Armed Forces).
+
+This system is currently being deployed in the French administration (government ministries) and for other private-sector customers, for cloud-based sharing of sensitive files.
+
+As this is an end-to-end (E2E) security system for the protection of sensitive data, the question of user identity is central, as it determines trust.
+
+PARSEC reconciles two orthogonal and complementary choices:
+
+- cases where an identity is provided by a centralized "Key Management Infrastructure" (KMI) or "Public Key Infrastructure" (PKI), guaranteeing the identity of the individual. The advantage is that you can rely on a trusted directory without having to repeat the enrolment procedure for each member of the trusted organization.
+- In other cases, identity can be "self-declared", enabling the enrolment of a user who, for example, is anonymous, or in any case does not belong to the PKI's trust infrastructure, but whose identity is occasionally attested by the Organization's Administrator. The advantage here is to enable trusted exchanges between users inside the PKI directory, but also outside the directory, such as subcontractors working on confidential plans.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+Co-written by :
+
+[Thierry Leblond](https://www.linkedin.com/search/results/all/?keywords=thierry%20leblond&origin=RICH_QUERY_SUGGESTION&position=0&searchId=558cb6b8-1aa1-465a-8c08-7172114196d3&sid=aS0), CEO Scille/Parsec
+
+[Najah Naffah](https://www.linkedin.com/in/najah-naffah-427121/), President of Quantum Blockchain
+
+---
+
+[\[1\]](#_ftnref1) [https://fr.wikipedia.org/wiki/IdentitC3A9_numC3A9rique](https://fr.wikipedia.org/wiki/Identit%C3%A9_num%C3%A9rique)
+
+[\[2\]](#_ftnref2) [https://trustoverip.org/wp-content/uploads/2020/05/toip_introduction_050520.pdf](https://trustoverip.org/wp-content/uploads/2020/05/toip_introduction_050520.pdf)
+
+[\[3\]](#_ftnref3) [https://fr.wikipedia.org/wiki/Electronic_identification_and_trust_services](https://fr.wikipedia.org/wiki/Electronic_identification_and_trust_services)
+
+[\[4\]](#_ftnref4) [https://www.archipels.io/post/quest-ce-que-lidentite-numerique](https://www.archipels.io/post/quest-ce-que-lidentite-numerique)
+
+[\[5\]](#_ftnref5) [https://en.wikipedia.org/wiki/Self-sovereign_identity](https://en.wikipedia.org/wiki/Self-sovereign_identity)
+
+[\[6\]](#_ftnref6) [https://www.eublockchainforum.eu/sites/default/files/report_identity_v0.9.4.pdf](https://www.eublockchainforum.eu/sites/default/files/report_identity_v0.9.4.pdf)
+
+[\[7\]](#_ftnref7) [https://ec.europa.eu/futurium/en/eidas-observatory/ssi-and-eidas-vision-how-they-are-connected-share-your-views.html](https://ec.europa.eu/futurium/en/eidas-observatory/ssi-and-eidas-vision-how-they-are-connected-share-your-views.html)
+
+[\[8\]](#_ftnref8) [https://ec.europa.eu/futurium/en/system/files/ged/eidas_supported_ssi_may_2019_0.pdf](https://ec.europa.eu/futurium/en/system/files/ged/eidas_supported_ssi_may_2019_0.pdf)
+
+[\[9\]](#_ftnref9) The term "centralized" does not mean that there is a single, central source of digital identities, but rather that digital identities are almost always provided by a third-party authority (often a private company) for a specific purpose. Identity information is "centralized" within this entity.
+
+[\[10\]](#_ftnref10) [https://www.w3.org./TR/did-core/](https://www.w3.org./TR/did-core/)
+
+[\[11\]](#_ftnref11) [https://trustoverip.org/wp-content/uploads/2020/05/toip_introduction_050520.pdf](https://trustoverip.org/wp-content/uploads/2020/05/toip_introduction_050520.pdf)

@@ -1,0 +1,39 @@
+---
+title: "PARSEC Key Transfer Cryptography for Sharing Sensitive Data"
+image: "parsec-healthcare-data-protection-poster.png"
+date: 2023-03-21
+author: "Thierry Leblond"
+categories:
+  - Technology
+draft: false
+
+excerpt: "Scille's PARSEC uses key transfer cryptography to secure healthcare data sharing via the cloud, blending Zero Trust and Zero Knowledge. Learn how it works."
+---
+
+**Well-known in the public sector and in a number of government ministries, Scille has now entered the healthcare sector with its PARSEC solution for securing sensitive data, using the cloud as a sharing hub. Thierry Leblond, CEO and co-founder of Scille, explains.**
+
+As early as 2015, the Young Innovative Company (JEI), created in 2014, developed in less than 8 months the one-stop-shop system enabling the processing of asylum seekers' files, and then until today of all foreigners in France, from all prefectures and migrant reception centers.
+
+**A new approach to safety**
+
+It was in 2016 that Scille took a major step forward, offering the French armed forces an innovative data-sharing technology that allows data to be controlled by local keys hosted on the terminal. "Our technology is a bit of a contradiction, since it meets both the desire to control data as close to the user as possible using crypto methods from the terminal, and yet still allow them to be shared with authorized people," said Thierry Leblond. PARSEC is a highly complex, disruptive technology that took 5 years to develop, before it was awarded CSPN certification by ANSSI and achieved its first commercial successes. The idea behind PARSEC, the name of Scille's cryptographic partitioning and sharing software, is to move security as far away from the central server as possible, to the user and device level. "These Zero Trust/Zero Knowledge data security technologies have nothing to do with traditional web servers," added the CEO.
+
+**Zero Trust/Zero Knowledge**
+
+Zero Trust (ZT) is a security approach in which no user, device or service is automatically trusted, even if they are within the protected network zone. " _This means that all access requests are authenticated and authorized before being granted, regardless of the user's location or prior knowledge. This principle is often used to reinforce the security of corporate networks and cloud systems._ "explained Scille's CEO. Zero Knowledge (ZK), meanwhile, is a data privacy approach that protects sensitive information while keeping it accessible to authorized users. " _This means that data is encrypted in such a way that only the owner can decrypt it, even if it is stored or transited by a third party_," he added.
+
+**Building a trusted organization**
+
+All the intelligence involved in reading the data is located locally on the terminal, with the server playing the very minimal role of a metadata server, itself encrypted, whose role is to route encrypted packets to users who request them. All packets are systematically checked by the software on the terminal via the local crypto signature. " _With such a mechanism, the server handles very little data, and the difficulty with this type of technology lies in the ability to develop local embedded software, which asynchronously handles all the crypto and sharing functions_ ," explained Leblond.
+
+In practice, PARSEC takes the form of a browser in which each tab corresponds to a trusted organization, i.e. a group of people previously enrolled by a trust mechanism involving shared secrets. " _It is the administrator who builds the organization and enrolls individuals through token exchange mechanisms. Each user will be able to share his or her safe data with a subset of this trusted organization. Security is reinforced by a revocation mechanism accessible to both the administrator and the owner of each crypto enclave._ "added Thierry Leblond. Functionally, the approach is similar to that of Dropbox, except that here, only people who share data can access it. " _PARSEC can be installed on physical servers in a data center, or deployed directly on a SecNumCloud Outscale Cloud, certified as an HDS healthcare data hosting facility. You could even deploy a PARSEC Cloud service dedicated to the hospital sector in just 1 day._ "said the CEO. PARSEC, which has been ANSSI-certified since April 2021, is currently being deployed in this environment on behalf of four government ministries under the project management of the Direction Interministérielle du Numérique (DINUM).
+
+Exchanging ultra-confidential files Parsec was chosen in 2022 by the Négrepelisse hospital for multi-site sharing of ultra-confidential files, enabling teams to save several days in transferring and processing patient files.
+
+On a different note, Nantes University Hospital recently reported on the implementation of a security patch on the Internet bastion, which led to 630 security incidents linked to the sharing of confidential healthcare documents on Dropbox. This is typically the type of sharing where PARSEC provides a turnkey solution to the question of "by design" security in the storage and sharing of confidential healthcare data, by guaranteeing, through cryptographic partitioning mechanisms, that the data is only accessible to those who "need to know", and by excluding all third parties, including the hosting provider, from the zone of trust. Mr. Leblond also cites the case of a government agency looking for a multi-OS workstation encryption solution for 20,000 employees. "Apart from Parsec, there is no global or industrialized solution that enables data to be managed cryptographically with a global admin; securing workstations is often the result of local, personal initiatives by administrators, with BitLocker and Active Directory," says Leblond.
+
+Among the solution's other advantages, the CEO cites the simplicity of the key transfer mechanism, the price, the openness of the code, and a forthcoming evolution towards a complete zero trust & zero knowledge collaborative ecosystem: desktop publishing, messaging, indexing.
+
+Finally, PARSEC was proposed to the Centrale d'Achat de l'Informatique Hospitalière to join the ELODI market. The solution is up and running in less than a day.
+
+To discover the magazine **_HOSPITAL TECHNOLOGIES & INNOVATIONS_** : \***\*[https://magtih.com/tih-45-2/](https://magtih.com/tih-45-2/)\*\***

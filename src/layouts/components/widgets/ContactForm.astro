@@ -1,0 +1,348 @@
+---
+import { markdownify, toLowerCase } from "@/lib/utils/textConverter";
+import CustomButton from "@/components/CustomButton.astro";
+import Icons from "@/layouts/helpers/Icons.astro";
+import type { z } from "astro/zod";
+import type { sectionsSchema, inputFieldSchema } from "@/sections.schema";
+import { getPrelineSelectConfig } from "@/lib/utils/preline";
+import config from ".astro/config.generated.json";
+import { useTranslations } from "@/lib/utils/i18nUtils";
+
+interface Props {
+  form: z.infer<typeof sectionsSchema.contactForm>;
+  class?: string;
+}
+
+const {
+  settings: { contactFormAction, contactFormProvider },
+} = config;
+
+const translate = await useTranslations(Astro.currentLocale as string);
+
+// Generate ID from label (Required for Input Radio and Checkbox)
+const genIdFromLabel = (label: string) => toLowerCase(label).replace(" ", "-");
+
+// Combine same group radio to show them together without space
+const combineRadio = (list: z.infer<typeof inputFieldSchema>[]) => {
+  const groupMap: Record<
+    string,
+    {
+      index: number;
+      groupLabel?: string;
+      items: z.infer<typeof inputFieldSchema>[];
+    }
+  > = {};
+  const result: any[] = [...list];
+
+  list.forEach((item, index) => {
+    if (item.group) {
+      // Track the group items, their first position, and groupLabel
+      if (!groupMap[item.group]) {
+        groupMap[item.group] = {
+          index,
+          groupLabel: item.groupLabel || "", // Capture groupLabel from the first occurrence
+          items: [],
+        };
+      }
+      groupMap[item.group].items.push(item);
+    }
+  });
+
+  // Replace first occurrence of group with combined object and remove others
+  Object.entries(groupMap).forEach(
+    ([groupName, { index, groupLabel, items }]) => {
+      // Replace the first occurrence with the combined group object
+      result[index] = { group: groupName, groupLabel, items };
+
+      // Remove other occurrences from the result array
+      for (let i = result.length - 1; i > index; i--) {
+        if (result[i].group === groupName) {
+          result.splice(i, 1);
+        }
+      }
+    },
+  );
+
+  return result;
+};
+
+let { form } = Astro.props;
+form = {
+  ...form,
+  inputs: combineRadio(form.inputs),
+};
+
+const successNote = form.inputs.find(
+  (input: z.infer<typeof inputFieldSchema>) => input.note === "success",
+);
+
+const noteStyles = {
+  info: "border-border-information-default-subtle bg-surface-information-default-subtle",
+  warning:
+    "border-border-warning-default-subtle bg-surface-warning-default-subtle",
+  success:
+    "border-border-success-default-subtle bg-surface-success-default-subtle",
+  deprecated:
+    "border-border-neutral-default-subtle bg-surface-neutral-default-subtle",
+  hint: "border-border-extra-purple-default-subtle bg-surface-extra-purple-default-subtle",
+};
+---
+
+<form
+  id="contact-form"
+  {...{
+    "data-action": contactFormAction,
+    "data-provider": contactFormProvider,
+  }}
+  method="post"
+  class:list={[
+    "bg-surface-base-default-secondary shadow-card h-fit rounded-xl",
+    Astro.props.class,
+  ]}>
+  <div
+    id="form-container"
+    class="grid grid-cols-1 gap-x-4 gap-y-6 px-6 py-8 md:grid-cols-2 md:p-10">
+    {
+      form.emailSubject && (
+        <input type="hidden" name={"_subject"} value={form.emailSubject} />
+      )
+    }
+
+    <input type="hidden" name="_template" value="table" />
+
+    {
+      form.autoResponse && (
+        <input type="hidden" name="_autoresponse" value={form.autoResponse} />
+      )
+    }
+
+    {
+      form.inputs.map((input) => (
+        <div
+          input-wrapper
+          class:list={[
+            "flex flex-col gap-2",
+            input.halfWidth ? "max-md:col-span-2" : "col-span-2",
+            input.parentClass,
+          ]}>
+          {!input.note &&
+            input.type !== "checkbox" &&
+            input.type !== "radio" &&
+            (input.groupLabel || input.label) && (
+              <label for={input.id || input.name} class="form-label">
+                {input.groupLabel || input.label || "Please set label"}
+                {input.required && (
+                  <span class="text-text-error-default">*</span>
+                )}
+              </label>
+            )}
+          {input.dropdown ? (
+            <div id="validation-target">
+              <select
+                id={input.id || input.name}
+                data-name={input.name || input.label || "Please set name value"}
+                data-hs-select={JSON.stringify(
+                  getPrelineSelectConfig({
+                    placeholder: input.placeholder || "Please set placeholder",
+                    searchPlaceholder: input.dropdown?.search?.placeholder,
+                    hasSearch: input.dropdown?.type === "search",
+                    notFoundText: translate("common.contactDropdownSearch404"),
+                  }),
+                )}
+                class="hidden">
+                <option value="">Choose</option>
+                {input.dropdown?.items?.map((option) => (
+                  <option
+                    {...(option.selected && { selected: true })}
+                    value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              <p class="hs-error:block text-text-error-default mt-2 hidden text-sm">
+                {translate("common.contactDropdownInvalid")}
+              </p>
+            </div>
+          ) : input.tag === "textarea" ? (
+            <textarea
+              id={input.id || input.name}
+              rows={input.rows || "4"}
+              name={input.name || input.label || "Please set name value"}
+              placeholder={input.placeholder || "Please set placeholder"}
+              class="form-input"
+              {...(input.required && { required: true })}
+              set:html={input.defaultValue || ""}
+            />
+          ) : input.items ? (
+            <div class="form-check-wrapper">
+              {input.items?.map((input) => (
+                <div class="form-check">
+                  <input
+                    {...{
+                      value:
+                        typeof input.value === "boolean"
+                          ? String(input.value)
+                          : input.value || input.label,
+                      checked: input.checked ? true : undefined,
+                    }}
+                    type={input.type}
+                    name={
+                      input.name || input.groupLabel || "Please set name value"
+                    }
+                    id={input.id || genIdFromLabel(input.label || "example-id")}
+                    class:list={[
+                      input.type === "radio" ? "form-radio" : "form-checkbox",
+                    ]}
+                    {...(input.required && { required: true })}
+                  />
+                  <label
+                    for={
+                      input.id || genIdFromLabel(input.label || "example-id")
+                    }
+                    class="form-check-label text-text-base-label font-medium"
+                    set:html={markdownify(input.label) || "Example Label"}
+                  />
+                </div>
+              ))}
+            </div>
+          ) : input.type === "checkbox" || input.type === "radio" ? (
+            <div class="form-check">
+              <input
+                {...{
+                  value:
+                    typeof input.value === "boolean"
+                      ? String(input.value)
+                      : input.value || input.label,
+                  checked: input.checked ? true : undefined,
+                }}
+                type={input.type || "text"}
+                name={input.name || "Please set name value"}
+                id={input.id || genIdFromLabel(input.label || "example-id")}
+                placeholder={input.placeholder || "Please set placeholder"}
+                class:list={[
+                  input.type === "radio" ? "form-radio" : "form-checkbox",
+                ]}
+                {...(input.required && { required: true })}
+              />
+              <label
+                for={input.id || genIdFromLabel(input.label || "example-id")}
+                class="form-check-label"
+                set:html={
+                  (input.label && markdownify(input.label)) ||
+                  input.label ||
+                  "Example Label"
+                }
+              />
+            </div>
+          ) : input.note ? (
+            <div
+              {...{ "data-default": input.content }}
+              class:list={[
+                "form-content text-text-base-body text-body-lg flex items-start gap-2 rounded-xl border px-4 py-3",
+                noteStyles[input.note] || "border-gray-200 bg-gray-50/25",
+              ]}>
+              {input.note === "success" && (
+                <Icons
+                  icon="CheckCircleIcon"
+                  class="text-icon-success-default mt-0.5 shrink-0 text-lg"
+                />
+              )}
+              <div set:html={markdownify(input.content || "", true)} />
+            </div>
+          ) : (
+            <input
+              {...(input.defaultValue && {
+                value: input.defaultValue,
+              })}
+              type={input.type || "text"}
+              name={input.name || input.label || "Please set name value"}
+              id={input.id || input.name}
+              placeholder={input.placeholder || "Please set placeholder"}
+              class="form-input"
+              {...(input.required && { required: true })}
+            />
+          )}
+        </div>
+      ))
+    }
+
+    <div
+      id="form-error-message"
+      class="border-border-error-default-subtle bg-surface-error-default-subtle text-text-base-body text-body-lg col-span-2 hidden items-start gap-2 rounded-xl border px-4 py-3">
+      <Icons
+        icon="ExclamationCircleIcon"
+        class="text-icon-error-default mt-0.5 shrink-0 text-lg"
+      />
+      <div id="form-error-message-text"></div>
+    </div>
+
+    {
+      form.submitButton && (
+        <div class="col-span-1 mt-4 flex w-full flex-col">
+          <CustomButton
+            tag="button"
+            type="submit"
+            class="w-full md:w-fit"
+            hoverEffect="text-flip"
+            {...form.submitButton}
+          />
+        </div>
+      )
+    }
+  </div>
+  {
+    successNote && (
+      <div
+        id="thank-you-message"
+        class="hidden flex-col items-center gap-2 p-8 text-center md:p-10">
+        <Icons
+          class="text-icon-brand-default text-3xl"
+          icon="CheckCircleIcon"
+        />
+        <h4 class="text-text-base-heading">
+          {translate("common.contactThankYou")}
+        </h4>
+        <p
+          class="text-body-xl text-text-base-body"
+          set:html={markdownify(successNote.content || "")}
+        />
+      </div>
+    )
+  }
+</form>
+
+<script>
+  import { initContactForm } from "@/lib/utils/FormHandle";
+
+  initContactForm();
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById(
+      "contact-form",
+    ) as HTMLFormElement | null;
+
+    form?.addEventListener("contactform:result", (e: Event) => {
+      const { success, message } = (e as CustomEvent).detail;
+      const formContainer = document.querySelector("#form-container");
+      const thankYouMessage = document.getElementById("thank-you-message");
+      const errorMessage = document.getElementById("form-error-message");
+      const errorMessageText = document.getElementById(
+        "form-error-message-text",
+      );
+
+      if (success) {
+        errorMessage?.classList.add("hidden");
+        errorMessage?.classList.remove("flex");
+        formContainer?.classList.add("hidden");
+        thankYouMessage?.classList.remove("hidden");
+        thankYouMessage?.classList.add("flex");
+      } else {
+        if (errorMessageText) {
+          errorMessageText.textContent = message || "";
+        }
+        errorMessage?.classList.remove("hidden");
+        errorMessage?.classList.add("flex");
+      }
+    });
+  });
+</script>

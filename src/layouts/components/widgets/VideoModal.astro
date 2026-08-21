@@ -1,0 +1,176 @@
+---
+// src/layouts/components/widgets/VideoModal.astro
+import Icons from "@/helpers/Icons.astro";
+import type { VideoConfig } from "@/types";
+import { useTranslations } from "@/lib/utils/i18nUtils";
+import { resolveVideoSrc } from "@/lib/utils/resolveVideoSrc";
+
+interface Props {
+  video: VideoConfig;
+}
+
+const { video } = Astro.props;
+const translate = await useTranslations(Astro.currentLocale as string);
+let { src, provider = "youtube", poster, autoplay = true, type, id } = video;
+
+const {
+  src: resolvedSrc,
+  isLocalHostedVideo,
+  embedSrc,
+} = resolveVideoSrc(src, provider, autoplay);
+src = resolvedSrc ?? src;
+---
+
+{
+  src && (
+    <dialog
+      id={id}
+      class="video-modal m-auto w-[min(100%-2rem,72rem)] max-w-4xl rounded-2xl border-0 bg-transparent p-3 text-left shadow-2xl backdrop:bg-black/80"
+      data-video-modal
+      aria-label={translate("aria.playVideo")}>
+      <div class="pointer-events-auto flex flex-col">
+        <button
+          type="button"
+          aria-label={translate("aria.closeModal")}
+          data-video-modal-close
+          class="bg-surface-base-default mb-2 ml-auto flex h-10 w-10 items-center justify-center rounded-full ring-0 ring-white/50 duration-300 hover:rotate-90 hover:ring-4">
+          <span class="sr-only">{translate("aria.closeModal")}</span>
+          <Icons icon="XMarkIcon" class="text-text-default/80 h-6 w-6" />
+        </button>
+
+        {isLocalHostedVideo ? (
+          <video
+            class="video-player bg-surface-elevated-default aspect-video w-full rounded-2xl"
+            playsinline
+            controls
+            preload="none"
+            poster={poster || undefined}
+            data-video-player
+            data-autoplay={autoplay === true ? "true" : "false"}>
+            <source src={src} type={type} />
+          </video>
+        ) : (
+          <div class="bg-surface-elevated-default aspect-video w-full overflow-hidden rounded-2xl">
+            <iframe
+              class="hidden size-full"
+              title={translate("aria.playVideo")}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              data-video-embed
+              data-provider={provider}
+              data-src={embedSrc}
+              src="about:blank"
+            />
+          </div>
+        )}
+      </div>
+    </dialog>
+  )
+}
+
+<script>
+  declare global {
+    interface Window {
+      tarteaucitron?: {
+        state?: Record<string, boolean>;
+        userInterface?: { openPanel: () => void };
+      };
+    }
+  }
+
+  function cleanupModal(dialog: HTMLDialogElement): void {
+    const iframe =
+      dialog.querySelector<HTMLIFrameElement>("[data-video-embed]");
+    if (iframe) {
+      iframe.src = "about:blank";
+      iframe.classList.add("hidden");
+    }
+
+    const video = dialog.querySelector<HTMLVideoElement>("[data-video-player]");
+    if (video) {
+      video.pause();
+    }
+  }
+
+  function needsConsent(iframe: HTMLIFrameElement): boolean {
+    if (iframe.dataset.provider !== "dailymotion") return false;
+    return window.tarteaucitron?.state?.dailymotion !== true;
+  }
+
+  function openModal(dialog: HTMLDialogElement): void {
+    const iframe =
+      dialog.querySelector<HTMLIFrameElement>("[data-video-embed]");
+    const requiresConsent = iframe ? needsConsent(iframe) : false;
+
+    if (requiresConsent) {
+      window.tarteaucitron?.userInterface?.openPanel();
+    } else if (iframe && iframe.dataset.src) {
+      iframe.src = iframe.dataset.src;
+      iframe.classList.remove("hidden");
+    }
+
+    const video = dialog.querySelector<HTMLVideoElement>("[data-video-player]");
+    if (!requiresConsent && video?.dataset.autoplay === "true") {
+      void video.play().catch(() => {});
+    }
+
+    // Always open the dialog, even when consent is pending, so the click
+    // never silently no-ops (e.g. tarteaucitron blocked by an ad blocker).
+    if (!dialog.open) {
+      dialog.showModal();
+    }
+  }
+
+  function closeModal(dialog: HTMLDialogElement): void {
+    cleanupModal(dialog);
+    if (dialog.open) {
+      dialog.close();
+    }
+  }
+
+  function resolveDialog(trigger: Element | null): HTMLDialogElement | null {
+    const selector = trigger?.getAttribute("data-hs-overlay");
+    if (!selector?.startsWith("#")) return null;
+
+    const target = document.querySelector(selector);
+    return target instanceof HTMLDialogElement &&
+      target.hasAttribute("data-video-modal")
+      ? target
+      : null;
+  }
+
+  document.addEventListener("click", (event) => {
+    const target = event.target as Element | null;
+    const closeButton = target?.closest("[data-video-modal-close]");
+
+    if (closeButton) {
+      const dialog = closeButton.closest("dialog[data-video-modal]");
+      if (dialog instanceof HTMLDialogElement) {
+        event.preventDefault();
+        closeModal(dialog);
+      }
+      return;
+    }
+
+    const trigger = target ? target.closest("[data-hs-overlay]") : null;
+    const dialog = resolveDialog(trigger);
+    if (dialog) {
+      event.preventDefault();
+      openModal(dialog);
+    }
+  });
+
+  document
+    .querySelectorAll<HTMLDialogElement>("dialog[data-video-modal]")
+    .forEach((dialog) => {
+      dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) {
+          closeModal(dialog);
+        }
+      });
+
+      dialog.addEventListener("close", () => {
+        cleanupModal(dialog);
+      });
+    });
+</script>

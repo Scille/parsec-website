@@ -1,0 +1,14 @@
+---
+import HeroIcon from "./HeroIcon.vue";
+import type { HeroIconName } from "./heroIconNames";
+
+interface Props {
+  icon: HeroIconName;
+  class?: string;
+  [key: string]: any;
+}
+
+const { icon, ...restProps } = Astro.props;
+---
+
+<HeroIcon icon={icon} {...restProps} />

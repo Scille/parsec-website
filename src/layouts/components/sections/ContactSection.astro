@@ -1,0 +1,239 @@
+---
+import type { Section } from "@/types";
+import { contact } from "@/config/contact.json";
+import ContactForm from "@/components/widgets/ContactForm.astro";
+import CustomButton from "@/components/CustomButton.astro";
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import overrideObjects from "@/lib/utils/overrideObjects.ts";
+import type { sectionsSchema } from "@/sections.schema";
+import type { z } from "astro/zod";
+import Icons from "@/helpers/Icons.astro";
+
+type ContactSection = Section & z.infer<typeof sectionsSchema.contactSection>;
+
+type Props = {
+  content?: ContactSection;
+};
+
+let defaultContent = (
+  await getEntryCTM("sections", "contact-section", Astro.currentLocale)
+)?.data as ContactSection;
+
+let actualContent = overrideObjects(
+  { ...defaultContent },
+  Astro.props.content,
+) as ContactSection;
+
+let {
+  enable = true,
+  title,
+  description,
+  contactInfo,
+  form,
+  needs,
+} = actualContent;
+
+if (!enable) return null;
+
+const needColorClasses = {
+  brand: {
+    bg: "bg-surface-brand-default-subtle",
+    icon: "text-icon-brand-default",
+  },
+  "extra-purple": {
+    bg: "bg-surface-extra-purple-default-subtle",
+    icon: "text-icon-extra-purple-default",
+  },
+  "extra-orange": {
+    bg: "bg-surface-extra-orange-default-subtle",
+    icon: "text-icon-extra-orange-default",
+  },
+} as const;
+
+const contactInfoByIcon: Record<string, { label: string; link?: string }> = {
+  EnvelopeIcon: { label: contact.email, link: `mailto:${contact.email}` },
+  PhoneIcon: {
+    label: contact.phone,
+    link: `tel:${contact.phone.replace(/\s+/g, "")}`,
+  },
+  MapPinIcon: { label: contact.location },
+};
+---
+
+<section class="relative max-lg:pt-12">
+  <div class="container">
+    <div class="flex flex-col gap-10 lg:flex-row">
+      <div class="flex flex-col lg:sticky lg:top-32 lg:max-w-xl">
+        <div class="mb-6 flex flex-col lg:mb-10">
+          {
+            title && (
+              <h2
+                class="has-italic-text text-text-base-heading flex flex-col"
+                set:html={markdownify(title)}
+              />
+            )
+          }
+          {
+            description && (
+              <div
+                class="text-text-base-body text-body-xl mt-6 flex flex-col gap-6"
+                set:html={markdownify(description, true)}
+              />
+            )
+          }
+        </div>
+        <div class="mt-auto hidden lg:block">
+          <div
+            class="border-border-base-default bg-surface-base-page flex w-full flex-col gap-6 border-t p-6 lg:max-w-80">
+            <>
+              {
+                contactInfo && (
+                  <>
+                    <div class="mb-2 flex items-center gap-2">
+                      <p
+                        class="text-text-base-description/80 text-sm font-semibold uppercase"
+                        set:html={markdownify(contactInfo.title)}
+                      />
+                    </div>
+                    <div class="flex gap-6 lg:flex-col">
+                      {contactInfo.list.map((item) => {
+                        const info = item.icon
+                          ? contactInfoByIcon[item.icon]
+                          : undefined;
+
+                        return (
+                          <div class="flex w-full flex-col items-center gap-3.5 lg:flex-row lg:items-start">
+                            {item.icon && (
+                              <Icons
+                                class="bg-surface-base-default text-icon-brand-default shrink-0 p-0.5 text-2xl"
+                                icon={item.icon as any}
+                              />
+                            )}
+                            {info &&
+                              (info.link ? (
+                                <a
+                                  href={info.link}
+                                  class="text-text-base-label text-body-xl hover:text-text-brand-default font-medium"
+                                  set:html={info.label}
+                                />
+                              ) : (
+                                <p
+                                  class="text-text-base-label text-body-xl font-medium"
+                                  set:html={info.label}
+                                />
+                              ))}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </>
+                )
+              }
+            </>
+          </div>
+        </div>
+      </div>
+      {form && <ContactForm class="w-full max-w-full" form={form} />}
+    </div>
+
+    <div class="mt-16 lg:hidden">
+      <div class="flex w-full flex-col gap-6 lg:max-w-80">
+        <p
+          class="text-text-base-description/80 mx-auto text-sm font-semibold uppercase"
+          set:html={markdownify(contactInfo.title)}
+        />
+        <div class="flex flex-col gap-6 md:flex-row lg:flex-col">
+          <>
+            {
+              contactInfo &&
+                contactInfo.list.map((item) => {
+                  const info = item.icon
+                    ? contactInfoByIcon[item.icon]
+                    : undefined;
+
+                  const cardContent = (
+                    <>
+                      {item.icon && (
+                        <Icons
+                          class="text-icon-brand-default text-2xl"
+                          icon={item.icon as any}
+                        />
+                      )}
+                      {info && (
+                        <p
+                          class="text-text-base-label text-body-xl text-center font-medium"
+                          set:html={info.label}
+                        />
+                      )}
+                    </>
+                  );
+
+                  return info?.link ? (
+                    <a
+                      href={info.link}
+                      class="hover:bg-surface-base-page-secondary flex w-full flex-col items-center gap-3.5 rounded-2xl px-5 py-5 transition-colors lg:flex-row lg:items-start">
+                      {cardContent}
+                    </a>
+                  ) : (
+                    <div class="flex w-full flex-col items-center gap-3.5 rounded-2xl px-5 py-5 lg:flex-row lg:items-start">
+                      {cardContent}
+                    </div>
+                  );
+                })
+            }
+          </>
+        </div>
+      </div>
+    </div>
+
+    {
+      needs?.enable && (
+        <div class="mt-16 flex flex-col items-center gap-12">
+          <div class="flex flex-col items-center gap-6">
+            <h3
+              class="has-italic-text text-text-base-heading text-center"
+              set:html={markdownify(needs.title)}
+            />
+          </div>
+          <div class="grid w-full grid-cols-1 gap-6 lg:grid-cols-3">
+            {needs.list.map((item) => (
+              <div
+                class:list={[
+                  "flex flex-col items-start gap-5.5 rounded-xl border p-6 xl:p-10",
+                  item.color && needColorClasses[item.color].bg,
+                ]}>
+                {item.icon && (
+                  <Icons
+                    class:list={[
+                      "text-3xl",
+                      item.color && needColorClasses[item.color].icon,
+                    ]}
+                    icon={item.icon as any}
+                  />
+                )}
+                <div class="flex flex-col items-start gap-2">
+                  <h4 class="text-text-base-heading font-semibold">
+                    {item.title}
+                  </h4>
+                  <p class="text-text-base-body text-body-lg">
+                    {item.description}
+                  </p>
+                </div>
+                {item.button && (
+                  <CustomButton
+                    hoverEffect="text-flip"
+                    variant="fill"
+                    color="white"
+                    class="shadow-xs"
+                    {...item.button}
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+    }
+  </div>
+</section>

@@ -1,0 +1,22 @@
+{
+  "main": [
+    {
+      "enable": true,
+      "label": "twitter",
+      "icon": "/images/icons/svg/twitter.svg",
+      "url": "https://twitter.com/parsecscille"
+    },
+    {
+      "enable": true,
+      "label": "github",
+      "icon": "/images/icons/svg/github.svg",
+      "url": "https://github.com/scille/parsec-cloud"
+    },
+    {
+      "enable": true,
+      "label": "linkedin",
+      "icon": "/images/icons/svg/linkedin.svg",
+      "url": "https://fr.linkedin.com/company/parsec-by-scille"
+    }
+  ]
+}

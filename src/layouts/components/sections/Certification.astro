@@ -1,0 +1,112 @@
+---
+import type { Section } from "@/types";
+import CustomButton from "@/components/CustomButton.astro";
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import overrideObjects from "@/lib/utils/overrideObjects.ts";
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+import AnimatedText from "@/components/widgets/AnimatedText.astro";
+
+// Type for this section data
+type certificationSectionType = Section & {
+  badge: {
+    enable: boolean;
+    label: string;
+  };
+  logoCSPN: {
+    src: string;
+    alt: string;
+  };
+};
+
+type Props = {
+  content?: certificationSectionType;
+};
+
+// Fetching the default content for the this section
+let defaultContent = (
+  await getEntryCTM("sections", "certification", Astro.currentLocale)
+)?.data as certificationSectionType;
+
+let actualContent = overrideObjects(
+  { ...defaultContent },
+  Astro.props.content,
+) as certificationSectionType;
+
+// Extracting required values from 'content' object
+let {
+  enable = true,
+  badge,
+  title,
+  description,
+  button,
+  image,
+  logoCSPN,
+} = actualContent as certificationSectionType;
+
+if (!enable) return;
+---
+
+<section
+  class="border-border-base-default/50 overflow-hidden border-t py-16 md:py-32"
+  id="certification">
+  <div data-aos="fade-down-sm" class="relative container">
+    {
+      logoCSPN && (
+        <OptimizedImage
+          src={logoCSPN.src}
+          alt={logoCSPN.alt}
+          class="-top absolute left-8 mx-auto my-4 flex max-w-52 object-contain md:hidden"
+        />
+      )
+    }
+    <div
+      class="from-surface-brand-default-pressed to-surface-elevated-secondary mx-auto flex max-w-6xl flex-col rounded-3xl bg-linear-to-b/oklch px-8 py-12 shadow-xl md:flex-row md:py-16 md:pl-16">
+      <div class="space-y-4 max-md:mt-20 lg:max-w-xl">
+        {
+          badge?.enable && (
+            <span
+              class="bg-surface-brand-default text-text-brand-on-color hidden gap-1 rounded-full px-3 py-1 text-sm font-normal md:inline-block"
+              set:html={markdownify(badge.label)}
+            />
+          )
+        }
+        {
+          title && (
+            <h3 class="has-italic-text text-h4-sm md:text-h4 text-text-on-color-heading mb-6 leading-[1.15] font-semibold">
+              <AnimatedText
+                delay={0.2}
+                stagger={0.09}
+                content={markdownify(title)}
+              />
+            </h3>
+          )
+        }
+        {
+          description && (
+            <div
+              data-aos="fade-down-sm"
+              data-aos-delay="100"
+              class="text-text-on-color-body text-body-lg mx-auto mb-8 flex max-w-2xl flex-col gap-3 space-y-1"
+              set:html={markdownify(description, true)}
+            />
+          )
+        }
+        {
+          button && button.enable && (
+            <CustomButton
+              variant="fill"
+              color="white"
+              class="w-full md:w-fit"
+              {...button}
+            />
+          )
+        }
+      </div>
+
+      <div class="mx-auto hidden md:flex">
+        {image && <OptimizedImage src={image} class="w-70 object-contain" />}
+      </div>
+    </div>
+  </div>
+</section>

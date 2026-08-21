@@ -1,0 +1,86 @@
+---
+import type { Section } from "@/types";
+import CustomButton from "@/components/CustomButton.astro";
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import overrideObjects from "@/lib/utils/overrideObjects.ts";
+import AnimatedText from "@/components/widgets/AnimatedText.astro";
+
+// Type for this section data
+type ctaSectionType = Section & {
+  ratingContent: string;
+};
+
+type Props = {
+  content?: ctaSectionType;
+};
+
+// Fetching the default content for the this section
+let defaultContent = (
+  await getEntryCTM("sections", "call-to-action", Astro.currentLocale)
+)?.data as ctaSectionType;
+
+// Enables content customization (e.g., title, description) with a fallback to 'defaultContent' if not provided.
+// The 'content' prop should match the structure of 'defaultContent'.
+// Allows using this section with different content across multiple pages.
+// If 'content' is missing, 'defaultContent' will be used.
+let actualContent = overrideObjects(
+  { ...defaultContent },
+  Astro.props.content,
+) as ctaSectionType;
+
+// Extracting required values from 'content' object
+let {
+  enable = true,
+  title,
+  description,
+  button,
+} = actualContent as ctaSectionType;
+
+if (!enable) return;
+---
+
+<section class="call-to-action overflow-hidden pt-0">
+  <div
+    class="from-surface-brand-default to-surface-brand-default-pressed relative z-10 bg-linear-to-b py-20 md:py-40">
+    <div class="container">
+      <div class="mx-auto space-y-8 text-center lg:max-w-3xl">
+        {
+          title && (
+            <h2 class="has-italic-text text-text-on-color-heading mb-8 text-center leading-[1.15]">
+              <AnimatedText
+                delay={0.2}
+                stagger={0.09}
+                content={markdownify(title)}
+              />
+            </h2>
+          )
+        }
+        {
+          description && (
+            <p
+              data-aos="fade-down-sm"
+              data-aos-delay="100"
+              class="text-text-on-color-description text-body-xl mx-auto max-w-2xl space-y-1 text-center"
+              set:html={markdownify(description)}
+            />
+          )
+        }
+        {
+          button && button.enable && (
+            <div
+              class="flex place-content-center"
+              data-aos="fade-down-sm"
+              data-aos-delay="200">
+              <CustomButton
+                color="white"
+                iconRight="ArrowRightIcon"
+                {...button}
+              />
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>

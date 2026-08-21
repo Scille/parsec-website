@@ -1,0 +1,21 @@
+---
+import type { TocHeading } from "@/types";
+const { toc } = Astro.props;
+---
+
+{
+  toc && (
+    <ul class="recursive pl-4">
+      {toc.map((heading: TocHeading) => (
+        <li>
+          <a href={`#${heading.slug}`} class="text-text-base-label/80">
+            {heading.text}
+          </a>
+          {heading.subheadings && heading.subheadings.length > 0 && (
+            <Astro.self toc={heading.subheadings} />
+          )}
+        </li>
+      ))}
+    </ul>
+  )
+}

@@ -1,0 +1,159 @@
+---
+import type { z } from "astro/zod";
+import type { Section } from "@/types";
+import { plainify } from "@/lib/utils/textConverter";
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import { localizedLink } from "@/lib/utils/localizedLink";
+import { markdownify } from "@/lib/utils/textConverter";
+import AnimatedText from "@/components/widgets/AnimatedText.astro";
+import type { sectionsSchema } from "@/sections.schema";
+import CustomButton from "@/components/CustomButton.astro";
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+// Type for this section data
+type SectionType = Section &
+  NonNullable<z.infer<typeof sectionsSchema.heroSection>>;
+
+// Fetching the content for this section
+let { title, preTitle, description, image, buttons } = (
+  await getEntryCTM("sections", "home-hero", Astro.currentLocale)
+)?.data as SectionType;
+---
+
+<section class="bg-dots-fade home-hero overflow-hidden max-sm:pt-13">
+  <div
+    class="pointer-events-none absolute -top-1/3 -right-1/4 -z-10 h-[140%] w-[70%] rounded-full opacity-50 blur-3xl"
+    style="background: radial-gradient(circle at 50% 90%, color-mix(in oklch, var(--parsec-color-surface-brand-default) 40%, transparent), transparent 60%), radial-gradient(circle at 70% 70%, color-mix(in oklch, var(--parsec-color-surface-brand-default) 50%, transparent), transparent 60%);">
+  </div>
+  <div class="relative mb-20">
+    <div class="container">
+      <div class="relative z-10 max-w-4xl space-y-10 md:mx-auto">
+        <div>
+          {
+            preTitle && (
+              <div
+                data-aos="reveal-anim-left"
+                data-aos-offset="0"
+                data-aos-delay="200"
+                data-aos-duration="1000"
+                class="hover:bg-surface-base-page-secondary group relative mb-5 max-w-fit overflow-hidden rounded-full border p-px md:mx-auto">
+                <div class="translate-y-centered to-surface-brand-default from-surface-base-default absolute left-1/2 -z-10 h-6 w-1/2 origin-left rotate-90 animate-spin rounded-full bg-linear-to-b [animation-duration:5000ms]" />
+                {preTitle.url && (
+                  <div class="bg-surface-base-default hover:bg-surface-base-page-secondary flex items-center rounded-full transition">
+                    {preTitle.badge?.enable && (
+                      <span
+                        class="bg-surface-elevated-default group-hover:bg-surface-brand-default inline-block gap-1 rounded-full px-3 py-1 text-sm font-normal text-white transition"
+                        set:html={markdownify(preTitle.badge.label)}
+                      />
+                    )}
+                    <div class="text-text-default mx-3 flex items-center rounded-full py-px font-normal">
+                      {markdownify(preTitle.label)}
+                    </div>
+                    <a
+                      title={markdownify(preTitle.label) as string}
+                      class="absolute inset-0 size-full"
+                      href={localizedLink(preTitle.url, Astro.currentLocale)}
+                    />
+                  </div>
+                )}
+              </div>
+            )
+          }
+          {
+            title && (
+              <h1>
+                <AnimatedText
+                  delay={0.1}
+                  class="has-italic-text text-text-base-heading mb-6 md:mb-8 md:text-center"
+                  content={markdownify(title)}
+                />
+              </h1>
+            )
+          }
+          {
+            description && (
+              <AnimatedText
+                delay={0.9}
+                stagger={0.03}
+                content={markdownify(description)}
+                class="text-body-xl text-text-base-body max-w-xl md:mx-auto md:text-center"
+              />
+            )
+          }
+        </div>
+
+        <div
+          data-aos="fade-up-sm"
+          data-aos-delay="500"
+          data-aos-duration="1000"
+          class="flex flex-col flex-wrap gap-6 sm:flex-row md:items-center md:justify-center">
+          {
+            buttons &&
+              buttons.map((item) => (
+                <CustomButton class="w-full sm:w-auto" {...item} />
+              ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Banner Image -->
+    {
+      image && (
+        <div class="relative mx-6 mt-12 hidden rounded-b-[6.25rem] md:m-0 md:mx-auto md:mt-20 md:block">
+          <div class="banner-image container">
+            <OptimizedImage
+              src={image}
+              width={1320}
+              loading="eager"
+              decoding="sync"
+              fetchpriority="high"
+              class="shadow-hero-image mx-auto rounded-3xl border-8 border-white/35 md:rounded-[2.25rem] md:border-[1.25rem]"
+              alt={"About " + plainify(title).toLowerCase()}
+            />
+          </div>
+        </div>
+      )
+    }
+  </div>
+  <div
+    class="translate-x-centered absolute bottom-0 -z-10 h-1/4 w-full overflow-hidden">
+    <div
+      class="absolute inset-0 -z-10 bg-linear-to-b from-transparent to-white">
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const section = document.querySelector(".home-hero");
+      if (!section) return;
+
+      const mediaQuery = window.matchMedia("(min-width: 1024px)");
+
+      async function initAnimation() {
+        if (mediaQuery.matches && section) {
+          const { animate, scroll } = await import("motion");
+
+          scroll(
+            animate(".banner-image", {
+              transform: [
+                "perspective(75em) rotateX(20deg)",
+                "perspective(75em) rotateX(0deg)",
+              ],
+              zoom: ["0.8", "1"],
+            }),
+            {
+              target: section,
+              offset: ["start start", "90% end"],
+            },
+          );
+        }
+      }
+
+      initAnimation();
+
+      // Listen for viewport changes
+      mediaQuery.addEventListener("change", initAnimation);
+    });
+  </script>
+</section>

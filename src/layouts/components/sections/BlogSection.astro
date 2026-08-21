@@ -1,0 +1,227 @@
+---
+import type { Section } from "@/types";
+import { sortByDate } from "@/lib/utils/sortFunctions";
+import Pagination from "@/components/widgets/Pagination.astro";
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import { markdownify, slugifyyy } from "@/lib/utils/textConverter";
+import { getCollectionCTM } from "@/lib/contentParser.astro";
+import overrideObjects from "@/lib/utils/overrideObjects.ts";
+import BlogCard from "@/layouts/components/cards/BlogCard.astro";
+import config from ".astro/config.generated.json";
+import AnimatedText from "@/components/widgets/AnimatedText.astro";
+import CustomButton from "@/components/CustomButton.astro";
+import { getTaxonomy } from "@/lib/taxonomyParser.astro";
+import { localizedLink } from "@/lib/utils/localizedLink";
+
+const { blogFolder } = config.settings;
+
+// Type for this section data
+type blogSectionType = Section & {
+  featuredPost?: boolean;
+};
+type Props = {
+  listPage?: boolean;
+  content?: blogSectionType;
+  pagination?: {
+    enable: boolean;
+    currentPage: number;
+  };
+  category?: string;
+};
+
+// Fetching the default content for the this section
+let defaultContent = (
+  await getEntryCTM("sections", "blog-section", Astro.currentLocale)
+)?.data as blogSectionType;
+
+// Enables content customization (e.g., title, description) with a fallback to 'defaultContent' if not provided.
+// The 'content' prop should match the structure of 'defaultContent'.
+// Allows using this section with different content across multiple pages.
+// If 'content' is missing, 'defaultContent' will be used.
+let actualContent = overrideObjects(
+  { ...defaultContent },
+  Astro.props.content,
+) as blogSectionType;
+
+// Extracting required values from 'content' object
+let {
+  enable = true,
+  limit,
+  title,
+  subtitle,
+  button,
+} = actualContent as blogSectionType;
+let { listPage = false, category } = Astro.props as Props;
+
+let posts = await getCollectionCTM(blogFolder as "blog", Astro.currentLocale);
+
+// Sort posts by date
+posts = sortByDate(posts);
+
+// List all distinct categories used across blog posts
+const categories = listPage
+  ? await getTaxonomy(blogFolder, "categories", Astro.currentLocale)
+  : [];
+
+// When browsing a category page, only keep posts tagged with that category
+if (category) {
+  posts = posts.filter((post) =>
+    post.data.categories?.some(
+      (postCategory: string) => slugifyyy(postCategory) === category,
+    ),
+  );
+}
+
+const featuredPost = posts.find((post) => post.data.featured);
+
+// Remove featured posts from the main list
+if (featuredPost) {
+  posts = posts.filter((post) => post.data.featured !== true);
+}
+
+// Limit the number of items to be displayed
+let totalPages = Math.ceil(posts?.length / config.settings.pagination);
+
+if (Astro.props.pagination) {
+  const indexOfLastPost =
+    Astro.props.pagination?.currentPage * config.settings.pagination;
+  const indexOfFirstPost = indexOfLastPost - config.settings.pagination;
+  posts = posts.slice(indexOfFirstPost, indexOfLastPost);
+}
+
+// Limit the number of items to be displayed
+if (limit && !Astro.props.pagination && !category) {
+  posts = posts.slice(0, limit);
+}
+
+if (!enable) return;
+---
+
+{
+  listPage && featuredPost && Astro.props.pagination?.currentPage === 1 && (
+    <div class="bg-surface-base-default-secondary relative w-full pb-16">
+      <div class="container">
+        <BlogCard
+          listPage={listPage}
+          layout="horizontal"
+          content={{ ...featuredPost.data, ...featuredPost }}
+        />
+      </div>
+    </div>
+  )
+}
+
+<section class="relative pb-32" transition:animate="fade">
+  {
+    !listPage && (
+      <div
+        class="pointer-events-none absolute -top-1/3 -right-1/4 -z-10 h-[101%] w-[60%] rounded-full opacity-70 blur-3xl"
+        style="background: radial-gradient(circle at 30% 30%, color-mix(in oklch, var(--parsec-color-surface-brand-default) 40%, transparent), transparent 60%), radial-gradient(circle at 70% 70%, color-mix(in oklch, var(--parsec-color-surface-brand-default) 50%, transparent), transparent 60%);"
+      />
+    )
+  }
+  <div
+    class:list={[
+      "container flex flex-col gap-10",
+      listPage ? "md:gap-12" : "md:gap-16",
+    ]}>
+    {
+      !listPage ? (
+        <div class="flex items-end justify-between">
+          {title && (
+            <h2 class="has-italic-text max-w-2xl">
+              <AnimatedText
+                delay={0.2}
+                stagger={0.09}
+                content={markdownify(title)}
+              />
+            </h2>
+          )}
+          {button && (
+            <CustomButton
+              hoverEffect="text-flip"
+              variant="fill"
+              color="white"
+              class="hidden md:flex"
+              {...button}
+            />
+          )}
+        </div>
+      ) : (
+        <h3 class="has-italic-text max-w-2xl">
+          {subtitle && (
+            <AnimatedText
+              delay={0.2}
+              stagger={0.09}
+              content={markdownify(subtitle)}
+            />
+          )}
+        </h3>
+      )
+    }
+
+    {
+      listPage && categories.length > 0 && (
+        <div class="flex flex-wrap gap-2.5">
+          {categories.map((categoryItem) => (
+            <a
+              href={localizedLink(
+                `/blog/category/${categoryItem.slug}`,
+                Astro.currentLocale,
+              )}
+              class:list={[
+                "text-label-md rounded-2xl border px-3 py-1 leading-none font-medium",
+                category === categoryItem.slug
+                  ? "bg-surface-brand-default text-text-on-color-label hover:bg-surface-brand-default-hover border-transparent"
+                  : "bg-surface-information-default-subtle text-text-information-default border-border-information-default-subtle hover:bg-surface-information-default-subtle-hover",
+              ]}>
+              {categoryItem.name}
+            </a>
+          ))}
+        </div>
+      )
+    }
+    <div class="grid gap-x-6 gap-y-10 md:grid-cols-2 xl:grid-cols-3">
+      {
+        posts &&
+          posts.map((post, index) => (
+            <BlogCard
+              listPage={listPage}
+              content={{ ...post.data, ...post }}
+              data-aos-delay={
+                !Astro.props.pagination && ((index % 3) + 1) * 100
+              }
+              data-aos={
+                !Astro.props.pagination &&
+                (Math.floor(index / 3) % 2 === 0
+                  ? "fade-right-sm"
+                  : "fade-left-sm")
+              }
+            />
+          ))
+      }
+    </div>
+
+    {
+      !listPage && button && (
+        <CustomButton
+          hoverEffect="text-flip"
+          variant="outline"
+          color="neutral"
+          class="w-full md:hidden"
+          {...button}
+        />
+      )
+    }
+
+    {
+      listPage && !category && (
+        <Pagination
+          collection={blogFolder}
+          currentPage={Astro.props.pagination?.currentPage || 1}
+          totalPages={totalPages}
+        />
+      )
+    }
+  </div>
+</section>

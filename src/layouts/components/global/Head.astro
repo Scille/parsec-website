@@ -1,0 +1,71 @@
+---
+import { Font } from "astro:assets";
+import type { CssVariable } from "astro:assets";
+import SEO from "@/components/seo/Seo.astro";
+import JsonLD from "@/components/widgets/JsonLD.astro";
+import Favicons from "@/components/seo/Favicons.astro";
+import OpenGraph from "@/components/seo/OpenGraph.astro";
+import fontsJson from "@/config/fonts.json";
+import config from ".astro/config.generated.json";
+import CookieConsent from "@/components/utilities/CookieConsent.astro";
+---
+
+<head>
+  <!------------
+    General
+-------------->
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Language" content={Astro.currentLocale} />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=5"
+  />
+  <SEO {...Astro.props} />
+  <meta
+    name="theme-color"
+    media="(prefers-color-scheme: light)"
+    content="#fff"
+  />
+  <meta
+    name="theme-color"
+    media="(prefers-color-scheme: dark)"
+    content="#000"
+  />
+  <meta name="generator" content={Astro.generator} />
+  {
+    fontsJson.map((font) => (
+      <Font
+        cssVariable={font.cssVariable as CssVariable}
+        preload={font.preload}
+      />
+    ))
+  }
+  {
+    config.head?.content && (
+      // Injecting custom scripts such as Google Analytics, Google Tag Manager, etc. tracking code,
+      // which should be placed in <head> tag
+      // Root-relative src/href (self-hosted scripts) are rewritten to respect the Astro base path
+      <Fragment
+        set:html={config.head.content.replace(
+          /((?:src|href)=")\/(?!\/)/g,
+          `$1${import.meta.env.BASE_URL}`,
+        )}
+      />
+    )
+  }
+  <OpenGraph {...Astro.props} />
+  <Favicons />
+  <JsonLD
+    content={{
+      ...Astro.props,
+    }}
+  />
+  <CookieConsent />
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 110vh;
+    }
+  </style>
+</head>

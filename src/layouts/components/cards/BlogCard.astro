@@ -1,0 +1,164 @@
+---
+import type { Section } from "@/types";
+import readingTime from "@/lib/utils/readingTime";
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+import { markdownify, plainify, slugifyyy } from "@/lib/utils/textConverter";
+import { localizedLink } from "@/lib/utils/localizedLink";
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import Icons from "@/helpers/Icons.astro";
+
+interface Props {
+  listPage?: boolean;
+  content: Section & {
+    id: string;
+    collection: string;
+    body?: string;
+  };
+  class?: string;
+  layout?: "horizontal" | "vertical";
+}
+
+let {
+  listPage,
+  content,
+  layout = "vertical",
+  class: className,
+  ...rest
+} = Astro.props;
+let { title, image, excerpt, body, categories, author } = content || {};
+const displayImage = image || "placeholder-article.png";
+
+const timeReadingEstimated = body ? readingTime(body) : undefined;
+
+let authorEntry;
+if (author) {
+  const authorSlug = slugifyyy(author);
+  const entry = await getEntryCTM("author", authorSlug, Astro.currentLocale);
+  authorEntry = entry?.data;
+}
+
+// Format categories
+const categoriesArray = categories?.map((category: string) => ({
+  name: category,
+  slug: slugifyyy(category),
+}));
+
+let slug = localizedLink(content.id, Astro.currentLocale, content.collection);
+
+const isHorizontal = layout === "horizontal";
+---
+
+<article
+  class:list={[
+    "bg-surface-base-page md:shadow-card border-border-base-default/50 relative rounded-3xl border p-6 md:border-0",
+    isHorizontal &&
+      "grid h-fit grid-cols-1 items-start gap-5 md:grid-cols-2 md:items-center md:gap-10 md:pr-10",
+    !isHorizontal && "flex flex-col",
+    className,
+  ]}
+  {...rest}>
+  {
+    title && (
+      <a
+        class="group after:from-surface-base-default absolute inset-0 z-30 flex justify-center after:absolute after:inset-0 after:z-10 after:hidden after:rounded-3xl after:bg-linear-to-t after:to-transparent after:transition-opacity after:duration-500 after:md:block after:md:opacity-0 hover:md:after:opacity-100"
+        href={slug}
+        aria-label={"Learn more about " + plainify(title)?.toLowerCase()}>
+        <div class="relative z-40 h-full w-full">
+          <span class="bg-surface-base-default pointer-events-none absolute top-full left-1/2 z-45 hidden h-16 w-16 -translate-1/2 items-center justify-center rounded-full shadow-2xl transition-[top] duration-500 group-hover:top-4/5 group-hover:rotate-45 md:flex md:opacity-0 group-hover:md:opacity-100">
+            <Icons
+              class="text-icon-brand-default text-2xl"
+              icon="ArrowUpRightIcon"
+            />
+          </span>
+        </div>
+      </a>
+    )
+  }
+  <div
+    class:list={[
+      "from-surface-elevated-secondary/30 absolute top-6 left-6 z-30 flex flex-wrap items-center gap-x-2.5 gap-y-px rounded-tl-xl rounded-tr-xl bg-linear-to-b/oklch to-transparent px-4 pt-4 pb-8",
+      isHorizontal && "mt-auto w-[calc(100%-3rem)] md:w-[calc(50%-3.25rem)]",
+      !isHorizontal && "w-[calc(100%-3rem)]",
+    ]}>
+    {
+      categoriesArray?.map((category: any) => (
+        <>
+          <span class="bg-surface-information-default-subtle text-label-md text-text-information-default border-border-information-default-subtle rounded-2xl border px-3 py-1 leading-none font-medium">
+            {category.name}
+          </span>
+        </>
+      ))
+    }
+  </div>
+  <div
+    class:list={[
+      "group relative flex max-w-2xl items-center justify-center overflow-hidden rounded-xl via-20% after:pointer-events-none",
+      isHorizontal
+        ? "h-full md:min-h-75"
+        : "max-h-52 min-h-52 lg:max-h-60 lg:min-h-60",
+    ]}>
+    <OptimizedImage
+      src={displayImage}
+      alt={"Related to " + title?.toLowerCase()}
+      class:list={[
+        "h-full min-w-full object-cover transition duration-500 group-hover:scale-105",
+      ]}
+    />
+    <span class="sr-only">
+      {"Learn more about " + title?.toLowerCase()}
+    </span>
+  </div>
+  <div
+    class:list={[
+      "flex h-full flex-col space-y-4",
+      layout !== "horizontal" && "mt-4",
+    ]}>
+    {
+      title && (
+        <h2
+          class:list={[
+            isHorizontal
+              ? "md:text-h3 text-h3-sm mt-auto mb-6 font-semibold"
+              : "md:text-h4 text-h4-sm leading-h4 mb-4",
+          ]}
+          set:html={plainify(title)}
+        />
+      )
+    }
+    {
+      excerpt && (
+        <p
+          class="text-body-lg text-text-base-body"
+          set:html={markdownify(excerpt)}
+        />
+      )
+    }
+    {
+      (authorEntry?.title || timeReadingEstimated) && (
+        <div
+          class:list={[
+            "text-body-lg text-text-base-description flex items-center justify-between pt-6",
+            isHorizontal ? "lg:mt-8 lg:mb-0" : "mt-auto",
+          ]}>
+          {listPage && (
+            <div class="flex items-center gap-2">
+              {authorEntry.image && (
+                <OptimizedImage
+                  width={32}
+                  height={32}
+                  src={authorEntry.image}
+                  alt={authorEntry.title}
+                  class="h-8 w-8 rounded-full object-cover"
+                />
+              )}
+              <span class="text-body-lg font-medium">{authorEntry.title}</span>
+            </div>
+          )}
+          {timeReadingEstimated && (
+            <p set:html={markdownify(timeReadingEstimated)} />
+          )}
+        </div>
+      )
+    }
+  </div>
+</article>

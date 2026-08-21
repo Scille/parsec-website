@@ -1,0 +1,30 @@
+{
+  "common": {
+    "category": "Catégorie",
+    "publishedOn": "Publié le",
+    "learnMoreAbout": "En savoir plus sur",
+    "emailPlaceholder": "Adresse e-mail",
+    "paginationNext": "Suivant",
+    "paginationPrevious": "Précédent",
+    "backToBlog": "Retour au blog",
+    "contactDropdownSearch404": "Aucun résultat trouvé",
+    "contactDropdownInvalid": "Veuillez sélectionner une valeur valide.",
+    "contactThankYou": "Merci pour votre message !",
+    "toc": "Sommaire"
+  },
+  "navigation": {
+    "buttonLabel": "Télécharger Parsec"
+  },
+  "contactInfo": {
+    "locationLabel": "Adresse",
+    "phoneLabel": "Téléphone",
+    "emailLabel": "Nous envoyer un e-mail"
+  },
+  "footer": {
+    "colTitleOne": "Parsec Cloud",
+    "colTitleTwo": "Ressources",
+    "colTitleThree": "Contact",
+    "description": "Parsec Cloud est la solution de stockage et collaboration certifiée ANSSI pour vos données sensibles. Chiffrement de bout en bout, zéro connaissance, souveraineté totale.",
+    "copyright": "Copyright © {currentYear} Parsec Cloud. Tous droits réservés."
+  }
+}

@@ -1,0 +1,162 @@
+---
+import Icons from "@/helpers/Icons.astro";
+import CustomButton from "@/components/CustomButton.astro";
+import AnimatedText from "@/components/widgets/AnimatedText.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import type { sectionsSchema } from "@/sections.schema";
+import type { z } from "astro/zod";
+
+type Comparison = NonNullable<z.infer<typeof sectionsSchema.pricingSection>>;
+
+type Props = {
+  class?: string;
+  content: {
+    title?: string;
+    description?: string;
+    caption?: string;
+    list: Comparison["list"];
+    comparison: Comparison["comparison"];
+  };
+};
+
+const {
+  class: className,
+  content: { title, description, caption, list, comparison },
+} = Astro.props;
+---
+
+<div
+  class:list={[
+    "space-y-12 overflow-x-scroll overflow-y-visible md:max-w-4xl md:space-y-16 lg:mx-auto lg:w-full lg:max-w-5xl lg:overflow-x-visible lg:px-4 xl:max-w-7xl",
+    className,
+  ]}>
+  <div class="sticky left-0 flex flex-col gap-6 pl-8">
+    {
+      title && (
+        <h3>
+          <AnimatedText
+            delay={200}
+            delay={0.1}
+            class="has-italic-text text-text-base-heading"
+            content={markdownify(title)}
+          />
+        </h3>
+      )
+    }
+    {
+      description && (
+        <AnimatedText
+          delay={0.9}
+          stagger={0.03}
+          content={markdownify(description)}
+          class="text-body-xl text-text-base-body max-w-xl"
+        />
+      )
+    }
+  </div>
+  <table
+    class="relative w-full min-w-180 pr-8 after:-top-40 after:-z-10 lg:pr-0">
+    {caption && <caption class="sr-only" set:html={markdownify(caption)} />}
+    <colgroup>
+      <col class="w-[20%] md:w-[30%]" />
+      <col class="w-1/6 md:w-1/5" />
+      <col class="w-1/6 md:w-1/5" />
+      <col class="w-1/6 md:w-1/5" />
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="bg-surface-base-default sticky left-0 z-20"></th>
+        {
+          list.map((item) => (
+            <th>
+              <div class="border-border-base-default space-y-4 px-8 pt-10 pb-4 not-last:border-r">
+                <span
+                  class="text-body-md text-text-base-heading block font-medium tracking-wider uppercase opacity-50"
+                  set:html={markdownify(item.name)}
+                />
+                {item.price?.map((price) => (
+                  <div class="flex items-baseline justify-center gap-0 text-2xl font-medium md:text-3xl">
+                    {price.prependValue && (
+                      <span set:html={markdownify(price.prependValue)} />
+                    )}
+                    {price.value && (
+                      <span set:html={markdownify(price.value)} />
+                    )}
+                    {price.appendValue && (
+                      <span set:html={markdownify(price.appendValue)} />
+                    )}
+                    {price.billing && (
+                      <span
+                        class="text-body-lg ml-2 shrink-0"
+                        set:html={markdownify(price.billing)}
+                      />
+                    )}
+                  </div>
+                ))}
+
+                {item?.button?.enable && (
+                  <CustomButton
+                    hoverEffect="text-flip"
+                    variant="outline"
+                    class="w-full"
+                    {...item?.button}
+                  />
+                )}
+              </div>
+            </th>
+          ))
+        }
+      </tr>
+    </thead>
+    <tbody>
+      {
+        comparison?.map((item, index) => (
+          <>
+            <tr class="border-b">
+              <td
+                class:list={[
+                  "border-border-base-default bg-surface-base-page-secondary md:bg-surface-base-default sticky left-0 z-10 w-fit border-r pl-2 md:pl-8 lg:border-none",
+                  index !== 0 && "pt-16",
+                  "py-4",
+                ]}>
+                <span
+                  class="text-text-base-heading text-md block font-semibold md:text-lg"
+                  set:html={markdownify(item.label)}
+                />
+              </td>
+              {list.map((_) => (
+                <td class="border-border-base-default py-4 not-last:border-r" />
+              ))}
+            </tr>
+
+            {item.list.map((row) => (
+              <tr class="border-border-base-default hover:bg-surface-base-default-secondary/30 border-b">
+                <td
+                  class="border-border-base-default bg-surface-base-default-secondary md:bg-surface-base-default text-text-base-body text-body-md md:text-body-lg sticky left-0 z-10 max-w-44 border-r py-4 pl-2 font-medium md:pl-8 lg:min-w-fit lg:border-none"
+                  set:html={markdownify(row.value)}
+                />
+                {row.included.map((includedIn) => (
+                  <td class="border-border-base-default text-body-lg text-text-base-description px-1 py-4 text-center font-medium not-last:border-r">
+                    {includedIn === true ? (
+                      <Icons
+                        icon="CheckIcon"
+                        class="text-icon-brand-default mx-auto"
+                      />
+                    ) : includedIn === false ? (
+                      <Icons
+                        icon="MinusIcon"
+                        class="text-icon-disabled-default mx-auto"
+                      />
+                    ) : (
+                      <span set:html={markdownify(includedIn)} />
+                    )}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </>
+        ))
+      }
+    </tbody>
+  </table>
+</div>

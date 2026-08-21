@@ -1,0 +1,147 @@
+---
+import type { z } from "astro/zod";
+import Icons from "@/helpers/Icons.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import CustomButton from "@/components/CustomButton.astro";
+import type { sectionsSchema } from "@/sections.schema";
+
+type PricingSectionType = z.infer<typeof sectionsSchema.pricingSection>;
+type PlanType = NonNullable<PricingSectionType>["list"][number];
+
+type Props = {
+  content: PlanType;
+  class?: string;
+};
+
+const {
+  class: className,
+  content: {
+    enable,
+    featured,
+    name,
+    badge,
+    description,
+    price,
+    mainFeaturesList,
+    button,
+  },
+  ...rest
+} = Astro.props;
+
+if (!enable) return;
+---
+
+<div
+  class:list={[
+    "text-text-base-body bg-surface-base-default relative flex min-h-full flex-col gap-8 rounded-3xl transition-transform duration-500",
+    {
+      "after:from-primary relative after:absolute after:top-0 after:left-0 after:h-11/12 after:w-full after:rounded-t-4xl after:bg-linear-to-b after:to-white max-md:px-2 max-md:py-2 md:shadow-md md:after:scale-[1.03]":
+        featured,
+    },
+    className,
+  ]}
+  {...rest}>
+  <div
+    class="bg-surface-base-default-secondary relative z-10 flex min-h-full flex-col gap-5 rounded-3xl p-8">
+    <div class="flex w-full justify-between">
+      {
+        name && (
+          <h3 class="text-h5-sm md:text-h5" set:html={markdownify(name)} />
+        )
+      }
+      {
+        badge && (
+          <span
+            class="bg-surface-base-default border-border-base-default text-text-base-label text-label-md lg:text-label-lg inline-block h-fit gap-1 rounded-full border px-3 py-1 font-medium lg:hidden xl:inline-block"
+            set:html={markdownify(badge.label)}
+          />
+        )
+      }
+    </div>
+
+    <div class="border-border-base-default flex flex-col gap-4 border-b pb-5">
+      {
+        price?.map((item) => (
+          <div
+            class:list={[
+              "price-wrapper relative flex items-center gap-2.5 transition-all duration-300",
+            ]}>
+            <div class="md:text-h3 flex gap-0 text-4xl font-medium">
+              {item.prependValue && (
+                <span set:html={markdownify(item.prependValue)} />
+              )}
+              {item.value && <span set:html={markdownify(item.value)} />}
+              {item.appendValue && (
+                <span set:html={markdownify(item.appendValue)} />
+              )}
+            </div>
+            <div class="text-text-base-body text-body-lg flex flex-col">
+              {item.tax && (
+                <p
+                  class="text-text-base-description text-body-md"
+                  set:html={markdownify(item.tax)}
+                />
+              )}
+              {item.billing && (
+                <p
+                  class="text-text-base-body font-semibold"
+                  set:html={markdownify(item.billing)}
+                />
+              )}
+            </div>
+          </div>
+        ))
+      }
+      {
+        description && (
+          <p
+            class="text-body-lg md:text-body-xl text-text-base-body opacity-80"
+            set:html={markdownify(description)}
+          />
+        )
+      }
+    </div>
+
+    <ul class="my-6 space-y-4">
+      {
+        mainFeaturesList.map((item) => {
+          const featureText = item.value;
+          const isEnabled = item.isEnabled;
+
+          return (
+            <li class:list={["relative ps-10", !isEnabled ? "opacity-50" : ""]}>
+              <span
+                class:list={[
+                  "absolute top-px left-0 me-4 inline-flex h-5 w-5 items-center justify-center rounded-full text-white",
+                  isEnabled
+                    ? "bg-icon-brand-default"
+                    : "bg-icon-neutral-default",
+                ]}>
+                {isEnabled ? (
+                  <Icons icon="CheckIcon" class="text-xs" />
+                ) : (
+                  <Icons icon="XMarkIcon" class="text-xs" />
+                )}
+              </span>
+              <span
+                class="text-text-base-body text-body-lg font-medium"
+                set:html={markdownify(featureText)}
+              />
+            </li>
+          );
+        })
+      }
+    </ul>
+
+    {
+      button?.enable && (
+        <CustomButton
+          hoverEffect="magnetic-text-flip"
+          color={featured ? "primary" : "neutral"}
+          class:list={["mt-auto text-center"]}
+          {...button}
+        />
+      )
+    }
+  </div>
+</div>

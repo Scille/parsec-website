@@ -1,0 +1,62 @@
+---
+title: "Intel SGX : sécuriser le rechiffrement des données"
+image: "intel-sgx.jpg"
+date: 2020-11-04
+author: "Thierry Leblond"
+categories:
+  - Technologie
+draft: false
+
+excerpt: "L'enclave Intel SGX permet de rechiffrer les données sur un serveur distant sans exposer les clés. Découvrez comment Parsec l'exploite."
+---
+
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+### INTRO
+
+Dans un contexte de crise sanitaire, les entreprises sont de plus en plus amenées à travailler avec des collaborateurs à distance. Pour se prémunir des cyberattaques et protéger ses données critiques, diverses solutions sont envisageables.
+
+Chez Parsec nous appliquons la politique du zero-trust, toutes les données sont chiffrées pour que seuls les utilisateurs, ayant au préalable obtenu l'accès aux espaces de travail par un administrateur, puissent déchiffrer les documents.
+
+Un problème réside néanmoins : dans le cadre de la révocation des droits d'accès aux données d'un utilisateur, comment s'assurer que celui-ci soit dans l'incapacité de déchiffrer les données passées et futures ?
+
+La solution à ce problème consiste bien sûr à rechiffrer les données en question avec une nouvelle clé distribuée  
+aux utilisateur non révoqués. En outre ces rechiffrement doivent avoir lieu dans un environnement sûr afin de respecter la politique zero-trust.
+
+Une première solution pour s'assurer d'un environnement sûr est de faire le rechiffrement directement sur le poste de travail d'un administrateur de l'espace de travail concerné. Bien que théoriquement simple, cette solution entraine des problèmes en pratique:
+
+- les données doivent transiter sur le poste de travail ce qui implique une forte bande passante
+- l'opération de rechiffrement peut se retrouvée mise en pause pour une durée indéterminée si le poste de travail  
+   se retrouve éteint ou hors ligne
+- l'opération de rechiffrement est longue et lourde en charge de travail ce qui peut dégrader l'expérience de l'utilisateur
+
+Une seconde solution qui sera développée dans cet article est le rechiffrement des données sur un serveur distant, dans une enclave SGX.
+
+### Qu'est-ce qu'une enclave SGX ?
+
+[**Intel SGX**](https://software.intel.com/en-us/sgx) (_Software Guard Extensions_) est un ensemble d’instructions disponibles sur les versions récentes des processeurs x86_64 de Intel, permettant à l’utilisateur d’allouer des régions privées de mémoire appelées **enclaves** ou encore **Trusted Execution Environments (TEE)** de manière plus générale. Ces enclaves sont protégées de tout programme ou administrateur présent sur le système d’exploitation. Nous allons nous concentrer sur SGX dans cet article mais il existe d'autres solutions comparables tel que [**ARM Trustzone**](https://www.arm.com/why-arm/technologies/trustzone-for-cortex-a) ou encore le **gravity core** de [**Sanctum**](http://www.sanctum.com/products.html).
+
+Seules certaines opérations permettent de transmettre des données avec l'enclave, ces opérations sont sécurisées de sorte que les données en clair ne soient accessibles que depuis l'enclave.
+
+### Utilisation de SGX pour rechiffrer des données
+
+Le rechiffrement des données peut également être effectuées directement sur un serveur distant. Cependant, pour éviter d'avoir à faire confiance à un tier (hébergeur, fournisseur cloud…), nous souhaitons mettre en place une couche de protection supplémentaire et nous assurer d'avoir un environnement sûr pour le rechiffrement des données.  
+Effectuer le rechiffrement des données dans une enclave SGX permet de se protéger d'un serveur corrompu en effectuant des opérations critiques dans la zone de mémoire privée.
+
+### Utilisation de SGX en pratique
+
+Pour illustrer un cas d'utilisation de SGX avec Parsec, prenons l'exemple suivant :  
+Un ordinateur d'un des collaborateurs de l'entreprise est compromis (vol, perte…). Un rechiffrement des données est alors nécessaire pour rendre les données inaccessibles depuis cet appareil.
+
+<OptimizedImage src="workspace-compromis-SGX.jpg" alt="" />
+
+Un administrateur décide alors de lancer le rechiffrement de l'espace de travail depuis son client Parsec.
+
+<OptimizedImage src="process-rechiffrement-SGX.jpg" alt="" />
+
+Le serveur envoie les données chiffrées ainsi que la clé de déchiffrement et la nouvelle clé de chiffrement dans la zone privée de mémoire (enclave) grâce aux instructions disponibles dans SGX et demande à celle-ci de rechiffrer les données. Pour s'assurer que le serveur ne puisse avoir connaissance des clés transmises, les deux clés sont également chiffrées en amont par le client de l'administrateur et seul l'enclave possède la clé pour les déchiffrer.  
+Une fois l'opération de rechiffrement terminée, les données sont renvoyées et les nouvelles clés de déchiffrement sont transmises aux clients Parsec des utilisateurs ayant les droit d'accès à l'espace de travail. L'appareil compromis n'a plus accès aux données.
+
+### CONCLUSION
+
+Dans cet article, nous avons vu un cas d'utilisation d'une enclave SGX pour le rechiffrement des données. Cet exemple illustre l'importance de SGX pour se prémunir de potentielles attaques sur un serveur distant. Cela permet de s'assurer que les données ne soient accessibles que depuis l'espace de mémoire privée de l'enclave et par les utilisateurs autorisés par un administrateur. SGX n'est pas une technologie qui vient se substituer aux bonnes pratiques de sécurité intégrées à l'application mais permet d'assurer une couche de protection supplémentaire.

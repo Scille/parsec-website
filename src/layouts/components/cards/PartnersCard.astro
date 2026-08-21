@@ -1,0 +1,49 @@
+---
+import { markdownify } from "@/lib/utils/textConverter";
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+import CustomButton from "@/components/CustomButton.astro";
+import type { sharedButton } from "@/sections.schema";
+import type { z } from "astro/zod";
+
+type CardContent = {
+  name: string;
+  url: string;
+  image: {
+    src: string;
+    alt: string;
+  };
+};
+
+interface Props {
+  content: CardContent;
+  index: number;
+  button?: z.infer<typeof sharedButton>;
+  class?: string;
+}
+
+const { content, index, button, class: className } = Astro.props;
+const { name, url, image } = content;
+---
+
+<div
+  data-aos={Math.floor(index / 3) % 2 === 0 ? "fade-right-sm" : "fade-left-sm"}
+  data-aos-delay={((index % 3) + 1) * 100}
+  class:list={[
+    "bg-surface-base-default md:shadow-card border-border-neutral-default-subtle flex flex-col gap-4 rounded-2xl border p-5 md:border-0 md:p-8",
+    className,
+  ]}>
+  {
+    image && (
+      <OptimizedImage
+        src={image.src}
+        alt={image.alt}
+        class:list={["h-full max-h-32 w-full object-contain object-top-left"]}
+      />
+    )
+  }
+  <p
+    class="text-h4-sm md:text-h4 clip- w-full font-semibold"
+    set:html={markdownify(name)}
+  />
+  {button && <CustomButton class="mt-auto" url={url} {...button} />}
+</div>

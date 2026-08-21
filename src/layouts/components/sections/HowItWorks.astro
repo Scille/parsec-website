@@ -1,0 +1,110 @@
+---
+import type { Section } from "@/types";
+import type { z } from "astro/zod";
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import overrideObjects from "@/lib/utils/overrideObjects.ts";
+import type { sectionsSchema } from "@/sections.schema";
+import AnimatedText from "@/components/widgets/AnimatedText.astro";
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+import CustomButton from "@/components/CustomButton.astro";
+
+// Type
+type SectionType = Section & z.infer<typeof sectionsSchema.howItWorksSection>;
+type Props = { content?: SectionType };
+
+// Default content fetch
+let defaultContent = (
+  await getEntryCTM("sections", "how-it-works", Astro.currentLocale)
+)?.data as SectionType;
+
+let actualContent = overrideObjects(
+  { ...defaultContent },
+  Astro.props.content,
+) as SectionType;
+
+let { enable = true, title, list, button } = actualContent as SectionType;
+
+if (!enable) return;
+---
+
+<section>
+  <div class="bg-surface-base-page relative border-t py-20 md:py-32">
+    <div class="relative z-2 container flex flex-col space-y-10 md:space-y-16">
+      {
+        title && (
+          <div class="mx-auto max-w-lg text-center md:max-w-2xl">
+            <h2 class="has-italic-text text-text-base-heading">
+              <AnimatedText
+                delay={0.2}
+                stagger={0.09}
+                content={markdownify(title)}
+              />
+            </h2>
+          </div>
+        )
+      }
+      {
+        list && (
+          <div class="grid gap-8 lg:grid-cols-3">
+            {list.map((item, index) => (
+              <div class="bg-surface-base-default shadow-card rounded-4xl p-8">
+                <div
+                  data-aos="fade-right-sm"
+                  data-aos-delay={(index + 2.5) * 100}
+                  class="flex flex-col items-center gap-8 overflow-hidden md:gap-10">
+                  <div class="has-italic-text text-text-base-heading flex w-full flex-wrap gap-y-4 font-medium">
+                    {item.step && (
+                      <div
+                        class="md:text-h4 text-h4-sm"
+                        set:html={markdownify(item.step)}
+                      />
+                    )}
+                  </div>
+                  {item.image && (
+                    <div class="w-4/5 max-w-[inherit] p-4 md:w-3/5 lg:h-42 lg:w-auto">
+                      <OptimizedImage
+                        src={item.image.src}
+                        alt={item.image.alt}
+                      />
+                    </div>
+                  )}
+                  <div class="flex flex-col gap-5">
+                    {item.title && (
+                      <h3
+                        class="md:text-h5 text-h5-sm text-text-base-heading"
+                        set:html={markdownify(item.title)}
+                      />
+                    )}
+                    {item.description && (
+                      <p
+                        class="border-border-base-default text-text-base-description border-t pt-4"
+                        set:html={markdownify(item.description)}
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )
+      }
+      {
+        button && (
+          <CustomButton
+            hoverEffect="text-flip"
+            variant="fill"
+            class="w-full self-center md:w-fit"
+            {...button}
+          />
+        )
+      }
+    </div>
+    <div
+      class="absolute -bottom-14 z-1 mx-auto flex h-2/5 w-full items-center justify-center self-center opacity-20 lg:opacity-10">
+      <div
+        class="bg-surface-brand-default h-full w-10/12 rounded-t-4xl blur-3xl">
+      </div>
+    </div>
+  </div>
+</section>

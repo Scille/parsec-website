@@ -1,0 +1,49 @@
+[
+  {
+    "name": "Albert Sans",
+    "variants": [
+      {
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "style": "normal",
+        "weight": "500"
+      },
+      {
+        "style": "normal",
+        "weight": "600"
+      },
+      {
+        "style": "normal",
+        "weight": "700"
+      }
+    ],
+    "preload": [
+      { "weight": 400 },
+      { "weight": 500 },
+      { "weight": 600 },
+      { "weight": 700 }
+    ],
+    "display": "swap",
+    "cssVariable": "--font-primary-face",
+    "provider": "fontsource",
+    "subsets": ["latin"],
+    "fallback": "sans-serif"
+  },
+  {
+    "name": "Orbit",
+    "variants": [
+      {
+        "style": "normal",
+        "weight": "400"
+      }
+    ],
+    "preload": [{ "weight": 400 }],
+    "display": "swap",
+    "cssVariable": "--font-secondary-face",
+    "provider": "fontsource",
+    "subsets": ["latin"],
+    "fallback": "sans-serif"
+  }
+]

@@ -1,0 +1,201 @@
+/* ====================================================== */
+/* Button Style */
+/* ====================================================== */
+
+@utility btn {
+  @apply relative inline-block overflow-hidden rounded-full px-6 py-3 leading-tight font-medium whitespace-nowrap duration-[.35s] disabled:cursor-not-allowed;
+}
+@utility btn-link {
+  @apply relative inline-block overflow-hidden leading-tight font-medium whitespace-nowrap duration-[.35s] disabled:cursor-not-allowed;
+}
+@utility btn-sm {
+  @apply text-label-md md:text-label-md px-4 py-2.5;
+}
+@utility btn-md {
+  @apply px-10 py-4 md:text-lg xl:px-12;
+}
+
+/* Button Fill */
+.btn-fill.btn-primary {
+  @apply bg-surface-brand-default text-text-on-color-label shadow-button hover:bg-surface-brand-default-hover;
+}
+.btn-fill.btn-neutral {
+  @apply bg-surface-neutral-default text-text-on-color-label shadow-button hover:bg-surface-neutral-default-hover;
+}
+.btn-fill.btn-white {
+  @apply bg-surface-base-default text-text-base-label border-border-base-default border;
+}
+
+/* Button Outline */
+.btn-outline.btn-primary {
+  @apply border-border-base-default text-text-brand-default border;
+}
+.btn-outline.btn-neutral {
+  @apply border-border-base-default text-text-base-label border;
+}
+.btn-outline.btn-white {
+  @apply border-border-base-default text-text-on-color-label border;
+}
+
+/* Button Link */
+.btn-link.btn-primary {
+  @apply text-text-brand-default hover:text-text-brand-default-hover;
+}
+.btn-link.btn-neutral {
+  @apply text-text-base-label hover:text-text-brand-default-hover;
+}
+.btn-link.btn-white {
+  @apply text-text-base-label;
+}
+
+/* Button Animation */
+.magnetic-hover-anim:not([disabled="true"]) {
+  transition: transform 0.2s ease;
+  will-change: transform;
+}
+.creative-hover-anim:not([disabled="true"]) {
+  @apply relative z-10 overflow-hidden delay-100;
+
+  .hover-bg {
+    @apply translate-centered absolute top-(--creative-hover-top) left-(--creative-hover-left) -z-10 block h-0 w-0 rounded-full;
+    transition:
+      width 0.7s ease,
+      height 0.7s ease;
+  }
+}
+.text-flip-hover-anim:not([disabled="true"]) {
+  .text-flip-inner {
+    @apply relative block overflow-hidden text-transparent;
+
+    &::before,
+    &::after {
+      content: attr(data-content);
+      @apply pointer-events-none absolute inset-0 text-center transition-all duration-300 ease-in-out;
+    }
+
+    &::before {
+      @apply top-0 opacity-100;
+    }
+
+    &::after {
+      @apply top-full opacity-0;
+    }
+  }
+
+  &:hover .text-flip-inner {
+    &::before {
+      @apply -top-full opacity-0;
+    }
+
+    &::after {
+      @apply top-0 opacity-100;
+    }
+  }
+
+  /* Variant = outline/link | Color = Primary */
+  &.btn-outline.btn-primary,
+  &.btn-link.btn-primary {
+    .text-flip-inner {
+      &::before,
+      &::after {
+        @apply text-text-brand-default;
+      }
+    }
+
+    .hero-icon {
+      @apply text-icon-brand-default;
+    }
+  }
+
+  /* Variant = outline/link | Color = Neutral/White */
+  &.btn-outline.btn-neutral,
+  &.btn-link.btn-neutral,
+  &.btn-link.btn-white {
+    .text-flip-inner {
+      &::before,
+      &::after {
+        @apply text-text-base-label;
+      }
+    }
+
+    .hero-icon {
+      @apply text-icon-neutral-default;
+    }
+  }
+
+  /* Variant = outline | Color = White */
+  &.btn-outline.btn-white {
+    .text-flip-inner {
+      &::before,
+      &::after {
+        @apply text-text-on-color-label;
+      }
+    }
+
+    .hero-icon {
+      @apply text-icon-neutral-default;
+    }
+  }
+
+  /* Variant = fill | Color = White */
+  &.btn-fill.btn-white {
+    .text-flip-inner {
+      &::before,
+      &::after {
+        @apply text-text-base-label;
+      }
+    }
+
+    .hero-icon {
+      @apply text-icon-neutral-default;
+    }
+  }
+
+  &.btn-primary,
+  &.btn-neutral,
+  &.btn-black {
+    .text-flip-inner {
+      &::before,
+      &::after {
+        @apply text-text-on-color-label;
+        @apply text-text-on-color-label;
+      }
+    }
+
+    .hero-icon {
+      @apply text-text-on-color-label;
+    }
+  }
+}
+.has-icon-moving-animation {
+  @apply overflow-hidden;
+  &:hover .icon {
+    &.icon-before .hero-icon {
+      @apply inset-s-full -top-full;
+    }
+
+    &.icon-after .hero-icon {
+      @apply inset-s-0 top-0;
+    }
+  }
+
+  .icons-wrapper {
+    @apply relative overflow-hidden;
+  }
+  .hero-icon {
+    @apply transition-[top,left] duration-500 ease-in-out;
+
+    &.icon-before .hero-icon,
+    &.icon-after .hero-icon {
+      @apply absolute inset-0 size-full;
+    }
+
+    &.icon-before .hero-icon {
+      @apply top-0;
+    }
+
+    &.icon-after .hero-icon {
+      @apply -inset-s-full top-full;
+    }
+  }
+}

@@ -1,0 +1,146 @@
+---
+import TOC from "@/components/widgets/TableOfContents.astro";
+import readingTime from "@/lib/utils/readingTime";
+import { markdownify } from "@/lib/utils/textConverter";
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+import CustomButton from "@/components/CustomButton.astro";
+import { useTranslations } from "@/lib/utils/i18nUtils";
+
+const translate = await useTranslations(Astro.currentLocale as string);
+
+const { content } = Astro.props;
+const {
+  title,
+  image,
+  author,
+  excerpt,
+  body,
+  Content,
+  categories,
+  tocHeadings,
+  tableOfContents,
+} = content;
+
+const timeReadingEstimated = body ? readingTime(body) : undefined;
+
+// Check if table of contents is enable
+const tocEnabled =
+  tableOfContents?.enable && tocHeadings && tocHeadings.length > 0;
+---
+
+<section
+  class="article-single -mt-21 mb-16 grid grid-cols-1 justify-items-center pt-0">
+  <div class="flex w-full flex-col items-center space-y-8">
+    <div class="bg-surface-base-default-secondary w-full pt-40 pb-16 md:pb-32">
+      <div class="container flex flex-col gap-8">
+        <CustomButton
+          class="self-start"
+          url="/blog"
+          variant="link"
+          iconLeft="ArrowLeftIcon"
+          label={translate("common.backToBlog")}
+        />
+
+        <div class="flex flex-col gap-8 lg:flex-row">
+          <div class="space-y-8 lg:max-w-3xl">
+            {title && <h1 class="h2" set:html={title} />}
+            {
+              excerpt && (
+                <p
+                  set:html={markdownify(excerpt)}
+                  class="text-text-base-description text-body-xl font-medium"
+                />
+              )
+            }
+            {
+              (author || timeReadingEstimated) && (
+                <div class="text-body-lg mt-8 flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    {author?.image && (
+                      <OptimizedImage
+                        width={64}
+                        height={64}
+                        src={author.image}
+                        alt={author.title || "author image"}
+                        class="border-border-brand-default-subtle h-12 w-12 rounded-full border-2"
+                      />
+                    )}
+                    <div class="text-start">
+                      {author?.title && (
+                        <p
+                          class="text-text-base-label text-label-lg font-medium"
+                          set:html={markdownify(author.title)}
+                        />
+                      )}
+                      {author?.role && (
+                        <p
+                          set:html={markdownify(author.role)}
+                          class="text-text-base-label/80 text-label-md"
+                        />
+                      )}
+                    </div>
+                  </div>
+                  {timeReadingEstimated && (
+                    <p
+                      class="text-text-base-description text-body-lg"
+                      set:html={markdownify(timeReadingEstimated)}
+                    />
+                  )}
+                </div>
+              )
+            }
+            {
+              categories && categories.length > 0 && (
+                <div class="border-border-base-on-color border-t pt-8">
+                  <ul class="flex gap-2">
+                    {categories.map((category: string) => (
+                      <li
+                        class="bg-surface-base-default text-label-md text-text-information-default border-border-information-default-subtle rounded-2xl border px-3 py-1 leading-none font-medium shadow-sm"
+                        set:html={markdownify(category)}
+                      />
+                    ))}
+                  </ul>
+                </div>
+              )
+            }
+          </div>
+
+          <!-- Post/Portfolio Image -->
+          {
+            image && Content && (
+              <OptimizedImage
+                src={image as string}
+                alt={title}
+                class:list={[
+                  "h-auto w-full rounded-3xl object-cover lg:h-96 lg:max-w-xl",
+                ]}
+              />
+            )
+          }
+        </div>
+      </div>
+    </div>
+    <div
+      class="container mt-8 flex flex-col gap-12 md:mt-24 md:flex-row md:gap-16">
+      <!-- Table of Contents -->
+      {
+        tocEnabled && tocHeadings && (
+          <TOC
+            toc={tocHeadings}
+            marker={false}
+            className="sticky hidden md:block top-28 lg:w-full lg:max-w-75 lg:shrink-0"
+          />
+        )
+      }
+
+      <!-- Main Content -->
+      {
+        Content && (
+          <div class="prose-styles content grid w-full min-w-0 grid-cols-[minmax(0,1fr)]">
+            <Content />
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,62 @@
+---
+title: "Zero-Trust Security for Real-Time Collaborative Apps"
+image: "futuristic-arrow-chart-tech-background-with-big-data-business-growth-currency-stock-investment.jpg"
+date: 2024-08-23
+author: "Thierry Leblond"
+categories:
+  - News
+draft: false
+
+excerpt: "A PhD study on weak coherence and zero-trust in real-time apps, balancing security, confidentiality, and availability. See what the research found."
+---
+
+I'm working as a PhD student at the Computer Science and Systems Laboratory on a thesis funded under a CIFRE contract with Parsec. As my subject is the study of coherence in distributed systems, since September 2023 I have been exploring the complex field of "Weak coherence for cloud zero-trust". In collaboration with Parsec, my aim is to address the crucial challenges of security, confidentiality and high availability in real-time collaborative applications. This research is rooted in a contemporary context marked by the widespread use of applications as a service (SaaS), highlighting the importance of rethinking traditional client-server architectures.
+
+## Introduction
+
+Real-time collaborative applications have gained in popularity with the spread of remote working. However, most of these applications rely on centralized client-server architectures, raising major security and confidentiality concerns. Trusting a third party to manage data and vulnerabilities to denial-of-service attacks are just some of the challenges to be overcome.
+
+## The issues
+
+Indeed, we're a long way from the days of Leslie Lamport (the father of distributed computing), when the issue of actors working on a common task only concerned multi-core processors. Today, this problem extends to much broader contexts and applications, forcing us to consider multiple parameters such as latency and security.
+
+Today's systems are asynchronous (each member expresses himself at his own pace), prey to crashes, malicious attacks, long and irregular communication delays, and untimely loss of messages. This makes the realization of collaborative tasks in real time highly complex, requiring the implementation of important compromises impacting the resilience, coherence or availability of the system (as demonstrated by Brewer's CAP theorem). [\[Brewer99\]](http://ieeexplore.ieee.org/document/798396/).
+
+## Towards Innovative Solutions
+
+To meet these challenges, we suggest exploring untrusted solutions through zero-trust and/or peer-to-peer approaches. These approaches aim to guarantee a high level of security while ensuring system resilience. However, maintaining robust performance, particularly in the case of high availability, requires the implementation of innovative solutions and reflection on achievable compromises.
+
+These reflections lead us to consider the very definition of the coherence of our system, and to envisage weaknesses in this coherence in order to gain in resilience and availability. Researchers in distributed algorithms refer to these solutions as weak coherences. [\[Dubois86\]](https://dl.acm.org/doi/10.1145/17356.17406)We have defined different families of weak coherence depending on the use case in question.
+
+## Weak Coherence at the Heart of Solutions
+
+The landscape of weak coherence properties can be broken down into groups, each satisfying a specific property.[\[Perrin17\]](https://books.google.fr/books?id=6DRlDwAAQBAJ&lpg=PP1&ots=AMV5YkIpbw&dq=Concurrence%20et%20coh%C3%A9rence%20dans%20les%20syst%C3%A8mes%20r%C3%A9partis&lr&hl=fr&pg=PP1#v=onepage&q=Concurrence%20et%20coh%C3%A9rence%20dans%20les%20syst%C3%A8mes%20r%C3%A9partis&f=false). Ces groupes ne sont pas exclusifs et peuvent se chevaucher. Evidemment, plus le critère de cohérence satisfait de propriétés et plus il est couteux à mettre en place, demandant de contraindre la résilience et la disponibilité du système.
+
+The aim is therefore to strike a balance between these different properties to guarantee a sufficient level of consistency while maintaining robust performance. This requires an in-depth understanding of the trade-offs between the different coherence properties and the algorithmic solutions to guarantee them.
+
+## Algorithmic results
+
+Recent work has explored algorithmic solutions to guarantee weak consistency in cloud environments, taking into account possible crashes, system openness or even malicious behavior[\[Frey23](http://arxiv.org/abs/2311.13936), [Kleppman22](https://dl.acm.org/doi/10.1145/3517209.3524042), [Nicolaescu16](https://dl.acm.org/doi/10.1145/2957276.2957310)\]. Research shows promising advances, but challenges persist, and the solutions presented strongly constrain the final applications, thus limiting the possible functionalities.
+
+## Towards a Zero-Trust Cloud
+
+Weakening the coherence of our system therefore makes it possible to gain in resilience and availability, but it does not in itself provide an answer to all the challenges brought about by real-time collaboration. Questions relating to data security and confidentiality remain unanswered. Having a highly resilient and available system makes no sense if the data handled is not secure. This is where the notion of cloud zero-trust (which we explain in more detail in this article) can play a key role in reducing the attack surface. Indeed, by imagining a system where trusted intermediaries do not exist, the only malicious actors in the system are reduced to the end-users who exploit the data.
+
+Unfortunately, this security choice is not without consequences for the system architecture, and constrains us in the possible solutions for achieving low coherence. The zero-trust approach places the central server(s) in the role of a simple message relay, making our system very similar to a peer-to-peer system. Gone are the solutions where a central server would take on a significant algorithmic load to resolve consistency issues, further limiting the possible solutions.
+
+## Data-centric security
+
+Even though weak coherence increases resilience and availability, and the zero-trust approach reduces the attack surface, the data manipulated by the system remains vulnerable through the actions of end-users. Nevertheless, this is a risk that can be managed by adopting a data-centric approach to security. This is the subject of this article.
+
+## Conclusion
+
+Balancing security, confidentiality and performance in real-time collaborative applications is a major challenge. The study of weak coherences and the exploration of innovative solutions pave the way for promising developments, but questions remain as to their practical application in a zero-trust context. Future research should focus on formalizing these concepts for effective implementation.
+
+## Sources
+
+\[Frey23\] [Process-Commutative Distributed Objects: From Cryptocurrencies to Byzantine-Fault-Tolerant CRDTs](http://arxiv.org/abs/2311.13936)  
+\[Kleppmann22\] [Making CRDTs Byzantine fault tolerant](https://dl.acm.org/doi/10.1145/3517209.3524042)  
+\[Perrin17\] [Concurrency and coherence in distributed systems](https://books.google.fr/books?id=6DRlDwAAQBAJ&lpg=PP1&ots=AMV5YkIpbw&dq=Concurrence%20et%20coh%C3%A9rence%20dans%20les%20syst%C3%A8mes%20r%C3%A9partis&lr&hl=fr&pg=PP1#v=onepage&q=Concurrence%20et%20coh%C3%A9rence%20dans%20les%20syst%C3%A8mes%20r%C3%A9partis&f=false)  
+\[Nicolaescu16\] [Near Real-Time Peer-to-Peer Shared Editing on Extensible Data Types](https://dl.acm.org/doi/10.1145/2957276.2957310)  
+\[Dubois86\] [Memory access buffering in multiprocessors](https://dl.acm.org/doi/10.1145/17356.17406)  
+\[Brewer99\] [Harvest, yield, and scalable tolerant systems](http://ieeexplore.ieee.org/document/798396/)

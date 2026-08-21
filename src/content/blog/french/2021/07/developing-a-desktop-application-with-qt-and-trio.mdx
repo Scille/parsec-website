@@ -1,0 +1,179 @@
+---
+title: "Application bureau avec Qt et Trio : notre expérience"
+image: "trioqt.png"
+date: 2021-07-05
+author: "Thierry Leblond"
+categories:
+  - Technologie
+draft: false
+
+excerpt: "Combiner Qt et le framework asynchrone Trio pose des défis techniques. Découvrez comment l'équipe Parsec a résolu ces soucis de threading dans son client."
+---
+
+## Introduction
+
+| AVERTISSEMENT : le développement a démarré avec la release du [mode invité de Trio](https://trio.readthedocs.io/en/stable/reference-lowlevel.html#using-guest-mode-to-run-trio-on-top-of-other-event-loops) et nous n'avons pas encore pu le tester. Il pourrait être le sujet d'un prochain article une fois que nous l'aurons étudié. |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
+Développer une application [Qt](https://www.qt.io/) autour d'un framework asynchrone en Python peut être délicat. Dans cet article, nous essaieront de décrire les soucis que nous avons rencontrés en creant [Parsec](https://parsec.cloud), qui utilise la bibliothèque [Trio](https://trio.readthedocs.io/en/stable/).
+
+## Qu'est-ce que Parsec ?
+
+Parsec est un logiciel de partage de fichiers open-source zero-trust (ergonomiquement se présente comme Dropbox mais avec un chiffrement côte client). Les sources sont disponibles sur [Github](https://github.com/Scille/parsec-cloud).
+
+Parsec est centré autour d'un serveur de métadonnées, est une application client, disponible originellement qu'à travers une interface en ligne de commande (CLI). Elle utilise massivement le paradigme de programmation asynchrone ([https://en.wikipedia.org/wiki/Asynchrony\_(computer_programming)](<https://en.wikipedia.org/wiki/Asynchrony_(computer_programming)>)) avec Trio. Tout Cela fonctionne correctement tant que nous utilisions uniquement la CLI, mais devient complexe quand nous voulions une application bureau avec Qt.
+
+## Quel est le problème avec l'asynchrone et Qt ?
+
+Qt est construit autour d'une boucle d'événement qui tourne généralement dans le thread principal. Tant qu'il n'y a pas d'interaction avec le logiciel, la boucle attend qu'un évenement se produise. Aussitôt que celui-ci est produit (un utilisateur clique sur un bouton par exemple), une callback est appelée et nous permet de réagir.
+
+```
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QMessageBox
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        # On ajoute un bouton
+        button = QPushButton("Click me", parent=self)
+        # On lie le signal "clicked" du bouton à notre méthode
+        button.clicked.connect(self._on_button_clicked)
+
+    def _on_button_clicked(self):
+        # On affiche un message que le bouton a été cliqué
+        QMessageBox.information(self, "Information", "Le bouton a été cliqué !")
+
+if __name__ == "__main__":
+    app = QApplication([])
+
+    # On créé notre fenêtre
+    win = MainWindow()
+    win.show()
+    # On démarre la boucle d'événements
+    app.exec_()
+```
+
+Les soucis apparaissent lorsque l'on cherche à démarrer Trio en même temps. Puisque Qt monopolise le thread principal, nous ne pouvons pas executer Trio simultanément (Qt bloquera Trio ou vice-versa). La solution évidente est l'utilisation de plusieurs threads (un pour Qt, un pour Trio) mais d'autres problèmes apparaissent car nous ne seront pas seulement obligés de naviguer entre threads mais aussi entre contexte synchrone et asynchrone. À cela s'ajoute l'impossibilité de mettre à jour un widget Qt depuis un thread différent de celui de la boucle d'événements Qt.
+
+Dans Parsec, nous avons besoin de réagir dans la GUI (Graphical User Interface) à des événements reçus du serveur de métadonnées, et envoyer des informations au serveur en fonction des entrées utilisateur.
+
+\[Serveur de métadonnées\] → \[Core - Trio - Async\] → \[GUI - Qt - Sync\]
+
+## Comment avons-nous "résolu" le problème ?
+
+Nous utilisons des threads (surprise !). Nous laissons Qt tourner dans le thread principal (par contrainte car seulement la thread principale peut faire des modifications sur l'interface graphique), nous démarrons un autre thread pour Trio, et nous utilisons un contexte spécifique pour interagir entre les deux. Les communications depuis la GUI vers le core Trio sont faites en démarrant des _jobs_, les communications depuis le core Trio vers la GUI utilisent les signaux Qt. Ceux-ci peuvent être _thread-safe_ avec l'argument [QueuedConnection](https://doc.qt.io/qt-5/qt.html#ConnectionType-enum)). Par défaut, Qt utilise `AutoConnection` qui se sert automatiquement de `DirectionConnection` (la callback est appellée immédiatement, donc dans le même thread que l'émetteur du signal) ou `QueueConnection` (la callback est appelée dans le thread du receveur) en fonction du contexte.
+
+```
+# On omet les imports
+
+@contextmanager
+def run_trio_thread():
+    # QtToTrioJobScheduler est défini [ici](https://github.com/Scille/parsec-cloud/blob/master/parsec/core/gui/trio_thread.py#L153)
+    job_scheduler = QtToTrioJobScheduler()
+    thread = threading.Thread(target=trio_run, args=[job_scheduler._start])
+    thread.setName("TrioLoop")
+    thread.start()
+    job_scheduler.started.wait()
+
+    try:
+        yield job_scheduler
+
+    finally:
+        job_scheduler.stop()
+        thread.join()
+
+class MainWindow(QMainWindow):
+    def __init__(self, jobs_ctx):
+        super().__init__()
+        self.jobs_ctx = jobs_ctx
+
+if __name__ == "__main__":
+
+    app = QApplication([])
+
+    with run_trio_thread() as jobs_ctx:
+        # On créé notre fenêtre en lui fournissant le jobs_ctx
+        win = MainWindow(jobs_ctx)
+        win.show()
+        app.exec_()
+```
+
+Un des points faibles est l'obligation de promener _jobs_ctx_ entre les classes qui en ont besoin.
+
+### Communication depuis Qt vers le core Trio
+
+Nous démarrons un nouveau _job_ en passant en paramètre des signaux Qt. Par exemple, si l'on demande son nom à l'utilisateur et que nous souhaitons le fournir au core :
+
+```
+class MainWindow(QMainWindow):
+    # Les deux signaux sont utilisés pour déterminer l'état de l'appel à la fonction asynchrone
+    set_name_success = pyqtSignal()
+    set_name_failure = pyqtSignal()
+
+    def __init__(self, jobs_ctx):
+        super().__init__()
+        self.jobs_ctx = jobs_ctx
+        button = QPushButton("Cliquez moi", parent=self)
+        button.clicked.connect(self._on_button_clicked)
+        # On lie les deux signaux à nos méthodes
+        self.set_name_success.connect(self._on_set_name_success)
+        self.set_name_failure.connect(self._on_set_name_failure)
+
+    def _on_button_clicked(self):
+        # On demande son nom à l'utilisateur
+        name = QInputDialog.getText(self, "Donnemoitonnom", "Veuillez entrer votre nom :")
+        # On démarre le job
+        self.jobs_ctx.submit_job(
+            # ThreadSafeQtSignal est un wrapper qui s'assure que le signal est bien émis avec le paramètre Qt.QueuedConnection
+            ThreadSafeQtSignal(self, "set_name_success"),
+            ThreadSafeQtSignal(self, "set_name_failure"),
+            # core_set_name est notre fonction asynchrone qui tourne dans un contexte Trio
+            core_set_name,
+            name=name,
+        )
+
+    # Si core_set_name est un succès, le signal "set_name_success" est invoqué, qui appelera cette callback
+    def _on_set_name_success(self):
+        QMessageBox.information(self, "Succès !", "Votre nom a bien été pris en compte.")
+
+    # Si core_set_name échoue, le signal "set_name_failure" est invoqué, qui appelera cette callback
+    def _on_set_name_failure(self):
+        QMessageBox.warning(self, "Erreur !", "Votre nom n'a pas été pris en compte.")
+```
+
+`submit_job` retourne également le _job_ si nous en avons besoin (pour annuler le job par exemple) mais dans un soucis de breveté, on ne le détaille pas ici. L'implémentation complète est disponible [ici](https://github.com/Scille/parsec-cloud/blob/master/parsec/core/gui/trio_thread.py).
+
+### Communication depuis le core Trio vers Qt
+
+Le core a également besoin de communiquer avec la GUI. Par exemple, un utilisateur partage un fichier avec nous. Il serait sympathique d'être capable de réagir à cet événement et nous informer.
+
+Ce cas est plus simple car nous pouvons utiliser directement les signaux Qt.
+
+```
+class MainWindow(QMainWindow):
+    # Ce signal sera émit quand un fichier est partagé avec nous. Les deux paramètres sont l'utilisateur qui a créé le partage et le nom du fichier.
+    file_shared = pyqtSignal(str, str)
+
+    def __init__(self, jobs_ctx):
+        super().__init__()
+        self.jobs_ctx = jobs_ctx
+        # On se connecte à l'événement FILE_SHARED du core et appelons _on_core_file_shared quand il arrive.
+        # L'event_bus est une simple clé associée à une liste de callback. L'implémentation complète est disponible [ici](https://github.com/Scille/parsec-cloud/blob/master/parsec/event_bus.py).
+        self.jobs_ctx.event_bus.connect(FILE_SHARED, self._on_core_file_shared)
+        # On connect notre signal file_shared à _on_file_shared.
+        # QueuedConnection est utilisé par défaut par Qt mais on le rend explicite pour l'exemple.
+        self.file_shared.connect(self._on_file_shared, Qt.QueuedConnection)
+
+    def _on_core_file_shared(self, user_name, file_name):
+        # On passe les arguments au signal
+        # On ne fait rien dans cette méthode, nous ne sommes pas dans le thread Qt.
+        self.file_shared.emit(user_name, file_name)
+
+    def _on_file_shared(self, user_name, file_name):
+        QMessageBox.information(self, "Fichier partagé !", f"Le fichier '{file_name}' a été partagé par l'utilisateur '{user_name}'")
+```
+
+## Conclusion
+
+Cette solution fonctionne, nous sommes bien capables de jongler entre les threads et les contextes, mais elle ajoute beaucoup de complexité et beaucoup de boilerplate. Dans notre cas, les interactions entre Trio et Qt ne sont pas trop nombreuses mais dans des cas plus complexes, on peut se retrouver facilement avec du code spaghetti.
+
+Pour répondre à cette problématique, Trio a sorti son [mode invité](https://trio.readthedocs.io/en/stable/reference-lowlevel.html#using-guest-mode-to-run-trio-on-top-of-other-event-loops), et certains bibliothèques se sont construites autour, comme [QTrio](https://qtrio.readthedocs.io/en/stable/) mais ceux-ci sont très récents et nous n'avons pas encore eu l'occasion de les tester.

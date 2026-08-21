@@ -1,0 +1,80 @@
+---
+import type { Section } from "@/types";
+import type { z } from "astro/zod";
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import TestimonialCard from "@/components/cards/TestimonialCard.astro";
+import overrideObjects from "@/lib/utils/overrideObjects.ts";
+import type { sectionsSchema } from "@/sections.schema";
+import AnimatedText from "@/components/widgets/AnimatedText.astro";
+
+// Type
+type SectionType = Section & z.infer<typeof sectionsSchema.testimonialSection>;
+type Props = {
+  content?: SectionType;
+  minimalLayout?: boolean;
+};
+
+// Default content fetch
+let defaultContent = (
+  await getEntryCTM("testimonial", "-index", Astro.currentLocale)
+)?.data as SectionType;
+
+let actualContent = overrideObjects(
+  { ...defaultContent },
+  Astro.props.content,
+) as SectionType;
+
+let {
+  enable = true,
+  title,
+  limit,
+} = Astro.props.content || (actualContent.testimonialSection as SectionType);
+
+let list = actualContent.list;
+
+if (!enable) return;
+
+// limit the list defined in frontmatter
+if (limit) {
+  list = list?.slice(0, limit);
+}
+---
+
+<section class="bg-dots-fade pb-20 md:pb-32">
+  <div class:list={[Astro.props.minimalLayout ? "container" : ""]}>
+    <div
+      class:list={[
+        "space-y-10 md:space-y-16",
+        !Astro.props.minimalLayout && "container",
+      ]}>
+      {
+        title && (
+          <div class="mx-auto max-w-4xl text-center">
+            {title && (
+              <h2 class="text-h3-sm md:text-h3 has-italic-text text-text-base-heading">
+                <AnimatedText
+                  delay={0.2}
+                  stagger={0.09}
+                  content={markdownify(title)}
+                />
+              </h2>
+            )}
+          </div>
+        )
+      }
+
+      {
+        list && (
+          <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {list
+              .filter((item) => item.enable !== false)
+              .map((testimonial, index) => (
+                <TestimonialCard content={testimonial} />
+              ))}
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>

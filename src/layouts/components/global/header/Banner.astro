@@ -1,0 +1,45 @@
+---
+import Icons from "@/helpers/Icons.astro";
+import type { HeroIconName } from "@/helpers/heroIconNames";
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+import { getEntryCTM } from "@/lib/contentParser.astro";
+
+const banner = await getEntryCTM("banner", "-index", Astro.currentLocale);
+const buttons = banner?.data.buttons ?? [];
+---
+
+<div class="z-30 transform">
+  {
+    banner && banner?.data.enable && (
+      <div class="bottom-menu border-border-base-default/20 bg-surface-base-default-secondary -top-6 z-1 w-full border-b backdrop-blur-md backdrop-filter transition-all">
+        <div class="relative">
+          <div class="container flex items-center justify-end">
+            {buttons.map(
+              (item: any) =>
+                item.enable && (
+                  <a
+                    href={item.url}
+                    target={item.target}
+                    class:list={[
+                      "hover:bg-surface-neutral-default-subtle-pressed text-text-base-label hover:text-text-brand-default border-border-base-default flex items-center gap-1 border-l px-3 py-2 last:border-r",
+                      item.class,
+                    ]}>
+                    {item.icon && (
+                      <Icons class="text-lg" icon={item.icon as HeroIconName} />
+                    )}
+                    {item.image && (
+                      <OptimizedImage
+                        src={item.image}
+                        class="group h-3.5 w-auto"
+                      />
+                    )}
+                    <span class="text-label-lg font-medium">{item.label}</span>
+                  </a>
+                ),
+            )}
+          </div>
+        </div>
+      </div>
+    )
+  }
+</div>

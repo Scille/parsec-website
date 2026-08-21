@@ -1,0 +1,56 @@
+---
+import { markdownify } from "@/lib/utils/textConverter";
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+const { class: className, ...rest } = Astro.props;
+let { enable, customer, content } = Astro.props.content || {};
+
+if (!enable) return;
+---
+
+<div
+  class:list={[
+    "bg-surface-base-default border-border-base-default group relative flex w-full flex-col items-start gap-6 rounded-2xl p-6 shadow-lg",
+    className,
+  ]}
+  {...rest}>
+  <OptimizedImage
+    src="/images/quote-mark.svg"
+    class:list={"h-[2rem] w-auto opacity-10"}
+  />
+
+  <div class="flex flex-col items-start space-y-4">
+    {
+      content && (
+        <blockquote
+          class="text-body-lg leading-relaxed"
+          set:html={markdownify(content)}
+        />
+      )
+    }
+  </div>
+
+  <div class="mt-auto flex items-center gap-4">
+    {
+      customer.avatar && (
+        <OptimizedImage
+          src={customer.avatar}
+          alt={customer.name}
+          class="h-12 w-12 rounded-full object-cover"
+        />
+      )
+    }
+    <div class="mt-2 min-w-0 flex-1">
+      {
+        customer.name && (
+          <p class="text-body-lg font-semibold">{customer.name}</p>
+        )
+      }
+      {
+        customer.role && (
+          <p class="text-body-md text-text-base-description">{customer.role}</p>
+        )
+      }
+    </div>
+  </div>
+</div>

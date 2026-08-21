@@ -1,0 +1,59 @@
+---
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import overrideObjects from "@/lib/utils/overrideObjects.ts";
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+import type { customersSectionType } from "@/types";
+import { markdownify } from "@/lib/utils/textConverter";
+
+type Props = {
+  content?: customersSectionType;
+  class?: string;
+  tag?: "div";
+};
+
+// Fetching the default content for the this section
+let defaultContent = (
+  await getEntryCTM("sections", "customers", Astro.currentLocale)
+)?.data as customersSectionType;
+
+let actualContent = overrideObjects(
+  { ...defaultContent },
+  Astro.props.content,
+) as customersSectionType;
+
+let { enable = true, title, list } = actualContent as customersSectionType;
+
+const { tag: Element = "section", class: className } = Astro.props;
+
+if (!enable) return;
+---
+
+<Element class:list={[className]}>
+  <div class="container">
+    <div class="mx-auto text-center">
+      {
+        title && (
+          <h3
+            data-aos="fade-up-sm"
+            class="text-h4-sm md:text-h4 text-center max-md:mx-auto"
+            set:html={markdownify(title)}
+          />
+        )
+      }
+      <div
+        data-aos="fade-up-sm"
+        data-aos-delay={200}
+        class="relative mt-6 flex shrink flex-wrap justify-center gap-7 overflow-hidden md:mt-8">
+        {
+          list.map((item) => (
+            <OptimizedImage
+              src={item.src}
+              alt={item.alt}
+              class:list={["h-full max-h-[90px] w-auto md:max-h-[100px]"]}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</Element>
