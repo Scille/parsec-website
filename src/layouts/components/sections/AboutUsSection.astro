@@ -70,7 +70,7 @@ if (!enable) return;
           )}
           <div class="grid gap-14 md:grid-cols-12">
             {about.image && (
-              <div class="relative col-span-4 h-fit max-md:mx-auto max-md:w-fit">
+              <div class="relative col-span-1 h-fit max-md:mx-auto max-md:w-fit md:col-span-4">
                 <OptimizedImage
                   width={310}
                   height={270}
@@ -93,7 +93,7 @@ if (!enable) return;
             <div
               data-aos="fade-right-sm"
               data-aos-delay="150"
-              class="space-y-7 md:col-span-8 md:space-y-14">
+              class="col-span-1 space-y-7 md:col-span-8 md:space-y-14">
               {about.list && about.list.length > 0 && (
                 <div class="flex flex-col flex-wrap gap-7 md:flex-nowrap md:gap-10">
                   {about.list.map((item) => (

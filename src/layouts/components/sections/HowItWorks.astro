@@ -52,7 +52,7 @@ if (!enable) return;
                 <div
                   data-aos="fade-right-sm"
                   data-aos-delay={(index + 2.5) * 100}
-                  class="flex flex-col items-center gap-8 md:gap-10">
+                  class="flex flex-col items-center gap-8 overflow-hidden md:gap-10">
                   <div class="has-italic-text text-text-base-heading flex w-full flex-wrap gap-y-4 font-medium">
                     {item.step && (
                       <div
@@ -65,7 +65,7 @@ if (!enable) return;
                     <OptimizedImage
                       src={item.image.src}
                       alt={item.image.alt}
-                      class:list={"w-full md:w-auto lg:h-[180px]"}
+                      class="w-full max-w-[inherit] md:w-auto lg:h-45"
                     />
                   )}
                   <div class="flex flex-col gap-5">
