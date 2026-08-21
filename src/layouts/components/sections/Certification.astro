@@ -56,17 +56,17 @@ if (!enable) return;
         <OptimizedImage
           src={logoCSPN.src}
           alt={logoCSPN.alt}
-          class="-top absolute right-6 mx-auto my-4 flex max-w-52 object-contain md:hidden"
+          class="-top absolute left-8 mx-auto my-4 flex max-w-52 object-contain md:hidden"
         />
       )
     }
     <div
       class="from-surface-brand-default-pressed to-surface-elevated-secondary mx-auto flex max-w-6xl flex-col rounded-3xl bg-linear-to-b/oklch px-8 py-12 shadow-xl md:flex-row md:py-16 md:pl-16">
-      <div class="space-y-4 max-md:mt-8 lg:max-w-xl">
+      <div class="space-y-4 max-md:mt-20 lg:max-w-xl">
         {
           badge?.enable && (
             <span
-              class="bg-surface-brand-default text-text-brand-on-color inline-block gap-1 rounded-full px-3 py-1 text-sm font-normal"
+              class="bg-surface-brand-default text-text-brand-on-color hidden gap-1 rounded-full px-3 py-1 text-sm font-normal md:inline-block"
               set:html={markdownify(badge.label)}
             />
           )

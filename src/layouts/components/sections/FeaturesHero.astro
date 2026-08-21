@@ -20,7 +20,7 @@ let { title, description, image, button, subSection } = (
 
 <section class="features-hero overflow-visible! pt-0">
   <div
-    class="after:from-surface-brand-default after:to-surface-brand-default-pressed relative z-20 after:pointer-events-none after:absolute after:-top-20 after:-z-10 after:h-[calc(100%+5rem)] after:w-full after:bg-linear-180 after:content-['']">
+    class="after:from-surface-brand-default after:to-surface-brand-default-pressed relative z-20 after:pointer-events-none after:absolute after:-top-21 after:-z-10 after:h-[calc(100%+5rem)] after:w-full after:bg-linear-180 after:content-['']">
     <div
       class="from-surface-brand-default to-surface-brand-default-pressed pointer-events-none absolute -top-20 z-10 h-[calc(100%+5rem)] w-full overflow-hidden bg-linear-180">
       <div class="container grid h-full w-full py-20 lg:grid-cols-2">
@@ -30,7 +30,7 @@ let { title, description, image, button, subSection } = (
               <div class="absolute -right-6/12 z-0">
                 <OptimizedImage
                   src={image.src}
-                  class="shadow-hero-image mx-auto rounded-3xl border-8 border-white/35 object-cover md:rounded-[2.25rem] md:border-[1.25rem]"
+                  class="shadow-hero-image mx-auto rounded-3xl border-8 border-white/35 object-cover md:rounded-[2.25rem] md:border-4"
                 />
               </div>
             </div>
@@ -67,7 +67,7 @@ let { title, description, image, button, subSection } = (
             {
               button && (
                 <CustomButton
-                  class="mt-4"
+                  class="mt-4 w-full md:w-fit"
                   {...button}
                   data-aos="fade-right-sm"
                   data-aos-delay="500"
