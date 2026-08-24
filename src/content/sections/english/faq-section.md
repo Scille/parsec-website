@@ -64,6 +64,10 @@ list:
           Since Parsec is a Zero Trust solution, you have two options for recovering your password: either through another device already connected to your account, or via a recovery file plus a secret key that you must have downloaded beforehand.
           Whichever option you choose, click the **Forgot Password** link on the login page and follow the instructions to set a new password.
       - active: false
+        title: "Does the web app work on Safari?"
+        content: |
+          The web app is currently compatible with Chrome Firefox, and Edge browsers. We are working on making it compatible with Safari in the future.
+      - active: false
         title: "Do you offer onboarding assistance?"
         content: |
           Yes, we provide a user guide and documentation to help you use the application. We are also able to train you, or your teams if needed, with on-site or remote sessions.

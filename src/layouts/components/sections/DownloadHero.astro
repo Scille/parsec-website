@@ -137,6 +137,10 @@ const codeOptions = (osDropdown?.items ?? [])
                     {...goOnWeb.button}
                   />
                 )}
+                <p
+                  class="text-body-lg text-text-base-description mx-auto w-fit px-2 text-center italic backdrop-blur-md"
+                  set:html={markdownify(goOnWeb.info)}
+                />
               </div>
             )
           }

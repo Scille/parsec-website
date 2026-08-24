@@ -208,6 +208,7 @@ const heroDownloadSchema = z.object({
     enable: z.boolean().default(true).optional(),
     title: z.string(),
     button: sharedButtonBase,
+    info: z.string(),
   }),
   moreButton: sharedButtonBase.optional(),
 });
