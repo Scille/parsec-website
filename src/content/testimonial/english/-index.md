@@ -29,7 +29,7 @@ list:
       avatar: "/images/customers/avatar/placeholder-woman.png"
       company: "Turenne Hospital Centre"
   - enable: true
-    content: "Review by Pascal Gauffeny"
+    content: "In a world where data sharing is becoming the norm, where cyberattacks threaten every transaction and where regulations impose ever-stricter constraints, Parsec is reinventing security. Being platform-agnostic, it integrates seamlessly with your existing infrastructure without requiring any changes. Secure, it offers high-performance end-to-end encryption without compromising on simplicity or flexibility. With Parsec, security becomes simple, compliance comes naturally, and integration is seamless."
     customer:
       name: "Pascal Gauffeny"
       role: "Strategy Director"
