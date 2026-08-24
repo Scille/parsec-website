@@ -61,6 +61,10 @@ list:
           Parsec étant une solution Zero Trust, vous avez deux solutions pour récupérer votre mot de passe. Soit via un autre appareil qui est connecté avec votre compte, soit via un fichier de récupération + clé secrète que vous devez avoir préalablement téléchargé.
           Quel que soit votre choix, cliquez sur le lien **Mot de passe oublié** sur la page de connexion et suivez les instructions pour définir un nouveau mot de passe.
       - active: false
+        title: "Le web app fonctionne-t-elle sur Safari ?"
+        content: |
+          L'application web est actuellement compatible avec les navigateurs Chrome, Firefox et Edge. Nous travaillons à sa compatibilité avec Safari dans le futur.
+      - active: false
         title: "Proposez-vous de l'assistance à l'onboarding ?"
         content: |
           Oui, nous fournissons un guide utilisateur et une documentation pour vous aider à utiliser l'application. Nous sommes en mesure de vous former, ou de former vos équipes si besoin, avec des sessions sur site ou à distance.

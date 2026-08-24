@@ -54,6 +54,7 @@ goOnWeb:
     hoverEffect: "text-flip"
     data-umami-event: "web-app-button"
     data-umami-event-location: "download-hero"
+  info: "Non disponible sur Safari."
 
 moreButton:
   enable: true
