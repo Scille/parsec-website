@@ -27,7 +27,7 @@ list:
       avatar: "/images/customers/avatar/placeholder-woman.png"
       company: "Centre Hospitalier Turenne"
   - enable: true
-    content: "Contenu avis Pascal Gauffeny"
+    content: "Dans un monde où le partage de données devient légion, où les cyberattaques menacent chaque échange et où les réglementations imposent des contraintes toujours plus lourdes, Parsec réinvente la sécurité. Agnostique, elle s’intègre parfaitement à vos infrastructures existantes, sans imposer de changement. Sécurisée, elle offre un chiffrement de bout en bout ultra-performant, sans sacrifier la simplicité ou la flexibilité. Avec Parsec, la sécurité devient simple, la conformité naturelle, et l’intégration transparente."
     customer:
       name: "Pascal Gauffeny"
       role: "Directeur Stratégique"
