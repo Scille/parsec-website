@@ -23,16 +23,19 @@
     }
 
     // Smooth Scroll - https://github.com/gblazex/smoothscroll-for-websites/wiki
-    runWhenIdle(async () => {
-      const { default: SmoothScroll } =
-        await import("smoothscroll-for-websites");
+    // Skipped on Safari: conflicts with its native scroll handling.
+    if (!isSafari()) {
+      runWhenIdle(async () => {
+        const { default: SmoothScroll } =
+          await import("smoothscroll-for-websites");
 
-      SmoothScroll({
-        animationTime: 600, // [ms]
-        stepSize: 60, // [px]
-        touchpadSupport: true,
+        SmoothScroll({
+          animationTime: 600, // [ms]
+          stepSize: 60, // [px]
+          touchpadSupport: true,
+        });
       });
-    });
+    }
 
     // Fix: Support horizontal scrolling by using the mouse wheel + shift
     initHorizontalScroll();
@@ -43,6 +46,12 @@
     // Magnetic Hover Animation
     initMagneticHoverAnimation();
   });
+
+  // Detect Safari (desktop and iOS), excluding other WebKit-based UAs like Chrome/Edge on iOS
+  function isSafari() {
+    const ua = window.navigator.userAgent;
+    return /^((?!chrome|android|crios|fxios|edgios).)*safari/i.test(ua);
+  }
 
   // Load Preline components dynamically based on DOM content
   async function loadPrelineComponents() {
