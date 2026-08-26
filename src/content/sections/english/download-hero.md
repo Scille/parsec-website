@@ -1,5 +1,5 @@
 ---
-title: "Try **a secure experience** on desktop and the web"
+title: "Try **a secure experience** on desktop and web"
 description: "Store and manage your data securely, with fast access and enhanced protection on your system."
 image: "/images/product-for-hero-logged-en.svg"
 
@@ -46,7 +46,7 @@ goOnWeb:
   title: "Web"
   button:
     tag: "a"
-    label: "Continue on the web"
+    label: "Continue on this browser"
     url: "https://app.parsec.cloud/"
     variant: "outline"
     color: "primary"

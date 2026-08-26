@@ -2,7 +2,7 @@
 enable: true # Control the visibility of this section across all pages where it is used
 title: "**Have questions?** Send us a message"
 description: |
-  If you have any questions, please feel free to send us a message; we’ll do our best to reply within two working days.
+  If you have any questions, please feel free to send us a message; we’ll do our best to reply within two business days.
 
   If the request is <u>urgent</u>, you can reach us via the communication channels below.
 
@@ -54,7 +54,7 @@ needs:
 # Check config.toml file for form action related settings
 form:
   emailSubject: "New inquiry - Parsec Cloud"
-  autoResponse: "Thanks for reaching out! We've received your message and will get back to you within two working days."
+  autoResponse: "Thanks for reaching out! We've received your message and will get back to you within two business days."
   submitButton:
     enable: true
     label: "Send message"

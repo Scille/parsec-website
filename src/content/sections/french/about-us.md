@@ -10,7 +10,7 @@ about:
   image: "/images/about/group-photo.jpg"
   list:
     - title: "**2014**"
-      description: "L'entreprise a été fondée par Thierry Leblond et Emmanuel Leblond, ingénieur EPITA. La société Scille se spécialise dans la conception et le déploiement de projets de transformation numérique pour les grandes entreprises, en utilisant des technologies open source."
+      description: "L'entreprise a été fondée par Thierry Leblond, ancien ingénieur de l'armement, et Emmanuel Leblond, ingénieur EPITA. La société Scille se spécialise dans la conception et le déploiement de projets de transformation numérique pour les grandes entreprises, en utilisant des technologies open source."
     - title: "**2016**"
       description: "En 2016, en collaboration avec le Laboratoire Bordelais de Recherche en Informatique (LaBRI), SCILLE intègre le dispositif RAPID (Régime d’APpui à l’Innovation Duale)  du ministère des Armées avec le projet de recherche Parsec Cloud."
     - title: "**2026**"

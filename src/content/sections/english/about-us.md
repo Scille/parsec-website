@@ -10,9 +10,9 @@ about:
   image: "/images/about/group-photo.jpg"
   list:
     - title: "**2014**"
-      description: "The company was founded by Thierry Leblond and Emmanuel Leblond, engineers from EPITA. The company Scille specializes in designing and deploying digital transformation projects for large enterprises, using open source technologies."
+      description: "The company was founded by Thierry Leblond, former armaments engineer, and Emmanuel Leblond, engineer from EPITA. The company Scille specializes in designing and deploying digital transformation projects for large companies, using open source technologies."
     - title: "**2016**"
       description: "In 2016, in collaboration with the Bordelais Laboratory for Computer Science Research (LaBRI), SCILLE integrates the RAPID (Dual Innovation Support Scheme) device of the Ministry of Defence with the Parsec Cloud research project."
     - title: "**2026**"
-      description: "After one year of evaluation audit by ANSSI, we obtain a second time (the first time in 2021), the CSPN certification. Our solution guarantees the confidentiality, authenticity, and integrity of sensitive data shared and stored anywhere in the world regardless of the storage cloud."
+      description: "After one year of evaluation audit by ANSSI, Parsec obtained the CSPN certification for a second time (the first time in 2021). Our solution guarantees the confidentiality, authenticity, and integrity of sensitive data shared and stored anywhere in the world regardless of the cloud storage."
 ---

@@ -46,13 +46,13 @@ list:
       - value: Unlimited external users (guests)
         isEnabled: true
 
-  # Government plan
+  # Administration plan
   - enable: true
     featured: false
     badge:
       enable: true
       label: Dedicated SaaS
-    name: Government
+    name: Administration
     description: Perfect for mid-sized companies and public administrations with data encryption needs.
 
     price:
@@ -62,12 +62,12 @@ list:
     button:
       enable: true
       label: Request a quote
-      url: /contact/?plan=government
+      url: /contact/?plan=administration
       rel:
       target:
       hoverEffect: "text-flip"
       data-umami-event: "pricing-cta"
-      data-umami-event-location: "government"
+      data-umami-event-location: "administration"
 
     mainFeaturesList:
       - value: Everything included in Business

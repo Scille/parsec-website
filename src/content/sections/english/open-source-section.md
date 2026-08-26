@@ -14,6 +14,6 @@ list:
     title: "Code available to everyone"
     description: "You can consult the code at any time to ensure the reliability of the deployment of the innovative technologies implemented to guarantee the confidentiality of your sensitive data."
   - icon: "UserGroupIcon"
-    title: "Contribution to development"
+    title: "Contributing to development"
     description: "If you are passionate about code, Parsec Cloud is undoubtedly the opportunity for you to challenge your technical knowledge and bring your contribution to the construction of free cybersecurity!"
 ---

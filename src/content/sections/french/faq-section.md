@@ -22,7 +22,7 @@ list:
       - active: false
         title: "Quelle différence avec les services de cloud comme Dropbox, OneDrive, Google Drive etc ?"
         content: |
-          Contrairement aux services de partage de données comme Google Drive ou Dropbox, Parsec vient sécuriser votre collaboration avec des tiers externes même en dehors de votre périmètre de confiance. Les données sont chiffrées et stockées uniquement sur votre appareil. Vous, et vous seul, êtes en mesure de déchiffrer ces données pour les consulter et les modifier (principe du Zero Knowledge).
+          Contrairement aux services de partage de données comme Google Drive ou Dropbox, Parsec vient sécuriser votre collaboration avec des tiers externes même en dehors de votre périmètre de confiance. Les données sont chiffrées avec des clefs stockées uniquement sur votre appareil. Vous et les membres de votre organisation êtes les seuls en mesure de déchiffrer ces données pour les consulter et les modifier (principe du Zero Knowledge).
       - active: false
         title: "La plateforme est-elle adaptée aux mobiles ?"
         content: |
@@ -50,7 +50,7 @@ list:
       - active: true
         title: "Comment créer un compte ?"
         content: |
-          Si vous souhaitez créer une organisation depuis notre Saas, il vous faudra un espace client, vous pouvez vous y rendre en allant sur [sign.parsec.cloud](https://sign.parsec.cloud). Après avoir souscrit à l'offre Saas (Business), vous pourrez créer votre organisation.
+          Si vous souhaitez créer une organisation depuis notre Saas, il vous faudra un espace client que vous pouvez créer en allant sur [sign.parsec.cloud](https://sign.parsec.cloud). Après avoir souscrit à l'offre Saas (Business), vous pourrez créer votre organisation.
       - active: false
         title: "Puis-je inviter des membres de mon équipe ?"
         content: |

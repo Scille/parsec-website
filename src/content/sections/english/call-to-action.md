@@ -1,6 +1,6 @@
 ---
 enable: true
-title: Get started to secure your **sensitive data** today
+title: Start securing your **sensitive data** today
 description: Enjoy a 15-day free trial — You can cancel anytime.
 button:
   enable: true

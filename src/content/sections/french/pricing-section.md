@@ -62,12 +62,12 @@ list:
     button:
       enable: true
       label: Demander un devis
-      url: /contact/?plan=government
+      url: /contact/?plan=administration
       rel:
       target:
       hoverEffect: "text-flip"
       data-umami-event: "pricing-cta"
-      data-umami-event-location: "government"
+      data-umami-event-location: "administration"
 
     mainFeaturesList:
       - value: Tout ce qui est inclus dans Business
@@ -88,7 +88,7 @@ list:
       enable: true
       label: On-premise
     name: Intégrateur
-    description: Idéal pour les intégrateurs qui souhaitent ajouter Parsec à leur éco-système.
+    description: Idéal pour les intégrateurs qui souhaitent ajouter Parsec à leur écosystème.
 
     price:
       - billing:

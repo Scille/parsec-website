@@ -20,12 +20,12 @@ list:
       - active: true
         title: "Why choose Parsec Cloud?"
         content: |
-          Parsec Cloud is a collaborative vault for sharing sensitive and confidential data, following Zero Trust and Zero Knowledge principles, including with parties outside your organisation (such as government bodies or clients).
+          Parsec Cloud is a collaborative vault for sharing sensitive and confidential data, following Zero Trust and Zero Knowledge principles, including parties outside your organisation (such as government bodies or clients).
           It is simple to deploy, easy to use, end-to-end encrypted (E2EE), and holds ANSSI's CSPN security certification.
       - active: false
         title: "What's the difference with cloud services like Dropbox, OneDrive, Google Drive, etc.?"
         content: |
-          Unlike data-sharing services such as Google Drive or Dropbox, Parsec secures your collaboration with external parties, even outside your trusted perimeter. Data is encrypted and stored only on your device. You, and only you, are able to decrypt this data to view or edit it (the Zero Knowledge principle).
+          Unlike data-sharing services such as Google Drive or Dropbox, Parsec secures your collaboration with external parties, even outside your trusted perimeter. Data is encrypted and stored only on your device. Only you and your organization members are able to decrypt this data to view or edit it (the Zero Knowledge principle).
       - active: false
         title: "Is the platform mobile-friendly?"
         content: |
@@ -41,11 +41,11 @@ list:
       - active: true
         title: "What payment methods do you accept?"
         content: |
-          We only accept credit cards for the "Business" plan. The "Government" and "Integrator" plans can only be paid by bank transfer.
+          We only accept credit cards for the "Business" plan. The "Administration" and "Integrator" plans can only be paid by bank transfer.
       - active: false
         title: "Can I cancel my plan later?"
         content: |
-          Available only with our "Business" plan, you can cancel your plan at any time from your admin dashboard. The "Government" and "Integrator" plans are fixed for the duration of the contract.
+          Available only with our "Business" plan, you can cancel your plan at any time from your admin dashboard. The "Administration" and "Integrator" plans are fixed for the duration of the contract.
 
   - label: "Download & Onboarding"
     id: download
@@ -53,7 +53,7 @@ list:
       - active: true
         title: "How do I create an account?"
         content: |
-          If you want to create an organisation through our SaaS offering, you'll need a client space, which you can access at [sign.parsec.cloud](https://sign.parsec.cloud). Once you've subscribed to the SaaS (Business) offer, you'll be able to create your organisation.
+          If you want to create an organisation through our SaaS offering, you will first need a client space which you can create at [sign.parsec.cloud](https://sign.parsec.cloud). Once you've subscribed to the SaaS (Business) offer, you'll be able to create your organisation.
       - active: false
         title: "Can I invite my team members?"
         content: |
@@ -70,7 +70,7 @@ list:
       - active: false
         title: "Do you offer onboarding assistance?"
         content: |
-          Yes, we provide a user guide and documentation to help you use the application. We are also able to train you, or your teams if needed, with on-site or remote sessions.
+          Yes, we provide a user guide and documentation to help you use the application. If needed, we can also train you or your teams, with on-site or remote sessions.
 
   - label: "Contact"
     id: contact

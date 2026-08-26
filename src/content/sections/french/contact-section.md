@@ -42,7 +42,7 @@ needs:
         target: "_blank"
     - icon: "ExclamationTriangleIcon"
       title: "Reporter un problème"
-      description: "Vous avez rencontré un problème sur l'application ou simplement le site internet ?"
+      description: "Vous avez rencontré un problème sur l'application ou sur le site internet ?"
       color: "extra-orange"
       button:
         tag: "a"

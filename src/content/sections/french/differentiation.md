@@ -1,6 +1,6 @@
 ---
 enable: true
-title: Face aux **menaces de cybersécurité** et même les plus sophistiquées, nous pouvons vous aider à protéger vos données.
+title: Face aux **menaces de cybersécurité** y compris les plus sophistiquées, nous pouvons vous aider à protéger vos données.
 list:
   - name: ZeroTrust
     image:
