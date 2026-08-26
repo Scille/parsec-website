@@ -31,7 +31,7 @@ items:
     description: "Parsec offre une gestion précise des accès, une synchronisation automatique entre les collaborateurs et un partage sécurisé avec des partenaires externes, tout en préservant vos habitudes de travail."
     features:
       - title: "Partage sécurisé par défaut"
-        description: "Chaque accès est rigoureusement vérifié et chaque action est enregistrée. Collaborez en toute sécurité sans compromettre la confidentialité."
+        description: "Chaque accès est rigoureusement vérifié et chaque action est enregistrée. Collaborez en toute sécurité sans compromettre la confidentialité de vos données."
       - title: "Confidentialité intacte, collaboration fluide"
         description: "Aucun utilisateur ou appareil ne peut être considéré comme fiable sans une vérification adéquate. Vous conservez un contrôle total sur vos échanges."
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Des solutions de sécurité <br/> **pour votre entreprise**"
-description: "Parsec est un outil français de partage de fichiers sécurisé qui facilite la collaboration en toute sécurité, sans nécessiter d'accès externe. Ses fonctionnalités avancées, vous permettent de travailler ensemble tout en restant protégée."
+description: "Parsec est un outil français de partage de fichiers sécurisé qui facilite la collaboration en toute sécurité, sans nécessiter d'accès externe. Ses fonctionnalités avancées, vous permettent de travailler ensemble tout en restant protégé."
 image:
   {
     src: "/images/product-for-hero-logged-fr.svg",

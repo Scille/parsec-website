@@ -4,7 +4,7 @@ title: "Our core **values** at Parsec Cloud"
 
 values:
   - title: "Innovation"
-    description: "We embrace creativity and constantly seek new ways to solve problems and deliver value."
+    description: "We embrace creativity and constantly seek new ways to solve problems and add value."
     icon: "LightBulbIcon"
 
   - title: "Collaboration"
@@ -24,6 +24,6 @@ values:
     icon: "AcademicCapIcon"
 
   - title: "Discipline"
-    description: "We are committed to providing high-quality products, services, and experiences with every interaction."
+    description: "We are committed to perfect each technical detail with high quality standards, in order to provide reliable and secure solutions for our clients."
     icon: "StarIcon"
 ---
