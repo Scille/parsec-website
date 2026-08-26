@@ -24,6 +24,6 @@ values:
     icon: "AcademicCapIcon"
 
   - title: "Rigueur"
-    description: "Nous nous engageons à fournir des produits, services et expériences de haute qualité à chaque interaction."
+    description: "Nous nous efforçons de perfectionner chaque détail technique avec exigence, pour offrir des solutions fiables et sécurisées sur lesquelles nos clients peuvent compter."
     icon: "StarIcon"
 ---

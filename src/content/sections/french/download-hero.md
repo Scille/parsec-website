@@ -1,5 +1,5 @@
 ---
-title: "Essayer **une expérience sécurisée** sur desktop et le web"
+title: "Essayez **une expérience sécurisée** sur desktop et web"
 description: "Stockez et gérez vos données en toute sécurité, avec un accès rapide et une protection renforcée sur votre système."
 image: "/images/product-for-hero-logged-en.svg"
 
