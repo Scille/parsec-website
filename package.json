@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.8",
-    "@astrojs/mdx": "^7.0.3",
+    "@astrojs/mdx": "^7.0.7",
     "@astrojs/sitemap": "^3.7.3",
     "@realfavicongenerator/generate-favicon": "^0.8.4",
     "@realfavicongenerator/image-adapter-node": "^0.8.4",
