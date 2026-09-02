@@ -70,7 +70,7 @@
     "toml": "^5.0.0",
     "ts-jest": "^29.4.6",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3",
+    "typescript": "^7.0.2",
     "unist-util-visit": "^5.1.0",
     "xml2js": "^0.6.2"
   },
