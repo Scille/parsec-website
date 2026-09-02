@@ -1,23 +1,17 @@
 ---
 import type { Section } from "@/types";
+import type { z } from "astro/zod";
 import CustomButton from "@/components/CustomButton.astro";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import overrideObjects from "@/lib/utils/overrideObjects.ts";
+import type { sectionsSchema } from "@/sections.schema";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
 import AnimatedText from "@/components/widgets/AnimatedText.astro";
 
 // Type for this section data
-type certificationSectionType = Section & {
-  badge: {
-    enable: boolean;
-    label: string;
-  };
-  logoCSPN: {
-    src: string;
-    alt: string;
-  };
-};
+type certificationSectionType = Section &
+  z.infer<typeof sectionsSchema.certificationSection>;
 
 type Props = {
   content?: certificationSectionType;
@@ -42,6 +36,7 @@ let {
   button,
   image,
   logoCSPN,
+  links,
 } = actualContent as certificationSectionType;
 
 if (!enable) return;
@@ -90,6 +85,21 @@ if (!enable) return;
               class="text-text-on-color-body text-body-lg mx-auto mb-8 flex max-w-2xl flex-col gap-3 space-y-1"
               set:html={markdownify(description, true)}
             />
+          )
+        }
+        {
+          links && links.length > 0 && (
+            <div class="text-text-on-color-body text-label-md mb-10 flex gap-4 font-medium">
+              {links.map((link) => (
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-text-brand-on-color hover:text-text-brand-on-color-hover bg-surface-base-default/10 hover:bg-surface-base-default/30 rounded-sm px-2 py-1 text-center">
+                  {link.label}
+                </a>
+              ))}
+            </div>
           )
         }
         {
