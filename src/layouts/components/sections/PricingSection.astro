@@ -23,16 +23,11 @@ let defaultContent = (
   await getEntryCTM("sections", "pricing-section", Astro.currentLocale)
 )?.data as SectionType;
 
-// Enables content customization (e.g., title, description) with a fallback to 'defaultContent' if not provided.
-// The 'content' prop should match the structure of 'defaultContent'.
-// Allows using this section with different content across multiple pages.
-// If 'content' is missing, 'defaultContent' will be used.
 let actualContent = overrideObjects(
   { ...defaultContent },
   Astro.props.content,
 ) as SectionType;
 
-// Extracting required values from 'content' object
 let {
   enable = true,
   title,
@@ -69,7 +64,7 @@ if (!enable) return;
         {list && list.length > 0 && (
           <div
             class:list={[
-              "grid grid-cols-1 gap-x-8 gap-y-6 pb-20 md:grid-cols-2 lg:grid-cols-3 xl:gap-x-10",
+              "grid grid-cols-1 gap-x-8 gap-y-6 pb-20 md:grid-cols-[repeat(2,minmax(480px,480px))] md:justify-center xl:gap-x-10",
             ]}>
             {list.map((item, index) => (
               <PricingCard

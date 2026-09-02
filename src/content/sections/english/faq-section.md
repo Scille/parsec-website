@@ -41,11 +41,11 @@ list:
       - active: true
         title: "What payment methods do you accept?"
         content: |
-          We only accept credit cards for the "Business" plan. The "Administration" and "Integrator" plans can only be paid by bank transfer.
+          We only accept credit cards for the "Business" plan. The "Contract" plan can only be paid by bank transfer.
       - active: false
         title: "Can I cancel my plan later?"
         content: |
-          Available only with our "Business" plan, you can cancel your plan at any time from your admin dashboard. The "Administration" and "Integrator" plans are fixed for the duration of the contract.
+          Available only with our "Business" plan, you can cancel your plan at any time from your admin dashboard. The "Contract" plan is fixed for the duration of the contract.
 
   - label: "Download & Onboarding"
     id: download
