@@ -33,7 +33,7 @@ if (!enable) return;
 
 <div
   class:list={[
-    "text-text-base-body bg-surface-base-default relative flex min-h-full flex-col gap-8 rounded-3xl transition-transform duration-500",
+    "text-text-base-body bg-surface-base-default relative flex min-h-full max-w-4xl flex-col gap-8 rounded-3xl transition-transform duration-500",
     {
       "after:from-primary relative after:absolute after:top-0 after:left-0 after:h-11/12 after:w-full after:rounded-t-4xl after:bg-linear-to-b after:to-white max-md:px-2 max-md:py-2 md:shadow-md md:after:scale-[1.03]":
         featured,
@@ -42,7 +42,7 @@ if (!enable) return;
   ]}
   {...rest}>
   <div
-    class="bg-surface-base-default-secondary relative z-10 flex min-h-full flex-col gap-5 rounded-3xl p-8">
+    class="bg-surface-base-default-secondary relative z-10 flex min-h-full max-w-120 flex-col gap-5 rounded-3xl p-8">
     <div class="flex w-full justify-between">
       {
         name && (

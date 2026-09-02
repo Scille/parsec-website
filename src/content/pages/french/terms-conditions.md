@@ -28,7 +28,7 @@ Désigne le client, personne morale ou physique, qui souscrit à un Abonnement 
 
 **Cloud**
 
-Désigne les services Cloud compatibles sur lesquels les Données seront stockées et chiffrées. Dans le cas des options « Business » « Intégrateur » « Administration » , définies à l’article 3.2 des CGV, le Client pourra recourir aux services Cloud de son choix ;
+Désigne les services Cloud compatibles sur lesquels les Données seront stockées et chiffrées. Dans le cas des options « Business » ou « Contrat », définies à l’article 3.2 des CGV, le Client pourra recourir aux services Cloud de son choix ;
 
 **Compte**
 
@@ -124,7 +124,7 @@ Désigne une solution déployée et hébergée directement sur les infrastructur
 
 **Espace client**
 
-Désigne le site web, de type « SaaS » (souscription offre « Business ») ou « On Premise » (souscription de type « Intégrateur » ou « Administration » dédiée au Client) qui permet de créer les Organisations et éventuellement de gérer la facturation et accessible à l’adresse suivante [https://www.parsec.cloud/](https://www.parsec.cloud/) ;
+Désigne le site web, de type « SaaS » (souscription offre « Business ») ou « On Premise » (souscription de type « Contrat » dédiée au Client) qui permet de créer les Organisations et éventuellement de gérer la facturation et accessible à l’adresse suivante [https://www.parsec.cloud/](https://www.parsec.cloud/) ;
 
 **Support**
 Désigne le support technique apporté par SCILLE conformément aux CGV ;
@@ -201,21 +201,21 @@ PARSEC propose trois offres commerciales distinctes adaptées aux besoins spéci
 
 L'offre Business est destinée aux entreprises cherchant à sécuriser leurs données critiques avec une protection de pointe tout en profitant des avantages du cloud. L'accès à cette offre nécessite une souscription à l’abonnement mensuel disponible sur le site parsec.cloud.
 
-#### Offre Intégrateur :
+#### Offre Contrat :
 
-L'offre Intégrateur est spécifiquement conçue pour les intégrateurs et éditeurs de solutions technologiques, permettant une intégration transparente de la solution PARSEC dans les systèmes existants de leurs clients. Cette offre permet une flexibilité maximale en matière d'adaptation et de personnalisation des services, tout en garantissant une sécurité optimale. Les intégrateurs bénéficient d'outils dédiés et d'un support technique pour faciliter l'intégration et la gestion de la solution.
+L'offre Contrat est spécifiquement conçue pour les grandes entreprises qui souhaitent intégrer Parsec à leur écosystème. Cette offre permet de personnaliser et d'adapter la solution pour répondre aux besoins spécifiques de chaque client. L'offre Contrat inclut toutes les fonctionnalités de l'offre Business, ainsi que des services et un support supplémentaires.
 
-#### Offre Administration :
+<!-- #### Offre Administration :
 
-L'offre Administration est destinée aux administrations gouvernementales et aux opérateurs de services critiques. Elle offre un contrôle complet sur la gestion des données, les politiques de sécurité, et les accès utilisateurs.
+L'offre Administration est destinée aux administrations gouvernementales et aux opérateurs de services critiques. Elle offre un contrôle complet sur la gestion des données, les politiques de sécurité, et les accès utilisateurs. -->
 
 ### Article 3.4 \- Correspondance des offres selon les types d’hébergement cloud disponible dans Parsec
 
-|            | Business | Intégrateur | Administration |
-| :--------- | :------- | :---------- | :------------- |
-| SaaS       | oui      | non         | non            |
-| SaaS dédié | non      | oui         | oui            |
-| On Premise | non      | oui         | oui            |
+|            | Business | Contrat |
+| :--------- | :------- | :------ |
+| SaaS       | oui      | non     |
+| SaaS dédié | non      | oui     |
+| On Premise | non      | oui     |
 
 ### Article 3.5 \- Accès à Parsec
 
@@ -651,7 +651,7 @@ En cas de développement spécifique nécessaire pour que le client puisse bén�
 
 ### Article 9.2 \- Modalités de paiement
 
-Le prix de la Licence PARSEC est stipulé en euros et hors taxes. Pour les offres « Business » mentionnées à l’article 3.2 des CGV, la facturation est établie à l’adresse déclarée du Client lors de l’inscription sur le Site Marchand. Pour les offres « Intégrateurs » et « Administration » la facturation est établie à l’adresse de facturation déclarée par le Client : siège social du Client, établissement secondaire, service...
+Le prix de la Licence PARSEC est stipulé en euros et hors taxes. Pour les offres « Business » mentionnées à l’article 3.2 des CGV, la facturation est établie à l’adresse déclarée du Client lors de l’inscription sur le Site Marchand. Pour l'offre « Contrat », la facturation est établie à l’adresse de facturation déclarée par le Client : siège social du Client, établissement secondaire, service...
 
 Les factures sont payables dans les trente (30) jours de leur émission, par virement bancaire ou par chèque. Il ne sera pratiqué aucun escompte en cas de règlement anticipé.
 
@@ -666,7 +666,7 @@ Le cas échéant, les frais supplémentaires de gestion des impayés seront fact
 Le non-paiement de l’Abonnement souscrit par le Client à son échéance entraînera la suspension immédiate de la prestation et la résiliation de plein droit de la Licence PARSEC :
 
 - pour un service « Business » trente (30) jours après l’envoi d’une mise en demeure restée infructueuse adressée à l’adresse courriel déclarée par le Client SaaS lors de l’Abonnement de ses Organisations ;
-- pour un service « Intégrateurs » ou « Administration » trente (30) jours après l’envoi d’une mise en demeure restée infructueuse adressée par lettre recommandée avec demande d’avis de réception par SCILLE au Client.
+- pour un service « Contrat » trente (30) jours après l’envoi d’une mise en demeure restée infructueuse adressée par lettre recommandée avec demande d’avis de réception par SCILLE au Client.
 
 ## Article 10 \- Protection des données à caractère personnel
 
@@ -704,7 +704,7 @@ SCILLE est autorisé à faire appel à un autre sous-traitant, notamment de type
 
 Le Client « Business » dispose d’un (1) mois à compter de la date de réception de cette information pour se désabonner et migrer ses Données dans le cas où cette sous-traitance ne lui conviendrait pas.
 
-Le Client « Intégrateurs » ou « Administration » dispose d’un délai d’un (1) mois à compter de la date de réception de cette information pour présenter ses objections. Cette sous-traitance ne peut être effectuée que si le Client n’a pas émis d’objection pendant le délai convenu.
+Le Client « Contrat » dispose d’un délai d’un (1) mois à compter de la date de réception de cette information pour présenter ses objections. Cette sous-traitance ne peut être effectuée que si le Client n’a pas émis d’objection pendant le délai convenu.
 
 Il appartient à SCILLE de s’assurer que le second sous-traitant présente les mêmes garanties quant à la mise en œuvre de mesures techniques et organisationnelles appropriées de manière à ce que le traitement réponde aux exigences du RGPD. Dans le cas contraire, SCILLE demeure pleinement responsable devant le Client de l’exécution par le second sous-traitant de ses obligations.
 
@@ -802,7 +802,7 @@ En cas de contradiction entre l’un quelconque des titres figurant en tête des
 
 Les CGV sont expressément acceptées par le Client par le biais d’une case à cocher lors de l’inscription, qui, par sa signature, déclare et reconnaît en avoir une parfaite connaissance et renonce, de ce fait, à se prévaloir de tout document contradictoire et notamment, de ses propres conditions générales d’achat, qui seront inopposables à SCILLE, même si elle en a eu connaissance.
 
-Les CGV peuvent être complétées par des Conditions Particulières pour les offres « Intégrateurs » et « Administration » (article 3.2).
+Les CGV peuvent être complétées par des Conditions Particulières pour l'offre « Contrat » (article 3.2).
 
 En cas de contradiction entre les Conditions Particulières et les CGV, ces dernières prévalent toujours, sauf dans le cas où les Conditions Particulières prennent la forme d’un contrat négocié OEM “Original Equipment Manufacturer” et que la (ou les) clause(s) de celui-ci qui sont contradictoires avec les CGV débutent par la mention « _par dérogation aux Conditions Générales de Vente, avec l’indication de leur date ou numéro de version_ », ainsi que dans le cas où les CGV prévoient expressément une possibilité de dérogation dans les Conditions Particulières.
 

@@ -47,7 +47,7 @@ list:
         isEnabled: true
 
   # Administration plan
-  - enable: true
+  - enable: false
     featured: false
     badge:
       enable: true
@@ -81,14 +81,14 @@ list:
       - value: Possible alignment with regulatory directives (NIS2, DORA)
         isEnabled: true
 
-  # Integrator plan
+  # Contract plan
   - enable: true
     featured: false
     badge:
       enable: true
       label: On-premise
-    name: Integrator
-    description: Ideal for integrators looking to add Parsec to their ecosystem.
+    name: Contract
+    description: Ideal for large companies looking to add Parsec to their ecosystem.
 
     price:
       - billing:
@@ -97,12 +97,12 @@ list:
     button:
       enable: true
       label: Request a quote
-      url: /contact/?plan=integrator
+      url: /contact/?plan=contract
       rel:
       target:
       hoverEffect: "text-flip"
       data-umami-event: "pricing-cta"
-      data-umami-event-location: "integrator"
+      data-umami-event-location: "contract"
 
     mainFeaturesList:
       - value: On-premise deployment (Docker / Linux)
