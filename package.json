@@ -44,7 +44,7 @@
     "vue": "^3.5.40"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.8",
+    "@astrojs/check": "^0.9.10",
     "@astrojs/mdx": "^7.0.3",
     "@astrojs/sitemap": "^3.7.3",
     "@realfavicongenerator/generate-favicon": "^0.8.4",
