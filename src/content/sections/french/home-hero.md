@@ -1,12 +1,12 @@
 ---
-title: Vos **données** **sensibles** méritent une protection sans compromis
+title: L'alternative à SharePoint **Zero Knowledge** pour collaborer en sécurité.
 preTitle:
   label: Parsec est certifié CSPN
   url: "/blog/" #/blog/2026/09/certification-cspn/
   badge:
     enable: true
     label: "Nouveau"
-description: Parsec est l’outil de partage de fichiers sécurisé, 100 % français permettant de collaborer sans aucun accès externe.
+description: "**RSSI**, **DSI**, **DPO**, sécurisez votre système collaboratif avec des tiers tout en garantissant la conformité réglementaire du stockage de vos données dans le cloud, grâce à une solution française et certifiée CSPN par l’ANSSI."
 image: "/images/product-for-hero-logged-fr.svg" # image dimensions: 1320x745
 buttons:
   - enable: true
