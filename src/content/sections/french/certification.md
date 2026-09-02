@@ -19,4 +19,11 @@ image: "/images/certification.png"
 logoCSPN:
   src: "/images/logo-cspn.png"
   alt: "Logo CSPN"
+links:
+  - label: "Certificat ANSSI"
+    url: "https://parsec.cloud/wp-content/uploads/2026/07/ANSSI-CSPN-2026-18-certificat.pdf"
+  - label: "Rapport de certification"
+    url: "https://messervices.cyber.gouv.fr/visas/ANSSI-CSPN-2026-18-rapport.pdf"
+  - label: "Cible de sécurité"
+    url: "https://messervices.cyber.gouv.fr/visas/ANSSI-CSPN-2026-18-cible.pdf"
 ---

@@ -526,6 +526,30 @@ const videoSectionSchema = z.object({
   video: videoConfigSchema,
 });
 
+const certificationSectionSchema = z.object({
+  enable: z.boolean().default(true),
+  badge: z
+    .object({
+      enable: z.boolean().default(false),
+      label: z.string(),
+    })
+    .optional(),
+  logoCSPN: z
+    .object({
+      src: z.string(),
+      alt: z.string(),
+    })
+    .optional(),
+  links: z
+    .array(
+      z.object({
+        label: z.string(),
+        url: z.string(),
+      }),
+    )
+    .optional(),
+});
+
 export const partnersSectionSchema = z
   .object({
     enable: z.boolean().default(false).optional(),
@@ -579,4 +603,5 @@ export const sectionsSchema = {
   openSourceSection: openSourceSectionSchema,
   videoSection: videoSectionSchema,
   sectorsSection: sectorsSectionSchema,
+  certificationSection: certificationSectionSchema,
 };
