@@ -28,7 +28,7 @@ Refers to the client, whether a legal or natural person, who subscribes to a Sub
 
 **Cloud**
 
-Refers to the compatible Cloud services where the Data will be stored and encrypted. In the case of the "Business," "Integrator," or "Administration" options, as defined in Article 3.2 of the GTCS, the Client can use the Cloud services of their choice.
+Refers to the compatible Cloud services where the Data will be stored and encrypted. In the case of the "Business" or "Contract" options, as defined in Article 3.2 of the GTCS, the Client can use the Cloud services of their choice.
 
 **Account**
 
@@ -123,7 +123,7 @@ Refers to a solution deployed and hosted directly on the client's own infrastruc
 
 **Customer Area**
 
-Refers to the website, of the "SaaS" type (subscription to the "Business" offer) or "On-Premise" type (subscription to the "Integrator" or "Administration" offer dedicated to the Client), which allows for the creation of Organizations and possibly billing management, accessible at the following address: [https://www.parsec.cloud/](https://www.parsec.cloud/);
+Refers to the website, of the "SaaS" type (subscription to the "Business" offer) or "On-Premise" type (subscription to the "Contract" offer dedicated to the Client), which allows for the creation of Organizations and possibly billing management, accessible at the following address: [https://www.parsec.cloud/](https://www.parsec.cloud/);
 
 **Support**  
 Refers to the technical support provided by SCILLE in accordance with the GTCS;
@@ -200,21 +200,21 @@ PARSEC offers three distinct commercial offers tailored to the specific needs of
 
 The Business offer is intended for companies looking to secure their critical data with state-of-the-art protection while enjoying the benefits of the cloud. Access to this offer requires a subscription to the monthly plan available on the parsec.cloud website.
 
-#### Integrator Offer:
+#### Contract Offer:
 
-The Integrator offer is specifically designed for integrators and publishers of technology solutions, enabling seamless integration of the PARSEC solution into their clients' existing systems. This offer allows maximum flexibility in adapting and customizing services, while guaranteeing optimal security. Integrators benefit from dedicated tools and technical support to facilitate the integration and management of the solution.
+The Contract offer is specifically designed for large enterprises that want to add Parsec to their ecosystem. This offer provides the flexibility to customize and adapt the solution to meet the specific needs of each client. The Contract offer includes all the features of the Business offer, plus additional services and support.
 
-#### Administration Offer:
+<!-- #### Administration Offer:
 
-The Administration offer is intended for government administrations and operators of critical services. It offers full control over data management, security policies, and user access.
+The Administration offer is intended for government administrations and operators of critical services. It offers full control over data management, security policies, and user access. -->
 
 ### Article 3.4 \- Correspondence Between Offers and Available Cloud Hosting Types in Parsec
 
-|                | Business | Integrator | Administration |
-| :------------- | :------- | :--------- | :------------- |
-| SaaS           | yes      | no         | no             |
-| Dedicated SaaS | no       | yes        | yes            |
-| On-Premise     | no       | yes        | yes            |
+|                | Business | Contract |
+| :------------- | :------- | :------- |
+| SaaS           | yes      | no       |
+| Dedicated SaaS | no       | yes      |
+| On-Premise     | no       | yes      |
 
 ### Article 3.5 \- Access to Parsec
 
@@ -648,7 +648,7 @@ In the event that specific development is required for the client to benefit fro
 
 ### Article 9.2 \- Payment Terms
 
-The price of the PARSEC License is stated in euros, excluding taxes. For the "Business" offers mentioned in Article 3.2 of the GTCS, billing is made to the Client's declared address during registration on the Merchant Site. For "Integrator" and "Administration" offers, billing is made to the billing address declared by the Client (headquarters, secondary establishment, department, etc.).
+The price of the PARSEC License is stated in euros, excluding taxes. For the "Business" offers mentioned in Article 3.2 of the GTCS, billing is made to the Client's declared address during registration on the Merchant Site. For "Contract" offer, billing is made to the billing address declared by the Client (headquarters, secondary establishment, department, etc.).
 
 Invoices are payable within thirty (30) days of issuance, by bank transfer or check. No discount will be applied in the case of early payment.
 
@@ -663,7 +663,7 @@ Where applicable, additional unpaid management fees will be charged by SCILLE to
 Non-payment of the Subscription by the Client at its due date will result in the immediate suspension of the service and the automatic termination of the PARSEC License:
 
 - For a "Business" service, thirty (30) days after the sending of a formal notice that remains unanswered, addressed to the SaaS Client's declared email address when subscribing to their Organizations;
-- For an "Integrator" or "Administration" service, thirty (30) days after the sending of a formal notice that remains unanswered, sent by registered mail with acknowledgment of receipt by SCILLE to the Client.
+- For a "Contract" service, thirty (30) days after the sending of a formal notice that remains unanswered, sent by registered mail with acknowledgment of receipt by SCILLE to the Client.
 
 ## Article 10 \- Protection of Personal Data
 
@@ -701,7 +701,7 @@ SCILLE is authorized to call upon another subcontractor, in particular of the Pa
 
 The "Business" Customer has one (1) month from the date of receipt of this information to unsubscribe and migrate its Data in the event that this subcontracting does not suit it.
 
-The "Integrator" or "Administration" Customer has one (1) month from the date of receipt of this information to present any objections. This subcontracting can only be carried out if the Customer has not raised any objections within the agreed period.
+The "Contract" Customer has one (1) month from the date of receipt of this information to present any objections. This subcontracting can only be carried out if the Customer has not raised any objections within the agreed period.
 
 It is SCILLE's responsibility to ensure that the second subcontractor presents the same guarantees regarding the implementation of appropriate technical and organizational measures so that the processing meets the requirements of the RGPD. Otherwise, SCILLE remains fully liable to the Customer for the second processor's performance of its obligations.
 
@@ -799,7 +799,7 @@ In the event of a contradiction between any of the headings appearing at the top
 
 The GTCS are expressly accepted by the Customer by means of a box to be ticked at the time of registration, who, by his signature, declares and acknowledges that he is fully aware of them, and thereby waives the right to invoke any contradictory document, and in particular his own general terms and conditions of purchase, which will be unenforceable against SCILLE, even if it has been made aware of them.
 
-The GTCS may be supplemented by Special Conditions for the "Integrators" and "Administration" offers (article 3.2).
+The GTCS may be supplemented by Special Conditions for the "Contract" offers (article 3.2).
 
 In the event of contradiction between the Special Conditions and the GTCS, the latter shall always prevail, except in the event that the Special Conditions take the form of a negotiated OEM "Original Equipment Manufacturer" contract, and the clause(s) thereof which contradict(s) the GTCS begin with the words "by derogation to the General Sales Conditions, with indication of their date or version number," as well as in the event that the GTCS expressly provide for the possibility of derogation in the Special Conditions.
 

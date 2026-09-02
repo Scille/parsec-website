@@ -46,8 +46,8 @@ list:
       - value: Utilisateurs externes (invités) illimités
         isEnabled: true
 
-  # Govermnent plan
-  - enable: true
+  # Administration plan
+  - enable: false
     featured: false
     badge:
       enable: true
@@ -81,14 +81,14 @@ list:
       - value: Possibilité d’alignement des directives (NIS2, DORA)
         isEnabled: true
 
-  # Integrator plan
+  # Contract plan
   - enable: true
     featured: false
     badge:
       enable: true
       label: On-premise
     name: Intégrateur
-    description: Idéal pour les intégrateurs qui souhaitent ajouter Parsec à leur écosystème.
+    description: Idéal pour les grandes entreprises qui souhaitent ajouter Parsec à leur écosystème.
 
     price:
       - billing:
@@ -97,17 +97,17 @@ list:
     button:
       enable: true
       label: Demander un devis
-      url: /contact/?plan=integrator
+      url: /contact/?plan=contract
       rel:
       target:
       hoverEffect: "text-flip"
       data-umami-event: "pricing-cta"
-      data-umami-event-location: "integrator"
+      data-umami-event-location: "contract"
 
     mainFeaturesList:
       - value: Déploiement On-Premise (Docker / Linux)
         isEnabled: true
-      - value: Chiffrement de bout en bout & Zero-Knowledge
+      - value: Chiffrement de bout en bout & Zero-Knowledge
         isEnabled: true
       - value: Interface en ligne de commande (CLI)
         isEnabled: true
