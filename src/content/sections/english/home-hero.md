@@ -1,5 +1,5 @@
 ---
-title: Your data deserves **uncompromising** protection
+title: Your data deserves protection **without compromise**
 preTitle:
   label: Parsec is CPSN-certified
   url: "/blog/" #/blog/2026/09/certification-cspn/
