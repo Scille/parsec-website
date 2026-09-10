@@ -69,33 +69,54 @@ if (!enable) return;
 
     {
       sectors && (
-        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {sectors.map((item, index) => (
-            <div
-              data-aos="fade-up-sm"
-              data-aos-delay={(index + 1) * 50}
-              data-aos-duration={900}
-              class="bg-surface-base-page border-border-neutral-default-subtle md:shadow-card flex flex-col gap-4 rounded-xl border p-5 md:border-0 md:p-8">
-              <Icons
-                class="text-icon-brand-default text-2xl"
-                icon={item.icon as HeroIconName}
-              />
-              <div class="flex flex-col gap-2">
-                {item.title && (
-                  <h3
-                    class="text-h5-sm md:text-h5 font-semibold"
-                    set:html={markdownify(item.title)}
-                  />
-                )}
+        <div class="hs-accordion-group grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {sectors.map((item, index) => {
+            const uniqueId = "sector-" + (index + 1);
+            return (
+              <div
+                data-aos="fade-up-sm"
+                data-aos-delay={(index + 1) * 50}
+                data-aos-duration={900}
+                class="hs-accordion bg-surface-base-page hover:bg-surface-base-default-secondary border-border-neutral-default-subtle md:shadow-card h-fit rounded-xl border md:border-0">
+                <button
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls={uniqueId + "-content"}
+                  class="hs-accordion-toggle flex w-full flex-col items-start gap-4 p-5 text-left md:p-8">
+                  <span class="flex w-full items-center justify-between">
+                    <Icons
+                      class="text-icon-brand-default text-2xl"
+                      icon={item.icon as HeroIconName}
+                    />
+                    <span class="hs-accordion-active:rotate-180 transition duration-300">
+                      <Icons
+                        icon="ChevronDownIcon"
+                        class="text-icon-neutral-default text-xl"
+                      />
+                    </span>
+                  </span>
+                  {item.title && (
+                    <p
+                      class="text-h5-sm md:text-h5 font-semibold"
+                      set:html={markdownify(item.title)}
+                    />
+                  )}
+                </button>
                 {item.description && (
-                  <p
-                    class="text-body-lg text-text-base-description"
-                    set:html={markdownify(item.description)}
-                  />
+                  <div
+                    id={uniqueId + "-content"}
+                    role="region"
+                    aria-labelledby={uniqueId}
+                    class="hs-accordion-content hidden overflow-hidden px-5 pb-5 transition-[height] duration-300 md:px-8 md:pb-8">
+                    <p
+                      class="text-body-lg text-text-base-description"
+                      set:html={markdownify(item.description)}
+                    />
+                  </div>
                 )}
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )
     }
