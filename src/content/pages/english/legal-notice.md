@@ -22,6 +22,10 @@ This site is owned by:
 - Share capital: €91,500.00
 - Publication director: Thierry LEBLOND
 - This site is hosted by:
+  - GitHub, Inc.
+  - 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA
+  - Phone: +1 415 200 2000
+  - Website: [https://github.com](https://github.com)
 
 The owner of this site reserves the right to modify its content at any time and without notice. It cannot be held responsible for the consequences of such modifications. Likewise, it reserves the right to interrupt or suspend all or part of the site's functionalities at any time and without notice.
 

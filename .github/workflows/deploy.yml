@@ -35,8 +35,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          PAGES_BASE_PATH: /parsec-website/
-          PAGES_SITE_URL: https://scille.github.io
+          PAGES_SITE_URL: https://parsec.cloud
         timeout-minutes: 5
 
       - name: Setup Pages

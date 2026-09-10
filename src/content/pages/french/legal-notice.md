@@ -22,6 +22,10 @@ Ce site est la propriété de :
 - Montant du capital social&nbsp;: 91.500,00 €
 - Directeur de la publication du site&nbsp;: Thierry LEBLOND
 - Ce site est hébergé par :
+  - GitHub, Inc.
+  - 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA
+  - Téléphone : +1 415 200 2000
+  - Site web : [https://github.com](https://github.com)
 
 Le propriétaire de ce site se réserve le droit de modifier son contenu à tout moment et sans préavis. Il ne pourra être tenu responsable des conséquences de telles modifications. De même, il se réserve le droit d’interrompre ou de suspendre tout ou partie des fonctionnalités du site à tout moment et sans préavis.
 
