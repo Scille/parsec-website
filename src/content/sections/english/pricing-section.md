@@ -57,7 +57,7 @@ list:
 
     price:
       - billing:
-        value: Custom
+        value: On quote
 
     button:
       enable: true
@@ -92,7 +92,7 @@ list:
 
     price:
       - billing:
-        value: Custom
+        value: On quote
 
     button:
       enable: true
@@ -155,13 +155,13 @@ comparison:
       - value: Default storage volume included
         included:
           - "100GB"
-          - "Custom"
-          - "Custom"
+          - "On quote"
+          - "On quote"
       - value: Metadata storage
         included:
           - "Shared PostgreSQL"
-          - "Custom"
-          - "Custom"
+          - "On quote"
+          - "On quote"
 
   - label: Security & Cryptography
     list:
