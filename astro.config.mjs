@@ -32,7 +32,6 @@ export default defineConfig({
   site:
     process.env.PAGES_SITE_URL ||
     (config.site.baseUrl ? config.site.baseUrl : "http://examplesite.com"),
-  base: process.env.PAGES_BASE_PATH || "/", //remove when final deploy on parsec.cloud
   trailingSlash: config.site.trailingSlash ? "always" : "never",
   redirects: redirects,
   build: {
