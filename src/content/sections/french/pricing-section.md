@@ -57,7 +57,7 @@ list:
 
     price:
       - billing:
-        value: Sur-mesure
+        value: Sur devis
 
     button:
       enable: true
@@ -92,7 +92,7 @@ list:
 
     price:
       - billing:
-        value: Sur-mesure
+        value: Sur devis
 
     button:
       enable: true
@@ -155,13 +155,13 @@ comparison:
       - value: Volume de stockage inclus par défaut
         included:
           - "100 Go"
-          - "Sur-mesure"
-          - "Sur-mesure"
+          - "Sur devis"
+          - "Sur devis"
       - value: Stockage métadonnées
         included:
           - "PostgreSQL mutualisée"
-          - "Sur-mesure"
-          - "Sur-mesure"
+          - "Sur devis"
+          - "Sur devis"
 
   - label: Sécurité & Cryptographie
     list:
