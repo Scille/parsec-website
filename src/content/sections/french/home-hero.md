@@ -1,5 +1,5 @@
 ---
-title: L'alternative à SharePoint **Zero Knowledge** pour collaborer en sécurité.
+title: Vos données méritent une protection **sans compromis**
 preTitle:
   label: Parsec est certifié CSPN
   url: "/blog/" #/blog/2026/09/certification-cspn/
