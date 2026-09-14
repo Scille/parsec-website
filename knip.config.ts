@@ -5,16 +5,45 @@ import type { KnipConfig } from "knip";
 // Knip configuration
 const config = {
   tags: ["-lintignore"],
-  // Exclude the following checks from the report
   // TODO: Fix code base to enable these checks
   exclude: [
-    "dependencies",
     "duplicates",
     "exports",
-    "files",
     "types",
-    "unlisted",
   ],
+  // TODO: the following dependencies are reported as unused, check if still needed
+  ignoreDependencies: [
+    'tarteaucitronjs',
+  ],
+  // TODO: the following files are reported as unused, check if still needed
+  ignoreFiles: [
+    "public/tarteaucitron/css/tarteaucitron.min.css",
+    "public/tarteaucitron/custom.css",
+    "public/tarteaucitron/lang/tarteaucitron.en.min.js",
+    "public/tarteaucitron/lang/tarteaucitron.fr.min.js",
+    "public/tarteaucitron/tarteaucitron.min.js",
+    "public/tarteaucitron/tarteaucitron.services.min.js",
+    "public/umami.is.js",
+    "src/layouts/components/widgets/Marquee.astro",
+    "src/layouts/shortcodes/Card.astro",
+    "src/layouts/shortcodes/CardGrid.astro",
+    "src/layouts/shortcodes/Notice.astro",
+    "src/layouts/shortcodes/ImageItem.astro",
+    "src/layouts/shortcodes/ImageList.astro",
+    "src/layouts/shortcodes/Tab.astro",
+    "src/layouts/shortcodes/Tabs.astro",
+    "src/layouts/shortcodes/Testimonial.astro",
+    "src/lib/utils/bgOptimizedImage.ts",
+    "src/lib/utils/dateFormat.ts",
+    "src/lib/utils/downloadSelfHostedFonts.ts",
+    "src/lib/utils/formatRelativeDate.ts",
+    "src/lib/utils/generateTypeScale.ts",
+    "src/lib/utils/getRelatedContent.ts",
+    "src/lib/utils/removeEmptyKeys.ts",
+    "src/lib/utils/removeUnusedFonts.ts",
+    "src/lib/utils/splitProtectedText.ts",
+    "src/plugins/sticky-sidebar.js",
+  ]
 } satisfies KnipConfig;
 
 export default config;
