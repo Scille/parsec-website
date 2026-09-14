@@ -6,15 +6,9 @@ import type { KnipConfig } from "knip";
 const config = {
   tags: ["-lintignore"],
   // TODO: Fix code base to enable these checks
-  exclude: [
-    "duplicates",
-    "exports",
-    "types",
-  ],
+  exclude: ["duplicates", "exports", "types"],
   // TODO: the following dependencies are reported as unused, check if still needed
-  ignoreDependencies: [
-    'tarteaucitronjs',
-  ],
+  ignoreDependencies: ["tarteaucitronjs"],
   // TODO: the following files are reported as unused, check if still needed
   ignoreFiles: [
     "public/tarteaucitron/css/tarteaucitron.min.css",
@@ -43,7 +37,7 @@ const config = {
     "src/lib/utils/removeUnusedFonts.ts",
     "src/lib/utils/splitProtectedText.ts",
     "src/plugins/sticky-sidebar.js",
-  ]
+  ],
 } satisfies KnipConfig;
 
 export default config;
