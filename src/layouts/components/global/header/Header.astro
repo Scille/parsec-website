@@ -1,6 +1,5 @@
 ---
 import Logo from "@/components/global/Logo.astro";
-import Icons from "@/helpers/Icons.astro";
 import config from ".astro/config.generated.json";
 import LanguageSwitcher from "@/layouts/components/global/header/LanguageSwitcher.astro";
 import NavMenuItem from "@/layouts/components/global/header/MenuItem.astro";
@@ -10,7 +9,6 @@ import { useTranslations } from "@/lib/utils/i18nUtils";
 import { sortByWeight } from "@/lib/utils/sortFunctions";
 import { filteredEnabled } from "@/lib/utils/filteredEnabled";
 import CustomButton from "@/components/CustomButton.astro";
-import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
 
 const translate = await useTranslations(Astro.currentLocale as string);
 let main = translate("main") as NavigationLink[];
