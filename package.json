@@ -20,7 +20,9 @@
     "prettier:check": "prettier . --check",
     "prettier:fix": "prettier . --write",
     "test": "cross-env TS_NODE_PROJECT=\"./tsconfig.jest.json\" jest",
-    "test:watch": "cross-env TS_NODE_PROJECT=\"./tsconfig.jest.json\" jest --watch"
+    "test:watch": "cross-env TS_NODE_PROJECT=\"./tsconfig.jest.json\" jest --watch",
+    "knip": "knip",
+    "knip:fix": "knip --fix"
   },
   "engines": {
     "node": ">=22.12.0"
@@ -58,6 +60,7 @@
     "gray-matter": "^4.0.3",
     "ignore": "^7.0.6",
     "jest": "^30.3.0",
+    "knip": "^6.35.1",
     "linkedom": "^0.18.13",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^0.14.1",
