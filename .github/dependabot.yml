@@ -2,7 +2,10 @@ version: 2
 updates:
   - package-ecosystem: github-actions
     schedule:
-      interval: monthly
+      interval: weekly
+      day: monday
+      time: "04:20"
+      timezone: Europe/Paris
     cooldown:
       default-days: 10
     assignees:
@@ -20,7 +23,10 @@ updates:
   - package-ecosystem: pre-commit
     directory: /
     schedule:
-      interval: monthly
+      interval: weekly
+      day: monday
+      time: "04:20"
+      timezone: Europe/Paris
     cooldown:
       default-days: 10
     open-pull-requests-limit: 5
@@ -35,7 +41,10 @@ updates:
   - package-ecosystem: npm
     directory: /
     schedule:
-      interval: monthly
+      interval: weekly
+      day: monday
+      time: "04:20"
+      timezone: Europe/Paris
     cooldown:
       default-days: 10
     open-pull-requests-limit: 15
@@ -47,3 +56,11 @@ updates:
         dependency-type: development
         patterns:
           - prettier*
+      dev-deps:
+        dependency-type: development
+        patterns:
+          - "*"
+      prod-deps:
+        dependency-type: production
+        patterns:
+          - "*"
