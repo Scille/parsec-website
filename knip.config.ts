@@ -8,7 +8,11 @@ const config = {
   // TODO: Fix code base to enable these checks
   exclude: ["duplicates", "exports", "types"],
   // TODO: the following dependencies are reported as unused, check if still needed
-  ignoreDependencies: ["tarteaucitronjs"],
+  ignoreDependencies: [
+    "date-fns", // used by src/lib/utils/formatRelativeDate.ts:1:24 (reported as unused file below)
+    "linkedom", // used by src/layouts/shortcodes/Tabs.astro:19:27  (reported as unused file below)
+    "tarteaucitronjs",
+  ],
   // TODO: the following files are reported as unused, check if still needed
   ignoreFiles: [
     "public/tarteaucitron/css/tarteaucitron.min.css",
