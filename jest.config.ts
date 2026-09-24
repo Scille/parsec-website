@@ -7,6 +7,9 @@ const preset = createDefaultEsmPreset({
 
 const jestConfig: JestConfigWithTsJest = {
   ...preset,
+  transform: {
+    "^.+\\.[tj]sx?$": ["ts-jest", { tsconfig: "tsconfig.jest.json" }],
+  },
   moduleNameMapper: {
     "^@/components/(.*)$": "<rootDir>/src/layouts/components/$1",
     "^@/shortcodes/(.*)$": "<rootDir>/src/layouts/shortcodes/$1",

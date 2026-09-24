@@ -1,6 +1,6 @@
 import trailingSlashChecker from "./trailingSlashChecker";
 import { shouldOmitDefaultLangPrefix } from "./i18nUtils";
-import config from "../../../.astro/config.generated.json";
+import config from "@/config/config";
 
 const {
   site: { trailingSlash },

@@ -1,6 +1,6 @@
 import path from "node:path";
 import trailingSlashChecker from "./trailingSlashChecker";
-import config from "../../../.astro/config.generated.json";
+import config from "@/config/config";
 import languagesJSON from "../../config/language.json";
 
 // Load configuration from TOML file
