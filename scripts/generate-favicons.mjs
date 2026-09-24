@@ -19,11 +19,7 @@ const PROJECT_ROOT = path.resolve(__dirname, "..");
 const FAVICON_DIR = path.resolve(PROJECT_ROOT, "public", "images", "favicons");
 const DEFAULT_TITLE = "Website";
 const DEFAULT_FAVICON_IMAGE = "/images/default-favicon.png";
-const CONFIG_PATH = path.resolve(
-  PROJECT_ROOT,
-  ".astro",
-  "config.generated.json",
-);
+const CONFIG_PATH = path.resolve(PROJECT_ROOT, "src", "config", "config.js");
 
 // Helper: Read config in a Node-version-friendly way
 async function loadConfig() {

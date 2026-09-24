@@ -1,5 +1,5 @@
 import { describe, expect, test } from "@jest/globals";
-import config from "../../.astro/config.generated.json";
+import config from "@/config/config";
 import { getLocaleUrlCTM } from "../lib/utils/i18nUtils";
 
 const paths = [

@@ -1,5 +1,4 @@
 import { defineCollection } from "astro:content";
-
 import { button, sharedButton, videoConfigSchema } from "./sections.schema";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
