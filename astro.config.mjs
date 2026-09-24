@@ -10,7 +10,7 @@ import { enabledLanguages } from "@/lib/utils/i18nUtils.ts";
 import { generateAstroFontsConfig } from "@/lib/utils/AstroFont.ts";
 import { buildRedirects } from "@/lib/utils/buildRedirects.ts";
 import rehypeExternalLinks from "rehype-external-links";
-import config from ".astro/config.generated.json";
+import config from "src/config/config";
 import { unified } from "@astrojs/markdown-remark";
 import icon from "astro-icon";
 import astroExpressiveCode from "astro-expressive-code";

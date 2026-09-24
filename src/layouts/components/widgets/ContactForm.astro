@@ -5,7 +5,7 @@ import Icons from "@/layouts/helpers/Icons.astro";
 import type { z } from "astro/zod";
 import type { sectionsSchema, inputFieldSchema } from "@/sections.schema";
 import { getPrelineSelectConfig } from "@/lib/utils/preline";
-import config from ".astro/config.generated.json";
+import config from "@/config/config";
 import { useTranslations } from "@/lib/utils/i18nUtils";
 
 interface Props {
