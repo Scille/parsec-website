@@ -45,8 +45,8 @@ repos:
           npx prettier
           --config=.prettierrc
           --ignore-path=.prettierignore
-          --check
+          --write
         language: node
-        types_or: [vue, ts, tsx, javascript, jsx, html]
+        types_or: [vue, ts, tsx, javascript, jsx, html, json]
         additional_dependencies:
           - prettier@3.1.0
