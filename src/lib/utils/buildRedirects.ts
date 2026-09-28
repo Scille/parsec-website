@@ -30,14 +30,16 @@ export const oldToNewSlug: Record<string, Record<string, string>> = {
     // pricing
     tarifs: "pricing",
     tarification: "pricing",
-    //misc
+    // misc
     "a-propos": "about-us",
     "nous-rejoindre": "contact",
     partenaires: "partners",
     "open-source": "features/#open-source",
-    //legal
+    // legal
     "cgvu-parsec": "terms-conditions",
     "politique-de-confidentialite": "privacy-policy",
+    // what's new
+    "whats-new": "blog/category/mises-a-jour",
   },
   en: {
     "start-parsec": "download",
@@ -60,13 +62,15 @@ export const oldToNewSlug: Record<string, Record<string, string>> = {
     "security-cloud-hosting": "",
     // pricing
     pricing: "pricing",
-    //misc
+    // misc
     "join-parsec": "contact",
     partners__trashed: "partners",
     "open-source": "features/#open-source",
-    //legal
+    // legal
     "gtcs-parsec": "terms-conditions",
     "politique-de-confidentialite": "privacy-policy",
+    // what's new
+    "whats-new": "blog/category/releases",
   },
 };
 
