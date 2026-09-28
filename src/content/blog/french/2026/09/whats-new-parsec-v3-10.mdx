@@ -1,0 +1,81 @@
+---
+title: "Quoi de neuf dans Parsec 3.10 ?"
+image: "/images/blog/whats-new-in-parsec.png"
+date: 2026-09-29
+author: "Marcos Medrano"
+categories:
+  - Mises à Jour
+draft: false
+excerpt: "Parsec 3.10 est disponible ! Cette version apporte des améliorations significatives en matière de gestion des fichiers, d'organisation de l'espace de travail et d'expérience utilisateur globale. Voici les changements les plus notables pour les utilisateurs quotidiens."
+---
+
+Si vous travaillez régulièrement avec des fichiers volumineux, gérez plusieurs espaces de travail ou collaborez avec des équipes au sein desquelles les responsables changent fréquemment, la version 3.10 apporte des améliorations significatives à votre travail.
+
+## 📁 Gestion des fichiers améliorée
+
+### Fin des limites de taille pour les aperçus
+
+La limite de 15 Mo imposée à la taille des fichiers pour les aperçus a été supprimée. Vous pouvez désormais prévisualiser des fichiers plus volumineux directement dans l'application sans avoir à les télécharger au préalable.
+
+### Téléchargements plus rapides de fichiers volumineux
+
+Le téléchargement simultané de nombreux fichiers a été considérablement optimisé. Que ce soit pour migrer des projets ou sauvegarder des données, les téléchargements par lots volumineux s'effectuent plus rapidement et de manière plus fiable.
+
+### Suivi en temps réel de la progression de la synchronisation
+
+Lors de la synchronisation de fichiers avec le serveur, le fait de passer la souris sur un fichier affiche désormais le pourcentage exact de progression du téléchargement : plus besoin de deviner combien de temps la synchronisation va encore durer.
+
+### Téléchargements de plusieurs fichiers (Web)
+
+Sur la version Web, vous pouvez désormais sélectionner et télécharger plusieurs fichiers ou des dossiers entiers en une seule fois, au lieu de télécharger chaque élément individuellement.
+
+## 🔍 Recherche et organisation améliorées
+
+### Recherche de fichiers dans tous les espaces de travail
+
+La page « Mes espaces de travail » prend désormais en charge la recherche simultanée dans tous vos espaces de travail. La recherche d'un document spécifique est plus rapide, quel que soit l'espace de travail dans lequel il se trouve.
+
+### Filtres de partage basés sur les profils
+
+Lors du partage d'espaces de travail, vous pouvez désormais filtrer les utilisateurs en fonction de leur type de profil, ce qui facilite la gestion des droits d'accès pour des équipes de tailles variées.
+
+## 💻 Améliorations de l'application de bureau
+
+### Barre de titre unifiée (Windows/Linux)
+
+La fenêtre de l'application et son titre ont été regroupés en une seule barre de titre plus épurée, pour un aspect plus moderne et une interface moins encombrée.
+
+### Menu natif macOS
+
+Les utilisateurs Mac peuvent désormais accéder aux actions courantes (déconnexion, navigation, aide, paramètres) directement via la barre de menu native de macOS.
+
+## 👥 Filet de sécurité concernant la propriété des espaces de travail
+
+Si tous les propriétaires d'un espace de travail ont été révoqués, les administrateurs et les membres disposant du rôle le plus élevé parmi ceux qui ne sont pas propriétaires peuvent désormais se promouvoir propriétaires. Cela empêche les espaces de travail de devenir définitivement inaccessibles en raison de problèmes de propriété.
+
+## 🔐 Modifications des autorisations
+
+### Demande d'accès au réseau local
+
+Avant d'activer l'authentification Web PKI, l'application demande désormais explicitement l'autorisation d'accéder au réseau local. Cela garantit la transparence quant aux ressources système utilisées par l'application.
+
+## 🐛 Principaux correctifs de bugs
+
+- Les fichiers créés via le bouton « Nouveau fichier » n'apparaissaient pas immédiatement
+- Les fichiers importés ne s'affichaient pas dans la fenêtre du gestionnaire d'opérations
+- Erreur « Afficher dans l'explorateur » sur les espaces de travail masqués (Bureau)
+- Les utilisateurs dont les droits ont été révoqués pouvaient toujours être sélectionnés dans la gestion des utilisateurs
+- Les icônes des organisations d'essai étaient invisibles sur les petits écrans
+- La navigation après la déconnexion conduisait à des écrans vides
+
+## ⚙️ Améliorations techniques
+
+- Démarrage plus rapide, que la connexion Internet soit lente ou rapide
+- Visualiseur de logs intégré améliorée avec des fonctionnalités de copie et de téléchargement
+- Numérotation automatique des fichiers nouvellement créés
+- Messages d'erreur plus clairs en cas d'échec de l'authentification par trousseau de clés
+
+## Sources
+
+Pour plus d'informations, veuillez consulter la liste complète des modifications
+dans le [changelog](https://docs.parsec.cloud/fr/v3.10.0/history.html).

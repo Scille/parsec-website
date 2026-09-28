@@ -1,0 +1,86 @@
+---
+title: "What's new in Parsec 3.10"
+image: "/images/blog/whats-new-in-parsec.png"
+date: 2026-09-29
+author: "Marcos Medrano"
+categories:
+  - Releases
+draft: false
+excerpt: "Parsec 3.10 is here! This version brings significant improvements to file handling, workspace management, and overall user experience. Here are the most notable changes for everyday users."
+---
+
+If you regularly work with large files, manage multiple workspaces, or collaborate with teams where ownership changes frequently, v3.10 delivers meaningful workflow improvements.
+
+## 📁 Enhanced File Management
+
+### No More Preview Size Limits
+
+The 15MB file size restriction for previews has been removed. You can now preview larger files directly within the app without downloading them first.
+
+### Faster Large File Uploads
+
+Uploading many files at once has been significantly optimized. Whether you're migrating projects or backing up data, large batch uploads complete faster and more reliably.
+
+### Real-Time Sync Progress Tracking
+
+When synchronizing files with the server, hovering over a file now displays the exact upload progress percentage—no more guessing how much longer your sync will take.
+
+### Multiple File Downloads (Web)
+
+On the web version, you can now select and download multiple files or entire folders at once instead of downloading each item individually.
+
+## 🔍 Better Search & Organization
+
+### Cross-Workspace File Search
+
+The **My workspaces** page now supports searching across all your workspaces simultaneously. Finding a specific document is faster regardless of which workspace it's located in.
+
+### Profile-Based Sharing Filters
+
+When sharing workspaces, you can now filter users by their profile type—making it easier to manage access permissions for teams of varying sizes.
+
+## 💻 Desktop App Improvements
+
+### Unified Title Bar (Windows/Linux)
+
+The app window and title have been combined into a single, cleaner title bar for a more modern look and reduced visual
+clutter.
+
+### MacOS Native Menu
+
+Mac users can now access common actions (logout, navigation, help, settings) directly through the native macOS menu bar.
+
+### Favorites Renamed
+
+Starred workspaces are now called **Favorites** for clearer terminology.
+
+## 👥 Workspace Ownership Safety Net
+
+If all workspace Owners have been revoked, Administrators and Members with the highest remaining non-Owner role can now promote themselves to Owner. This prevents workspaces from becoming permanently inaccessible due to ownership issues.
+
+## 🔐 Permission Changes
+
+### Local Network Access Request
+
+Before enabling PKI web authentication, the app now explicitly requests local network access permission. This ensures transparency around what system resources the app uses.
+
+## 🐛 Key Bug Fixes
+
+- Files created via "New file" button not appearing immediately
+- Imported files missing from operations manager window
+- Show in explorer error on hidden workspaces (Desktop)
+- Revoked users still selectable in user management
+- Trial organization icons invisible on small displays
+- Logout navigation leading to blank screens
+
+## ⚙️ Under-the-Hood Improvements
+
+- Faster startup on both slow and fast internet connections
+- Enhanced log viewer with copy/download functionality
+- Auto-numbering for multiple newly-created files
+- Better error messages for keyring authentication failures
+
+## Sources
+
+For more information, please check the complete list of changes
+on the [changelog](https://docs.parsec.cloud/en/v3.10.0/history.html).
