@@ -35,50 +35,42 @@ if (!enable) return;
 
 <section>
   <div class="container space-y-10 md:space-y-16">
-    {
-      title && (
-        <h2 class="has-italic-text max-w-lg px-6">
-          <AnimatedText
-            delay={0.2}
-            stagger={0.09}
-            content={markdownify(title)}
-          />
-        </h2>
-      )
-    }
+    {title && (
+      <h2 class="has-italic-text max-w-lg px-6">
+        <AnimatedText delay={0.2} stagger={0.09} content={markdownify(title)} />
+      </h2>
+    )}
 
-    {
-      values && (
-        <div class="border-border-base-default grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:max-md:[&>*:not(:last-child)]:border-b md:max-lg:[&>*:not(:last-child):nth-child(2n+1)]:border-r lg:[&>*:not(:nth-child(3n))]:border-r md:max-lg:[&>*:not(:nth-last-child(-n+2))]:border-b lg:[&>*:nth-child(-n+3)]:border-b">
-          {values.map((item, index) => (
-            <div
-              data-aos="fade-up-sm"
-              data-aos-delay={(index + 1) * 50}
-              data-aos-duration={900}
-              class="flex flex-col gap-6 px-6 py-6">
-              <Icons
-                class="text-icon-neutral-default text-2xl"
-                icon={item.icon as HeroIconName}
-              />
-              <div class="flex flex-col gap-2">
-                {item.title && (
-                  <h3
-                    class="text-h4-sm md:text-h4 font-bold"
-                    set:html={markdownify(item.title)}
-                  />
-                )}
-                {item.description && (
-                  <p
-                    class="text-body-lg text-text-base-description"
-                    set:html={markdownify(item.description)}
-                  />
-                )}
-              </div>
+    {values && (
+      <div class="border-border-base-default grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:max-md:[&>*:not(:last-child)]:border-b md:max-lg:[&>*:not(:last-child):nth-child(2n+1)]:border-r lg:[&>*:not(:nth-child(3n))]:border-r md:max-lg:[&>*:not(:nth-last-child(-n+2))]:border-b lg:[&>*:nth-child(-n+3)]:border-b">
+        {values.map((item, index) => (
+          <div
+            data-aos="fade-up-sm"
+            data-aos-delay={(index + 1) * 50}
+            data-aos-duration={900}
+            class="flex flex-col gap-6 px-6 py-6">
+            <Icons
+              class="text-icon-neutral-default text-2xl"
+              icon={item.icon as HeroIconName}
+            />
+            <div class="flex flex-col gap-2">
+              {item.title && (
+                <h3
+                  class="text-h4-sm md:text-h4 font-bold"
+                  set:html={markdownify(item.title)}
+                />
+              )}
+              {item.description && (
+                <p
+                  class="text-body-lg text-text-base-description"
+                  set:html={markdownify(item.description)}
+                />
+              )}
             </div>
-          ))}
-        </div>
-      )
-    }
+          </div>
+        ))}
+      </div>
+    )}
 
     <div
       data-aos="fade-up-sm"

@@ -28,8 +28,7 @@ const tocEnabled =
   description={description || excerpt}
 />
 
-<section
-  class="after:bg-theme-light pt-0 after:pointer-events-none after:absolute after:top-0 after:left-0 after:-z-10 after:h-250 after:w-full after:content-['']">
+<section class="after:bg-theme-light pt-0 after:pointer-events-none after:absolute after:top-0 after:left-0 after:-z-10 after:h-250 after:w-full after:content-['']">
   <div class="container">
     <div
       class:list={[
@@ -40,13 +39,11 @@ const tocEnabled =
 
       {tocEnabled && tocHeadings && <TOC toc={tocHeadings} marker={false} />}
 
-      {
-        Content && (
-          <div class="prose-styles content has-video-modal">
-            <Content />
-          </div>
-        )
-      }
+      {Content && (
+        <div class="prose-styles content has-video-modal">
+          <Content />
+        </div>
+      )}
     </div>
   </div>
 </section>

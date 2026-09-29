@@ -102,169 +102,158 @@ const noteStyles = {
   <div
     id="form-container"
     class="grid grid-cols-1 gap-x-4 gap-y-6 px-6 py-8 md:grid-cols-2 md:p-10">
-    {
-      form.emailSubject && (
-        <input type="hidden" name={"_subject"} value={form.emailSubject} />
-      )
-    }
+    {form.emailSubject && (
+      <input type="hidden" name={"_subject"} value={form.emailSubject} />
+    )}
 
     <input type="hidden" name="_template" value="table" />
 
-    {
-      form.autoResponse && (
-        <input type="hidden" name="_autoresponse" value={form.autoResponse} />
-      )
-    }
+    {form.autoResponse && (
+      <input type="hidden" name="_autoresponse" value={form.autoResponse} />
+    )}
 
-    {
-      form.inputs.map((input) => (
-        <div
-          input-wrapper
-          class:list={[
-            "flex flex-col gap-2",
-            input.halfWidth ? "max-md:col-span-2" : "col-span-2",
-            input.parentClass,
-          ]}>
-          {!input.note &&
-            input.type !== "checkbox" &&
-            input.type !== "radio" &&
-            (input.groupLabel || input.label) && (
-              <label for={input.id || input.name} class="form-label">
-                {input.groupLabel || input.label || "Please set label"}
-                {input.required && (
-                  <span class="text-text-error-default">*</span>
-                )}
-              </label>
-            )}
-          {input.dropdown ? (
-            <div id="validation-target">
-              <select
-                id={input.id || input.name}
-                data-name={input.name || input.label || "Please set name value"}
-                data-hs-select={JSON.stringify(
-                  getPrelineSelectConfig({
-                    placeholder: input.placeholder || "Please set placeholder",
-                    searchPlaceholder: input.dropdown?.search?.placeholder,
-                    hasSearch: input.dropdown?.type === "search",
-                    notFoundText: translate("common.contactDropdownSearch404"),
-                  }),
-                )}
-                class="hidden">
-                <option value="">Choose</option>
-                {input.dropdown?.items?.map((option) => (
-                  <option
-                    {...(option.selected && { selected: true })}
-                    value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-              <p class="hs-error:block text-text-error-default mt-2 hidden text-sm">
-                {translate("common.contactDropdownInvalid")}
-              </p>
-            </div>
-          ) : input.tag === "textarea" ? (
-            <textarea
-              id={input.id || input.name}
-              rows={input.rows || "4"}
-              name={input.name || input.label || "Please set name value"}
-              placeholder={input.placeholder || "Please set placeholder"}
-              class="form-input"
-              {...(input.required && { required: true })}
-              set:html={input.defaultValue || ""}
-            />
-          ) : input.items ? (
-            <div class="form-check-wrapper">
-              {input.items?.map((input) => (
-                <div class="form-check">
-                  <input
-                    {...{
-                      value:
-                        typeof input.value === "boolean"
-                          ? String(input.value)
-                          : input.value || input.label,
-                      checked: input.checked ? true : undefined,
-                    }}
-                    type={input.type}
-                    name={
-                      input.name || input.groupLabel || "Please set name value"
-                    }
-                    id={input.id || genIdFromLabel(input.label || "example-id")}
-                    class:list={[
-                      input.type === "radio" ? "form-radio" : "form-checkbox",
-                    ]}
-                    {...(input.required && { required: true })}
-                  />
-                  <label
-                    for={
-                      input.id || genIdFromLabel(input.label || "example-id")
-                    }
-                    class="form-check-label text-text-base-label font-medium"
-                    set:html={markdownify(input.label) || "Example Label"}
-                  />
-                </div>
-              ))}
-            </div>
-          ) : input.type === "checkbox" || input.type === "radio" ? (
-            <div class="form-check">
-              <input
-                {...{
-                  value:
-                    typeof input.value === "boolean"
-                      ? String(input.value)
-                      : input.value || input.label,
-                  checked: input.checked ? true : undefined,
-                }}
-                type={input.type || "text"}
-                name={input.name || "Please set name value"}
-                id={input.id || genIdFromLabel(input.label || "example-id")}
-                placeholder={input.placeholder || "Please set placeholder"}
-                class:list={[
-                  input.type === "radio" ? "form-radio" : "form-checkbox",
-                ]}
-                {...(input.required && { required: true })}
-              />
-              <label
-                for={input.id || genIdFromLabel(input.label || "example-id")}
-                class="form-check-label"
-                set:html={
-                  (input.label && markdownify(input.label)) ||
-                  input.label ||
-                  "Example Label"
-                }
-              />
-            </div>
-          ) : input.note ? (
-            <div
-              {...{ "data-default": input.content }}
-              class:list={[
-                "form-content text-text-base-body text-body-lg flex items-start gap-2 rounded-xl border px-4 py-3",
-                noteStyles[input.note] || "border-gray-200 bg-gray-50/25",
-              ]}>
-              {input.note === "success" && (
-                <Icons
-                  icon="CheckCircleIcon"
-                  class="text-icon-success-default mt-0.5 shrink-0 text-lg"
-                />
-              )}
-              <div set:html={markdownify(input.content || "", true)} />
-            </div>
-          ) : (
-            <input
-              {...(input.defaultValue && {
-                value: input.defaultValue,
-              })}
-              type={input.type || "text"}
-              name={input.name || input.label || "Please set name value"}
-              id={input.id || input.name}
-              placeholder={input.placeholder || "Please set placeholder"}
-              class="form-input"
-              {...(input.required && { required: true })}
-            />
+    {form.inputs.map((input) => (
+      <div
+        input-wrapper
+        class:list={[
+          "flex flex-col gap-2",
+          input.halfWidth ? "max-md:col-span-2" : "col-span-2",
+          input.parentClass,
+        ]}>
+        {!input.note &&
+          input.type !== "checkbox" &&
+          input.type !== "radio" &&
+          (input.groupLabel || input.label) && (
+            <label for={input.id || input.name} class="form-label">
+              {input.groupLabel || input.label || "Please set label"}
+              {input.required && <span class="text-text-error-default">*</span>}
+            </label>
           )}
-        </div>
-      ))
-    }
+        {input.dropdown ? (
+          <div id="validation-target">
+            <select
+              id={input.id || input.name}
+              data-name={input.name || input.label || "Please set name value"}
+              data-hs-select={JSON.stringify(
+                getPrelineSelectConfig({
+                  placeholder: input.placeholder || "Please set placeholder",
+                  searchPlaceholder: input.dropdown?.search?.placeholder,
+                  hasSearch: input.dropdown?.type === "search",
+                  notFoundText: translate("common.contactDropdownSearch404"),
+                }),
+              )}
+              class="hidden">
+              <option value="">Choose</option>
+              {input.dropdown?.items?.map((option) => (
+                <option
+                  {...(option.selected && { selected: true })}
+                  value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            <p class="hs-error:block text-text-error-default mt-2 hidden text-sm">
+              {translate("common.contactDropdownInvalid")}
+            </p>
+          </div>
+        ) : input.tag === "textarea" ? (
+          <textarea
+            id={input.id || input.name}
+            rows={input.rows || "4"}
+            name={input.name || input.label || "Please set name value"}
+            placeholder={input.placeholder || "Please set placeholder"}
+            class="form-input"
+            {...(input.required && { required: true })}
+            set:html={input.defaultValue || ""}></textarea>
+        ) : input.items ? (
+          <div class="form-check-wrapper">
+            {input.items?.map((input) => (
+              <div class="form-check">
+                <input
+                  {...{
+                    value:
+                      typeof input.value === "boolean"
+                        ? String(input.value)
+                        : input.value || input.label,
+                    checked: input.checked ? true : undefined,
+                  }}
+                  type={input.type}
+                  name={
+                    input.name || input.groupLabel || "Please set name value"
+                  }
+                  id={input.id || genIdFromLabel(input.label || "example-id")}
+                  class:list={[
+                    input.type === "radio" ? "form-radio" : "form-checkbox",
+                  ]}
+                  {...(input.required && { required: true })}
+                />
+                <label
+                  for={input.id || genIdFromLabel(input.label || "example-id")}
+                  class="form-check-label text-text-base-label font-medium"
+                  set:html={markdownify(input.label) || "Example Label"}
+                />
+              </div>
+            ))}
+          </div>
+        ) : input.type === "checkbox" || input.type === "radio" ? (
+          <div class="form-check">
+            <input
+              {...{
+                value:
+                  typeof input.value === "boolean"
+                    ? String(input.value)
+                    : input.value || input.label,
+                checked: input.checked ? true : undefined,
+              }}
+              type={input.type || "text"}
+              name={input.name || "Please set name value"}
+              id={input.id || genIdFromLabel(input.label || "example-id")}
+              placeholder={input.placeholder || "Please set placeholder"}
+              class:list={[
+                input.type === "radio" ? "form-radio" : "form-checkbox",
+              ]}
+              {...(input.required && { required: true })}
+            />
+            <label
+              for={input.id || genIdFromLabel(input.label || "example-id")}
+              class="form-check-label"
+              set:html={
+                (input.label && markdownify(input.label)) ||
+                input.label ||
+                "Example Label"
+              }
+            />
+          </div>
+        ) : input.note ? (
+          <div
+            {...{ "data-default": input.content }}
+            class:list={[
+              "form-content text-text-base-body text-body-lg flex items-start gap-2 rounded-xl border px-4 py-3",
+              noteStyles[input.note] || "border-gray-200 bg-gray-50/25",
+            ]}>
+            {input.note === "success" && (
+              <Icons
+                icon="CheckCircleIcon"
+                class="text-icon-success-default mt-0.5 shrink-0 text-lg"
+              />
+            )}
+            <div set:html={markdownify(input.content || "", true)} />
+          </div>
+        ) : (
+          <input
+            {...(input.defaultValue && {
+              value: input.defaultValue,
+            })}
+            type={input.type || "text"}
+            name={input.name || input.label || "Please set name value"}
+            id={input.id || input.name}
+            placeholder={input.placeholder || "Please set placeholder"}
+            class="form-input"
+            {...(input.required && { required: true })}
+          />
+        )}
+      </div>
+    ))}
 
     <div
       id="form-error-message"
@@ -276,39 +265,32 @@ const noteStyles = {
       <div id="form-error-message-text"></div>
     </div>
 
-    {
-      form.submitButton && (
-        <div class="col-span-1 mt-4 flex w-full flex-col">
-          <CustomButton
-            tag="button"
-            type="submit"
-            class="w-full md:w-fit"
-            hoverEffect="text-flip"
-            {...form.submitButton}
-          />
-        </div>
-      )
-    }
-  </div>
-  {
-    successNote && (
-      <div
-        id="thank-you-message"
-        class="hidden flex-col items-center gap-2 p-8 text-center md:p-10">
-        <Icons
-          class="text-icon-brand-default text-3xl"
-          icon="CheckCircleIcon"
-        />
-        <h4 class="text-text-base-heading">
-          {translate("common.contactThankYou")}
-        </h4>
-        <p
-          class="text-body-xl text-text-base-body"
-          set:html={markdownify(successNote.content || "")}
+    {form.submitButton && (
+      <div class="col-span-1 mt-4 flex w-full flex-col">
+        <CustomButton
+          tag="button"
+          type="submit"
+          class="w-full md:w-fit"
+          hoverEffect="text-flip"
+          {...form.submitButton}
         />
       </div>
-    )
-  }
+    )}
+  </div>
+  {successNote && (
+    <div
+      id="thank-you-message"
+      class="hidden flex-col items-center gap-2 p-8 text-center md:p-10">
+      <Icons class="text-icon-brand-default text-3xl" icon="CheckCircleIcon" />
+      <h4 class="text-text-base-heading">
+        {translate("common.contactThankYou")}
+      </h4>
+      <p
+        class="text-body-xl text-text-base-body"
+        set:html={markdownify(successNote.content || "")}
+      />
+    </div>
+  )}
 </form>
 
 <script>

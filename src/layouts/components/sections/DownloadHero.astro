@@ -34,140 +34,125 @@ const codeOptions = (osDropdown?.items ?? [])
 <section class="bg-dots-fade home-hero -mt-20 overflow-hidden pt-30 md:pt-40">
   <div
     class="pointer-events-none absolute -top-1/3 -left-1/4 -z-10 h-[140%] w-[70%] rounded-full opacity-70 blur-3xl"
-    style="background: radial-gradient(circle at 20% 120%, color-mix(in oklch, var(--parsec-color-surface-brand-default) 40%, transparent), transparent 60%);">
-  </div>
+    style="background: radial-gradient(circle at 20% 120%, color-mix(in oklch, var(--parsec-color-surface-brand-default) 40%, transparent), transparent 60%);"></div>
   <div
     class="pointer-events-none absolute -top-1/3 -right-1/4 -z-10 h-[140%] w-[70%] rounded-full opacity-70 blur-3xl"
-    style="background: radial-gradient(circle at 80% 90%, color-mix(in oklch, var(--parsec-color-surface-brand-default) 40%, transparent), transparent 60%)">
-  </div>
+    style="background: radial-gradient(circle at 80% 90%, color-mix(in oklch, var(--parsec-color-surface-brand-default) 40%, transparent), transparent 60%)"></div>
   <div class="border-border-base-default relative border-b">
     <div class="container pb-20 md:pb-0">
       <div class="mx-autospace-y-10 relative flex flex-col items-center gap-12">
         <div class="mx-auto max-w-2xl">
-          {
-            title && (
-              <h2>
-                <AnimatedText
-                  delay={0.1}
-                  class="has-italic-text text-text-base-heading mb-6 text-center md:mb-8"
-                  content={markdownify(title)}
-                />
-              </h2>
-            )
-          }
-          {
-            description && (
+          {title && (
+            <h2>
               <AnimatedText
-                delay={0.9}
-                stagger={0.03}
-                content={markdownify(description)}
-                class="text-body-xl text-text-base-body mx-auto max-w-xl text-center"
+                delay={0.1}
+                class="has-italic-text text-text-base-heading mb-6 text-center md:mb-8"
+                content={markdownify(title)}
               />
-            )
-          }
+            </h2>
+          )}
+          {description && (
+            <AnimatedText
+              delay={0.9}
+              stagger={0.03}
+              content={markdownify(description)}
+              class="text-body-xl text-text-base-body mx-auto max-w-xl text-center"
+            />
+          )}
         </div>
 
         <div
           id="download-dropdown-container"
           class="flex w-full flex-col justify-center gap-6 lg:grid lg:grid-cols-2">
-          {
-            downloadClient && osDropdown && (
-              <div
-                id="download-client-card"
-                class="bg-surface-base-default shadow-card flex w-full flex-col gap-4 rounded-3xl p-6 lg:ml-auto lg:max-w-sm lg:self-end">
-                <p
-                  class="text-body-md text-text-base-description text-center uppercase"
-                  set:html={markdownify(downloadClient.title)}
+          {downloadClient && osDropdown && (
+            <div
+              id="download-client-card"
+              class="bg-surface-base-default shadow-card flex w-full flex-col gap-4 rounded-3xl p-6 lg:ml-auto lg:max-w-sm lg:self-end">
+              <p
+                class="text-body-md text-text-base-description text-center uppercase"
+                set:html={markdownify(downloadClient.title)}
+              />
+              {osDropdown && osDropdown.id && (
+                <select
+                  id={osDropdown.id || osDropdown.name}
+                  data-name={
+                    osDropdown.name ||
+                    osDropdown.label ||
+                    "Please set name value"
+                  }
+                  data-hs-select={JSON.stringify(
+                    getPrelineSelectConfig({
+                      placeholder:
+                        osDropdown.placeholder || "Please set placeholder",
+                    }),
+                  )}
+                  class="download-dropdown">
+                  <option value="">{osDropdown.name}</option>
+                  {osDropdown?.items?.map((option) => (
+                    <option
+                      {...(option.selected && { selected: true })}
+                      {...getPrelineSelectOptionAttrs(option.icon)}
+                      data-url={option.url}
+                      data-code={Boolean(option.source)}
+                      value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              )}
+              {downloadClient.button && (
+                <CustomButton
+                  id="download-client-button"
+                  hoverEffect="magnetic-text-flip"
+                  class="w-full sm:w-auto"
+                  {...downloadClient.button}
                 />
-                {osDropdown && osDropdown.id && (
-                  <select
-                    id={osDropdown.id || osDropdown.name}
-                    data-name={
-                      osDropdown.name ||
-                      osDropdown.label ||
-                      "Please set name value"
-                    }
-                    data-hs-select={JSON.stringify(
-                      getPrelineSelectConfig({
-                        placeholder:
-                          osDropdown.placeholder || "Please set placeholder",
-                      }),
-                    )}
-                    class="download-dropdown">
-                    <option value="">{osDropdown.name}</option>
-                    {osDropdown?.items?.map((option) => (
-                      <option
-                        {...(option.selected && { selected: true })}
-                        {...getPrelineSelectOptionAttrs(option.icon)}
-                        data-url={option.url}
-                        data-code={Boolean(option.source)}
-                        value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                )}
-                {downloadClient.button && (
-                  <CustomButton
-                    id="download-client-button"
-                    hoverEffect="magnetic-text-flip"
-                    class="w-full sm:w-auto"
-                    {...downloadClient.button}
-                  />
-                )}
-                {codeOptions.map(({ value, code, lang }) => (
-                  <div class="download-client-code hidden" data-value={value}>
-                    <Code code={code} lang={lang} />
-                  </div>
-                ))}
-              </div>
-            )
-          }
-          {
-            goOnWeb && (
-              <div class="flex min-w-80 flex-col gap-4 p-6 lg:max-w-sm">
-                <p
-                  class="text-body-md text-text-base-description text-center uppercase"
-                  set:html={markdownify(goOnWeb.title)}
+              )}
+              {codeOptions.map(({ value, code, lang }) => (
+                <div class="download-client-code hidden" data-value={value}>
+                  <Code code={code} lang={lang} />
+                </div>
+              ))}
+            </div>
+          )}
+          {goOnWeb && (
+            <div class="flex min-w-80 flex-col gap-4 p-6 lg:max-w-sm">
+              <p
+                class="text-body-md text-text-base-description text-center uppercase"
+                set:html={markdownify(goOnWeb.title)}
+              />
+              {goOnWeb.button && (
+                <CustomButton
+                  hoverEffect="magnetic-text-flip"
+                  class="bg-surface-base-default w-full sm:w-auto"
+                  {...goOnWeb.button}
                 />
-                {goOnWeb.button && (
-                  <CustomButton
-                    hoverEffect="magnetic-text-flip"
-                    class="bg-surface-base-default w-full sm:w-auto"
-                    {...goOnWeb.button}
-                  />
-                )}
-                <p
-                  class="text-body-lg text-text-base-description mx-auto w-fit px-2 text-center italic backdrop-blur-md"
-                  set:html={markdownify(goOnWeb.info)}
-                />
-              </div>
-            )
-          }
+              )}
+              <p
+                class="text-body-lg text-text-base-description mx-auto w-fit px-2 text-center italic backdrop-blur-md"
+                set:html={markdownify(goOnWeb.info)}
+              />
+            </div>
+          )}
         </div>
         {moreButton && <CustomButton class="mx-auto mt-16" {...moreButton} />}
       </div>
     </div>
 
     <!-- Banner Image -->
-    {
-      image && (
-        <div class="relative mx-6 mt-12 hidden max-w-425 rounded-b-[6.25rem] pb-20 md:m-0 md:mx-auto md:mt-20 md:block">
-          <div class="banner-image container max-h-50">
-            <OptimizedImage
-              src={image}
-              class="shadow-hero-image mx-auto rounded-3xl border-8 border-white/35 md:rounded-[2.25rem] md:border-[1.25rem]"
-            />
-          </div>
+    {image && (
+      <div class="relative mx-6 mt-12 hidden max-w-425 rounded-b-[6.25rem] pb-20 md:m-0 md:mx-auto md:mt-20 md:block">
+        <div class="banner-image container max-h-50">
+          <OptimizedImage
+            src={image}
+            class="shadow-hero-image mx-auto rounded-3xl border-8 border-white/35 md:rounded-[2.25rem] md:border-[1.25rem]"
+          />
         </div>
-      )
-    }
+      </div>
+    )}
   </div>
-  <div
-    class="translate-x-centered absolute bottom-0 -z-10 h-1/4 w-full max-w-full overflow-hidden">
-    <div
-      class="to-surface-base-default absolute inset-0 -z-10 bg-linear-to-b from-transparent">
-    </div>
+  <div class="translate-x-centered absolute bottom-0 -z-10 h-1/4 w-full max-w-full overflow-hidden">
+    <div class="to-surface-base-default absolute inset-0 -z-10 bg-linear-to-b from-transparent"></div>
   </div>
 
   <script>

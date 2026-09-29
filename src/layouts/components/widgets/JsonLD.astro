@@ -50,12 +50,10 @@ const jsonLdData = JsonLdGenerator(
 );
 ---
 
-<!-- JSON-LD -->{
-  content ? (
-    <script
-      type="application/ld+json"
-      is:inline
-      set:html={JSON.stringify(jsonLdData, null, 2)}
-    />
-  ) : null
-}
+<!-- JSON-LD -->
+{content ? (
+  <script
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(jsonLdData, null, 2)}></script>
+) : null}

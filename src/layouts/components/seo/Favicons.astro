@@ -45,15 +45,16 @@ const metaTags = [
 
 <!--------------
     Favicons
----------------->{
-  favicons.map((favicon) => (
-    <link
-      rel={favicon.rel}
-      type={favicon.type}
-      sizes={favicon.sizes}
-      href={favicon.href}
-    />
-  ))
-}
+---------------->
+{favicons.map((favicon) => (
+  <link
+    rel={favicon.rel}
+    type={favicon.type}
+    sizes={favicon.sizes}
+    href={favicon.href}
+  />
+))}
 
-{metaTags.map((meta) => <meta name={meta.name} content={meta.content} />)}
+{metaTags.map((meta) => (
+  <meta name={meta.name} content={meta.content} />
+))}

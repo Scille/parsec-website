@@ -16,49 +16,39 @@ const { title, preTitle, description, overlapShape } = Astro.props;
         description ? "flex-col justify-center" : "",
       ]}>
       <div>
-        {
-          preTitle && (
-            <span
-              class:list={[
-                "text-text-base-description text-body-xl mb-4 inline-block w-full rounded-full font-medium",
-                description ? "text-left" : "text-center",
-              ]}
-              set:html={markdownify(preTitle)}
-            />
-          )
-        }
-        {
-          title && (
-            <h1
-              class:list={[
-                "has-italic-text text-h2-sm md:text-h2",
-                description
-                  ? "max-w-lg"
-                  : "max-w-2xl justify-center text-center",
-              ]}
-              set:html={markdownify(title)}
-            />
-          )
-        }
-      </div>
-      {
-        description && (
-          <p
-            class="text-text-base-body text-lg md:max-w-xl"
-            set:html={markdownify(description)}
+        {preTitle && (
+          <span
+            class:list={[
+              "text-text-base-description text-body-xl mb-4 inline-block w-full rounded-full font-medium",
+              description ? "text-left" : "text-center",
+            ]}
+            set:html={markdownify(preTitle)}
           />
-        )
-      }
+        )}
+        {title && (
+          <h1
+            class:list={[
+              "has-italic-text text-h2-sm md:text-h2",
+              description ? "max-w-lg" : "max-w-2xl justify-center text-center",
+            ]}
+            set:html={markdownify(title)}
+          />
+        )}
+      </div>
+      {description && (
+        <p
+          class="text-text-base-body text-lg md:max-w-xl"
+          set:html={markdownify(description)}
+        />
+      )}
     </div>
   </div>
-  {
-    Astro.props.hasBgShape && (
-      <div
-        class:list={[
-          "bg-theme-light pointer-events-none absolute left-0 -z-10 h-250 w-full",
-          overlapShape ? "-bottom-full" : "bottom-0",
-        ]}
-      />
-    )
-  }
+  {Astro.props.hasBgShape && (
+    <div
+      class:list={[
+        "bg-theme-light pointer-events-none absolute left-0 -z-10 h-250 w-full",
+        overlapShape ? "-bottom-full" : "bottom-0",
+      ]}
+    />
+  )}
 </section>

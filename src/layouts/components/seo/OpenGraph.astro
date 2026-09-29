@@ -46,23 +46,15 @@ if (!disableTagline) {
 
 <!-------------------------
     Standard Open Graph
---------------------------->{
-  image && <meta property="og:image" content={absoluteUrl(image, Astro)} />
-}
+--------------------------->
+{image && <meta property="og:image" content={absoluteUrl(image, Astro)} />}
 {title && <meta property="og:title" content={removeWhitespace(title)} />}
-{
-  config.site.title && (
-    <meta
-      property="og:site_name"
-      content={removeWhitespace(config.site.title)}
-    />
-  )
-}
-{
-  description && (
-    <meta property="og:description" content={removeWhitespace(description)} />
-  )
-}
+{config.site.title && (
+  <meta property="og:site_name" content={removeWhitespace(config.site.title)} />
+)}
+{description && (
+  <meta property="og:description" content={removeWhitespace(description)} />
+)}
 {ogTitle && <meta property="og:title" content={removeWhitespace(ogTitle)} />}
 {ogType && <meta property="og:type" content={ogType} />}
 {ogLocale && <meta property="og:locale" content={ogLocale} />}
@@ -73,10 +65,8 @@ if (!disableTagline) {
 --------------------------->
 {twitterCard && <meta name="twitter:card" content={twitterCard} />}
 {title && <meta name="twitter:title" content={removeWhitespace(title)} />}
-{
-  description && (
-    <meta name="twitter:description" content={removeWhitespace(description)} />
-  )
-}
+{description && (
+  <meta name="twitter:description" content={removeWhitespace(description)} />
+)}
 {image && <meta name="twitter:image" content={absoluteUrl(image, Astro)} />}
 {twitter && <meta name="twitter:site" content={twitter} />}

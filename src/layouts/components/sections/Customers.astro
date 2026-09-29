@@ -31,28 +31,24 @@ if (!enable) return;
 <Element class:list={[className]}>
   <div class="container">
     <div class="mx-auto text-center">
-      {
-        title && (
-          <h3
-            data-aos="fade-up-sm"
-            class="text-h4-sm md:text-h4 text-center max-md:mx-auto"
-            set:html={markdownify(title)}
-          />
-        )
-      }
+      {title && (
+        <h3
+          data-aos="fade-up-sm"
+          class="text-h4-sm md:text-h4 text-center max-md:mx-auto"
+          set:html={markdownify(title)}
+        />
+      )}
       <div
         data-aos="fade-up-sm"
         data-aos-delay={200}
         class="relative mt-6 flex shrink flex-wrap justify-center gap-7 overflow-hidden md:mt-8">
-        {
-          list.map((item) => (
-            <OptimizedImage
-              src={item.src}
-              alt={item.alt}
-              class:list={["h-full max-h-[90px] w-auto md:max-h-[100px]"]}
-            />
-          ))
-        }
+        {list.map((item) => (
+          <OptimizedImage
+            src={item.src}
+            alt={item.alt}
+            class:list={["h-full max-h-[90px] w-auto md:max-h-[100px]"]}
+          />
+        ))}
       </div>
     </div>
   </div>

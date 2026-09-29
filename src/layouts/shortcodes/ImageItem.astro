@@ -72,54 +72,52 @@ const id = videoId
     : undefined;
 ---
 
-{
-  imageSrc && (
-    <div
-      class="not-prose relative"
-      class:list={[
-        {
-          "col-span-6": !width,
-          "col-span-3": width === "1/2",
-          "col-span-2": width === "1/3",
-        },
-        className,
-      ]}>
-      <OptimizedImage
-        width={900}
-        height={400}
-        src={imageSrc}
-        alt={imageAlt || "alt text"}
-        class:list={["!h-72 w-full !max-w-full object-cover md:!h-96"]}
-      />
-      {videoSrc && (
-        <>
-          <button
-            type="button"
-            title="Play Video"
-            aria-haspopup="dialog"
-            aria-expanded="false"
-            video-config={JSON.stringify({
-              id,
-              src: videoSrc,
-              provider: videoProvider,
-            })}
-            aria-controls={"#" + id}
-            data-hs-overlay={"#" + id}
-            data-hs-overlay-options={`{"emulateScrollbarSpace" : true}`}
-            class="video-modal-toggle translate-centered has-animated-waves waves-white absolute flex h-20 w-20 items-center justify-center rounded-full transition-transform duration-300 hover:scale-110 lg:h-20 lg:w-20">
-            <div class="relative z-10 flex h-20 w-20 items-center justify-center rounded-full">
-              <Icons icon="PlayIcon" class="icon fill-theme-light text-dark" />
-            </div>
-          </button>
-          <VideoModal
-            video={{
-              id,
-              src: videoSrc,
-              provider: videoProvider,
-            }}
-          />
-        </>
-      )}
-    </div>
-  )
-}
+{imageSrc && (
+  <div
+    class="not-prose relative"
+    class:list={[
+      {
+        "col-span-6": !width,
+        "col-span-3": width === "1/2",
+        "col-span-2": width === "1/3",
+      },
+      className,
+    ]}>
+    <OptimizedImage
+      width={900}
+      height={400}
+      src={imageSrc}
+      alt={imageAlt || "alt text"}
+      class:list={["!h-72 w-full !max-w-full object-cover md:!h-96"]}
+    />
+    {videoSrc && (
+      <>
+        <button
+          type="button"
+          title="Play Video"
+          aria-haspopup="dialog"
+          aria-expanded="false"
+          video-config={JSON.stringify({
+            id,
+            src: videoSrc,
+            provider: videoProvider,
+          })}
+          aria-controls={"#" + id}
+          data-hs-overlay={"#" + id}
+          data-hs-overlay-options={`{"emulateScrollbarSpace" : true}`}
+          class="video-modal-toggle translate-centered has-animated-waves waves-white absolute flex h-20 w-20 items-center justify-center rounded-full transition-transform duration-300 hover:scale-110 lg:h-20 lg:w-20">
+          <div class="relative z-10 flex h-20 w-20 items-center justify-center rounded-full">
+            <Icons icon="PlayIcon" class="icon fill-theme-light text-dark" />
+          </div>
+        </button>
+        <VideoModal
+          video={{
+            id,
+            src: videoSrc,
+            provider: videoProvider,
+          }}
+        />
+      </>
+    )}
+  </div>
+)}

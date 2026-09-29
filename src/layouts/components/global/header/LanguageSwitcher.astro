@@ -39,8 +39,7 @@ if (languages.length <= 1) {
 }
 ---
 
-<div
-  class="language-switcher hs-dropdown relative inline-block [--gpu-acceleration:false] [--offset:8] [--placement:bottom-right] [--strategy:auto] lg:[--auto-close:inside]">
+<div class="language-switcher hs-dropdown relative inline-block [--gpu-acceleration:false] [--offset:8] [--placement:bottom-right] [--strategy:auto] lg:[--auto-close:inside]">
   <button
     type="button"
     id="language-switcher-dropdown-toggle"
@@ -59,11 +58,12 @@ if (languages.length <= 1) {
       stroke-linejoin="round"
       data-icon
       class="w-4">
-      <path d="m5 8 6 6"></path><path d="m4 14 6-6 2-3"></path><path
-        d="M2 5h12">
-      </path><path d="M7 2h1"></path><path d="m22 22-5-10-5 10"></path><path
-        d="M14 18h6">
-      </path>
+      <path d="m5 8 6 6"></path>
+      <path d="m4 14 6-6 2-3"></path>
+      <path d="M2 5h12"></path>
+      <path d="M7 2h1"></path>
+      <path d="m22 22-5-10-5 10"></path>
+      <path d="M14 18h6"></path>
     </svg>
     <span class="text uppercase">{currentLocale}</span>
     <svg
@@ -84,24 +84,22 @@ if (languages.length <= 1) {
   <ul
     class="language-switcher-dropdown hs-dropdown-menu hs-dropdown-open:opacity-100 hs-dropdown-open:mt-0! hs-dropdown-open:visible z-10 mt-2 hidden w-24 min-w-32 opacity-0 transition-[opacity,margin] [--placement:right-bottom]"
     aria-labelledby="language-switcher-dropdown-toggle">
-    {
-      languages.map(
-        (language) =>
-          language && (
-            <li>
-              <a
-                class:list={[
-                  {
-                    active: language.languageCode === currentLocale,
-                  },
-                  "capitalize",
-                ]}
-                href={language.slug}>
-                {language.contentDir}
-              </a>
-            </li>
-          ),
-      )
-    }
+    {languages.map(
+      (language) =>
+        language && (
+          <li>
+            <a
+              class:list={[
+                {
+                  active: language.languageCode === currentLocale,
+                },
+                "capitalize",
+              ]}
+              href={language.slug}>
+              {language.contentDir}
+            </a>
+          </li>
+        ),
+    )}
   </ul>
 </div>

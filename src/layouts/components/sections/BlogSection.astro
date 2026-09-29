@@ -97,131 +97,115 @@ if (limit && !Astro.props.pagination && !category) {
 if (!enable) return;
 ---
 
-{
-  listPage && featuredPost && Astro.props.pagination?.currentPage === 1 && (
-    <div class="bg-surface-base-default-secondary relative w-full pb-16">
-      <div class="container">
-        <BlogCard
-          listPage={listPage}
-          layout="horizontal"
-          content={{ ...featuredPost.data, ...featuredPost }}
-        />
-      </div>
+{listPage && featuredPost && Astro.props.pagination?.currentPage === 1 && (
+  <div class="bg-surface-base-default-secondary relative w-full pb-16">
+    <div class="container">
+      <BlogCard
+        listPage={listPage}
+        layout="horizontal"
+        content={{ ...featuredPost.data, ...featuredPost }}
+      />
     </div>
-  )
-}
+  </div>
+)}
 
 <section class="relative pb-32" transition:animate="fade">
-  {
-    !listPage && (
-      <div
-        class="pointer-events-none absolute -top-1/3 -right-1/4 -z-10 h-[101%] w-[60%] rounded-full opacity-70 blur-3xl"
-        style="background: radial-gradient(circle at 30% 30%, color-mix(in oklch, var(--parsec-color-surface-brand-default) 40%, transparent), transparent 60%), radial-gradient(circle at 70% 70%, color-mix(in oklch, var(--parsec-color-surface-brand-default) 50%, transparent), transparent 60%);"
-      />
-    )
-  }
+  {!listPage && (
+    <div
+      class="pointer-events-none absolute -top-1/3 -right-1/4 -z-10 h-[101%] w-[60%] rounded-full opacity-70 blur-3xl"
+      style="background: radial-gradient(circle at 30% 30%, color-mix(in oklch, var(--parsec-color-surface-brand-default) 40%, transparent), transparent 60%), radial-gradient(circle at 70% 70%, color-mix(in oklch, var(--parsec-color-surface-brand-default) 50%, transparent), transparent 60%);"
+    />
+  )}
   <div
     class:list={[
       "container flex flex-col gap-10",
       listPage ? "md:gap-12" : "md:gap-16",
     ]}>
-    {
-      !listPage ? (
-        <div class="flex items-end justify-between">
-          {title && (
-            <h2 class="has-italic-text max-w-2xl">
-              <AnimatedText
-                delay={0.2}
-                stagger={0.09}
-                content={markdownify(title)}
-              />
-            </h2>
-          )}
-          {button && (
-            <CustomButton
-              hoverEffect="text-flip"
-              variant="fill"
-              color="white"
-              class="hidden md:flex"
-              {...button}
-            />
-          )}
-        </div>
-      ) : (
-        <h3 class="has-italic-text max-w-2xl">
-          {subtitle && (
+    {!listPage ? (
+      <div class="flex items-end justify-between">
+        {title && (
+          <h2 class="has-italic-text max-w-2xl">
             <AnimatedText
               delay={0.2}
               stagger={0.09}
-              content={markdownify(subtitle)}
+              content={markdownify(title)}
             />
-          )}
-        </h3>
-      )
-    }
+          </h2>
+        )}
+        {button && (
+          <CustomButton
+            hoverEffect="text-flip"
+            variant="fill"
+            color="white"
+            class="hidden md:flex"
+            {...button}
+          />
+        )}
+      </div>
+    ) : (
+      <h3 class="has-italic-text max-w-2xl">
+        {subtitle && (
+          <AnimatedText
+            delay={0.2}
+            stagger={0.09}
+            content={markdownify(subtitle)}
+          />
+        )}
+      </h3>
+    )}
 
-    {
-      listPage && categories.length > 0 && (
-        <div class="flex flex-wrap gap-2.5">
-          {categories.map((categoryItem) => (
-            <a
-              href={localizedLink(
-                `/blog/category/${categoryItem.slug}`,
-                Astro.currentLocale,
-              )}
-              class:list={[
-                "text-label-md rounded-2xl border px-3 py-1 leading-none font-medium",
-                category === categoryItem.slug
-                  ? "bg-surface-brand-default text-text-on-color-label hover:bg-surface-brand-default-hover border-transparent"
-                  : "bg-surface-information-default-subtle text-text-information-default border-border-information-default-subtle hover:bg-surface-information-default-subtle-hover",
-              ]}>
-              {categoryItem.name}
-            </a>
-          ))}
-        </div>
-      )
-    }
+    {listPage && categories.length > 0 && (
+      <div class="flex flex-wrap gap-2.5">
+        {categories.map((categoryItem) => (
+          <a
+            href={localizedLink(
+              `/blog/category/${categoryItem.slug}`,
+              Astro.currentLocale,
+            )}
+            class:list={[
+              "text-label-md rounded-2xl border px-3 py-1 leading-none font-medium",
+              category === categoryItem.slug
+                ? "bg-surface-brand-default text-text-on-color-label hover:bg-surface-brand-default-hover border-transparent"
+                : "bg-surface-information-default-subtle text-text-information-default border-border-information-default-subtle hover:bg-surface-information-default-subtle-hover",
+            ]}>
+            {categoryItem.name}
+          </a>
+        ))}
+      </div>
+    )}
     <div class="grid gap-x-6 gap-y-10 md:grid-cols-2 xl:grid-cols-3">
-      {
-        posts &&
-          posts.map((post, index) => (
-            <BlogCard
-              listPage={listPage}
-              content={{ ...post.data, ...post }}
-              data-aos-delay={
-                !Astro.props.pagination && ((index % 3) + 1) * 100
-              }
-              data-aos={
-                !Astro.props.pagination &&
-                (Math.floor(index / 3) % 2 === 0
-                  ? "fade-right-sm"
-                  : "fade-left-sm")
-              }
-            />
-          ))
-      }
+      {posts &&
+        posts.map((post, index) => (
+          <BlogCard
+            listPage={listPage}
+            content={{ ...post.data, ...post }}
+            data-aos-delay={!Astro.props.pagination && ((index % 3) + 1) * 100}
+            data-aos={
+              !Astro.props.pagination &&
+              (Math.floor(index / 3) % 2 === 0
+                ? "fade-right-sm"
+                : "fade-left-sm")
+            }
+          />
+        ))}
     </div>
 
-    {
-      !listPage && button && (
-        <CustomButton
-          hoverEffect="text-flip"
-          variant="outline"
-          color="neutral"
-          class="w-full md:hidden"
-          {...button}
-        />
-      )
-    }
+    {!listPage && button && (
+      <CustomButton
+        hoverEffect="text-flip"
+        variant="outline"
+        color="neutral"
+        class="w-full md:hidden"
+        {...button}
+      />
+    )}
 
-    {
-      listPage && !category && (
-        <Pagination
-          collection={blogFolder}
-          currentPage={Astro.props.pagination?.currentPage || 1}
-          totalPages={totalPages}
-        />
-      )
-    }
+    {listPage && !category && (
+      <Pagination
+        collection={blogFolder}
+        currentPage={Astro.props.pagination?.currentPage || 1}
+        totalPages={totalPages}
+      />
+    )}
   </div>
 </section>

@@ -81,39 +81,37 @@ const buttonClasses = [
 ];
 ---
 
-{
-  tag === "a" ? (
-    <a
-      rel={resolvedRel}
-      target={resolvedTarget}
-      class:list={buttonClasses}
-      href={localizedLink(url, Astro.currentLocale)}
-      {...rest}>
-      <CustomButtonContent
-        {...{
-          label,
-          title,
-          iconRight,
-          iconLeft,
-          isCreativeHoverEffect,
-          isTextFlipHoverEffect,
-          isMagneticTextFlipHoverEffect,
-        }}
-      />
-    </a>
-  ) : (
-    <button class:list={buttonClasses} {...rest}>
-      <CustomButtonContent
-        {...{
-          label,
-          title,
-          iconRight,
-          iconLeft,
-          isCreativeHoverEffect,
-          isTextFlipHoverEffect,
-          isMagneticTextFlipHoverEffect,
-        }}
-      />
-    </button>
-  )
-}
+{tag === "a" ? (
+  <a
+    rel={resolvedRel}
+    target={resolvedTarget}
+    class:list={buttonClasses}
+    href={localizedLink(url, Astro.currentLocale)}
+    {...rest}>
+    <CustomButtonContent
+      {...{
+        label,
+        title,
+        iconRight,
+        iconLeft,
+        isCreativeHoverEffect,
+        isTextFlipHoverEffect,
+        isMagneticTextFlipHoverEffect,
+      }}
+    />
+  </a>
+) : (
+  <button class:list={buttonClasses} {...rest}>
+    <CustomButtonContent
+      {...{
+        label,
+        title,
+        iconRight,
+        iconLeft,
+        isCreativeHoverEffect,
+        isTextFlipHoverEffect,
+        isMagneticTextFlipHoverEffect,
+      }}
+    />
+  </button>
+)}

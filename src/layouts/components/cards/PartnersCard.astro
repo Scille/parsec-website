@@ -32,15 +32,13 @@ const { name, url, image } = content;
     "bg-surface-base-default md:shadow-card border-border-neutral-default-subtle flex flex-col gap-4 rounded-2xl border p-5 md:border-0 md:p-8",
     className,
   ]}>
-  {
-    image && (
-      <OptimizedImage
-        src={image.src}
-        alt={image.alt}
-        class:list={["h-full max-h-32 w-full object-contain object-top-left"]}
-      />
-    )
-  }
+  {image && (
+    <OptimizedImage
+      src={image.src}
+      alt={image.alt}
+      class:list={["h-full max-h-32 w-full object-contain object-top-left"]}
+    />
+  )}
   <p
     class="text-h4-sm md:text-h4 clip- w-full font-semibold"
     set:html={markdownify(name)}
