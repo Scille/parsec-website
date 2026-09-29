@@ -60,52 +60,50 @@ if (disabled) {
 // This component is used in Contact Page, Footer
 ---
 
-{
-  list && list[0] && (
-    <ul class:list={["flex flex-wrap items-center gap-4", className]} {...rest}>
-      {list.map((social) => (
-        <li>
-          <a
-            aria-label={social.label}
-            href={linkType === "share" ? shareLinks[social.label] : social.url}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-            class:list={[
-              "group relative flex items-center justify-center transition duration-300",
-              {
-                "bg-primary/15 hover:bg-primary rounded-full":
-                  layout === "classic",
-              },
-              { "text-dark hover:scale-110": layout === "minimal" },
-              {
-                "bg-primary/25 hover:bg-primary text-primary rounded-full":
-                  layout === "modern",
-              },
-              layout !== "minimal" && {
-                "h-6 w-6": size === "sm",
-                "h-14 w-14": size === "md",
-                "h-16 w-16": size === "lg",
-              },
-            ]}>
-            <span class="sr-only">{social.label}</span>
-            {social.icon && (
-              <OptimizedImage
-                inlineSvg={true}
-                src={social.icon}
-                class:list={[
-                  "text-dark fill-text-base-body relative z-10 transition duration-300",
-                  {
-                    "h-4 w-4": size === "sm",
-                    "h-5 w-5": size === "md",
-                    "h-6 w-6": size === "lg",
-                  },
-                ]}
-                alt={social.label}
-              />
-            )}
-          </a>
-        </li>
-      ))}
-    </ul>
-  )
-}
+{list && list[0] && (
+  <ul class:list={["flex flex-wrap items-center gap-4", className]} {...rest}>
+    {list.map((social) => (
+      <li>
+        <a
+          aria-label={social.label}
+          href={linkType === "share" ? shareLinks[social.label] : social.url}
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+          class:list={[
+            "group relative flex items-center justify-center transition duration-300",
+            {
+              "bg-primary/15 hover:bg-primary rounded-full":
+                layout === "classic",
+            },
+            { "text-dark hover:scale-110": layout === "minimal" },
+            {
+              "bg-primary/25 hover:bg-primary text-primary rounded-full":
+                layout === "modern",
+            },
+            layout !== "minimal" && {
+              "h-6 w-6": size === "sm",
+              "h-14 w-14": size === "md",
+              "h-16 w-16": size === "lg",
+            },
+          ]}>
+          <span class="sr-only">{social.label}</span>
+          {social.icon && (
+            <OptimizedImage
+              inlineSvg={true}
+              src={social.icon}
+              class:list={[
+                "text-dark fill-text-base-body relative z-10 transition duration-300",
+                {
+                  "h-4 w-4": size === "sm",
+                  "h-5 w-5": size === "md",
+                  "h-6 w-6": size === "lg",
+                },
+              ]}
+              alt={social.label}
+            />
+          )}
+        </a>
+      </li>
+    ))}
+  </ul>
+)}

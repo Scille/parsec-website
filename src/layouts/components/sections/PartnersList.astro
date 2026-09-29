@@ -35,52 +35,42 @@ if (!enable) return;
 ---
 
 <section>
-  {
-    title && (
-      <div class="container flex w-full flex-col justify-between pb-16 md:flex-row">
-        <h2 class="has-italic-text md:max-w-xl">
-          <AnimatedText
-            delay={0.2}
-            stagger={0.09}
-            content={markdownify(title)}
-          />
-        </h2>
-        {description && (
-          <p class="text-body-xl text-text-base-body mt-4 md:max-w-lg">
-            {description}
-          </p>
-        )}
-      </div>
-    )
-  }
+  {title && (
+    <div class="container flex w-full flex-col justify-between pb-16 md:flex-row">
+      <h2 class="has-italic-text md:max-w-xl">
+        <AnimatedText delay={0.2} stagger={0.09} content={markdownify(title)} />
+      </h2>
+      {description && (
+        <p class="text-body-xl text-text-base-body mt-4 md:max-w-lg">
+          {description}
+        </p>
+      )}
+    </div>
+  )}
 
   <div class="bg-surface-base-page flex flex-col gap-28 py-16">
-    {
-      partners && button && (
-        <div class="container space-y-8">
-          {partners.title && <h3 class="font-semibold">{partners.title}</h3>}
-          <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {partners.list.map((item, index) => (
-              <PartnersCard content={item} index={index} button={button} />
-            ))}
-          </div>
+    {partners && button && (
+      <div class="container space-y-8">
+        {partners.title && <h3 class="font-semibold">{partners.title}</h3>}
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {partners.list.map((item, index) => (
+            <PartnersCard content={item} index={index} button={button} />
+          ))}
         </div>
-      )
-    }
+      </div>
+    )}
 
-    {
-      collaboration && (
-        <div class="container space-y-8">
-          {collaboration.title && (
-            <h3 class="font-semibold">{collaboration.title}</h3>
-          )}
-          <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {collaboration.list.map((item, index) => (
-              <PartnersCard content={item} index={index} button={button} />
-            ))}
-          </div>
+    {collaboration && (
+      <div class="container space-y-8">
+        {collaboration.title && (
+          <h3 class="font-semibold">{collaboration.title}</h3>
+        )}
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {collaboration.list.map((item, index) => (
+            <PartnersCard content={item} index={index} button={button} />
+          ))}
         </div>
-      )
-    }
+      </div>
+    )}
   </div>
 </section>

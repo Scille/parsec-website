@@ -32,27 +32,23 @@ import CookieConsent from "@/components/utilities/CookieConsent.astro";
     content="#000"
   />
   <meta name="generator" content={Astro.generator} />
-  {
-    fontsJson.map((font) => (
-      <Font
-        cssVariable={font.cssVariable as CssVariable}
-        preload={font.preload}
-      />
-    ))
-  }
-  {
-    config.head?.content && (
-      // Injecting custom scripts such as Google Analytics, Google Tag Manager, etc. tracking code,
-      // which should be placed in <head> tag
-      // Root-relative src/href (self-hosted scripts) are rewritten to respect the Astro base path
-      <Fragment
-        set:html={config.head.content.replace(
-          /((?:src|href)=")\/(?!\/)/g,
-          `$1${import.meta.env.BASE_URL}`,
-        )}
-      />
-    )
-  }
+  {fontsJson.map((font) => (
+    <Font
+      cssVariable={font.cssVariable as CssVariable}
+      preload={font.preload}
+    />
+  ))}
+  {config.head?.content && (
+    // Injecting custom scripts such as Google Analytics, Google Tag Manager, etc. tracking code,
+    // which should be placed in <head> tag
+    // Root-relative src/href (self-hosted scripts) are rewritten to respect the Astro base path
+    <Fragment
+      set:html={config.head.content.replace(
+        /((?:src|href)=")\/(?!\/)/g,
+        `$1${import.meta.env.BASE_URL}`,
+      )}
+    />
+  )}
   <OpenGraph {...Astro.props} />
   <Favicons />
   <JsonLD

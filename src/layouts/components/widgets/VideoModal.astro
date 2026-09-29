@@ -21,52 +21,49 @@ const {
 src = resolvedSrc ?? src;
 ---
 
-{
-  src && (
-    <dialog
-      id={id}
-      class="video-modal m-auto w-[min(100%-2rem,72rem)] max-w-4xl rounded-2xl border-0 bg-transparent p-3 text-left shadow-2xl backdrop:bg-black/80"
-      data-video-modal
-      aria-label={translate("aria.playVideo")}>
-      <div class="pointer-events-auto flex flex-col">
-        <button
-          type="button"
-          aria-label={translate("aria.closeModal")}
-          data-video-modal-close
-          class="bg-surface-base-default mb-2 ml-auto flex h-10 w-10 items-center justify-center rounded-full ring-0 ring-white/50 duration-300 hover:rotate-90 hover:ring-4">
-          <span class="sr-only">{translate("aria.closeModal")}</span>
-          <Icons icon="XMarkIcon" class="text-text-default/80 h-6 w-6" />
-        </button>
+{src && (
+  <dialog
+    id={id}
+    class="video-modal m-auto w-[min(100%-2rem,72rem)] max-w-4xl rounded-2xl border-0 bg-transparent p-3 text-left shadow-2xl backdrop:bg-black/80"
+    data-video-modal
+    aria-label={translate("aria.playVideo")}>
+    <div class="pointer-events-auto flex flex-col">
+      <button
+        type="button"
+        aria-label={translate("aria.closeModal")}
+        data-video-modal-close
+        class="bg-surface-base-default mb-2 ml-auto flex h-10 w-10 items-center justify-center rounded-full ring-0 ring-white/50 duration-300 hover:rotate-90 hover:ring-4">
+        <span class="sr-only">{translate("aria.closeModal")}</span>
+        <Icons icon="XMarkIcon" class="text-text-default/80 h-6 w-6" />
+      </button>
 
-        {isLocalHostedVideo ? (
-          <video
-            class="video-player bg-surface-elevated-default aspect-video w-full rounded-2xl"
-            playsinline
-            controls
-            preload="none"
-            poster={poster || undefined}
-            data-video-player
-            data-autoplay={autoplay === true ? "true" : "false"}>
-            <source src={src} type={type} />
-          </video>
-        ) : (
-          <div class="bg-surface-elevated-default aspect-video w-full overflow-hidden rounded-2xl">
-            <iframe
-              class="hidden size-full"
-              title={translate("aria.playVideo")}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-              data-video-embed
-              data-provider={provider}
-              data-src={embedSrc}
-              src="about:blank"
-            />
-          </div>
-        )}
-      </div>
-    </dialog>
-  )
-}
+      {isLocalHostedVideo ? (
+        <video
+          class="video-player bg-surface-elevated-default aspect-video w-full rounded-2xl"
+          playsinline
+          controls
+          preload="none"
+          poster={poster || undefined}
+          data-video-player
+          data-autoplay={autoplay === true ? "true" : "false"}>
+          <source src={src} type={type} />
+        </video>
+      ) : (
+        <div class="bg-surface-elevated-default aspect-video w-full overflow-hidden rounded-2xl">
+          <iframe
+            class="hidden size-full"
+            title={translate("aria.playVideo")}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            data-video-embed
+            data-provider={provider}
+            data-src={embedSrc}
+            src="about:blank"></iframe>
+        </div>
+      )}
+    </div>
+  </dialog>
+)}
 
 <script>
   declare global {

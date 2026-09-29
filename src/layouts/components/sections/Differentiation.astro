@@ -35,96 +35,86 @@ if (!enable) return;
   <div class="sticky top-0 h-dvh overflow-hidden">
     <div
       class="pointer-events-none absolute -top-1/3 -right-1/4 -z-10 h-[140%] w-[70%] rounded-full opacity-70 blur-3xl"
-      style="background: radial-gradient(circle at 30% 30%, color-mix(in oklch, var(--color-pink-500) 40%, transparent), transparent 60%), radial-gradient(circle at 70% 70%, color-mix(in oklch, var(--color-indigo-600) 50%, transparent), transparent 60%);">
-    </div>
-    {
-      list && (
-        <div class="pointer-events-none absolute inset-0 z-10 hidden xl:block">
-          <div class="differentiation-progress-track absolute h-32 -translate-y-1/2 opacity-(--progress-track-opacity,0) transition-opacity duration-300 lg:left-20 xl:top-1/2">
-            {list.map((item, i) => (
-              <button
-                type="button"
-                class="differentiation-progress-step pointer-events-auto absolute left-0 flex -translate-y-1/2 cursor-pointer items-center gap-3"
-                style={`top: ${(i / (list.length - 1)) * 100}%`}
-                data-index={i}
-                aria-label={item.name}>
-                <span class="differentiation-progress-step-dot border-border-base-on-color/40 h-1.5 w-1.5 shrink-0 rounded-full border bg-transparent transition-colors duration-300" />
-                <span
-                  class="differentiation-progress-step-label font-secondary text-text-on-color-label text-nowrap opacity-40 transition-opacity duration-300"
-                  set:html={markdownify(item.name)}
-                />
-              </button>
-            ))}
-          </div>
-        </div>
-      )
-    }
-    <div class="differentiation-slides flex flex-col md:h-full">
-      <div
-        class="differentiation-slide container mx-6 flex h-dvh w-full max-w-lg shrink-0 flex-col place-content-center gap-6 self-center px-8 md:mx-0 md:h-dvh md:max-w-2xl md:px-0">
-        {
-          title && (
-            <h2 class="has-italic-text text-text-on-color-heading">
-              <AnimatedText
-                delay={0.05}
-                stagger={0.04}
-                content={markdownify(title)}
+      style="background: radial-gradient(circle at 30% 30%, color-mix(in oklch, var(--color-pink-500) 40%, transparent), transparent 60%), radial-gradient(circle at 70% 70%, color-mix(in oklch, var(--color-indigo-600) 50%, transparent), transparent 60%);"></div>
+    {list && (
+      <div class="pointer-events-none absolute inset-0 z-10 hidden xl:block">
+        <div class="differentiation-progress-track absolute h-32 -translate-y-1/2 opacity-(--progress-track-opacity,0) transition-opacity duration-300 lg:left-20 xl:top-1/2">
+          {list.map((item, i) => (
+            <button
+              type="button"
+              class="differentiation-progress-step pointer-events-auto absolute left-0 flex -translate-y-1/2 cursor-pointer items-center gap-3"
+              style={`top: ${(i / (list.length - 1)) * 100}%`}
+              data-index={i}
+              aria-label={item.name}>
+              <span class="differentiation-progress-step-dot border-border-base-on-color/40 h-1.5 w-1.5 shrink-0 rounded-full border bg-transparent transition-colors duration-300" />
+              <span
+                class="differentiation-progress-step-label font-secondary text-text-on-color-label text-nowrap opacity-40 transition-opacity duration-300"
+                set:html={markdownify(item.name)}
               />
-            </h2>
-          )
-        }
-        {
-          list && (
-            <div class="font-secondary text-text-base-placeholder flex flex-col justify-items-start gap-2 md:flex-row">
-              {list.map(
-                (item) =>
-                  item && (
-                    <p
-                      class="opacity-80 not-last:after:content-['_•']"
-                      set:html={markdownify(item.name)}
-                    />
-                  ),
-              )}
-            </div>
-          )
-        }
+            </button>
+          ))}
+        </div>
       </div>
-      {
-        list?.map((item) => (
-          <div class="differentiation-slide container flex h-dvh shrink-0 grid-cols-2 flex-col justify-center md:grid md:items-center md:gap-16 xl:pl-64">
-            <div class="flex flex-col gap-8 px-4 py-6 md:pl-6">
-              <div class="flex flex-col gap-5">
-                {item.title && (
-                  <h3
-                    class="has-italic-text text-text-on-color-heading flex flex-col"
-                    set:html={markdownify(item.title)}
+    )}
+    <div class="differentiation-slides flex flex-col md:h-full">
+      <div class="differentiation-slide container mx-6 flex h-dvh w-full max-w-lg shrink-0 flex-col place-content-center gap-6 self-center px-8 md:mx-0 md:h-dvh md:max-w-2xl md:px-0">
+        {title && (
+          <h2 class="has-italic-text text-text-on-color-heading">
+            <AnimatedText
+              delay={0.05}
+              stagger={0.04}
+              content={markdownify(title)}
+            />
+          </h2>
+        )}
+        {list && (
+          <div class="font-secondary text-text-base-placeholder flex flex-col justify-items-start gap-2 md:flex-row">
+            {list.map(
+              (item) =>
+                item && (
+                  <p
+                    class="opacity-80 not-last:after:content-['_•']"
+                    set:html={markdownify(item.name)}
                   />
-                )}
-                {item.description && (
-                  <div
-                    class="text-text-on-color-description text-body-xl flex flex-col gap-3"
-                    set:html={markdownify(item.description, true)}
-                  />
-                )}
-              </div>
-              {button && (
-                <CustomButton
-                  class="btn-primary w-fit"
-                  hoverEffect="text-flip"
-                  {...button}
+                ),
+            )}
+          </div>
+        )}
+      </div>
+      {list?.map((item) => (
+        <div class="differentiation-slide container flex h-dvh shrink-0 grid-cols-2 flex-col justify-center md:grid md:items-center md:gap-16 xl:pl-64">
+          <div class="flex flex-col gap-8 px-4 py-6 md:pl-6">
+            <div class="flex flex-col gap-5">
+              {item.title && (
+                <h3
+                  class="has-italic-text text-text-on-color-heading flex flex-col"
+                  set:html={markdownify(item.title)}
+                />
+              )}
+              {item.description && (
+                <div
+                  class="text-text-on-color-description text-body-xl flex flex-col gap-3"
+                  set:html={markdownify(item.description, true)}
                 />
               )}
             </div>
-            {item.image && (
-              <OptimizedImage
-                src={item.image.src}
-                alt={item.image.alt}
-                class:list={"mx-auto hidden w-auto md:block md:max-h-[380px]"}
+            {button && (
+              <CustomButton
+                class="btn-primary w-fit"
+                hoverEffect="text-flip"
+                {...button}
               />
             )}
           </div>
-        ))
-      }
+          {item.image && (
+            <OptimizedImage
+              src={item.image.src}
+              alt={item.image.alt}
+              class:list={"mx-auto hidden w-auto md:block md:max-h-[380px]"}
+            />
+          )}
+        </div>
+      ))}
     </div>
   </div>
 
@@ -214,7 +204,6 @@ if (!enable) return;
       });
     });
   </script>
-
   <style>
     .differentiation-slides {
       transition: transform 0.8s ease-in-out;

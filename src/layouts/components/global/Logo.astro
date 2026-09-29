@@ -39,17 +39,15 @@ let {
 <a
   href={localizedLink("/", Astro.currentLocale)}
   class:list={["logo-wrapper", className]}>
-  {
-    src || logo || logoIcon ? (
-      <OptimizedImage
-        src={src ?? logo ?? logoIcon}
-        class="logo"
-        width={getNumber(logoWidth)}
-        height={getNumber(logoHeight)}
-        alt={toSentenceCase("Brand logo of " + title)}
-      />
-    ) : (
-      title
-    )
-  }
+  {src || logo || logoIcon ? (
+    <OptimizedImage
+      src={src ?? logo ?? logoIcon}
+      class="logo"
+      width={getNumber(logoWidth)}
+      height={getNumber(logoHeight)}
+      alt={toSentenceCase("Brand logo of " + title)}
+    />
+  ) : (
+    title
+  )}
 </a>

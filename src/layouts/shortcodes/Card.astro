@@ -52,36 +52,34 @@ let actualContent = mergeObjects(content, {
 }) as Card;
 ---
 
-{
-  (actualContent?.value || actualContent?.description) && (
-    <div
-      class:list={[
-        "flex flex-col gap-4 rounded-xl border bg-white p-5 md:p-8",
-        className,
-      ]}>
-      {actualContent?.icon && (
+{(actualContent?.value || actualContent?.description) && (
+  <div
+    class:list={[
+      "flex flex-col gap-4 rounded-xl border bg-white p-5 md:p-8",
+      className,
+    ]}>
+    {actualContent?.icon && (
+      <Icons
+        class="text-text-default text-3xl"
+        icon={actualContent.icon as HeroIconName}
+      />
+    )}
+    <div class="mt-2 space-y-3">
+      {actualContent.value && (
         <Icons
-          class="text-text-default text-3xl"
-          icon={actualContent.icon as HeroIconName}
+          class="text-h4-sm md:text-h4"
+          icon={actualContent.value as any}
         />
       )}
-      <div class="mt-2 space-y-3">
-        {actualContent.value && (
-          <Icons
-            class="text-h4-sm md:text-h4"
-            icon={actualContent.value as any}
-          />
-        )}
-        {actualContent.title && (
-          <h3 class="text-h5-sm md:text-h5" set:html={actualContent.title} />
-        )}
-        {actualContent?.description && (
-          <p
-            class="text-gray-700 opacity-80"
-            set:html={markdownify(actualContent?.description)}
-          />
-        )}
-      </div>
+      {actualContent.title && (
+        <h3 class="text-h5-sm md:text-h5" set:html={actualContent.title} />
+      )}
+      {actualContent?.description && (
+        <p
+          class="text-gray-700 opacity-80"
+          set:html={markdownify(actualContent?.description)}
+        />
+      )}
     </div>
-  )
-}
+  </div>
+)}

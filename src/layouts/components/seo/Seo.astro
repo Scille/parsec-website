@@ -57,18 +57,14 @@ if (
 ---
 
 {title && <title>{removeWhitespace(title)}</title>}
-{
-  description && (
-    <meta name="description" content={removeWhitespace(description)} />
-  )
-}
+{description && (
+  <meta name="description" content={removeWhitespace(description)} />
+)}
 {keywords && <meta name="keywords" content={removeWhitespace(keywords)} />}
 {author && <meta name="author" content={removeWhitespace(author)} />}
 {robots && <meta name="robots" content={removeWhitespace(robots)} />}
 {canonical && <link rel="canonical" href={canonical} item-prop="url" />}
-{
-  alternateTags &&
-    alternateTags.map((tag) => (
-      <link rel="alternate" hreflang={tag.hreflang} href={tag.href} />
-    ))
-}
+{alternateTags &&
+  alternateTags.map((tag) => (
+    <link rel="alternate" hreflang={tag.hreflang} href={tag.href} />
+  ))}

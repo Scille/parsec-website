@@ -28,69 +28,67 @@ for (let i = 1; i <= totalPages; i++) {
 }
 ---
 
-{
-  totalPages > 1 && (
-    <nav
-      id="pagination"
-      class:list={[
-        "flex flex-wrap items-center justify-center gap-3 font-medium",
-        className,
-      ]}
-      aria-label="Pagination">
-      {/* previous */}
-      {hasPrevPage ? (
+{totalPages > 1 && (
+  <nav
+    id="pagination"
+    class:list={[
+      "flex flex-wrap items-center justify-center gap-3 font-medium",
+      className,
+    ]}
+    aria-label="Pagination">
+    {/* previous */}
+    {hasPrevPage ? (
+      <a
+        href={localizedLink(
+          indexPageLink
+            ? `${collection ? "/" + collection : "/"}`
+            : `${collection ? "/" + collection : ""}/page/${currentPage - 1}`,
+          Astro.currentLocale,
+        )}
+        class="border-border-base-default text-text-base-label hover:bg-surface-neutral-default-subtle-hover hover:text-text-base-label flex items-center gap-3 rounded-full border px-8 py-2.5 transition duration-300">
+        <Icons icon="ArrowLeftIcon" />
+        {translate("common.paginationPrevious")}
+      </a>
+    ) : (
+      ""
+    )}
+
+    {/* page index */}
+    {pageList.map((pagination, i) =>
+      pagination === currentPage ? (
+        <span
+          aria-current="page"
+          class="text-text-on-color-label bg-surface-neutral-default border-border-base-default text-body-md flex h-12 w-12 items-center justify-center rounded-full border">
+          {pagination}
+        </span>
+      ) : (
         <a
           href={localizedLink(
-            indexPageLink
+            i === 0
               ? `${collection ? "/" + collection : "/"}`
-              : `${collection ? "/" + collection : ""}/page/${currentPage - 1}`,
+              : `${collection ? "/" + collection : ""}/page/${pagination}`,
             Astro.currentLocale,
           )}
-          class="border-border-base-default text-text-base-label hover:bg-surface-neutral-default-subtle-hover hover:text-text-base-label flex items-center gap-3 rounded-full border px-8 py-2.5 transition duration-300">
-          <Icons icon="ArrowLeftIcon" />
-          {translate("common.paginationPrevious")}
+          aria-current="page"
+          class="text-text-base-default border-border-base-default hover:bg-surface-neutral-default-subtle-hover hover:text-text-base-label flex h-12 w-12 items-center justify-center rounded-full border transition duration-200">
+          {pagination}
         </a>
-      ) : (
-        ""
-      )}
+      ),
+    )}
 
-      {/* page index */}
-      {pageList.map((pagination, i) =>
-        pagination === currentPage ? (
-          <span
-            aria-current="page"
-            class="text-text-on-color-label bg-surface-neutral-default border-border-base-default text-body-md flex h-12 w-12 items-center justify-center rounded-full border">
-            {pagination}
-          </span>
-        ) : (
-          <a
-            href={localizedLink(
-              i === 0
-                ? `${collection ? "/" + collection : "/"}`
-                : `${collection ? "/" + collection : ""}/page/${pagination}`,
-              Astro.currentLocale,
-            )}
-            aria-current="page"
-            class="text-text-base-default border-border-base-default hover:bg-surface-neutral-default-subtle-hover hover:text-text-base-label flex h-12 w-12 items-center justify-center rounded-full border transition duration-200">
-            {pagination}
-          </a>
-        ),
-      )}
-
-      {/* next page */}
-      {hasNextPage ? (
-        <a
-          href={localizedLink(
-            `${collection ? "/" + collection : ""}/page/${currentPage + 1}`,
-            Astro.currentLocale,
-          )}
-          class="border-border-base-default text-text-base-default hover:bg-surface-neutral-default-subtle-hover hover:text-text-base-label flex items-center gap-3 rounded-full border px-8 py-2.5 transition duration-200">
-          {translate("common.paginationNext")}
-          <Icons icon="ArrowRightIcon" />
-        </a>
-      ) : (
-        ""
-      )}
-    </nav>
-  )
-}
+    {/* next page */}
+    {hasNextPage ? (
+      <a
+        href={localizedLink(
+          `${collection ? "/" + collection : ""}/page/${currentPage + 1}`,
+          Astro.currentLocale,
+        )}
+        class="border-border-base-default text-text-base-default hover:bg-surface-neutral-default-subtle-hover hover:text-text-base-label flex items-center gap-3 rounded-full border px-8 py-2.5 transition duration-200">
+        {translate("common.paginationNext")}
+        <Icons icon="ArrowRightIcon" />
+      </a>
+    ) : (
+      ""
+    )}
+  </nav>
+)}

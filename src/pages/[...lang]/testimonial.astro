@@ -25,17 +25,15 @@ if (response) return response;
 <Base {...testimonialListPage?.data}>
   <SinglePageLayout content={testimonialListPage}>
     <div slot="content">
-      {
-        testimonialListPage.data?.list && (
-          <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {testimonialListPage.data?.list
-              .filter((item: any) => item.enable !== false)
-              .map((testimonial: any) => (
-                <TestimonialCard content={testimonial} />
-              ))}
-          </div>
-        )
-      }
+      {testimonialListPage.data?.list && (
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {testimonialListPage.data?.list
+            .filter((item: any) => item.enable !== false)
+            .map((testimonial: any) => (
+              <TestimonialCard content={testimonial} />
+            ))}
+        </div>
+      )}
     </div>
   </SinglePageLayout>
   <CallToAction />

@@ -26,8 +26,7 @@ const { stickyHeader, navigationButton } = config.settings;
     { "sticky-header": stickyHeader },
   ]}>
   <div class="relative container">
-    <nav
-      class="hs-dropdown relative z-2 flex items-center justify-between px-2 py-2 [--auto-close:inside] [--gpu-acceleration:false] [--strategy:absolute] lg:[--strategy:static]">
+    <nav class="hs-dropdown relative z-2 flex items-center justify-between px-2 py-2 [--auto-close:inside] [--gpu-acceleration:false] [--strategy:absolute] lg:[--strategy:static]">
       <Logo class="logo-full mx-4" src={config.site.logo} />
       <Logo class="logo-icon mx-4 hidden" src={config.site.logoIcon} />
 
@@ -35,54 +34,49 @@ const { stickyHeader, navigationButton } = config.settings;
         id="nav-menu"
         role="list"
         class="navbar hs-dropdown-menu hs-dropdown-open:flex hs-dropdown-open:mt-2! max-lg:absolute max-lg:transform-none! max-md:shadow-2xl lg:transform-none!">
-        {main.map((menu) => <NavMenuItem menu={menu} />)}
+        {main.map((menu) => (
+          <NavMenuItem menu={menu} />
+        ))}
 
         {/* Language Switcher For Small Devices */}
-        {
-          config.settings.multilingual.enable && (
-            <li class="max-lg:px-4 max-lg:py-2 lg:hidden">
-              <LanguageSwitcher />
-            </li>
-          )
-        }
-        {
-          navigationButton.enable && (
-            <li class="mb-2 max-lg:px-4 max-lg:py-2 lg:hidden">
-              {navigationButton.enable && (
-                <CustomButton
-                  hoverEffect="text-flip"
-                  variant="fill"
-                  {...navigationButton}
-                  label={
-                    navigationButton.label ||
-                    translate("navigation.buttonLabel")
-                  }
-                />
-              )}
-            </li>
-          )
-        }
-      </ul>
-
-      {/* Navigation Button For Large Devices */}
-      {
-        (navigationButton.enable || config.settings.multilingual.enable) && (
-          <div class="hidden gap-3.5 max-lg:ms-auto max-lg:me-4 lg:flex lg:items-center">
-            {config.settings.multilingual.enable && <LanguageSwitcher />}
+        {config.settings.multilingual.enable && (
+          <li class="max-lg:px-4 max-lg:py-2 lg:hidden">
+            <LanguageSwitcher />
+          </li>
+        )}
+        {navigationButton.enable && (
+          <li class="mb-2 max-lg:px-4 max-lg:py-2 lg:hidden">
             {navigationButton.enable && (
               <CustomButton
                 hoverEffect="text-flip"
                 variant="fill"
-                color="primary"
                 {...navigationButton}
                 label={
                   navigationButton.label || translate("navigation.buttonLabel")
                 }
               />
             )}
-          </div>
-        )
-      }
+          </li>
+        )}
+      </ul>
+
+      {/* Navigation Button For Large Devices */}
+      {(navigationButton.enable || config.settings.multilingual.enable) && (
+        <div class="hidden gap-3.5 max-lg:ms-auto max-lg:me-4 lg:flex lg:items-center">
+          {config.settings.multilingual.enable && <LanguageSwitcher />}
+          {navigationButton.enable && (
+            <CustomButton
+              hoverEffect="text-flip"
+              variant="fill"
+              color="primary"
+              {...navigationButton}
+              label={
+                navigationButton.label || translate("navigation.buttonLabel")
+              }
+            />
+          )}
+        </div>
+      )}
       <NavToggleBtn />
     </nav>
   </div>
