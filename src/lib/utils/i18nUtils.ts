@@ -198,7 +198,7 @@ export const getLocaleUrlCTM = (
   url: string,
   providedLang: string | undefined,
   prependValue?: string,
-  base = "/",
+  base: string = "/",
 ): string => {
   const language = providedLang || defaultLanguage;
   const languageCodes = languagesJSON.map((language) => language.languageCode);
