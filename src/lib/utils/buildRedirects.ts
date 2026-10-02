@@ -71,6 +71,10 @@ export const oldToNewSlug: Record<string, Record<string, string>> = {
     "politique-de-confidentialite": "privacy-policy",
     // what's new
     "whats-new": "blog/category/releases",
+    // special case: "/en/" must redirect to root "/"
+    // note that the buildRedirects function below prepends "en" to the key,
+    // thus the empty string in the key here
+    "": "",
   },
 };
 
