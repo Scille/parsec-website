@@ -34,7 +34,7 @@ const { title, description, image, button } = footer.data;
 
   <div class="container space-y-8 px-6 md:space-y-12">
     <div class="grid grid-cols-1 gap-y-8 md:grid-cols-2 xl:grid-cols-3">
-      <div class="space-y-8 xl:pe-20">
+      <div class="space-y-8 xl:pe-15">
         <Logo src={config.site.logo} />
         <p set:html={markdownify(translate("footer.description"))} />
         <SocialComponent
@@ -43,6 +43,18 @@ const { title, description, image, button } = footer.data;
           linkType="follow"
           list={social.main.filter((social) => social.enable)}
         />
+        <div class="flex flex-wrap items-center gap-4">
+          <OptimizedImage
+            src={translate("footer.euLogo.src")}
+            alt={translate("footer.euLogo.alt")}
+            class="h-12 w-auto"
+          />
+          <OptimizedImage
+            src="/images/euro3c.svg"
+            alt="EURO-3C"
+            class="h-12 w-auto"
+          />
+        </div>
       </div>
 
       <div class="col-span-2 grid gap-y-10 md:grid-cols-3 xl:pl-56">

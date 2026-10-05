@@ -25,6 +25,10 @@
     "colTitleTwo": "Ressources",
     "colTitleThree": "Contact",
     "description": "Parsec Cloud est la solution de stockage et collaboration certifiée ANSSI pour vos données sensibles. Chiffrement de bout en bout, zéro connaissance, souveraineté totale.",
-    "copyright": "Copyright © {currentYear} Parsec Cloud. Tous droits réservés."
+    "copyright": "Copyright © {currentYear} Parsec Cloud. Tous droits réservés.",
+    "euLogo": {
+      "src": "/images/FR_Co-fundedbyUE.png",
+      "alt": "Cofinancé par l'Union européenne"
+    }
   }
 }
