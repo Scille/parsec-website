@@ -25,6 +25,10 @@
     "colTitleTwo": "Resources",
     "colTitleThree": "Contact",
     "description": "Parsec Cloud is the ANSSI-certified secure storage and collaboration platform for sensitive data. End-to-end encryption, zero-knowledge, full data sovereignty.",
-    "copyright": "Copyright © {currentYear} Parsec Cloud. All Rights Reserved."
+    "copyright": "Copyright © {currentYear} Parsec Cloud. All Rights Reserved.",
+    "euLogo": {
+      "src": "/images/EN_Co-fundedbyUE.png",
+      "alt": "Co-funded by the European Union"
+    }
   }
 }
