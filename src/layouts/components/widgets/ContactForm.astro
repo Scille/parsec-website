@@ -14,7 +14,7 @@ interface Props {
 }
 
 const {
-  settings: { contactFormAction, contactFormProvider },
+  settings: { contactFormAction },
 } = config;
 
 const translate = await useTranslations(Astro.currentLocale as string);
@@ -72,10 +72,6 @@ form = {
   inputs: combineRadio(form.inputs),
 };
 
-const successNote = form.inputs.find(
-  (input: z.infer<typeof inputFieldSchema>) => input.note === "success",
-);
-
 const noteStyles = {
   info: "border-border-information-default-subtle bg-surface-information-default-subtle",
   warning:
@@ -90,10 +86,7 @@ const noteStyles = {
 
 <form
   id="contact-form"
-  {...{
-    "data-action": contactFormAction,
-    "data-provider": contactFormProvider,
-  }}
+  data-action={contactFormAction}
   method="post"
   class:list={[
     "bg-surface-base-default-secondary shadow-card h-fit rounded-xl",
@@ -106,11 +99,14 @@ const noteStyles = {
       <input type="hidden" name={"_subject"} value={form.emailSubject} />
     )}
 
-    <input type="hidden" name="_template" value="table" />
-
-    {form.autoResponse && (
-      <input type="hidden" name="_autoresponse" value={form.autoResponse} />
-    )}
+    <input
+      type="text"
+      name="_gotcha"
+      class="hidden"
+      tabindex="-1"
+      autocomplete="off"
+      aria-hidden="true"
+    />
 
     {form.inputs.map((input) => (
       <div
@@ -277,7 +273,7 @@ const noteStyles = {
       </div>
     )}
   </div>
-  {successNote && (
+  {form.successMessage && (
     <div
       id="thank-you-message"
       class="hidden flex-col items-center gap-2 p-8 text-center md:p-10">
@@ -287,7 +283,7 @@ const noteStyles = {
       </h4>
       <p
         class="text-body-xl text-text-base-body"
-        set:html={markdownify(successNote.content || "")}
+        set:html={markdownify(form.successMessage)}
       />
     </div>
   )}

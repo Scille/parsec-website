@@ -52,7 +52,7 @@ needs:
 
 form:
   emailSubject: "Nouvelle demande - Parsec Cloud"
-  autoResponse: "Merci pour votre message ! Nous l'avons bien reçu et vous répondrons sous deux jours ouvrés."
+  successMessage: "Nous avons bien reçu votre message et vous répondrons sous deux jours ouvrés."
   submitButton:
     enable: true
     label: "Envoyer le message"
@@ -139,7 +139,4 @@ form:
       type: "checkbox"
       halfWidth: false
       defaultValue: ""
-    - note: success
-      parentClass: "hidden" # gardé masqué : sert uniquement de source de contenu pour le panneau "merci" post-envoi
-      content: "Nous avons reçu votre message ! Nous vous répondrons aussi rapidement que possible."
 ---

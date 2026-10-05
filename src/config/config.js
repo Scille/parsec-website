@@ -56,8 +56,7 @@ export default {
     blogFolder: "blog", // Folder where blog posts are stored
     pagination: 6, // Number of posts displayed on each page blog list page
     stickyHeader: true, // Enables or disable sticky feature of header
-    contactFormAction: "https://formsubmit.co/contact@parsec.cloud",
-    contactFormProvider: "formsubmit.co",
+    contactFormAction: "https://api.deploybase.eu/f/bGkrQ4LcNKkYdc",
     newsletterFormAction:
       "https://88b667bb.sibforms.com/serve/MUIFAJCmszJ9RrZAMbpkib-6s5CsbVQZ0YrvrhJWBo1FmwlSdDNp-HJ4q_o5kQGLX76mAuZnAiMiFBmcHM2eaOHdtu0vcq1IxfORVnpUkyTbxRdwwbablagw2cCjHzGtDtNMlQoaJFajjF0POPvQd5m9H3DKBiqMfiZeu3wgg31D0odlvDkZgxUwUsggOia1GL7dh9GbBfhNikEv", // Brevo subscription form URL
     brandName: "Parsec Cloud",

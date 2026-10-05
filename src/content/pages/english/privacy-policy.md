@@ -47,11 +47,11 @@ Personal Data is collected when the User uses the services of the Site and Parse
 
 ### 3. Protection, retention and deletion of Personal Data
 
-The Personal Data provided by Users is hosted by SCILLE on the Parsec site and is accessible to the marketing department and the customer service department.
+The Personal Data provided by Users is hosted by SCILLE on the Parsec site, except for data submitted via the contact form (see the "Contact form" section), and is accessible to the marketing department and the customer service department.
 
 SCILLE does everything possible to prevent any interference with Users' Personal Data, such as loss, misuse, intrusion, unauthorized disclosure, alteration or destruction of personal data.
 
-Unless legal provisions impose a specific retention period, Users' Personal Data will be retained for the entire duration of the Subscription and will then be destroyed one month after unsubscription. There is no prospecting data hosted on the Site.
+Unless legal provisions impose a specific retention period, Users' Personal Data will be retained for the entire duration of the Subscription and will then be destroyed one month after unsubscription. Apart from data submitted via the contact form, there is no prospecting data hosted on the Site.
 
 The User may request the deletion of their Account at any time from SCILLE. Without prejudice to the provisions relating to the retention of Personal Data, the deletion of an Account will occur within one (1) month from such request.
 
@@ -80,6 +80,14 @@ Users also have the right to lodge a complaint with a supervisory authority and 
 Users have the right to withdraw their consent at any time, when it had been requested, it being specified that any prior processing will remain lawful.
 
 Users may exercise their rights by sending an email to the following address support@parsec.cloud or by writing to the following address: Scille – 11 chemin de Jalès – 33160 Saint-Médard-en-Jalles – FRANCE.
+
+## Contact form
+
+The data submitted via the contact form (name, company name, number of employees, email address, subject and message content) is processed in order to respond to requests sent to Scille.
+
+This data is transmitted to our form processing provider, [deploybase](https://deploybase.eu), which acts as a data processor. The data may be temporarily retained by this provider in accordance with its [retention policy](https://deploybase.eu/privacy#retention).
+
+The data is retained by Scille for the time necessary to process the request, and then deleted in accordance with our retention policy.
 
 ## Cookie policy used by Scille
 
