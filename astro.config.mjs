@@ -38,6 +38,7 @@ export default defineConfig({
   },
   image: {
     layout: "constrained",
+    breakpoints: [640, 1080, 1600, 2048],
   },
   fonts,
   i18n: {
