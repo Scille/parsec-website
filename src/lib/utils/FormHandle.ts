@@ -126,30 +126,25 @@ export const formSubmit = async ({
 }) => {
   const data = Object.fromEntries(new FormData(form).entries());
 
-  // FormSubmit only auto-detects a field literally named "email" as the
+  // Deploybase only falls back to a field literally named "email" for the
   // Reply-To; our visible field is named "Email Address", so set _replyto
   // explicitly from whichever input has type="email".
-  if (form.getAttribute("data-provider") === "formsubmit.co") {
-    const emailInput = form.querySelector<HTMLInputElement>(
-      'input[type="email"]',
-    );
-    if (emailInput?.value) {
-      data["_replyto"] = emailInput.value;
-    }
+  const emailInput = form.querySelector<HTMLInputElement>(
+    'input[type="email"]',
+  );
+  if (emailInput?.value) {
+    data["_replyto"] = emailInput.value;
   }
 
   const controller = new AbortController();
   const signal = controller.signal;
   const timeout = 60000;
 
-  // Replace 'formsubmit.co' with 'formsubmit.co/ajax' to submit form data with AJAX
-  const ajaxAction = action.replace("formsubmit.co/", "formsubmit.co/ajax/");
-
   const timer = setTimeout(() => {
     controller.abort();
   }, timeout);
 
-  fetch(ajaxAction, {
+  fetch(action, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -159,26 +154,36 @@ export const formSubmit = async ({
     signal,
   })
     .then(async (response: any) => {
-      // Parse JSON response
-      const jsonResponse = await response.json();
+      // Deploybase answers {"ok": true} on success, an error status otherwise
+      const jsonResponse = await response.json().catch(() => ({}));
 
-      // Check success status in the JSON response
-      if (jsonResponse.success === "true") {
+      if (response.ok && jsonResponse.ok === true) {
         setMessage("default", true, false, form);
         formReset(form);
-      } else if (jsonResponse.success === "false") {
-        setMessage(jsonResponse.message, false, false, form);
+      } else {
+        console.error(
+          "Form submission failed:",
+          response.status,
+          jsonResponse.message,
+        );
+        setMessage(
+          "Oops! There was a problem submitting your form.",
+          false,
+          false,
+          form,
+        );
       }
     })
     .catch(async (error) => {
       if (error.name === "AbortError") {
         setMessage(
-          "We couldn't reach the server. Trying alternative server.",
+          "We couldn't reach the server. Please try again later.",
           false,
           false,
           form,
         );
       } else {
+        console.error("Form submission failed:", error);
         setMessage(
           "Oops! There was a problem submitting your form.",
           false,

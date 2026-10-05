@@ -54,7 +54,7 @@ needs:
 # Check config.toml file for form action related settings
 form:
   emailSubject: "New inquiry - Parsec Cloud"
-  autoResponse: "Thanks for reaching out! We've received your message and will get back to you within two business days."
+  successMessage: "We've received your message and will get back to you within two business days."
   submitButton:
     enable: true
     label: "Send message"
@@ -145,7 +145,4 @@ form:
       type: "checkbox"
       halfWidth: false
       defaultValue: ""
-    - note: success # info | warning | success | deprecated | hint
-      parentClass: "hidden" # kept hidden: only used as the content source for the post-submit thank-you panel
-      content: "We have received your message! We'll get back to you as soon as possible."
 ---

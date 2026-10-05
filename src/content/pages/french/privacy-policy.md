@@ -47,11 +47,11 @@ Les Données à Caractère Personnel sont collectées lorsque l'Utilisateur util
 
 ### 3. Protection, conservation et suppression des Données à Caractère Personnel
 
-Les Données à Caractère Personnel communiquées par les Utilisateurs sont hébergées par SCILLE sur le site Parsec et sont accessibles au service marketing et au service clients.
+Les Données à Caractère Personnel communiquées par les Utilisateurs sont hébergées par SCILLE sur le site Parsec, à l'exception des données transmises via le formulaire de contact (voir la section « Formulaire de contact »), et sont accessibles au service marketing et au service clients.
 
 SCILLE met tout en œuvre pour éviter toute ingérence avec les Données à Caractère Personnel des Utilisateurs, telles que la perte, le détournement, l'intrusion, la divulgation non autorisée, l'altération ou la destruction des données à caractère personnel.
 
-Sauf dispositions légales imposant une durée de conservation spécifique, les Données à Caractère Personnel des Utilisateurs seront conservées pendant toute la durée de l'Abonnement puis seront détruites un mois à l'issue de la désinscription. Il n'existe aucune donnée de prospection hébergée sur le Site.
+Sauf dispositions légales imposant une durée de conservation spécifique, les Données à Caractère Personnel des Utilisateurs seront conservées pendant toute la durée de l'Abonnement puis seront détruites un mois à l'issue de la désinscription. À l'exception des données transmises via le formulaire de contact, il n'existe aucune donnée de prospection hébergée sur le Site.
 
 L'Utilisateur pourra demander la suppression de son Compte à tout moment à SCILLE. Sans préjudice des stipulations liées à la conservation des Données à Caractère Personnel, la suppression d'un Compte interviendra dans un délai de un (1) mois à compter de cette demande.
 
@@ -80,6 +80,14 @@ Les Utilisateurs disposent également du droit d'introduire une réclamation aup
 Les Utilisateurs disposent du droit de retirer leur consentement à tout moment, lorsque celui-ci avait été demandé, étant précisé que tout traitement antérieur demeurera licite.
 
 Les Utilisateurs peuvent exercer leurs droits en adressant un courriel à l'adresse suivante support@parsec.cloud ou en écrivant à l'adresse suivante&nbsp;: Scille – 11 chemin de Jalès – 33160 Saint-Médard-en-Jalles – FRANCE.
+
+## Formulaire de contact
+
+Les données transmises via le formulaire de contact (nom, nom de l'entreprise, nombre de salariés, adresse e-mail, objet et contenu du message) sont traitées afin de répondre aux demandes adressées à Scille.
+
+Ces données sont transmises à notre prestataire de traitement de formulaires, [deploybase](https://deploybase.eu), qui intervient en tant que sous-traitant. Les données peuvent être temporairement conservées par ce prestataire conformément à sa [politique de conservation](https://deploybase.eu/privacy#retention).
+
+Les données sont conservées par Scille pendant la durée nécessaire au traitement de la demande, puis supprimées conformément à notre politique de conservation.
 
 ## Politique des cookies utilisés par Scille
 
