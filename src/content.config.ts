@@ -144,4 +144,7 @@ export const collections = {
   }),
   author: defineCollection({ loader: contentLoader("./src/content/author") }),
   footer: defineCollection({ loader: contentLoader("./src/content/footer") }),
+  newsletter: defineCollection({
+    loader: contentLoader("./src/content/newsletter"),
+  }),
 };

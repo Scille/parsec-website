@@ -11,6 +11,7 @@ import { localizedLink } from "@/lib/utils/localizedLink";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
 import CustomButton from "@/components/CustomButton.astro";
 import { getEntryCTM } from "@/lib/contentParser.astro";
+import NewsletterForm from "@/components/widgets/NewsletterForm.astro";
 
 const translate = await useTranslations(Astro.currentLocale as string);
 const currentYear = new Date().getFullYear().toString();
@@ -34,7 +35,7 @@ const { title, description, image, button } = footer.data;
 
   <div class="container space-y-8 px-6 md:space-y-12">
     <div class="grid grid-cols-1 gap-y-8 md:grid-cols-2 xl:grid-cols-3">
-      <div class="space-y-8 xl:pe-15">
+      <div class="space-y-8">
         <Logo src={config.site.logo} />
         <p set:html={markdownify(translate("footer.description"))} />
         <SocialComponent
@@ -57,78 +58,83 @@ const { title, description, image, button } = footer.data;
         </div>
       </div>
 
-      <div class="col-span-2 grid gap-y-10 md:grid-cols-3 xl:pl-56">
-        <div>
-          {translate("footer.colTitleOne") && (
-            <h3
-              class="text-text-base-heading mb-4 text-xl md:mb-6"
-              set:html={translate("footer.colTitleOne")}
-            />
-          )}
-          <ul class="flex flex-col gap-y-1.5">
-            {translate("footerMenuOne")?.map(
-              (menu: { name: string; url: string }) => (
-                <li>
+      <div class="flex flex-col gap-8 col-span-2 xl:pl-56">
+        <div class="grid gap-y-10 md:grid-cols-3">
+          <div>
+            {translate("footer.colTitleOne") && (
+              <h3
+                class="text-text-base-heading mb-4 text-xl md:mb-6"
+                set:html={translate("footer.colTitleOne")}
+              />
+            )}
+            <ul class="flex flex-col gap-y-1.5">
+              {translate("footerMenuOne")?.map(
+                (menu: { name: string; url: string }) => (
+                  <li>
+                    <a
+                      class="has-underline-anim text-text-base-label inline-block py-px"
+                      href={localizedLink(menu.url, Astro.currentLocale)}>
+                      {menu.name}
+                    </a>
+                  </li>
+                ),
+              )}
+            </ul>
+          </div>
+
+          <div>
+            {translate("footer.colTitleTwo") && (
+              <h3
+                class="text-text-base-heading mb-4 text-xl md:mb-6"
+                set:html={translate("footer.colTitleTwo")}
+              />
+            )}
+            <ul class="flex flex-col gap-2">
+              {translate("footerMenuTwo").map(
+                (menu: { name: string; url: string }) => (
+                  <li class="inline-block">
+                    <a
+                      class="has-underline-anim text-text-base-label inline-block py-px"
+                      href={localizedLink(menu.url, Astro.currentLocale)}
+                      set:html={menu.name}
+                    />
+                  </li>
+                ),
+              )}
+            </ul>
+          </div>
+
+          <div>
+            {translate("footer.colTitleThree") && (
+              <h3
+                class="text-text-base-heading mb-4 text-xl md:mb-6"
+                set:html={translate("footer.colTitleThree")}
+              />
+            )}
+
+            <ul class="flex flex-col gap-3">
+              <li>
+                <span class="text-text-base-description mb-1.5 inline-block text-sm/none font-medium">
+                  {translate("contactInfo.emailLabel") || "Email"}:
+                </span>
+                <span class="text-base-sm block md:text-base">
                   <a
-                    class="has-underline-anim text-text-base-label inline-block py-px"
-                    href={localizedLink(menu.url, Astro.currentLocale)}>
-                    {menu.name}
+                    class="text-text-base-description hover:text-text-brand-default-hover flex items-center gap-1 py-px"
+                    href={localizedLink(
+                      `mailto:${contact.email}`,
+                      Astro.currentLocale,
+                    )}>
+                    <!-- mail icon -->
+                    <Icons class="text-inherit" icon="EnvelopeIcon" />
+                    {contact.email}
                   </a>
-                </li>
-              ),
-            )}
-          </ul>
+                </span>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <div>
-          {translate("footer.colTitleTwo") && (
-            <h3
-              class="text-text-base-heading mb-4 text-xl md:mb-6"
-              set:html={translate("footer.colTitleTwo")}
-            />
-          )}
-          <ul class="flex flex-col gap-2">
-            {translate("footerMenuTwo").map(
-              (menu: { name: string; url: string }) => (
-                <li class="inline-block">
-                  <a
-                    class="has-underline-anim text-text-base-label inline-block py-px"
-                    href={localizedLink(menu.url, Astro.currentLocale)}
-                    set:html={menu.name}
-                  />
-                </li>
-              ),
-            )}
-          </ul>
-        </div>
-        <div>
-          {translate("footer.colTitleThree") && (
-            <h3
-              class="text-text-base-heading mb-4 text-xl md:mb-6"
-              set:html={translate("footer.colTitleThree")}
-            />
-          )}
-
-          <ul class="flex flex-col gap-3">
-            <li>
-              <span class="text-text-base-description mb-1.5 inline-block text-sm/none font-medium">
-                {translate("contactInfo.emailLabel") || "Email"}:
-              </span>
-              <span class="text-base-sm block md:text-base">
-                <a
-                  class="text-text-base-description hover:text-text-brand-default-hover flex items-center gap-1 py-px"
-                  href={localizedLink(
-                    `mailto:${contact.email}`,
-                    Astro.currentLocale,
-                  )}>
-                  <!-- mail icon -->
-                  <Icons class="text-inherit" icon="EnvelopeIcon" />
-                  {contact.email}
-                </a>
-              </span>
-            </li>
-          </ul>
-        </div>
+        <NewsletterForm />
       </div>
     </div>
 
