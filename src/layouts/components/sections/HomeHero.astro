@@ -28,34 +28,45 @@ let { title, preTitle, description, image, buttons } = (
     <div class="container">
       <div class="relative z-10 max-w-4xl space-y-10 md:mx-auto">
         <div>
-          {preTitle && (
-            <div
+          <div class="md:flex relative md:w-fit mx-auto">
+            {preTitle && (
+              <div
+                data-aos="reveal-anim-left"
+                data-aos-offset="0"
+                data-aos-delay="200"
+                data-aos-duration="1000"
+                class="hover:bg-surface-base-page-secondary group relative mb-5 max-w-fit overflow-hidden rounded-full border p-px md:mx-auto">
+                <div class="translate-y-centered to-surface-brand-default from-surface-base-default absolute left-1/2 -z-10 h-6 w-1/2 origin-left rotate-90 animate-spin rounded-full bg-linear-to-b [animation-duration:5000ms]" />
+                {preTitle.url && (
+                  <div class="bg-surface-base-default hover:bg-surface-base-page-secondary flex items-center rounded-full transition">
+                    {preTitle.badge?.enable && (
+                      <span
+                        class="bg-surface-elevated-default group-hover:bg-surface-brand-default inline-block gap-1 rounded-full px-3 py-1 text-sm font-normal text-white transition"
+                        set:html={markdownify(preTitle.badge.label)}
+                      />
+                    )}
+                    <div class="text-text-default mx-3 flex items-center rounded-full py-px font-normal">
+                      {markdownify(preTitle.label)}
+                    </div>
+                    <a
+                      title={markdownify(preTitle.label) as string}
+                      class="absolute inset-0 size-full"
+                      href={localizedLink(preTitle.url, Astro.currentLocale)}
+                    />
+                  </div>
+                )}
+              </div>
+            )}
+            <OptimizedImage
               data-aos="reveal-anim-left"
               data-aos-offset="0"
               data-aos-delay="200"
               data-aos-duration="1000"
-              class="hover:bg-surface-base-page-secondary group relative mb-5 max-w-fit overflow-hidden rounded-full border p-px md:mx-auto">
-              <div class="translate-y-centered to-surface-brand-default from-surface-base-default absolute left-1/2 -z-10 h-6 w-1/2 origin-left rotate-90 animate-spin rounded-full bg-linear-to-b [animation-duration:5000ms]" />
-              {preTitle.url && (
-                <div class="bg-surface-base-default hover:bg-surface-base-page-secondary flex items-center rounded-full transition">
-                  {preTitle.badge?.enable && (
-                    <span
-                      class="bg-surface-elevated-default group-hover:bg-surface-brand-default inline-block gap-1 rounded-full px-3 py-1 text-sm font-normal text-white transition"
-                      set:html={markdownify(preTitle.badge.label)}
-                    />
-                  )}
-                  <div class="text-text-default mx-3 flex items-center rounded-full py-px font-normal">
-                    {markdownify(preTitle.label)}
-                  </div>
-                  <a
-                    title={markdownify(preTitle.label) as string}
-                    class="absolute inset-0 size-full"
-                    href={localizedLink(preTitle.url, Astro.currentLocale)}
-                  />
-                </div>
-              )}
-            </div>
-          )}
+              src="/images/logo-anssi.png"
+              alt="logo visa anssi"
+              class="h-20 md:h-18 sm:absolute w-auto sm:m-auto sm:right-6 md:-right-38 -top-5.5"
+            />
+          </div>
           {title && (
             <h1>
               <AnimatedText
