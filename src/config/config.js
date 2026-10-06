@@ -58,6 +58,8 @@ export default {
     stickyHeader: true, // Enables or disable sticky feature of header
     contactFormAction: "https://formsubmit.co/contact@parsec.cloud",
     contactFormProvider: "formsubmit.co",
+    newsletterFormAction:
+      "https://88b667bb.sibforms.com/serve/MUIFAJCmszJ9RrZAMbpkib-6s5CsbVQZ0YrvrhJWBo1FmwlSdDNp-HJ4q_o5kQGLX76mAuZnAiMiFBmcHM2eaOHdtu0vcq1IxfORVnpUkyTbxRdwwbablagw2cCjHzGtDtNMlQoaJFajjF0POPvQd5m9H3DKBiqMfiZeu3wgg31D0odlvDkZgxUwUsggOia1GL7dh9GbBfhNikEv", // Brevo subscription form URL
     brandName: "Parsec Cloud",
     footerDescription: "", // Check src/i18n/en.json and src/i18n/fr.json for changing the footer description in different languages or directly add value here if you are not using internationalization feature
     // For changing footer description and footer copyright in different languages see src/i18n/en.json and src/i18n/fr.json

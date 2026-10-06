@@ -1,0 +1,140 @@
+---
+import CustomButton from "@/components/CustomButton.astro";
+import config from "@/config/config";
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+
+const {
+  settings: { newsletterFormAction },
+} = config;
+
+const newsletter = await getEntryCTM(
+  "newsletter",
+  "-index",
+  Astro.currentLocale,
+);
+const { input, button } = newsletter.data;
+---
+
+{newsletterFormAction && (
+  <form
+    id="newsletter-form"
+    action={newsletterFormAction}
+    method="post"
+    novalidate
+    data-success={input.success}
+    data-error={input.error}
+    class="flex flex-col gap-3 border-t border-border-base-default pt-8">
+    <label for="newsletter-email" class="form-label font-normal">
+      {input.label}
+    </label>
+    <div class="flex items-center gap-4">
+      <input
+        id="newsletter-email"
+        type="email"
+        name="EMAIL"
+        autocomplete="email"
+        placeholder={input.placeholder}
+        class="form-input flex-1"
+        data-value-missing={input.emailRequired}
+        data-type-mismatch={input.emailInvalid}
+        required
+      />
+
+      <input
+        type="text"
+        name="email_trap"
+        class="sr-only"
+        tabindex="-1"
+        autocomplete="off"
+        aria-hidden="true"
+      />
+      <CustomButton tag="button" type="submit" {...button} />
+    </div>
+
+    <div class="form-check">
+      <input
+        id="newsletter-consent"
+        type="checkbox"
+        name="OPT_IN"
+        value="1"
+        class="form-checkbox"
+        data-value-missing={input.consentRequired}
+        required
+      />
+      <label
+        for="newsletter-consent"
+        class="form-check-label text-text-base-description text-sm"
+        set:html={markdownify(input.consent)}
+      />
+    </div>
+    <p
+      id="newsletter-status"
+      class="hidden text-body-md font-medium py-2 px-4 bg-surface-base-default rounded-2xl border border-border-base-default"
+      role="status"></p>
+  </form>
+)}
+
+<script>
+  const form = document.getElementById(
+    "newsletter-form",
+  ) as HTMLFormElement | null;
+  const status = document.getElementById("newsletter-status");
+  const submitButton = form?.querySelector('button[type="submit"]');
+
+  const showStatus = (message: string, success: boolean) => {
+    if (!status) return;
+    status.textContent = message;
+    status.classList.remove(
+      "hidden",
+      "text-text-success-default",
+      "text-text-error-default",
+    );
+    status.classList.add(
+      success ? "text-text-success-default" : "text-text-error-default",
+    );
+  };
+
+  // Native validation bubbles follow the browser language, not the page's,
+  // so the form is "novalidate" and errors are shown in the status instead
+  const validate = () => {
+    const fields = [
+      ...(form?.querySelectorAll<HTMLInputElement>("input[required]") ?? []),
+    ];
+    fields.forEach((field) => field.removeAttribute("aria-invalid"));
+    const invalid = fields.find((field) => !field.validity.valid);
+    if (!invalid) return true;
+
+    invalid.setAttribute("aria-invalid", "true");
+    invalid.focus();
+    showStatus(
+      (invalid.validity.valueMissing
+        ? invalid.dataset.valueMissing
+        : invalid.dataset.typeMismatch) || "",
+      false,
+    );
+    return false;
+  };
+
+  form?.addEventListener("submit", async (e: Event) => {
+    e.preventDefault();
+    if (!validate()) return;
+    submitButton?.setAttribute("disabled", "true");
+
+    // Brevo's own embed script posts the form in the background the same way
+    const response = await fetch(form.action, {
+      method: "POST",
+      body: new FormData(form),
+    }).catch(() => null);
+
+    submitButton?.removeAttribute("disabled");
+
+    const result = await response?.json().catch(() => null);
+    const success = result?.success === true;
+    showStatus(
+      form.getAttribute(success ? "data-success" : "data-error") || "",
+      success,
+    );
+    if (success) form.reset();
+  });
+</script>
