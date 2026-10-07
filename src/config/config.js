@@ -108,6 +108,6 @@ export default {
   // -----------------------------------------------------------------------------------------------------------------------------------
   head: {
     content:
-      '  <script defer src="https://cloud.umami.is/script.js" data-website-id="1daed81f-63f1-4529-af11-85cddf85e879"></script>\n  ',
+      '  <script defer src="https://cloud.umami.is/script.js" data-website-id="1daed81f-63f1-4529-af11-85cddf85e879" data-domains="parsec.cloud,www.parsec.cloud"></script>\n  ',
   },
 };
