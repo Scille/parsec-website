@@ -130,7 +130,7 @@ form:
       name: "Message"
       required: true
       halfWidth: false
-    - label: "J'accepte les [termes & conditions](/terms-and-conditions/) et la [politique de confidentialité](/privacy-policy/)."
+    - label: "J'accepte les [termes & conditions](/fr/terms-conditions/) et la [politique de confidentialité](/fr/privacy-policy/)."
       id: "privacy-policy"
       name: "Consentement vie privée"
       value: "Consentement"
