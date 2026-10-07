@@ -1,0 +1,124 @@
+---
+title: "Partage de données sensibles sur Internet : pourquoi les architectures classiques ne suffisent plus"
+image: "placeholder-article.png"
+date: 2026-10-08
+author: "Thierry Leblond"
+categories:
+  - Cybersécurité
+draft: false
+excerpt: "Pourquoi les serveurs centraux ne suffisent plus pour partager des données sensibles, et comment Zero Trust et Zero Knowledge comblent l'écart."
+---
+
+Dans tous les secteurs — juridique, santé, finance, administration, recherche — les professionnels manipulent chaque jour des données qui doivent rester strictement confidentielles : propriété intellectuelle, dossiers médicaux, stratégies juridiques, modèles financiers, secrets industriels. Partager ces actifs sur Internet soulève une question qui n'a plus rien de théorique : qui, au-delà du destinataire prévu, peut techniquement accéder à ces données ?
+
+Pour explorer cette question, j'ai contacté plusieurs professionnels aux profils variés. Leurs réponses — parfois convergentes, parfois étonnamment différentes — dressent un portrait réaliste de la situation actuelle.
+
+## 1. Comment les professionnels partagent-ils réellement des données sensibles en toute sécurité ?
+
+La réponse honnête est : de manière inégale.
+
+De nombreuses organisations s'appuient sur les plateformes cloud et collaboratives grand public — Microsoft 365, Google Workspace et leurs outils de partage natifs — parce qu'elles sont pratiques, largement adoptées et déjà payées. Comme le fait remarquer **[Fayçal de Poltorasky](https://www.linkedin.com/in/fay%C3%A7al-de-poltorasky/)**, RSSI et DPO au sein d'un réseau de soins à domicile :
+
+> « Une large majorité des entreprises s'appuient aujourd'hui sur des suites collaboratives telles que Microsoft 365. De ce fait, leurs données sont déjà hébergées sur une plateforme GAFAM. Utiliser l'outil de partage natif de la suite — OneDrive ou SharePoint — est le choix évident, tant d'un point de vue économique que technique. C'est un risque résiduel accepté, compte tenu des garanties apportées par Microsoft dans son DPA — qui couvre le chiffrement, l'accès des administrateurs et d'autres mesures de protection — mais il découle aussi d'arbitrages budgétaires et d'un besoin de rationaliser les coûts.
+>
+> Ce risque résiduel fait l'objet d'une surveillance étroite et revient régulièrement dans les discussions lors d'événements géopolitiques. »
+
+**Yanniss Levron**, Cybersecurity Governance & Team Leader chez Trustteam Luxembourg, souligne le lien étroit entre les pratiques personnelles et professionnelles :
+
+> « Le Shadow IT était autrefois toléré en marge par les organisations. C'est désormais leur véritable stratégie d'adoption. Les plateformes choisies comme infrastructure professionnelle sont, délibérément, les mêmes que celles que les gens utilisent déjà chez eux, car il n'y a plus aucune friction d'adoption lorsque les équipes savent déjà utiliser l'outil. Soixante-quatre pour cent des organisations utilisent désormais Microsoft 365 et Google Workspace en même temps, ce qui crée un environnement en couches où les versions professionnelle et personnelle d'un même produit se retrouvent dans le même navigateur, parfois dans le même onglet. Nous observons le même schéma avec l'IA générative : près de la moitié de l'usage professionnel passe par des comptes personnels (47 % de l'usage de l'IA en entreprise via des comptes personnels, Netskope 2026). Cette logique est cohérente à l'échelle de chaque décision d'achat. Aucune formation nécessaire, intégration immédiate, délai de prise en main proche de zéro. Ce que ce calcul omet presque à chaque fois, c'est le coût de la gouvernance nécessaire pour rendre cette convergence sûre. Personne ne le budgétise au départ. Il est absorbé plus tard, après l'incident, sous forme de remédiation que personne n'avait planifiée. »
+
+Il est important de reconnaître cette réalité : pour la plupart des organisations, le risque d'accès de tiers à leurs données — par le fournisseur de la plateforme, par des juridictions étrangères au moyen d'instruments légaux, ou par des administrateurs d'infrastructure privilégiés — est un risque accepté par la direction, pas nécessairement un risque résolu.
+
+**[Sophie Newbould](https://www.linkedin.com/in/sophie-newbould-230641240/)**, directrice et fondatrice de Newbould & Co Solutions Ltd, qui travaille beaucoup dans les environnements juridiques et gouvernementaux, identifie les pratiques clés que tendent à adopter les organisations réellement soucieuses de sécurité :
+
+> « Chiffrement de bout en bout, clés de chiffrement contrôlées par le client, accès cloisonnés, réduction de l'exposition des métadonnées, infrastructure souveraine ou auto-hébergée lorsque c'est approprié, et pratiques de sécurité opérationnelle robustes. »
+
+Elle ajoute aussitôt une réserve essentielle :
+
+> « De nombreux utilisateurs supposent que "chiffré" signifie automatiquement inaccessible aux fournisseurs de services, aux opérateurs d'infrastructure ou aux administrateurs privilégiés. En réalité, cela dépend entièrement de l'endroit où les clés de chiffrement sont détenues, de la manière dont les accès sont gérés et de la juridiction légale qui régit le service. »
+
+C'est une distinction fondamentale. Le chiffrement en transit (données protégées pendant leur circulation sur le réseau) est désormais la norme. Le chiffrement de bout en bout avec une architecture zero-knowledge — où même le fournisseur de services ou l'opérateur de la plateforme ne peut pas accéder aux données en clair — reste bien moins répandu, et bien moins compris.
+
+## 2. Pourquoi les utilisateurs font-ils confiance à leurs outils, et ont-ils raison ?
+
+La réponse courte, aussi inconfortable soit-elle : la confiance est souvent mal placée.
+
+**Rhieya Rahul**, étudiante au Royal College of Surgeons in Ireland, l'exprime clairement :
+
+> « La confiance dans les outils de partage sécurisé repose sur une combinaison de facteurs : un chiffrement et une gestion des clés robustes, la transparence sur l'hébergement des données et sur les personnes qui peuvent y accéder, la réduction de la dépendance vis-à-vis d'administrateurs tiers, et une facilité d'usage qui évite que les employés contournent les processus sécurisés par commodité. »
+
+En pratique, toutefois, **Fayçal de Poltorasky** souligne que la plupart des utilisateurs ne sont pas d'abord motivés par la sensibilisation à la sécurité :
+
+> « Leur priorité est l'efficacité opérationnelle — faire leur travail. C'est une génération habituée aux outils numériques dans sa vie personnelle, et elle a tendance à reproduire ces habitudes dans un contexte professionnel, en utilisant des outils grand public pour répondre à un besoin immédiat. Il ne s'agit pas d'une intention malveillante de contourner le système — c'est une recherche de simplicité. »
+
+**Sophie Newbould** identifie un problème structurel plus profond :
+
+> « Dans bien des cas, la confiance repose davantage sur la confiance accordée aux fournisseurs établis et sur des hypothèses de conformité réglementaire que sur une compréhension détaillée des risques architecturaux, opérationnels et juridictionnels. On observe souvent une tendance — notamment dans les cabinets d'avocats et les institutions publiques — à s'en remettre fortement à des prestataires tiers sans évaluer pleinement les accès administratifs, les risques liés aux accès privilégiés, les exigences de résidence des données, les pratiques de collecte de métadonnées ou la dépendance à des infrastructures étrangères. »
+
+**Antonio Rodrigues**, député à l'Assembleia da República du Portugal, est encore plus direct :
+
+> « Je crois que certaines personnes, même informées, ne croient pas assez aux problèmes d'interception des données sensibles. D'autres pensent être protégées par leurs logiciels. Le seul moyen de garantir la sécurité lors de la transmission de données est la remise en main propre — mais dans de nombreux cas, ce n'est pas possible. »
+
+La question fondamentale — vaut-il la peine de protéger les données même vis-à-vis des administrateurs informatiques ? — peut sembler provocatrice. Pourtant, elle est au cœur de la pensée moderne en matière de sécurité. L'accès privilégié des administrateurs système reste l'un des plus grands problèmes de concentration du risque en sécurité de l'information. Le principe du zero trust, de plus en plus adopté dans les architectures de sécurité, repose précisément sur l'idée que l'infrastructure interne ne doit pas être automatiquement digne de confiance, pas plus que les réseaux externes.
+
+## 3. Quels sont les principaux problèmes lorsque la confiance fait défaut, et comment procéder ?
+
+Lorsque les utilisateurs ne font pas confiance aux outils qui leur sont fournis, ou lorsqu'aucun outil adapté n'est fourni, les conséquences sont prévisibles et bien documentées.
+
+**Rhieya Rahul** identifie les principaux modes de défaillance :
+
+> « Shadow IT, réticence à partager numériquement des informations critiques, inefficacités opérationnelles, et risques accrus de conformité ou de réputation. »
+
+**Sophie Newbould** le confirme :
+
+> « Les organisations créent des contournements non sécurisés, évitent les outils de collaboration, partagent trop d'informations en interne ou développent des pratiques de Shadow IT non maîtrisées. Pendant ce temps, les informations sensibles circulent en permanence hors du périmètre traditionnel — via les plateformes cloud, le télétravail, les écosystèmes SaaS, l'accès mobile, la collaboration externe, et désormais les services d'IA. Le défi est que les informations sensibles sont désormais traitées en routine sur les plateformes cloud, les environnements de télétravail, les écosystèmes SaaS, les appareils mobiles, les canaux de collaboration externes et les services d'IA. En conséquence, conserver le contrôle de l'information dans les environnements juridiques et gouvernementaux est devenu nettement plus complexe que dans les modèles traditionnels fondés sur le périmètre. »
+
+**Grzegorz Nichthauser**, qui compte 32 ans d'expérience dans une grande multinationale, rappelle un exemple révélateur de la façon dont les grandes organisations réagissaient autrefois :
+
+> « Après des années de formation, le réflexe inculqué était : renvoyer toute question sur l'envoi de documents sécurisés à l'extérieur vers le service conformité — et la réponse était invariablement que ces informations sont classifiées et ne peuvent pas sortir du réseau interne de l'entreprise. Bien sûr, il existe des documents chiffrés et envoyés hors du réseau interne, par exemple à des clients, des conseillers, etc. Mais je ne suis pas autorisé à en parler ici dans le détail, parce que la banque a ses propres procédures de sécurité, et les méthodes précises d'envoi de données confidentielles ne sont pas quelque chose que je peux divulguer. :-) »
+
+Cette approche — fermer le périmètre et restreindre tout partage externe — a été le modèle dominant pendant des décennies. Elle n'est plus tenable dans un monde de travail distribué, de collaboration mondiale et d'infrastructures cloud-first.
+
+**Fayçal de Poltorasky** propose un cadre de gouvernance en quatre étapes qui reste le bon point de départ pour toute organisation :
+
+1. **Sensibiliser :** expliquer les risques liés au transfert de données sensibles — réglementaires, juridiques, de réputation.
+2. **Fournir les outils :** mettre à disposition une solution sécurisée officiellement approuvée, avec une expérience utilisateur équivalente à celle des outils grand public — car si l'outil officiel est peu pratique, les utilisateurs en utiliseront un autre.
+3. **Communiquer :** formaliser et diffuser les procédures d'utilisation.
+4. **Faire appliquer :** restreindre techniquement l'accès aux outils non approuvés pour éliminer le Shadow IT.
+
+Ce cadre est solide. Mais il soulève une question d'architecture que les organisations ne peuvent plus éluder.
+
+## 4. La question de l'architecture : pourquoi les serveurs centraux ne suffisent plus
+
+Les architectures d'information traditionnelles — construites autour d'un serveur central qui gère les accès et détient les données en clair, ou les déchiffre pour le compte des utilisateurs — ont été conçues pour un autre modèle de menace. L'hypothèse implicite était que l'infrastructure elle-même était digne de confiance : le serveur, l'administrateur, le centre de données.
+
+Cette hypothèse ne tient plus. Le paysage des menaces comprend désormais :
+
+- des fournisseurs de plateformes soumis à l'obligation légale de communiquer des données aux autorités de leur juridiction d'origine (une préoccupation particulièrement aiguë pour les services GAFAM américains au regard de législations comme le CLOUD Act) ;
+- des acteurs internes privilégiés — administrateurs système, ingénieurs DevOps, personnel du support cloud — qui disposent d'un accès technique aux données au repos ;
+- des attaques au niveau de l'infrastructure ciblant le point central où les données sont agrégées et déchiffrées ;
+- des risques juridictionnels et de souveraineté pour les données stockées de part et d'autre des frontières.
+
+Dans ce contexte, les architectures fondées sur un serveur central de confiance — aussi bien gérées soient-elles — introduisent une vulnérabilité structurelle : un point de confiance unique qui, s'il est compromis ou contraint, expose toutes les données.
+
+La réponse émergente à ce défi est un changement de paradigme vers des architectures Zero Trust et Zero Knowledge avec chiffrement de bout en bout. Les principes clés sont les suivants :
+
+- le chiffrement de bout en bout, où les données sont chiffrées côté client, avant de quitter l'appareil de l'utilisateur, et ne peuvent être déchiffrées que par les destinataires autorisés — jamais par le serveur ni par le fournisseur de services ;
+- l'architecture Zero Knowledge, où le fournisseur de services ne peut techniquement pas accéder au contenu des données qu'il stocke ou transmet, parce qu'il ne détient jamais les clés de déchiffrement ;
+- les modèles d'accès Zero Trust, où aucun acteur — y compris l'infrastructure informatique interne — n'est implicitement digne de confiance, et où chaque accès est vérifié, journalisé et minimisé.
+
+Il ne s'agit pas d'une approche de niche ou théorique. C'est de plus en plus la seule architecture capable de garantir de manière crédible la confidentialité face aux menaces modernes — pour les professionnels du droit qui protègent le secret professionnel, pour les chercheurs en médecine qui manipulent des données de patients, pour les entreprises qui protègent leurs secrets industriels, pour les institutions publiques qui traitent des informations gouvernementales classifiées ou sensibles.
+
+La transition n'est pas triviale. Elle impose de repenser la gestion des clés, l'authentification des utilisateurs et la gouvernance des accès. Mais l'alternative — continuer à s'appuyer sur des architectures qui, structurellement, ne peuvent pas offrir les garanties de confidentialité qu'elles promettent implicitement — est une position de moins en moins défendable pour les organisations soumises à de réelles obligations de confidentialité.
+
+## Conclusion
+
+Les professionnels qui ont contribué à cet article partagent un fil conducteur dans leurs observations : l'écart entre la sécurité perçue et la sécurité réelle est bien réel, et il se creuse.
+
+La commodité guide l'adoption des outils. La conformité réglementaire est souvent confondue avec la sécurité technique. La confiance envers les grands fournisseurs tient lieu d'évaluation architecturale rigoureuse. Et pendant ce temps, la surface sur laquelle circulent les données sensibles — à travers les clouds, les appareils, les juridictions et les services d'IA — continue de s'étendre.
+
+La réponse n'est pas de revenir aux périmètres fermés et aux coursiers physiques, aussi tentant que cela puisse paraître. Elle consiste à adopter des architectures conçues dès l'origine pour un monde où l'infrastructure elle-même ne peut pas être entièrement digne de confiance — des architectures où la confidentialité est une propriété mathématique du système, et non une promesse de politique d'un fournisseur.
+
+Zero Trust. Zero Knowledge. Chiffrement de bout en bout. Ce ne sont pas des mots à la mode. Ce sont les prérequis techniques d'une véritable souveraineté des données à l'ère numérique.
+
+Je tiens à remercier **[Rhieya Rahul](https://www.linkedin.com/in/rhieya-rahul-39ab602aa/)**, **[Fayçal de Poltorasky](https://www.linkedin.com/in/fay%C3%A7al-de-poltorasky/)**, **[Sophie Newbould](https://www.linkedin.com/in/sophie-newbould-230641240/)**, **[Antonio Rodrigues](https://www.linkedin.com/in/antonio-rodrigues-43b24555/)** et **[Grzegorz Nichthauser](https://www.linkedin.com/in/grzegorz-nichthauser/)** pour leurs contributions et leurs points de vue, qui ont nourri et enrichi cet article.
