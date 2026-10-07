@@ -1,0 +1,124 @@
+---
+title: "Sensitive Data Sharing Over the Internet: Why Classic Architectures Are No Longer Enough"
+image: "placeholder-article.png"
+date: 2026-10-08
+author: "Thierry Leblond"
+categories:
+  - Cybersecurity
+draft: false
+excerpt: "Why central-server architectures no longer suffice to share sensitive data online, and how Zero Trust and Zero Knowledge close the gap."
+---
+
+Across industries — legal, healthcare, finance, government, research — professionals handle data every day that must remain strictly confidential: intellectual property, medical records, legal strategies, financial models, trade secrets. Sharing these assets over the internet raises a question that is no longer theoretical: who, beyond the intended recipient, can technically access this data?
+
+To explore this question, I reached out to a number of professionals with diverse backgrounds. Their answers — sometimes convergent, sometimes strikingly different — paint a realistic picture of where we stand today.
+
+## 1. How Do Professionals Actually Share Sensitive Data Securely?
+
+The honest answer is: unevenly.
+
+Many organisations rely on mainstream cloud and collaboration platforms — Microsoft 365, Google Workspace, and their native sharing tools — because they are convenient, widely adopted, and already paid for. As **[Fayçal de Poltorasky](https://www.linkedin.com/in/fay%C3%A7al-de-poltorasky/)**, CISO and DPO within a home care network, observes:
+
+> "A large majority of companies today rely on collaborative suites such as Microsoft 365. As a result, their data is already stored on a GAFAM platform. Using the suite's native sharing tool—OneDrive or SharePoint—is the obvious choice from both an economic and technical standpoint. This is an accepted residual risk, given the safeguards provided by Microsoft in its DPA—which covers encryption, administrator access, and other protective measures—but it is also driven by budgetary trade-offs and a need to streamline costs.
+>
+> This residual risk remains under close scrutiny and is regularly discussed during geopolitical events."
+
+**Yanniss Levron**, Cybersecurity Governance & Team Leader at Trustteam Luxembourg, underlines the strong link between home and professional practices:
+
+> "Shadow IT used to be something organizations tolerated at the edges. Now it's their actual adoption strategy. The platforms chosen as professional infrastructure are, deliberately, the same ones people already use at home, because there's no adoption friction left when teams already know how to use the tool. Sixty-four percent of organizations now run Microsoft 365 and Google Workspace at the same time, which creates a layered environment where the professional and personal versions of the same product end up sitting in the same browser, sometimes the same tab. We're watching the same pattern play out with generative AI: nearly half of professional usage runs through personal accounts (47% of enterprise AI usage via personal accounts, Netskope 2026). This logic makes sense at the level of any single purchasing decision. No training needed, instant integration, time-to-productivity close to zero. What that calculation leaves out, almost every time, is the cost of the governance needed to make this convergence safe. Nobody budgets for it upfront. It just gets absorbed later, after the incident, as remediation nobody planned for."
+
+This reality is important to acknowledge: for most organisations, the risk of third-party access to their data — by the platform provider, by foreign jurisdictions through legal instruments, or by privileged infrastructure administrators — is a risk that has been accepted by management, not necessarily a risk that has been resolved.
+
+**[Sophie Newbould](https://www.linkedin.com/in/sophie-newbould-230641240/)**, Director and Founder of Newbould & Co Solutions Ltd, working extensively in legal and government environments, identifies the key practices that genuinely security-conscious organisations tend to adopt:
+
+> "End-to-end encryption, customer-controlled encryption keys, compartmentalised access, minimising metadata exposure, sovereign or self-hosted infrastructure where appropriate, and robust operational security practices."
+
+She immediately adds a critical caveat:
+
+> "Many users assume that 'encrypted' automatically means inaccessible to service providers, infrastructure operators, or privileged administrators. In reality, that depends entirely on where encryption keys are held, how access is managed, and the legal jurisdiction governing the service."
+
+This is a fundamental distinction. Encryption in transit (data protected while moving across the network) is now standard. End-to-end encryption with zero-knowledge architecture — where even the service provider or platform operator cannot access the plaintext data — remains far less common, and far less understood.
+
+## 2. Why Are People Confident in Their Tools — and Should They Be?
+
+The short answer, uncomfortable as it may be: confidence is often misplaced.
+
+**Rhieya Rahul**, a student at the Royal College of Surgeons in Ireland, puts it clearly:
+
+> "Confidence in secure sharing tools comes from a combination of factors: strong encryption and key management practices, transparency about where data is hosted and who can access it, minimising dependency on third-party administrators, and ensuring usability so employees do not bypass secure processes for convenience."
+
+In practice, however, **Fayçal de Poltorasky** highlights that most users are not primarily motivated by security awareness:
+
+> "Their priority is operational efficiency — getting the job done. They are a generation accustomed to digital tools in their personal lives, and they tend to reproduce those habits in a professional context, using consumer-grade tools to meet an immediate need. It is not malicious intent to bypass the system — it is a search for simplicity."
+
+**Sophie Newbould** identifies a deeper structural issue:
+
+> "In many cases, confidence is driven more by trust in established vendors and assumptions of regulatory compliance than by a detailed understanding of architectural, operational, and jurisdictional risks. There is often a tendency—particularly in law firms and public institutions—to place significant reliance on third-party providers without fully assessing administrative access, privileged access risks, data residency requirements, metadata collection practices, or dependency on foreign infrastructure."
+
+**Antonio Rodrigues**, Member of Parliament at the Assembleia da República of Portugal, is even more direct:
+
+> "I believe that some people, even those who are informed, don't believe enough in the problems of interception of sensitive data. Others believe they are defended by their software. The only way to ensure security when transmitting data is personal delivery — but in many cases that isn't possible."
+
+The fundamental question — is it worthwhile protecting data even from IT administrators? — may seem provocative. But it lies at the heart of modern security thinking. Privileged access by system administrators remains one of the largest concentration-of-risk issues in information security. The principle of zero trust, increasingly adopted in security architecture, rests precisely on the premise that internal infrastructure should not be automatically trusted, any more than external networks.
+
+## 3. What Are the Main Issues When Confidence Is Lacking — and How to Proceed?
+
+When users do not trust the tools provided to them, or when no suitable tool is provided at all, the consequences are predictable and well-documented.
+
+**Rhieya Rahul** identifies the core failure modes:
+
+> "Shadow IT, reluctance to share critical information digitally, operational inefficiencies, and increased compliance or reputational risks."
+
+**Sophie Newbould** reinforces this:
+
+> "Organisations create insecure workarounds, avoid collaboration tools, overshare information internally, or develop unmanaged shadow IT practices. Meanwhile, sensitive information is constantly moving outside the traditional perimeter — through cloud platforms, remote work, SaaS ecosystems, mobile access, external collaboration, and now AI services. The challenge is that sensitive information is now routinely processed across cloud platforms, remote work environments, SaaS ecosystems, mobile devices, external collaboration channels, and AI services. As a result, maintaining control over information in legal and government environments has become significantly more complex than in traditional perimeter-based models."
+
+**Grzegorz Nichthauser**, with 32 years of experience in a major multinational corporation, recalls a telling example of how large organisations used to respond:
+
+> "After years of training, the instilled reflex was: refer any question about sending secure documents outside to the compliance department — and the answer would invariably be that such information is classified and cannot be sent outside the corporate internal network. Of course there are documents encrypted and sent outside the internal network, e.g. to clients, advisors, etc. But I am not allowed to talk about the details here, because the bank has its own security procedures, but specific methods of sending confidential data are not something I can disseminate. :-)"
+
+This approach — close the perimeter and restrict all external sharing — was the dominant model for decades. It is no longer tenable in a world of distributed work, global collaboration, and cloud-first infrastructure.
+
+**Fayçal de Poltorasky** proposes a four-step governance framework that remains the right starting point for any organisation:
+
+1. **Raise awareness:** Explain the risks linked to sensitive data transfer — regulatory, legal, reputational.
+2. **Provide the tools:** Supply an officially approved, secure solution with a user experience equivalent to consumer tools — because if the official tool is inconvenient, users will use something else.
+3. **Communicate:** Formalise and disseminate usage procedures.
+4. **Enforce:** Technically restrict access to non-approved tools to eliminate shadow IT.
+
+This framework is sound. But it raises an architecture question that organisations can no longer avoid.
+
+## 4. The Architecture Question: Why Central Servers Are No Longer Sufficient
+
+Traditional information architectures — built around a central server that manages access and holds data in cleartext, or decrypts it on behalf of users — were designed for a different threat model. The implicit assumption was that the infrastructure itself was trustworthy: the server, the administrator, the data centre.
+
+That assumption no longer holds. The threat landscape now includes:
+
+- Platform providers with legal obligations to disclose data to their home jurisdiction's authorities (a particularly acute concern for US-based GAFAM services under legislation such as the CLOUD Act);
+- Privileged insiders — system administrators, DevOps engineers, cloud support staff — who have technical access to data at rest;
+- Infrastructure-level attacks targeting the central point where data is aggregated and decrypted;
+- Jurisdictional and sovereignty risks for data stored across borders.
+
+In this context, architectures based on a central trusted server — however well-managed — introduce a structural vulnerability: a single point of trust that, if compromised or compelled, exposes all data.
+
+The emerging response to this challenge is a paradigm shift toward Zero Trust and Zero Knowledge architectures with end-to-end encryption. The key principles are:
+
+- End-to-end encryption where data is encrypted on the client side, before it leaves the user's device, and can only be decrypted by authorised recipients — never by the server or the service provider;
+- Zero Knowledge architecture, where the service provider technically cannot access the content of the data it stores or transmits, because it never holds the decryption keys;
+- Zero Trust access models, where no actor — including internal IT infrastructure — is implicitly trusted, and every access is verified, logged, and minimised.
+
+This is not a niche or theoretical approach. It is increasingly the only architecture that can credibly guarantee confidentiality in the face of modern threats — for legal professionals protecting client privilege, for medical researchers handling patient data, for enterprises protecting trade secrets, for public institutions handling classified or sensitive government information.
+
+The transition is not trivial. It requires rethinking key management, user authentication, and access governance. But the alternative — continuing to rely on architectures that structurally cannot provide the confidentiality guarantees they implicitly promise — is an increasingly indefensible position for organisations with genuine confidentiality obligations.
+
+## Conclusion
+
+The professionals who contributed to this article share a common thread in their observations: the gap between perceived security and actual security is real, and it is growing.
+
+Convenience drives tool adoption. Regulatory compliance is often mistaken for technical security. Trust in large vendors substitutes for rigorous architectural assessment. And all the while, the surface area over which sensitive data moves — across clouds, devices, jurisdictions, and AI services — continues to expand.
+
+The answer is not to return to closed perimeters and physical couriers, as tempting as that might seem. It is to adopt architectures that are designed from the ground up for a world in which the infrastructure itself cannot be fully trusted — architectures where confidentiality is a mathematical property of the system, not a policy promise by a vendor.
+
+Zero Trust. Zero Knowledge. End-to-end encryption. These are not buzzwords. They are the technical prerequisites for genuine data sovereignty in the digital age.
+
+I would like to thank **[Rhieya Rahul](https://www.linkedin.com/in/rhieya-rahul-39ab602aa/)**, **[Fayçal de Poltorasky](https://www.linkedin.com/in/fay%C3%A7al-de-poltorasky/)**, **[Sophie Newbould](https://www.linkedin.com/in/sophie-newbould-230641240/)**, **[Antonio Rodrigues](https://www.linkedin.com/in/antonio-rodrigues-43b24555/)**, and **[Grzegorz Nichthauser](https://www.linkedin.com/in/grzegorz-nichthauser/)** for their contributions and perspectives, which informed and enriched this article.
