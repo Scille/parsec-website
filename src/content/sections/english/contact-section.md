@@ -136,7 +136,7 @@ form:
       name: "Message" # This is crucial. Its indicate under which name you want to receive this field data
       required: true
       halfWidth: false
-    - label: "I agree to the [terms & conditions](/terms-and-conditions/) and [privacy policy](/privacy-policy/)." # only valid for type="checkbox" & type === "radio"
+    - label: "I agree to the [terms & conditions](/terms-conditions/) and [privacy policy](/privacy-policy/)." # only valid for type="checkbox" & type === "radio"
       id: "privacy-policy"
       name: "Privacy consent" # This is crucial. Its indicate under which name you want to receive this field data
       value: "Consent" # Value that will be submit (applicable for type="checkbox" & type === "radio")

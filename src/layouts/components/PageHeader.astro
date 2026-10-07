@@ -10,27 +10,17 @@ const { title, preTitle, description, overlapShape } = Astro.props;
     Astro.props.class,
   ]}>
   <div class="container">
-    <div
-      class:list={[
-        "mx-auto flex max-w-6xl flex-wrap justify-between gap-5 self-center md:gap-6",
-        description ? "flex-col justify-center" : "",
-      ]}>
+    <div class="mx-auto flex max-w-6xl flex-wrap justify-between gap-5 self-center md:gap-6">
       <div>
         {preTitle && (
           <span
-            class:list={[
-              "text-text-base-description text-body-xl mb-4 inline-block w-full rounded-full font-medium",
-              description ? "text-left" : "text-center",
-            ]}
+            class="text-text-base-description text-body-xl mb-4 inline-block w-full rounded-full font-medium text-left"
             set:html={markdownify(preTitle)}
           />
         )}
         {title && (
           <h1
-            class:list={[
-              "has-italic-text text-h2-sm md:text-h2",
-              description ? "max-w-lg" : "max-w-2xl justify-center text-center",
-            ]}
+            class="has-italic-text text-h2-sm md:text-h2 max-w-xl"
             set:html={markdownify(title)}
           />
         )}
