@@ -53,7 +53,7 @@ From the point of view of the data exchanged with the outside world, an applicat
 1. application installation/update
 2. application usage
 
-{/* TODO: image not available locally - https://lh4.googleusercontent.com/tw4oqjP2NTBmnCaXYpPhUaZWNQ6GMMLRgu5fKqmIOikSUdn14QUWS5JzQawGRKClTTcUzoJxxs0GbZMMXksKx9JVtrXLHfiTc_CDfmVqP3fAuQ7GhOyUfZbs2wwFrOUu58jmdEZPul0uErfY50QGIFprAqoqC2mleel9SNp0tzKCCvaWDGFi6aXx_JRq */}
+<!-- TODO: image not available locally - https://lh4.googleusercontent.com/tw4oqjP2NTBmnCaXYpPhUaZWNQ6GMMLRgu5fKqmIOikSUdn14QUWS5JzQawGRKClTTcUzoJxxs0GbZMMXksKx9JVtrXLHfiTc_CDfmVqP3fAuQ7GhOyUfZbs2wwFrOUu58jmdEZPul0uErfY50QGIFprAqoqC2mleel9SNp0tzKCCvaWDGFi6aXx_JRq -->
 
 What we can see is a native app comes with a strong separation between the installation/update step and the usage one. On the contrary, a website is in charge of both sending the web app the client should run _and_ handling application logic and data later on.
 
@@ -161,14 +161,14 @@ Of course, power users will want to keep security at its highest, so we shouldn'
 
 A way to support both online and local DKF:
 
-{/* TODO: image not available locally - https://lh3.googleusercontent.com/7M1IplZESEntCD62eK6MyOOy3M6gBXgWqWAdJnIXcQOBejKTGBl0rezGTz_2PPQk44k6T5h_IpjW0ixVYRgndvBgdPYCjziVVGL7aNmToPbJ2BZDnjucPxl-YhI8Ee9axhB4ZjTm-TNFyLz_mqF-sBrtXfvIPl670sCHi2JBjRmBqb9Nwoc4af4mKNYC */}
+<!-- TODO: image not available locally - https://lh3.googleusercontent.com/7M1IplZESEntCD62eK6MyOOy3M6gBXgWqWAdJnIXcQOBejKTGBl0rezGTz_2PPQk44k6T5h_IpjW0ixVYRgndvBgdPYCjziVVGL7aNmToPbJ2BZDnjucPxl-YhI8Ee9axhB4ZjTm-TNFyLz_mqF-sBrtXfvIPl670sCHi2JBjRmBqb9Nwoc4af4mKNYC -->
 
 - A part of the login page allows login from a server. On top of that, an "advanced" button is present to display additional config (i.e. the address of the server to use).
 - All existing device key files are listed on the login page
 
 When selecting an existing login or filling in a new login, the following dialog appears:
 
-{/* TODO: image not available locally - https://lh4.googleusercontent.com/xOpypKI0A6ermwo1lVPK5NbEaXn8vov6NFlfBYOkX_uOBlrf5l6pOg6moy31V6SO8VC2d4QCdUBrAMWDhXoCroZzss2ILNOcAoMNFsatYsPmgWzlkgry-8hpTpMBnsRyQ6ACtritPiyQtpoJ6Oru9Nt7dyu25xrt8mKQoApCgKoXGQDMaIZgohZOkpIX */}
+<!-- TODO: image not available locally - https://lh4.googleusercontent.com/xOpypKI0A6ermwo1lVPK5NbEaXn8vov6NFlfBYOkX_uOBlrf5l6pOg6moy31V6SO8VC2d4QCdUBrAMWDhXoCroZzss2ILNOcAoMNFsatYsPmgWzlkgry-8hpTpMBnsRyQ6ACtritPiyQtpoJ6Oru9Nt7dyu25xrt8mKQoApCgKoXGQDMaIZgohZOkpIX -->
 
 This dialog should typically also allow displaying advanced information about the login (typically the server address, and whether the key file is stored on the server or only locally).
 
@@ -182,7 +182,7 @@ On top of that, the organization configuration (and hence the `organization_conf
 
 We should probably do something similar to [what is done by Bitwarden](https://bitwarden.com/images/resources/security-white-paper-download.pdf):
 
-{/* TODO: image not available locally - https://lh6.googleusercontent.com/teTHz047G5fi10d5w919AR-xBO364Mdi9V_3A-X5PNR0LatPAavcuMUvpDhXL3yPepC2rVQMBRJnqlDZtEwKEUVJeu73VnrPdo-dDpqYhPorgCgdNrJ4GEKe_PnGAwIdnzIiorBdgM3Xg7JfL3VV1q3PNAHSHF_WVVfIxUyyf0_qJWX0pvrVON473f1e */}
+<!-- TODO: image not available locally - https://lh6.googleusercontent.com/teTHz047G5fi10d5w919AR-xBO364Mdi9V_3A-X5PNR0LatPAavcuMUvpDhXL3yPepC2rVQMBRJnqlDZtEwKEUVJeu73VnrPdo-dDpqYhPorgCgdNrJ4GEKe_PnGAwIdnzIiorBdgM3Xg7JfL3VV1q3PNAHSHF_WVVfIxUyyf0_qJWX0pvrVON473f1e -->
 
 The idea is:
 
@@ -220,7 +220,7 @@ However, given Parsec authentication is only possible in the Parsec client (sinc
 
 This is currently doable with the Qt5-based GUI, but should be much easier with the web-based GUI:
 
-{/* TODO: image not available locally - https://lh5.googleusercontent.com/o45xyNYDKmXVVnhdjHRvRcVx5fEnc8cLin1Rt9-E6R8SXPSZJGItmHwwbZSym711haCD3rKYCTzvYmf38UgOxigi6kunpVTRu3_4en2d6w5bEb_pk9a4pbYTbcjKIlDYtgHMaPNkak9jN56MFRHuzHIcJDKJc9wG7Lnd3MtmyHWH5PuOLnLm7dTKg4jp */}
+<!-- TODO: image not available locally - https://lh5.googleusercontent.com/o45xyNYDKmXVVnhdjHRvRcVx5fEnc8cLin1Rt9-E6R8SXPSZJGItmHwwbZSym711haCD3rKYCTzvYmf38UgOxigi6kunpVTRu3_4en2d6w5bEb_pk9a4pbYTbcjKIlDYtgHMaPNkak9jN56MFRHuzHIcJDKJc9wG7Lnd3MtmyHWH5PuOLnLm7dTKg4jp -->
 
 1. The user does Parsec authentication on the Parsec client, and the device signing key is now available. The Parsec client detects that the current organization is hosted on the SAAS and that the user is the owner of the organization, and it then provides a "Manage subscription" button to access the SAAS website from within the client.
 2. When this button is clicked, the Parsec client uses the device signing key to sign an authentication token (typically JSON containing organization ID/user ID/timestamp).

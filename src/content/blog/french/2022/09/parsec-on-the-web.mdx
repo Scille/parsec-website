@@ -53,7 +53,7 @@ Du point de vue des données échangées avec l'extérieur, le cycle de vie d'un
 1. installation/mise à jour de l'application
 2. utilisation de l'application
 
-{/* TODO: image not available locally - https://lh4.googleusercontent.com/tw4oqjP2NTBmnCaXYpPhUaZWNQ6GMMLRgu5fKqmIOikSUdn14QUWS5JzQawGRKClTTcUzoJxxs0GbZMMXksKx9JVtrXLHfiTc_CDfmVqP3fAuQ7GhOyUfZbs2wwFrOUu58jmdEZPul0uErfY50QGIFprAqoqC2mleel9SNp0tzKCCvaWDGFi6aXx_JRq */}
+<!-- TODO: image not available locally - https://lh4.googleusercontent.com/tw4oqjP2NTBmnCaXYpPhUaZWNQ6GMMLRgu5fKqmIOikSUdn14QUWS5JzQawGRKClTTcUzoJxxs0GbZMMXksKx9JVtrXLHfiTc_CDfmVqP3fAuQ7GhOyUfZbs2wwFrOUu58jmdEZPul0uErfY50QGIFprAqoqC2mleel9SNp0tzKCCvaWDGFi6aXx_JRq -->
 
 Ce que l'on constate, c'est qu'une application native bénéficie d'une séparation forte entre l'étape d'installation/mise à jour et celle d'utilisation. À l'inverse, un site web doit à la fois envoyer l'application cliente que le navigateur doit exécuter _et_ gérer la logique applicative et les données par la suite.
 
@@ -161,14 +161,14 @@ Bien sûr, les utilisateurs avancés voudront conserver le niveau de sécurité 
 
 Une façon de prendre en charge à la fois le DKF en ligne et local :
 
-{/* TODO: image not available locally - https://lh3.googleusercontent.com/7M1IplZESEntCD62eK6MyOOy3M6gBXgWqWAdJnIXcQOBejKTGBl0rezGTz_2PPQk44k6T5h_IpjW0ixVYRgndvBgdPYCjziVVGL7aNmToPbJ2BZDnjucPxl-YhI8Ee9axhB4ZjTm-TNFyLz_mqF-sBrtXfvIPl670sCHi2JBjRmBqb9Nwoc4af4mKNYC */}
+<!-- TODO: image not available locally - https://lh3.googleusercontent.com/7M1IplZESEntCD62eK6MyOOy3M6gBXgWqWAdJnIXcQOBejKTGBl0rezGTz_2PPQk44k6T5h_IpjW0ixVYRgndvBgdPYCjziVVGL7aNmToPbJ2BZDnjucPxl-YhI8Ee9axhB4ZjTm-TNFyLz_mqF-sBrtXfvIPl670sCHi2JBjRmBqb9Nwoc4af4mKNYC -->
 
 - Une partie de la page de connexion permet de se connecter depuis un serveur. Un bouton « avancé » est également présent pour afficher une configuration supplémentaire (à savoir l'adresse du serveur à utiliser).
 - Tous les fichiers de clé d'appareil existants sont listés sur la page de connexion
 
 Lors de la sélection d'une connexion existante ou de la saisie d'une nouvelle connexion, la boîte de dialogue suivante apparaît :
 
-{/* TODO: image not available locally - https://lh4.googleusercontent.com/xOpypKI0A6ermwo1lVPK5NbEaXn8vov6NFlfBYOkX_uOBlrf5l6pOg6moy31V6SO8VC2d4QCdUBrAMWDhXoCroZzss2ILNOcAoMNFsatYsPmgWzlkgry-8hpTpMBnsRyQ6ACtritPiyQtpoJ6Oru9Nt7dyu25xrt8mKQoApCgKoXGQDMaIZgohZOkpIX */}
+<!-- TODO: image not available locally - https://lh4.googleusercontent.com/xOpypKI0A6ermwo1lVPK5NbEaXn8vov6NFlfBYOkX_uOBlrf5l6pOg6moy31V6SO8VC2d4QCdUBrAMWDhXoCroZzss2ILNOcAoMNFsatYsPmgWzlkgry-8hpTpMBnsRyQ6ACtritPiyQtpoJ6Oru9Nt7dyu25xrt8mKQoApCgKoXGQDMaIZgohZOkpIX -->
 
 Cette boîte de dialogue devrait également permettre d'afficher des informations avancées sur la connexion (typiquement l'adresse du serveur, et si le fichier de clé est stocké sur le serveur ou seulement en local).
 
@@ -182,7 +182,7 @@ De plus, la configuration de l'organisation (et donc l'API `organization_config`
 
 Nous devrions probablement faire quelque chose de similaire à [ce que fait Bitwarden](https://bitwarden.com/images/resources/security-white-paper-download.pdf) :
 
-{/* TODO: image not available locally - https://lh6.googleusercontent.com/teTHz047G5fi10d5w919AR-xBO364Mdi9V_3A-X5PNR0LatPAavcuMUvpDhXL3yPepC2rVQMBRJnqlDZtEwKEUVJeu73VnrPdo-dDpqYhPorgCgdNrJ4GEKe_PnGAwIdnzIiorBdgM3Xg7JfL3VV1q3PNAHSHF_WVVfIxUyyf0_qJWX0pvrVON473f1e */}
+<!-- TODO: image not available locally - https://lh6.googleusercontent.com/teTHz047G5fi10d5w919AR-xBO364Mdi9V_3A-X5PNR0LatPAavcuMUvpDhXL3yPepC2rVQMBRJnqlDZtEwKEUVJeu73VnrPdo-dDpqYhPorgCgdNrJ4GEKe_PnGAwIdnzIiorBdgM3Xg7JfL3VV1q3PNAHSHF_WVVfIxUyyf0_qJWX0pvrVON473f1e -->
 
 L'idée est la suivante :
 
@@ -220,7 +220,7 @@ Cependant, comme l'authentification Parsec n'est possible que dans le client Par
 
 C'est actuellement faisable avec l'interface graphique basée sur Qt5, mais cela devrait être bien plus simple avec l'interface web :
 
-{/* TODO: image not available locally - https://lh5.googleusercontent.com/o45xyNYDKmXVVnhdjHRvRcVx5fEnc8cLin1Rt9-E6R8SXPSZJGItmHwwbZSym711haCD3rKYCTzvYmf38UgOxigi6kunpVTRu3_4en2d6w5bEb_pk9a4pbYTbcjKIlDYtgHMaPNkak9jN56MFRHuzHIcJDKJc9wG7Lnd3MtmyHWH5PuOLnLm7dTKg4jp */}
+<!-- TODO: image not available locally - https://lh5.googleusercontent.com/o45xyNYDKmXVVnhdjHRvRcVx5fEnc8cLin1Rt9-E6R8SXPSZJGItmHwwbZSym711haCD3rKYCTzvYmf38UgOxigi6kunpVTRu3_4en2d6w5bEb_pk9a4pbYTbcjKIlDYtgHMaPNkak9jN56MFRHuzHIcJDKJc9wG7Lnd3MtmyHWH5PuOLnLm7dTKg4jp -->
 
 1. L'utilisateur s'authentifie sur le client Parsec, la clé de signature de l'appareil est désormais disponible. Le client Parsec détecte que l'organisation courante est hébergée sur le SAAS et que l'utilisateur en est propriétaire ; il propose alors un bouton « Gérer l'abonnement » pour accéder au site SAAS depuis le client.
 2. Lorsque ce bouton est cliqué, le client Parsec utilise la clé de signature de l'appareil pour signer un jeton d'authentification (typiquement du JSON contenant l'ID d'organisation/l'ID utilisateur/un timestamp).

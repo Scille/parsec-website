@@ -60,7 +60,7 @@ En matière de cybersécurité informatique, il faut considérer le chemin d'att
 
 Voici l'infrastructure de Monsieur Tout-le-Monde : les **utilisateurs** Alice, Bob et Charlie travaillent sur des **appareils** qui communiquent avec des **serveurs distants** et des **clouds distants** via des **réseaux périmétriques Internet ou intranet**.
 
-{/* TODO: image not available locally - https://lh6.googleusercontent.com/stL17dHTy81YWe8_K5KWh1vi51E1tJNvoneQO5JJ40gU7b40d_T90Qx7nl89dpO6NqlIpHwBZd9helN1rz_v6SY6h3u6Dl9idcfcNiLTTJrVsM9ISpSaNLoq6_2JXCis2IFL2tFkksnZIf38gCWzQWgyJmesjqEX */}
+<!-- TODO: image not available locally - https://lh6.googleusercontent.com/stL17dHTy81YWe8_K5KWh1vi51E1tJNvoneQO5JJ40gU7b40d_T90Qx7nl89dpO6NqlIpHwBZd9helN1rz_v6SY6h3u6Dl9idcfcNiLTTJrVsM9ISpSaNLoq6_2JXCis2IFL2tFkksnZIf38gCWzQWgyJmesjqEX -->
 
 La première attaque cible les utilisateurs : c'est le domaine de l'ingénierie sociale. Techniquement, les contre-mesures sont l'authentification forte de type « Multi-Factor Authentication » (MFA), avec toute la gamme des solutions biométriques ou des jetons à usage unique. Ces technologies sont matures.
 
@@ -78,7 +78,7 @@ La stratégie Zero Trust du département de la Défense américain illustre bien
 
 <figure>
 
-{/* TODO: image not available locally - https://lh6.googleusercontent.com/YXuWQB9HdwPevWhkp6WfkdAB1yFgRXW6evGex6Xx8-VKW8_BEhwc4jOwb9bVpx2I_Hl8JuJQfxBIpqGXLTR2y0FnnXqymTvEA846_o_sSyxyB0k9m838P4CAl7MfE7wIP3qZZEkoPZTQZ_ATaoIgZCjiqfFX1VXd */}
+<!-- TODO: image not available locally - https://lh6.googleusercontent.com/YXuWQB9HdwPevWhkp6WfkdAB1yFgRXW6evGex6Xx8-VKW8_BEhwc4jOwb9bVpx2I_Hl8JuJQfxBIpqGXLTR2y0FnnXqymTvEA846_o_sSyxyB0k9m838P4CAl7MfE7wIP3qZZEkoPZTQZ_ATaoIgZCjiqfFX1VXd -->
 
 <figcaption>
 
@@ -100,7 +100,7 @@ Chaque utilisateur génère et utilise ses propres clés de chiffrement, et chaq
 - Les données quittant un appareil sont systématiquement signées.
 - Les données entre client et serveur sont systématiquement signées.
 
-{/* TODO: image not available locally - https://lh3.googleusercontent.com/g-2rOK3dypLhetlq94ezZGHwz2vBJOTkEF6rqkGkvJbNqTbCEA_nTyQZj2UkA7PWtLkaXQAttwR5f4jjlnEDRNcAXwapeY2cSV9Q-wOifMPSdvONxyKP5GgddAMBK-f_oVrsyx_4qnpSDjWhIpFzF0p4sJbYJyNX */}
+<!-- TODO: image not available locally - https://lh3.googleusercontent.com/g-2rOK3dypLhetlq94ezZGHwz2vBJOTkEF6rqkGkvJbNqTbCEA_nTyQZj2UkA7PWtLkaXQAttwR5f4jjlnEDRNcAXwapeY2cSV9Q-wOifMPSdvONxyKP5GgddAMBK-f_oVrsyx_4qnpSDjWhIpFzF0p4sJbYJyNX -->
 
 ### Problème n°1 : comment distribuer les clés facilement ?
 
@@ -108,7 +108,7 @@ La signature et le chiffrement existent depuis 30 ans, et depuis l'invention de 
 
 Nous avons essayé de trouver une solution avec le « web of trust », censé créer un réseau de confiance en faisant signer les clés publiques par des tiers, mais cela a échoué car nous avons atteint la limite de la compréhension humaine : c'est trop compliqué, donc personne ne l'utilise. Théoriquement viable, c'est en pratique inutilisable par le commun des utilisateurs.
 
-{/* TODO: image not available locally - https://lh5.googleusercontent.com/zQyQGMnu9kTtZVPeLUhT32NdTnPFTQhBYEHeF9xhLZOO9ZNj80pB8dFyS3Z47grYyyhCrHT9bZKP-nvZa2YUlgoIXecugcjcECMakYqBrea2qMucZ6VZ53Y7318gvRof2wrn5tNmDiQtZLVBxAHllaScByQNSNQF */}
+<!-- TODO: image not available locally - https://lh5.googleusercontent.com/zQyQGMnu9kTtZVPeLUhT32NdTnPFTQhBYEHeF9xhLZOO9ZNj80pB8dFyS3Z47grYyyhCrHT9bZKP-nvZa2YUlgoIXecugcjcECMakYqBrea2qMucZ6VZ53Y7318gvRof2wrn5tNmDiQtZLVBxAHllaScByQNSNQF -->
 
 **Notre réponse à ce problème a été d'intégrer le mécanisme de confiance dans l'application elle-même pour résoudre ce problème de complexité.** C'est pourquoi PARSEC inclut une PKI dédiée. Le principe est très similaire à celui d'un système PKI standard, avec des processus d'enrôlement au moment de la délivrance et de la signature des tokens. Mais ici, nous ne passons plus par une PKI centrale : nous intégrons la PKI dans l'application — c'est une **« PKI clé en main »**.
 
@@ -116,11 +116,11 @@ Nous avons essayé de trouver une solution avec le « web of trust », censé cr
 
 Nous avons choisi d'intégrer un mécanisme d'enrôlement reposant sur un échange croisé de jetons secrets. C'est le mécanisme SAS, pour « Short Authentication String ».
 
-{/* TODO: image not available locally - https://lh5.googleusercontent.com/jolImqo4MyISlTvgBZZGpxx_Vb_cpFZQOtB3fTPsI-yW0nE1Rto6mN6pbRg0MbpJE3Yx4KmK15PUe38ddRNiOiodMLbuCo3-5l2bpgwmJxIicnUMQT9iVIMee8YKcCf8IEAjONT8ZAXbElkOYpL-3S47Vy6UlDzW */}
+<!-- TODO: image not available locally - https://lh5.googleusercontent.com/jolImqo4MyISlTvgBZZGpxx_Vb_cpFZQOtB3fTPsI-yW0nE1Rto6mN6pbRg0MbpJE3Yx4KmK15PUe38ddRNiOiodMLbuCo3-5l2bpgwmJxIicnUMQT9iVIMee8YKcCf8IEAjONT8ZAXbElkOYpL-3S47Vy6UlDzW -->
 
 Du point de vue de l'utilisateur, cela ressemble à ceci :
 
-{/* TODO: image not available locally - https://lh6.googleusercontent.com/Vn7pPCVDVqWVNyiPwxTCBjo7njn96aNWL27GIQhWWPLujlazpocb2UJyvK6Bqa76OzNjxTow0HtJ2y0EQJzXD-1FDYGqdefT25qvuC9bUduui_iSIvoh6Qw_XQgC9-s6ErPypOwohQHjyTEBGr1_aOQ9GqWVkpiV */}
+<!-- TODO: image not available locally - https://lh6.googleusercontent.com/Vn7pPCVDVqWVNyiPwxTCBjo7njn96aNWL27GIQhWWPLujlazpocb2UJyvK6Bqa76OzNjxTow0HtJ2y0EQJzXD-1FDYGqdefT25qvuC9bUduui_iSIvoh6Qw_XQgC9-s6ErPypOwohQHjyTEBGr1_aOQ9GqWVkpiV -->
 
 Le principe de base est que seuls les humains peuvent créer de la confiance, et la crypto en est la garantie. C'est radicalement la même chose que d'ouvrir un compte sur un serveur web distant.
 
@@ -133,7 +133,7 @@ Le système Zero Trust & Zero Knowledge de PARSEC fonctionne sur deux niveaux de
 
 Dans cette architecture radicalement nouvelle, le serveur remplit un rôle « simple » de routage de paquets chiffrés et signés.
 
-{/* TODO: image not available locally - https://lh6.googleusercontent.com/Ov-Go1BBfOndnLXluh9zl4zaz0iXqiwjCqbdpCUNdKqd8Plhp0FleLwqQ6X8Ydyy_SqYbhNUIlEnxiWf3HtO5seUi7F0znjaQIi62f0KJHAZJe5beiX9BGnEkbZyrW71Dq2xD4DHoW9ecdDFOSH3H2KZ6TL0BA-r */}
+<!-- TODO: image not available locally - https://lh6.googleusercontent.com/Ov-Go1BBfOndnLXluh9zl4zaz0iXqiwjCqbdpCUNdKqd8Plhp0FleLwqQ6X8Ydyy_SqYbhNUIlEnxiWf3HtO5seUi7F0znjaQIi62f0KJHAZJe5beiX9BGnEkbZyrW71Dq2xD4DHoW9ecdDFOSH3H2KZ6TL0BA-r -->
 
 Chaque fois qu'une opération est effectuée, elle est signée, ce qui permet une vérification systématique.
 
@@ -156,7 +156,7 @@ Il en résulte un besoin croissant d'intégration entre la couche sécurité et 
 
 La réponse à ce problème nous est apparue en sécurisant (by design) l'ensemble de la solution et en abordant résolument le sujet au niveau des flux, et non des documents. La sécurité cryptographique est assurée par l'application elle-même.
 
-{/* TODO: image not available locally - https://lh4.googleusercontent.com/h4maDNrW20pxOpO6y9pMDjllpMVqIA4cFaqdQXBICFdZb_Q_Y6yLzP0gNY7CeD5z98rwTvejgy9RMZ439AuOvAEKfXe0ca_2ZJSYM7vuKSLyyZpfaytuask3SBMvHGyBBJ45xMV2WwrwHHvZcGFLPlVkYkDZJjYO */}
+<!-- TODO: image not available locally - https://lh4.googleusercontent.com/h4maDNrW20pxOpO6y9pMDjllpMVqIA4cFaqdQXBICFdZb_Q_Y6yLzP0gNY7CeD5z98rwTvejgy9RMZ439AuOvAEKfXe0ca_2ZJSYM7vuKSLyyZpfaytuask3SBMvHGyBBJ45xMV2WwrwHHvZcGFLPlVkYkDZJjYO -->
 
 Ces problèmes résolus, nous faisons désormais face à des défis très importants, dont la plupart ont été résolus au cours de cinq années de travail acharné.
 
@@ -192,7 +192,7 @@ Alors que dans le cas des applications web classiques, il faut dialoguer avec le
 
 L'idée générale du DCS est d'attacher des métadonnées XML au fichier ou au document, lui conférant des fonctionnalités de classification, de signature et de chiffrement conformes aux standards OTAN : il s'agit des Stanag 4774 (Label Syntax) et 4778 (Labeling Profiles).
 
-{/* TODO: image not available locally - https://lh6.googleusercontent.com/R7kwO6BCA1SutwCSMRU9hj3KUVRRLQfeNPXziNzVx_xiDCsS1co53s21cFqKyKoI3v5smSq6FrNgjbNEwB3TDr-R9i6CoouTHxAKgmDq30vZ6DrTJyGhq0tF_lIoq88HzxTlvm0h9KYg7lLpuG2MoigE6tUNEuIf */}
+<!-- TODO: image not available locally - https://lh6.googleusercontent.com/R7kwO6BCA1SutwCSMRU9hj3KUVRRLQfeNPXziNzVx_xiDCsS1co53s21cFqKyKoI3v5smSq6FrNgjbNEwB3TDr-R9i6CoouTHxAKgmDq30vZ6DrTJyGhq0tF_lIoq88HzxTlvm0h9KYg7lLpuG2MoigE6tUNEuIf -->
 
 C'est une vision qui a des conséquences :
 
@@ -210,7 +210,7 @@ L'architecture inter-nations proposée comprend deux interfaces :
 
 Une question centrale demeure celle de la classification du partage des flux de données en tant que flux, le standard OTAN DCS étant orienté document et non orienté flux.
 
-{/* TODO: image not available locally - https://lh3.googleusercontent.com/LQ0qdm9VKLgJFlFOx8rHF2Oefvn8lW6372MlBizopiqFdfFqMXRCBi-XJU4PAfF7brHvjj_fEBWEzd6VAdHzgAaS4rTjGOH0o45KVwQYzD4TSdtVh_Kf0698kvakrBxhv7c94A0RwLE_vT486mj0G86gd3Tois2L */}
+<!-- TODO: image not available locally - https://lh3.googleusercontent.com/LQ0qdm9VKLgJFlFOx8rHF2Oefvn8lW6372MlBizopiqFdfFqMXRCBi-XJU4PAfF7brHvjj_fEBWEzd6VAdHzgAaS4rTjGOH0o45KVwQYzD4TSdtVh_Kf0698kvakrBxhv7c94A0RwLE_vT486mj0G86gd3Tois2L -->
 
 Dans ce cas, la solution consiste à adopter une solution applicative unique, orientée flux, au niveau national.
 

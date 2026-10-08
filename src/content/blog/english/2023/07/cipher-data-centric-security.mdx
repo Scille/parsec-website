@@ -60,7 +60,7 @@ When it comes to IT cybersecurity, we need to consider the attack path and the s
 
 Here's Mr. Anybody's infrastructure: **Users** Alice, Bob and Charlie work on **devices** that communicate with **remote servers** and **remote clouds** via **either Internet or intranet perimeter networks**.
 
-{/* TODO: image not available locally - https://lh6.googleusercontent.com/stL17dHTy81YWe8_K5KWh1vi51E1tJNvoneQO5JJ40gU7b40d_T90Qx7nl89dpO6NqlIpHwBZd9helN1rz_v6SY6h3u6Dl9idcfcNiLTTJrVsM9ISpSaNLoq6_2JXCis2IFL2tFkksnZIf38gCWzQWgyJmesjqEX */}
+<!-- TODO: image not available locally - https://lh6.googleusercontent.com/stL17dHTy81YWe8_K5KWh1vi51E1tJNvoneQO5JJ40gU7b40d_T90Qx7nl89dpO6NqlIpHwBZd9helN1rz_v6SY6h3u6Dl9idcfcNiLTTJrVsM9ISpSaNLoq6_2JXCis2IFL2tFkksnZIf38gCWzQWgyJmesjqEX -->
 
 The first attack targets users: this is the domain of social engineering. In technical terms, the countermeasures are strong authentication of the "Multi-Factor Authentication" (MFA) type, with the whole range of biometric-based solutions, or single-use tokens. These technologies are mature.
 
@@ -78,7 +78,7 @@ The Zero Trust strategy of the US Department of Defense is a good illustration o
 
 <figure>
 
-{/* TODO: image not available locally - https://lh6.googleusercontent.com/YXuWQB9HdwPevWhkp6WfkdAB1yFgRXW6evGex6Xx8-VKW8_BEhwc4jOwb9bVpx2I_Hl8JuJQfxBIpqGXLTR2y0FnnXqymTvEA846_o_sSyxyB0k9m838P4CAl7MfE7wIP3qZZEkoPZTQZ_ATaoIgZCjiqfFX1VXd */}
+<!-- TODO: image not available locally - https://lh6.googleusercontent.com/YXuWQB9HdwPevWhkp6WfkdAB1yFgRXW6evGex6Xx8-VKW8_BEhwc4jOwb9bVpx2I_Hl8JuJQfxBIpqGXLTR2y0FnnXqymTvEA846_o_sSyxyB0k9m838P4CAl7MfE7wIP3qZZEkoPZTQZ_ATaoIgZCjiqfFX1VXd -->
 
 <figcaption>
 
@@ -100,7 +100,7 @@ Each user generates and uses their own encryption keys, and each device generate
 - Data leaving a device is systematically signed.
 - Data between client and server is systematically signed.
 
-{/* TODO: image not available locally - https://lh3.googleusercontent.com/g-2rOK3dypLhetlq94ezZGHwz2vBJOTkEF6rqkGkvJbNqTbCEA_nTyQZj2UkA7PWtLkaXQAttwR5f4jjlnEDRNcAXwapeY2cSV9Q-wOifMPSdvONxyKP5GgddAMBK-f_oVrsyx_4qnpSDjWhIpFzF0p4sJbYJyNX */}
+<!-- TODO: image not available locally - https://lh3.googleusercontent.com/g-2rOK3dypLhetlq94ezZGHwz2vBJOTkEF6rqkGkvJbNqTbCEA_nTyQZj2UkA7PWtLkaXQAttwR5f4jjlnEDRNcAXwapeY2cSV9Q-wOifMPSdvONxyKP5GgddAMBK-f_oVrsyx_4qnpSDjWhIpFzF0p4sJbYJyNX -->
 
 ### Problem No. 1: How to distribute keys easily?
 
@@ -108,7 +108,7 @@ Signing and encryption have been around for 30 years, and since the invention of
 
 We did try to find a solution with the "web of trust", which is supposed to create a network of trust by having public keys signed by third parties, but it failed because we reached the limit of human understanding: it's too complicated, so nobody uses it. Theoretically it's viable, but in practice it's unusable by the average person.
 
-{/* TODO: image not available locally - https://lh5.googleusercontent.com/zQyQGMnu9kTtZVPeLUhT32NdTnPFTQhBYEHeF9xhLZOO9ZNj80pB8dFyS3Z47grYyyhCrHT9bZKP-nvZa2YUlgoIXecugcjcECMakYqBrea2qMucZ6VZ53Y7318gvRof2wrn5tNmDiQtZLVBxAHllaScByQNSNQF */}
+<!-- TODO: image not available locally - https://lh5.googleusercontent.com/zQyQGMnu9kTtZVPeLUhT32NdTnPFTQhBYEHeF9xhLZOO9ZNj80pB8dFyS3Z47grYyyhCrHT9bZKP-nvZa2YUlgoIXecugcjcECMakYqBrea2qMucZ6VZ53Y7318gvRof2wrn5tNmDiQtZLVBxAHllaScByQNSNQF -->
 
 **Our response to this problem was to integrate the trust mechanism into the application itself to solve this complexity problem.** This is why PARSEC includes a dedicated PKI. The principle is very similar to that of a standard PKI system, with enrollment processes at the time of token delivery and signature. But here, we no longer go through a central PKI: we integrate the PKI into the application — it's a **"turnkey PKI"**.
 
@@ -116,11 +116,11 @@ We did try to find a solution with the "web of trust", which is supposed to crea
 
 We have chosen to integrate an enrollment mechanism involving a cross-exchange of secret tokens. This is the SAS mechanism, for "Short Authentication String".
 
-{/* TODO: image not available locally - https://lh5.googleusercontent.com/jolImqo4MyISlTvgBZZGpxx_Vb_cpFZQOtB3fTPsI-yW0nE1Rto6mN6pbRg0MbpJE3Yx4KmK15PUe38ddRNiOiodMLbuCo3-5l2bpgwmJxIicnUMQT9iVIMee8YKcCf8IEAjONT8ZAXbElkOYpL-3S47Vy6UlDzW */}
+<!-- TODO: image not available locally - https://lh5.googleusercontent.com/jolImqo4MyISlTvgBZZGpxx_Vb_cpFZQOtB3fTPsI-yW0nE1Rto6mN6pbRg0MbpJE3Yx4KmK15PUe38ddRNiOiodMLbuCo3-5l2bpgwmJxIicnUMQT9iVIMee8YKcCf8IEAjONT8ZAXbElkOYpL-3S47Vy6UlDzW -->
 
 From the user's point of view, it looks like this:
 
-{/* TODO: image not available locally - https://lh6.googleusercontent.com/Vn7pPCVDVqWVNyiPwxTCBjo7njn96aNWL27GIQhWWPLujlazpocb2UJyvK6Bqa76OzNjxTow0HtJ2y0EQJzXD-1FDYGqdefT25qvuC9bUduui_iSIvoh6Qw_XQgC9-s6ErPypOwohQHjyTEBGr1_aOQ9GqWVkpiV */}
+<!-- TODO: image not available locally - https://lh6.googleusercontent.com/Vn7pPCVDVqWVNyiPwxTCBjo7njn96aNWL27GIQhWWPLujlazpocb2UJyvK6Bqa76OzNjxTow0HtJ2y0EQJzXD-1FDYGqdefT25qvuC9bUduui_iSIvoh6Qw_XQgC9-s6ErPypOwohQHjyTEBGr1_aOQ9GqWVkpiV -->
 
 The basic principle is that only humans can create trust, and crypto is the guarantee of this. It's radically the same as opening an account on a remote web server.
 
@@ -133,7 +133,7 @@ PARSEC's Zero Trust & Zero Knowledge system operates on two security levels:
 
 In this radically new architecture, the server fulfills a "simple" role of routing encrypted and signed packets.
 
-{/* TODO: image not available locally - https://lh6.googleusercontent.com/Ov-Go1BBfOndnLXluh9zl4zaz0iXqiwjCqbdpCUNdKqd8Plhp0FleLwqQ6X8Ydyy_SqYbhNUIlEnxiWf3HtO5seUi7F0znjaQIi62f0KJHAZJe5beiX9BGnEkbZyrW71Dq2xD4DHoW9ecdDFOSH3H2KZ6TL0BA-r */}
+<!-- TODO: image not available locally - https://lh6.googleusercontent.com/Ov-Go1BBfOndnLXluh9zl4zaz0iXqiwjCqbdpCUNdKqd8Plhp0FleLwqQ6X8Ydyy_SqYbhNUIlEnxiWf3HtO5seUi7F0znjaQIi62f0KJHAZJe5beiX9BGnEkbZyrW71Dq2xD4DHoW9ecdDFOSH3H2KZ6TL0BA-r -->
 
 Every time an operation is carried out, it is signed, so it can be systematically verified.
 
@@ -156,7 +156,7 @@ As a result, there is a growing need for integration between the security layer 
 
 The answer to this problem appeared to us in securing (by design) the entire solution and resolutely tackling the issue at the level of flows, not documents. Cryptographic security is provided by the application itself.
 
-{/* TODO: image not available locally - https://lh4.googleusercontent.com/h4maDNrW20pxOpO6y9pMDjllpMVqIA4cFaqdQXBICFdZb_Q_Y6yLzP0gNY7CeD5z98rwTvejgy9RMZ439AuOvAEKfXe0ca_2ZJSYM7vuKSLyyZpfaytuask3SBMvHGyBBJ45xMV2WwrwHHvZcGFLPlVkYkDZJjYO */}
+<!-- TODO: image not available locally - https://lh4.googleusercontent.com/h4maDNrW20pxOpO6y9pMDjllpMVqIA4cFaqdQXBICFdZb_Q_Y6yLzP0gNY7CeD5z98rwTvejgy9RMZ439AuOvAEKfXe0ca_2ZJSYM7vuKSLyyZpfaytuask3SBMvHGyBBJ45xMV2WwrwHHvZcGFLPlVkYkDZJjYO -->
 
 With these problems solved, we are now faced with some very important challenges, most of which we have solved over five years of hard work.
 
@@ -192,7 +192,7 @@ Whereas in the case of conventional web applications you have to talk to the ser
 
 The general idea behind DCS is to attach XML metadata to the file or document, providing it with classification, signature and encryption functionality in line with NATO standards: these are Stanag 4774 (Label Syntax) and 4778 (Labeling Profiles).
 
-{/* TODO: image not available locally - https://lh6.googleusercontent.com/R7kwO6BCA1SutwCSMRU9hj3KUVRRLQfeNPXziNzVx_xiDCsS1co53s21cFqKyKoI3v5smSq6FrNgjbNEwB3TDr-R9i6CoouTHxAKgmDq30vZ6DrTJyGhq0tF_lIoq88HzxTlvm0h9KYg7lLpuG2MoigE6tUNEuIf */}
+<!-- TODO: image not available locally - https://lh6.googleusercontent.com/R7kwO6BCA1SutwCSMRU9hj3KUVRRLQfeNPXziNzVx_xiDCsS1co53s21cFqKyKoI3v5smSq6FrNgjbNEwB3TDr-R9i6CoouTHxAKgmDq30vZ6DrTJyGhq0tF_lIoq88HzxTlvm0h9KYg7lLpuG2MoigE6tUNEuIf -->
 
 It's a vision with consequences:
 
@@ -210,7 +210,7 @@ The proposed inter-nation architecture includes two interfaces:
 
 A central issue remains that of classifying the sharing of data flows as flows, since the NATO DCS standard is document-oriented, not flow-oriented.
 
-{/* TODO: image not available locally - https://lh3.googleusercontent.com/LQ0qdm9VKLgJFlFOx8rHF2Oefvn8lW6372MlBizopiqFdfFqMXRCBi-XJU4PAfF7brHvjj_fEBWEzd6VAdHzgAaS4rTjGOH0o45KVwQYzD4TSdtVh_Kf0698kvakrBxhv7c94A0RwLE_vT486mj0G86gd3Tois2L */}
+<!-- TODO: image not available locally - https://lh3.googleusercontent.com/LQ0qdm9VKLgJFlFOx8rHF2Oefvn8lW6372MlBizopiqFdfFqMXRCBi-XJU4PAfF7brHvjj_fEBWEzd6VAdHzgAaS4rTjGOH0o45KVwQYzD4TSdtVh_Kf0698kvakrBxhv7c94A0RwLE_vT486mj0G86gd3Tois2L -->
 
 In this case, the solution is to adopt a single flow-oriented application solution at the national level.
 
