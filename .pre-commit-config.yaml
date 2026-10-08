@@ -42,11 +42,6 @@ repos:
       - id: prettier
         name: prettier
         entry: >-
-          npx prettier
-          --config=.prettierrc
-          --ignore-path=.prettierignore
-          --write
+          npm run prettier -- --write
         language: node
-        types_or: [vue, ts, tsx, javascript, jsx, html, json]
-        additional_dependencies:
-          - prettier@3.1.0
+        types_or: [vue, ts, tsx, javascript, jsx, html, json, markdown, mdx]
