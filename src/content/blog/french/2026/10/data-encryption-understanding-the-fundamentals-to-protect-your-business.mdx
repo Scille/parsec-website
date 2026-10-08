@@ -1,0 +1,347 @@
+---
+title: "Le chiffrement des données : comprendre les fondamentaux pour protéger votre entreprise"
+image: "/images/blog/data_encryption.png"
+date: 2026-10-07
+author: "Thierry Leblond"
+categories:
+  - Cybersécurité
+draft: false
+excerpt: "Le chiffrement des données protège votre entreprise du vol et du rançongiciel : principes, types et bonnes pratiques pour les TPE et PME."
+---
+
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+Toutes les entreprises gèrent des données sensibles : contrats, données clients,
+informations bancaires, secrets de fabrication. Le chiffrement des données
+constitue l'un des maillons essentiels de la cybersécurité des TPE et PME. En
+permettant au seul détenteur des clés d'accès de lire, exploiter ou modifier ces
+données, il constitue une protection particulièrement efficace contre le
+piratage, le vol ou l'altération.
+
+Ce dossier, rédigé par Parsec, spécialiste de la sécurisation des données,
+référencé Activateur [France Num](https://www.francenum.gouv.fr), vous explique
+ce qu'est le chiffrement, comment il fonctionne et pourquoi il est aujourd'hui
+indispensable à toute stratégie de cybersécurité, quelle que soit la taille de
+votre entreprise.
+
+## Pourquoi toutes les TPE et PME doivent protéger leurs données
+
+### Des risques qui touchent toutes les tailles d'entreprise
+
+La cybersécurité n'est pas l'affaire exclusive des grandes entreprises. Selon le
+Baromètre national de la maturité cyber des TPE PME 2025 publié par
+[Cybermalveillance.gouv.fr](https://www.cybermalveillance.gouv.fr), 80 % des TPE
+PME reconnaissent ne pas être suffisamment préparées à une cyberattaque, et près
+de 6 entreprises sur 10 admettent ne pas savoir évaluer les conséquences d'un
+incident de sécurité.
+
+Pourtant, l'enjeu est vital. Ainsi, une analyse Bessé / G.P. Goldstein sur 48
+incidents cyber sur des entreprises françaises non cotées, entre 2017 et 2021,
+montre que le risque de défaillance de l'entreprise augmente d'environ 50 % dans
+les 6 mois qui suivent l'annonce de l'incident, faute de pouvoir absorber les
+coûts de remise en état, la perte d'activité et les éventuelles sanctions
+réglementaires.
+
+### Des données sensibles dans tous les secteurs
+
+Toutes les TPE et PME gèrent des données personnelles sensibles :
+
+- fichiers clients ;
+- données relatives aux salariés ;
+- informations bancaires ;
+- contrats ;
+- etc.
+
+Nombreuses sont aussi les entreprises qui disposent de documents confidentiels
+relevant du secret des affaires ou de la propriété intellectuelle. Certains
+secteurs sont particulièrement exposés :
+
+- Les garages automobiles conservent des copies de cartes grises, des documents
+  à valeur administrative, souvent stockées dans un simple dossier partagé ou
+  une boîte mail.
+- Les cabinets d'avocats et les consultants en stratégie gèrent des informations
+  couvertes par le secret professionnel : litiges en cours, montages financiers,
+  opérations de cession.
+- Les professionnels de l'immobilier reçoivent et transmettent des bulletins de
+  salaire, des relevés bancaires, des offres de prêt, autant de données
+  personnelles au sens du
+  [RGPD](https://www.cnil.fr/fr/reglement-europeen-protection-donnees).
+- Les bureaux d'études et sous-traitants industriels détiennent des plans, des
+  brevets en cours de dépôt, des secrets de fabrication qui constituent leur
+  avantage concurrentiel.
+
+Dans tous ces cas, une fuite de données peut entraîner des sanctions
+financières, une perte de confiance des clients et une mise en cause de la
+responsabilité de l'entreprise.
+
+## Qu'est-ce que le chiffrement des données ?
+
+Le chiffrement des données occupe une place cruciale en cybersécurité : il
+consiste à transformer des données lisibles en un code secret qui ne peut être
+déchiffré que par une clé numérique spécifique. Un algorithme mathématique (le
+logiciel de chiffrement) crée un schéma de chiffrement qui, en théorie, ne peut
+être cassé que par une puissance de calcul exceptionnelle.
+
+Imaginez que vous glissez un document confidentiel dans une boîte fermée à clé
+avant de l'envoyer par la poste. Seule la personne qui possède la clé de cette
+boîte pourra l'ouvrir et lire le document ; personne d'autre, ni le facteur, ni
+l'opérateur postal, ne pourra accéder au contenu. Le chiffrement numérique
+fonctionne exactement sur ce principe : sans la clé correspondante, il est
+impossible de retrouver le contenu original, même pour un ordinateur très
+puissant.
+
+La clé est indispensable pour accéder aux données chiffrées. Elles ne peuvent
+être lues ou modifiées qu'après avoir été déchiffrées.
+
+En cas de vol ou d'intrusion, le chiffrement offre une barrière robuste en
+rendant les données illisibles faute de disposer de la clé appropriée. Les
+informations demeurent ainsi sécurisées, qu'elles soient stockées sur des
+ordinateurs, en transit, ou durant leur traitement.
+
+### Du chiffrement des données à la cryptographie
+
+La cryptographie désigne l'ensemble des techniques mathématiques permettant de
+protéger des données. Elle offre une protection robuste contre la fuite de
+données, qu'elle soit accidentelle ou liée à un acte malveillant. Elle assure
+notamment :
+
+- **La confidentialité des données** : le chiffrement permet de maintenir la
+  confidentialité des données en les rendant illisibles pour toute personne non
+  autorisée. Même si une personne parvient à intercepter les données, elles
+  seront inutilisables sans la clé de chiffrement appropriée pour les
+  déchiffrer.
+- **L'intégrité des données** : les pirates informatiques ne se limitent pas à
+  dérober des informations, ils peuvent aussi altérer des données à des fins
+  frauduleuses. La cryptographie, via les fonctions de hachage ou les codes
+  d'authentification de message, aide à garantir l'intégrité des données en
+  détectant toute altération ou modification non autorisée : tout changement
+  apporté à des données chiffrées est détecté lors du processus de
+  déchiffrement, ce qui révèle une atteinte à l'intégrité des données.
+- **L'authentification des données** : la cryptographie est aussi utilisée pour
+  vérifier l'authenticité des données et de l'expéditeur. L'utilisation de
+  certificats électroniques et de signatures numériques permet de s'assurer que
+  les données proviennent bien de la source attendue et qu'elles n'ont pas été
+  altérées lors de leur transmission.
+
+Pour en savoir plus, consultez l'article de la [CNIL](https://www.cnil.fr) :
+[Comprendre les grands principes de la cryptologie et du chiffrement](https://www.cnil.fr/fr/comprendre-les-grands-principes-de-la-cryptologie-et-du-chiffrement).
+
+On distingue 2 types de chiffrement, selon la façon dont est gérée la clé.
+
+### Le chiffrement symétrique : une seule clé pour tout le monde
+
+Dans le chiffrement symétrique, la même clé sert à la fois à chiffrer le
+document et à le déchiffrer. C'est le système le plus simple : vous verrouillez
+la boîte avec une clé, et votre destinataire l'ouvre avec la même clé. Les
+logiciels de compression (une archive ZIP protégée par mot de passe, par
+exemple) fonctionnent sur ce principe.
+
+Simple à mettre en œuvre, il s'avère plus limité pour échanger des informations.
+En effet, comment transmettre la clé (le mot de passe) au destinataire sans
+qu'un tiers puisse l'intercepter ? A minima, il convient d'utiliser des canaux
+différents : si le document chiffré est envoyé par courrier électronique, la clé
+peut être envoyée par SMS. C'est le problème fondamental du chiffrement
+symétrique dès qu'il s'agit de partager des données avec d'autres personnes.
+
+Le chiffrement symétrique est également utilisé pour le chiffrement de disque,
+qui permet de chiffrer l'intégralité du contenu d'un ordinateur ou d'une clé USB
+; ses atouts et ses limites sont détaillés plus bas.
+
+### Le chiffrement asymétrique : une clé pour verrouiller, une autre pour ouvrir
+
+Le chiffrement asymétrique résout ce problème avec une idée ingénieuse : chaque
+utilisateur dispose de deux clés mathématiquement liées mais distinctes.
+
+- La **clé publique** de l'expéditeur peut être librement partagée avec tout le
+  monde. Elle sert à chiffrer un message à l'attention de son propriétaire.
+- La **clé privée** n'est connue que de son propriétaire. Elle seule permet au
+  destinataire de déchiffrer les messages que d'autres lui ont envoyés en
+  utilisant sa clé publique.
+
+Imaginez un cadenas ouvert (la clé publique) que vous distribuez librement :
+n'importe qui peut s'en saisir, y glisser un document et le refermer. Mais vous
+êtes le seul à posséder la clé qui ouvre ce cadenas (la clé privée). Vous pouvez
+distribuer autant de cadenas ouverts que vous le souhaitez, personne ne pourra
+les ouvrir à votre place.
+
+C'est sur ce principe que reposent les technologies de chiffrement de bout en
+bout utilisées aujourd'hui pour sécuriser les communications et les partages de
+fichiers entre plusieurs personnes.
+
+## Pourquoi chiffrer les données de son entreprise ?
+
+### Un rempart contre les attaques par rançongiciel
+
+Les rançongiciels (ou ransomware) sont une menace réelle pour les TPE PME. Si ce
+n'est pas la menace la plus fréquente (elle représentait 8,1 % des demandes
+d'assistance auprès de
+[Cybermalveillance.gouv.fr](https://www.cybermalveillance.gouv.fr) en 2025),
+elle est l'une des plus redoutables pour une organisation.
+
+Un logiciel malveillant s'introduit dans le système d'information, souvent via
+une pièce jointe piégée reçue par courrier électronique, et chiffre l'ensemble
+des fichiers de l'entreprise, qui en perd l'accès. Les attaquants réclament
+alors une rançon pour restituer les données. Si les données d'une entreprise
+sont centralisées sur un serveur non cloisonné, une seule attaque peut tout
+compromettre simultanément.
+
+### Une protection contre les attaques par interception
+
+Les entreprises utilisent de plus en plus de services hébergés à l'extérieur de
+leurs locaux, tels que le cloud ou les services SaaS, et de moins en moins de
+serveurs informatiques internes. En conséquence, leurs données transitent en
+permanence sur les réseaux. Si les données ne sont pas chiffrées, elles sont
+soumises à des risques d'interception.
+
+Lorsque les données sont chiffrées, elles sont beaucoup plus difficiles à
+intercepter et à comprendre pour un attaquant : même s'il parvient à obtenir les
+données chiffrées, il ne pourra pas les lire sans la clé de chiffrement
+appropriée.
+
+### Une souveraineté des données et une conformité vis-à-vis des réglementations
+
+Les grands fournisseurs de services numériques (cloud, stockage en ligne, suites
+bureautiques) sont majoritairement américains. Leurs données, même hébergées en
+Europe, peuvent être soumises à des législations américaines qui autorisent les
+autorités américaines à y accéder sans nécessairement en informer les
+entreprises européennes concernées. Pour une entreprise traitant des données
+couvertes par le secret professionnel ou relevant du Règlement européen sur les
+données personnelles
+([RGPD](https://www.cnil.fr/fr/reglement-europeen-protection-donnees)), cette
+situation soulève des questions légitimes de conformité et de responsabilité
+juridique.
+
+Les réglementations sur la protection des données encouragent ou exigent le
+chiffrement des données, selon leur niveau de sensibilité. Le chiffrement permet
+de se conformer aux exigences relatives à la protection des données personnelles
+définies par le RGPD.
+
+## Quelle approche de chiffrement adopter ?
+
+### Comprendre les trois états de la donnée
+
+Dans sa fiche pratique consacrée au chiffrement dans le cloud, la
+[CNIL](https://www.cnil.fr) distingue 3 états que peut prendre une donnée, et
+rappelle que les mesures de protection à appliquer diffèrent selon cet état :
+
+1. **La donnée au repos** est stockée de manière persistante (sur un disque dur
+   ou un disque SSD) sans être activement utilisée ou transmise.
+2. **La donnée en transit** est celle qui circule sur un réseau : un courriel
+   envoyé, un fichier transféré vers un espace de stockage en ligne de type
+   cloud, un message échangé sur une messagerie instantanée.
+3. **La donnée en traitement** est celle qui est en cours de consultation, de
+   mise à jour ou d'analyse par un utilisateur, une application ou un service.
+
+Les données, dans chacun de leurs états, peuvent bénéficier du chiffrement pour
+améliorer le niveau de sécurité de l'entreprise.
+
+### Le chiffrement appliqué à chaque état de la donnée : une approche utile mais limitée
+
+Le chiffrement de disque (données au repos), qui chiffre l'intégralité du
+contenu d'un ordinateur ou d'une clé USB, permet de s'assurer, en cas de vol du
+matériel, que personne ne pourra accéder aux données sans le mot de passe. C'est
+une protection utile et à activer systématiquement.
+
+Mais dès que l'ordinateur est allumé et connecté, les données échangées avec
+l'extérieur (données en transit) sont déchiffrées et redeviennent lisibles par
+l'utilisateur, mais aussi par tout réseau ou tout service en ligne auquel ces
+fichiers sont ensuite envoyés. Le chiffrement de disque ne protège donc pas les
+données une fois qu'elles quittent l'appareil. Pour chiffrer les données en
+transit, le recours à d'autres outils de chiffrement est nécessaire, comme par
+exemple une solution VPN qui chiffre les flux de données échangés pour les
+rendre illisibles.
+
+Les données envoyées vers un serveur distant, un stockage cloud ou une solution
+SaaS, comme un ERP ou un CRM distant, et qui sont traitées par ces solutions
+(données en traitement), sont aussi exposées si elles sont stockées en clair
+(non chiffrées), en particulier en cas de fuite de données.
+
+En ne chiffrant pas les données dans tous leurs états (au repos, en transit et
+en traitement), on les expose à des risques spécifiques. C'est à cette
+problématique que répond le chiffrement de bout en bout, qui permet d'assurer
+une continuité du chiffrement tout au long de l'utilisation de la donnée.
+
+### Le chiffrement de bout en bout : une protection renforcée
+
+Avec le chiffrement de bout en bout, les données sont chiffrées (et signées)
+avant même de quitter l'appareil de l'expéditeur, et ne sont déchiffrées (et
+vérifiées) qu'à l'arrivée, sur l'appareil du destinataire autorisé. Entre les
+deux, pendant le transport, sur les serveurs du prestataire, dans les centres de
+données, les données restent chiffrées et illisibles pour quiconque ne dispose
+pas de la clé.
+
+C'est la différence fondamentale avec un service de stockage cloud classique,
+qui chiffre peut-être les données en transit et au repos, mais qui conserve les
+clés de déchiffrement, et peut donc, lui ou un tiers qui l'y contraint, accéder
+aux données.
+
+Certaines applications de messagerie, les SMS et d'autres services de
+communication reposent sur le chiffrement de bout en bout pour protéger les
+messages contre tout accès non autorisé.
+
+Cette approche permet de mettre en place une architecture Zéro Confiance (ou
+Zero Trust) qui part du principe qu'aucune personne, aucun appareil ni aucune
+application ne doit être considéré comme fiable par défaut, qu'il soit situé à
+l'intérieur ou à l'extérieur du réseau de l'entreprise.
+
+Ce type d'architecture est à privilégier pour sécuriser au maximum ses données,
+en particulier dans un contexte d'échange d'informations et de collaboration.
+Elle permet d'éviter que le serveur de l'entreprise qui centralise ses données
+(qu'il soit hébergé dans ses locaux ou chez un prestataire) ne constitue un
+unique point de vulnérabilité.
+
+<figure>
+
+<OptimizedImage
+  src="architecture_classic_vs_zero_trust.png"
+  alt="Schéma comparant l'architecture traditionnelle, où le serveur central stocke les données en clair, et l'architecture Zéro Confiance, où les données sont chiffrées sur l'appareil de l'utilisateur"
+/>
+
+<figcaption>
+
+Image générée avec l'IA
+
+</figcaption>
+
+</figure>
+
+Dans l'architecture traditionnelle, en haut du schéma, le serveur central stocke
+les données en clair ou avec des clés qu'il contrôle. Trois acteurs peuvent y
+accéder : les groupes criminels organisés (éditeurs de rançongiciels ou
+revendeurs sur le web clandestin), les autorités étrangères (via le Cloud Act),
+et les administrateurs du fournisseur cloud.
+
+Dans l'architecture Zéro Confiance, en bas du schéma, les données sont chiffrées
+sur l'appareil de l'utilisateur avant d'être envoyées : le serveur ne stocke que
+des données chiffrées illisibles. Ces trois mêmes acteurs ne voient que des
+données inexploitables, sans les clés que seul l'utilisateur détient.
+
+## Le conseil de l'expert
+
+Pour un budget souvent équivalent à celui de solutions classiques, il est
+possible de basculer ses données vers une solution intégrant le chiffrement de
+bout en bout et de bénéficier ainsi d'un niveau de protection maximal.
+
+Un point de vigilance à anticiper : dans une architecture où le prestataire ne
+détient jamais les clés de déchiffrement, un mot de passe perdu par un
+collaborateur peut rendre ses fichiers définitivement inaccessibles, y compris
+pour le prestataire lui-même. Il n'existe, en effet, pas de procédure de
+réinitialisation « par la porte de derrière » comme sur un service classique.
+Une procédure interne de sauvegarde des accès, comme la mise en place d'un
+coffre-fort de mots de passe partagé, est donc recommandée. Ces outils intègrent
+des mécanismes de sauvegarde des clés personnelles, des rappels associés et un
+clonage de son terminal.
+
+Autre nuance à connaître : le chiffrement de bout en bout protège le contenu des
+fichiers et des messages, mais pas toujours les métadonnées associées (qui
+échange avec qui, à quelle heure, quel est le nom ou la taille d'un fichier).
+Ces informations peuvent rester visibles du prestataire selon les solutions. Il
+est conseillé de lui demander explicitement ce qui échappe au chiffrement avant
+de valider que l'offre est totalement étanche.
+
+Enfin, pour objectiver le choix d'un prestataire, la qualification ou la
+certification délivrée par
+l'[Agence nationale de la sécurité des systèmes d'information (ANSSI)](https://cyber.gouv.fr),
+partenaire de France Num, constitue un repère fiable : elle atteste d'une
+évaluation indépendante de la robustesse du produit et, pour la qualification,
+de la conformité du fournisseur aux exigences réglementaires françaises.
