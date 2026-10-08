@@ -1,0 +1,310 @@
+---
+title: "Data Encryption: Understanding the Fundamentals to Protect Your Business"
+image: "/images/blog/data_encryption.png"
+date: 2026-10-07
+author: "Thierry Leblond"
+categories:
+  - Cybersecurity
+draft: false
+excerpt: "Data encryption protects your business from theft and ransomware: key principles, types and best practices for small and medium-sized businesses."
+---
+
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+Every business handles sensitive data: contracts, customer data, banking
+information, trade secrets. Data encryption is one of the essential links in the
+cybersecurity of very small businesses and SMEs. By allowing only the holder of
+the access keys to read, use or modify the data, it provides particularly
+effective protection against hacking, theft and tampering.
+
+This guide, written by Parsec, a data security specialist listed as a
+[France Num](https://www.francenum.gouv.fr) Activator, explains what encryption
+is, how it works and why it is now indispensable to any cybersecurity strategy,
+whatever the size of your company.
+
+## Why every small business and SME must protect its data
+
+### Risks that affect businesses of every size
+
+Cybersecurity is not a concern exclusive to large companies. According to the
+2025 national barometer of cyber maturity among very small businesses and SMEs
+published by [Cybermalveillance.gouv.fr](https://www.cybermalveillance.gouv.fr),
+80% of them admit they are not sufficiently prepared for a cyberattack, and
+nearly 6 in 10 admit they do not know how to assess the consequences of a
+security incident.
+
+Yet the stakes are vital. An analysis by Bessé / G.P. Goldstein of 48 cyber
+incidents affecting unlisted French companies between 2017 and 2021 shows that
+the risk of the company failing increases by about 50% in the 6 months following
+the announcement of the incident, because it cannot absorb the costs of
+recovery, the loss of business and any regulatory penalties.
+
+### Sensitive data in every sector
+
+All small businesses and SMEs handle sensitive personal data:
+
+- customer files;
+- employee data;
+- banking information;
+- contracts;
+- etc.
+
+Many companies also hold confidential documents covered by trade secrets or
+intellectual property. Some sectors are particularly exposed:
+
+- Car garages keep copies of vehicle registration certificates, documents with
+  administrative value, often stored in a simple shared folder or a mailbox.
+- Law firms and strategy consultants handle information covered by professional
+  secrecy: ongoing disputes, financial structures, disposal transactions.
+- Real estate professionals receive and forward payslips, bank statements and
+  loan offers, all of which are personal data under the
+  [GDPR](https://www.cnil.fr/fr/reglement-europeen-protection-donnees).
+- Engineering firms and industrial subcontractors hold plans, pending patents
+  and trade secrets that make up their competitive advantage.
+
+In all these cases, a data leak can lead to financial penalties, a loss of
+customer trust and legal liability for the company.
+
+## What is data encryption?
+
+Data encryption plays a crucial role in cybersecurity: it consists of
+transforming readable data into a secret code that can only be decrypted with a
+specific digital key. A mathematical algorithm (the encryption software) creates
+an encryption scheme that, in theory, can only be broken with exceptional
+computing power.
+
+Imagine you slip a confidential document into a locked box before sending it by
+post. Only the person who holds the key to that box can open it and read the
+document; no one else, neither the postman nor the postal operator, can access
+the content. Digital encryption works on exactly this principle: without the
+matching key, it is impossible to recover the original content, even with a very
+powerful computer.
+
+The key is essential to access encrypted data. It can only be read or modified
+after being decrypted.
+
+In the event of theft or intrusion, encryption provides a robust barrier by
+making the data unreadable without the appropriate key. The information remains
+secure whether it is stored on computers, in transit, or during processing.
+
+### From data encryption to cryptography
+
+Cryptography refers to the set of mathematical techniques used to protect data.
+It offers robust protection against data leaks, whether accidental or caused by
+a malicious act. In particular, it ensures:
+
+- **Data confidentiality**: encryption maintains data confidentiality by making
+  it unreadable to anyone unauthorized. Even if someone manages to intercept the
+  data, it is unusable without the appropriate decryption key.
+- **Data integrity**: hackers do not just steal information, they can also alter
+  data for fraudulent purposes. Through hash functions or message authentication
+  codes, cryptography helps guarantee data integrity by detecting any
+  unauthorized alteration or modification: any change made to encrypted data is
+  detected during the decryption process, which reveals a breach of data
+  integrity.
+- **Data authentication**: cryptography is also used to verify the authenticity
+  of data and of the sender. Electronic certificates and digital signatures make
+  it possible to ensure that data comes from the expected source and has not
+  been altered during transmission.
+
+To learn more, read the [CNIL](https://www.cnil.fr) article (in French):
+[Comprendre les grands principes de la cryptologie et du chiffrement](https://www.cnil.fr/fr/comprendre-les-grands-principes-de-la-cryptologie-et-du-chiffrement)
+(Understanding the main principles of cryptology and encryption).
+
+There are 2 types of encryption, depending on how the key is managed.
+
+### Symmetric encryption: one key for everyone
+
+In symmetric encryption, the same key is used both to encrypt and to decrypt the
+document. It is the simplest system: you lock the box with a key, and your
+recipient opens it with the same key. Compression software (a password-protected
+ZIP archive, for example) works on this principle.
+
+Simple to implement, it proves more limited for exchanging information. How can
+you pass the key (the password) to the recipient without a third party being
+able to intercept it? At the very least, different channels should be used: if
+the encrypted document is sent by email, the key can be sent by SMS. This is the
+fundamental problem of symmetric encryption whenever data must be shared with
+other people.
+
+Symmetric encryption is also used for disk encryption, which encrypts the entire
+contents of a computer or a USB key; its strengths and limitations are detailed
+below.
+
+### Asymmetric encryption: one key to lock, another to open
+
+Asymmetric encryption solves this problem with an ingenious idea: each user has
+two keys that are mathematically linked but distinct.
+
+- The sender's **public key** can be freely shared with everyone. It is used to
+  encrypt a message for its owner.
+- The **private key** is known only to its owner. Only it allows the recipient
+  to decrypt the messages that others have sent them using their public key.
+
+Imagine an open padlock (the public key) that you distribute freely: anyone can
+take it, slip a document inside and close it. But you are the only one who holds
+the key that opens this padlock (the private key). You can hand out as many open
+padlocks as you like; no one will be able to open them in your place.
+
+This is the principle behind the end-to-end encryption technologies used today
+to secure communications and file sharing between several people.
+
+## Why encrypt your company's data?
+
+### A bulwark against ransomware attacks
+
+Ransomware is a real threat to small businesses and SMEs. While it is not the
+most frequent threat (it accounted for 8.1% of assistance requests to
+[Cybermalveillance.gouv.fr](https://www.cybermalveillance.gouv.fr) in 2025), it
+is one of the most formidable for an organization.
+
+Malicious software enters the information system, often via a booby-trapped
+email attachment, and encrypts all of the company's files, which then become
+inaccessible. The attackers demand a ransom to give the data back. If a
+company's data is centralized on a non-partitioned server, a single attack can
+compromise everything at once.
+
+### Protection against interception attacks
+
+Companies increasingly use services hosted outside their premises, such as the
+cloud or SaaS services, and fewer and fewer internal servers. As a result, their
+data constantly travels over networks. If the data is not encrypted, it is
+exposed to the risk of interception.
+
+When data is encrypted, it is much harder for an attacker to intercept and
+understand: even if they manage to obtain the encrypted data, they cannot read
+it without the appropriate encryption key.
+
+### Data sovereignty and regulatory compliance
+
+The major digital service providers (cloud, online storage, office suites) are
+mostly American. Their data, even when hosted in Europe, may be subject to US
+legislation that allows US authorities to access it without necessarily
+informing the European companies concerned. For a company handling data covered
+by professional secrecy or falling under the European General Data Protection
+Regulation
+([GDPR](https://www.cnil.fr/fr/reglement-europeen-protection-donnees)), this
+situation raises legitimate questions of compliance and legal liability.
+
+Data protection regulations encourage or require data encryption, depending on
+its level of sensitivity. Encryption helps meet the personal data protection
+requirements set by the GDPR.
+
+## Which encryption approach should you adopt?
+
+### Understanding the three states of data
+
+In its practical guide on encryption in the cloud, the
+[CNIL](https://www.cnil.fr) distinguishes 3 states in which data can exist, and
+points out that the protection measures to apply differ depending on the state:
+
+1. **Data at rest** is stored persistently (on a hard drive or an SSD) without
+   being actively used or transmitted.
+2. **Data in transit** is data moving across a network: a sent email, a file
+   transferred to online cloud storage, a message exchanged on an instant
+   messaging service.
+3. **Data in use** is data being viewed, updated or analyzed by a user, an
+   application or a service.
+
+In each of its states, data can benefit from encryption to improve the company's
+level of security.
+
+### Encryption applied to each state of data: a useful but limited approach
+
+Disk encryption (data at rest), which encrypts the entire contents of a computer
+or a USB key, ensures that if the hardware is stolen, no one can access the data
+without the password. This is a useful protection that should always be enabled.
+
+But as soon as the computer is turned on and connected, the data exchanged with
+the outside (data in transit) is decrypted and becomes readable again by the
+user, but also by any network or online service these files are then sent to.
+Disk encryption therefore does not protect data once it leaves the device. To
+encrypt data in transit, other encryption tools are needed, such as a VPN
+solution that encrypts the data flows exchanged to make them unreadable.
+
+Data sent to a remote server, cloud storage or a SaaS solution, such as a remote
+ERP or CRM, and processed by these solutions (data in use), is also exposed if
+it is stored in clear text (unencrypted), particularly in the event of a data
+leak.
+
+By not encrypting data in all of its states (at rest, in transit and in use),
+you expose it to specific risks. End-to-end encryption addresses this issue by
+ensuring continuous encryption throughout the use of the data.
+
+### End-to-end encryption: reinforced protection
+
+With end-to-end encryption, data is encrypted (and signed) before it even leaves
+the sender's device, and is only decrypted (and verified) on arrival, on the
+authorized recipient's device. In between, during transport, on the provider's
+servers and in data centers, the data remains encrypted and unreadable to anyone
+who does not hold the key.
+
+This is the fundamental difference with a conventional cloud storage service,
+which may encrypt data in transit and at rest, but keeps the decryption keys,
+and can therefore, itself or through a third party compelling it, access the
+data.
+
+Some messaging applications, SMS and other communication services rely on
+end-to-end encryption to protect messages against unauthorized access.
+
+This approach makes it possible to implement a Zero Trust architecture, which
+assumes that no person, device or application should be trusted by default,
+whether inside or outside the company network.
+
+This type of architecture should be favored to secure data as much as possible,
+particularly in the context of information exchange and collaboration. It
+prevents the company server that centralizes its data (whether hosted on its
+premises or with a provider) from becoming a single point of vulnerability.
+
+<figure>
+
+<OptimizedImage
+  src="architecture_classic_vs_zero_trust.png"
+  alt="Diagram comparing the traditional architecture, where the central server stores data in clear text, and the Zero Trust architecture, where data is encrypted on the user's device"
+/>
+
+<figcaption>
+
+AI-generated image
+
+</figcaption>
+
+</figure>
+
+In the traditional architecture, at the top of the diagram, the central server
+stores data in clear text or with keys that it controls. Three actors can access
+it: organized criminal groups (ransomware operators or resellers on the dark
+web), foreign authorities (via the Cloud Act), and the cloud provider's
+administrators.
+
+In the Zero Trust architecture, at the bottom of the diagram, data is encrypted
+on the user's device before being sent: the server only stores unreadable
+encrypted data. These same three actors only see unusable data, without the keys
+that only the user holds.
+
+## The expert's advice
+
+For a budget that is often equivalent to that of conventional solutions, it is
+possible to move your data to a solution that includes end-to-end encryption and
+thus benefits from the highest level of protection.
+
+One point to anticipate: in an architecture where the provider never holds the
+decryption keys, a password lost by an employee can make their files permanently
+inaccessible, even to the provider itself. There is indeed no "back door" reset
+procedure as on a conventional service. An internal procedure for backing up
+access, such as setting up a shared password vault, is therefore recommended.
+These tools include mechanisms for backing up personal keys, associated
+reminders and cloning of one's device.
+
+Another nuance to be aware of: end-to-end encryption protects the content of
+files and messages, but not always the associated metadata (who communicates
+with whom, at what time, the name or size of a file). Depending on the solution,
+this information may remain visible to the provider. It is advisable to ask the
+provider explicitly what is not covered by encryption before concluding that the
+offer is completely watertight.
+
+Finally, to make the choice of a provider more objective, the qualification or
+certification issued by the French National Cybersecurity Agency
+([ANSSI](https://cyber.gouv.fr)), a France Num partner, is a reliable benchmark:
+it attests to an independent evaluation of the product's robustness and, for
+qualification, to the provider's compliance with French regulatory requirements.
