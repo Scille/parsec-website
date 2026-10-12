@@ -57,7 +57,7 @@
     "cross-env": "^10.1.0",
     "gray-matter": "^4.0.3",
     "jest": "^30.5.2",
-    "knip": "^6.38.0",
+    "knip": "^6.39.0",
     "linkedom": "^0.18.13",
     "prettier": "^3.9.9",
     "prettier-plugin-astro": "^1.1.0",
@@ -67,7 +67,7 @@
     "remark-toc": "^9.0.0",
     "slugify": "^1.6.8",
     "tailwindcss": "^4.2.1",
-    "ts-jest": "^29.4.13",
+    "ts-jest": "^29.4.14",
     "typescript": "^6.0.3",
     "unist-util-visit": "^5.1.0",
     "xml2js": "^0.6.2"
