@@ -35,7 +35,7 @@
     "astro-icon": "^1.1.5",
     "date-fns": "^4.4.0",
     "marked": "^18.0.14",
-    "motion": "^13.4.3",
+    "motion": "^13.5.0",
     "preline": "^5.0.0",
     "sharp": "^0.35.5",
     "smoothscroll-for-websites": "^1.5.1",
