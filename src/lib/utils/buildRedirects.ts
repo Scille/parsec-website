@@ -78,6 +78,11 @@ export const oldToNewSlug: Record<string, Record<string, string>> = {
   },
 };
 
+export const releaseSlugs: Record<string, string> = {
+  "/blog/releases/3.10/": "/blog/2026/09/whats-new-parsec-v3-10/",
+  "/fr/blog/releases/3.10/": "/fr/blog/2026/09/whats-new-parsec-v3-10/",
+};
+
 export function buildRedirectDestination(
   lang: string,
   newSlug: string,
@@ -94,7 +99,7 @@ export function buildRedirectDestination(
 export type RedirectEntry = { status: number; destination: string };
 
 export function buildRedirects(): Record<string, RedirectEntry> {
-  return Object.fromEntries(
+  const oldToNewRedirects = Object.fromEntries(
     Object.entries(oldToNewSlug).flatMap(([lang, slugs]) =>
       Object.entries(slugs).map(([oldSlug, newSlug]) => {
         const baseOldSlug = lang === "fr" ? `/${oldSlug}` : `/en/${oldSlug}`;
@@ -109,4 +114,11 @@ export function buildRedirects(): Record<string, RedirectEntry> {
       }),
     ),
   );
+  const releaseRedirects = Object.fromEntries(
+    Object.entries(releaseSlugs).map(([fromSlug, toSlug]) => {
+      return [fromSlug, { status: 302, destination: toSlug }] as const;
+    }),
+  );
+
+  return { ...oldToNewRedirects, ...releaseRedirects };
 }
