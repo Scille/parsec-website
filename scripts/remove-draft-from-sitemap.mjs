@@ -1,7 +1,7 @@
 // scripts/process-sitemaps.mjs
 import path from "node:path";
 import { promises as fs } from "node:fs";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import matter from "gray-matter";
 import { parseStringPromise, Builder } from "xml2js";
 
@@ -27,11 +27,11 @@ const SITEMAP_FILE_PATTERN = /^sitemap-\d+\.xml$/;
 // --------- JSON load (Node-safe) ----------
 async function readJsonFile(filePath) {
   try {
-    const mod = await import(filePath);
+    const mod = await import(pathToFileURL(filePath).href);
     return mod.default ?? mod;
   } catch {
     try {
-      const mod = await import(filePath);
+      const mod = await import(pathToFileURL(filePath).href);
       return mod.default ?? mod;
     } catch {
       const raw = await fs.readFile(filePath, "utf8");
