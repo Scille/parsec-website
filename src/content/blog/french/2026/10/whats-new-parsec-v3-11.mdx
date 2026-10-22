@@ -1,13 +1,15 @@
 ---
-title: "Quoi de neuf dans Parsec 3.11 ?"
-image: "/images/blog/whats-new-in-parsec.png"
+title: "Les nouveautés avec Parsec 3.11"
+image: "/images/blog/whats-new-in-parsec-v3-11.png"
 date: 2026-10-26
 author: "Marcos Medrano"
 categories:
   - Mises à jour
 draft: true
-excerpt: "Parsec 3.11 est disponible ! Une expérience d'édition plus rapide et plus fluide."
+excerpt: "Parsec 3.11 est disponible : éditeur de documents repensé, images depuis votre PC, nouvel éditeur Monaco, bannière de mise à jour et infos admin enrichies."
 ---
+
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
 
 Parsec 3.11 vise à faciliter la gestion quotidienne des documents : un éditeur
 de fichiers repensé, un tout nouvel éditeur de texte, une insertion d'images
@@ -19,7 +21,7 @@ l'ensemble de l'application.
 ### Une bannière « Nouveautés » après les mises à jour
 
 Jusqu'à présent, l'application web se mettait à jour silencieusement en
-arrière-plan, sans aucune indication qu'un changement avait eu lieu —
+arrière-plan, sans aucune indication qu'un changement avait eu lieu -
 contrairement à l'application de bureau, qui affiche une boîte de dialogue
 lorsqu'une nouvelle version est disponible.
 
@@ -29,7 +31,10 @@ version plus récente, avec un lien permettant de découvrir les modifications
 apportées. Vous pouvez à tout moment vérifier si vous utilisez la dernière
 version depuis la page « À propos ».
 
-[SCREENSHOT]
+<OptimizedImage
+  src="new-update-banner.fr.png"
+  alt="Bannière « Quoi de neuf » affichée en haut de l'application web après une mise à jour"
+/>
 
 ### Un éditeur de fichiers intégré repensé
 
@@ -39,10 +44,11 @@ basé sur CryptPad a été remplacé par une nouvelle intégration « Editics »
 (basée sur OnlyOffice), ouvrant la voie à de futures améliorations en matière
 d'édition collaborative.
 
-Vous constaterez des sessions d'édition de documents plus rapides et plus
-fiables — notamment une sauvegarde automatique toutes les 10 minutes et des
-mesures de sécurité permettant même aux documents vides ou problématiques de
-s'ouvrir avec un message clair, au lieu de s'échouer en silence.
+**Le résultat ?** Vos documents s'ouvrent plus vite et l'édition est plus
+fiable. Votre travail est sauvegardé automatiquement toutes les 10 minutes, afin
+d'assurer que vos modifications sont toujours à jour. Et si un document ne peut
+pas s'ouvrir, un message clair vous l'indique au lieu de vous laisser sans
+explication.
 
 ### Insérer des images depuis votre espace de travail ou votre PC
 
@@ -52,12 +58,15 @@ pouvez également importer des images directement depuis votre ordinateur. Plus
 besoin de passer par l'étape intermédiaire consistant à télécharger d'abord les
 fichiers pour pouvoir ensuite les intégrer dans un document.
 
-[SCREENSHOT]
+<OptimizedImage
+  src="insert-image-editics.fr.png"
+  alt="Fenêtre de sélection d'image avec les options « Depuis l'espace de travail » et « Depuis mon PC »"
+/>
 
 ### Un nouvel éditeur de texte et de code plus rapide
 
 Les fichiers en texte brut et les fichiers de code s'ouvrent désormais dans
-Monaco — le même éditeur qui équipe les outils de développement les plus
+Monaco - le même éditeur qui équipe les outils de développement les plus
 populaires. Il est plus rapide et plus agréable à utiliser que l'éditeur
 précédent, avec un véritable mode lecture seule pour les lecteurs et une
 détection plus intelligente des fichiers modifiables.
@@ -65,7 +74,10 @@ détection plus intelligente des fichiers modifiables.
 L'éditeur est intégré, ce qui signifie que vos fichiers ne sont transmis nulle
 part ; l'édition s'effectue toujours localement sur votre ordinateur.
 
-[SCREENSHOT]
+<OptimizedImage
+  src="file-editor-monaco.fr.png"
+  alt="Fichier texte ouvert dans le nouvel éditeur Monaco"
+/>
 
 ### Des informations plus détaillées et pertinentes pour les administrateurs
 
@@ -77,7 +89,7 @@ supprimer.
 Les horodatages sont désormais affichés avec une plus grande précision
 temporelle (date et heure) pour la création et la dernière mise à jour des
 fichiers, les dates d'adhésion/de révocation des utilisateurs, ainsi que les
-dates d'archivage/de suppression des espaces de travail — vous pouvez ainsi
+dates d'archivage/de suppression des espaces de travail - vous pouvez ainsi
 savoir exactement quand un fichier a été modifié pour la dernière fois, ou quand
 un collaborateur a rejoint l'équipe.
 
@@ -105,6 +117,6 @@ un collaborateur a rejoint l'équipe.
 Pour plus d'informations, veuillez consulter la liste complète des modifications
 dans le [Changelog](https://docs.parsec.cloud/fr/v3.11/history.html).
 
-Comme toujours, effectuez la mise à jour depuis l'application elle-même —
+Comme toujours, effectuez la mise à jour depuis l'application elle-même -
 ou téléchargez la dernière version depuis notre
 [page de téléchargement](https://parsec.cloud/fr/download/).

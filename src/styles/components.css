@@ -472,7 +472,7 @@
   }
 
   img {
-    @apply h-auto max-w-full min-w-0 rounded-xl shadow-lg;
+    @apply h-auto max-w-full min-w-0 rounded-xl;
   }
 
   figcaption p {
