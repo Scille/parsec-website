@@ -1,0 +1,110 @@
+---
+title: "Quoi de neuf dans Parsec 3.11 ?"
+image: "/images/blog/whats-new-in-parsec.png"
+date: 2026-10-26
+author: "Marcos Medrano"
+categories:
+  - Mises à jour
+draft: true
+excerpt: "Parsec 3.11 est disponible ! Une expérience d'édition plus rapide et plus fluide."
+---
+
+Parsec 3.11 vise à faciliter la gestion quotidienne des documents : un éditeur
+de fichiers repensé, un tout nouvel éditeur de texte, une insertion d'images
+simplifiée et toute une série de corrections et d'améliorations apportées à
+l'ensemble de l'application.
+
+## ✨ Nouvelles fonctionnalités
+
+### Une bannière « Nouveautés » après les mises à jour
+
+Jusqu'à présent, l'application web se mettait à jour silencieusement en
+arrière-plan, sans aucune indication qu'un changement avait eu lieu —
+contrairement à l'application de bureau, qui affiche une boîte de dialogue
+lorsqu'une nouvelle version est disponible.
+
+À partir de la version 3.11, vous verrez apparaître une bannière de
+notification vous informant que l'application a été mise à jour vers une
+version plus récente, avec un lien permettant de découvrir les modifications
+apportées. Vous pouvez à tout moment vérifier si vous utilisez la dernière
+version depuis la page « À propos ».
+
+[SCREENSHOT]
+
+### Un éditeur de fichiers intégré repensé
+
+L'éditeur de documents intégré a été considérablement repensé pour offrir de
+meilleures performances et une plus grande stabilité. En coulisses, l'éditeur
+basé sur CryptPad a été remplacé par une nouvelle intégration « Editics »
+(basée sur OnlyOffice), ouvrant la voie à de futures améliorations en matière
+d'édition collaborative.
+
+Vous constaterez des sessions d'édition de documents plus rapides et plus
+fiables — notamment une sauvegarde automatique toutes les 10 minutes et des
+mesures de sécurité permettant même aux documents vides ou problématiques de
+s'ouvrir avec un message clair, au lieu de s'échouer en silence.
+
+### Insérer des images depuis votre espace de travail ou votre PC
+
+Vous modifiez un document et souhaitez y insérer une image ? Vous pouviez déjà
+insérer des images stockées dans l'espace de travail actuel ; désormais, vous
+pouvez également importer des images directement depuis votre ordinateur. Plus
+besoin de passer par l'étape intermédiaire consistant à télécharger d'abord les
+fichiers pour pouvoir ensuite les intégrer dans un document.
+
+[SCREENSHOT]
+
+### Un nouvel éditeur de texte et de code plus rapide
+
+Les fichiers en texte brut et les fichiers de code s'ouvrent désormais dans
+Monaco — le même éditeur qui équipe les outils de développement les plus
+populaires. Il est plus rapide et plus agréable à utiliser que l'éditeur
+précédent, avec un véritable mode lecture seule pour les lecteurs et une
+détection plus intelligente des fichiers modifiables.
+
+L'éditeur est intégré, ce qui signifie que vos fichiers ne sont transmis nulle
+part ; l'édition s'effectue toujours localement sur votre ordinateur.
+
+[SCREENSHOT]
+
+### Des informations plus détaillées et pertinentes pour les administrateurs
+
+Les invitations d'utilisateurs en attente indiquent désormais quel
+administrateur les a créées, ce qui permet aux administrateurs d'identifier
+facilement les invitations obsolètes et de savoir qui contacter avant de les
+supprimer.
+
+Les horodatages sont désormais affichés avec une plus grande précision
+temporelle (date et heure) pour la création et la dernière mise à jour des
+fichiers, les dates d'adhésion/de révocation des utilisateurs, ainsi que les
+dates d'archivage/de suppression des espaces de travail — vous pouvez ainsi
+savoir exactement quand un fichier a été modifié pour la dernière fois, ou quand
+un collaborateur a rejoint l'équipe.
+
+## 🐛 Principaux correctifs de bugs
+
+- Correction du défilement sur les petits écrans. Sur les écrans de petite
+  taille, un dossier contenant de nombreux fichiers pouvait être tronqué,
+  rendant certains fichiers inaccessibles lors du défilement en mode liste.
+- Correction du statut du périphérique de récupération. La section relative au
+  périphérique de récupération de votre page de profil n'apparaît plus à tort
+  comme « Inactive » même lorsqu'elle est correctement configurée.
+- Correction des icônes du programme d'installation macOS. Les icônes
+  d'application corrompues dans la barre de titre du fichier .dmg et dans la
+  fenêtre « Copie vers Applications » s'affichent désormais correctement.
+
+## ⚙️ Améliorations techniques
+
+- Le lecteur vidéo s'affiche désormais avec un rendu amélioré et une meilleure
+  stabilité.
+- L'application web se lance plus rapidement : le processus de démarrage a été
+  optimisé, ce qui réduit le temps de chargement initial.
+
+## Sources
+
+Pour plus d'informations, veuillez consulter la liste complète des modifications
+dans le [Changelog](https://docs.parsec.cloud/fr/v3.11/history.html).
+
+Comme toujours, effectuez la mise à jour depuis l'application elle-même —
+ou téléchargez la dernière version depuis notre
+[page de téléchargement](https://parsec.cloud/fr/download/).

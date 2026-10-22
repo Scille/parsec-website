@@ -1,0 +1,95 @@
+---
+title: "What's new in Parsec 3.11"
+image: "/images/blog/whats-new-in-parsec.png"
+date: 2026-10-26
+author: "Marcos Medrano"
+categories:
+  - Releases
+draft: true
+excerpt: "Parsec 3.11 is here! A Faster, Fresher Editing Experience."
+---
+
+Parsec 3.11 focuses on making everyday document work smoother: a reworked file
+editor, a brand-new text editor, easier image insertion, and a batch of polish
+fixes across the app.
+
+## ✨ New Features
+
+### A "What's New" banner after updates
+
+Until now, the web app silently updated in the background with no indication
+that anything had changed —unlike the desktop app, which shows a dialog when a
+new version is available.
+
+Starting with v3.11, you'll see a notification banner letting you know the app
+has been updated to a newer version, with a link to find out what changed. You
+can always check whether you're running the latest release from the About page.
+
+[SCREENSHOT: "What's new" banner appearing at the top of the web app after an update]
+
+### A reworked built-in file editor
+
+The integrated document editor has been substantially reworked for better
+performance and stability. Under the hood, the CryptPad-based editor has been
+replaced by a new "Editics" integration (based on OnlyOffice), paving the way
+for upcoming improvements in collaborative editing.
+
+You'll notice faster, more reliable document editing sessions — including
+automatic saving after 10 minutes and safeguards so that even empty or
+problematic documents open with a clear message instead of failing silently.
+
+### Insert images from your workspace or your PC
+
+Editing a document and want to drop in a picture? You could already insert
+images stored in the current workspace; now you can also import images directly
+from your computer. No more round-trips of uploading files first just to embed
+them in a document.
+
+[SCREENSHOT: Image selection modal with the two source options — "From workspace" and "From my PC"]
+
+### A new, faster text and code editor
+
+Plain-text and code files now open in Monaco — the same editor that powers
+popular development tools. It's faster and more pleasant to use than the
+previous editor, with proper read-only mode for viewers and smarter detection
+of which files are editable.
+
+The editor is integrated so your files are not transmitted anywhere; editing is
+always done locally on your computer.
+
+[SCREENSHOT]
+
+### More detailed and relevant information for Administrators
+
+Pending user invitations now display which administrator created them, making
+it easy for admins to identify obsolete invitations and know who to contact
+before cleaning them up.
+
+Timestamps are now shown with greater time precision (date and time) for file
+creation and last update, user join/revocation dates, and workspace
+archived/deletion dates — so you can tell exactly when a file was last modified,
+or when a teammate joined.
+
+## 🐛 Bug Fixes
+
+- Scrolling fixed on small displays. On smaller screens, a folder containing
+  many files could be cropped, leaving some files unreachable when scrolling in
+  list mode. This is now fixed.
+- Recovery device status fixed. The recovery device section in your profile page
+  no longer incorrectly shows as Inactive even when it's properly set up.
+- macOS installer icons fixed. Corrupted app icons in the .dmg title bar and the
+  "Copying to Applications" window now display correctly.
+
+## 🔧 Improvements Under the Hood
+
+- The video player loads with improved display and stability.
+- The web app starts faster — the startup path was streamlined, cutting down
+  initial load time.
+
+## Sources
+
+For more information, please check the complete list of changes on the
+[changelog](https://docs.parsec.cloud/en/v3.11/history.html).
+
+As always, update from the app itself — or grab the latest version from our
+[Download](https://parsec.cloud/download/) page. Enjoy!
