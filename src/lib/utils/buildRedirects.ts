@@ -80,7 +80,9 @@ export const oldToNewSlug: Record<string, Record<string, string>> = {
 
 export const releaseSlugs: Record<string, string> = {
   "/blog/releases/3.10/": "/blog/2026/09/whats-new-parsec-v3-10/",
+  "/blog/releases/3.11/": "/blog/2026/10/whats-new-parsec-v3-11/",
   "/fr/blog/releases/3.10/": "/fr/blog/2026/09/whats-new-parsec-v3-10/",
+  "/fr/blog/releases/3.11/": "/fr/blog/2026/10/whats-new-parsec-v3-11/",
 };
 
 export function buildRedirectDestination(
