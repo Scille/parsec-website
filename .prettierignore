@@ -1,3 +1,4 @@
+dist/**
 public/tarteaucitron/**/*.min.js
 public/tarteaucitron/**/*.min.css
 src/layouts/components/utilities/CookieConsent.astro
