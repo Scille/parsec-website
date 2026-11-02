@@ -29,6 +29,14 @@
     "euLogo": {
       "src": "/images/FR_Co-fundedbyUE.png",
       "alt": "Cofinancé par l'Union européenne"
+    },
+    "euro3c": {
+      "src": "/images/euro3c.svg",
+      "alt": "EURO-3C"
+    },
+    "france2030": {
+      "src": "/images/logo-france-2030.png",
+      "text": "Cofinancé par<br>France 2030"
     }
   }
 }
