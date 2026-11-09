@@ -61,7 +61,7 @@
     "knip": "^6.42.1",
     "linkedom": "^0.18.14",
     "prettier": "^3.9.10",
-    "prettier-plugin-astro": "^1.1.1",
+    "prettier-plugin-astro": "^1.1.2",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "prettier-plugin-toml": "4.1.0",
     "rehype-external-links": "^3.0.0",
