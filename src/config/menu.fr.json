@@ -49,6 +49,12 @@
       "name": "Mentions légales",
       "url": "/legal-notice/",
       "weight": 3
+    },
+    {
+      "enable": true,
+      "name": "Accessibilité : non conforme",
+      "url": "/declaration-d-accessibilite/",
+      "weight": 4
     }
   ],
   "footerMenuOne": [
