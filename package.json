@@ -60,7 +60,7 @@
     "jest": "^30.5.2",
     "knip": "^6.44.1",
     "linkedom": "^0.18.15",
-    "prettier": "^3.9.10",
+    "prettier": "^3.10.1",
     "prettier-plugin-astro": "^1.1.2",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "prettier-plugin-toml": "4.1.0",
