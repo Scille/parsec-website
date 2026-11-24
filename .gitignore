@@ -25,7 +25,7 @@ pnpm-lock.yaml
 .DS_Store
 
 # ignore .astro directory
-.astro
+.astro/
 
 # Local Netlify folder
 .netlify
