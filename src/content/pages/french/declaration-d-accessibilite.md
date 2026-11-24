@@ -37,6 +37,6 @@ Si vous constatez un défaut d'accessibilité vous empêchant d'accéder à un c
 
 Plusieurs moyens sont à votre disposition :
 
-- Écrire un message au Défenseur des droits via le [formulaire de contact en ligne](https://formulaire.defenseurdesdroits.fr/) ;
+- Écrire un message au Défenseur des droits (https://www.defenseurdesdroits.fr/nous-contacter-355)
 - Contacter le délégué du Défenseur des droits près de chez vous (https://www.defenseurdesdroits.fr/carte-des-delegues)
-- Envoyer un courrier par la poste (gratuit, ne pas mettre de timbre) : Défenseur des droits, Libre réponse 71120, 75342 Paris CEDEX 07.
+- Envoyer un courrier par la poste (gratuit, ne pas mettre de timbre) : Défenseur des droits, Libre réponse 71120, 75342 Paris CEDEX 07
